@@ -18,7 +18,7 @@ CloakableMixin.kUncloakRate = 4
 CloakableMixin.kTriggerCloakDuration = .6
 CloakableMixin.kTriggerUncloakDuration = 2.5
 
-local kPlayerMaxCloak = 0.96
+local kPlayerMaxCloak = 0.93
 local kPlayerHideModelMin = 0
 local kPlayerHideModelMax = 0.15
 
@@ -157,8 +157,8 @@ local function UpdateDesiredCloakFraction(self, deltaTime)
     if self.GetSpeedScalar then
         -- Always cloak no matter how fast we go.
         -- TODO: Fix that GetSpeedScalar returns incorrect values for aliens with celerity
-        local speedScalar = Clamp(self:GetSpeedScalar() - 0.5 , 0 , 1);
-        newDesiredCloakFraction = newDesiredCloakFraction - 0.6 * speedScalar
+        local speedScalar = Clamp(self:GetSpeedScalar() - 0.6 , 0 , 1)
+        newDesiredCloakFraction = newDesiredCloakFraction - 0.8 * speedScalar
         self.speedScalar = speedScalar * 3
     end
 

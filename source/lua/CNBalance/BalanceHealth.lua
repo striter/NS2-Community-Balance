@@ -10,9 +10,9 @@ kParasitePlayerPointValue = 2
 kAlienRegenerationPercentage = 0.08
 
 kSkulkBaseCarapaceUpgradeAmount = 20
-kGorgeBaseCarapaceUpgradeAmount = 25
+kGorgeBaseCarapaceUpgradeAmount = 30
 kLerkBaseCarapaceUpgradeAmount  = 30
-kFadeBaseCarapaceUpgradeAmount  = 50
+kFadeBaseCarapaceUpgradeAmount  = 40
 kOnosBaseCarapaceUpgradeAmount  = 200
 
 kSkulkCarapaceArmorPerBiomass = 1.25
@@ -35,5 +35,12 @@ kARCDeployedHealth = 2600    kARCDeployedArmor = 0
 kHarvesterHealth = 2000 kHarvesterArmor = 200 kHarvesterPointValue = 15
 kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 500
 
+kCystHealth = 50    kCystArmor = 1
+kMatureCystHealth = 400    kMatureCystArmor = 1    kCystPointValue = 1
+kMinMatureCystHealth = 200 kMinCystScalingDistance = 48 kMaxCystScalingDistance = 168
+
 kClogHealth = 250  kClogArmor = 0 kClogPointValue = 0
 kClogHealthPerBioMass = 30
+
+kBoneWallHealth = 100 kBoneWallArmor = 200    kBoneWallHealthPerBioMass = 75
+kContaminationHealth = 1000 kContaminationArmor = 0    kContaminationPointValue = 2

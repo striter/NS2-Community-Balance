@@ -29,7 +29,7 @@ kPistolDamage = 20
 kPulseGrenadeDamageRadius = 4
 kPulseGrenadeEnergyDamageRadius = 4
 kPulseGrenadeDamage = 75
-kPulseGrenadeEnergyDamage = 30
+kPulseGrenadeEnergyDamage = 25
 
 kInfantryPortalBuildTime = 5
 
@@ -52,7 +52,7 @@ kCatPackPickupDelay = 4
 
 kEggGestateTime = 15
 
-kUmbraResearchCost = 205
+kUmbraResearchCost = 20
 
 kGorgeCost = 10
 kGorgeEggCost = 15
