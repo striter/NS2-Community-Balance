@@ -1,0 +1,21 @@
+name        = "CN Playground Balance"
+source_dir  = "source"
+output_dir  = "output"
+description = [=[Since UWE trying to 10v10 gamemode and even trying 6v6.
+And ppl start to realize how strong ARC & railgun are.
+1.Simply throw a rookies aliens skulk to a t3 railguns, he will eventually get deathspam until the game ends.
+2.Marine commander being a research machine and wait for arcs& railguns, the most winnable playstyle,also  most toxic.
+Then we decide to do some tweaks.
+
+Purpose:
+Let commander do some field job (pves) instead a "reseach , med & watch" machine.
+Increase late game skulks/gorges/lerks viability,
+Let rookies get their funs,like mines&gls.
+Most important,Bring back the old time!
+
+Commander fade shift!
+2021.12.18]=]
+image       = "preview.jpg"
+tag_modtype = ""
+tag_support = "Must be run on Server"
+publish_id = 2696776840
