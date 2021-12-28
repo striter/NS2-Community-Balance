@@ -15,7 +15,7 @@ local networkVars =
 }
 
 kMetabolizeDelay = 2.0
-local kMetabolizeEnergyRegain = 30
+local kMetabolizeEnergyRegain = 27
 local kMetabolizeHealthRegain = 25
 
 local kAnimationGraph = PrecacheAsset("models/alien/fade/fade_view.animation_graph")
