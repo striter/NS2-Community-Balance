@@ -18,6 +18,7 @@ kMinigunDamageType = kDamageType.Structural
 
 kRailgunDamage = 40
 kRailgunChargeDamage = 130
+kRailgunDamageType = kDamageType.Normal
 
 kMineCost = 9
 kMineDamage = 135
@@ -27,17 +28,15 @@ kPistolDamage = 20
 
 kPulseGrenadeDamageRadius = 4
 kPulseGrenadeEnergyDamageRadius = 4
-kPulseGrenadeDamage = 50
+kPulseGrenadeDamage = 75
 kPulseGrenadeEnergyDamage = 30
 
 kInfantryPortalBuildTime = 5
 
-kSentryDamage = 4.5
+kSentryDamage = 4
 kSentryCost = 2
 kSentryBatteryCost = 8
 kSentryBatteryBuildTime = 5
-
-kUmbraResearchCost = 20
 
 kPowerSurgeCost = 5
 kPowerSurgeTriggerEMP = true
@@ -49,7 +48,11 @@ kCatPackCost = 2
 kCatPackMoveAddSpeed = 1.25
 kCatPackWeaponSpeed = 1.5
 kCatPackDuration = 5
-kCatPackPickupDelay = 5
+kCatPackPickupDelay = 4
+
+kEggGestateTime = 15
+
+kUmbraResearchCost = 205
 
 kGorgeCost = 10
 kGorgeEggCost = 15
@@ -68,7 +71,7 @@ kLeapEnergyCost = 45
 
 kHealsprayDamage = 10
 
-kStabDamage = 150
+kStabDamage = 140
 kStabDamageType = kDamageType.Structural
 kStabEnergyCost = 30
 
