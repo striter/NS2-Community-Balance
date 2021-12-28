@@ -1,5 +1,5 @@
-kInitialMACs = 1
-kInitialDrifters = 1
+-- kInitialMACs = 1
+-- kInitialDrifters = 1
 
 kNumMines = 2
 
