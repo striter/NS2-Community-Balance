@@ -1,6 +1,14 @@
 -- kInitialMACs = 1
 -- kInitialDrifters = 1
 
+kPistolWeight = 0.0
+kRifleWeight = 0.13
+kHeavyRifleWeight = 0.25
+kHeavyMachineGunWeight = 0.23
+kGrenadeLauncherWeight = 0.15
+kFlamethrowerWeight = 0.14
+kShotgunWeight = 0.14
+
 kNumMines = 2
 
 kAlienStructureMoveSpeed = 1.5
@@ -42,15 +50,15 @@ kLerkCarapaceSpeedReduction = 0 --0.15
 kFadeCarapaceSpeedReduction = 0 --0.15
 kOnosCarapaceSpeedReduction = 0 --0.12
 
-kBiteLeapVampirismScalar = 0.0466   //0.0466
+kBiteLeapVampirismScalar = 0.05   //0.0466
 kParasiteVampirismScalar = 0.02    //0
 kSpitVampirismScalar = 0.05   //0.026
 kHealSprayVampirismScalar = 0.02   //0
-kLerkBiteVampirismScalar = 0.0267   //0.0267
+kLerkBiteVampirismScalar = 0.037   //0.0267
 kSpikesVampirismScalar = 0.01      //0
-kSwipeVampirismScalar = 0.0333
-kStabVampirismScalar = 0.0667
-kGoreVampirismScalar = 0.0183
+kSwipeVampirismScalar = 0.03
+kStabVampirismScalar = 0.07
+kGoreVampirismScalar = 0.02
 
 kMACSupply = 5
 kArmorySupply = 5

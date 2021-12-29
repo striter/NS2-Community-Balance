@@ -1,8 +1,19 @@
 kPlayerResPerInterval  = 0.125
 kPlayingTeamInitialTeamRes = 65
 
-kHydraDamage = 12
-kHydraAttackDamageType = kDamageType.Structural
+kMineCost = 9
+kMineDamage = 135
+
+kPistolRateOfFire = 0.01
+kPistolDamage = 20
+
+kHeavyMachineGunDamage = 8
+kHeavyMachineGunDamageType = kDamageType.MachineGun
+kHeavyMachineGunClipSize = 150
+kHeavyMachineGunClipNum = 1
+kHeavyMachineGunRange = 100
+kHeavyMachineGunSecondaryRange = 1.1
+kHeavyMachineGunSpread = Math.Radians(8)
 
 kGrenadeLauncherGrenadeDamage = 100
 kGrenadeLauncherGrenadeDamageType = kDamageType.Structural
@@ -17,14 +28,8 @@ kMinigunDamage = 9
 kMinigunDamageType = kDamageType.Structural
 
 kRailgunDamage = 40
-kRailgunChargeDamage = 130
+kRailgunChargeDamage = 90
 kRailgunDamageType = kDamageType.Normal
-
-kMineCost = 9
-kMineDamage = 135
-
-kPistolRateOfFire = 0.01
-kPistolDamage = 20
 
 kPulseGrenadeDamageRadius = 4
 kPulseGrenadeEnergyDamageRadius = 4
@@ -65,15 +70,24 @@ kOnosEggCost = 100
 
 kSpikeSpread = Math.Radians(3.8)
 kSpikeSize = 0.06
-kMetabolizeEnergyCost = 10
+kMetabolizeEnergyCost = 20
 
 kLeapEnergyCost = 45
 
 kHealsprayDamage = 10
 
-kStabDamage = 140
+kStabDamage = 150
 kStabDamageType = kDamageType.Structural
 kStabEnergyCost = 30
+
+kStompEnergyCost = 30
+kStompDamageType = kDamageType.Heavy
+kStompDamage = 40
+kStompRange = 12
+kDisruptMarineTime = 1
+kDisruptMarineTimeout = 4
+
+kChargeDamage = 30
 
 kBabblerShieldPercent = 0.1
 kSkulkBabblerShieldPercent = 0.35
@@ -94,6 +108,11 @@ kContaminationCost = 5
 kContaminationCooldown = 10
 kBoneWallCost = 3
 kRuptureCost = 1
+
+kDrifterCost = 6
+
+kHydraDamage = 12
+kHydraAttackDamageType = kDamageType.Structural
 
 kEchoWhipCost = 2
 kEchoCragCost = 2

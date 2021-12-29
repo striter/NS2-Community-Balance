@@ -1,0 +1,1 @@
+Skulk.kAdrenalineEnergyRecuperationRate = 30
