@@ -9,7 +9,7 @@ lowAmmoWarning = "true"
 local prevWeaponVariant = 1
 
 local magCount = 1
-local magMax = 150
+local magMax = 200
 local backgroundSize = Vector(256, 160, 0)
 local textYOffset = 58
 

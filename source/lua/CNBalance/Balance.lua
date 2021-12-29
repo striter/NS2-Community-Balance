@@ -7,9 +7,9 @@ kMineDamage = 135
 kPistolRateOfFire = 0.01
 kPistolDamage = 20
 
-kHeavyMachineGunDamage = 8
+kHeavyMachineGunDamage = 6.5
 kHeavyMachineGunDamageType = kDamageType.MachineGun
-kHeavyMachineGunClipSize = 150
+kHeavyMachineGunClipSize = 200
 kHeavyMachineGunClipNum = 1
 kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
