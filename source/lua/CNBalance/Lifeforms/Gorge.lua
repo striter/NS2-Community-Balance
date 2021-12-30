@@ -1,1 +1,1 @@
-Gorge.kAdrenalineEnergyRecuperationRate = 17.0
+Gorge.kAdrenalineEnergyRecuperationRate = 15.0  // 17 -> 15
