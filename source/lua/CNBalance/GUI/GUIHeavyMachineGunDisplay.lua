@@ -25,12 +25,12 @@ local textScale = 1.061
 
 local kTextures =
 {
-    "ui/hmgdisplay0.dds", -- normal
-    "ui/hmgdisplay4.dds", -- kodiak
-    "ui/hmgdisplay2.dds", -- tundra
-    "ui/hmgdisplay3.dds", -- forge
-    "ui/hmgdisplay1.dds", -- sandstorm
-    "ui/hmgdisplay5.dds", -- chroma
+    "ui/custom/hmgdisplay0.dds", -- normal
+    "ui/custom/hmgdisplay4.dds", -- kodiak
+    "ui/custom/hmgdisplay2.dds", -- tundra
+    "ui/custom/hmgdisplay3.dds", -- forge
+    "ui/custom/hmgdisplay1.dds", -- sandstorm
+    "ui/custom/hmgdisplay5.dds", -- chroma
 }
 
 local self = {} -- provide some encapsulation
@@ -52,7 +52,7 @@ function Update(deltaTime)
 
         -- Update the magazine gui items with this fraction info.
         local mag = self.mags[i]
-
+        
         if magFrac == 0.0 then
             mag:SetIsVisible(false)
         else
