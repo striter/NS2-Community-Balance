@@ -7,13 +7,13 @@ kMineDamage = 135
 kPistolRateOfFire = 0.01
 kPistolDamage = 20
 
-kHeavyMachineGunDamage = 6.5
+kHeavyMachineGunDamage = 7.5
 kHeavyMachineGunDamageType = kDamageType.MachineGun
 kHeavyMachineGunClipSize = 200
 kHeavyMachineGunClipNum = 2
 kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
-kHeavyMachineGunSpread = Math.Radians(8)
+kHeavyMachineGunSpread = Math.Radians(5.5)
 
 kGrenadeLauncherGrenadeDamage = 100
 kGrenadeLauncherGrenadeDamageType = kDamageType.Structural
@@ -27,9 +27,9 @@ kGrenadeLauncherWeapons3DamageScalar = 1.25
 kMinigunDamage = 9
 kMinigunDamageType = kDamageType.Structural
 
-kRailgunDamage = 40
-kRailgunChargeDamage = 90
-kRailgunDamageType = kDamageType.Normal
+kRailgunDamage = 50
+kRailgunChargeDamage = 100
+kRailgunDamageType = kDamageType.Structural
 
 kPulseGrenadeDamageRadius = 4
 kPulseGrenadeEnergyDamageRadius = 4
@@ -38,9 +38,9 @@ kPulseGrenadeEnergyDamage = 25
 
 kInfantryPortalBuildTime = 5
 
-kSentryDamage = 4
-kSentryCost = 2
-kSentryBatteryCost = 8
+kSentryDamage = 3
+kSentryCost = 3
+kSentryBatteryCost = 6
 kSentryBatteryBuildTime = 5
 
 kPowerSurgeCost = 5

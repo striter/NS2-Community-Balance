@@ -8,7 +8,7 @@ lowAmmoWarning = "true"
 
 local prevWeaponVariant = 1
 
-local magCount = 1
+local magCount = 2
 local magMax = 200
 local backgroundSize = Vector(256, 160, 0)
 local textYOffset = 58
@@ -52,7 +52,7 @@ function Update(deltaTime)
 
         -- Update the magazine gui items with this fraction info.
         local mag = self.mags[i]
-        
+
         if magFrac == 0.0 then
             mag:SetIsVisible(false)
         else

@@ -1,1 +1,1 @@
-SentryBattery.kRange = 5.0
+SentryBattery.kRange = 6

@@ -39,7 +39,7 @@ kHydrasPerHive = 4
 kClogsPerHive = 12
 kNumWebsPerGorge = 4
 
-kSentriesPerBattery = 4
+kSentriesPerBattery = 5
 
 kMACSpeedAmount = 1
 
