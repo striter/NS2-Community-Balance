@@ -1,7 +1,7 @@
 kHealingClampMaxHPAmount = 0.20
 
 kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5    kSkulkHealthPerBioMass = 4
-kGorgeHealth = 200   kGorgeArmor = 50    kGorgePointValue = 10    kGorgeHealthPerBioMass = 7.5
+kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 10    kGorgeHealthPerBioMass = 7.5
 kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15    kLerkHealthPerBioMass = 4
 kFadeHealth = 250    kFadeArmor = 80     kFadePointValue = 20    kFadeHealthPerBioMass = 5
 kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30    kOnosHealtPerBioMass = 50
@@ -15,25 +15,28 @@ kLerkBaseCarapaceUpgradeAmount  = 30
 kFadeBaseCarapaceUpgradeAmount  = 40
 kOnosBaseCarapaceUpgradeAmount  = 200
 
-kSkulkCarapaceArmorPerBiomass = 1.25
-kGorgeCarapaceArmorPerBiomass = 2.5
-kLerkCarapaceArmorPerBiomass  = 2
-kFadeCarapaceArmorPerBiomass  = 2.5
-kOnosCarapaceArmorPerBiomass  = 5
+kSkulkCarapaceArmorPerBiomass = 1
+kGorgeCarapaceArmorPerBiomass = 2
+kLerkCarapaceArmorPerBiomass  = 1.5
+kFadeCarapaceArmorPerBiomass  = 2
+kOnosCarapaceArmorPerBiomass  = 4
 
 kHiveHealth = 5200    kHiveArmor = 750
 kMatureHiveHealth = 7800 kMatureHiveArmor = 1400
 
-kExtractorHealth = 2400 kExtractorArmor = 1050 kExtractorPointValue = 15
+//2400 1050
+kExtractorHealth = 2400 kExtractorArmor = 1200 kExtractorPointValue = 15
 
 kSentryBatteryHealth = 700    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5
 kSentryHealth = 400    kSentryArmor = 50    kSentryPointValue = 2
 
-kARCHealth = 2600    kARCArmor = 400    kARCPointValue = 5
-kARCDeployedHealth = 2600    kARCDeployedArmor = 0
+kARCHealth = 2000    kARCArmor = 700    kARCPointValue = 5
+kARCDeployedHealth = 2000    kARCDeployedArmor = 0
 
 kHarvesterHealth = 2000 kHarvesterArmor = 200 kHarvesterPointValue = 15
+//2300 320
 kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 500
+
 
 kCystHealth = 50    kCystArmor = 1
 kMatureCystHealth = 400    kMatureCystArmor = 1    kCystPointValue = 1

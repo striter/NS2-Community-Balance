@@ -55,6 +55,22 @@ kCatPackWeaponSpeed = 1.5
 kCatPackDuration = 5
 kCatPackPickupDelay = 4
 
+kAdvancedArmoryUpgradeCost = 20
+kPrototypeLabCost = 30
+kAdvancedArmoryResearchTime = 60
+
+kJetpackCost = 12
+kJetpackDropCost = 15
+kJetpackTechResearchCost = 15
+
+kExosuitTechResearchCost = 30   //20
+
+kExosuitCost = 40
+kExosuitDropCost = 50
+kClawRailgunExosuitCost = 40
+kDualExosuitCost = 55
+kDualRailgunExosuitCost = 55
+
 kEggGestateTime = 15
 
 kUmbraResearchCost = 20
