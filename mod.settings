@@ -1,21 +1,13 @@
 name        = "CN Playground Balance"
 source_dir  = "source"
 output_dir  = "output"
-description = [=[Since UWE trying to 10v10 gamemode and even trying 6v6.
-And ppl start to realize how strong ARC & railgun are.
-1.Unfriendly to rookies whose not able to fight against a  t3 railgun,just being death spammed and leave.
-2.Marine commander being a research machine and wait for arcs& railguns, the most winnable playstyle,also  most toxic.
-3.Trying to find more possibility for game to play,include adrenaline lerk/skulk/gorge , camoflage,vamprism etc.
-
-Then we decide to do some tweaks.
+description = [=[Aiming and test, for 12v12 and further more players,better not put it in normal plays cause it reverted most of alien nerfs.
 
 Purpose:
 Let commander do some field job (pves) instead a "reseach , med & watch" machine.
 Increase late game skulks/gorges/lerks viability,
-Let rookies get their funs,like mines&gls.
-Most important,Bring back the old time!
-
-Commander fade shift!]=]
+Let rookies get the fun parts,like mines&gls&camoflages.
+Bring back the old time.]=]
 image       = "preview.jpg"
 tag_modtype = ""
 tag_support = "Must be run on Server"

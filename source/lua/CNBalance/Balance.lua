@@ -1,5 +1,7 @@
 kPlayerResPerInterval  = 0.125
 kPlayingTeamInitialTeamRes = 65
+kMarineInitialIndivRes = 15
+kAlienInitialIndivRes = 12
 
 kMineCost = 9
 kMineDamage = 135
@@ -57,7 +59,7 @@ kCatPackPickupDelay = 4
 
 kAdvancedArmoryUpgradeCost = 20
 kPrototypeLabCost = 30
-kAdvancedArmoryResearchTime = 60
+kAdvancedArmoryResearchTime = 90
 
 kJetpackCost = 12
 kJetpackDropCost = 15
