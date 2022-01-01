@@ -1,1 +1,1 @@
-Fade.kAdrenalineEnergyRecuperationRate = 18.0
+Fade.kAdrenalineEnergyRecuperationRate = 15.0 //18->15
