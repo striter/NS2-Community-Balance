@@ -3,19 +3,19 @@ kPlayingTeamInitialTeamRes = 65
 kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
 
-kMineCost = 9
+kMineCost = 7
 kMineDamage = 135
 
 kPistolRateOfFire = 0.01
 kPistolDamage = 20
 
-kHeavyMachineGunDamage = 7.5
+kHeavyMachineGunDamage = 9
 kHeavyMachineGunDamageType = kDamageType.MachineGun
-kHeavyMachineGunClipSize = 200
+kHeavyMachineGunClipSize = 160
 kHeavyMachineGunClipNum = 2
 kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
-kHeavyMachineGunSpread = Math.Radians(5.5)
+kHeavyMachineGunSpread = Math.Radians(5.0)
 
 kGrenadeLauncherGrenadeDamage = 100
 kGrenadeLauncherGrenadeDamageType = kDamageType.Structural
@@ -26,7 +26,7 @@ kGrenadeLauncherWeapons1DamageScalar = 1.08
 kGrenadeLauncherWeapons2DamageScalar = 1.17
 kGrenadeLauncherWeapons3DamageScalar = 1.25
 
-kMinigunDamage = 9
+kMinigunDamage = 9.5
 kMinigunDamageType = kDamageType.Structural
 
 kRailgunDamage = 50
@@ -35,8 +35,8 @@ kRailgunDamageType = kDamageType.Structural
 
 kPulseGrenadeDamageRadius = 4
 kPulseGrenadeEnergyDamageRadius = 4
-kPulseGrenadeDamage = 75
-kPulseGrenadeEnergyDamage = 25
+kPulseGrenadeDamage = 90  //75->90
+kPulseGrenadeEnergyDamage = 35  //25->35
 
 kInfantryPortalBuildTime = 5
 
@@ -59,7 +59,7 @@ kCatPackPickupDelay = 4
 
 kAdvancedArmoryUpgradeCost = 20
 kPrototypeLabCost = 30
-kAdvancedArmoryResearchTime = 90
+kAdvancedArmoryResearchTime = 75 //90->75
 
 kJetpackCost = 12
 kJetpackDropCost = 15
@@ -100,7 +100,7 @@ kStabEnergyCost = 30
 
 kStompEnergyCost = 30
 kStompDamageType = kDamageType.Heavy
-kStompDamage = 40
+kStompDamage = 40  
 kStompRange = 12
 kDisruptMarineTime = 1
 kDisruptMarineTimeout = 4
