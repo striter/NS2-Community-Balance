@@ -9,13 +9,24 @@ kMineDamage = 135
 kPistolRateOfFire = 0.01
 kPistolDamage = 20
 
-kHeavyMachineGunDamage = 9
+kShotgunFireRate = 0.88
+kShotgunDamage = 12.33 //11.33
+kShotgunDamageType = kDamageType.Normal
+kShotgunClipSize = 6
+kShotgunBulletsPerShot = 13
+kShotgunSpreadDistance = 10 
+
+kShotgunWeapons1DamageScalar = 1.059
+kShotgunWeapons2DamageScalar = 1.118
+kShotgunWeapons3DamageScalar = 1.177
+
+kHeavyMachineGunDamage = 8.5  //8
 kHeavyMachineGunDamageType = kDamageType.MachineGun
-kHeavyMachineGunClipSize = 160
-kHeavyMachineGunClipNum = 2
+kHeavyMachineGunClipSize = 150  //100
+kHeavyMachineGunClipNum = 3 //4
 kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
-kHeavyMachineGunSpread = Math.Radians(5.0)
+kHeavyMachineGunSpread = Math.Radians(5.5)  //4
 
 kGrenadeLauncherGrenadeDamage = 100
 kGrenadeLauncherGrenadeDamageType = kDamageType.Structural
