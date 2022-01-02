@@ -11,6 +11,10 @@ kShotgunWeight = 0.14
 
 kNumMines = 2
 
+kItemStayTime = 30
+kWeaponStayTime = 30
+kWeaponDropRateLimit = 0.2
+
 kAlienStructureMoveSpeed = 1.5
 
 kAlienRegenerationTime = 2
@@ -38,7 +42,6 @@ kAlienRegenerationCombatModifier = 0.5
 kHydrasPerHive = 4
 kClogsPerHive = 12
 kNumWebsPerGorge = 4
-
 kSentriesPerBattery = 5
 
 kMACSpeedAmount = 1
@@ -49,6 +52,7 @@ kGorgeCarapaceSpeedReduction = 0 --0.08
 kLerkCarapaceSpeedReduction = 0 --0.15
 kFadeCarapaceSpeedReduction = 0 --0.15
 kOnosCarapaceSpeedReduction = 0 --0.12
+kFadeAdrenalineSpeedReduction = 0
 
 kBiteLeapVampirismScalar = 0.05   //0.0466
 kParasiteVampirismScalar = 0.02    //0

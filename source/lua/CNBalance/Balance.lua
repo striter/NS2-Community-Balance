@@ -14,7 +14,7 @@ kShotgunDamage = 12.33 //11.33
 kShotgunDamageType = kDamageType.Normal
 kShotgunClipSize = 6
 kShotgunBulletsPerShot = 13
-kShotgunSpreadDistance = 10 
+kShotgunSpreadDistance = 10
 
 kShotgunWeapons1DamageScalar = 1.059
 kShotgunWeapons2DamageScalar = 1.118
@@ -105,13 +105,17 @@ kLeapEnergyCost = 45
 
 kHealsprayDamage = 10
 
-kStabDamage = 150
+kStabDamage = 130
 kStabDamageType = kDamageType.Structural
-kStabEnergyCost = 30
+kStabEnergyCost = 25
+
+kStartBlinkEnergyCost = 14
+kBlinkEnergyCost = 30
+kHealthOnBlink = 0
 
 kStompEnergyCost = 30
 kStompDamageType = kDamageType.Heavy
-kStompDamage = 40  
+kStompDamage = 40
 kStompRange = 12
 kDisruptMarineTime = 1
 kDisruptMarineTimeout = 4
