@@ -9,6 +9,10 @@ kMineDamage = 135
 kPistolRateOfFire = 0.01
 kPistolDamage = 20
 
+kShotgunCost = 18
+kShotgunDropCost = 20
+kShotgunTechResearchCost = 15
+
 kShotgunFireRate = 0.88
 kShotgunDamage = 12.33 //11.33
 kShotgunDamageType = kDamageType.Normal
@@ -37,7 +41,7 @@ kGrenadeLauncherWeapons1DamageScalar = 1.08
 kGrenadeLauncherWeapons2DamageScalar = 1.17
 kGrenadeLauncherWeapons3DamageScalar = 1.25
 
-kMinigunDamage = 9.0
+kMinigunDamage = 8.0
 kMinigunDamageType = kDamageType.Normal
 
 kRailgunDamage = 50
