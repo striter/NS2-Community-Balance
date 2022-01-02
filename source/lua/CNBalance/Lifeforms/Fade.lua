@@ -4,10 +4,10 @@ local kBlinkAddAcceleration = 1  //1 Speed after holding
 local kBlinkSpeedCap = 25 //25 Blink Max Speed,Normal ppl wont reach it. except proDDDDDD
 
 Fade.kAdrenalineEnergyRecuperationRate = 18
-local kAdrenalineBlinkSpeedReduction = 1
-local kAdrenalineBlinkAccelerationReduction = 0
-local kAdrenalineBlinkAddAccelerationReduction = 0.5
-local kAdrenalineBlinkSpeedCapReduction = 7
+local kAdrenalineBlinkSpeedReduction = 0.5
+local kAdrenalineBlinkAccelerationReduction = 20
+local kAdrenalineBlinkAddAccelerationReduction = 0
+local kAdrenalineBlinkSpeedCapReduction = 5
 
 function Fade:ModifyVelocity(input, velocity, deltaTime)
 
