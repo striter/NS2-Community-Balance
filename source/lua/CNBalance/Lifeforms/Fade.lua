@@ -5,7 +5,7 @@ local kBlinkSpeedCap = 25 //25 Blink Max Speed,Normal ppl wont reach it. except 
 
 Fade.kAdrenalineEnergyRecuperationRate = 18
 local kAdrenalineBlinkSpeedReduction = 0.5
-local kAdrenalineBlinkAccelerationReduction = 20
+local kAdrenalineBlinkAccelerationReduction = 10
 local kAdrenalineBlinkAddAccelerationReduction = 0
 local kAdrenalineBlinkSpeedCapReduction = 5
 

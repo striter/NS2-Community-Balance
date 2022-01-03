@@ -122,7 +122,7 @@ kStompDamageType = kDamageType.Heavy
 kStompDamage = 40
 kStompRange = 12
 kDisruptMarineTime = 1
-kDisruptMarineTimeout = 4
+kDisruptMarineTimeout = 2
 
 kChargeDamage = 30
 
