@@ -3,7 +3,7 @@ kPlayingTeamInitialTeamRes = 65
 kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
 
-kMineCost = 7
+kMineCost = 9
 kMineDamage = 135
 
 kPistolRateOfFire = 0.01
