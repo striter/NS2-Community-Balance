@@ -24,7 +24,7 @@ kShotgunWeapons1DamageScalar = 1.059
 kShotgunWeapons2DamageScalar = 1.118
 kShotgunWeapons3DamageScalar = 1.177
 
-kHeavyMachineGunDamage = 8.5  //8
+kHeavyMachineGunDamage = 8  //8
 kHeavyMachineGunDamageType = kDamageType.MachineGun
 kHeavyMachineGunClipSize = 150  //100
 kHeavyMachineGunClipNum = 3 //4
