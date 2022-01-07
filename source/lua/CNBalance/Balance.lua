@@ -109,7 +109,7 @@ kLeapEnergyCost = 45
 
 kHealsprayDamage = 10
 
-kStabDamage = 130
+kStabDamage = 150
 kStabDamageType = kDamageType.Structural
 kStabEnergyCost = 25
 
