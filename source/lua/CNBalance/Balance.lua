@@ -44,8 +44,8 @@ kGrenadeLauncherWeapons3DamageScalar = 1.25
 kMinigunDamage = 8.0
 kMinigunDamageType = kDamageType.Normal
 
-kRailgunDamage = 50
-kRailgunChargeDamage = 100
+kRailgunDamage = 10
+kRailgunChargeDamage = 140
 kRailgunDamageType = kDamageType.Structural
 
 kPulseGrenadeDamageRadius = 4
