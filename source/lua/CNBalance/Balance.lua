@@ -33,7 +33,7 @@ kHeavyMachineGunSecondaryRange = 1.1
 kHeavyMachineGunSpread = Math.Radians(5.5)  //4
 
 kGrenadeLauncherGrenadeDamage = 100
-kGrenadeLauncherGrenadeDamageType = kDamageType.Structural
+kGrenadeLauncherGrenadeDamageType = kDamageType.GrenadeLauncher
 kGrenadeLauncherClipSize = 4
 kGrenadeLauncherGrenadeDamageRadius = 4.8
 
@@ -81,6 +81,9 @@ kJetpackDropCost = 15
 kJetpackTechResearchCost = 15
 
 kExosuitTechResearchCost = 30   //20
+
+kGrenadeTechResearchCost = 10   //10
+kGrenadeTechResearchTime = 30   //45
 
 kExosuitCost = 40
 kExosuitDropCost = 50

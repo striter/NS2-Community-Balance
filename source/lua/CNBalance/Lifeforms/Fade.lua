@@ -28,8 +28,9 @@ function Fade:ModifyVelocity(input, velocity, deltaTime)
         local maxSpeedTable = { maxSpeed = speed }
         self:ModifyMaxSpeed(maxSpeedTable, input)
         local prevSpeed = velocity:GetLength()
-        local maxSpeed = math.min(prevSpeed, maxSpeedTable.maxSpeed)
+        local maxSpeed = math.max(prevSpeed, maxSpeedTable.maxSpeed)
         maxSpeed = math.min(speedCap,maxSpeed)
+
         velocity:Add(wishDir * acceleration * deltaTime)
 
         if velocity:GetLength() > maxSpeed then
