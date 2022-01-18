@@ -1,4 +1,4 @@
-name        = "CN Playground Balance"
+name        = "[CN] Playground Balance"
 source_dir  = "source"
 output_dir  = "output"
 description = [=[Aiming and test, for 12v12 and further more players,better not put it in normal plays cause it reverted most of alien nerfs.
