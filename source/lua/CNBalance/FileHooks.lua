@@ -30,3 +30,8 @@ ModLoader.SetupFileHook("lua/Onos.lua", "lua/CNBalance/Lifeforms/Onos.lua", "pos
 
 ModLoader.SetupFileHook("lua/ARC.lua", "lua/CNBalance/ARC.lua", "post")
 ModLoader.SetupFileHook("lua/Exo.lua", "lua/CNBalance/Exo.lua", "post")
+
+if AddHintModPanel then
+    local panelMaterial = PrecacheAsset("materials/CNPlaygroundBalance/Banner.material")
+    AddHintModPanel(panelMaterial, "https://docs.qq.com/doc/DUEZSeUtrR0tWTGJ4","阅读平衡修改文档")
+end
