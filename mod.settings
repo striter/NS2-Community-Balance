@@ -1,15 +1,20 @@
 name        = "[CN] Playground Balance"
 source_dir  = "source"
 output_dir  = "output"
-description = [=[Aiming and test, for 12v12 and further more players,better not put it in normal plays cause it reverted most of alien nerfs.
+description = [=[国服小操场专用平衡
+文档 https://docs.qq.com/doc/DUEZSeUtrR0tWTGJ4
+git仓库  https://github.com/striter/NS2-Playground-Balance/
+
+官方做10v10-6v6 我们做12v12...
+
+Aiming and test, for 12v12 and further more players,better not put it in normal plays cause it reverted most of alien nerfs.
 
 Purpose:
 Let commander do some field job (pves) instead a "reseach , med & watch" machine.
 Increase late game skulks/gorges/lerks viability,
 Let rookies get the fun parts,like mines&gls&camoflages.
 Bring back the old time.
-
-git https://github.com/striter/NS2-Playground-Balance/]=]
+]=]
 image       = "preview.jpg"
 tag_modtype = ""
 tag_support = ""
