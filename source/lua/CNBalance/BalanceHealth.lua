@@ -15,9 +15,9 @@ kLerkBaseCarapaceUpgradeAmount  = 25
 kFadeBaseCarapaceUpgradeAmount  = 40
 kOnosBaseCarapaceUpgradeAmount  = 200
 
-kSkulkCarapaceArmorPerBiomass = 1.41
-kGorgeCarapaceArmorPerBiomass = 1.41
-kLerkCarapaceArmorPerBiomass  = 1.41
+kSkulkCarapaceArmorPerBiomass = 1.25
+kGorgeCarapaceArmorPerBiomass = 1.25
+kLerkCarapaceArmorPerBiomass  = 1.25
 kFadeCarapaceArmorPerBiomass  = 0
 kOnosCarapaceArmorPerBiomass  = 0
 
