@@ -11,14 +11,14 @@ kAlienRegenerationPercentage = 0.08
 
 kSkulkBaseCarapaceUpgradeAmount = 15
 kGorgeBaseCarapaceUpgradeAmount = 25
-kLerkBaseCarapaceUpgradeAmount  = 20
+kLerkBaseCarapaceUpgradeAmount  = 25
 kFadeBaseCarapaceUpgradeAmount  = 40
 kOnosBaseCarapaceUpgradeAmount  = 200
 
-kSkulkCarapaceArmorPerBiomass = 1.5
-kGorgeCarapaceArmorPerBiomass = 1
-kLerkCarapaceArmorPerBiomass  = 1
-kFadeCarapaceArmorPerBiomass  = 1.5
+kSkulkCarapaceArmorPerBiomass = 1.41
+kGorgeCarapaceArmorPerBiomass = 1.41
+kLerkCarapaceArmorPerBiomass  = 0
+kFadeCarapaceArmorPerBiomass  = 0
 kOnosCarapaceArmorPerBiomass  = 0
 
 kHiveHealth = 5200    kHiveArmor = 750
