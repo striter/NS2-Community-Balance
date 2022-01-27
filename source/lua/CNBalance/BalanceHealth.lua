@@ -1,25 +1,25 @@
 kHealingClampMaxHPAmount = 0.20
 
-kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5    kSkulkHealthPerBioMass = 4
-kGorgeHealth = 190   kGorgeArmor = 50    kGorgePointValue = 10    kGorgeHealthPerBioMass = 10
-kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15    kLerkHealthPerBioMass = 4
+kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5    kSkulkHealthPerBioMass = 3
+kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 10    kGorgeHealthPerBioMass = 4
+kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15    kLerkHealthPerBioMass = 3
 kFadeHealth = 250    kFadeArmor = 80     kFadePointValue = 20    kFadeHealthPerBioMass = 5
 kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30    kOnosHealtPerBioMass = 50
 
 kParasitePlayerPointValue = 2
 kAlienRegenerationPercentage = 0.08
 
-kSkulkBaseCarapaceUpgradeAmount = 20
-kGorgeBaseCarapaceUpgradeAmount = 30
-kLerkBaseCarapaceUpgradeAmount  = 30
+kSkulkBaseCarapaceUpgradeAmount = 15
+kGorgeBaseCarapaceUpgradeAmount = 25
+kLerkBaseCarapaceUpgradeAmount  = 20
 kFadeBaseCarapaceUpgradeAmount  = 40
 kOnosBaseCarapaceUpgradeAmount  = 200
 
-kSkulkCarapaceArmorPerBiomass = 1.25
-kGorgeCarapaceArmorPerBiomass = 2.5
-kLerkCarapaceArmorPerBiomass  = 1.5
-kFadeCarapaceArmorPerBiomass  = 2
-kOnosCarapaceArmorPerBiomass  = 4
+kSkulkCarapaceArmorPerBiomass = 1.5
+kGorgeCarapaceArmorPerBiomass = 1
+kLerkCarapaceArmorPerBiomass  = 1
+kFadeCarapaceArmorPerBiomass  = 1.5
+kOnosCarapaceArmorPerBiomass  = 0
 
 kHiveHealth = 5200    kHiveArmor = 750
 kMatureHiveHealth = 7800 kMatureHiveArmor = 1400
