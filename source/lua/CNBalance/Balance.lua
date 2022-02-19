@@ -3,15 +3,35 @@ kPlayingTeamInitialTeamRes = 65
 kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
 
-kMineCost = 9
-kMineDamage = 135
+kRifleUpgradeCost = 20
+kRifleUpgradeTime = 60
+
+kNanoArmorResearchCost = 15
+kNanoArmorResearchTime = 60
 
 kPistolRateOfFire = 0.01
 kPistolDamage = 20
 
-kShotgunCost = 18
-kShotgunDropCost = 20
+kWelderDropCost = 3
+kWelderDropCooldown = 0
+
+kGrenadeTechResearchCost = 10   //10
+kGrenadeTechResearchTime = 30   //45
+
+kMineCost = 9
+kMineDamage = 135
+kMinesSupplyResearchCost = 10
+kMinesSupplyResearchTime = 60 
+kDropMineCost = 8
+kDropMineCooldown = 0
+
 kShotgunTechResearchCost = 15
+kShotgunTechResearchTime = 45
+kShotgunCost = 20
+kShotgunSupplyResearchCost = 10
+kShotgunSupplyResearchTime = 60
+kShotgunDropCost = 12
+kShotgunDropCooldown = 0
 
 kShotgunFireRate = 0.88
 kShotgunDamage = 12.33 //11.33
@@ -19,10 +39,15 @@ kShotgunDamageType = kDamageType.Normal
 kShotgunClipSize = 6
 kShotgunBulletsPerShot = 13
 kShotgunSpreadDistance = 10
-
 kShotgunWeapons1DamageScalar = 1.059
 kShotgunWeapons2DamageScalar = 1.118
 kShotgunWeapons3DamageScalar = 1.177
+
+kHeavyMachineGunCost = 20
+kHeavyMachineGunSupplyResearchCost = 10
+kHeavyMachineGunSupplyResearchTime = 60
+kHeavyMachineGunDropCost = 12
+kHeavyMachineGunDropCooldown = 0
 
 kHeavyMachineGunDamage = 8  //8
 kHeavyMachineGunDamageType = kDamageType.MachineGun
@@ -32,21 +57,51 @@ kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
 kHeavyMachineGunSpread = Math.Radians(5.5)  //4
 
-kGrenadeLauncherGrenadeDamage = 100
-kGrenadeLauncherGrenadeDamageType = kDamageType.GrenadeLauncher
-kGrenadeLauncherClipSize = 4
-kGrenadeLauncherGrenadeDamageRadius = 4.8
+--Grenade Launcher
+kGrenadeLauncherSupplyResearchCost = 10
+kGrenadeLauncherSupplyResearchTime = 60
 
+kGrenadeLauncherImpactShotResearchCost = 10
+kGrenadeLauncherImpactShotResearchTime = 45
+
+kGrenadeLauncherDetectionShotResearchCost = 15
+kGrenadeLauncherDetectionShotResearchTime = 60
+
+kGrenadeLauncherAllyBlastResearchCost = 10
+kGrenadeLauncherAllyBlastResearchTime = 45
+
+kGrenadeLauncherUpgradeResearchCost = 15
+kGrenadeLauncherUpgradeResearchTime = 60
+
+kGrenadeLauncherCost = 20
+kGrenadeLauncherDropCost = 12
+kGrenadeLauncherDropCooldown = 0
+
+kGrenadeLauncherGrenadeDamageType = kDamageType.GrenadeLauncher
+kGrenadeLauncherGrenadeDamage = 100
+kGrenadeLauncherGrenadeDamageRadius = 4.8
+kGrenadeLauncherDetectionShotRadius = 3
+
+kGrenadeLauncherImpactGrenadeDamage = 80
+kGrenadeLauncherAllyBlastReduction = 0.3
+
+kGrenadeLauncherClipSize = 4
 kGrenadeLauncherWeapons1DamageScalar = 1.08
 kGrenadeLauncherWeapons2DamageScalar = 1.17
 kGrenadeLauncherWeapons3DamageScalar = 1.25
+--
+
+kFlamethrowerCost = 20
+kFlamethrowerSupplyResearchCost = 20
+kFlamethrowerSupplyResearchTime = 60
+kFlamethrowerDropCost = 12
+kFlamethrowerDropCooldown = 0
 
 kMinigunDamage = 8.0
-kMinigunDamageType = kDamageType.Normal
-
-kRailgunDamage = 10
-kRailgunChargeDamage = 140
-kRailgunDamageType = kDamageType.Structural
+kMinigunDamageType = kDamageType.Exosuit
+kRailgunDamage = 40
+kRailgunChargeDamage = 110
+kRailgunDamageType = kDamageType.Exosuit
 
 kPulseGrenadeDamageRadius = 4
 kPulseGrenadeEnergyDamageRadius = 4
@@ -60,41 +115,32 @@ kSentryCost = 3
 kSentryBatteryCost = 6
 kSentryBatteryBuildTime = 5
 
-kPowerSurgeCost = 5
-kPowerSurgeTriggerEMP = true
-kPowerSurgeEMPDamage = 25
-kPowerSurgeEMPDamageRadius = 6
-kPowerSurgeEMPElectrifiedDuration = 6
-
-kCatPackCost = 2
-kCatPackMoveAddSpeed = 1.25
-kCatPackWeaponSpeed = 1.5
-kCatPackDuration = 5
-kCatPackPickupDelay = 4
-
-kAdvancedArmoryUpgradeCost = 20
-kPrototypeLabCost = 30
+kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 75 //90->75
 
-kJetpackCost = 12
-kJetpackDropCost = 15
+kPrototypeLabCost = 30
+
 kJetpackTechResearchCost = 15
+kJetpackTechResearchTime = 90
+kJetpackCost = 12
+kJetpackDropCost = 12
+kJetpackDropCooldown = 0
+kJetpackSupplyResearchCost = 20
+kJetpackSupplyResearchTime = 60
 
-kExosuitTechResearchCost = 30   //20
-
-kGrenadeTechResearchCost = 10   //10
-kGrenadeTechResearchTime = 30   //45
-
-kExosuitCost = 40
-kExosuitDropCost = 50
-kClawRailgunExosuitCost = 40
+kExosuitTechResearchCost = 25
 kDualExosuitCost = 55
 kDualRailgunExosuitCost = 55
+kExosuitSupplyResearchCost = 20
+kExosuitSupplyResearchTime = 60
+kExosuitDropCost = 100
+kExosuitDropCooldown = 0
+
+kExosuitCost = 40
+kClawRailgunExosuitCost = 40
 
 kEggGestateTime = 15
-
 kUmbraResearchCost = 20
-
 kGorgeCost = 10
 kGorgeEggCost = 15
 kLerkCost = 21
@@ -103,57 +149,38 @@ kFadeCost = 37
 kFadeEggCost = 70
 kOnosCost = 62
 kOnosEggCost = 100
-
 kSpikeSpread = Math.Radians(3.8)
-kSpikeSize = 0.06
-kMetabolizeEnergyCost = 20
-
-kLeapEnergyCost = 45
-
-kHealsprayDamage = 10
-
-kStabDamage = 150
-kStabDamageType = kDamageType.Structural
 kStabEnergyCost = 25
-
 kStartBlinkEnergyCost = 14
 kBlinkEnergyCost = 30
 kHealthOnBlink = 0
-
 kStompEnergyCost = 30
 kStompDamageType = kDamageType.Heavy
 kStompDamage = 40
 kStompRange = 12
 kDisruptMarineTime = 1
 kDisruptMarineTimeout = 2
-
 kChargeDamage = 30
-
 kBabblerShieldPercent = 0.1
 kSkulkBabblerShieldPercent = 0.35
 kGorgeBabblerShieldPercent = 0.2
 kLerkBabblerShieldPercent = 0.2
 kFadeBabblerShieldPercent = 0.25
 kBabblerShieldMaxAmount = 200
-
 kWebZeroVisDistance = 3.0
 kWebFullVisDistance = 2.0
-
 kWhipCost = 8
 kShadeCost = 10
 kShiftCost = 10
 kCragCost = 10
-
 kContaminationCost = 5
 kContaminationCooldown = 10
 kBoneWallCost = 3
 kRuptureCost = 1
-
 kDrifterCost = 6
-
 kHydraDamage = 12
 kHydraAttackDamageType = kDamageType.Structural
-
+kHealsprayDamage = 10
 kEchoWhipCost = 2
 kEchoCragCost = 2
 kEchoShadeCost = 2
@@ -162,3 +189,41 @@ kEchoVeilCost = 0
 kEchoSpurCost = 0
 kEchoShellCost = 0
 kEchoEggCost = 1
+
+kObservatoryScanCost = 3
+kScanCooldown = 0
+kObservatoryDistressBeaconCost = 10
+
+kAdvancedMarineSupportResearchCost = 20
+kAdvancedMarineSupportResearchTime = 90
+kAmmoPackCost = 1
+kAmmoPackCooldown = 0
+kMedPackCost = 1
+kMedPackCooldown = 0
+
+kCatPackSupportCost = 10
+kCatPackSupportTime = 60
+kCatPackCost = 1
+kCatPackCooldown = 0
+kCatPackMoveAddSpeed = 1.25
+kCatPackWeaponSpeed = 1.5
+kCatPackDuration = 5
+kCatPackPickupDelay = 4
+
+kPowerSurgeSupportCost = 10
+kPowerSurgeSupportTime = 60
+kPowerSurgeCost = 3
+kPowerSurgeCooldown = 5
+kPowerSurgeDuration = 10
+kPowerSurgeTriggerEMP = true
+kPowerSurgeEMPDamage = 25
+kPowerSurgeEMPDamageRadius = 6
+kPowerSurgeEMPElectrifiedDuration = 2
+
+kNanoShieldSupportCost = 10
+kNanoShieldSupportTime = 60
+kNanoShieldPlayerDuration = 3
+kNanoShieldStructureDuration = 3
+kNanoShieldCost = 3
+kNanoShieldCooldown = 5
+kNanoShieldDamageReductionDamage = 0.68

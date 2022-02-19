@@ -13,8 +13,14 @@ kShotgunWeight = 0.14
 
 kNumMines = 2
 
-kItemStayTime = 30
-kWeaponStayTime = 30
+-- Jetpack
+kUpgradedJetpackUseFuelRate = 0.18
+kJetpackingAccel = 0.8
+kJetpackUseFuelRate = 0.21
+kJetpackReplenishFuelRate = 0.21
+
+kItemStayTime = 5
+kWeaponStayTime = 20
 kWeaponDropRateLimit = 0.2
 
 kAlienStructureMoveSpeed = 1.5
@@ -81,3 +87,6 @@ kWhipSupply = 15
 kCragSupply = 20
 kShadeSupply = 20
 kShiftSupply = 20
+
+
+kNanoArmorHealPerSecond = 3

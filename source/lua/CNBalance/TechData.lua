@@ -332,6 +332,12 @@ function BuildTechData()
             [kTechDataTooltipInfo] = "WEAPONS_MENU_TOOLTIP",
         },
 
+        {
+            [kTechDataId] = kTechId.ProtosMenu,
+            [kTechDataDisplayName] = "PROTOS_MENU",
+            [kTechDataTooltipInfo] = "PROTOS_MENU_TOOLTIP",
+        },
+
         -- Marine menus
         {
             [kTechDataId] = kTechId.RoboticsFactoryARCUpgradesMenu,
@@ -473,26 +479,16 @@ function BuildTechData()
         },
 
         -- Marine Commander abilities
+        
         {
-            [kTechDataId] = kTechId.PowerSurge,
-            [kTechDataCooldown] = kPowerSurgeCooldown,
-            [kTechDataAllowStacking] = true,
-            [kTechDataIgnorePathingMesh] = true,
-            [kTechDataDisplayName] = "POWER_SURGE",
-            [kTechDataCostKey] = kPowerSurgeCost,
-            [kTechDataTooltipInfo] = "POWER_SURGE_TOOLTIP",
+            [kTechDataId] = kTechId.AdvancedMarineSupport,
+            [kTechDataDisplayName] = "ADVANCED_MARINE_SUPPORT",
+            [kTechDataTooltipInfo] = "ADVANCED_MARINE_SUPPORT_TOOLTIP",
+            [kTechDataCostKey] = kAdvancedMarineSupportResearchCost,
+            [kTechDataResearchTimeKey] = kAdvancedMarineSupportResearchTime,
+            [kTechDataResearchName] = "ADVANCED_MARINE_SUPPORT",
         },
 
-        {
-            [kTechDataId] = kTechId.NanoShield,
-            [kTechDataCooldown] = kNanoShieldCooldown,
-            [kTechDataAllowStacking] = true,
-            [kTechDataIgnorePathingMesh] = true,
-            [kTechDataMapName] = NanoShield.kMapName,
-            [kTechDataDisplayName] = "NANO_SHIELD_DEFENSE",
-            [kTechDataCostKey] = kNanoShieldCost,
-            [kTechDataTooltipInfo] = "NANO_SHIELD_DEFENSE_TOOLTIP",
-        },
 
         {
             [kTechDataId] = kTechId.AmmoPack,
@@ -523,6 +519,15 @@ function BuildTechData()
         },
 
         {
+            [kTechDataId] = kTechId.CatPackSupport,
+            [kTechDataCostKey] = kCatPackSupportCost,
+            [kTechDataResearchTimeKey] = kCatPackSupportTime,
+            [kTechDataDisplayName] = "CAT_PACK_SUPPORT",
+            [kTechDataTooltipInfo] = "CAT_PACK_TOOLTIP",
+            [kTechDataResearchName] = "CAT_PACK_SUPPORT",
+        },
+
+        {
             [kTechDataId] = kTechId.CatPack,
             [kTechDataAllowStacking] = true,
             [kTechDataIgnorePathingMesh] = true,
@@ -533,6 +538,43 @@ function BuildTechData()
             [kTechDataTooltipInfo] = "CAT_PACK_TOOLTIP",
             [kTechDataSpawnHeightOffset] = kCommanderDropSpawnHeight,
             [kTechDataOverrideCoordsMethod] = AlignDroppack,
+        },
+        {
+            [kTechDataId] = kTechId.PowerSurgeSupport,
+            [kTechDataCostKey] = kPowerSurgeSupportCost,
+            [kTechDataResearchTimeKey] = kPowerSurgeSupportTime,
+            [kTechDataDisplayName] = "POWER_SURGE_SUPPORT",
+            [kTechDataTooltipInfo] = "POWER_SURGE_TOOLTIP",
+            [kTechDataResearchName] = "POWER_SURGE_SUPPORT",
+        },
+
+        {
+            [kTechDataId] = kTechId.PowerSurge,
+            [kTechDataCooldown] = kPowerSurgeCooldown,
+            [kTechDataAllowStacking] = true,
+            [kTechDataIgnorePathingMesh] = true,
+            [kTechDataDisplayName] = "POWER_SURGE",
+            [kTechDataCostKey] = kPowerSurgeCost,
+            [kTechDataTooltipInfo] = "POWER_SURGE_TOOLTIP",
+        },
+        {
+            [kTechDataId] = kTechId.NanoShieldSupport,
+            [kTechDataCostKey] = kNanoShieldSupportCost,
+            [kTechDataResearchTimeKey] = kNanoShieldSupportTime,
+            [kTechDataDisplayName] = "NANO_SHIELD_SUPPORT",
+            [kTechDataTooltipInfo] = "NANO_SHIELD_TOOLTIP",
+            [kTechDataResearchName] = "NANO_SHIELD_SUPPORT",
+        },
+
+        {
+            [kTechDataId] = kTechId.NanoShield,
+            [kTechDataCooldown] = kNanoShieldCooldown,
+            [kTechDataAllowStacking] = true,
+            [kTechDataIgnorePathingMesh] = true,
+            [kTechDataMapName] = NanoShield.kMapName,
+            [kTechDataDisplayName] = "NANO_SHIELD",
+            [kTechDataCostKey] = kNanoShieldCost,
+            [kTechDataTooltipInfo] = "NANO_SHIELD_TOOLTIP",
         },
 
         {
@@ -624,15 +666,6 @@ function BuildTechData()
             [kTechDataPointValue] = kMACPointValue,
             [kTechDataHotkey] = Move.M,
             [kTechDataTooltipInfo] = "MAC_TOOLTIP",
-        },
-
-        {
-            [kTechDataId] = kTechId.AdvancedMarineSupport,
-            [kTechDataDisplayName] = "ADVANCED_MARINE_SUPPORT",
-            [kTechDataTooltipInfo] = "ADVANCED_MARINE_SUPPORT_TOOLTIP",
-            [kTechDataCostKey] = kAdvancedMarineSupportResearchCost,
-            [kTechDataResearchTimeKey] = kAdvancedMarineSupportResearchTime,
-            [kTechDataResearchName] = "ADVANCED_MARINE_SUPPORT",
         },
 
         -- Marine base structures
@@ -994,7 +1027,7 @@ function BuildTechData()
             [kTechIDShowEnables] = false,
             [kTechDataResearchTimeKey] = kAdvancedArmoryResearchTime,
             [kTechDataHotkey] = Move.U,
-            [kTechDataDisplayName] = "ADVANCED_ARMORY_UPGRADE",
+            [kTechDataDisplayName] = "ADVANCED_ARMORY",
             [kTechDataTooltipInfo] = "ADVANCED_ARMORY_TOOLTIP",
             [kTechDataResearchName] = "ADVANCED_ARMORY"
         },
@@ -1134,6 +1167,35 @@ function BuildTechData()
             [kTechDataCostKey] = kHeavyMachineGunCost,
         },
 
+        {
+            [kTechDataId] = kTechId.Flamethrower,
+            [kTechDataMaxHealth] = kMarineWeaponHealth,
+            [kTechDataPointValue] = kFlamethrowerPointValue,
+            [kTechDataMapName] = Flamethrower.kMapName,
+            [kTechDataDisplayName] = "FLAMETHROWER",
+            [kTechDataTooltipInfo] = "FLAMETHROWER_TOOLTIP",
+            [kTechDataModel] = Flamethrower.kModelName,
+            [kTechDataDamageType] = kFlamethrowerDamageType,
+            [kTechDataCostKey] = kFlamethrowerCost,
+            [kStructureAttachId] = kTechId.Armory,
+            [kStructureAttachRange] = kArmoryWeaponAttachRange,
+            [kStructureAttachRequiresPower] = true,
+        },
+
+        {
+            [kTechDataId] = kTechId.GrenadeLauncher,
+            [kTechDataMaxHealth] = kMarineWeaponHealth,
+            [kTechDataPointValue] = kGrenadeLauncherPointValue,
+            [kTechDataMapName] = GrenadeLauncher.kMapName,
+            [kTechDataDisplayName] = "GRENADE_LAUNCHER",
+            [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_TOOLTIP",
+            [kTechDataModel] = GrenadeLauncher.kModelName,
+            [kTechDataDamageType] = kRifleDamageType,
+            [kTechDataCostKey] = kGrenadeLauncherCost,
+            [kStructureAttachId] = kTechId.Armory,
+            [kStructureAttachRange] = kArmoryWeaponAttachRange,
+            [kStructureAttachRequiresPower] = true,
+        },
         -- hand grenades
         {
             [kTechDataId] = kTechId.ClusterGrenade,
@@ -1191,30 +1253,74 @@ function BuildTechData()
             [kTechDataTooltipInfo] = "PULSE_GRENADE_TOOLTIP",
         },
 
+        -- Supply (Free drop)
+        {
+            [kTechDataId] = kTechId.MinesSupply,
+            [kTechDataCostKey] = kMinesSupplyResearchCost,
+            [kTechDataResearchTimeKey] = kMinesSupplyResearchTime,
+            [kTechDataDisplayName] = "MINES_SUPPLY",
+            [kTechDataTooltipInfo] = "MINES_SUPPLY_TOOLTIP",
+            [kTechDataResearchName] = "MINES_SUPPLY",
+        },
+
+
+        {
+            [kTechDataId] = kTechId.ShotgunSupply,
+            [kTechDataCostKey] = kShotgunSupplyResearchCost,
+            [kTechDataResearchTimeKey] = kShotgunSupplyResearchTime,
+            [kTechDataDisplayName] = "SHOTGUN_SUPPLY",
+            [kTechDataTooltipInfo] = "SHOTGUN_SUPPLY_TOOLTIP",
+            [kTechDataResearchName] = "SHOTGUN_SUPPLY",
+        },
+
+        {
+            [kTechDataId] = kTechId.FlamethrowerSupply,
+            [kTechDataCostKey] = kFlamethrowerSupplyResearchCost,
+            [kTechDataResearchTimeKey] = kFlamethrowerSupplyResearchTime,
+            [kTechDataDisplayName] = "FLAMETHROWER_SUPPLY",
+            [kTechDataTooltipInfo] = "FLAMETHROWER_SUPPLY_TOOLTIP",
+            [kTechDataResearchName] = "FLAMETHROWER_SUPPLY",
+        },
+
+
+        {
+            [kTechDataId] = kTechId.GrenadeLauncherSupply,
+            [kTechDataCostKey] = kGrenadeLauncherSupplyResearchCost,
+            [kTechDataResearchTimeKey] = kGrenadeLauncherSupplyResearchTime,
+            [kTechDataDisplayName] = "GRENADE_LAUNCHER_SUPPLY",
+            [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_SUPPLY_TOOLTIP",
+            [kTechDataResearchName] = "GRENADE_LAUNCHER_SUPPLY",
+        },
+
+
+        {
+            [kTechDataId] = kTechId.HeavyMachineGunSupply,
+            [kTechDataCostKey] = kHeavyMachineGunSupplyResearchCost,
+            [kTechDataResearchTimeKey] = kHeavyMachineGunSupplyResearchTime,
+            [kTechDataDisplayName] = "HEAVY_MACHINE_GUN_SUPPLY",
+            [kTechDataTooltipInfo] = "HEAVY_MACHINE_GUN_SUPPLY_TOOLTIP",
+            [kTechDataResearchName] = "HEAVY_MACHINE_GUN_SUPPLY",
+        },
+
+        {
+            [kTechDataId] = kTechId.JetpackSupply,
+            [kTechDataCostKey] = kJetpackSupplyResearchCost,
+            [kTechDataResearchTimeKey] = kJetpackSupplyResearchTime,
+            [kTechDataDisplayName] = "JETPACK_SUPPLY",
+            [kTechDataTooltipInfo] = "JETPACK_SUPPLY_TOOLTIP",
+            [kTechDataResearchName] = "JETPACK_SUPPLY",
+        },
+
+        {
+            [kTechDataId] = kTechId.ExosuitSupply,
+            [kTechDataCostKey] = kExosuitSupplyResearchCost,
+            [kTechDataResearchTimeKey] = kExosuitSupplyResearchTime,
+            [kTechDataDisplayName] = "EXOSUIT_SUPPLY",
+            [kTechDataTooltipInfo] = "EXOSUIT_SUPPLY_TOOLTIP",
+            [kTechDataResearchName] = "EXOSUIT_SUPPLY",
+        },
+
         -- dropped by commander:
-        {
-            [kTechDataId] = kTechId.FlamethrowerTech,
-            [kTechDataCostKey] = kFlamethrowerTechResearchCost,
-            [kTechDataResearchTimeKey] = kFlamethrowerTechResearchTime,
-            [kTechDataDisplayName] = "RESEARCH_FLAMETHROWERS",
-            [kTechDataTooltipInfo] = "FLAMETHROWER_TECH_TOOLTIP",
-        },
-
-        {
-            [kTechDataId] = kTechId.Flamethrower,
-            [kTechDataMaxHealth] = kMarineWeaponHealth,
-            [kTechDataPointValue] = kFlamethrowerPointValue,
-            [kTechDataMapName] = Flamethrower.kMapName,
-            [kTechDataDisplayName] = "FLAMETHROWER",
-            [kTechDataTooltipInfo] = "FLAMETHROWER_TOOLTIP",
-            [kTechDataModel] = Flamethrower.kModelName,
-            [kTechDataDamageType] = kFlamethrowerDamageType,
-            [kTechDataCostKey] = kFlamethrowerCost,
-            [kStructureAttachId] = kTechId.Armory,
-            [kStructureAttachRange] = kArmoryWeaponAttachRange,
-            [kStructureAttachRequiresPower] = true,
-        },
-
         {
             [kTechDataId] = kTechId.DualMinigunTech,
             [kTechDataCostKey] = kDualMinigunTechResearchCost,
@@ -1264,20 +1370,6 @@ function BuildTechData()
             [kTechDataModel] = Railgun.kModelName,
         },
 
-        {
-            [kTechDataId] = kTechId.GrenadeLauncher,
-            [kTechDataMaxHealth] = kMarineWeaponHealth,
-            [kTechDataPointValue] = kGrenadeLauncherPointValue,
-            [kTechDataMapName] = GrenadeLauncher.kMapName,
-            [kTechDataDisplayName] = "GRENADE_LAUNCHER",
-            [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_TOOLTIP",
-            [kTechDataModel] = GrenadeLauncher.kModelName,
-            [kTechDataDamageType] = kRifleDamageType,
-            [kTechDataCostKey] = kGrenadeLauncherCost,
-            [kStructureAttachId] = kTechId.Armory,
-            [kStructureAttachRange] = kArmoryWeaponAttachRange,
-            [kStructureAttachRequiresPower] = true,
-        },
 
         {
             [kTechDataId] = kTechId.DropShotgun,
@@ -1287,6 +1379,7 @@ function BuildTechData()
             [kTechDataTooltipInfo] = "SHOTGUN_TOOLTIP",
             [kTechDataModel] = Shotgun.kModelName,
             [kTechDataCostKey] = kShotgunDropCost,
+            [kTechDataCooldown] = kShotgunDropCooldown,
             [kStructureAttachId] = { kTechId.Armory, kTechId.AdvancedArmory },
             [kStructureAttachRange] = kArmoryWeaponAttachRange,
             [kStructureAttachRequiresPower] = true,
@@ -1300,6 +1393,7 @@ function BuildTechData()
             [kTechDataTooltipInfo] = "HEAVY_MACHINE_GUN_TOOLTIP",
             [kTechDataModel] = HeavyMachineGun.kModelName,
             [kTechDataCostKey] = kHeavyMachineGunDropCost,
+            [kTechDataCooldown] = kHeavyMachineGunDropCooldown,
             [kStructureAttachId] = { kTechId.AdvancedArmory },
             [kStructureAttachRange] = kArmoryWeaponAttachRange,
             [kStructureAttachRequiresPower] = true,
@@ -1313,6 +1407,7 @@ function BuildTechData()
             [kTechDataTooltipInfo] = "WELDER_TOOLTIP",
             [kTechDataModel] = Welder.kModelName,
             [kTechDataCostKey] = kWelderDropCost,
+            [kTechDataCooldown] = kWelderDropCooldown,
             [kStructureAttachId] = { kTechId.Armory, kTechId.AdvancedArmory },
             [kStructureAttachRange] = kArmoryWeaponAttachRange,
             [kStructureAttachRequiresPower] = true,
@@ -1326,6 +1421,7 @@ function BuildTechData()
             [kTechDataTooltipInfo] = "MINE_TOOLTIP",
             [kTechDataModel] = LayMines.kDropModelName,
             [kTechDataCostKey] = kDropMineCost,
+            [kTechDataCooldown] = kDropMineCooldown,
             [kStructureAttachId] = { kTechId.Armory, kTechId.AdvancedArmory },
             [kStructureAttachRange] = kArmoryWeaponAttachRange,
             [kStructureAttachRequiresPower] = true,
@@ -1339,6 +1435,7 @@ function BuildTechData()
             [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_TOOLTIP",
             [kTechDataModel] = GrenadeLauncher.kModelName,
             [kTechDataCostKey] = kGrenadeLauncherDropCost,
+            [kTechDataCooldown] = kGrenadeLauncherDropCooldown,
             [kStructureAttachId] = kTechId.AdvancedArmory,
             [kStructureAttachRange] = kArmoryWeaponAttachRange,
             [kStructureAttachRequiresPower] = true,
@@ -1352,6 +1449,7 @@ function BuildTechData()
             [kTechDataTooltipInfo] = "FLAMETHROWER_TOOLTIP",
             [kTechDataModel] = Flamethrower.kModelName,
             [kTechDataCostKey] = kFlamethrowerDropCost,
+            [kTechDataCooldown] = kFlamethrowerDropCooldown,
             [kStructureAttachId] = kTechId.AdvancedArmory,
             [kStructureAttachRange] = kArmoryWeaponAttachRange,
             [kStructureAttachRequiresPower] = true,
@@ -1365,6 +1463,7 @@ function BuildTechData()
             [kTechDataTooltipInfo] = "JETPACK_TOOLTIP",
             [kTechDataModel] = Jetpack.kModelName,
             [kTechDataCostKey] = kJetpackDropCost,
+            [kTechDataCooldown] = kJetpackDropCooldown,
             [kStructureAttachId] = kTechId.PrototypeLab,
             [kStructureAttachRange] = kArmoryWeaponAttachRange,
             [kStructureAttachRequiresPower] = true,
@@ -1378,6 +1477,7 @@ function BuildTechData()
             [kTechDataTooltipInfo] = "EXOSUIT_TOOLTIP",
             [kTechDataModel] = Exosuit.kModelName,
             [kTechDataCostKey] = kExosuitDropCost,
+            [kTechDataCooldown] = kExosuitDropCooldown,
             [kStructureAttachId] = kTechId.PrototypeLab,
             [kStructureAttachRange] = kArmoryWeaponAttachRange,
             [kStructureAttachRequiresPower] = true,
@@ -1537,6 +1637,7 @@ function BuildTechData()
             [kTechDataResearchTimeKey] = kNanoArmorResearchTime,
             [kTechDataDisplayName] = "NANO_ARMOR",
             [kTechDataTooltipInfo] = "NANO_ARMOR_TOOLTIP",
+            [kTechDataResearchName] = "NANO_ARMOR",
         },
 
         -- Weapons research
@@ -1571,6 +1672,15 @@ function BuildTechData()
         },
 
         {
+            [kTechDataId] = kTechId.RifleUpgrade,
+            [kTechDataCostKey] = kRifleUpgradeCost,
+            [kTechDataResearchTimeKey] = kRifleUpgradeTime,
+            [kTechDataDisplayName] = "MARINE_RIFLE_UPGRADE",
+            [kTechDataTooltipInfo] = "MARINE_RIFLE_UPGRADE_TOOLTIP",
+            [kTechDataResearchName] = "MARINE_RIFLE_UPGRADE",
+        },
+
+        {
             [kTechDataId] = kTechId.ShotgunTech,
             [kTechDataCostKey] = kShotgunTechResearchCost,
             [kTechDataResearchTimeKey] = kShotgunTechResearchTime,
@@ -1578,7 +1688,7 @@ function BuildTechData()
             [kTechDataTooltipInfo] = "SHOTGUN_TECH_TOOLTIP",
             [kTechDataResearchName] = "RESEARCH_SHOTGUNS_TITLE",
         },
-
+        
         {
             [kTechDataId] = kTechId.HeavyRifleTech,
             [kTechDataCostKey] = kHeavyRifleTechResearchCost,
@@ -1588,11 +1698,27 @@ function BuildTechData()
         },
 
         {
+            [kTechDataId] = kTechId.FlamethrowerTech,
+            [kTechDataCostKey] = kFlamethrowerTechResearchCost,
+            [kTechDataResearchTimeKey] = kFlamethrowerTechResearchTime,
+            [kTechDataDisplayName] = "RESEARCH_FLAMETHROWERS",
+            [kTechDataTooltipInfo] = "FLAMETHROWER_TECH_TOOLTIP",
+        },
+
+        {
             [kTechDataId] = kTechId.GrenadeLauncherTech,
             [kTechDataCostKey] = kGrenadeLauncherTechResearchCost,
             [kTechDataResearchTimeKey] = kGrenadeLauncherTechResearchTime,
             [kTechDataDisplayName] = "RESEARCH_GRENADE_LAUNCHERS",
             [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_TECH_TOOLTIP",
+        },
+        
+        {
+            [kTechDataId] = kTechId.HeavyMachineGunTech,
+            [kTechDataCostKey] = kHeavyMachineGunTechResearchCost,
+            [kTechDataResearchTimeKey] = kHeavyMachineGunTechResearchTime,
+            [kTechDataDisplayName] = "RESEARCH_HEAVY_MACHINE_GUN",
+            [kTechDataTooltipInfo] = "HEAVY_MACHINE_GUN_TOOLTIP",
         },
 
         {
@@ -1603,25 +1729,44 @@ function BuildTechData()
             [kTechDataTooltipInfo] = "GRENADES_TOOLTIP",
             [kTechDataResearchName] = "RESEARCH_GRENADES_TITLE",
         },
-
+        
+        -- Additional Abilities
         {
-            [kTechDataId] = kTechId.AdvancedWeaponry,
-            [kTechDataCostKey] = kAdvancedWeaponryResearchCost,
-            [kTechDataResearchTimeKey] = kAdvancedWeaponryResearchTime,
-            [kTechDataDisplayName] = "ADVANCED_WEAPONRY",
-            [kTechDataHotkey] = Move.G,
-            [kTechDataTooltipInfo] = "ADVANCED_WEAPONRY_TOOLTIP",
-            [kTechDataResearchName] = "ADVANCED_WEAPONRY",
+            [kTechDataId] = kTechId.GrenadeLauncherImpactShot,
+            [kTechDataCostKey] = kGrenadeLauncherImpactShotResearchCost,
+            [kTechDataResearchTimeKey] = kGrenadeLauncherImpactShotResearchTime,
+            [kTechDataDisplayName] = "GRENADE_LAUNCHER_IMPACT_SHOT",
+            [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_IMPACT_SHOT_TOOLTIP",
+            [kTechDataResearchName] = "GRENADE_LAUNCHER_IMPACT_SHOT",
         },
 
         {
-            [kTechDataId] = kTechId.HeavyMachineGunTech,
-            [kTechDataCostKey] = kHeavyMachineGunTechResearchCost,
-            [kTechDataResearchTimeKey] = kHeavyMachineGunTechResearchTime,
-            [kTechDataDisplayName] = "RESEARCH_HEAVY_MACHINE_GUN",
-            [kTechDataTooltipInfo] = "HEAVY_MACHINE_GUN_TOOLTIP",
+            [kTechDataId] = kTechId.GrenadeLauncherDetectionShot,
+            [kTechDataCostKey] = kGrenadeLauncherDetectionShotResearchCost,
+            [kTechDataResearchTimeKey] = kGrenadeLauncherDetectionShotResearchTime,
+            [kTechDataDisplayName] = "GRENADE_LAUNCHER_DETECTION_SHOT",
+            [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_DETECTION_SHOT_TOOLTIP",
+            [kTechDataResearchName] = "GRENADE_LAUNCHER_DETECTION_SHOT",
         },
 
+        {
+            [kTechDataId] = kTechId.GrenadeLauncherAllyBlast,
+            [kTechDataCostKey] = kGrenadeLauncherAllyBlastResearchCost,
+            [kTechDataResearchTimeKey] = kGrenadeLauncherAllyBlastResearchTime,
+            [kTechDataDisplayName] = "GRENADE_LAUNCHER_ALLY_BLAST",
+            [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_ALLY_BLAST_TOOLTIP",
+            [kTechDataResearchName] = "GRENADE_LAUNCHER_ALLY_BLAST",
+        },
+
+        {
+            [kTechDataId] = kTechId.GrenadeLauncherUpgrade,
+            [kTechDataCostKey] = kGrenadeLauncherUpgradeResearchCost,
+            [kTechDataResearchTimeKey] = kGrenadeLauncherUpgradeResearchTime,
+            [kTechDataDisplayName] = "GRENADE_LAUNCHER_UPGRADE",
+            [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_UPGRADE_TOOLTIP",
+            [kTechDataResearchName] = "GRENADE_LAUNCHER_UPGRADE",
+        },
+        
         -- ARC abilities
         {
             [kTechDataId] = kTechId.ARCDeploy,

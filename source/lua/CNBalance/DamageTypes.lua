@@ -194,7 +194,8 @@ kDamageType = enum(
     'Falling', 'Door', 'Flame',
     'Corrode', 'ArmorOnly', 'Biological', 'StructuresOnlyLight', 
     'Spreading', 'GrenadeLauncher', 'MachineGun', 'ClusterFlame',
-    'ClusterFlameFragment'
+    'ClusterFlameFragment',
+    'Exosuit',
 })
 
 kDamageTriggerTypes = enum(
@@ -223,7 +224,8 @@ kDamageTypeDesc = {
     "Spreading: Does less damage against small targets.",
     "GrenadeLauncher: Double structure damage, 20% reduction in player damage",
     "MachineGun: Deals 1.5x amount of base damage vs. players",
-    "ClusterFlame: Deals 5x damage vs. flammable structures and 2.5x vs. all other structures, 50% reduction in player damage"
+    "ClusterFlame: Deals 5x damage vs. flammable structures and 2.5x vs. all other structures, 50% reduction in player damage",
+    "Exosuit:1.5xstructure damage"
 }
 
 kSpreadingDamageScalar = 0.75
@@ -463,6 +465,16 @@ local function GrenadeLauncherForStructure(target, _, _, damage, armorFractionUs
     return damage, armorFractionUsed, healthPerArmor
 end
 
+local kExosuitDamageScarlar = 1.5
+local function ExosuitForStructure(target, _, _, damage, armorFractionUsed, healthPerArmor, damageType)
+
+    if target.GetReceivesStructuralDamage and target:GetReceivesStructuralDamage(damageType) then
+        damage = damage * kExosuitDamageScarlar
+    end
+
+    return damage, armorFractionUsed, healthPerArmor
+end
+
 local kClusterStructuralDamageScalar = 2.5
 local kClusterPlayerDamageScalar = 0.3
 local function ClusterFlameModifier(target, _, _, damage, armorFractionUsed, healthPerArmor, damageType)
@@ -562,6 +574,9 @@ local function BuildDamageTypeRules()
     }
     -- ------------------------------
 
+    kDamageTypeRules[kDamageType.Exosuit] = {
+        ExosuitForStructure
+    }
     -- Machine Gun rules
     kDamageTypeRules[kDamageType.MachineGun] = {
         MultiplyForMachineGun
