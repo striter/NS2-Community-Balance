@@ -1,6 +1,7 @@
 
-local function CheckNanoArmor(self)
+local function CheckResearch(self)
     self.nanoArmorResearched = GetHasTech(self,kTechId.NanoArmor)
+    self.lifeSustainResearched = GetHasTech(self,kTechId.LifeSustain)
     return true
 end
 
@@ -11,7 +12,10 @@ function Marine:OnInitialized()
 
     if Server then
         self.timeNextWeld = 0
-        self:AddTimedCallback(CheckNanoArmor, 1)
+        self.timeNextSustain = 0
+        self.nanoArmorResearched = false
+        self.lifeSustainResearched = false
+        self:AddTimedCallback(CheckResearch, 1)
     end
 end
 
@@ -19,25 +23,20 @@ if Server then
     
     local function SharedUpdate(self)
     
-        if not self.nanoArmorResearched then 
-            return
-        end
-        -- Don't auto weld if in combat or took damage too recently.
         if self:GetIsInCombat() then
             return
         end
+
         local now = Shared.GetTime()
-        -- Don't auto weld if not enough time has passed yet.
-        if now < self.timeNextWeld then
-            return
+        if self.nanoArmorResearched and now > self.timeNextWeld then 
+            self.timeNextWeld = now + AutoWeldMixin.kWeldInterval
+            self:OnWeld(self, AutoWeldMixin.kWeldInterval, self, kNanoArmorHealPerSecond)
         end
-    
-        -- Update the cooldown for the next weld.
-        self.timeNextWeld = now + AutoWeldMixin.kWeldInterval
-        
-        -- Perform the welding.
-        self:OnWeld(self, AutoWeldMixin.kWeldInterval, self, kNanoArmorHealPerSecond)
-    
+
+        if self.lifeSustainResearched and  now > self.timeNextSustain then
+            self.timeNextSustain = now + kLifeSustainHealInterval
+            self:AddRegeneration(kLifeSustainHealInterval * kLifeSustainHealPerSecond)
+        end
     end
     
     local baseOnProcessMove=Marine.OnProcessMove

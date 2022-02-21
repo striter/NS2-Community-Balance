@@ -39,8 +39,8 @@ kAlienCrushDamagePercentByLevel = 0.07
 
 kCelerityAddSpeed = 2
 
-kFocusAttackSlowAtMax = 0.33
-kFocusDamageBonusAtMax = 0.34
+kFocusAttackSlowAtMax = 1
+kFocusDamageBonusAtMax = 1
 
 kSpitFocusAttackSlowAtMax = 0
 kSpitFocusDamageBonusAtMax = 0.66
@@ -90,3 +90,5 @@ kShiftSupply = 20
 
 
 kNanoArmorHealPerSecond = 3
+kLifeSustainHealPerSecond = 10
+kLifeSustainHealInterval = 0.5

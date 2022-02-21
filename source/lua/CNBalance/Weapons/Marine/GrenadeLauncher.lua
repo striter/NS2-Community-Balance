@@ -1,8 +1,8 @@
 
 function GrenadeLauncher:GetCatalystSpeedBase()
     local speed=1   
-    if GetHasTech(self,kTechId.GrenadeLauncherUpgrade) and self:GetIsReloading() then
-        speed =1.5
+    if GetHasTech(self,kTechId.GrenadeLauncherUpgrade)  then
+        speed =1.33
     end
     return speed
 end

@@ -58,10 +58,12 @@ kTechId = enum {
     'ShotgunTech', 'HeavyRifleTech','HeavyMachineGunTech','GrenadeLauncherTech','AdvancedWeaponry','FlamethrowerTech', 'DetonationTimeTech', 'FlamethrowerAltTech', 'WelderTech', 'MinesTech',
     'GrenadeTech', 'ClusterGrenade', 'ClusterGrenadeProjectile', 'ClusterGrenadeProjectileFragment', 'GasGrenade', 'GasGrenadeProjectile', 'PulseGrenade', 'PulseGrenadeProjectile',
     
-    -- Weapon supply
-    'ShotgunSupply','HeavyMachineGunSupply','FlamethrowerSupply','GrenadeLauncherSupply','MinesSupply',
+    'StandardSupply',
+    'PistolAxeUpgrade','RifleUpgrade','MinesUpgrade',
 
-    -- Supply Tech
+    'KinematicSupply',
+    
+    'ExplosiveSupply',
     'GrenadeLauncherImpactShot','GrenadeLauncherDetectionShot','GrenadeLauncherAllyBlast','GrenadeLauncherUpgrade',
 
     -- Marine buys
@@ -91,8 +93,9 @@ kTechId = enum {
     'Jetpack',  'Exosuit',
 
     -- Marine upgrades
-    'Weapons1', 'Weapons2', 'Weapons3', 'RifleUpgrade',
-    'Armor1', 'Armor2', 'Armor3', 'NanoArmor',
+    'Weapons1', 'Weapons2', 'Weapons3', 
+    'Armor1', 'Armor2', 'Armor3',
+    'LifeSustain','NanoArmor',
 
     -- Activations
     'ARCDeploy', 'ARCUndeploy',

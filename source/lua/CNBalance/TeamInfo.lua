@@ -14,11 +14,11 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.Weapons1,
     kTechId.Weapons2,
     kTechId.Weapons3,
-    kTechId.RifleUpgrade,
     kTechId.Armor1,
     kTechId.Armor2,
     kTechId.Armor3,
     kTechId.NanoArmor,
+    kTechId.LifeSustain,
 
     kTechId.PrototypeLab,
 
@@ -39,16 +39,16 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.PowerSurgeSupport,
     kTechId.NanoShieldSupport,
 
+    kTechId.ExplosiveSupply,
+    kTechId.GrenadeLauncherImpactShot,
+    kTechId.GrenadeLauncherDetectionShot,
+    kTechId.GrenadeLauncherAllyBlast,
+    kTechId.GrenadeLauncherUpgrade,
 
-    kTechId.ShotgunSupply,
-    kTechId.MinesSupply,
-    kTechId.GrenadeLauncherSupply,
-    kTechId.FlamethrowerSupply,
-    kTechId.HeavyMachineGunSupply,
-    kTechId.JetpackSupply,
-    kTechId.ExosuitSupply,
-    -- kTechId.GrenadeLauncherImpactShot,
-    -- kTechId.GrenadeLauncherDetectionShot,
-    -- kTechId.GrenadeLauncherAllyBlast,
-    -- kTechId.GrenadeLauncherUpgrade,
+    kTechId.StandardSupply,
+    kTechId.PistolAxeUpgrade,
+    kTechId.RifleUpgrade,
+    kTechId.MinesUpgrade,
+
+    kTechId.KinematicSupply,
 }

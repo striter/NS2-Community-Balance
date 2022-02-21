@@ -10,7 +10,7 @@ function Rifle:GetClipSize()
     local clipSize=kRifleClipSize
     
     if GetHasTech(self, kTechId.RifleUpgrade) then
-        clipSize = clipSize+5
+        clipSize = clipSize + 10
     end
 
     return clipSize

@@ -1,30 +1,10 @@
 name        = "[CN] Playground Balance"
 source_dir  = "source"
 output_dir  = "output"
-description = [=[国服小操场平衡
-文档 https://docs.qq.com/doc/DUEZSeUtrR0tWTGJ4
-git仓库  https://github.com/striter/NS2-Playground-Balance/
-
-官方做10v10-6v6 我们做12v12...
-
-Purpose:
-*Aiming for 12v12 and further more players.
-*Do more buffs than nerfs(somehow nerfs is required).
-*Let commander do some field job (pves) instead a "reseach , med & watch" machine.
-Increase late game skulks/gorges/lerks viability,
-*Let rookies get the fun parts,like mines&gls&camoflages.
-*Bring back the old time.'
-
-Done:
-*Balance tweaks:check doc from above or the git repo
-*Improve alien traits viability (buff traits like cloak/adrenaline etc)
-*Tech tree enhanced: 
-1.somehow buffed marine tech tree,
-provide some option diff from origin uwe style.
-2.Add some researches for marines comm. 
-
-For more informations/suggestions contact @StriteR.]=]
+description = [=[Goal:Bring back the old time
+Tweak the playersize forward to 14v14
+With heavy playtesting during CN Communities.]=]
 image       = "preview.jpg"
-tag_modtype = ""
+tag_modtype = "Gameplay Tweak"
 tag_support = "Must be run on Server"
-publish_id = 2704532523
+publish_id = 2759124482

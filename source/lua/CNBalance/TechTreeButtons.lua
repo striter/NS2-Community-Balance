@@ -180,7 +180,6 @@ kTechIdToMaterialOffset[kTechId.NanoShieldSupport] = 55
 kTechIdToMaterialOffset[kTechId.NanoShield] = 55
 kTechIdToMaterialOffset[kTechId.NutrientMist] = 56
 kTechIdToMaterialOffset[kTechId.Welding] = 57
-kTechIdToMaterialOffset[kTechId.NanoArmor] = 202
 kTechIdToMaterialOffset[kTechId.EvolveHallucinations] = 58
 kTechIdToMaterialOffset[kTechId.EvolveEcho] = 59
 
@@ -269,20 +268,21 @@ kTechIdToMaterialOffset[kTechId.DefensivePosture] = 167
 kTechIdToMaterialOffset[kTechId.OffensivePosture] = 42
 
 --MOD
-kTechIdToMaterialOffset[kTechId.RifleUpgrade] = 192
+kTechIdToMaterialOffset[kTechId.NanoArmor] = 202
+kTechIdToMaterialOffset[kTechId.LifeSustain] = 205
 
-kTechIdToMaterialOffset[kTechId.GrenadeLauncherSupply] = 197
+kTechIdToMaterialOffset[kTechId.StandardSupply] = 208
+kTechIdToMaterialOffset[kTechId.PistolAxeUpgrade] = 209
+kTechIdToMaterialOffset[kTechId.RifleUpgrade] = 192
+kTechIdToMaterialOffset[kTechId.MinesUpgrade] = 199
+
+kTechIdToMaterialOffset[kTechId.KinematicSupply] = 206
+
+kTechIdToMaterialOffset[kTechId.ExplosiveSupply] = 207
 kTechIdToMaterialOffset[kTechId.GrenadeLauncherAllyBlast] = 203
 kTechIdToMaterialOffset[kTechId.GrenadeLauncherUpgrade] = 193
 kTechIdToMaterialOffset[kTechId.GrenadeLauncherImpactShot] = 194
 kTechIdToMaterialOffset[kTechId.GrenadeLauncherDetectionShot] = 204
-
-kTechIdToMaterialOffset[kTechId.HeavyMachineGunSupply] = 195
-kTechIdToMaterialOffset[kTechId.FlamethrowerSupply] = 196
-kTechIdToMaterialOffset[kTechId.ShotgunSupply] = 198
-kTechIdToMaterialOffset[kTechId.MinesSupply] = 199
-kTechIdToMaterialOffset[kTechId.ExosuitSupply] = 200
-kTechIdToMaterialOffset[kTechId.JetpackSupply] = 201
 
 
 kTechIdToMaterialOffset[kTechId.Stomp] = 72

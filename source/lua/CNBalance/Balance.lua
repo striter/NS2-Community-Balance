@@ -3,11 +3,11 @@ kPlayingTeamInitialTeamRes = 65
 kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
 
-kRifleUpgradeCost = 20
-kRifleUpgradeTime = 60
-
 kNanoArmorResearchCost = 15
 kNanoArmorResearchTime = 60
+
+kLifeSustainResearchCost = 10
+kLifeSustainResearchTime = 45
 
 kPistolRateOfFire = 0.01
 kPistolDamage = 20
@@ -20,16 +20,12 @@ kGrenadeTechResearchTime = 30   //45
 
 kMineCost = 9
 kMineDamage = 135
-kMinesSupplyResearchCost = 10
-kMinesSupplyResearchTime = 60 
 kDropMineCost = 8
 kDropMineCooldown = 0
 
 kShotgunTechResearchCost = 15
 kShotgunTechResearchTime = 45
 kShotgunCost = 20
-kShotgunSupplyResearchCost = 10
-kShotgunSupplyResearchTime = 60
 kShotgunDropCost = 12
 kShotgunDropCooldown = 0
 
@@ -44,8 +40,6 @@ kShotgunWeapons2DamageScalar = 1.118
 kShotgunWeapons3DamageScalar = 1.177
 
 kHeavyMachineGunCost = 20
-kHeavyMachineGunSupplyResearchCost = 10
-kHeavyMachineGunSupplyResearchTime = 60
 kHeavyMachineGunDropCost = 12
 kHeavyMachineGunDropCooldown = 0
 
@@ -57,19 +51,29 @@ kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
 kHeavyMachineGunSpread = Math.Radians(5.5)  //4
 
---Grenade Launcher
-kGrenadeLauncherSupplyResearchCost = 10
-kGrenadeLauncherSupplyResearchTime = 60
+-- Standard Supply
+kStandardSupplyResearchTime = 10
+kStandardSupplyResearchTime = 30
+kPistolAxeResearchCost = 10
+kPistolAxeResearchTime = 45
+kRifleUpgradeCost = 25
+kRifleUpgradeTime = 60
+kMinesUpgradeResearchCost = 10
+kMinesUpgradeResearchTime = 30
 
+-- Kinematic Supply
+kKinematicSupplyResearchTime = 10
+kKinematicSupplyResearchTime = 45
+
+--Explosive Supply
+kExplosiveSupplyResearchCost = 10
+kExplosiveSupplyResearchTime = 45
 kGrenadeLauncherImpactShotResearchCost = 10
-kGrenadeLauncherImpactShotResearchTime = 45
-
+kGrenadeLauncherImpactShotResearchTime = 30
 kGrenadeLauncherDetectionShotResearchCost = 15
 kGrenadeLauncherDetectionShotResearchTime = 60
-
 kGrenadeLauncherAllyBlastResearchCost = 10
 kGrenadeLauncherAllyBlastResearchTime = 45
-
 kGrenadeLauncherUpgradeResearchCost = 15
 kGrenadeLauncherUpgradeResearchTime = 60
 
@@ -92,8 +96,6 @@ kGrenadeLauncherWeapons3DamageScalar = 1.25
 --
 
 kFlamethrowerCost = 20
-kFlamethrowerSupplyResearchCost = 20
-kFlamethrowerSupplyResearchTime = 60
 kFlamethrowerDropCost = 12
 kFlamethrowerDropCooldown = 0
 
@@ -125,14 +127,10 @@ kJetpackTechResearchTime = 90
 kJetpackCost = 12
 kJetpackDropCost = 12
 kJetpackDropCooldown = 0
-kJetpackSupplyResearchCost = 20
-kJetpackSupplyResearchTime = 60
 
 kExosuitTechResearchCost = 25
 kDualExosuitCost = 55
 kDualRailgunExosuitCost = 55
-kExosuitSupplyResearchCost = 20
-kExosuitSupplyResearchTime = 60
 kExosuitDropCost = 100
 kExosuitDropCooldown = 0
 
@@ -149,8 +147,16 @@ kFadeCost = 37
 kFadeEggCost = 70
 kOnosCost = 62
 kOnosEggCost = 100
+
+kBileBombResearchCost = 10
+kBileBombResearchTime = 40
+
 kSpikeSpread = Math.Radians(3.8)
+
+kStabDamage = 150
+kStabDamageType = kDamageType.Structural
 kStabEnergyCost = 25
+
 kStartBlinkEnergyCost = 14
 kBlinkEnergyCost = 30
 kHealthOnBlink = 0

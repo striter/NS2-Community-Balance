@@ -62,12 +62,13 @@ function MarineTeam:InitTechTree()
     self.techTree:AddResearchNode(kTechId.Armor2,                 kTechId.Armor1, kTechId.None)
     self.techTree:AddResearchNode(kTechId.Armor3,                 kTechId.Armor2, kTechId.None)
 
+    self.techTree:AddResearchNode(kTechId.LifeSustain,  kTechId.ArmsLab)
+    self.techTree:AddResearchNode(kTechId.NanoArmor,  kTechId.LifeSustain)
+
     self.techTree:AddResearchNode(kTechId.Weapons1,               kTechId.ArmsLab)
     self.techTree:AddResearchNode(kTechId.Weapons2,               kTechId.Weapons1, kTechId.None)
     self.techTree:AddResearchNode(kTechId.Weapons3,               kTechId.Weapons2, kTechId.None)
 
-    self.techTree:AddResearchNode(kTechId.NanoArmor,  kTechId.Armor2)
-    self.techTree:AddResearchNode(kTechId.RifleUpgrade,  kTechId.Weapons2)
     -- Marine tier 2
     self.techTree:AddBuildNode(kTechId.AdvancedArmory,               kTechId.Armory,        kTechId.None)
     self.techTree:AddResearchNode(kTechId.PhaseTech,                    kTechId.Observatory,        kTechId.None)
@@ -80,12 +81,10 @@ function MarineTeam:InitTechTree()
 
     self.techTree:AddResearchNode(kTechId.ShotgunTech,           kTechId.Armory)
     self.techTree:AddTargetedActivation(kTechId.DropShotgun,     kTechId.Armory)
-    self.techTree:AddResearchNode(kTechId.ShotgunSupply,         kTechId.ShotgunTech)
     self.techTree:AddTargetedBuyNode(kTechId.Shotgun,            kTechId.ShotgunTech)
 
     self.techTree:AddResearchNode(kTechId.MinesTech,            kTechId.Armory)
     self.techTree:AddTargetedActivation(kTechId.DropMines,      kTechId.Armory)
-    self.techTree:AddResearchNode(kTechId.MinesSupply,          kTechId.MinesTech)
     self.techTree:AddTargetedBuyNode(kTechId.LayMines,          kTechId.MinesTech)
     
     self.techTree:AddResearchNode(kTechId.GrenadeTech,           kTechId.Armory)
@@ -105,27 +104,32 @@ function MarineTeam:InitTechTree()
     -- self.techTree:AddActivation(kTechId.DoorUnlock)
 
     -- Marine tier 3
-    self.techTree:AddTargetedActivation(kTechId.GrenadeLauncherTech,      kTechId.AdvancedArmory,      kTechId.None)
+    -- self.techTree:AddTargetedActivation(kTechId.GrenadeLauncherTech,      kTechId.AdvancedArmory,      kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.HeavyMachineGunTech,      kTechId.AdvancedArmory,      kTechId.None)
-    self.techTree:AddTargetedActivation(kTechId.FlamethrowerTech,      kTechId.AdvancedArmory,      kTechId.None)
+    self.techTree:AddTargetedActivation(kTechId.AdvancedWeaponry,      kTechId.AdvancedArmory,      kTechId.None)
+    -- self.techTree:AddTargetedActivation(kTechId.FlamethrowerTech,      kTechId.AdvancedArmory,      kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.DropGrenadeLauncher,  kTechId.AdvancedArmory,      kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.DropHeavyMachineGun,     kTechId.AdvancedArmory,      kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.DropFlamethrower,  kTechId.AdvancedArmory,      kTechId.None)
     
     self.techTree:AddTargetedBuyNode(kTechId.GrenadeLauncher ,kTechId.AdvancedArmory)
-    self.techTree:AddResearchNode(kTechId.GrenadeLauncherSupply,  kTechId.AdvancedArmory)
+    self.techTree:AddTargetedBuyNode(kTechId.HeavyMachineGun ,kTechId.AdvancedArmory)
+    self.techTree:AddTargetedBuyNode(kTechId.Flamethrower ,kTechId.AdvancedArmory)
 
-    self.techTree:AddResearchNode(kTechId.GrenadeLauncherImpactShot,      kTechId.GrenadeLauncherSupply)
+    self.techTree:AddResearchNode(kTechId.StandardSupply,  kTechId.Armory)
+    self.techTree:AddResearchNode(kTechId.PistolAxeUpgrade,  kTechId.StandardSupply)
+    self.techTree:AddResearchNode(kTechId.RifleUpgrade,  kTechId.PistolAxeUpgrade)
+    self.techTree:AddResearchNode(kTechId.MinesUpgrade,  kTechId.MinesTech,kTechId.StandardSupply )
+    
+    self.techTree:AddResearchNode(kTechId.KinematicSupply,  kTechId.Armory)
+
+    self.techTree:AddResearchNode(kTechId.ExplosiveSupply,  kTechId.AdvancedArmory)
+    self.techTree:AddResearchNode(kTechId.GrenadeLauncherImpactShot,      kTechId.ExplosiveSupply)
     self.techTree:AddResearchNode(kTechId.GrenadeLauncherDetectionShot,      kTechId.GrenadeLauncherImpactShot)
 
-    self.techTree:AddResearchNode(kTechId.GrenadeLauncherAllyBlast , kTechId.GrenadeLauncherSupply)
+    self.techTree:AddResearchNode(kTechId.GrenadeLauncherAllyBlast , kTechId.ExplosiveSupply)
     self.techTree:AddResearchNode(kTechId.GrenadeLauncherUpgrade, kTechId.GrenadeLauncherAllyBlast)
     
-    self.techTree:AddTargetedBuyNode(kTechId.HeavyMachineGun ,kTechId.AdvancedArmory)
-    self.techTree:AddResearchNode(kTechId.HeavyMachineGunSupply, kTechId.AdvancedArmory)
-
-    self.techTree:AddTargetedBuyNode(kTechId.Flamethrower ,kTechId.AdvancedArmory)
-    self.techTree:AddResearchNode(kTechId.FlamethrowerSupply,  kTechId.AdvancedArmory)
 
     
     self.techTree:AddBuildNode(kTechId.PrototypeLab,          kTechId.AdvancedArmory,              kTechId.None)
@@ -134,15 +138,13 @@ function MarineTeam:InitTechTree()
     self.techTree:AddResearchNode(kTechId.JetpackTech,           kTechId.PrototypeLab)
     self.techTree:AddTargetedActivation(kTechId.DropJetpack,    kTechId.JetpackTech,      kTechId.None)
     self.techTree:AddBuyNode(kTechId.Jetpack,                    kTechId.JetpackTech)
-    self.techTree:AddResearchNode(kTechId.JetpackSupply,        kTechId.JetpackTech)
-    self.techTree:AddResearchNode(kTechId.JetpackFuelTech,        kTechId.JetpackSupply)
+    self.techTree:AddResearchNode(kTechId.JetpackFuelTech,           kTechId.JetpackTech)
 
     -- Exosuit
     self.techTree:AddResearchNode(kTechId.ExosuitTech,           kTechId.PrototypeLab, kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.DropExosuit,     kTechId.ExosuitTech, kTechId.None)
     self.techTree:AddBuyNode(kTechId.DualMinigunExosuit, kTechId.ExosuitTech, kTechId.None)
     self.techTree:AddBuyNode(kTechId.DualRailgunExosuit, kTechId.ExosuitTech, kTechId.None)
-    self.techTree:AddResearchNode(kTechId.ExosuitSupply,   kTechId.ExosuitTech)
 
      
     -- Robotics factory menus
