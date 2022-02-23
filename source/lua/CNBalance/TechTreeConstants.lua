@@ -59,12 +59,12 @@ kTechId = enum {
     'GrenadeTech', 'ClusterGrenade', 'ClusterGrenadeProjectile', 'ClusterGrenadeProjectileFragment', 'GasGrenade', 'GasGrenadeProjectile', 'PulseGrenade', 'PulseGrenadeProjectile',
     
     'StandardSupply',
-    'PistolAxeUpgrade','RifleUpgrade','MinesUpgrade',
+    'PistolAxeUpgrade','RifleUpgrade',
 
     'KinematicSupply',
     
     'ExplosiveSupply',
-    'GrenadeLauncherImpactShot','GrenadeLauncherDetectionShot','GrenadeLauncherAllyBlast','GrenadeLauncherUpgrade',
+    'MinesUpgrade','GrenadeLauncherImpactShot','GrenadeLauncherDetectionShot','GrenadeLauncherAllyBlast','GrenadeLauncherUpgrade',
 
     -- Marine buys
     'FlamethrowerAlt',

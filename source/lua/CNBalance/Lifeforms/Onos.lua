@@ -2,11 +2,11 @@ function Onos:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoin
 
     if hitPoint ~= nil and self:GetIsBoneShieldActive() and self:GetHitsBoneShield(doer, hitPoint) then
 
-        local className = doer:GetClassName()
+        local className = string.lower(doer:GetClassName())
         local reduction = kBoneShieldDamageReduction
-        if className == "RailGun" then
+        if className == "railgun" then
             reduction = 0
-        elseif className == "Grenade" then
+        elseif className == "grenade" then
             reduction = 0.6
         end
 

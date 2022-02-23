@@ -101,8 +101,8 @@ kFlamethrowerDropCooldown = 0
 
 kMinigunDamage = 8.0
 kMinigunDamageType = kDamageType.Exosuit
-kRailgunDamage = 40
-kRailgunChargeDamage = 110
+kRailgunDamage = 10
+kRailgunChargeDamage = 140
 kRailgunDamageType = kDamageType.Exosuit
 
 kPulseGrenadeDamageRadius = 4
@@ -199,6 +199,22 @@ kEchoEggCost = 1
 kObservatoryScanCost = 3
 kScanCooldown = 0
 kObservatoryDistressBeaconCost = 10
+
+
+kWeapons1ResearchTime = 75
+kWeapons2ResearchTime = 90
+kWeapons3ResearchTime = 120
+
+kWeapons1ResearchCost = 20
+kWeapons2ResearchCost = 30
+kWeapons3ResearchCost = 40
+
+kArmor1ResearchTime = 75
+kArmor2ResearchTime = 90
+kArmor3ResearchTime = 90
+kArmor1ResearchCost = 20
+kArmor2ResearchCost = 30
+kArmor3ResearchCost = 30
 
 kAdvancedMarineSupportResearchCost = 20
 kAdvancedMarineSupportResearchTime = 90

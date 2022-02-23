@@ -119,11 +119,12 @@ function MarineTeam:InitTechTree()
     self.techTree:AddResearchNode(kTechId.StandardSupply,  kTechId.Armory)
     self.techTree:AddResearchNode(kTechId.PistolAxeUpgrade,  kTechId.StandardSupply)
     self.techTree:AddResearchNode(kTechId.RifleUpgrade,  kTechId.PistolAxeUpgrade)
-    self.techTree:AddResearchNode(kTechId.MinesUpgrade,  kTechId.MinesTech,kTechId.StandardSupply )
     
     self.techTree:AddResearchNode(kTechId.KinematicSupply,  kTechId.Armory)
 
-    self.techTree:AddResearchNode(kTechId.ExplosiveSupply,  kTechId.AdvancedArmory)
+    self.techTree:AddResearchNode(kTechId.ExplosiveSupply,  kTechId.Armory)
+    self.techTree:AddResearchNode(kTechId.MinesUpgrade,  kTechId.MinesTech,kTechId.ExplosiveSupply )
+
     self.techTree:AddResearchNode(kTechId.GrenadeLauncherImpactShot,      kTechId.ExplosiveSupply)
     self.techTree:AddResearchNode(kTechId.GrenadeLauncherDetectionShot,      kTechId.GrenadeLauncherImpactShot)
 

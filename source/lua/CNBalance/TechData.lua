@@ -1272,15 +1272,6 @@ function BuildTechData()
         },
 
         {
-            [kTechDataId] = kTechId.MinesUpgrade,
-            [kTechDataCostKey] = kMinesUpgradeResearchCost,
-            [kTechDataResearchTimeKey] = kMinesUpgradeResearchTime,
-            [kTechDataDisplayName] = "MINES_UPGRADE",
-            [kTechDataTooltipInfo] = "MINES_UPGRADE_TOOLTIP",
-            [kTechDataResearchName] = "MINES_UPGRADE",
-        },
-
-        {
             [kTechDataId] = kTechId.RifleUpgrade,
             [kTechDataCostKey] = kRifleUpgradeResearchCost,
             [kTechDataResearchTimeKey] = kRifleUpgradeResearchTime,
@@ -1305,6 +1296,15 @@ function BuildTechData()
             [kTechDataDisplayName] = "EXPLOSIVE_SUPPLY",
             [kTechDataTooltipInfo] = "EXPLOSIVE_SUPPLY_TOOLTIP",
             [kTechDataResearchName] = "EXPLOSIVE_SUPPLY",
+        },
+
+        {
+            [kTechDataId] = kTechId.MinesUpgrade,
+            [kTechDataCostKey] = kMinesUpgradeResearchCost,
+            [kTechDataResearchTimeKey] = kMinesUpgradeResearchTime,
+            [kTechDataDisplayName] = "MINES_UPGRADE",
+            [kTechDataTooltipInfo] = "MINES_UPGRADE_TOOLTIP",
+            [kTechDataResearchName] = "MINES_UPGRADE",
         },
 
         {
