@@ -1,9 +1,11 @@
-name        = "[CN] Playground Balance"
+name        = "[CN] Playground Balance (ns2.0)"
 source_dir  = "source"
 output_dir  = "output"
-description = [=[Goal:Bring back the old time
-Tweak the playersize forward to 14v14
-With heavy playtesting during CN Communities.]=]
+description = [=[重返好时光计划.
+Goal:Bring back the old time
+Tweak the playersize forward to 14v14.
+Under heavy playtesting.
+Feel free to test/play with it.]=]
 image       = "preview.jpg"
 tag_modtype = "Gameplay Tweak"
 tag_support = "Must be run on Server"

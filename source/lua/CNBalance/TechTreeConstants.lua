@@ -171,6 +171,7 @@ kTechId = enum {
     "SelectTunnelEntryOne", "SelectTunnelEntryTwo", "SelectTunnelEntryThree", "SelectTunnelEntryFour",
     "SelectTunnelExitOne", "SelectTunnelExitTwo", "SelectTunnelExitThree", "SelectTunnelExitFour",
 
+    'FastTunnel',
     -- Skulk abilities
     'Bite', 'Sneak', 'Parasite', 'Leap', 'Xenocide',
 

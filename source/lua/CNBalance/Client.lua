@@ -39,4 +39,6 @@ if kTranslateMessage then
     kTranslateMessage["GRENADE_LAUNCHER_UPGRADE"] = "榴弹枪适用性升级"
     kTranslateMessage["GRENADE_LAUNCHER_UPGRADE_TOOLTIP"] = "*改进装弹加速榴弹枪换弹."
     
+    kTranslateMessage["FAST_TUNNEL"] = "快速通道"
+    kTranslateMessage["FAST_TUNNEL_TOOLTIP"] = "*通道使用者不再需要长途跋涉."
 end

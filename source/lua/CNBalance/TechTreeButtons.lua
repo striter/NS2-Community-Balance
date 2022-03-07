@@ -240,6 +240,8 @@ kTechIdToMaterialOffset[kTechId.SelectTunnelExitFour] = 176
 kTechIdToMaterialOffset[kTechId.TunnelRelocate] = 190
 kTechIdToMaterialOffset[kTechId.TunnelCollapse] = 191
 
+kTechIdToMaterialOffset[kTechId.FastTunnel] = 189
+
 kTechIdToMaterialOffset[kTechId.Stab] = 105
 kTechIdToMaterialOffset[kTechId.ShadowStep] = 160
 kTechIdToMaterialOffset[kTechId.MetabolizeEnergy] = 169

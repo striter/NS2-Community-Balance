@@ -3199,6 +3199,15 @@ function BuildTechData()
             [kTechDataPointValue] = kTunnelEntrancePointValue,
             [kTechIDShowEnables] = false,
         },
+        
+        {
+            [kTechDataId] = kTechId.FastTunnel,
+            [kTechDataCostKey] = kFastTunnelCost,
+            [kTechDataResearchTimeKey] = kFastTunnelTime,
+            [kTechDataDisplayName] = "FAST_TUNNEL",
+            [kTechDataTooltipInfo] = "FAST_TUNNEL_TOOLTIP",
+            [kTechDataResearchName] = "FAST_TUNNEL",
+        },
 
         -- Tunnel relocation placement.
         {

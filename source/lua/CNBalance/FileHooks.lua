@@ -1,5 +1,5 @@
-
 ModLoader.SetupFileHook("lua/Shared.lua", "lua/CNBalance/Shared.lua", "post")
+ModLoader.SetupFileHook("lua/NS2Gamerules.lua", "lua/CNBalance/NS2Gamerules.lua", "post")
 ModLoader.SetupFileHook("lua/TechTreeConstants.lua", "lua/CNBalance/TechTreeConstants.lua", "post")
 ModLoader.SetupFileHook("lua/TechData.lua", "lua/CNBalance/TechData.lua", "post")
 ModLoader.SetupFileHook("lua/TechTreeButtons.lua", "lua/CNBalance/TechTreeButtons.lua", "post")
@@ -12,7 +12,6 @@ ModLoader.SetupFileHook("lua/DamageTypes.lua", "lua/CNBalance/DamageTypes.lua", 
 ModLoader.SetupFileHook("lua/Balance.lua", "lua/CNBalance/Balance.lua", "post")
 ModLoader.SetupFileHook("lua/BalanceHealth.lua", "lua/CNBalance/BalanceHealth.lua", "post")
 ModLoader.SetupFileHook("lua/BalanceMisc.lua", "lua/CNBalance/BalanceMisc.lua", "post")
-
 --Marines
 ModLoader.SetupFileHook("lua/MarineTeam.lua", "lua/CNBalance/MarineTeam.lua", "post")
 ModLoader.SetupFileHook("lua/ArmsLab.lua", "lua/CNBalance/ArmsLab.lua", "post")
@@ -46,12 +45,18 @@ ModLoader.SetupFileHook("lua/RegenerationMixin.lua", "lua/CNBalance/Mixin/Regene
 ModLoader.SetupFileHook("lua/AlienTeam.lua", "lua/CNBalance/AlienTeam.lua", "post")
 ModLoader.SetupFileHook("lua/AlienTechMap.lua", "lua/CNBalance/AlienTechMap.lua", "post")
 
-ModLoader.SetupFileHook("lua/AlienTunnelManager.lua", "lua/CNBalance/AlienTunnelManager.lua", "replace")
+ModLoader.SetupFileHook("lua/AlienTunnelManager.lua", "lua/CNBalance/AlienTunnelManager.lua", "post")
+ModLoader.SetupFileHook("lua/Hive.lua", "lua/CNBalance/Hive.lua", "post")
+ModLoader.SetupFileHook("lua/Tunnel.lua", "lua/CNBalance/Tunnel.lua", "post")
 ModLoader.SetupFileHook("lua/TunnelEntrance.lua", "lua/CNBalance/TunnelEntrance.lua", "post")
+
+ModLoader.SetupFileHook("lua/Cyst_Server.lua", "lua/CNBalance/Cyst_Server.lua", "post")
+ModLoader.SetupFileHook("lua/Cyst.lua", "lua/CNBalance/Cyst.lua", "post")
 ModLoader.SetupFileHook("lua/Hydra.lua", "lua/CNBalance/Hydra.lua", "post")
 
 ModLoader.SetupFileHook("lua/Weapons/Alien/Metabolize.lua", "lua/CNBalance/Weapons/Alien/Metabolize.lua", "replace")
 ModLoader.SetupFileHook("lua/Weapons/Alien/BoneShield.lua", "lua/CNBalance/Weapons/Alien/BoneShield.lua", "replace")
+ModLoader.SetupFileHook("lua/Weapons/Alien/BabblerPheromone.lua", "lua/CNBalance/Weapons/Alien/BabblerPheromone.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/HydraAbility.lua", "lua/CNBalance/Weapons/Alien/HydraAbility.lua", "post")
 
 ModLoader.SetupFileHook("lua/Alien.lua", "lua/CNBalance/Alien.lua", "post")

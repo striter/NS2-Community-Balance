@@ -214,11 +214,12 @@ function AlienTeam:InitTechTree()
     self.techTree:AddAction(kTechId.SelectTunnelExitThree)
     self.techTree:AddAction(kTechId.SelectTunnelExitFour)
 
+    self.techTree:AddResearchNode(kTechId.FastTunnel ,kTechId.BioMassFive)
     -- abilities unlocked by bio mass:
 
     -- skulk researches
     self.techTree:AddResearchNode(kTechId.Leap,              kTechId.BioMassFour, kTechId.None, kTechId.AllAliens)
-    self.techTree:AddResearchNode(kTechId.Xenocide,          kTechId.BioMassNine, kTechId.None, kTechId.AllAliens)
+    self.techTree:AddResearchNode(kTechId.Xenocide,          kTechId.BioMassSeven, kTechId.None, kTechId.AllAliens)
 
     -- gorge researches
     self.techTree:AddBuyNode(kTechId.BabblerAbility,        kTechId.None)
@@ -247,5 +248,93 @@ function AlienTeam:InitTechTree()
     self.techTree:AddBuildNode(kTechId.Clog)
 
     self.techTree:SetComplete()
+
+end
+
+
+function AlienTeam:OnResetComplete()
+
+    --adjust first power node
+    local initialTechPoint = self:GetInitialTechPoint()
+    local locationName = initialTechPoint:GetLocationName()
+    -- DestroyPowerForLocation(locationName, true)
+
+    local commander = self:GetCommander()
+    local gameInfo = GetGameInfoEntity()
+    local teamIdx = self:GetTeamNumber()
+    
+    if commander then
+
+        local commStructSkin = commander:GetCommanderStructureSkin()
+        local commDrifterSkin = commander:GetCommanderDrifterSkin()
+        local commHarvesterSkin = commander:GetCommanderHarvesterSkin()
+        local commEggSkin = commander:GetCommanderEggSkin()
+        local commCystSkin = commander:GetCommanderCystSkin()
+        local commTunnelSkin = commander:GetCommanderTunnelSkin()
+        
+        if commStructSkin then
+            self.activeStructureSkin = commStructSkin
+            local skinnedEnts = GetEntitiesWithMixinForTeam( "AlienStructureVariant", teamIdx )
+            for i, ent in ipairs(skinnedEnts) do
+                ent.structureVariant = commStructSkin
+            end
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot1, commStructSkin )
+        end
+
+        if commHarvesterSkin then
+            self.activeHarvesterSkin = commHarvesterSkin
+            local skinnedEnts = GetEntitiesWithMixinForTeam( "HarvesterVariant", teamIdx )
+            for i, ent in ipairs(skinnedEnts) do
+                ent.harvesterVariant = commHarvesterSkin
+            end
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot2, commHarvesterSkin )
+        end
+
+        if commTunnelSkin then
+            self.activeTunnelSkin = commTunnelSkin
+            local skinnedEnts = GetEntitiesWithMixinForTeam( "AlienTunnelVariant", teamIdx )
+            for i, ent in ipairs(skinnedEnts) do
+                ent.tunnelVariant = commTunnelSkin
+            end
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot3, commTunnelSkin )
+        end
+
+        if commEggSkin then
+            self.activeEggSkin = commEggSkin
+            local skinnedEnts = GetEntitiesWithMixinForTeam( "EggVariant", teamIdx )
+            for i, ent in ipairs(skinnedEnts) do
+                ent.eggVariant = commEggSkin
+            end
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot4, commEggSkin )
+        end
+
+        if commCystSkin then
+            self.activeEggSkin = commCystSkin
+            local skinnedEnts = GetEntitiesWithMixinForTeam( "CystVariant", teamIdx )
+            for i, ent in ipairs(skinnedEnts) do
+                ent.eggVariant = commCystSkin
+            end
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot5, commCystSkin )
+        end
+
+        if commDrifterSkin then
+            self.activeDrifterSkin = commDrifterSkin
+            local skinnedEnts = GetEntitiesWithMixinForTeam( "DrifterVariant", teamIdx )
+            for i, ent in ipairs(skinnedEnts) do
+                ent.drifterVariant = commDrifterSkin
+            end
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot6, commDrifterSkin )
+        end
+
+    else
+
+        gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot1, kDefaultAlienStructureVariant )
+        gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot2, kDefaultHarvesterVariant )
+        gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot3, kDefaultAlienTunnelVariant )
+        gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot4, kDefaultEggVariant )
+        gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot5, kDefaultAlienCystVariant )
+        gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot6, kDefaultAlienDrifterVariant )
+        
+    end
 
 end

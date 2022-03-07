@@ -52,17 +52,17 @@ kHeavyMachineGunSecondaryRange = 1.1
 kHeavyMachineGunSpread = Math.Radians(5.5)  //4
 
 -- Standard Supply
-kStandardSupplyResearchTime = 10
+kStandardSupplyResearchCost = 10
 kStandardSupplyResearchTime = 30
 kPistolAxeResearchCost = 10
 kPistolAxeResearchTime = 45
-kRifleUpgradeCost = 25
-kRifleUpgradeTime = 60
+kRifleUpgradeResearchCost = 25
+kRifleUpgradeResearchTime = 60
 kMinesUpgradeResearchCost = 10
 kMinesUpgradeResearchTime = 30
 
 -- Kinematic Supply
-kKinematicSupplyResearchTime = 10
+kKinematicSupplyResearchCost = 10
 kKinematicSupplyResearchTime = 45
 
 --Explosive Supply
@@ -137,6 +137,9 @@ kExosuitDropCooldown = 0
 kExosuitCost = 40
 kClawRailgunExosuitCost = 40
 
+kFastTunnelCost = 15
+kFastTunnelTime = 60
+
 kEggGestateTime = 15
 kUmbraResearchCost = 20
 kGorgeCost = 10
@@ -147,6 +150,11 @@ kFadeCost = 37
 kFadeEggCost = 70
 kOnosCost = 62
 kOnosEggCost = 100
+
+kXenocideDamage = 120   --200
+kXenocideDamageType = kDamageType.Normal
+kXenocideRange = 9  -- 14
+kXenocideEnergyCost = 30
 
 kBileBombResearchCost = 10
 kBileBombResearchTime = 40

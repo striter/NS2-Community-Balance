@@ -27,10 +27,10 @@ kAlienTechMap =
     { kTechId.BioMassTwo, 3.5, 7, nil, "2" }, {kTechId.Rupture, 3.5, 8}, {kTechId.BileBomb, 3.5, 9},
     { kTechId.BioMassThree, 4.5, 7, nil, "3" }, {kTechId.BoneWall, 4.5, 8}, { kTechId.MetabolizeEnergy, 4.5, 9 },
     { kTechId.BioMassFour, 5.5, 7, nil, "4" }, {kTechId.Leap, 5.5, 8}, {kTechId.Spores, 5.5, 9},
-    { kTechId.BioMassFive, 6.5, 7, nil, "5" }, {kTechId.MetabolizeHealth, 6.5, 8},
+    { kTechId.BioMassFive, 6.5, 7, nil, "5" }, {kTechId.MetabolizeHealth, 6.5, 8},{kTechId.FastTunnel,6.5 , 9},
     { kTechId.BioMassSix, 7.5, 7, nil, "6" }, {kTechId.Umbra, 7.5, 8}, {kTechId.BoneShield, 7.5, 9},
-    { kTechId.BioMassSeven, 8.5, 7, nil, "7" }, {kTechId.Stab, 8.5, 8},
+    { kTechId.BioMassSeven, 8.5, 7, nil, "7" }, {kTechId.Xenocide, 8.5, 8},{kTechId.Stab, 8.5, 9}, 
     { kTechId.BioMassEight, 9.5, 7, nil, "8" }, {kTechId.Stomp, 9.5, 8},
-    { kTechId.BioMassNine, 10.5, 7, nil, "9" }, {kTechId.Xenocide, 10.5, 8},
+    { kTechId.BioMassNine, 10.5, 7, nil, "9" },
     { kTechId.BioMassTen, 11.5, 7, nil, "10" }, {kTechId.Contamination, 11.5, 8}
 }

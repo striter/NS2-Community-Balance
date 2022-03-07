@@ -1,3 +1,4 @@
+
 function JetpackMarine:GetFuel()
 
     local dt = Shared.GetTime() - self.timeJetpackingChanged

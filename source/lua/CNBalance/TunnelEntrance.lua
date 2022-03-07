@@ -61,3 +61,14 @@ function TunnelEntrance:OnResearchComplete(techId)
     return success
 
 end
+
+function TunnelEntrance:GetCystParentRange()
+    return kHiveCystParentRange
+end
+
+if Server then
+    --Function to treat as hive
+    function TunnelEntrance:GetDistanceToHive()
+        return 0
+    end
+end
