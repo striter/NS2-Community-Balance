@@ -67,39 +67,38 @@ if Server then
                 local owner = self:GetOwner()
                 local moveType = GetMoveType(self, entity)
                 local origin = self:GetOrigin()
+                local position = HasMixin(entity, "Target") and entity:GetEngagementPoint() or entity:GetOrigin()
                 if moveType == kBabblerMoveType.Attack then
                     do
                         if owner:GetBabblerCount() < kMaxBabblerCount then
-                            local babbler = CreateEntity(Babbler.kMapName, origin, owner:GetTeamNumber())
-                            babbler:SetOwner(owner)
-                            babbler:SetSilenced(false)
+                            local babbler = CreateEntity(Babbler.kMapName, origin, self:GetTeamNumber())
+                            -- -- babbler:SetSilenced(false)
                 
                             local client = owner:GetClient()
                             if client and client.variantData then
                                 babbler:SetVariant( client.variantData.babblerVariant )
                             end
                             babbler:TriggerEffects("babbler_engage")
-                            babbler:SetMoveType(moveType, entity, origin, true)
+                            babbler:SetOwner(owner)
+                            babbler.clinged = true
+                            babbler:Detach(true)
+                            babbler:SetMoveType(moveType, entity, position, true)
                         end
                     end
                 end
 
                 for _, babbler in ipairs(GetEntitiesForTeamWithinRange("Babbler", self:GetTeamNumber(), origin, kBabblerSearchRange )) do
-
                     if babbler:GetOwner() == owner then
+                        if babbler:GetIsClinged() then
 
-                        if babbler:GetIsClinged() and babbler:GetParent() == owner then
-                            babbler:Detach()
-                        end
-                        
-                        -- moveType, entity, position, boolean value
-                        local position = HasMixin(entity, "Target") and entity:GetEngagementPoint() or entity:GetOrigin()
-                        babbler:SetMoveType(moveType, entity, position, true)
-                        if moveType == kBabblerMoveType.Attack then
-                            babbler:TriggerEffects("babbler_engage")
+                            if babbler:GetParent() == owner then
+                                babbler:Detach()
+                            end
+                            
+                            babbler:SetMoveType(moveType, entity, position, true)
+
                         end
                     end
-
                 end
 
                 DestroyEntity(self)
@@ -110,4 +109,27 @@ if Server then
 
     end
     
+    function BabblerPheromone:OnUpdate(deltaTime)
+
+        Projectile.OnUpdate(self, deltaTime)
+
+        if not self.firstUpdate then
+
+            self.firstUpdate = true
+
+            local gorge = self:GetOwner()
+            for _, babbler in ipairs(GetEntitiesForTeamWithinRange("Babbler", self:GetTeamNumber(), self:GetOrigin(), kBabblerSearchRange )) do
+
+                if babbler:GetIsClinged() and babbler:GetOwner() == gorge and babbler:GetParent() == gorge then
+
+                    babbler:Detach()
+
+                end
+
+            end
+
+        end
+
+    end
+
 end

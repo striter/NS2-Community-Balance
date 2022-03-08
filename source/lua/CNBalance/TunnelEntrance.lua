@@ -71,4 +71,8 @@ if Server then
     function TunnelEntrance:GetDistanceToHive()
         return 0
     end
+
+    function TunnelEntrance:AddChildCyst(child)
+        
+    end
 end

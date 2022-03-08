@@ -3,6 +3,12 @@ kPlayingTeamInitialTeamRes = 65
 kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
 
+kMarineRespawnTime = 9
+
+kAlienSpawnTime = 10
+kEggGenerationRate = 10  //13
+kAlienEggsPerHive = 2
+
 kNanoArmorResearchCost = 15
 kNanoArmorResearchTime = 60
 
@@ -110,6 +116,15 @@ kPulseGrenadeEnergyDamageRadius = 4
 kPulseGrenadeDamage = 90  //75->90
 kPulseGrenadeEnergyDamage = 35  //25->35
 
+
+kClusterGrenadeDamageRadius = 10
+kClusterGrenadeDamage = 72
+kClusterGrenadeDamageType = kDamageType.ClusterFlame
+
+kClusterFragmentDamageRadius = 6
+kClusterFragmentDamage = 20
+kClusterGrenadeFragmentDamageType = kDamageType.ClusterFlameFragment
+
 kInfantryPortalBuildTime = 5
 
 kSentryDamage = 3
@@ -151,8 +166,10 @@ kFadeEggCost = 70
 kOnosCost = 62
 kOnosEggCost = 100
 
+kTunnelEntranceCost = 6
+
 kXenocideDamage = 120   --200
-kXenocideDamageType = kDamageType.Normal
+kXenocideDamageType = kDamageType.Structural
 kXenocideRange = 9  -- 14
 kXenocideEnergyCost = 30
 

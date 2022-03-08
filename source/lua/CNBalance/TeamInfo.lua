@@ -54,8 +54,6 @@ TeamInfo.kRelevantTechIdsMarine =
 }
 TeamInfo.kRelevantTechIdsAlien =
 {
-    kTechId.FastTunnel,
-
     kTechId.CragHive,
     kTechId.UpgradeToCragHive,
     kTechId.Shell,
@@ -77,6 +75,7 @@ TeamInfo.kRelevantTechIdsAlien =
     kTechId.ResearchBioMassOne,
     kTechId.ResearchBioMassTwo,
     kTechId.ResearchBioMassThree,
+    kTechId.FastTunnel,
 
     kTechId.Leap,
     kTechId.Xenocide,

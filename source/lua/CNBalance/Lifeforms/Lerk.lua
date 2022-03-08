@@ -6,7 +6,7 @@ function Lerk:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoin
 
         local className = string.lower(doer:GetClassName())
 
-        if className == "grenade" or className == "impactgrenade" then
+        if className == "grenade" or className == "impactgrenade" or className == "pulsegrenade"  then
             damageTable.damage = damageTable.damage * Lerk.kGrenadeDamageReduction
         end
         
