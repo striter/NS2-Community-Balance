@@ -283,7 +283,6 @@ kTechIdToMaterialOffset[kTechId.KinematicSupply] = 206
 kTechIdToMaterialOffset[kTechId.ExplosiveSupply] = 207
 kTechIdToMaterialOffset[kTechId.GrenadeLauncherAllyBlast] = 203
 kTechIdToMaterialOffset[kTechId.GrenadeLauncherUpgrade] = 193
-kTechIdToMaterialOffset[kTechId.GrenadeLauncherImpactShot] = 194
 kTechIdToMaterialOffset[kTechId.GrenadeLauncherDetectionShot] = 204
 
 

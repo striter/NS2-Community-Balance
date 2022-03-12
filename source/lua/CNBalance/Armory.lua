@@ -82,12 +82,9 @@ function Armory:GetTechButtons(techId)
 
     if GetHasTech(self,kTechId.ExplosiveSupply)  then
         techButtons[2] = kTechId.MinesUpgrade
-        techButtons[3] = kTechId.GrenadeLauncherImpactShot
+        techButtons[3] = kTechId.GrenadeLauncherDetectionShot
         techButtons[4] = kTechId.GrenadeLauncherAllyBlast
 
-        if GetHasTech(self,kTechId.GrenadeLauncherImpactShot) then
-            techButtons[3] = kTechId.GrenadeLauncherDetectionShot
-        end
         if GetHasTech(self,kTechId.GrenadeLauncherAllyBlast) then
             techButtons[4] = kTechId.GrenadeLauncherUpgrade
         end

@@ -1307,14 +1307,6 @@ function BuildTechData()
             [kTechDataResearchName] = "MINES_UPGRADE",
         },
 
-        {
-            [kTechDataId] = kTechId.GrenadeLauncherImpactShot,
-            [kTechDataCostKey] = kGrenadeLauncherImpactShotResearchCost,
-            [kTechDataResearchTimeKey] = kGrenadeLauncherImpactShotResearchTime,
-            [kTechDataDisplayName] = "GRENADE_LAUNCHER_IMPACT_SHOT",
-            [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_IMPACT_SHOT_TOOLTIP",
-            [kTechDataResearchName] = "GRENADE_LAUNCHER_IMPACT_SHOT",
-        },
 
         {
             [kTechDataId] = kTechId.GrenadeLauncherDetectionShot,

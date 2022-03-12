@@ -64,7 +64,7 @@ kTechId = enum {
     'KinematicSupply',
     
     'ExplosiveSupply',
-    'MinesUpgrade','GrenadeLauncherImpactShot','GrenadeLauncherDetectionShot','GrenadeLauncherAllyBlast','GrenadeLauncherUpgrade',
+    'MinesUpgrade','GrenadeLauncherDetectionShot','GrenadeLauncherAllyBlast','GrenadeLauncherUpgrade',
 
     -- Marine buys
     'FlamethrowerAlt',

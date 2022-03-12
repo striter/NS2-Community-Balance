@@ -30,8 +30,6 @@ if kTranslateMessage then
 
     kTranslateMessage["EXPLOSIVE_SUPPLY"] = "可燃物分支"
     kTranslateMessage["EXPLOSIVE_SUPPLY_TOOLTIP"] = "开始可燃物分支的科技研发\n*将禁用其他的分支学习."
-    kTranslateMessage["GRENADE_LAUNCHER_IMPACT_SHOT"] = "撞击引信 (副攻击)"
-    kTranslateMessage["GRENADE_LAUNCHER_IMPACT_SHOT_TOOLTIP"] = "*副攻击发射撞击榴弹\n*榴弹碰撞后立刻爆炸.\n-伤害有所降低."
     kTranslateMessage["GRENADE_LAUNCHER_DETECTION_SHOT"] = "智能引信 (副攻击)"
     kTranslateMessage["GRENADE_LAUNCHER_DETECTION_SHOT_TOOLTIP"] = "撞击榴弹将内置智能芯片\n*探测到临近敌方单位立刻爆炸."
     kTranslateMessage["GRENADE_LAUNCHER_ALLY_BLAST"] = "智能爆燃"

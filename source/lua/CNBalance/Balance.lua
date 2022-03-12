@@ -74,8 +74,6 @@ kKinematicSupplyResearchTime = 45
 --Explosive Supply
 kExplosiveSupplyResearchCost = 10
 kExplosiveSupplyResearchTime = 45
-kGrenadeLauncherImpactShotResearchCost = 10
-kGrenadeLauncherImpactShotResearchTime = 30
 kGrenadeLauncherDetectionShotResearchCost = 15
 kGrenadeLauncherDetectionShotResearchTime = 60
 kGrenadeLauncherAllyBlastResearchCost = 10

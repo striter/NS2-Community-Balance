@@ -33,9 +33,10 @@ kMarineTechMap =
                                                     { kTechId.ExosuitTech, 11,7.5 },
 
         --Supply
-                                 { kTechId.StandardSupply, 4, 9 },                                             { kTechId.KinematicSupply, 7, 9 },                               { kTechId.ExplosiveSupply, 10, 9 },
-                { kTechId.PistolAxeUpgrade, 3.5 ,10 },                                                                                                     {kTechId.MinesUpgrade,9,10}, { kTechId.GrenadeLauncherImpactShot, 10, 10 }, { kTechId.GrenadeLauncherAllyBlast, 11, 10 },         
-                { kTechId.RifleUpgrade, 3.5, 11 },                                                                                                                                        { kTechId.GrenadeLauncherDetectionShot, 10, 11 }, { kTechId.GrenadeLauncherUpgrade, 11, 11 },
+                                 { kTechId.StandardSupply, 4, 9 },                                             { kTechId.KinematicSupply, 7, 9 },                                       { kTechId.ExplosiveSupply, 10, 9 },
+                { kTechId.PistolAxeUpgrade, 3.5 ,10 },                                                                                                  {kTechId.MinesUpgrade,9,10},   { kTechId.GrenadeLauncherDetectionShot, 10, 10 },{ kTechId.GrenadeLauncherAllyBlast, 11, 10 },         
+                { kTechId.RifleUpgrade, 3.5, 11 },                                                                                                                                                                                              { kTechId.GrenadeLauncherUpgrade, 11, 11 },
+                                                                                                                                                                                                                                  
 }
 
 kMarineLines = 
@@ -104,8 +105,7 @@ kMarineLines =
     --Explosive Supply
     { 10, 8, 10, 9 },
     GetLinePositionForTechMap(kMarineTechMap, kTechId.ExplosiveSupply, kTechId.MinesUpgrade),
-    GetLinePositionForTechMap(kMarineTechMap, kTechId.ExplosiveSupply, kTechId.GrenadeLauncherImpactShot),
-    GetLinePositionForTechMap(kMarineTechMap, kTechId.GrenadeLauncherImpactShot, kTechId.GrenadeLauncherDetectionShot),
+    GetLinePositionForTechMap(kMarineTechMap, kTechId.ExplosiveSupply, kTechId.GrenadeLauncherDetectionShot),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.ExplosiveSupply, kTechId.GrenadeLauncherAllyBlast),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.GrenadeLauncherAllyBlast, kTechId.GrenadeLauncherUpgrade),
 

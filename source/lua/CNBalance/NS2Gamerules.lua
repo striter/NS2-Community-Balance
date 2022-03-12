@@ -1,53 +1,54 @@
--- Find team start with team 0 or for specified team. Remove it from the list so other teams don't start there. Return nil if there are none.
-function NS2Gamerules:ChooseTechPoint(techPoints, teamNumber)
-
+function NS2Gamerules:RandomTechPoint(techPoints, teamNumber)
     local chosenIndex = math.random(1,#techPoints)
     local chosenTechPoint = techPoints[chosenIndex]
-    table.removevalue(techPoints, chosenTechPoint)
+    -- table.removevalue(techPoints, chosenTechPoint)
     return chosenTechPoint
-    
-    -- local validTechPoints = { }
-    -- local totalTechPointWeight = 0
-    
-    -- -- Build list of valid starts (marked as "neutral" or for this team in map)
-    -- for _, currentTechPoint in ipairs(techPoints) do
-    
-    --     -- Always include tech points with team 0 and never include team 3 into random selection process
+end
 
-    --     -- Some Test Stuff
-    --     local teamNum = currentTechPoint:GetTeamNumberAllowed()
-    --     if (teamNum == 0 or teamNum == teamNumber) and teamNum ~= 3 then
+-- Find team start with team 0 or for specified team. Remove it from the list so other teams don't start there. Return nil if there are none.
+function NS2Gamerules:ChooseTechPoint(techPoints, teamNumber)
+    local validTechPoints = { }
+    local totalTechPointWeight = 0
+    
+    -- Build list of valid starts (marked as "neutral" or for this team in map)
+    for _, currentTechPoint in ipairs(techPoints) do
+    
+        -- Always include tech points with team 0 and never include team 3 into random selection process
+
+        -- Some Test Stuff
+        local teamNum = currentTechPoint:GetTeamNumberAllowed()
+        if (teamNum == 0 or teamNum == teamNumber) and teamNum ~= 3 then
         
-    --         table.insert(validTechPoints, currentTechPoint)
-    --         totalTechPointWeight = totalTechPointWeight + currentTechPoint:GetChooseWeight()
+            table.insert(validTechPoints, currentTechPoint)
+            totalTechPointWeight = totalTechPointWeight + currentTechPoint:GetChooseWeight()
             
-    --     end
+        end
         
-    -- end
+    end
     
-    -- local chosenTechPointWeight = self.techPointRandomizer:random(0, totalTechPointWeight)
-    -- local chosenTechPoint
-    -- local currentWeight = 0
-    -- for _, currentTechPoint in ipairs(validTechPoints) do
+    local chosenTechPointWeight = self.techPointRandomizer:random(0, totalTechPointWeight)
+    local chosenTechPoint
+    local currentWeight = 0
+    for _, currentTechPoint in ipairs(validTechPoints) do
     
-    --     currentWeight = currentWeight + currentTechPoint:GetChooseWeight()
-    --     if chosenTechPointWeight - currentWeight <= 0 then
+        currentWeight = currentWeight + currentTechPoint:GetChooseWeight()
+        if chosenTechPointWeight - currentWeight <= 0 then
         
-    --         chosenTechPoint = currentTechPoint
-    --         break
+            chosenTechPoint = currentTechPoint
+            break
             
-    --     end
+        end
         
-    -- end
+    end
     
-    -- -- Remove it from the list so it isn't chosen by other team
-    -- if chosenTechPoint ~= nil then
-    --     table.removevalue(techPoints, chosenTechPoint)
-    -- else
-    --     assert(false, "ChooseTechPoint couldn't find a tech point for team " .. teamNumber)
-    -- end
+    -- Remove it from the list so it isn't chosen by other team
+    if chosenTechPoint ~= nil then
+        table.removevalue(techPoints, chosenTechPoint)
+    else
+        assert(false, "ChooseTechPoint couldn't find a tech point for team " .. teamNumber)
+    end
     
-    -- return chosenTechPoint
+    return chosenTechPoint
     
 end
 function NS2Gamerules:ResetGame()
@@ -194,8 +195,15 @@ function NS2Gamerules:ResetGame()
     -- else
     
         -- Reset teams (keep players on them)
-        team1TechPoint = self:ChooseTechPoint(techPoints, kTeam1Index)
-        team2TechPoint = self:ChooseTechPoint(techPoints, kTeam2Index)
+
+        local value = math.random(1,10)
+        if value == 10 then
+            team1TechPoint = self:RandomTechPoint(techPoints, kTeam1Index)
+            team2TechPoint = self:RandomTechPoint(techPoints, kTeam2Index)
+        else
+            team1TechPoint = self:ChooseTechPoint(techPoints, kTeam1Index)
+            team2TechPoint = self:ChooseTechPoint(techPoints, kTeam2Index)
+        end
 
     -- end
     

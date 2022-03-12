@@ -27,7 +27,7 @@ if Server then
             local canAttach =  HasMixin(target, "BabblerCling") and target:GetCanAttachBabbler()
             local ownerBlocked = HasMixin(target,"BabblerOwner") and target:GetBabblerCount() >= target:GetMaxBabblers()
             if canAttach and not ownerBlocked then
-                local babbler = CreateEntity(Babbler.kMapName, self:GetOrigin(), self:GetTeamNumber())
+                local babbler = CreateEntity(Babbler.kMapName, target:GetOrigin(), self:GetTeamNumber())
                 -- -- babbler:SetSilenced(false)
     
                 local client = target:GetClient()

@@ -24,7 +24,7 @@ function GrenadeLauncher:OnPrimaryAttack(player)
 end
 
 function GrenadeLauncher:GetHasSecondary(player)
-    return GetHasTech(self,kTechId.GrenadeLauncherImpactShot)
+    return true
 end
 
 function GrenadeLauncher:OnSecondaryAttack(player)

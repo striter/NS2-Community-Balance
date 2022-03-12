@@ -40,7 +40,6 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.NanoShieldSupport,
 
     kTechId.ExplosiveSupply,
-    kTechId.GrenadeLauncherImpactShot,
     kTechId.GrenadeLauncherDetectionShot,
     kTechId.GrenadeLauncherAllyBlast,
     kTechId.GrenadeLauncherUpgrade,
