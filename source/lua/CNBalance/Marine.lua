@@ -55,3 +55,26 @@ if Server then
         return true
     end
 end
+
+
+Script.Load("lua/Devour/DevouredPlayer.lua")
+
+Marine.kDevourEscapeScreenEffectDuration = 4
+
+local oldOnCreate = Marine.OnCreate
+function Marine:OnCreate()
+	oldOnCreate(self)
+	self.clientTimeDevourEscaped = -20
+end
+
+function Marine:DevourEscape()
+	if Server then
+		Server.SendNetworkMessage(self, "DevourEscape", {  }, true)
+	elseif Client then
+		local cinematic = Client.CreateCinematic(RenderScene.Zone_ViewModel)
+		cinematic:SetCinematic(kTunnelUseScreenCinematic)
+		cinematic:SetRepeatStyle(Cinematic.Repeat_None)
+		
+		self.clientTimeDevourEscaped = Shared.GetTime()
+	end
+end

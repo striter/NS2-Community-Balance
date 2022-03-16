@@ -88,6 +88,8 @@ function Armory:GetTechButtons(techId)
         if GetHasTech(self,kTechId.GrenadeLauncherAllyBlast) then
             techButtons[4] = kTechId.GrenadeLauncherUpgrade
         end
+    elseif GetHasTech(self,kTechId.KinematicSupply) then
+        techButtons[3] = kTechId.DragonBreath
     elseif GetHasTech(self,kTechId.StandardSupply) then
         
         techButtons[3] = kTechId.PistolAxeUpgrade
@@ -95,7 +97,6 @@ function Armory:GetTechButtons(techId)
         if GetHasTech(self,kTechId.PistolAxeUpgrade) then
             techButtons[3] = kTechId.RifleUpgrade
         end
-
     end
 
     -- Show button to upgraded to advanced armory

@@ -71,6 +71,9 @@ kMinesUpgradeResearchTime = 30
 kKinematicSupplyResearchCost = 10
 kKinematicSupplyResearchTime = 45
 
+kDragonBreathResearchCost = 25
+kDragonBreathResearchTime = 90
+
 --Explosive Supply
 kExplosiveSupplyResearchCost = 10
 kExplosiveSupplyResearchTime = 45
@@ -102,6 +105,10 @@ kGrenadeLauncherWeapons3DamageScalar = 1.25
 kFlamethrowerCost = 20
 kFlamethrowerDropCost = 12
 kFlamethrowerDropCooldown = 0
+
+kBurnDamagePerSecond = 5
+kFlamethrowerBurnDuration = 1
+kFlamethrowerMaxBurnDuration = 6
 
 kMinigunDamage = 8.0
 kMinigunDamageType = kDamageType.Exosuit
@@ -149,6 +156,12 @@ kExosuitDropCooldown = 0
 
 kExosuitCost = 40
 kClawRailgunExosuitCost = 40
+
+kOnosDevourCost = 15
+kOnosDevourTime = 60
+
+kDevourEnergyCost = 40 --50
+kDevourPunchDamage = 30 --100
 
 kFastTunnelCost = 15
 kFastTunnelTime = 60

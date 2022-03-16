@@ -33,9 +33,9 @@ kMarineTechMap =
                                                     { kTechId.ExosuitTech, 11,7.5 },
 
         --Supply
-                                 { kTechId.StandardSupply, 4, 9 },                                             { kTechId.KinematicSupply, 7, 9 },                                       { kTechId.ExplosiveSupply, 10, 9 },
-                { kTechId.PistolAxeUpgrade, 3.5 ,10 },                                                                                                  {kTechId.MinesUpgrade,9,10},   { kTechId.GrenadeLauncherDetectionShot, 10, 10 },{ kTechId.GrenadeLauncherAllyBlast, 11, 10 },         
-                { kTechId.RifleUpgrade, 3.5, 11 },                                                                                                                                                                                              { kTechId.GrenadeLauncherUpgrade, 11, 11 },
+                                 { kTechId.StandardSupply, 4, 9 },                                             { kTechId.KinematicSupply, 7, 9 },                                                           { kTechId.ExplosiveSupply, 10, 9 },
+                { kTechId.PistolAxeUpgrade, 3.5 ,10 },  { kTechId.RifleUpgrade, 4.5, 10 },                     { kTechId.DragonBreath,7 ,10 },                  {kTechId.MinesUpgrade,9,10},   { kTechId.GrenadeLauncherDetectionShot, 10, 10 },{ kTechId.GrenadeLauncherAllyBlast, 11, 10 },         
+                                                                                                                                                                                                             { kTechId.GrenadeLauncherUpgrade, 11, 11 },
                                                                                                                                                                                                                                   
 }
 
@@ -96,11 +96,11 @@ kMarineLines =
     -- Standard Supply
     { 4, 8, 4, 9 },
     GetLinePositionForTechMap(kMarineTechMap, kTechId.StandardSupply, kTechId.PistolAxeUpgrade),
-    GetLinePositionForTechMap(kMarineTechMap, kTechId.PistolAxeUpgrade, kTechId.RifleUpgrade),
+    GetLinePositionForTechMap(kMarineTechMap, kTechId.StandardSupply, kTechId.RifleUpgrade),
 
     -- Kinematic Supply
     { 7, 8, 7, 9 },
-
+    GetLinePositionForTechMap(kMarineTechMap, kTechId.KinematicSupply, kTechId.DragonBreath),
 
     --Explosive Supply
     { 10, 8, 10, 9 },

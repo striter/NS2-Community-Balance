@@ -58,13 +58,16 @@ kTechId = enum {
     'ShotgunTech', 'HeavyRifleTech','HeavyMachineGunTech','GrenadeLauncherTech','AdvancedWeaponry','FlamethrowerTech', 'DetonationTimeTech', 'FlamethrowerAltTech', 'WelderTech', 'MinesTech',
     'GrenadeTech', 'ClusterGrenade', 'ClusterGrenadeProjectile', 'ClusterGrenadeProjectileFragment', 'GasGrenade', 'GasGrenadeProjectile', 'PulseGrenade', 'PulseGrenadeProjectile',
     
+---------------
     'StandardSupply',
     'PistolAxeUpgrade','RifleUpgrade',
 
     'KinematicSupply',
-    
+    'DragonBreath',
+
     'ExplosiveSupply',
     'MinesUpgrade','GrenadeLauncherDetectionShot','GrenadeLauncherAllyBlast','GrenadeLauncherUpgrade',
+---------------
 
     -- Marine buys
     'FlamethrowerAlt',
@@ -75,9 +78,6 @@ kTechId = enum {
     'DualMinigunTech', 'DualMinigunExosuit', 'UpgradeToDualMinigun',
     'ClawRailgunTech', 'ClawRailgunExosuit',
     'DualRailgunTech', 'DualRailgunExosuit', 'UpgradeToDualRailgun',
-   
-    --Proto Supply
-    'JetpackSupply','ExosuitSupply',
 
     --Proto Supply Upgrade
     'ExosuitLockdownTech', 'ExosuitUpgradeTech',
@@ -95,8 +95,10 @@ kTechId = enum {
     -- Marine upgrades
     'Weapons1', 'Weapons2', 'Weapons3', 
     'Armor1', 'Armor2', 'Armor3',
-    'LifeSustain','NanoArmor',
 
+---------------
+    'LifeSustain','NanoArmor',
+---------------
     -- Activations
     'ARCDeploy', 'ARCUndeploy',
 
@@ -171,7 +173,9 @@ kTechId = enum {
     "SelectTunnelEntryOne", "SelectTunnelEntryTwo", "SelectTunnelEntryThree", "SelectTunnelEntryFour",
     "SelectTunnelExitOne", "SelectTunnelExitTwo", "SelectTunnelExitThree", "SelectTunnelExitFour",
 
+---------------
     'FastTunnel',
+---------------
     -- Skulk abilities
     'Bite', 'Sneak', 'Parasite', 'Leap', 'Xenocide',
 
@@ -186,6 +190,9 @@ kTechId = enum {
 
     -- onos abilities
     'Gore', 'Smash', 'Charge', 'BoneShield', 'Stomp', 'Shockwave',
+---------------
+    'Devour',
+---------------
 
     -- echo menu
     'TeleportHydra', 'TeleportWhip', 'TeleportTunnel', 'TeleportCrag', 'TeleportShade', 'TeleportShift', 'TeleportVeil', 'TeleportSpur', 'TeleportShell', 'TeleportHive', 'TeleportEgg', 'TeleportHarvester',

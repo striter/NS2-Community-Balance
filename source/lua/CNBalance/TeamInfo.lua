@@ -50,7 +50,9 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.MinesUpgrade,
 
     kTechId.KinematicSupply,
+    kTechId.DragonBreath,
 }
+
 TeamInfo.kRelevantTechIdsAlien =
 {
     kTechId.CragHive,
@@ -87,6 +89,6 @@ TeamInfo.kRelevantTechIdsAlien =
     kTechId.Stab,
     kTechId.Charge,
     kTechId.BoneShield,
+    kTechId.Devour,
     kTechId.Stomp,
-    
 }

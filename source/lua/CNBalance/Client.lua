@@ -15,7 +15,6 @@ if kTranslateMessage then
     kTranslateMessage["JETPACK_FUEL_TECH"] = "研发 喷气背包燃料"
     kTranslateMessage["JETPACK_FUEL_TOOLTIP"] = "*延长喷气背包的飞行时间."
 
-
     kTranslateMessage["STANDARD_SUPPLY"] = "制式装备分支"
     kTranslateMessage["STANDARD_SUPPLY_TOOLTIP"] = "开始制式装备/工具的科技研发\n*将禁用其他的分支学习."
     kTranslateMessage["PISTOL_AXE_UPGRADE"]="制式装备材料升级"
@@ -27,6 +26,8 @@ if kTranslateMessage then
 
     kTranslateMessage["KINEMATIC_SUPPLY"] = "动能武器分支"
     kTranslateMessage["KINEMATIC_SUPPLY_TOOLTIP"] = "开始动能武器分支的科技研发\n*将禁用其他的分支学习."
+    kTranslateMessage["DRAGON_BREATH"] = "龙息弹"
+    kTranslateMessage["DRAGON_BREATH_TOOLTIP"] = "*子弹将点燃敌方单位."
 
     kTranslateMessage["EXPLOSIVE_SUPPLY"] = "可燃物分支"
     kTranslateMessage["EXPLOSIVE_SUPPLY_TOOLTIP"] = "开始可燃物分支的科技研发\n*将禁用其他的分支学习."
@@ -37,6 +38,10 @@ if kTranslateMessage then
     kTranslateMessage["GRENADE_LAUNCHER_UPGRADE"] = "榴弹枪适用性升级"
     kTranslateMessage["GRENADE_LAUNCHER_UPGRADE_TOOLTIP"] = "*改进装弹加速榴弹枪换弹."
     
+    kTranslateMessage["STATUS_DEVOURED"] = "消化中"
+    kTranslateMessage["ONOS_DEVOUR"] = "吞噬"
+    kTranslateMessage["ONOS_DEVOUR_TOOLTIP"] = "*Onos将陆战队员吞进肚子.\n*吞噬单位将无法使用武器\n-消化过程将遇到抵抗。"
+
     kTranslateMessage["FAST_TUNNEL"] = "快速通道"
     kTranslateMessage["FAST_TUNNEL_TOOLTIP"] = "*通道使用者不再需要长途跋涉."
 end

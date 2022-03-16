@@ -1,3 +1,4 @@
+
 function AlienTeam:InitTechTree()
 
     PlayingTeam.InitTechTree(self)
@@ -214,7 +215,6 @@ function AlienTeam:InitTechTree()
     self.techTree:AddAction(kTechId.SelectTunnelExitThree)
     self.techTree:AddAction(kTechId.SelectTunnelExitFour)
 
-    self.techTree:AddResearchNode(kTechId.FastTunnel ,kTechId.BioMassFive)
     -- abilities unlocked by bio mass:
 
     -- skulk researches
@@ -238,8 +238,10 @@ function AlienTeam:InitTechTree()
     self.techTree:AddResearchNode(kTechId.MetabolizeHealth,        kTechId.BioMassFive, kTechId.MetabolizeEnergy, kTechId.AllAliens)
     self.techTree:AddResearchNode(kTechId.Stab,              kTechId.BioMassSeven, kTechId.None, kTechId.AllAliens)
 
+    self.techTree:AddResearchNode(kTechId.FastTunnel ,kTechId.BioMassFive)
     -- onos researches
     self.techTree:AddPassive(kTechId.Charge)
+    self.techTree:AddResearchNode(kTechId.Devour,            kTechId.BioMassTwo, kTechId.None, kTechId.AllAliens)
     self.techTree:AddResearchNode(kTechId.BoneShield,        kTechId.BioMassSix, kTechId.None, kTechId.AllAliens)
     self.techTree:AddResearchNode(kTechId.Stomp,             kTechId.BioMassEight, kTechId.None, kTechId.AllAliens)
 
@@ -248,7 +250,6 @@ function AlienTeam:InitTechTree()
     self.techTree:AddBuildNode(kTechId.Clog)
 
     self.techTree:SetComplete()
-
 end
 
 

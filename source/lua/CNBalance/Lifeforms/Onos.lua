@@ -18,3 +18,31 @@ function Onos:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoin
         
     end
 end
+
+
+Script.Load("lua/Devour/Devour.lua")
+
+function Onos:GetHasMovementSpecial()
+    return true
+end
+
+if Server then
+
+    function Onos:GetTierOneTechId()
+        return kTechId.Devour
+    end
+    
+end
+
+function Onos:CanBeStampeded(ent)
+    
+    if ent.nextStampede and Shared.GetTime() < ent.nextStampede then
+        return false
+    end
+    
+    if not GetAreEnemies(self, ent) or not ent:GetIsAlive() or ent:isa("DevouredPlayer") then
+        return false
+    end
+    
+    return true
+end
