@@ -46,10 +46,14 @@ function Shotgun:OnSecondaryAttack(player)
 end
 
 
+local kSecondaryTracerName = PrecacheAsset("cinematics/marine/railgun/tracer_small.cinematic")
+local kSecondaryTracerResidueName = PrecacheAsset("cinematics/marine/railgun/tracer_residue_small.cinematic")
+local kMuzzleEffectName = PrecacheAsset("cinematics/marine/shotgun/muzzle_flash.cinematic")
+
 local kSecondaryAttackDamage = 70
-local function FireSecondary(player)
-    self:TriggerEffects("shotgun_attack_sound")
-    self:TriggerEffects("shotgun_attack")
+local function FireSecondary(self,player)
+    -- self:TriggerEffects("shotgun_attack_sound")
+    self:TriggerEffects("shotgun_attack_secondary")
 
     local viewAngles = player:GetViewAngles()
     local shootCoords = viewAngles:GetCoords()
@@ -72,25 +76,25 @@ local function FireSecondary(player)
     local direction = (trace.endPoint - startPoint):GetUnit()
     local hitOffset = direction * kHitEffectOffset
     local impactPoint = trace.endPoint - hitOffset
-    local effectFrequency = self:GetTracerEffectFrequency()
-    local showTracer = math.random() < effectFrequency
 
     local numTargets = #targets
     
     if numTargets == 0 then
-        self:ApplyBulletGameplayEffects(player, nil, impactPoint, direction, 0, trace.surface, showTracer)
+        self:ApplyBulletGameplayEffects(player, nil, impactPoint, direction, 0, trace.surface, true)
     end
     
-    if Client and showTracer then
-        TriggerFirstPersonTracer(self, impactPoint)
+    if Client then
+        local tracerStart = self.GetBarrelPoint and self:GetBarrelPoint() or self:GetOrigin()
+        local tracerVelocity = GetNormalizedVector(impactPoint - tracerStart) * kTracerSpeed
+        CreateTracer(tracerStart, impactPoint, tracerVelocity, self , kSecondaryTracerName, kSecondaryTracerResidueName)
     end
-    
+
     for i = 1, numTargets do
 
         local target = targets[i]
         local hitPoint = hitPoints[i]
 
-        self:ApplyBulletGameplayEffects(player, target, hitPoint - hitOffset, direction, damage, "", showTracer and i == numTargets)
+        self:ApplyBulletGameplayEffects(player, target, hitPoint - hitOffset, direction, damage, "", i == numTargets)
         
         local client = Server and player:GetClient() or Client
         if not Shared.GetIsRunningPrediction() and client.hitRegEnabled then
@@ -101,11 +105,12 @@ local function FireSecondary(player)
         
 end
 
-local baseOnPrimaryAttack = Shotgun.OnPrimaryAttack
+
+local baseOnPrimaryAttack = Shotgun.FirePrimary
 function Shotgun:FirePrimary(player)
     if player.firePrimary then
-        baseOnPrimaryAttack(player)
+        baseOnPrimaryAttack(self,player)
     else
-        FireSecondary(player)
+        FireSecondary(self,player)
     end
 end

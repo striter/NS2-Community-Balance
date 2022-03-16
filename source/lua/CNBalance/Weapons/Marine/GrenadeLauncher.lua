@@ -19,7 +19,7 @@ GrenadeLauncher.kImpactGrenadeFriction = 0.2
 
 local baseOnPrimaryAttack = GrenadeLauncher.OnPrimaryAttack
 function GrenadeLauncher:OnPrimaryAttack(player)
-    player.GrenadeLauncherPrimary = true
+    player.firePrimary = true
     baseOnPrimaryAttack(self,player)
 end
 
@@ -28,7 +28,7 @@ function GrenadeLauncher:GetHasSecondary(player)
 end
 
 function GrenadeLauncher:OnSecondaryAttack(player)
-    player.GrenadeLauncherPrimary = false
+    player.firePrimary = false
     baseOnPrimaryAttack(self,player)
 end
 
@@ -54,7 +54,7 @@ function GrenadeLauncher:ShootGrenade(player)
         local round="Grenade"
         local speed = GrenadeLauncher.kGrenadeSpeed
         local friction = GrenadeLauncher.kImpactGrenadeFriction
-        if not player.GrenadeLauncherPrimary then
+        if not player.firePrimary then
             round="ImpactGrenade"
             speed= GrenadeLauncher.kImpactGrenadeSpeed
         end

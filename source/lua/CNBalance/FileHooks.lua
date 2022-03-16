@@ -28,6 +28,7 @@ ModLoader.SetupFileHook("lua/MarineCommander.lua", "lua/CNBalance/MarineCommande
 ModLoader.SetupFileHook("lua/Marine.lua", "lua/CNBalance/Marine.lua", "post")
 ModLoader.SetupFileHook("lua/JetpackMarine.lua", "lua/CNBalance/JetpackMarine.lua", "post")
 ModLoader.SetupFileHook("lua/Exo.lua", "lua/CNBalance/Exo.lua", "post")
+ModLoader.SetupFileHook("lua/MarineWeaponEffects.lua", "lua/CNBalance/MarineWeaponEffects.lua", "post")
 
 ModLoader.SetupFileHook("lua/Weapons/Weapon.lua", "lua/CNBalance/Weapons/Weapon.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/Axe.lua", "lua/CNBalance/Weapons/Marine/Axe.lua", "post")
