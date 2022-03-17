@@ -1,0 +1,5 @@
+modEntry = {
+    FileHooks = "lua/CNBalance/FileHooks.lua",
+    Client = "lua/CNBalance/Client.lua",
+    Priority = 1
+}
