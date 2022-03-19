@@ -160,8 +160,8 @@ kClawRailgunExosuitCost = 40
 kOnosDevourCost = 15
 kOnosDevourTime = 60
 
-kDevourEnergyCost = 40 --50
-kDevourPunchDamage = 30 --100
+kDevourEnergyCost = 50 --50
+kDevourPunchDamage = 50 --100
 
 kFastTunnelCost = 15
 kFastTunnelTime = 60
@@ -179,6 +179,7 @@ kOnosEggCost = 100
 
 kTunnelEntranceCost = 6
 
+--Skulk
 kXenocideDamage = 120   --200
 kXenocideDamageType = kDamageType.Structural
 kXenocideRange = 9  -- 14
@@ -187,8 +188,39 @@ kXenocideEnergyCost = 30
 kBileBombResearchCost = 10
 kBileBombResearchTime = 40
 
+--Lerk
 kSpikeSpread = Math.Radians(3.8)
 
+-- Prowler
+kProwlerCost = 16 --14
+
+kProwlerBaseCarapaceUpgradeAmount = 10.5
+kProwlerCarapaceArmorPerBiomass = 1.5
+
+kProwlerEggCost = 16
+kProwlerGestateTime = 6
+kProwlerUpgradeCost = 1
+kProwlerBabblerShieldPercent = 0.15
+
+kVolleySpread = Math.Radians(3)
+kProwlerDamagePerPellet = 8 -- there are 6 pellets
+kVolleyRappelDamageType = kDamageType.Normal
+kVolleyEnergyCost = 8.0 --7.0
+
+kRappelResearchCost = 10
+kRappelResearchTime = 20
+kRappelEnergyCost = 15
+kRappelRange = 25
+
+kAcidSprayResearchCost = 25
+kAcidSprayResearchTime = 60
+kAcidSprayEnergyCost = 19
+kAcidSprayDamage = 17  -- 3 missiles
+kAcidSprayDamageType = kDamageType.Heavy
+
+kProwlerHallucinationHealth = 180
+
+-- Fade
 kStabDamage = 150
 kStabDamageType = kDamageType.Structural
 kStabEnergyCost = 25
@@ -196,18 +228,23 @@ kStabEnergyCost = 25
 kStartBlinkEnergyCost = 14
 kBlinkEnergyCost = 30
 kHealthOnBlink = 0
+
+-- Onos
+kChargeDamage = 30
 kStompEnergyCost = 30
 kStompDamageType = kDamageType.Heavy
 kStompDamage = 40
 kStompRange = 12
+
 kDisruptMarineTime = 1
 kDisruptMarineTimeout = 2
-kChargeDamage = 30
+
 kBabblerShieldPercent = 0.1
 kSkulkBabblerShieldPercent = 0.35
 kGorgeBabblerShieldPercent = 0.2
 kLerkBabblerShieldPercent = 0.2
 kFadeBabblerShieldPercent = 0.25
+
 kBabblerShieldMaxAmount = 200
 kWebZeroVisDistance = 3.0
 kWebFullVisDistance = 2.0

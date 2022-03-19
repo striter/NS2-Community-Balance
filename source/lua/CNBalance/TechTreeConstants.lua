@@ -179,6 +179,11 @@ kTechId = enum {
     -- Skulk abilities
     'Bite', 'Sneak', 'Parasite', 'Leap', 'Xenocide',
 
+-----------
+    'Prowler','ProwlerMenu','ProwlerEgg','HallucinateProwler','UpgradeProwler',
+    'Volley','Rappel','AcidSpray',
+-----------
+
     -- gorge abilities
     'Spit', 'Spray', 'BellySlide', 'BabblerTech', 'BuildAbility', 'BabblerAbility', 'Babbler', 'BabblerEgg', 'GorgeTunnelTech', 'BileBomb',  'WebTech', 'Web', 'HydraTech',
 

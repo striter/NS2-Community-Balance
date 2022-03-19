@@ -1,0 +1,10 @@
+shader = "shaders/Model_emissive_alpha.surface_shader"
+albedoMap =   "materials/prowler/prowler.dds"
+specularMap = "materials/prowler/prowler.dds"
+opacityMap =  "materials/prowler/prowler_opacity.dds"
+emissiveMap = "materials/prowler/prowler.dds"
+normalMap =   "materials/dev/dev_normal.dds"
+specularMap = "materials/dev/black.dds"
+
+surface = "thin_metal"
+

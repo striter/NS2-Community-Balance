@@ -81,7 +81,9 @@ TeamInfo.kRelevantTechIdsAlien =
     kTechId.Leap,
     kTechId.Xenocide,
     kTechId.BileBomb,
-    kTechId.WebTech,
+    kTechId.Rappel,
+    kTechId.AcidSpray,
+
     kTechId.Umbra,
     kTechId.Spores,
     kTechId.MetabolizeEnergy,

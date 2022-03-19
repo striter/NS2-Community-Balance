@@ -22,6 +22,10 @@ local networkVars =
 	devouringOnosId = "integer",
 }
 
+function DevouredPlayer:ShouldAutopickupWeapons()
+	return false
+end
+
 function DevouredPlayer:OnCreate()
 
     Marine.OnCreate(self)

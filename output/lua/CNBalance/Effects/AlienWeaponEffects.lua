@@ -1,7 +1,5 @@
-local kCombatEffects =
+local kAdditionalEffects =
 {
- 
-    
     combat_devour_stomach_outside = 
     {
         devourOutsideEffects = 
@@ -37,8 +35,6 @@ local kCombatEffects =
     },
     
     
-    
-    
     combat_stop_effects = 
     {
         stopEffects = 
@@ -47,7 +43,13 @@ local kCombatEffects =
         },
     },
     
-   
+    volley_attack =
+    {
+        volleyHitSounds = 
+        {
+            {sound = "sound/NS2.fev/alien/skulk/parasite", done = true},
+        },
+    },
 }
 
-GetEffectManager():AddEffectData("kCombatEffects", kCombatEffects)
+GetEffectManager():AddEffectData("kAdditionalEffects", kAdditionalEffects)

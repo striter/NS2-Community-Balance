@@ -77,41 +77,6 @@ local function UpdateDevour(self)
     
 end
 
-local function DevourAttack(self, player, hitTarget, excludeTarget)
-    local x, y = self:GetMeleeBase()
-    local extents = Vector( x, y, 1)
-    local trace = Shared.TraceBox(extents, player:GetEyePos(), player:GetEyePos() + player:GetViewCoords().zAxis * kAttackOriginDistance, CollisionRep.Damage, PhysicsMask.Melee, EntityFilterOneAndIsa(excludeTarget, "Babbler"))
-                --Shared.TraceRay(player:GetEyePos(), player:GetEyePos() + player:GetViewCoords().zAxis * kAttackOriginDistance, CollisionRep.Damage, PhysicsMask.Melee, EntityFilterAll())
-    local attackOrigin = trace.endPoint
-    local didHit = false
-    
-    local targets = GetEntitiesWithMixinForTeamWithinRange ("Live", GetEnemyTeamNumber(player:GetTeamNumber()), attackOrigin, kAttackRadius)
-    
-    if hitTarget and HasMixin(hitTarget, "Live") and hitTarget:GetIsVisible() and hitTarget:GetCanTakeDamage() then
-        table.insertunique(targets, hitTarget)
-    end
-   
-    for index, target in ipairs(targets) do
-        
-        if target:isa("Player") and not target:isa("Exo") then
-            if target:GetTeamNumber() ~= self:GetTeamNumber() then
-                didHit = true
-                self.eatingPlayerId = target:GetId()
-                self.timeDevourEnd = Shared.GetTime() + Devour.kEatCoolDown
-                if Server then
-                    self:DevourPlayer(target)                  
-                    self:AddTimedCallback(UpdateDevour, kDevourUpdateRate)
-                end
-                break
-            end
-        end
-    
-    end
-    
-    return didHit, attackOrigin
-    
-end
-
 function Devour:OnCreate()
 
     Ability.OnCreate(self)
@@ -151,15 +116,18 @@ local function ClearPlayerNow(player)
         newPlayer:SetVelocity(newvelocity)
 
         newPlayer:DisableGroundMove(0.15)
-		
-		local oldWeapon1 = newPlayer:GetWeaponInHUDSlot(1)
-		if oldWeapon1 then
-			oldWeapon1:SetAmmoPercent(player.devouredPlayerPrimaryClipPercent, player.devouredPlayerPrimaryAmmoPercent)
-		end
-		local oldWeapon2 = newPlayer:GetWeaponInHUDSlot(2)
-		if oldWeapon2 then
-			oldWeapon2:SetAmmoPercent(player.devouredPlayerSecondaryClipPercent, player.devouredPlayerSecondaryAmmoPercent)
-		end
+    
+        local oldWeapon1 = newPlayer:GetWeaponInHUDSlot(1)
+        if oldWeapon1 then                
+            newPlayer:RemoveWeapon(oldWeapon1)
+            DestroyEntity(oldWeapon1)
+        end
+
+        local oldWeapon2 = newPlayer:GetWeaponInHUDSlot(2)
+        if oldWeapon2 then
+            newPlayer:SetActiveWeapon(oldWeapon2:GetMapName())
+        end
+
 		newPlayer:TriggerEffects("combat_devour_escape", {effecthostcoords = newPlayer:GetCoords()})
 		newPlayer:SetCorroded()
 	end
@@ -217,12 +185,13 @@ function Devour:OnHolster(player)
 end
 
 function Devour:GetMeleeBase()
-    return 1, 1.4
+    return 0.5,0.7
 end
 
 function Devour:GetDevourScalar()
     return self.devouringScalar
 end
+
 
 function Devour:Attack(player)
 
@@ -231,16 +200,28 @@ function Devour:Attack(player)
     local target = nil
     
     if self.eatingPlayerId == 0 then     
-        
+        --Devour Attack
         didHit, target, impactPoint = AttackMeleeCapsule(self, player, Devour.kInitialDamage, kAttackRange, nil, false, EntityFilterOneAndIsa(player, "Babbler")) -- AttackMeleeCapsule(self, player, 0, kAttackRange)
         local energyCost = kDevourEnergyCost --self:GetEnergyCost() --kMissedEnergyCost
         
         self.timeDevourEnd = Shared.GetTime() + Devour.kAttackAnimationLength
         
         if target and HasMixin(target, "Live") and target:GetIsAlive() then            
-            didHit, impactPoint = DevourAttack(self, player, target)
-            energyCost = kDevourEnergyCost --self:GetEnergyCost()
-        end        
+            
+            if target:isa("Player") and not target:isa("Exo") then
+                if target:GetTeamNumber() ~= self:GetTeamNumber() then
+                    self.eatingPlayerId = target:GetId()
+                    self.timeDevourEnd = Shared.GetTime() + Devour.kEatCoolDown
+                    
+                    if Server then
+                        self:DevourPlayer(target)                  
+                        self:AddTimedCallback(UpdateDevour, kDevourUpdateRate)
+                    end
+                end
+            end
+        end
+    
+        energyCost = kDevourEnergyCost --self:GetEnergyCost()
         player:DeductAbilityEnergy(energyCost)        
         
     end
@@ -318,23 +299,8 @@ function Devour:DevourPlayer(targetPlayer)
 	-- Look up and remember old values
     local oldHealth = targetPlayer:GetHealth()
     local oldArmor = targetPlayer:GetArmor()
-	local devouredPlayerPrimaryClipPercent 				= 100.0
-	local devouredPlayerPrimaryAmmoPercent 				= 100.0
-	local devouredPlayerSecondaryClipPercent			= 100.0
-	local devouredPlayerSecondaryAmmoPercent			= 100.0
-	local oldWeapon1 = targetPlayer:GetWeaponInHUDSlot(1)
-	if oldWeapon1 then
-		local oldClip, oldAmmo = oldWeapon1:GetAmmoPercent()
-		devouredPlayerPrimaryClipPercent = oldClip
-		devouredPlayerPrimaryAmmoPercent = oldAmmo
-	end
-	local oldWeapon2 = targetPlayer:GetWeaponInHUDSlot(2)
-	if oldWeapon2 then
-		local oldClip, oldAmmo = oldWeapon2:GetAmmoPercent()
-		devouredPlayerSecondaryClipPercent = oldClip
-		devouredPlayerSecondaryAmmoPercent = oldAmmo
-	end
-	
+    targetPlayer:DropAllWeapons()
+
     local devourCoords = targetPlayer:GetCoords()
     local vHeightOffset = Vector(0, Onos.YExtents, 0)
     devourCoords.origin = devourCoords.origin + vHeightOffset
@@ -342,10 +308,6 @@ function Devour:DevourPlayer(targetPlayer)
     devouredPlayer:SetHealth(oldHealth)
     devouredPlayer:SetArmor(oldArmor)
     devouredPlayer.previousMapName = targetPlayer:GetMapName()
-	devouredPlayer.devouredPlayerPrimaryClipPercent = devouredPlayerPrimaryClipPercent
-	devouredPlayer.devouredPlayerPrimaryAmmoPercent = devouredPlayerPrimaryAmmoPercent
-	devouredPlayer.devouredPlayerSecondaryClipPercent = devouredPlayerSecondaryClipPercent
-	devouredPlayer.devouredPlayerSecondaryAmmoPercent = devouredPlayerSecondaryAmmoPercent
 	local onos = self:GetParent()
 	local onosId = onos:GetId()
 	devouredPlayer:SetDevouringOnosId(onosId)

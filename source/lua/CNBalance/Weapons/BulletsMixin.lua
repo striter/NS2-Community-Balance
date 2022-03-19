@@ -27,8 +27,8 @@ function BulletsMixin:ApplyBulletGameplayEffects(player, target, endPoint, direc
     -- deals damage or plays surface hit effects
     self:DoDamage(damage, target, endPoint, direction, surface, false, showTracer)
     
-    if GetHasTech(player,kTechId.DragonBreath) then
-        if not blockedByUmbra and target and not target.GetReceivesStructuralDamage and GetAreEnemies(player,target) then
+    if not blockedByUmbra and target and GetHasTech(player,kTechId.DragonBreath) then
+        if HasMixin(target, "Fire") and not target.GetReceivesStructuralDamage and GetAreEnemies(player,target) then
             target:SetOnFire(player,self)
         end
     end

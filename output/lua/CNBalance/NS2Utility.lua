@@ -1,25 +1,29 @@
-
-local loadDevour = true
-local oldGetTexCoordsForTechId = GetTexCoordsForTechId
-function GetTexCoordsForTechId(techId)
-	if loadDevour and gTechIdPosition then
-		gTechIdPosition[kTechId.Devour] = kDeathMessageIcon.Devour
-		loadDevour = false
-	end
-	return oldGetTexCoordsForTechId(techId)
-end
-
-
 local oldBuildClassToGrid = BuildClassToGrid
 function BuildClassToGrid()
 
     local ClassToGrid = oldBuildClassToGrid()
     
 	ClassToGrid["DevouredPlayer"] = { 5, 3 }
+    ClassToGrid["Prowler"] = { 6, 3 }
     
     return ClassToGrid
     
 end
+
+local loadAdditional = true
+local oldGetTexCoordsForTechId = GetTexCoordsForTechId
+function GetTexCoordsForTechId(techId)
+	if loadAdditional and gTechIdPosition then
+		gTechIdPosition[kTechId.Devour] = kDeathMessageIcon.Devour
+		gTechIdPosition[kTechId.Volley] = kDeathMessageIcon.Spikes
+        gTechIdPosition[kTechId.AcidSpray] = kDeathMessageIcon.Spray
+        gTechIdPosition[kTechId.Rappel] = kDeathMessageIcon.Claw
+		loadAdditional = false
+	end
+	return oldGetTexCoordsForTechId(techId)
+end
+
+
 
 function CanEntityDoDamageTo(attacker, target, cheats, devMode, friendlyFire, damageType)
 

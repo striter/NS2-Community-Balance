@@ -6,11 +6,14 @@ kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15    kLerkHealthPerB
 kFadeHealth = 250    kFadeArmor = 80     kFadePointValue = 20    kFadeHealthPerBioMass = 5
 kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30    kOnosHealtPerBioMass = 50
 
+kProwlerHealth = 140 kProwlerArmor  = 10 kProwlerPointValue = 10 kProwlerHealthPerBioMass = 4
+
 kParasitePlayerPointValue = 2
 kAlienRegenerationPercentage = 0.08
 
 kSkulkBaseCarapaceUpgradeAmount = 15
 kGorgeBaseCarapaceUpgradeAmount = 25
+kProwlerArmorFullyUpgradedAmount = 28
 kLerkBaseCarapaceUpgradeAmount  = 25
 kFadeBaseCarapaceUpgradeAmount  = 40
 kOnosBaseCarapaceUpgradeAmount  = 200

@@ -149,6 +149,64 @@ function BuildTechData()
         [kTechDataResearchName] = "GRENADE_LAUNCHER_UPGRADE",
     })
 			
+
+    table.insert(techData, { 
+        [kTechDataId] = kTechId.ProwlerMenu,            
+        [kTechDataDisplayName] = "UPGRADE_PROWLER",  
+        [kTechDataTooltipInfo] = "UPGRADE_PROWLER_TOOLTIP", 
+    })
+    table.insert(techData, { 
+        [kTechDataId] = kTechId.Volley,           
+        [kTechDataCategory] = kTechId.Prowler, 
+        [kTechDataDisplayName] = "VOLLEY", 
+        [kTechDataDamageType] = kVolleyDamageType, 
+        [kTechDataTooltipInfo] = "VOLLEY_TOOLTIP"
+    })
+    table.insert(techData, { 
+        [kTechDataId] = kTechId.Rappel,           
+        [kTechDataCategory] = kTechId.Prowler, 
+        [kTechDataDisplayName] = "RAPPEL", 
+        [kTechDataCostKey] = kRappelResearchCost, 
+        [kTechDataResearchTimeKey] = kRappelResearchTime, 
+        [kTechDataTooltipInfo] = "RAPPEL_TOOLTIP" 
+    })
+    table.insert(techData, { 
+        [kTechDataId] = kTechId.AcidSpray,           
+        [kTechDataCategory] = kTechId.Prowler, 
+        [kTechDataMapName] = AcidSpray.kMapName, 
+        [kTechDataDisplayName] = "ACID_SPRAY", 
+        [kTechDataCostKey] = kAcidSprayResearchCost, 
+        [kTechDataResearchTimeKey] = kAcidSprayResearchTime, 
+        [kTechDataTooltipInfo] = "ACID_SPRAY_TOOLTIP" 
+    })
+    table.insert(techData,  { 
+		[kTechDataId] = kTechId.Prowler, 
+		[kTechDataUpgradeCost] = kProwlerUpgradeCost, 
+		[kTechDataMapName] = Prowler.kMapName, 
+		[kTechDataGestateName] = Prowler.kMapName,                      
+		[kTechDataGestateTime] = kProwlerGestateTime, 
+		[kTechDataDisplayName] = "PROWLER",  
+		[kTechDataTooltipInfo] = "PROWLER_TOOLTIP",        
+		[kTechDataModel] = Prowler.kModelName, 
+		[kTechDataCostKey] = kProwlerCost, 
+		[kTechDataMaxHealth] = Prowler.kHealth, 
+		[kTechDataMaxArmor] = Prowler.kArmor, 
+		[kTechDataEngagementDistance] = kPlayerEngagementDistance, 
+		[kTechDataMaxExtents] = Vector(Prowler.kXExtents, Prowler.kYExtents, Prowler.kZExtents), 
+		[kTechDataPointValue] = kProwlerPointValue
+	})
+	
+    table.insert(techData, { [kTechDataId] = kTechId.HallucinateProwler,             
+                             [kTechDataMapName] = ProwlerHallucination.kMapName,
+                             [kTechDataModel] = Prowler.kModelName,
+                             [kTechDataCostKey] = kProwlerCost,
+                             [kTechDataMaxHealth] = kProwlerHallucinationHealth,
+                             [kTechDataMaxArmor] = Prowler.kArmor,
+                             [kTechDataRequiresMature] = true, 
+                             [kTechDataDisplayName] = "HALLUCINATE_DRIFTER", 
+                             [kTechDataTooltipInfo] = "HALLUCINATE_DRIFTER_TOOLTIP", 
+                             [kTechDataCostKey] = kHallucinateLerkEnergyCost })
+
     table.insert(techData, {
         [kTechDataId] = kTechId.Devour, 
         [kTechDataCategory] = kTechId.Onos,
