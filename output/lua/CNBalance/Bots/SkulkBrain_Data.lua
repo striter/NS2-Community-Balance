@@ -180,11 +180,9 @@ local function GetAttackUrgency(bot, mem)
             [kMinimapBlipType.Marine] = numOthers >= 2 and 0.1 or 6.0,
             [kMinimapBlipType.JetpackMarine] = numOthers >= 1 and 0.1 or 5.0,
             [kMinimapBlipType.Exo] =  numOthers >= 4  and 0.1 or 4.0,
-            [kMinimapBlipType.Sentry]  = numOthers >= 3   and 0.1 or 5.0
+            [kMinimapBlipType.Sentry]  = numOthers >= 3   and 0.1 or 5.0,
+            [kMinimapBlipType.Prowler] = numOthers >= 2 and 0.1 or 4.0
         }
-        if table.contains(kMinimapBlipType, "Prowler") then
-            activeUrgencies[kMinimapBlipType.Prowler] = numOthers >= 2 and 0.1 or 4.0
-        end
         
         return activeUrgencies
     end

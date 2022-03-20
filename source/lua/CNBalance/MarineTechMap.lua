@@ -28,7 +28,7 @@ kMarineTechMap =
                                                     { kTechId.AdvancedArmory, 7, 7 }, 
 
         --R
-                                            { kTechId.JetpackTech, 11, 6.5 },       { kTechId.JetpackFuelTech, 12, 6.5 },   
+                                            { kTechId.JetpackTech, 11, 6.5 },       --{ kTechId.JetpackFuelTech, 12, 6.5 },   
                 { kTechId.PrototypeLab, 10, 7 },       
                                                     { kTechId.ExosuitTech, 11,7.5 },
 
@@ -114,7 +114,7 @@ kMarineLines =
     GetLinePositionForTechMap(kMarineTechMap, kTechId.PrototypeLab, kTechId.ExosuitTech),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.PrototypeLab, kTechId.JetpackTech),
 
-    GetLinePositionForTechMap(kMarineTechMap, kTechId.JetpackTech, kTechId.JetpackFuelTech),
+    --GetLinePositionForTechMap(kMarineTechMap, kTechId.JetpackTech, kTechId.JetpackFuelTech),
 
     -- AdvancedMarineSupport:
     GetLinePositionForTechMap(kMarineTechMap, kTechId.CommandStation, kTechId.CatPackSupport),

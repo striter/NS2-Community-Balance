@@ -20,6 +20,7 @@ ModLoader.SetupFileHook("lua/DamageTypes.lua", "lua/CNBalance/DamageTypes.lua", 
 ModLoader.SetupFileHook("lua/Commander_Server.lua", "lua/CNBalance/Commander_Server.lua", "post" )
 ModLoader.SetupFileHook("lua/CommandStructure_Server.lua", "lua/CNBalance/CommandStructure_Server.lua", "post" )
 ModLoader.SetupFileHook("lua/ReadyRoomTeam.lua", "lua/CNBalance/ReadyRoomTeam.lua", "post" )
+ModLoader.SetupFileHook("lua/ReadyRoomEmbryo.lua", "lua/CNBalance/ReadyRoomEmbryo.lua", "post" )
 ModLoader.SetupFileHook("lua/Scoreboard.lua", "lua/CNBalance/Scoreboard.lua", "post" )
 ModLoader.SetupFileHook("lua/ServerStats.lua", "lua/CNBalance/ServerStats.lua", "post" )
 
@@ -35,6 +36,7 @@ ModLoader.SetupFileHook("lua/CloakableMixin.lua", "lua/CNBalance/Mixin/Cloakable
 ModLoader.SetupFileHook("lua/BabblerOwnerMixin.lua", "lua/CNBalance/Mixin/BabblerOwnerMixin.lua", "post")
 ModLoader.SetupFileHook("lua/RegenerationMixin.lua", "lua/CNBalance/Mixin/RegenerationMixin.lua", "post")
 ModLoader.SetupFileHook("lua/ShieldableMixin.lua", "lua/CNBalance/Mixin/ShieldableMixin.lua", "post" )
+ModLoader.SetupFileHook("lua/PlayerHallucinationMixin.lua", "lua/CNBalance/Mixin/PlayerHallucinationMixin.lua", "post" )
 
 ModLoader.SetupFileHook("lua/Client.lua", "lua/CNBalance/Client.lua", "post" )
 ModLoader.SetupFileHook("lua/HitSounds.lua", "lua/CNBalance/HitSounds.lua", "post" )
@@ -82,6 +84,7 @@ ModLoader.SetupFileHook("lua/AlienTeam.lua", "lua/CNBalance/AlienTeam.lua", "pos
 ModLoader.SetupFileHook("lua/AlienTechMap.lua", "lua/CNBalance/AlienTechMap.lua", "post")
 
 ModLoader.SetupFileHook("lua/Alien.lua", "lua/CNBalance/Alien.lua", "post")
+ModLoader.SetupFileHook("lua/Alien_Server.lua", "lua/CNBalance/Alien_Server.lua", "post")
 ModLoader.SetupFileHook("lua/Skulk.lua", "lua/CNBalance/Lifeforms/Skulk.lua", "post")
 ModLoader.SetupFileHook("lua/Skulk.lua", "lua/Prowler/Prowler.lua", "post")
 ModLoader.SetupFileHook("lua/Lerk.lua", "lua/CNBalance/Lifeforms/Lerk.lua", "post")
@@ -89,6 +92,7 @@ ModLoader.SetupFileHook("lua/Fade.lua", "lua/CNBalance/Lifeforms/Fade.lua", "pos
 ModLoader.SetupFileHook("lua/Gorge.lua", "lua/CNBalance/Lifeforms/Gorge.lua", "post")
 ModLoader.SetupFileHook("lua/Onos.lua", "lua/CNBalance/Lifeforms/Onos.lua", "post")
 
+ModLoader.SetupFileHook("lua/GUIEggDisplay.lua", "lua/CNBalance/GUIEggDisplay.lua", "post" )
 ModLoader.SetupFileHook("lua/GUIAlienBuyMenu.lua", "lua/CNBalance/GUIAlienBuyMenu.lua", "post" )
 ModLoader.SetupFileHook("lua/EvolutionChamber.lua", "lua/CNBalance/EvolutionChamber.lua", "post")
 ModLoader.SetupFileHook("lua/AlienTunnelManager.lua", "lua/CNBalance/AlienTunnelManager.lua", "post")
@@ -108,9 +112,8 @@ ModLoader.SetupFileHook("lua/Weapons/Alien/XenocideLeap.lua", "lua/CNBalance/Wea
 ModLoader.SetupFileHook("lua/Weapons/Alien/BabblerPheromone.lua", "lua/CNBalance/Weapons/Alien/BabblerPheromone.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/HydraAbility.lua", "lua/CNBalance/Weapons/Alien/HydraAbility.lua", "post")
 --------------------
-ModLoader.SetupFileHook( "lua/bots/PlayerBot.lua", "lua/CNBalance/bots/PlayerBot.lua", "post" )
-ModLoader.SetupFileHook( "lua/bots/SkulkBrain_Data.lua", "lua/CNBalance/bots/SkulkBrain_Data.lua", "replace" )
-
+ModLoader.SetupFileHook("lua/bots/PlayerBot.lua", "lua/CNBalance/Bots/PlayerBot.lua", "post" )
+ModLoader.SetupFileHook("lua/bots/SkulkBrain_Data.lua", "lua/CNBalance/Bots/SkulkBrain_Data.lua", "replace" )
 
 if AddHintModPanel then
     local panelMaterial = PrecacheAsset("materials/CNPlaygroundBalance/Banner.material")

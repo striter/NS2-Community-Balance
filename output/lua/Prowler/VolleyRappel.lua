@@ -81,6 +81,11 @@ end
 function VolleyRappel:GetIsAffectedByFocus()
     return self.primaryAttacking
 end
+
+function VolleyRappel:GetMaxFocusBonusDamage()
+    return kVolleyFocusDamageBonusAtMax
+end
+
 function VolleyRappel:GetFocusAttackCooldown()
     return kVolleyFocusAttackSlowAtMax
 end
@@ -104,6 +109,9 @@ end
 function VolleyRappel:GetHUDSlot()
     return 1
 end
+function VolleyRappel:GetTechId()
+    return kTechId.Volley
+end
 function VolleyRappel:GetRange()
     return 40
 end
@@ -117,7 +125,11 @@ function VolleyRappel:GetBarrelPoint()
 end
 
 function VolleyRappel:GetDeathIconIndex()
-    return self.primaryAttacking and kDeathMessageIcon.Consumed or RappelMixin:GetDeathIconIndex() --self.primaryAttacking and kDeathMessageIcon.Volley or RappelMixin:GetDeathIconIndex() --kDeathMessageIcon.Claw
+    if self.primaryAttacking then
+        return kDeathMessageIcon.Volley
+    else
+        return RappelMixin:GetDeathIconIndex()
+    end
 end
 
 function VolleyRappel:GetDamageType()

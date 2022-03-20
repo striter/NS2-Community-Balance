@@ -135,7 +135,7 @@ function MarineTeam:InitTechTree()
     self.techTree:AddResearchNode(kTechId.JetpackTech,           kTechId.PrototypeLab)
     self.techTree:AddTargetedActivation(kTechId.DropJetpack,    kTechId.JetpackTech,      kTechId.None)
     self.techTree:AddBuyNode(kTechId.Jetpack,                    kTechId.JetpackTech)
-    self.techTree:AddResearchNode(kTechId.JetpackFuelTech,           kTechId.JetpackTech)
+    --self.techTree:AddResearchNode(kTechId.JetpackFuelTech,           kTechId.JetpackTech)
 
     -- Exosuit
     self.techTree:AddResearchNode(kTechId.ExosuitTech,           kTechId.PrototypeLab, kTechId.None)

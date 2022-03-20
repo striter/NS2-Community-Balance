@@ -6,3 +6,7 @@ debug.appendtoenum(kPlayerStatus, "Prowler")
 debug.appendtoenum(kPlayerStatus, "ProwlerEgg")
 
 debug.appendtoenum(kMinimapBlipType, "Prowler")
+
+debug.appendtoenum(kDeathMessageIcon, "Volley")
+debug.appendtoenum(kDeathMessageIcon, "Rappel")
+debug.appendtoenum(kDeathMessageIcon, "AcidSpray")

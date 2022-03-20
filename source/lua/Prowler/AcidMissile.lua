@@ -45,7 +45,7 @@ function AcidMissile:OnCreate()
 end
 
 function AcidMissile:GetDeathIconIndex()
-    return kDeathMessageIcon.Spray --kDeathMessageIcon.AcidSpray
+    return kDeathMessageIcon.AcidSpray
 end
 
 function AcidMissile:GetDamageType()

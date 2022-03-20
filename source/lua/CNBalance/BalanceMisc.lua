@@ -43,6 +43,7 @@ kFocusDamageBonusAtMax = 0.66
 kSpitFocusAttackSlowAtMax = 0
 kSpitFocusDamageBonusAtMax = 0.66
 
+kVolleyFocusDamageBonusAtMax = 0.33
 kVolleyFocusAttackSlowAtMax = 0
 
 kAlienRegenerationCombatModifier = 0.5

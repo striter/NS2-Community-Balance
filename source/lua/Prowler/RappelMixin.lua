@@ -157,7 +157,7 @@ function RappelMixin:GetTracerResidueEffectName()
 end
 
 function RappelMixin:GetDeathIconIndex()
-    return kDeathMessageIcon.Claw
+    return kDeathMessageIcon.Rappel
 end
 
 --[[function RappelMixin:GetGhostModelName()

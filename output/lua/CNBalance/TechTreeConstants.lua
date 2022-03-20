@@ -180,7 +180,7 @@ kTechId = enum {
     'Bite', 'Sneak', 'Parasite', 'Leap', 'Xenocide',
 
 -----------
-    'Prowler','ProwlerMenu','ProwlerEgg','HallucinateProwler',
+    'Prowler','ProwlerMenu','ProwlerEgg','HallucinateProwler','UpgradeProwler',
     'Volley','Rappel','AcidSpray',
 -----------
 

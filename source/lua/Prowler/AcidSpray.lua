@@ -163,7 +163,7 @@ function AcidSpray:OnUpdateAnimationInput(modelMixin)
 end
 
 function AcidSpray:GetDeathIconIndex()
-    return kDeathMessageIcon.Spray
+    return kDeathMessageIcon.AcidSpray
 end
 
 Shared.LinkClassToMap("AcidSpray", AcidSpray.kMapName, networkVars)

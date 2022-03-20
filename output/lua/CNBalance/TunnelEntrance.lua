@@ -75,4 +75,8 @@ if Server then
     function TunnelEntrance:AddChildCyst(child)
         
     end
+
+    function TunnelEntrance:GetIsActuallyConnected()
+        return true
+    end
 end

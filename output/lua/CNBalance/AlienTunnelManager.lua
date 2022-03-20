@@ -21,6 +21,10 @@ function AlienTunnelManager:GetTechAllowed(techId)
         local teamInfo = GetTeamInfoEntity(self:GetTeamNumber())
         local numHives = teamInfo:GetNumCapturedTechPoints()
 
+        if numHives == 0 then
+            return true,true
+        end
+        
         local otherIndex
         if techIndex < 4 then
             otherIndex = techIndex + 4

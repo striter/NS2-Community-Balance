@@ -3,8 +3,8 @@ function BuildClassToGrid()
 
     local ClassToGrid = oldBuildClassToGrid()
     
-	ClassToGrid["DevouredPlayer"] = { 5, 3 }
-    ClassToGrid["Prowler"] = { 6, 3 }
+	ClassToGrid["DevouredPlayer"] = { 8, 2 }
+    ClassToGrid["Prowler"] = { 1, 9 }
     
     return ClassToGrid
     
@@ -14,10 +14,10 @@ local loadAdditional = true
 local oldGetTexCoordsForTechId = GetTexCoordsForTechId
 function GetTexCoordsForTechId(techId)
 	if loadAdditional and gTechIdPosition then
+		gTechIdPosition[kTechId.Volley] = kDeathMessageIcon.Volley
 		gTechIdPosition[kTechId.Devour] = kDeathMessageIcon.Devour
-		gTechIdPosition[kTechId.Volley] = kDeathMessageIcon.Spikes
-        gTechIdPosition[kTechId.AcidSpray] = kDeathMessageIcon.Spray
-        gTechIdPosition[kTechId.Rappel] = kDeathMessageIcon.Claw
+        gTechIdPosition[kTechId.AcidSpray] = kDeathMessageIcon.AcidSpray
+        gTechIdPosition[kTechId.Rappel] = kDeathMessageIcon.Rappel
 		loadAdditional = false
 	end
 	return oldGetTexCoordsForTechId(techId)
