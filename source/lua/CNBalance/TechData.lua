@@ -149,7 +149,18 @@ function BuildTechData()
         [kTechDataResearchName] = "GRENADE_LAUNCHER_UPGRADE",
     })
 			
+    table.insert(techData, {
+        [kTechDataId] = kTechId.Revolver,
+        [kTechDataMaxHealth] = kMarineWeaponHealth,
+        [kTechDataMapName] = Revolver.kMapName,
+        [kTechDataModel] = Revolver.kModelName,
+        [kTechDataDamageType] = kRevolverDamageType,
+        [kTechDataCostKey] = kRevolverCost,
+        [kTechDataDisplayName] = "REVOLVER",
+        [kTechDataTooltipInfo] = "REVOLVER_TOOLTIP",
+    })
 
+----- Aliens
     table.insert(techData, { 
         [kTechDataId] = kTechId.ProwlerMenu,            
         [kTechDataDisplayName] = "UPGRADE_PROWLER",  

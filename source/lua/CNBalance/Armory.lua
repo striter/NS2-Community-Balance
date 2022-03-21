@@ -1,45 +1,24 @@
-
-function Armory:GetItemList()
-
-    local itemList =
-    {
-        kTechId.Rifle,
-        kTechId.Pistol,
-        kTechId.Axe,
-
-        kTechId.Welder,
-        kTechId.LayMines,
+local oldArmoryGetItemList = Armory.GetItemList
+function Armory:GetItemList(forPlayer)
         
-        kTechId.Shotgun,
 
-        kTechId.ClusterGrenade,
-        kTechId.GasGrenade,
-        kTechId.PulseGrenade
-    }
+    local itemList = oldArmoryGetItemList(self, forPlayer)
+		table.insert(itemList, kTechId.Revolver)
+    
+	return itemList
+    
+end
 
-    if self:GetTechId() == kTechId.AdvancedArmory then
+local oldAdvancedArmoryGetItemList = AdvancedArmory.GetItemList
+function AdvancedArmory:GetItemList(forPlayer)
+        
 
-        itemList =
-        {
-            kTechId.Rifle,
-            kTechId.Pistol,
-            kTechId.Axe,
-
-            kTechId.Welder,
-            kTechId.LayMines,
-            kTechId.Shotgun,
-            kTechId.GrenadeLauncher,
-            kTechId.Flamethrower,
-            kTechId.HeavyMachineGun,
-            kTechId.ClusterGrenade,
-            kTechId.GasGrenade,
-            kTechId.PulseGrenade,
-        }
-
+    local itemList = oldAdvancedArmoryGetItemList(self, forPlayer)
+	if self:GetTechId() == kTechId.AdvancedArmory then
+		table.insert(itemList, kTechId.Revolver)
     end
-
-    return itemList
-
+	return itemList
+    
 end
 
 local function IsSupplyTech(techId)

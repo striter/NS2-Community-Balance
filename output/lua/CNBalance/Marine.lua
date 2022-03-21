@@ -78,3 +78,16 @@ function Marine:DevourEscape()
 		self.clientTimeDevourEscaped = Shared.GetTime()
 	end
 end
+
+local oldGetStatusDesc = Marine.GetPlayerStatusDesc
+function Marine:GetPlayerStatusDesc()
+		  
+	local weapon = self:GetActiveWeapon()
+	if (weapon) then
+		if (weapon:isa("Revolver")) then
+			return kPlayerStatus.Revolver
+		end
+	end
+		
+	return oldGetStatusDesc(self)
+end

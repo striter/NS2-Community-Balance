@@ -1,4 +1,5 @@
 
+if not Server then return end
 
 function PlayerHallucinationMixin:OnUpdate(deltaTime)
 

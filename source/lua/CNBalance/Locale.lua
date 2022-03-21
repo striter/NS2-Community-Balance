@@ -38,6 +38,10 @@ if kTranslateMessage then
     kTranslateMessage["GRENADE_LAUNCHER_UPGRADE"] = "榴弹枪适用性升级"
     kTranslateMessage["GRENADE_LAUNCHER_UPGRADE_TOOLTIP"] = "*改进装弹加速榴弹枪换弹."
     
+    kTranslateMessage["REVOLVER"]="左轮"
+    kTranslateMessage["REVOLVER_BUYDESCRIPTION"]="左轮Tooltip"
+    kTranslateMessage["BUYMENU_GROUPLABEL_GRENADES"]="投掷物"
+    
     kTranslateMessage["PROWLER"] = "Prowler"
     kTranslateMessage["PROWLER_EGG"] = "蛹(Prowler)"
     kTranslateMessage["PROWLER_TOOLTIP"] = "地面远程骚然单位.\n*齐射钉刺远程输出\n*(进化)通过绳网快速移动\n*(进化)酸液投掷范围攻击."

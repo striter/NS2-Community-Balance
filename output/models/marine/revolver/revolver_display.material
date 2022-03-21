@@ -1,0 +1,4 @@
+shader = "shaders/Level_emissive.surface_shader"
+albedoMap = "materials/dev/black.dds"
+normalMap = "materials/dev/dev_normal.dds"
+emissiveMap = "*ammo_displayrevolver"

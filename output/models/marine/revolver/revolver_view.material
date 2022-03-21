@@ -1,0 +1,5 @@
+shader = "shaders/ViewModel.surface_shader"
+albedoMap = "models/marine/revolver/revolver_green_view.dds"
+specularMap = "models/marine/revolver/revolver_green_view_spec.dds"
+normalMap = "models/marine/revolver/revolver_green_view_normal.dds"
+emissiveMap = "models/marine/revolver/revolver_view_illum.dds"

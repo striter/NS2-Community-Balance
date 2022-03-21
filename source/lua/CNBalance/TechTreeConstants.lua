@@ -87,7 +87,7 @@ kTechId = enum {
     'MACEMP', 'Welding',
 
     -- Weapons
-    'Rifle', 'Pistol', 'Shotgun', 'HeavyMachineGun', 'Claw', 'Minigun', 'Railgun', 'GrenadeLauncher', 'Flamethrower', 'Axe', 'LayMines', 'Welder',
+    'Rifle', 'Pistol','Revolver', 'Shotgun', 'HeavyMachineGun', 'Claw', 'Minigun', 'Railgun', 'GrenadeLauncher', 'Flamethrower', 'Axe', 'LayMines', 'Welder',
 
     -- Armor
     'Jetpack',  'Exosuit',

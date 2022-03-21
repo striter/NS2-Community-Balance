@@ -100,6 +100,16 @@ kGrenadeLauncherClipSize = 4
 kGrenadeLauncherWeapons1DamageScalar = 1.08
 kGrenadeLauncherWeapons2DamageScalar = 1.17
 kGrenadeLauncherWeapons3DamageScalar = 1.25
+
+
+--Revolver
+kRevolverRateOfFire = 0.1
+kRevolverDamage = 27.5
+kRevolverDamageType = kDamageType.Normal
+kRevolverClipSize = 6
+kRevolverNumClips = 3
+kRevolverCost = 0
+kRevolverWeight = 0.01
 --
 
 kFlamethrowerCost = 20

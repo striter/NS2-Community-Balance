@@ -1,0 +1,7 @@
+shader = "shaders/Decal.surface_shader"
+albedoMap = "cinematics/vfx_materials/decals/bullet_hole_01.dds"
+opacityMap = "cinematics/vfx_materials/decals/bullet_hole_01_opacity.dds"
+
+specularMap = "cinematics/vfx_materials/decals/bullet_hole_01_specular.dds"
+normalMap = "cinematics/vfx_materials/decals/bullet_hole_01_normal.dds"
+
