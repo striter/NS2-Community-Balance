@@ -815,10 +815,6 @@ function Prowler:ModifyAttackSpeed(attackSpeedTable)
 
 end
 
-function Prowler:GetMaxOverShieldAmount()
-    return 27 * self:GetMaxHealth() * kVolleyRappelVampirismScalar
-end
-
 if Client then
 
     function Prowler:GetShowGhostModel()
