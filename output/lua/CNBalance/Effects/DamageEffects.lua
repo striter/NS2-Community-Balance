@@ -1,4 +1,4 @@
-kAdditionalDamageEffects =
+local kAdditionalDamageEffects =
 {
     damage_sound =
     {
@@ -7,6 +7,13 @@ kAdditionalDamageEffects =
             {sound = "sound/NS2.fev/alien/skulk/parasite_hit", doer = "VolleyRappel", world_space = true, done = true},
         }
     },
+}
+
+GetEffectManager():AddEffectData("DamageEffects", kAdditionalDamageEffects)
+
+
+local kRevolverDamageEffects = 
+{
     damage_decal =
     {
         damageDecals = 
@@ -17,4 +24,22 @@ kAdditionalDamageEffects =
         },    
     },
 }
-GetEffectManager():AddEffectData("DamageEffects", kAdditionalDamageEffects)
+GetEffectManager():AddEffectData("DamageEffects", kRevolverDamageEffects)
+
+
+local kCannonDamageEffects =
+{
+ damage_decal =
+    {
+        damageDecals = 
+        {
+                  
+
+			{decal = "cinematics/vfx_materials/decals/blast_01.material", scale = 0.5, doer = "Cannon", done = true},
+
+
+		}
+	},
+}
+
+GetEffectManager():AddEffectData("CannonDamageEffects", kCannonDamageEffects)

@@ -107,10 +107,37 @@ kRevolverRateOfFire = 0.1
 kRevolverDamage = 27.5
 kRevolverDamageType = kDamageType.Normal
 kRevolverClipSize = 6
-kRevolverNumClips = 3
+kRevolverNumClips = 5
 kRevolverCost = 0
 kRevolverWeight = 0.01
 --
+
+--SMG
+kSMGClipSize = 40
+kSMGClipNum = 5
+kSMGWeight = 0.08
+kSubmachinegunCost = 0
+kSMGDamage = 12
+kSubmachinegunDamageType = kDamageType.Normal
+-- kSubmachinegunTechResearchCost = 15
+-- kSubmachinegunTechResearchTime = 30
+-- kSubmachinegunPointValue = 1
+--
+
+--Cannon
+kCannonTechResearchCost = 20
+kCannonCost = 30
+kCannonDamage = 90
+kCannonRateOfFire = 0.7
+kCannonAoeDamage = 0
+kCannonSelfDamage = kCannonAoeDamage
+kCannonClipSize = 10
+kUmbraBulletModifier = 0.8
+kCannonPointValue = 15
+kCannonWeight = 0.18
+kCannonDamageType = kDamageType.Normal
+kCannonDropCost = 20
+---
 
 kFlamethrowerCost = 20
 kFlamethrowerDropCost = 12

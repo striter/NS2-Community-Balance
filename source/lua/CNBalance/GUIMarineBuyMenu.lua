@@ -211,6 +211,20 @@ local kTechIdStats =
         StructureDamage = 0.5,
         Range = 0.7,	
     },
+
+    [kTechId.Submachinegun] =
+    {
+        LifeFormDamage = 0.7,
+        StructureDamage = 0.7,
+        Range = 0.7,
+    },
+
+    [kTechId.Cannon] =
+    {
+        LifeFormDamage = 1,
+        StructureDamage = 1,
+        Range = 1,
+    },
  ------------
 
     [kTechId.Rifle] =
@@ -219,7 +233,7 @@ local kTechIdStats =
         StructureDamage = 0.8,
         Range = 0.8,
     },
-
+    
     [kTechId.Shotgun] =
     {
         LifeFormDamage = 1,
@@ -316,6 +330,22 @@ local kTechIdInfo =
         BigPictureIndex = 12,
         Description = "REVOLVER_BUYDESCRIPTION",    
         Stats = GetStatsForTechId(kTechId.Revolver)
+    },
+
+    [kTechId.Submachinegun] =
+    {
+        ButtonTextureIndex = 16,
+        BigPictureIndex = 13,
+        Description = "SUBMACHINEGUN_BUYDESCRIPTION",    
+        Stats = GetStatsForTechId(kTechId.Submachinegun)
+    },
+
+    [kTechId.Cannon] =
+    {
+        ButtonTextureIndex = 17,
+        BigPictureIndex = 14,
+        Description = "CANNON_BUYDESCRIPTION",    
+        Stats = GetStatsForTechId(kTechId.Cannon)
     },
 -----------
     [kTechId.Rifle] =
@@ -777,11 +807,12 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     weaponGroupTopLeft:SetOptionFlag(GUIItem.CorrectScaling)
     self.background:AddChild(weaponGroupTopLeft)
 ---------------
-    local pistolTech = PlayerUI_GetHasItem(kTechId.Pistol) and kTechId.Revolver or kTechId.Pistol
+    local primaryTech =  PlayerUI_GetHasItem(kTechId.Rifle) and kTechId.Submachinegun or kTechId.Rifle
+    local secondaryTech = PlayerUI_GetHasItem(kTechId.Pistol) and kTechId.Revolver or kTechId.Pistol
     self:_InitializeWeaponGroup(weaponGroupTopLeft, x2ButtonPositions,
     {
-        kTechId.Rifle,
-        pistolTech,
+        primaryTech,
+        secondaryTech,
     })
 --------------
 
@@ -797,7 +828,7 @@ function GUIMarineBuyMenu:CreateArmoryUI()
         kTechId.Shotgun,
         kTechId.Flamethrower,
         kTechId.HeavyMachineGun,
-        kTechId.GrenadeLauncher,
+        kTechId.Cannon,
     })
 
     local x4LabelStartX = 335

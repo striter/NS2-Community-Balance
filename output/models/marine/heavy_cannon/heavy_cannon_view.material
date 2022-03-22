@@ -1,0 +1,5 @@
+shader = "shaders/ViewModel_emissive.surface_shader"
+albedoMap = "models/marine/heavy_cannon/heavy_cannon_view.dds"
+specularMap = "models/marine/heavy_cannon/heavy_cannon_view_spec.dds"
+normalMap = "models/marine/heavy_cannon/heavy_cannon_view_normal.dds"
+emissiveMap = "models/marine/heavy_cannon/heavy_cannon_view_illum.dds"

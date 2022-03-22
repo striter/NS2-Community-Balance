@@ -36,6 +36,8 @@ kIconOffsets["LayMines"] = 8
 kIconOffsets["HeavyMachineGun"] = 9
 ----------
 kIconOffsets["Revolver"] = 10
+kIconOffsets["Submachinegun"] = 11
+kIconOffsets["Cannon"] = 12
 ------
 
 local kItemText = { }

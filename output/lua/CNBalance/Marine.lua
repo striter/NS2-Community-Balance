@@ -86,7 +86,11 @@ function Marine:GetPlayerStatusDesc()
 	if (weapon) then
 		if (weapon:isa("Revolver")) then
 			return kPlayerStatus.Revolver
-		end
+        elseif (weapon:isa("Submachinegun")) then
+            return kPlayerStatus.Submachinegun
+        elseif (weapon:isa("Cannon")) then
+            return kPlayerStatus.Cannon
+        end
 	end
 		
 	return oldGetStatusDesc(self)

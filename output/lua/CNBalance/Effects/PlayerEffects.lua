@@ -1,4 +1,4 @@
-kAdditionalEffects =
+local kAdditionalEffects =
 {
     jump =
     {

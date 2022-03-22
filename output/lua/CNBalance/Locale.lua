@@ -39,7 +39,14 @@ if kTranslateMessage then
     kTranslateMessage["GRENADE_LAUNCHER_UPGRADE_TOOLTIP"] = "*改进装弹加速榴弹枪换弹."
     
     kTranslateMessage["REVOLVER"]="左轮"
-    kTranslateMessage["REVOLVER_BUYDESCRIPTION"]="左轮Tooltip"
+    kTranslateMessage["STATUS_REVOLVER"]="左轮"
+    kTranslateMessage["REVOLVER_BUYDESCRIPTION"]="指示左轮手枪.\n*连射足以摧毁一切小型单位.\n-较低的载弹量."
+    kTranslateMessage["SUBMACHINEGUN"]="冲锋枪"
+    kTranslateMessage["STATUS_SUBMACHINEGUN"]="冲锋枪"
+    kTranslateMessage["SUBMACHINEGUN_BUYDESCRIPTION"]="制式冲锋枪.\n*相对步枪更高的伤害.\n*轻量化配置.\n-较少的弹夹容量.\n-远程精准度较差."
+    kTranslateMessage["CANNON"]="单兵磁轨炮"
+    kTranslateMessage["STATUS_CANNON"]="单兵磁轨炮"
+    kTranslateMessage["CANNON_BUYDESCRIPTION"]="单兵携带式磁轨炮.\n*单发高额伤害.\n*精准对点打击.\n-较慢的射速"
     kTranslateMessage["BUYMENU_GROUPLABEL_GRENADES"]="投掷物"
     
     kTranslateMessage["PROWLER"] = "Prowler"

@@ -157,12 +157,20 @@ function Revolver:GetClipSize()
     return kRevolverClipSize
 end
 
+function Revolver:GetMaxClips()
+    return kRevolverNumClips
+end
+
+function Revolver:GetMaxAmmo()
+    return kRevolverNumClips * self:GetClipSize()
+end
+
 function Revolver:GetSpread()
-    return ConditionalValue(self.altMode, kAltSpread, kSpread)
+    return kSpread
 end
 
 function Revolver:GetBulletDamage(target, endPoint)
-    return ConditionalValue(self.altMode, kRevolverAltDamage, kRevolverDamage)
+    return kRevolverDamage
 end
 
 
@@ -175,10 +183,6 @@ function Revolver:GetIdleAnimations(index)
     return animations[index]
 end
 
-
-function Revolver:GetMaxAmmo()
-    return 5 * self:GetClipSize()
-end
 
 function Revolver:GetSpread()
     return kSpread

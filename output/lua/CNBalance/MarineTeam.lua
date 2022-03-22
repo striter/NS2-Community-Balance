@@ -27,10 +27,11 @@ function MarineTeam:InitTechTree()
     self.techTree:AddBuildNode(kTechId.ArmsLab,                   kTechId.CommandStation,                kTechId.None)
     self.techTree:AddManufactureNode(kTechId.MAC,                 kTechId.RoboticsFactory,                kTechId.None,  true)
 
-    self.techTree:AddBuyNode(kTechId.Axe,                         kTechId.None,              kTechId.None)
+    self.techTree:AddBuyNode(kTechId.Axe,                         kTechId.None,                kTechId.None)
     self.techTree:AddBuyNode(kTechId.Pistol,                      kTechId.None,                kTechId.None)
     self.techTree:AddBuyNode(kTechId.Revolver,                    kTechId.None,                kTechId.None)
     self.techTree:AddBuyNode(kTechId.Rifle,                       kTechId.None,                kTechId.None)
+    self.techTree:AddBuyNode(kTechId.Submachinegun,               kTechId.None,                kTechId.None)
 
     self.techTree:AddBuildNode(kTechId.SentryBattery,             kTechId.RoboticsFactory,      kTechId.None)
 
@@ -123,6 +124,8 @@ function MarineTeam:InitTechTree()
     
     self.techTree:AddResearchNode(kTechId.KinematicSupply,  kTechId.Armory)
     self.techTree:AddResearchNode(kTechId.DragonBreath,  kTechId.KinematicSupply)
+    self.techTree:AddResearchNode(kTechId.CannonTech,               kTechId.KinematicSupply,                kTechId.None)
+    self.techTree:AddBuyNode(kTechId.Cannon,               kTechId.CannonTech,                kTechId.None)
 
     self.techTree:AddResearchNode(kTechId.ExplosiveSupply,  kTechId.Armory)
     self.techTree:AddResearchNode(kTechId.MinesUpgrade,  kTechId.MinesTech,kTechId.ExplosiveSupply )

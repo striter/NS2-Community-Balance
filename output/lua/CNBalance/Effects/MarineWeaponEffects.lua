@@ -1,4 +1,4 @@
-kAdditionalEffects =
+local kAdditionalEffects =
 {
     shotgun_attack_secondary = 
     {
@@ -10,7 +10,11 @@ kAdditionalEffects =
             {player_sound = "sound/NS2.fev/marine/shotgun/fire_upgrade_3", done = true},
         },
     },
+}
 
+GetEffectManager():AddEffectData("MarineWeaponEffects", kAdditionalEffects)
+
+local kRevolverEffects = {
     draw =
     {
         marineWeaponDrawSounds =
@@ -24,7 +28,6 @@ kAdditionalEffects =
 
     },
     
---Revolver
     reload_speed0 = 
     {
         gunReloadEffects =
@@ -68,7 +71,114 @@ kAdditionalEffects =
             {player_sound = "sound/revolver.fev/Revolver/revolver_fire"},
         },
     },
---
 }
 
-GetEffectManager():AddEffectData("MarineWeaponEffects", kAdditionalEffects)
+GetEffectManager():AddEffectData("MarineWeaponEffects", kRevolverEffects)
+
+local kSubmachinegunEffects =
+{
+    draw =
+    {
+        marineWeaponDrawSounds =
+        {
+            
+            {player_sound = "sound/Submachinegun.fev/submachinegun/lmg_draw", classname = "Submachinegun", done = true},
+            
+        },
+    },
+
+
+    reload_speed0 = 
+    {
+        gunReloadEffects =
+        {
+
+            {player_sound = "sound/Submachinegun.fev/submachinegun/lmg_reload", classname = "Submachinegun", done = true},
+        },
+    },
+
+    reload_speed1 = 
+    {
+        gunReloadEffects =
+        {
+
+            {player_sound = "sound/Submachinegun.fev/submachinegun/lmg_reload1", classname = "Submachinegun", done = true},
+        },
+    },
+
+    reload_cancel =
+    {
+        gunReloadCancelEffects =
+        {
+
+            {stop_sound = "sound/Submachinegun.fev/submachinegun/lmg_reload", classname = "Submachinegun"},
+            {stop_sound = "sound/Submachinegun.fev/submachinegun/lmg_reload1", classname = "Submachinegun", done = true},
+        },
+    },
+
+
+    rifle_alt_attack = 
+    {
+        rifleAltAttackEffects = 
+        {
+            { player_sound = "sound/NS2.fev/marine/rifle/alt_swing_female", sex = "female", done = true },
+            { player_sound = "sound/NS2.fev/marine/rifle/alt_swing" },
+        },
+    },
+}
+
+GetEffectManager():AddEffectData("MarineWeaponEffects", kSubmachinegunEffects)
+
+local kCannonEffects =
+
+{
+	draw =
+    {
+        marineWeaponDrawSounds =
+        {
+            {player_sound = "sound/NS2.fev/marine/rifle/draw", classname = "Cannon", done = true},
+        },
+
+    },
+   reload_speed0 = 
+    {
+        gunReloadEffects =
+        {
+
+            {player_sound = "sound/Cannon.fev/combat_cannon/cannon_reload", classname = "Cannon", done = true},
+		
+        },
+    },
+	
+	reload_speed1 = 
+    {
+        gunReloadEffects =
+        {
+	
+            {player_sound = "sound/Cannon.fev/combat_cannon/cannon_reload1", classname = "Cannon", done = true},
+
+        },
+    },
+	
+    reload_cancel =
+    {
+        gunReloadCancelEffects =
+        {
+
+			{stop_sound = "sound/Cannon.fev/combat_cannon/cannon_reload", classname = "Cannon"},
+			{stop_sound = "sound/Cannon.fev/combat_cannon/cannon_reload1", classname = "Cannon", done = true},
+
+        },
+    },
+	cannon_attack = 
+    {
+        cannonAttackEffects = 
+        {
+            {viewmodel_cinematic = "cinematics/marine/cannon_muzzle_flash.cinematic", attach_point = "fxnode_hcmuzzle", empty = false},            
+            //{weapon_cinematic = "cinematics/marine/pistol/muzzle_flash.cinematic", attach_point = "fxnode_hcmuzzle", empty = false},
+			
+			{player_sound = "sound/Cannon.fev/combat_cannon/cannon_fire", done = true},
+        },
+    },
+}
+GetEffectManager():AddEffectData("MarineWeaponEffects", kCannonEffects)

@@ -64,6 +64,7 @@ kTechId = enum {
 
     'KinematicSupply',
     'DragonBreath',
+    'Cannon','CannonTech','DropCannon',
 
     'ExplosiveSupply',
     'MinesUpgrade','GrenadeLauncherDetectionShot','GrenadeLauncherAllyBlast','GrenadeLauncherUpgrade',
@@ -87,7 +88,7 @@ kTechId = enum {
     'MACEMP', 'Welding',
 
     -- Weapons
-    'Rifle', 'Pistol','Revolver', 'Shotgun', 'HeavyMachineGun', 'Claw', 'Minigun', 'Railgun', 'GrenadeLauncher', 'Flamethrower', 'Axe', 'LayMines', 'Welder',
+    'Rifle','Submachinegun', 'Pistol','Revolver', 'Shotgun', 'HeavyMachineGun', 'Claw', 'Minigun', 'Railgun', 'GrenadeLauncher', 'Flamethrower', 'Axe', 'LayMines', 'Welder',
 
     -- Armor
     'Jetpack',  'Exosuit',

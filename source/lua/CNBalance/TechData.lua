@@ -160,6 +160,52 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "REVOLVER_TOOLTIP",
     })
 
+	table.insert(techData,{ 
+	
+        [kTechDataId] = kTechId.Submachinegun,
+        [kTechDataMaxHealth] = kMarineWeaponHealth,
+        [kTechDataPointValue] = kSubmachinegunPointValue,
+        [kTechDataMapName] = Submachinegun.kMapName,
+        [kTechDataTooltipInfo] = "SUBMACHINEGUN_TOOLTIP",
+        [kTechDataDisplayName] = "SUBMACHINEGUN",
+        [kTechDataModel] = Submachinegun.kModelName,
+        [kTechDataDamageType] = kSubmachinegunDamageType,
+        [kTechDataCostKey] = kSubmachinegunCost,
+    })
+
+
+table.insert(techData,{ 
+        [kTechDataId] = kTechId.Cannon,
+        [kTechDataMaxHealth] = kMarineWeaponHealth,
+        [kTechDataTooltipInfo] = "CANNON_TOOLTIP",
+        [kTechDataPointValue] = kCannonPointValue,
+        [kTechDataMapName] = Cannon.kMapName,
+        [kTechDataDisplayName] = "CANNON",
+        [kTechDataModel] = Cannon.kModelName,
+        [kTechDataDamageType] = kCannonDamageType,
+        [kTechDataCostKey] = kCannonCost,
+    } )
+
+table.insert(techData,{
+        [kTechDataId] = kTechId.CannonTech,
+        [kTechDataCostKey] = kCannonTechResearchCost,
+        [kTechDataResearchTimeKey] = kCannonTechResearchTime,
+        [kTechDataDisplayName] = "RESEARCH_CANNON",
+        [kTechDataTooltipInfo] = "CANNON_TOOLTIP", 
+    } )
+
+table.insert(techData,{ 
+        [kTechDataId] = kTechId.DropCannon,
+        [kTechDataMapName] = Cannon.kMapName,
+        [kTechDataDisplayName] = "CANNON_DROP",
+        [kTechIDShowEnables] = false,
+        [kTechDataTooltipInfo] = "CANNON_TOOLTIP",
+        [kTechDataModel] = Cannon.kModelName,
+        [kTechDataCostKey] = kCannonCost,
+        [kStructureAttachId] = { kTechId.AdvancedArmory },
+        [kStructureAttachRange] = kArmoryWeaponAttachRange,
+        [kStructureAttachRequiresPower] = true, 
+    } )
 ----- Aliens
     table.insert(techData, { 
         [kTechDataId] = kTechId.ProwlerMenu,            

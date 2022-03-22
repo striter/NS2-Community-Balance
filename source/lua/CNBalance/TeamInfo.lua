@@ -5,11 +5,7 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.MinesTech,
     kTechId.GrenadeTech,
 
-    -- kTechId.WelderTech,
-
-    -- kTechId.AdvancedArmory,
     kTechId.AdvancedArmoryUpgrade,
-    -- kTechId.AdvancedWeaponry,
 
     kTechId.Weapons1,
     kTechId.Weapons2,
@@ -25,32 +21,27 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.JetpackTech,
     kTechId.JetpackFuelTech,
     kTechId.ExosuitTech,
-    -- kTechId.DualMinigunTech,
 
-    -- kTechId.ARCRoboticsFactory,
     kTechId.UpgradeRoboticsFactory,
-    -- kTechId.MACEMPTech,
-    -- kTechId.MACSpeedTech,
-    
-    -- kTechId.Observatory,
+
     kTechId.PhaseTech,
 
     kTechId.CatPackSupport,
     kTechId.PowerSurgeSupport,
     kTechId.NanoShieldSupport,
+    --kTechId.StandardSupply,
+    kTechId.PistolAxeUpgrade,
+    kTechId.RifleUpgrade,
 
-    kTechId.ExplosiveSupply,
+    --kTechId.KinematicSupply,
+    kTechId.DragonBreath,
+    kTechId.Cannon,
+
+    --kTechId.ExplosiveSupply,
     kTechId.GrenadeLauncherDetectionShot,
     kTechId.GrenadeLauncherAllyBlast,
     kTechId.GrenadeLauncherUpgrade,
-
-    kTechId.StandardSupply,
-    kTechId.PistolAxeUpgrade,
-    kTechId.RifleUpgrade,
     kTechId.MinesUpgrade,
-
-    kTechId.KinematicSupply,
-    kTechId.DragonBreath,
 }
 
 TeamInfo.kRelevantTechIdsAlien =

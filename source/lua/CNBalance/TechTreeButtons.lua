@@ -15,6 +15,7 @@ kTechIdToMaterialOffset[kTechId.MinesUpgrade] = 194
 
 kTechIdToMaterialOffset[kTechId.KinematicSupply] = 199
 kTechIdToMaterialOffset[kTechId.DragonBreath] = 203
+kTechIdToMaterialOffset[kTechId.CannonTech] = 204
 
 kTechIdToMaterialOffset[kTechId.ExplosiveSupply] = 200
 kTechIdToMaterialOffset[kTechId.GrenadeLauncherAllyBlast] = 196
