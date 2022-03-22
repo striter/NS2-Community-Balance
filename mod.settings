@@ -5,7 +5,18 @@ description = [=[重返好时光计划.
 Goal:Bring back the old time
 Tweak the playersize forward to 14v14.
 Under heavy playtesting.
-Feel free to test/play with it.]=]
+Feel free to test/play with it.
+
+Merged Mods(For custom balance use):
+Devour:
+https://steamcommunity.com/sharedfiles/filedetails/?id=2742180487&searchtext=devour
+Prowler: https://steamcommunity.com/sharedfiles/filedetails/?id=1493522873&searchtext=prowler
+Machinegun:
+https://steamcommunity.com/sharedfiles/filedetails/?id=2580758324
+Revolver:
+https://steamcommunity.com/sharedfiles/filedetails/?id=2579986919
+Cannon:
+https://steamcommunity.com/sharedfiles/filedetails/?id=2576890089]=]
 image       = "preview.jpg"
 tag_modtype = "Gameplay Tweak"
 tag_support = "Must be run on Server"
