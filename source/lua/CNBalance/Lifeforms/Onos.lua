@@ -1,3 +1,26 @@
+Onos.kBlockDoers =
+set {
+    "Minigun",
+    "Railgun",
+    "Pistol",
+    "Rifle",
+    "HeavyMachineGun",
+    "Shotgun",
+    "Axe",
+    "Welder",
+    "Sentry",
+    "PulseGrenade",
+    "ClusterFragment",
+    "Mine",
+    "Claw",
+    "Flamethrower",
+    "Grenade", -- Grenade Launcher
+    "Mine",
+    "Revolver",
+    "Submachingun",
+    "Cannon",
+}
+
 function Onos:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
 
     if hitPoint ~= nil and self:GetIsBoneShieldActive() and self:GetHitsBoneShield(doer, hitPoint) then

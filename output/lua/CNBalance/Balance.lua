@@ -113,11 +113,11 @@ kRevolverWeight = 0.01
 --
 
 --SMG
-kSMGClipSize = 40
+kSMGClipSize = 42
 kSMGClipNum = 5
 kSMGWeight = 0.08
 kSubmachinegunCost = 0
-kSMGDamage = 12
+kSMGDamage = 11
 kSubmachinegunDamageType = kDamageType.Normal
 -- kSubmachinegunTechResearchCost = 15
 -- kSubmachinegunTechResearchTime = 30
@@ -127,7 +127,7 @@ kSubmachinegunDamageType = kDamageType.Normal
 --Cannon
 kCannonTechResearchCost = 20
 kCannonCost = 30
-kCannonDamage = 90
+kCannonDamage = 70
 kCannonRateOfFire = 0.7
 kCannonAoeDamage = 0
 kCannonSelfDamage = kCannonAoeDamage
@@ -249,7 +249,7 @@ kRappelResearchTime = 20
 kRappelEnergyCost = 15
 kRappelRange = 25
 
-kAcidSprayResearchCost = 25
+kAcidSprayResearchCost = 15
 kAcidSprayResearchTime = 60
 kAcidSprayEnergyCost = 19
 kAcidSprayDamage = 17  -- 3 missiles

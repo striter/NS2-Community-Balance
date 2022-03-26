@@ -249,7 +249,8 @@ function AlienTeam:InitTechTree()
 
     -- prowler researches
     self.techTree:AddPassive(kTechId.Volley)
-    self.techTree:AddResearchNode(kTechId.Rappel,              kTechId.BioMassThree,  kTechId.None, kTechId.AllAliens)
+    self.techTree:AddPassive(kTechId.Rappel)
+    -- self.techTree:AddResearchNode(kTechId.Rappel,              kTechId.BioMassThree,  kTechId.None, kTechId.AllAliens)
     self.techTree:AddResearchNode(kTechId.AcidSpray,           kTechId.BioMassSix,  kTechId.None, kTechId.AllAliens) 
 
     -- gorge structures
