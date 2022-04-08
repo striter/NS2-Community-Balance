@@ -6,8 +6,6 @@ set {
     "Rifle",
     "HeavyMachineGun",
     "Shotgun",
-    "Axe",
-    "Welder",
     "Sentry",
     "PulseGrenade",
     "ClusterFragment",
@@ -17,7 +15,8 @@ set {
     "Grenade", -- Grenade Launcher
     "Mine",
     "Revolver",
-    "Submachingun",
+    "SubMachineGun",
+    "LightMachineGun",
     "Cannon",
 }
 
@@ -43,7 +42,7 @@ function Onos:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoin
 end
 
 
-Script.Load("lua/Devour/Devour.lua")
+Script.Load("lua/Combat/Devour.lua")
 
 function Onos:GetHasMovementSpecial()
     return true

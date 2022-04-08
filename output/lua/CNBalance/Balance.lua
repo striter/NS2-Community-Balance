@@ -60,10 +60,10 @@ kHeavyMachineGunSpread = Math.Radians(5.5)  //4
 -- Standard Supply
 kStandardSupplyResearchCost = 10
 kStandardSupplyResearchTime = 30
-kPistolAxeResearchCost = 10
-kPistolAxeResearchTime = 45
-kRifleUpgradeResearchCost = 25
-kRifleUpgradeResearchTime = 60
+kAxeUpgradeCost = 10
+kAxeUpgradeResearchTime = 45
+kLightMachineGunUpgradeCost = 20
+kLightMachineGunUpgradeTime = 60
 kMinesUpgradeResearchCost = 10
 kMinesUpgradeResearchTime = 30
 
@@ -89,11 +89,11 @@ kGrenadeLauncherDropCost = 12
 kGrenadeLauncherDropCooldown = 0
 
 kGrenadeLauncherGrenadeDamageType = kDamageType.GrenadeLauncher
-kGrenadeLauncherGrenadeDamage = 100
+kGrenadeLauncherGrenadeDamage = 85
 kGrenadeLauncherGrenadeDamageRadius = 4.8
 kGrenadeLauncherDetectionShotRadius = 3
 
-kGrenadeLauncherImpactGrenadeDamage = 80
+kGrenadeLauncherImpactGrenadeDamage = 70
 kGrenadeLauncherAllyBlastReduction = 0.3
 
 kGrenadeLauncherClipSize = 4
@@ -112,27 +112,53 @@ kRevolverCost = 0
 kRevolverWeight = 0.01
 --
 
---SMG
-kSMGClipSize = 42
-kSMGClipNum = 5
-kSMGWeight = 0.08
-kSubmachinegunCost = 0
-kSMGDamage = 11
-kSubmachinegunDamageType = kDamageType.Normal
--- kSubmachinegunTechResearchCost = 15
--- kSubmachinegunTechResearchTime = 30
--- kSubmachinegunPointValue = 1
+--SubMachineGun
+kSubMachineGunClipSize = 42
+kSubMachineGunClipNum = 5
+kSubMachineGunWeight = 0.08
+kSubMachineGunDamage = 11
+kSubMachineGunDamageType = kDamageType.Normal
+kSubMachineGunCost = 0
+-- kSubMachineGunTechResearchCost = 15
+-- kSubMachineGunTechResearchTime = 30
+-- kSubMachineGunPointValue = 1
+--
+
+kRifleMeleeDamage = 20
+
+kCombatBuilderCost = 30
+kCombatBuilderPointValue = 20
+
+--Knife
+kKnifeWeight = 0
+kKnifeDamage = 25
+kKnifeRange = 1.5
+kKnifeCost = 0
+kKnifeDamageType = kDamageType.Structural
+--
+
+kAxeDamage = 40
+kAxeDamageType = kDamageType.Structural
+
+--Light Machine Gun
+kLightMachineGunClipSize = 50
+kLightMachineGunClipNum = 4
+kLightMachineGunWeight = 0.2
+kLightMachineGunDamage = 10.7
+kLightMachineGunDamageType = kDamageType.Normal
+kLightMachineGunCost = 0
 --
 
 --Cannon
 kCannonTechResearchCost = 20
-kCannonCost = 30
-kCannonDamage = 70
-kCannonRateOfFire = 0.7
+kCannonTechResearchTime = 60
+kCannonCost = 20
+
+kCannonDamage = 80
+kCannonRateOfFire = 0.8
 kCannonAoeDamage = 0
 kCannonSelfDamage = kCannonAoeDamage
-kCannonClipSize = 10
-kUmbraBulletModifier = 0.8
+kCannonClipSize = 6
 kCannonPointValue = 15
 kCannonWeight = 0.18
 kCannonDamageType = kDamageType.Normal
@@ -155,8 +181,8 @@ kRailgunDamageType = kDamageType.Exosuit
 
 kPulseGrenadeDamageRadius = 4
 kPulseGrenadeEnergyDamageRadius = 4
-kPulseGrenadeDamage = 90  //75->90
-kPulseGrenadeEnergyDamage = 35  //25->35
+kPulseGrenadeDamage = 90  --75->90
+kPulseGrenadeEnergyDamage = 35  --25->35
 
 
 kClusterGrenadeDamageRadius = 10
@@ -169,13 +195,14 @@ kClusterGrenadeFragmentDamageType = kDamageType.ClusterFlameFragment
 
 kInfantryPortalBuildTime = 5
 
+
 kSentryDamage = 3
 kSentryCost = 3
 kSentryBatteryCost = 6
 kSentryBatteryBuildTime = 5
 
 kAdvancedArmoryUpgradeCost = 25
-kAdvancedArmoryResearchTime = 75 //90->75
+kAdvancedArmoryResearchTime = 75 --90->75
 
 kPrototypeLabCost = 30
 
@@ -196,6 +223,8 @@ kClawRailgunExosuitCost = 40
 
 kOnosDevourCost = 15
 kOnosDevourTime = 60
+
+kUmbraBulletModifier = 0.8
 
 kDevourEnergyCost = 50 --50
 kDevourPunchDamage = 50 --100
@@ -234,7 +263,7 @@ kProwlerCost = 16 --14
 kProwlerBaseCarapaceUpgradeAmount = 10.5
 kProwlerCarapaceArmorPerBiomass = 1.5
 
-kProwlerEggCost = 16
+kProwlerEggCost = 13
 kProwlerGestateTime = 6
 kProwlerUpgradeCost = 1
 kProwlerBabblerShieldPercent = 0.15
@@ -359,3 +388,6 @@ kNanoShieldStructureDuration = 3
 kNanoShieldCost = 3
 kNanoShieldCooldown = 5
 kNanoShieldDamageReductionDamage = 0.68
+
+kWeaponCacheCost = 0
+kWeaponCacheBuildTime = 8

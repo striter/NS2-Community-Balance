@@ -80,8 +80,8 @@ kMACSupply = 5
 kArmorySupply = 5
 kObservatorySupply = 15
 kARCSupply = 20
-kSentrySupply = 5
-kSentryBatterySupply = 15
+kSentrySupply = 0
+kSentryBatterySupply = 25
 kRoboticsFactorySupply = 5
 kInfantryPortalSupply = 0
 kPhaseGateSupply = 10
@@ -97,3 +97,5 @@ kLifeSustainHealPerSecond = 10
 kLifeSustainHealInterval = 0.5
 
 kProwlerFov = 100
+
+kMarineBuildRadius = 1.5

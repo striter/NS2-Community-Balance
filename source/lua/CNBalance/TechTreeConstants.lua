@@ -43,7 +43,7 @@ kTechId = enum {
 
     'MarineAlertResearchComplete', 'MarineAlertManufactureComplete', 'MarineAlertUpgradeComplete', 'MarineAlertOrderComplete', 'MarineAlertWeldingBlocked', 'MarineAlertMACBlocked', 'MarineAlertNotEnoughResources', 'MarineAlertObjectiveCompleted', 'MarineAlertConstructionComplete',
 
-    -- Marine orders
+    -- Marine orders/
     'Defend',
 
     -- Special tech
@@ -51,6 +51,8 @@ kTechId = enum {
 
     -- Marine tech
     'CommandStation', 'MAC', 'Armory', 'InfantryPortal', 'Extractor', 'ExtractorArmor', 'Sentry', 'ARC',
+
+    
     'PowerPoint', 'AdvancedArmoryUpgrade', 'Observatory', 'Detector', 'DistressBeacon', 'PhaseGate', 'RoboticsFactory', 'ARCRoboticsFactory', 'ArmsLab',
     'SentryBattery', 'PrototypeLab', 'AdvancedArmory',
 
@@ -59,8 +61,10 @@ kTechId = enum {
     'GrenadeTech', 'ClusterGrenade', 'ClusterGrenadeProjectile', 'ClusterGrenadeProjectileFragment', 'GasGrenade', 'GasGrenadeProjectile', 'PulseGrenade', 'PulseGrenadeProjectile',
     
 ---------------
+    'WeaponCache',
+
     'StandardSupply',
-    'PistolAxeUpgrade','RifleUpgrade',
+    'AxeUpgrade','LightMachineGunUpgrade',
 
     'KinematicSupply',
     'DragonBreath',
@@ -88,7 +92,8 @@ kTechId = enum {
     'MACEMP', 'Welding',
 
     -- Weapons
-    'Rifle','Submachinegun', 'Pistol','Revolver', 'Shotgun', 'HeavyMachineGun', 'Claw', 'Minigun', 'Railgun', 'GrenadeLauncher', 'Flamethrower', 'Axe', 'LayMines', 'Welder',
+    'Rifle', 'Pistol', 'Shotgun', 'HeavyMachineGun', 'Claw', 'Minigun', 'Railgun', 'GrenadeLauncher', 'Flamethrower', 'Axe', 'LayMines', 'Welder',
+    'Revolver','SubMachineGun','LightMachineGun','Knife','CombatBuilder',
 
     -- Armor
     'Jetpack',  'Exosuit',

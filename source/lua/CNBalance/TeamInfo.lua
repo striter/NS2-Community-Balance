@@ -30,8 +30,8 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.PowerSurgeSupport,
     kTechId.NanoShieldSupport,
     --kTechId.StandardSupply,
-    kTechId.PistolAxeUpgrade,
-    kTechId.RifleUpgrade,
+    kTechId.AxeUpgrade,
+    kTechId.LightMachineGunUpgrade,
 
     --kTechId.KinematicSupply,
     kTechId.DragonBreath,

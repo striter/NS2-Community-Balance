@@ -205,6 +205,20 @@ local kTechIdStats =
     },
 
 -------------
+    [kTechId.Knife] =
+    {
+        LifeFormDamage = 0.1,
+        StructureDamage = 0.2,
+        Range = 0.1,
+    },
+
+    [kTechId.CombatBuilder] =
+    {
+        LifeFormDamage = 0,
+        StructureDamage = 0.1,
+        Range = 0,
+    },
+
     [kTechId.Revolver]=
     {   
         LifeFormDamage = 1,
@@ -212,11 +226,18 @@ local kTechIdStats =
         Range = 0.7,	
     },
 
-    [kTechId.Submachinegun] =
+    [kTechId.SubMachineGun] =
     {
         LifeFormDamage = 0.7,
         StructureDamage = 0.7,
         Range = 0.7,
+    },
+
+    [kTechId.LightMachineGun] =
+    {
+        LifeFormDamage = 0.85,
+        StructureDamage = 0.85,
+        Range = 0.85,
     },
 
     [kTechId.Cannon] =
@@ -324,6 +345,22 @@ local kTechIdInfo =
         Stats = GetStatsForTechId(kTechId.Pistol)
     },
 ------------
+    [kTechId.Knife] =
+    {
+        ButtonTextureIndex = 19,
+        BigPictureIndex = 15,
+        Description = "KNIFE_BUYDESCRIPTION",    
+        Stats = GetStatsForTechId(kTechId.Revolver)
+    },
+
+    [kTechId.CombatBuilder] =
+    {
+        ButtonTextureIndex = 20,
+        BigPictureIndex = 17,
+        Description = "COMBATBUILDER_BUYDESCRIPTION",    
+        Stats = GetStatsForTechId(kTechId.CombatBuilder)
+    },
+
     [kTechId.Revolver] =
     {
         ButtonTextureIndex = 15,
@@ -332,12 +369,20 @@ local kTechIdInfo =
         Stats = GetStatsForTechId(kTechId.Revolver)
     },
 
-    [kTechId.Submachinegun] =
+    [kTechId.LightMachineGun] =
+    {
+        ButtonTextureIndex = 18,
+        BigPictureIndex = 16,
+        Description = "LIGHTMACHINEGUN_BUYDESCRIPTION",    
+        Stats = GetStatsForTechId(kTechId.Revolver)
+    },
+
+    [kTechId.SubMachineGun] =
     {
         ButtonTextureIndex = 16,
         BigPictureIndex = 13,
         Description = "SUBMACHINEGUN_BUYDESCRIPTION",    
-        Stats = GetStatsForTechId(kTechId.Submachinegun)
+        Stats = GetStatsForTechId(kTechId.SubMachineGun)
     },
 
     [kTechId.Cannon] =
@@ -774,6 +819,10 @@ function GUIMarineBuyMenu:CreatePrototypeLabUI()
 
 end
 
+function PlayerUI_GetHasTech(techId)
+    return GetHasTech(Client.GetLocalPlayer(),techId)
+end
+
 function GUIMarineBuyMenu:CreateArmoryUI()
 
     local paddingX = 105 -- Start of content from left side of background.
@@ -807,7 +856,10 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     weaponGroupTopLeft:SetOptionFlag(GUIItem.CorrectScaling)
     self.background:AddChild(weaponGroupTopLeft)
 ---------------
-    local primaryTech =  PlayerUI_GetHasItem(kTechId.Rifle) and kTechId.Submachinegun or kTechId.Rifle
+    local havePrimary = PlayerUI_GetHasItem(kTechId.LightMachineGun) or PlayerUI_GetHasItem(kTechId.Rifle)
+    local buyPrimary = PlayerUI_GetHasTech(kTechId.LightMachineGunUpgrade) and kTechId.LightMachineGun or kTechId.Rifle
+    
+    local primaryTech =  havePrimary and kTechId.SubMachineGun or buyPrimary
     local secondaryTech = PlayerUI_GetHasItem(kTechId.Pistol) and kTechId.Revolver or kTechId.Pistol
     self:_InitializeWeaponGroup(weaponGroupTopLeft, x2ButtonPositions,
     {
@@ -854,7 +906,14 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     weaponGroupTopRight:SetOptionFlag(GUIItem.CorrectScaling)
 
 ---------------
-    local thirdTech = PlayerUI_GetHasItem(kTechId.Axe) and kTechId.Welder or kTechId.Axe
+    local haveMelee =  PlayerUI_GetHasItem(kTechId.Axe) or PlayerUI_GetHasItem(kTechId.Knife)
+    local haveWelder = PlayerUI_GetHasItem(kTechId.Welder)
+
+    local buyMelee = PlayerUI_GetHasTech(kTechId.AxeUpgrade) and kTechId.Axe or kTechId.Knife
+
+    local thirdTech = haveMelee and kTechId.Welder or buyMelee
+    thirdTech = haveWelder and kTechId.CombatBuilder or thirdTech
+    
     self:_InitializeWeaponGroup(weaponGroupTopRight, x2ButtonPositions,
     {
         thirdTech,
@@ -869,6 +928,7 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     weaponGroupBottomRight:SetTexture(self.kButtonGroupFrame_Labeled_x4)
     weaponGroupBottomRight:SetSizeFromTexture()
     weaponGroupBottomRight:SetOptionFlag(GUIItem.CorrectScaling)
+--------------
     self:_InitializeWeaponGroup(weaponGroupBottomRight, x4ButtonPositions,
     {
         kTechId.GasGrenade,

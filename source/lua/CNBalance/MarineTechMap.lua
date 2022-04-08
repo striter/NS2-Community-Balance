@@ -34,7 +34,7 @@ kMarineTechMap =
 
         --Supply
                                  { kTechId.StandardSupply, 4, 9 },                                             { kTechId.KinematicSupply, 7, 9 },                                                                        { kTechId.ExplosiveSupply, 10, 9 },
-                { kTechId.PistolAxeUpgrade, 3.5 ,10 },  { kTechId.RifleUpgrade, 4.5, 10 },         { kTechId.DragonBreath,6.5 ,10 },{ kTechId.CannonTech,7.5 ,10 },                  {kTechId.MinesUpgrade,9,10},   { kTechId.GrenadeLauncherDetectionShot, 10, 10 },{ kTechId.GrenadeLauncherAllyBlast, 11, 10 },         
+                { kTechId.AxeUpgrade, 3.5 ,10 },  { kTechId.LightMachineGunUpgrade, 4.5, 10 },         { kTechId.DragonBreath,6.5 ,10 },{ kTechId.CannonTech,7.5 ,10 },                  {kTechId.MinesUpgrade,9,10},   { kTechId.GrenadeLauncherDetectionShot, 10, 10 },{ kTechId.GrenadeLauncherAllyBlast, 11, 10 },         
                                                                                                                                                                                                                         { kTechId.GrenadeLauncherUpgrade, 11, 11 },
                                                                                                                                                                                                                                   
 }
@@ -95,8 +95,8 @@ kMarineLines =
 
     -- Standard Supply
     { 4, 8, 4, 9 },
-    GetLinePositionForTechMap(kMarineTechMap, kTechId.StandardSupply, kTechId.PistolAxeUpgrade),
-    GetLinePositionForTechMap(kMarineTechMap, kTechId.StandardSupply, kTechId.RifleUpgrade),
+    GetLinePositionForTechMap(kMarineTechMap, kTechId.StandardSupply, kTechId.AxeUpgrade),
+    GetLinePositionForTechMap(kMarineTechMap, kTechId.StandardSupply, kTechId.LightMachineGunUpgrade),
 
     -- Kinematic Supply
     { 7, 8, 7, 9 },

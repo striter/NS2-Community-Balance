@@ -27,11 +27,11 @@ function MarineTeam:InitTechTree()
     self.techTree:AddBuildNode(kTechId.ArmsLab,                   kTechId.CommandStation,                kTechId.None)
     self.techTree:AddManufactureNode(kTechId.MAC,                 kTechId.RoboticsFactory,                kTechId.None,  true)
 
-    self.techTree:AddBuyNode(kTechId.Axe,                         kTechId.None,                kTechId.None)
+    self.techTree:AddBuyNode(kTechId.Knife,                       kTechId.None,                kTechId.None)
     self.techTree:AddBuyNode(kTechId.Pistol,                      kTechId.None,                kTechId.None)
-    self.techTree:AddBuyNode(kTechId.Revolver,                    kTechId.None,                kTechId.None)
     self.techTree:AddBuyNode(kTechId.Rifle,                       kTechId.None,                kTechId.None)
-    self.techTree:AddBuyNode(kTechId.Submachinegun,               kTechId.None,                kTechId.None)
+    self.techTree:AddBuyNode(kTechId.SubMachineGun,               kTechId.None,                kTechId.None)
+    self.techTree:AddBuyNode(kTechId.Revolver,                    kTechId.None,                kTechId.None)
 
     self.techTree:AddBuildNode(kTechId.SentryBattery,             kTechId.RoboticsFactory,      kTechId.None)
 
@@ -96,6 +96,7 @@ function MarineTeam:InitTechTree()
 
 
     self.techTree:AddTargetedBuyNode(kTechId.Welder,          kTechId.Armory,        kTechId.None)
+    self.techTree:AddTargetedBuyNode(kTechId.CombatBuilder,   kTechId.Armory,       kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.DropWelder,   kTechId.Armory,        kTechId.None)
 
     -- Door actions
@@ -118,10 +119,14 @@ function MarineTeam:InitTechTree()
     self.techTree:AddTargetedBuyNode(kTechId.HeavyMachineGun ,kTechId.AdvancedArmory)
     self.techTree:AddTargetedBuyNode(kTechId.Flamethrower ,kTechId.AdvancedArmory)
 
+    -- Standard
     self.techTree:AddResearchNode(kTechId.StandardSupply,  kTechId.Armory)
-    self.techTree:AddResearchNode(kTechId.PistolAxeUpgrade,  kTechId.StandardSupply)
-    self.techTree:AddResearchNode(kTechId.RifleUpgrade,  kTechId.StandardSupply)
-    
+    self.techTree:AddResearchNode(kTechId.AxeUpgrade,  kTechId.StandardSupply)
+    self.techTree:AddResearchNode(kTechId.LightMachineGunUpgrade,  kTechId.StandardSupply)
+    self.techTree:AddBuyNode(kTechId.Axe,                       kTechId.AxeUpgrade)
+    self.techTree:AddBuyNode(kTechId.LightMachineGun,               kTechId.LightMachineGunUpgrade)
+
+    --- Kinematic
     self.techTree:AddResearchNode(kTechId.KinematicSupply,  kTechId.Armory)
     self.techTree:AddResearchNode(kTechId.DragonBreath,  kTechId.KinematicSupply)
     self.techTree:AddResearchNode(kTechId.CannonTech,               kTechId.KinematicSupply,                kTechId.None)
@@ -147,7 +152,6 @@ function MarineTeam:InitTechTree()
     self.techTree:AddBuyNode(kTechId.DualMinigunExosuit, kTechId.ExosuitTech, kTechId.None)
     self.techTree:AddBuyNode(kTechId.DualRailgunExosuit, kTechId.ExosuitTech, kTechId.None)
 
-     
     -- Robotics factory menus
     self.techTree:AddMenu(kTechId.RoboticsFactoryARCUpgradesMenu)
     self.techTree:AddMenu(kTechId.RoboticsFactoryMACUpgradesMenu)
@@ -175,5 +179,193 @@ function MarineTeam:InitTechTree()
     self.techTree:AddActivation(kTechId.SocketPowerNode,    kTechId.None,   kTechId.None)
 
     self.techTree:SetComplete()
+
+end
+
+
+local baseOnInitialize = MarineTeam.Initialize
+
+function MarineTeam:Initialize(teamName, teamNumber)
+
+    baseOnInitialize(self, teamName, teamNumber)
+    
+	self.clientOwnedStructures = { }
+end
+
+local cancelTechNode
+local function DestroyMarineStructure(self,structure)
+    if not cancelTechNode then
+        cancelTechNode = self:GetTechTree():GetTechNode(kTechId.Cancel)
+    end
+
+    structure.recycled = true
+    if structure:GetIsGhostStructure() then
+        structure:PerformAction(cancelTechNode)
+    elseif structure:GetCanDie() then
+        structure:Kill()
+    else
+        DestroyEntity(structure)
+    end
+end
+
+local function RemoveMarineStructureFromClient(self, techId, clientId)
+
+    local structureTypeTable = self.clientOwnedStructures[clientId]
+    
+    if structureTypeTable then
+    
+        if not structureTypeTable[techId] then
+        
+            structureTypeTable[techId] = { }
+            return
+            
+        end    
+        
+        local removeIndex = 0
+        local structure = nil
+        for index, id in ipairs(structureTypeTable[techId])  do
+        
+            if id then
+            
+                removeIndex = index
+                structure = Shared.GetEntity(id)
+                break
+                
+            end
+            
+        end
+        
+        if structure then
+        
+            -- Shared.Message("remove" .. tostring(structure:GetId()))
+            table.remove(structureTypeTable[techId], removeIndex)
+
+            DestroyMarineStructure(self,structure)
+        end
+        
+    end
+    
+end
+
+function MarineTeam:AddMarineStructure(player, structure)
+
+    if player ~= nil and structure ~= nil then
+    
+        local clientId = Server.GetOwner(player):GetUserId()
+        local structureId = structure:GetId()
+        local techId = structure:GetTechId()
+
+        if not self.clientOwnedStructures[clientId] then
+            self.clientOwnedStructures[clientId] = { }
+        end
+        
+        local structureTypeTable = self.clientOwnedStructures[clientId]
+        
+        if not structureTypeTable[techId] then
+            structureTypeTable[techId] = { }
+        end
+        
+        -- Shared.Message("insert" .. tostring(structureId))
+        table.insertunique(structureTypeTable[techId], structureId)
+        
+        local numAllowedStructure = LookupTechData(techId, kTechDataMaxAmount, -1) --* self:GetNumHives()
+        
+        if numAllowedStructure >= 0 and table.count(structureTypeTable[techId]) > numAllowedStructure then
+            RemoveMarineStructureFromClient(self, techId, clientId)
+        end
+        
+    end
+end
+
+function MarineTeam:ClearMarineStructure(player)
+
+    local clientId = Server.GetOwner(player):GetUserId()
+    local clientTypedStructures = self.clientOwnedStructures[clientId]
+    
+    if not clientTypedStructures then
+        return
+    end
+
+    for techId, structureList in pairs(clientTypedStructures) do
+        local count = table.count(structureList)
+        while count > 0 do      -- Why can't I simply use pairs?????????????
+            for i, structureId in pairs(structureList) do
+            
+                table.remove(structureList,structureId)
+                count = count-1
+                local structure = structureId and Shared.GetEntity(structureId)
+                if structure then
+                    DestroyMarineStructure(self,structure)
+                end
+            end
+        end
+    end
+        
+    self.clientOwnedStructures[clientId]=nil
+end
+
+
+function MarineTeam:GetDroppedMarineStructures(player, techId)
+
+    local owner = Server.GetOwner(player)
+
+    if owner then
+    
+        local clientId = owner:GetUserId()
+        local structureTypeTable = self.clientOwnedStructures[clientId]
+        
+        if structureTypeTable then
+            return structureTypeTable[techId]
+        end
+    
+    end
+    
+end
+
+function MarineTeam:GetNumDroppedMarineStructures(player, techId)
+
+    local structureTypeTable = self:GetDroppedMarineStructures(player, techId)
+    return (not structureTypeTable and 0) or #structureTypeTable
+    
+end
+
+
+function MarineTeam:UpdateClientOwnedStructures(oldEntityId)
+
+    if oldEntityId then
+    
+        for clientId, structureTypeTable in pairs(self.clientOwnedStructures) do
+        
+            for techId, structureList in pairs(structureTypeTable) do
+            
+                for i, structureId in ipairs(structureList) do
+                
+                    if structureId == oldEntityId then
+                    
+                        table.remove(structureList, i)
+                        break
+                        
+                    end
+                    
+                end
+                
+            end
+            
+        end
+        
+    end
+
+end
+
+
+
+function MarineTeam:OnEntityChange(oldEntityId, newEntityId)
+
+    PlayingTeam.OnEntityChange(self, oldEntityId, newEntityId)
+
+    -- Check if the oldEntityId matches any client's built structure and
+    -- handle the change.
+    
+    self:UpdateClientOwnedStructures(oldEntityId)
 
 end

@@ -5,9 +5,7 @@ function BuildClassToGrid()
     
 	ClassToGrid["DevouredPlayer"] = { 8, 2 }
     ClassToGrid["Prowler"] = { 1, 9 }
-    ClassToGrid["Revolver"] = { 1, 2 }
-    ClassToGrid["Submachinegun"] = { 3, 2 }
-    ClassToGrid["Cannon"] = { 3, 2 }
+    ClassToGrid["WeaponCache"] = { 8, 5 }
 
     return ClassToGrid
     
@@ -21,9 +19,13 @@ function GetTexCoordsForTechId(techId)
 		gTechIdPosition[kTechId.Devour] = kDeathMessageIcon.Devour
         gTechIdPosition[kTechId.AcidSpray] = kDeathMessageIcon.AcidSpray
         gTechIdPosition[kTechId.Rappel] = kDeathMessageIcon.Rappel
+
 		gTechIdPosition[kTechId.Revolver] = kDeathMessageIcon.Revolver
-		gTechIdPosition[kTechId.Submachinegun] = kDeathMessageIcon.Submachinegun
+		gTechIdPosition[kTechId.SubMachineGun] = kDeathMessageIcon.SubMachineGun
+		gTechIdPosition[kTechId.LightMachineGun] = kDeathMessageIcon.LightMachineGun
+		gTechIdPosition[kTechId.Knife] = kDeathMessageIcon.Knife
 		gTechIdPosition[kTechId.Cannon] = kDeathMessageIcon.Cannon
+		gTechIdPosition[kTechId.CombatBuilder] = kDeathMessageIcon.CombatBuilder
 		loadAdditional = false
 	end
 	return oldGetTexCoordsForTechId(techId)

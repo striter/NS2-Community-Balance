@@ -28,11 +28,6 @@ local networkVars =
 local kTrackedMarineGadgets =
 {
     Pistol.kMapName,
------------
-    Revolver.kMapName,
-    Submachinegun.kMapName,
-    Cannon.kMapName,
----------
     Rifle.kMapName,
     Axe.kMapName,
     Welder.kMapName,
@@ -45,6 +40,15 @@ local kTrackedMarineGadgets =
     PulseGrenadeThrower.kMapName,
     LayMines.kMapName,
     Jetpack.kMapName,
+    
+-----------
+    Knife.kMapName,
+    Revolver.kMapName,
+    SubMachineGun.kMapName,
+    LightMachineGun.kMapName,
+    Cannon.kMapName,
+    CombatBuilder.kMapName,
+---------
 }
 
 local kTrackedExoLayouts = IterableDict()

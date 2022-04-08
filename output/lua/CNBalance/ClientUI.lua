@@ -180,8 +180,8 @@ kShowAsClass["Spectator"] =
 {
 }
 --------------
-kShowAsClass["DevouredPlayer"] = { ["Devour/GUIDevour"] = true }
-kShowAsClass["Onos"] = { ["Devour/GUIDevour"] = true }
+kShowAsClass["DevouredPlayer"] = { ["Combat/GUIDevour"] = true }
+kShowAsClass["Onos"] = { ["Combat/GUIDevour"] = true }
 --------------
 
 -- Any lua file loaded on demand should be listed here to avoid being loaded after game has started
@@ -201,7 +201,7 @@ local kMiscPreloads = {
     'GUICommanderTooltip',
     'GUIDial',
     ---------
-    'Devour/GUIDevour',
+    'Combat/GUIDevour',
     ----------
     'GUIEvolveHelp',
     'GUIFadeBlinkHelp',

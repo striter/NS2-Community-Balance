@@ -5,13 +5,3 @@ if Client then
     end
     
 end
-
-function Rifle:GetClipSize()
-    local clipSize=kRifleClipSize
-    
-    if GetHasTech(self, kTechId.RifleUpgrade) then
-        clipSize = clipSize + 10
-    end
-
-    return clipSize
-end

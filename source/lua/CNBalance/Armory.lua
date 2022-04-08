@@ -1,9 +1,12 @@
 local oldArmoryGetItemList = Armory.GetItemList
 function Armory:GetItemList(forPlayer)
     local itemList = oldArmoryGetItemList(self, forPlayer)
+    table.insert(itemList, kTechId.Knife)
     table.insert(itemList, kTechId.Revolver)
-    table.insert(itemList, kTechId.Submachinegun)
+    table.insert(itemList, kTechId.SubMachineGun)
+    table.insert(itemList, kTechId.LightMachineGun)
     table.insert(itemList, kTechId.Cannon)
+    table.insert(itemList, kTechId.CombatBuilder)
 	return itemList
 end
 
@@ -11,9 +14,12 @@ local oldAdvancedArmoryGetItemList = AdvancedArmory.GetItemList
 function AdvancedArmory:GetItemList(forPlayer)
     local itemList = oldAdvancedArmoryGetItemList(self, forPlayer)
 	if self:GetTechId() == kTechId.AdvancedArmory then
-		table.insert(itemList, kTechId.Revolver)
-		table.insert(itemList, kTechId.Submachinegun)
-		table.insert(itemList, kTechId.Cannon)
+        table.insert(itemList, kTechId.Knife)
+        table.insert(itemList, kTechId.Revolver)
+        table.insert(itemList, kTechId.SubMachineGun)
+        table.insert(itemList, kTechId.LightMachineGun)
+        table.insert(itemList, kTechId.Cannon)
+        table.insert(itemList, kTechId.CombatBuilder)
     end
 	return itemList
 end
@@ -69,11 +75,8 @@ function Armory:GetTechButtons(techId)
         techButtons[3] = kTechId.CannonTech
     elseif GetHasTech(self,kTechId.StandardSupply) then
         
-        techButtons[3] = kTechId.PistolAxeUpgrade
-
-        if GetHasTech(self,kTechId.PistolAxeUpgrade) then
-            techButtons[3] = kTechId.RifleUpgrade
-        end
+        techButtons[2] = kTechId.AxeUpgrade
+        techButtons[3] = kTechId.LightMachineGunUpgrade
     end
 
     -- Show button to upgraded to advanced armory

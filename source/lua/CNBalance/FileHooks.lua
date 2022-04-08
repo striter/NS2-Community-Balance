@@ -7,6 +7,7 @@ ModLoader.SetupFileHook("lua/NS2Utility.lua", "lua/CNBalance/NS2Utility.lua", "p
 ModLoader.SetupFileHook("lua/NS2Utility_Server.lua", "lua/CNBalance/NS2Utility_Server.lua", "post" )
 ModLoader.SetupFileHook("lua/NS2ConsoleCommands_Server.lua", "lua/CNBalance/NS2ConsoleCommands_Server.lua", "post" )
 ModLoader.SetupFileHook("lua/NetworkMessages.lua", "lua/CNBalance/NetworkMessages.lua", "post" )
+ModLoader.SetupFileHook("lua/NetworkMessages_Server.lua", "lua/CNBalance/NetworkMessages_Server.lua", "post" )
 
 ModLoader.SetupFileHook("lua/TechTreeConstants.lua", "lua/CNBalance/TechTreeConstants.lua", "post")
 ModLoader.SetupFileHook("lua/TechData.lua", "lua/CNBalance/TechData.lua", "post")
@@ -25,11 +26,14 @@ ModLoader.SetupFileHook("lua/ReadyRoomEmbryo.lua", "lua/CNBalance/ReadyRoomEmbry
 ModLoader.SetupFileHook("lua/Scoreboard.lua", "lua/CNBalance/Scoreboard.lua", "post" )
 ModLoader.SetupFileHook("lua/ServerStats.lua", "lua/CNBalance/ServerStats.lua", "post" )
 
+ModLoader.SetupFileHook("lua/GeneralEffects.lua", "lua/CNBalance/Effects/GeneralEffects.lua", "post" )
 ModLoader.SetupFileHook("lua/PlayerEffects.lua", "lua/CNBalance/Effects/PlayerEffects.lua", "post" )
 ModLoader.SetupFileHook("lua/DamageEffects.lua", "lua/CNBalance/Effects/DamageEffects.lua", "post" )
+ModLoader.SetupFileHook("lua/MarineStructureEffects.lua", "lua/CNBalance/Effects/MarineStructureEffects.lua", "post")
 ModLoader.SetupFileHook("lua/MarineWeaponEffects.lua", "lua/CNBalance/Effects/MarineWeaponEffects.lua", "post")
 ModLoader.SetupFileHook("lua/AlienWeaponEffects.lua", "lua/CNBalance/Effects/AlienWeaponEffects.lua", "post" )
 
+ModLoader.SetupFileHook("lua/SoundEffect.lua", "lua/CNBalance/SoundEffect.lua", "post" )
 --Mixin
 ModLoader.SetupFileHook("lua/ClientLOSMixin.lua", "lua/CNBalance/ClientLOSMixin.lua", "post" )
 ModLoader.SetupFileHook("lua/Weapons/BulletsMixin.lua", "lua/CNBalance/Weapons/BulletsMixin.lua", "post")
@@ -39,6 +43,8 @@ ModLoader.SetupFileHook("lua/RegenerationMixin.lua", "lua/CNBalance/Mixin/Regene
 ModLoader.SetupFileHook("lua/ShieldableMixin.lua", "lua/CNBalance/Mixin/ShieldableMixin.lua", "post" )
 ModLoader.SetupFileHook("lua/PlayerHallucinationMixin.lua", "lua/CNBalance/Mixin/PlayerHallucinationMixin.lua", "post" )
 ModLoader.SetupFileHook("lua/UmbraMixin.lua", "lua/CNBalance/Mixin/UmbraMixin.lua", "post" )
+ModLoader.SetupFileHook("lua/TeamDeathMessageMixin.lua", "lua/CNBalance/Mixin/TeamDeathMessageMixin.lua", "post" )
+ModLoader.SetupFileHook("lua/PointGiverMixin.lua", "lua/CNBalance/Mixin/PointGiverMixin.lua", "post" )
 
 ModLoader.SetupFileHook("lua/Player.lua", "lua/CNBalance/Player.lua", "post" )
 ModLoader.SetupFileHook("lua/Client.lua", "lua/CNBalance/Client.lua", "post" )
@@ -60,6 +66,7 @@ ModLoader.SetupFileHook("lua/PrototypeLab.lua", "lua/CNBalance/PrototypeLab.lua"
 ModLoader.SetupFileHook("lua/CommandStation.lua", "lua/CNBalance/CommandStation.lua", "post")
 ModLoader.SetupFileHook("lua/Armory.lua", "lua/CNBalance/Armory.lua", "post")
 ModLoader.SetupFileHook("lua/Observatory.lua", "lua/CNBalance/Observatory.lua", "post")
+ModLoader.SetupFileHook("lua/Sentry.lua", "lua/CNBalance/Sentry.lua", "post")
 ModLoader.SetupFileHook("lua/SentryBattery.lua", "lua/CNBalance/SentryBattery.lua", "post")
 ModLoader.SetupFileHook("lua/ARC.lua", "lua/CNBalance/ARC.lua", "post")
 ModLoader.SetupFileHook("lua/MedPack.lua", "lua/CNBalance/MedPack.lua", "post")
@@ -73,10 +80,17 @@ ModLoader.SetupFileHook("lua/Exo.lua", "lua/CNBalance/Exo.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/WeaponDisplayManager.lua", "lua/CNBalance/Weapons/WeaponDisplayManager.lua", "post" )
 ModLoader.SetupFileHook("lua/Weapons/Weapon.lua", "lua/CNBalance/Weapons/Weapon.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/CNBalance/Weapons/Marine/ClipWeapon.lua", "post")
-ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Revolver/Revolver.lua", "post")   --Weapon Hacks
-ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Submachinegun/Submachinegun.lua", "post")
-ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Cannon/Cannon.lua", "post")
 
+--Combat Weapon Hacks
+ModLoader.SetupFileHook("lua/Weapons/Marine/Axe.lua", "lua/Combat/Knife.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/Revolver.lua", "post") 
+ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/SubMachineGun.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/LightMachineGun.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/Cannon.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Marine/Welder.lua", "lua/Combat/CombatBuilder.lua", "post")
+
+
+ModLoader.SetupFileHook("lua/Weapons/Marine/Welder.lua", "lua/CNBalance/Weapons/Marine/Welder.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/Axe.lua", "lua/CNBalance/Weapons/Marine/Axe.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/Pistol.lua", "lua/CNBalance/Weapons/Marine/Pistol.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/Rifle.lua", "lua/CNBalance/Weapons/Marine/Rifle.lua", "post")
@@ -121,6 +135,7 @@ ModLoader.SetupFileHook("lua/Cyst.lua", "lua/CNBalance/Cyst.lua", "post")
 ModLoader.SetupFileHook("lua/Hydra.lua", "lua/CNBalance/Hydra.lua", "post")
 
 ModLoader.SetupFileHook("lua/Weapons/Alien/Ability.lua", "lua/CNBalance/Weapons/Alien/Ability.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Alien/Web.lua", "lua/CNBalance/Weapons/Alien/Web.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/Metabolize.lua", "lua/CNBalance/Weapons/Alien/Metabolize.lua", "replace")
 ModLoader.SetupFileHook("lua/Weapons/Alien/BoneShield.lua", "lua/CNBalance/Weapons/Alien/BoneShield.lua", "replace")
 ModLoader.SetupFileHook("lua/Weapons/Alien/XenocideLeap.lua", "lua/CNBalance/Weapons/Alien/XenocideLeap.lua", "post")

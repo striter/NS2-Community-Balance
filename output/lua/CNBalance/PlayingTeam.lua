@@ -9,8 +9,8 @@ local function extGetIsResearchRelevant(techId)
         relevantResearchIds[kTechId.NanoArmor] = 1
         
         relevantResearchIds[kTechId.StandardSupply] = 2
-        relevantResearchIds[kTechId.PistolAxeUpgrade] = 2
-        relevantResearchIds[kTechId.RifleUpgrade] = 2
+        relevantResearchIds[kTechId.AxeUpgrade] = 2
+        relevantResearchIds[kTechId.LightMachineGunUpgrade] = 2
         
         relevantResearchIds[kTechId.KinematicSupply] = 2
         relevantResearchIds[kTechId.DragonBreath] = 2

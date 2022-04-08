@@ -15,23 +15,44 @@ end
 
 Shared.LinkClassToMap("RevolverAmmo", RevolverAmmo.kMapName)
 
-class 'SMGAmmo' (WeaponAmmoPack)
-SMGAmmo.kMapName = "smgammo"
-SMGAmmo.kModelName = PrecacheAsset("models/marine/rifle/RifleAmmo.model")
+------------
+class 'SubMachineGunAmmo' (WeaponAmmoPack)
+SubMachineGunAmmo.kMapName = "SubMachineGunAmmo"
+SubMachineGunAmmo.kModelName = PrecacheAsset("models/marine/rifle/RifleAmmo.model")
 
-function SMGAmmo:OnInitialized()
+function SubMachineGunAmmo:OnInitialized()
 
     WeaponAmmoPack.OnInitialized(self)    
-    self:SetModel(SMGAmmo.kModelName)
+    self:SetModel(SubMachineGunAmmo.kModelName)
 
 end
 
-function SMGAmmo:GetWeaponClassName()
-    return "Submachinegun"
+function SubMachineGunAmmo:GetWeaponClassName()
+    return "SubMachineGun"
 end
 
-Shared.LinkClassToMap("SMGAmmo", SMGAmmo.kMapName)
+Shared.LinkClassToMap("SubMachineGunAmmo", SubMachineGunAmmo.kMapName)
 
+
+------------
+class 'LightMachineGunAmmo' (WeaponAmmoPack)
+LightMachineGunAmmo.kMapName = "LightMachineGunAmmo"
+LightMachineGunAmmo.kModelName = PrecacheAsset("models/marine/rifle/RifleAmmo.model")
+
+function LightMachineGunAmmo:OnInitialized()
+
+    WeaponAmmoPack.OnInitialized(self)    
+    self:SetModel(LightMachineGunAmmo.kModelName)
+
+end
+
+function LightMachineGunAmmo:GetWeaponClassName()
+    return "LightMachineGun"
+end
+
+Shared.LinkClassToMap("LightMachineGunAmmo", LightMachineGunAmmo.kMapName)
+
+--------
 class 'CannonAmmo' (WeaponAmmoPack)
 CannonAmmo.kMapName = "cannonammo"
 CannonAmmo.kModelName = PrecacheAsset("models/marine/rifle/RifleAmmo.model")

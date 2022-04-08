@@ -1,1 +1,1 @@
-Script.Load("lua/Devour/Devour.lua")
+Script.Load("lua/Combat/Devour.lua")

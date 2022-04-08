@@ -27,7 +27,7 @@ kOnosCarapaceArmorPerBiomass  = 0
 kHiveHealth = 5200    kHiveArmor = 750
 kMatureHiveHealth = 7800 kMatureHiveArmor = 1400
 
-//2400 1050
+--2400 1050
 kExtractorHealth = 2400 kExtractorArmor = 1200 kExtractorPointValue = 15
 
 kSentryBatteryHealth = 700    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5
@@ -36,8 +36,11 @@ kSentryHealth = 400    kSentryArmor = 50    kSentryPointValue = 2
 kARCHealth = 2000    kARCArmor = 700    kARCPointValue = 5
 kARCDeployedHealth = 2000    kARCDeployedArmor = 0
 
+-- 1500  800
+kPhaseGateHealth = 1850    kPhaseGateArmor = 800    kPhaseGatePointValue = 10
+
 kHarvesterHealth = 2000 kHarvesterArmor = 200 kHarvesterPointValue = 15
-//2300 320
+--2300 320
 kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 500
 
 
@@ -48,5 +51,18 @@ kMinMatureCystHealth = 200 kMinCystScalingDistance = 48 kMaxCystScalingDistance 
 kClogHealth = 250  kClogArmor = 0 kClogPointValue = 0
 kClogHealthPerBioMass = 30
 
+kHydraHealth = 125    kHydraArmor = 5    kHydraPointValue = 0
+kMatureHydraHealth = 160   kMatureHydraArmor = 20    kMatureHydraPointValue = 0
+kHydraHealthPerBioMass = 16
+
 kBoneWallHealth = 100 kBoneWallArmor = 200    kBoneWallHealthPerBioMass = 75
 kContaminationHealth = 1000 kContaminationArmor = 0    kContaminationPointValue = 2
+
+kTunnelEntranceHealth = 1050   kTunnelEntranceArmor = 250    --1000 ---100
+kMatureTunnelEntranceHealth = 1300    kMatureTunnelEntranceArmor = 350    --1250 -200
+kInfestedTunnelEntranceHealth = 1300    kInfestedTunnelEntranceArmor = 350  --1250 200
+kMatureInfestedTunnelEntranceHealth = 1450    kMatureInfestedTunnelEntranceArmor = 400    --1400 250
+kTunnelEntrancePointValue = 5
+
+--Combat
+kWeaponCacheHealth = 600    kWeaponCacheArmor = 150        kWeaponCachePointValue = 2

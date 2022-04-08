@@ -9,8 +9,8 @@ kTechIdToMaterialOffset[kTechId.CatPackSupport] = 164
 kTechIdToMaterialOffset[kTechId.PowerSurgeSupport] = 119
 
 kTechIdToMaterialOffset[kTechId.StandardSupply] = 201
-kTechIdToMaterialOffset[kTechId.PistolAxeUpgrade] = 202
-kTechIdToMaterialOffset[kTechId.RifleUpgrade] = 192
+kTechIdToMaterialOffset[kTechId.AxeUpgrade] = 202
+kTechIdToMaterialOffset[kTechId.LightMachineGunUpgrade] = 192
 kTechIdToMaterialOffset[kTechId.MinesUpgrade] = 194
 
 kTechIdToMaterialOffset[kTechId.KinematicSupply] = 199
@@ -33,3 +33,5 @@ kTechIdToMaterialOffset[kTechId.ProwlerEgg] = 115
 kTechIdToMaterialOffset[kTechId.FastTunnel] = 189
 
 kTechIdToMaterialOffset[kTechId.Devour] = 109 
+
+kTechIdToMaterialOffset[kTechId.WeaponCache] = 1

@@ -58,3 +58,25 @@ function OnCommandScores(scoreTable)
             status, scoreTable.isSpectator, scoreTable.assists, scoreTable.clientIndex)
 
 end
+
+
+local kMarineBuildStructureMessage = 
+{
+    origin = "vector",
+    direction = "vector",
+    structureIndex = "integer (1 to 5)",
+    lastClickedPosition = "vector"
+}
+Shared.RegisterNetworkMessage("MarineBuildStructure", kMarineBuildStructureMessage)
+
+function BuildMarineDropStructureMessage(origin, direction, structureIndex, lastClickedPosition)
+
+    local t = {}
+    
+    t.origin = origin
+    t.direction = direction
+    t.structureIndex = structureIndex
+    t.lastClickedPosition = lastClickedPosition or Vector(0,0,0)
+
+    return t
+end    
