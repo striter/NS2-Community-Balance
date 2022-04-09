@@ -100,3 +100,5 @@ kProwlerFov = 100
 
 kMarineBuildBlockRadius = 0.75
 kMarineBuildRadius = 1.5
+
+kSporeMineMatureTime = 5

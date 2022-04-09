@@ -292,6 +292,43 @@ function BuildTechData()
 
 
 ----- Aliens
+
+    -- Fix Gorge Visualize
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.BellySlide,
+        [kTechDataCategory] = kTechId.Gorge,
+        [kTechDataDisplayName] = "BELLY_SLIDE",
+        [kTechDataTooltipInfo] = "BELLY_SLIDE_TOOLTIP",
+    })
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.BuildAbility,
+        [kTechDataMapName] = DropStructureAbility.kMapName,
+        [kTechDataCategory] = kTechId.Gorge,
+        [kTechDataDisplayName] = "BUILD_ABILITY",
+        [kTechDataTooltipInfo] = "BUILD_ABILITY_TOOLTIP",
+    })
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.SporeMine,
+        -- [kTechDataCategory] = kTechId.Gorge,
+        [kTechDataAllowConsumeDrop] = true,
+        [kTechDataMaxAmount] = kNumSporeMinesPerGorge,
+        [kTechDataCostKey] = kSporeMineCost,
+        [kTechDataBuildTime] = kSporeMineBuildTime,
+        [kTechDataMapName] = SporeMine.kMapName,
+        [kTechDataModel] = SporeMine.kModelName,
+        [kTechDataMaxHealth] = kSporeMineHealth,
+        [kTechDataMaxArmor] = kSporeMineArmor,
+        [kTechDataPointValue] = kSporeMinepointValue,
+        [kTechDataDisplayName] = "SPORE_MINE",
+        [kTechDataHint] = "SPORE_MINE_TOOLTIP",
+        [kTechDataTooltipInfo] = "SPORE_MINE_TOOLTIP", 
+    })
+
+    --Prowler
+
     table.insert(techData, { 
         [kTechDataId] = kTechId.ProwlerMenu,            
         [kTechDataDisplayName] = "UPGRADE_PROWLER",  
@@ -312,6 +349,8 @@ function BuildTechData()
         [kTechDataResearchTimeKey] = kRappelResearchTime, 
         [kTechDataTooltipInfo] = "RAPPEL_TOOLTIP" 
     })
+
+
     table.insert(techData, { 
         [kTechDataId] = kTechId.AcidSpray,           
         [kTechDataCategory] = kTechId.Prowler, 
@@ -350,6 +389,8 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "HALLUCINATE_DRIFTER_TOOLTIP", 
     })
 
+
+    -- Devour
     table.insert(techData, {
         [kTechDataId] = kTechId.Devour, 
         [kTechDataCategory] = kTechId.Onos,
@@ -362,6 +403,7 @@ function BuildTechData()
     })
                 
         
+    --Tunnels
     table.insert(techData, {
         [kTechDataId] = kTechId.FastTunnel,
         [kTechDataCostKey] = kFastTunnelCost,

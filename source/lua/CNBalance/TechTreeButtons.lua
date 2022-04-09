@@ -22,10 +22,12 @@ kTechIdToMaterialOffset[kTechId.GrenadeLauncherAllyBlast] = 196
 kTechIdToMaterialOffset[kTechId.GrenadeLauncherUpgrade] = 193
 kTechIdToMaterialOffset[kTechId.GrenadeLauncherDetectionShot] = 197
 
-kTechIdToMaterialOffset[kTechId.ProwlerMenu] = 115  -- babbler
-kTechIdToMaterialOffset[kTechId.Volley] = 106 -- parasite
-kTechIdToMaterialOffset[kTechId.Rappel] = 205  -- web
-kTechIdToMaterialOffset[kTechId.AcidSpray] = 206 -- bile bomb
+kTechIdToMaterialOffset[kTechId.BuildAbility] = 114
+
+kTechIdToMaterialOffset[kTechId.ProwlerMenu] = 115
+kTechIdToMaterialOffset[kTechId.Volley] = 106
+kTechIdToMaterialOffset[kTechId.Rappel] = 205
+kTechIdToMaterialOffset[kTechId.AcidSpray] = 206
 
 kTechIdToMaterialOffset[kTechId.Prowler] = 115
 kTechIdToMaterialOffset[kTechId.ProwlerEgg] = 115

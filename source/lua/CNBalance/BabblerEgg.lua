@@ -1,5 +1,5 @@
 if Server then
-
+    --Actually Babbler Egg
     function BabblerEgg:OnTakeDamage(_, attacker, doer)
         -- if self:GetIsBuilt() then
         --     local owner = self:GetOwner()
@@ -50,27 +50,32 @@ if Server then
                 if visibleTarget and trace.fraction < 1 then
                     
                         local owner = self:GetOwner()
-                        local client = owner:GetClient()
-                        local varaint = client and client.variantData and client.variantData.babblerVariant
-                        local position = HasMixin(visibleTarget, "Target") and visibleTarget:GetEngagementPoint() or visibleTarget:GetOrigin()
-                        for i=0 ,6 ,1 do
-                            local babbler = CreateEntity(Babbler.kMapName, origin, self:GetTeamNumber())
-                            -- -- babbler:SetSilenced(false)
+                        if owner then
+                            local client = owner:GetClient()
+                            local varaint = client and client.variantData and client.variantData.babblerVariant
+                            local target = trace.entity
+                            local origin = self:GetOrigin()
+                            local targetPosition = HasMixin(target, "Target") and target:GetEngagementPoint() or target:GetOrigin()
+                            for i=1 ,6 ,1 do
+                                local babbler = CreateEntity(Babbler.kMapName, origin, self:GetTeamNumber())
+                                -- -- babbler:SetSilenced(false)
 
-                            if varaint then
-                                babbler:SetVariant( varaint )
+                                if varaint then
+                                    babbler:SetVariant( varaint )
+                                end
+                                babbler:TriggerEffects("babbler_engage")
+                                babbler:SetOwner(owner)
+                                babbler.clinged = true
+                                babbler:Detach(true)
+                                babbler:SetMoveType(kBabblerMoveType.Attack, target, targetPosition, true)
+
                             end
-                            babbler:TriggerEffects("babbler_engage")
-                            babbler:SetOwner(owner)
-                            babbler.clinged = true
-                            babbler:Detach(true)
-                            babbler:SetMoveType(kBabblerMoveType.Attack, visibleTarget, position, true)
-
+                            self:TriggerEffects("Babbler_hatch")
+                        else
+                           self:Explode() 
                         end
-                        self:TriggerEffects("Babbler_hatch")
                         DestroyEntity(self)
 
-                        self:Explode()
                     break
                 end
             end

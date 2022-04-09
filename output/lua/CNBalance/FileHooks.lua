@@ -81,13 +81,6 @@ ModLoader.SetupFileHook("lua/Weapons/WeaponDisplayManager.lua", "lua/CNBalance/W
 ModLoader.SetupFileHook("lua/Weapons/Weapon.lua", "lua/CNBalance/Weapons/Weapon.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/CNBalance/Weapons/Marine/ClipWeapon.lua", "post")
 
---Combat Weapon Hacks
-ModLoader.SetupFileHook("lua/Weapons/Marine/Axe.lua", "lua/Combat/Knife.lua", "post")
-ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/Revolver.lua", "post") 
-ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/SubMachineGun.lua", "post")
-ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/LightMachineGun.lua", "post")
-ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/Cannon.lua", "post")
-ModLoader.SetupFileHook("lua/Weapons/Marine/Welder.lua", "lua/Combat/CombatBuilder.lua", "post")
 
 
 ModLoader.SetupFileHook("lua/Weapons/Marine/Welder.lua", "lua/CNBalance/Weapons/Marine/Welder.lua", "post")
@@ -102,6 +95,15 @@ ModLoader.SetupFileHook("lua/GUIHeavyMachineGunDisplay.lua", "lua/CNBalance/GUI/
 ModLoader.SetupFileHook("lua/Weapons/Marine/GrenadeThrower.lua", "lua/CNBalance/Weapons/Marine/GrenadeThrower.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/GrenadeLauncher.lua", "lua/CNBalance/Weapons/Marine/GrenadeLauncher.lua", "post")
 --------------------
+
+--Combat Weapon Hacks
+ModLoader.SetupFileHook("lua/Weapons/Marine/Axe.lua", "lua/Combat/Knife.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/Revolver.lua", "post") 
+ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/SubMachineGun.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/LightMachineGun.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/Cannon.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Marine/Welder.lua", "lua/Combat/CombatBuilder.lua", "post")
+ModLoader.SetupFileHook("lua/BabblerEgg.lua", "lua/Combat/SporeMine.lua", "post")
 
 -- Aliens
 ModLoader.SetupFileHook( "lua/CommAbilities/Alien/HallucinationCloud.lua", "lua/CNBalance/HallucinationCloud.lua", "post" )
@@ -133,6 +135,7 @@ ModLoader.SetupFileHook("lua/TunnelEntrance.lua", "lua/CNBalance/TunnelEntrance.
 ModLoader.SetupFileHook("lua/Cyst_Server.lua", "lua/CNBalance/Cyst_Server.lua", "post")
 ModLoader.SetupFileHook("lua/Cyst.lua", "lua/CNBalance/Cyst.lua", "post")
 ModLoader.SetupFileHook("lua/Hydra.lua", "lua/CNBalance/Hydra.lua", "post")
+ModLoader.SetupFileHook("lua/BabblerEgg.lua", "lua/CNBalance/BabblerEgg.lua", "post")
 
 ModLoader.SetupFileHook("lua/Weapons/Alien/Ability.lua", "lua/CNBalance/Weapons/Alien/Ability.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/Web.lua", "lua/CNBalance/Weapons/Alien/Web.lua", "post")

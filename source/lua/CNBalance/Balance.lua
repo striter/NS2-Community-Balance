@@ -395,3 +395,12 @@ kNanoShieldDamageReductionDamage = 0.68
 
 kWeaponCacheCost = 0
 kWeaponCacheBuildTime = 4
+
+kSporeMineCost = 0
+kSporeMineBuildTime = 2
+kNumSporeMinesPerGorge = 3
+kSporeMineDamage = 125 -- per second
+kSporeMineDamageType = kDamageType.Corrode
+kSporeMineDamageDuration = 3
+kSporeMineDamageRadius = 7
+kSporeMineDotInterval = 0.4

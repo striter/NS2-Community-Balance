@@ -23,7 +23,7 @@ kAlienTechMap =
     { kTechId.Carapace, 10, 5 },
     { kTechId.Regeneration, 11, 5 },
 
-    { kTechId.BioMassOne, 2.5, 7, nil, "1" }, { kTechId.BabblerEgg, 2.5, 8 },
+    { kTechId.BioMassOne, 2.5, 7, nil, "1" }, --{ kTechId.BabblerEgg, 2.5, 8 },
     { kTechId.BioMassTwo, 3.5, 7, nil, "2" }, {kTechId.Rupture, 3.5, 8}, {kTechId.BileBomb, 3.5, 9}, { kTechId.Devour, 3.5, 10 },
     { kTechId.BioMassThree, 4.5, 7, nil, "3" }, {kTechId.BoneWall, 4.5, 8}, { kTechId.MetabolizeEnergy, 4.5, 9 },
     { kTechId.BioMassFour, 5.5, 7, nil, "4" }, {kTechId.Leap, 5.5, 8}, {kTechId.Spores, 5.5, 9},

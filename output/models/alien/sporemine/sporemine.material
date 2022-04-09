@@ -1,0 +1,6 @@
+shader = "models/alien/alien.surface_shader"
+albedoMap = "models/alien/sporemine/sporemine.dds"
+normalMap = "models/alien/sporemine/sporemine_norm.dds"
+emissiveMap = "models/alien/sporemine/sporemine_illum.dds"
+specularMap = "models/alien/sporemine/sporemine_spec.dds"
+surface = "organic"

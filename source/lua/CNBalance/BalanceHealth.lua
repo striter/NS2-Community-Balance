@@ -64,5 +64,11 @@ kInfestedTunnelEntranceHealth = 1300    kInfestedTunnelEntranceArmor = 350  --12
 kMatureInfestedTunnelEntranceHealth = 1450    kMatureInfestedTunnelEntranceArmor = 400    --1400 250
 kTunnelEntrancePointValue = 5
 
+kBabblerEggHealth = 50    kBabblerEggArmor = 0    kBabblerEggPointValue = 0
+kMatureBabblerEggHealth = 150 kMatureBabblerEggArmor = 0
+
 --Combat
 kWeaponCacheHealth = 600    kWeaponCacheArmor = 150        kWeaponCachePointValue = 2
+
+kSporeMineHealth = 50 kSporeMineArmor = 0 kSporeMinepointValue=0
+kMatureSporeMineHealth = 100 kMatureSporeMineArmor = 0

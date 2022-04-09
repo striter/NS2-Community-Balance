@@ -55,6 +55,16 @@ if kTranslateMessage then
     kTranslateMessage["RESEARCH_CANNON"]="高斯枪研发"
     kTranslateMessage["RESEARCH_CANNON_TOOLTIP"]="*进行高斯枪研发.\n*适用于压制高机动目标."
 
+    kTranslateMessage["BUILD_ABILITY"]="建造者"
+    kTranslateMessage["BUILD_ABILITY_TOOLTIP"]="放置建筑,构建前线阵地.\n*刺花(造成远程伤害)\n*泥团(构建基础阵地)\n*酸液地雷(爆炸造成护甲伤害)\n*拌网(减缓敌方单位速度)"
+
+    kTranslateMessage["BELLY_SLIDE"]="滑行"
+    kTranslateMessage["BELLY_SLIDE_TOOLTIP"]="使用光滑的肚皮在地面滑行.\n*通过高低差获得加速度."
+    
+    kTranslateMessage["BABBLER_MINE"]="Babbler巢"
+    kTranslateMessage["BABBLER_MINE_TOOLTIP"]="自动感应式.\n*探测到临近敌方单位后.\n释放6个Babbler攻击敌方单位."
+    
+    
     kTranslateMessage["COMBATBUILDER"]="战斗套件"
     kTranslateMessage["COMBATBUILDER_BUYDESCRIPTION"]="给予基础建筑建造.\n*建造补给站以获取弹药与回复及临近机枪塔供电.\n*建造机枪塔攻击范围内敌方单位."
     

@@ -225,6 +225,8 @@ function AlienTeam:InitTechTree()
 
     -- gorge researches
     self.techTree:AddBuyNode(kTechId.BabblerAbility,        kTechId.None)
+    self.techTree:AddPassive(kTechId.BuildAbility,                   kTechId.None)
+    self.techTree:AddPassive(kTechId.BellySlide,                   kTechId.None)
     self.techTree:AddPassive(kTechId.WebTech,            kTechId.None) --, kTechId.None, kTechId.AllAliens
     --FIXME Above still shows in Alien-Comm buttons/menu
     self.techTree:AddBuyNode(kTechId.Web,                   kTechId.None)

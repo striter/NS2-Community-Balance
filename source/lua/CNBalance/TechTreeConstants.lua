@@ -191,7 +191,8 @@ kTechId = enum {
 -----------
 
     -- gorge abilities
-    'Spit', 'Spray', 'BellySlide', 'BabblerTech', 'BuildAbility', 'BabblerAbility', 'Babbler', 'BabblerEgg', 'GorgeTunnelTech', 'BileBomb',  'WebTech', 'Web', 'HydraTech',
+    'Spit', 'Spray', 'BellySlide', 'BabblerTech', 'BuildAbility', 'BabblerAbility', 'Babbler', 'BabblerEgg', 'GorgeTunnelTech',
+    'BuildAbility', 'BileBomb',  'WebTech', 'Web', 'HydraTech','SporeMine',
 
     -- lerk abilities
     'LerkBite', 'Cling', 'Spikes', 'Umbra', 'Spores',
