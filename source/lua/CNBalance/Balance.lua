@@ -126,7 +126,7 @@ kSubMachineGunCost = 0
 
 kRifleMeleeDamage = 20
 
-kCombatBuilderCost = 30
+kCombatBuilderCost = 20
 kCombatBuilderPointValue = 20
 
 --Knife
@@ -197,9 +197,10 @@ kInfantryPortalBuildTime = 5
 
 
 kSentryDamage = 3
-kSentryCost = 3
-kSentryBatteryCost = 6
+kSentryCost = 2
+kSentryBatteryCost = 10
 kSentryBatteryBuildTime = 5
+kSentryBuildTime = 2
 
 kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 75 --90->75
@@ -223,6 +224,9 @@ kClawRailgunExosuitCost = 40
 
 kOnosDevourCost = 15
 kOnosDevourTime = 60
+
+kXenocideResearchCost = 25
+kXenocideResearchTime = 60
 
 kUmbraBulletModifier = 0.8
 
@@ -387,11 +391,7 @@ kNanoShieldPlayerDuration = 3
 kNanoShieldStructureDuration = 3
 kNanoShieldCost = 3
 kNanoShieldCooldown = 5
-<<<<<<< Updated upstream
-kNanoShieldDamageReductionDamage = 0.68
-=======
 kNanoShieldDamageReductionDamage = 0.68
 
 kWeaponCacheCost = 0
-kWeaponCacheBuildTime = 8
->>>>>>> Stashed changes
+kWeaponCacheBuildTime = 4

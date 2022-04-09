@@ -1,7 +1,7 @@
 if Server then
     
     local kBabblerSearchRange = 1000
-    local kMaxBabblerCount = 9
+    local kMaxBabblerCount = 12
 
     local function CanGetAttach(self, entity)
         -- Can only attach to friends
@@ -83,6 +83,7 @@ if Server then
                             babbler.clinged = true
                             babbler:Detach(true)
                             babbler:SetMoveType(moveType, entity, position, true)
+                            self:TriggerEffects("Babbler_hatch")
                         end
                     end
                 end

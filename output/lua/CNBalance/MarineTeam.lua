@@ -198,10 +198,10 @@ local function DestroyMarineStructure(self,structure)
         cancelTechNode = self:GetTechTree():GetTechNode(kTechId.Cancel)
     end
 
-    structure.recycled = true
     if structure:GetIsGhostStructure() then
         structure:PerformAction(cancelTechNode)
     elseif structure:GetCanDie() then
+        structure.recycled = true
         structure:Kill()
     else
         DestroyEntity(structure)

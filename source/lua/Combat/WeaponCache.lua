@@ -49,7 +49,7 @@ WeaponCache.kRefillAmount = 0.5
 WeaponCache.kResupplyInterval = .8
 -- Players can use menu and be supplied by armor inside this range
 WeaponCache.kResupplyUseRange = 2.5
-WeaponCache.kSentryRange = 4.0
+WeaponCache.kSentryRange = 5
 
 if Server then
     Script.Load("lua/Combat/WeaponCache_Server.lua")

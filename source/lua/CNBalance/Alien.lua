@@ -28,3 +28,38 @@ function Alien:GetPlayerStatusDesc()
     
     return status
 end
+
+
+-- if Server then
+--     -- ThirdPerson Codes
+--     local function ThirdPerson(self)
+--         if HasMixin(self, "CameraHolder") then
+
+--             local numericDistance = 3
+--             if self:GetIsThirdPerson() then
+--                 numericDistance = 0
+--             end
+            
+--             self:SetIsThirdPerson(numericDistance)
+--         end
+--     end
+
+--     local baseHandleButtons = Alien.HandleButtons
+
+--     local tpPressed = false
+
+--     function Alien:HandleButtons(input)
+
+--         baseHandleButtons(self,input)
+
+--             if bit.band(input.commands, Move.Reload) ~= 0 then
+--                 if not tpPressed then
+--                     tpPressed=true
+--                     ThirdPerson(self)
+--                 end
+--             else
+--                 tpPressed=false
+--             end
+        
+--     end
+-- end

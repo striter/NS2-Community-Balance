@@ -18,6 +18,7 @@ CloakableMixin.kUncloakRate = 4
 CloakableMixin.kTriggerCloakDuration = .6
 CloakableMixin.kTriggerUncloakDuration = 2.5
 
+local kPlayerMinCloak = 0.84
 local kPlayerMaxCloak = 0.90
 local kPlayerHideModelMin = 0
 local kPlayerHideModelMax = 0.15

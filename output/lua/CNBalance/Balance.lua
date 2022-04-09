@@ -89,11 +89,11 @@ kGrenadeLauncherDropCost = 12
 kGrenadeLauncherDropCooldown = 0
 
 kGrenadeLauncherGrenadeDamageType = kDamageType.GrenadeLauncher
-kGrenadeLauncherGrenadeDamage = 85
+kGrenadeLauncherGrenadeDamage = 100
 kGrenadeLauncherGrenadeDamageRadius = 4.8
 kGrenadeLauncherDetectionShotRadius = 3
 
-kGrenadeLauncherImpactGrenadeDamage = 70
+kGrenadeLauncherImpactGrenadeDamage = 80
 kGrenadeLauncherAllyBlastReduction = 0.3
 
 kGrenadeLauncherClipSize = 4
@@ -126,7 +126,7 @@ kSubMachineGunCost = 0
 
 kRifleMeleeDamage = 20
 
-kCombatBuilderCost = 30
+kCombatBuilderCost = 20
 kCombatBuilderPointValue = 20
 
 --Knife
@@ -197,9 +197,10 @@ kInfantryPortalBuildTime = 5
 
 
 kSentryDamage = 3
-kSentryCost = 3
-kSentryBatteryCost = 6
+kSentryCost = 2
+kSentryBatteryCost = 10
 kSentryBatteryBuildTime = 5
+kSentryBuildTime = 2
 
 kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 75 --90->75
@@ -223,6 +224,9 @@ kClawRailgunExosuitCost = 40
 
 kOnosDevourCost = 15
 kOnosDevourTime = 60
+
+kXenocideResearchCost = 25
+kXenocideResearchTime = 60
 
 kUmbraBulletModifier = 0.8
 
@@ -263,7 +267,7 @@ kProwlerCost = 16 --14
 kProwlerBaseCarapaceUpgradeAmount = 10.5
 kProwlerCarapaceArmorPerBiomass = 1.5
 
-kProwlerEggCost = 13
+kProwlerEggCost = 16
 kProwlerGestateTime = 6
 kProwlerUpgradeCost = 1
 kProwlerBabblerShieldPercent = 0.15
@@ -390,4 +394,4 @@ kNanoShieldCooldown = 5
 kNanoShieldDamageReductionDamage = 0.68
 
 kWeaponCacheCost = 0
-kWeaponCacheBuildTime = 8
+kWeaponCacheBuildTime = 4

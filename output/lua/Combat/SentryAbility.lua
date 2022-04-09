@@ -55,7 +55,7 @@ function SentryAbility:GetIsPositionValid(position, player, surfaceNormal)
         
         end
 
-        if valid and #GetEntitiesWithMixinWithinRange("Construct", position, kMarineBuildRadius) > 0 then
+        if valid and #GetEntitiesWithMixinWithinRange("Construct", position, kMarineBuildBlockRadius) > 0 then
             valid = false
         end
     end
@@ -68,7 +68,7 @@ function SentryAbility:AllowBackfacing()
 end
 
 function SentryAbility:GetDropRange()
-    return kGorgeCreateDistance
+    return kMarineBuildRadius
 end
 
 function SentryAbility:GetStoreBuildId()

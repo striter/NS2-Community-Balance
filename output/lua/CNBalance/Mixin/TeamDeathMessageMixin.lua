@@ -35,5 +35,4 @@ function TeamDeathMessageMixin:OnEntityKilled(targetEntity, killer, doer)
             self:ForEachPlayer(func)
         end
     end
-    
 end

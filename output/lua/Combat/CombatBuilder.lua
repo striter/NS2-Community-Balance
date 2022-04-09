@@ -1,5 +1,6 @@
 Script.Load("lua/Combat/SentryAbility.lua")
 Script.Load("lua/Combat/ArmoryAbility.lua")
+Script.Load("lua/Combat/MarineStructureMixin.lua")
 Script.Load("lua/PickupableWeaponMixin.lua")
 Script.Load("lua/LiveMixin.lua")
 
@@ -185,7 +186,7 @@ end
 function CombatBuilder:Dropped(prevOwner)
 
     Weapon.Dropped(self, prevOwner)
-    prevOwner:GetTeam():ClearMarineStructure(prevOwner)
+    -- prevOwner:GetTeam():ClearMarineStructure(prevOwner)
 
     self.dropping = false
     self.mouseDown = false
@@ -286,7 +287,7 @@ local function DropStructure(self, player, origin, direction, structureAbility, 
             if structure then
             
                 structure:SetOwner(player)
-                --InitMixin(structure, CombatBuildingMixin)
+                InitMixin(structure, MarineStructureMixin)
 				player:GetTeam():AddMarineStructure(player, structure)
                 
                 -- Check for space

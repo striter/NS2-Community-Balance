@@ -14,7 +14,7 @@ MarineStructureMixin.expectedCallbacks =
 }
 
 if Server then
-    local kSelfDamagePercentPerSecond = .1
+    local kSelfDamagePercentPerSecond = .05
     local kSelfDamageInterval = 2
 
     local function CheckShouldDestroy(self)
@@ -30,11 +30,18 @@ if Server then
             end
         
         end
+        local valid = player ~= nil
+        if valid then
+            valid = player.GetWeapon and player:GetWeapon(CombatBuilder.kMapName) ~= nil
+        end
         
-        
-        if not player or not ( player.GetWeapon and player:GetWeapon(CombatBuilder.kMapName)) then
-            if self:GetCanDie() then
-                self:DeductHealth(kSelfDamageInterval*kSelfDamagePercentPerSecond*self.GetMaxHealth(), nil, self , true)()
+        if not valid then
+            if self:GetIsGhostStructure() then
+                self:PerformAction(GetTechTree(self:GetTeamNumber()):GetTechNode(kTechId.Cancel))
+            elseif self:GetCanDie() then
+                local deductHealth = kSelfDamageInterval*kSelfDamagePercentPerSecond*self:GetMaxHealth()
+                self.recycled=self:GetHealth() <= deductHealth
+                self:DeductHealth(deductHealth, nil, self , true)
             end
         end
         
@@ -43,24 +50,11 @@ if Server then
     end
 
     function MarineStructureMixin:__initmixin()
-            local owner = self:GetOwner()
-            if owner then
-                self:SetClientId(owner)
-                self:AddTimedCallback(CheckShouldDestroy, kSelfDamageInterval)
-            end
+        local owner = self:GetOwner()
+        if owner then 
+            self.ownerClientId = Server.GetOwner(owner):GetId()
+            self:AddTimedCallback(CheckShouldDestroy, kSelfDamageInterval)
+        end
     end
-
-
-    function MarineStructureMixin:GetOwnerClientId()
-        return self.ownerClientId
-    end
-
-    --save the client, not the playerID, the playerId changes after every death etc
-    function MarineStructureMixin:SetClientId(player)
-        local clientId = Server.GetOwner(player):GetId()
-        self.ownerClientId = clientId
-    end
-
-    
 end
 

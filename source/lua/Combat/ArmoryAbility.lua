@@ -36,7 +36,7 @@ function ArmoryAbility:GetIsPositionValid(position, player, surfaceNormal)
         
             valid = true
 			
-			local nearEntities = GetEntitiesWithMixinWithinRange("Construct", position, kMarineBuildRadius)
+			local nearEntities = GetEntitiesWithMixinWithinRange("Construct", position, kMarineBuildBlockRadius)
 			if #nearEntities > 0 then
 				valid = false
 			elseif #nearEntities == 0 then

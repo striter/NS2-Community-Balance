@@ -13,6 +13,7 @@ local function UpdateBatteryState(self)
         ----------------
         local weaponCaches = GetEntitiesForTeamWithinRange("WeaponCache",self:GetTeamNumber(), self:GetOrigin() ,WeaponCache.kSentryRange)
         for index,ent in ipairs(weaponCaches) do
+
             if GetIsUnitActive(ent) and ent:GetLocationName() == self:GetLocationName() then
                 self.attachedToBattery = true
                 return
