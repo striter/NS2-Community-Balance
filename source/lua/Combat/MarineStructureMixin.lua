@@ -15,7 +15,8 @@ MarineStructureMixin.expectedCallbacks =
 
 if Server then
     local kSelfDamagePercentPerSecond = .05
-    local kSelfDamageInterval = 2
+    local kCheckInverval = 1
+    local kAutoBuildPerSecond = 0.75
 
     local function CheckShouldDestroy(self)
 
@@ -35,11 +36,15 @@ if Server then
             valid = player.GetWeapon and player:GetWeapon(CombatBuilder.kMapName) ~= nil
         end
         
-        if not valid then
+        if valid then
+            if not self:GetIsBuilt() then
+                self:Construct(kAutoBuildPerSecond * kCheckInverval,self.owner)
+            end
+        else
             if self:GetIsGhostStructure() then
                 self:PerformAction(GetTechTree(self:GetTeamNumber()):GetTechNode(kTechId.Cancel))
             elseif self:GetCanDie() then
-                local deductHealth = kSelfDamageInterval*kSelfDamagePercentPerSecond*self:GetMaxHealth()
+                local deductHealth = kCheckInverval*kSelfDamagePercentPerSecond*self:GetMaxHealth()
                 self.recycled=self:GetHealth() <= deductHealth
                 self:DeductHealth(deductHealth, nil, self , true)
             end
@@ -53,8 +58,12 @@ if Server then
         local owner = self:GetOwner()
         if owner then 
             self.ownerClientId = Server.GetOwner(owner):GetId()
-            self:AddTimedCallback(CheckShouldDestroy, kSelfDamageInterval)
+            self:AddTimedCallback(CheckShouldDestroy, kCheckInverval)
         end
+    end
+
+    function MarineStructureMixin:GetCanAutoBuild()
+        return true
     end
 end
 
