@@ -44,6 +44,7 @@ end
 if Server then
     
     function Marine:GiveItem(itemMapName,setActive, suppressError)
+
         local newItem
     
         if setActive == nil then

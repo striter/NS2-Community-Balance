@@ -27,15 +27,15 @@ kAdditionalEffects =
         
         damageSounds =
         {
-            {sound = "sound/combat.fev/combat/materials/metal/knife/knife", surface = "metal", doer = "Knife", volume=0.5,  world_space = true, done = true},
-            {sound = "sound/combat.fev/combat/materials/organic/knife/knife", surface = "organic", doer = "Knife",volume=0.5, world_space = true, done = true},
-            {sound = "sound/combat.fev/combat/materials/organic/knife/knife", surface = "infestation", doer = "Knife",volume=0.5, world_space = true, done = true},
-            {sound = "sound/combat.fev/combat/materials/rock/knife/knife", surface = "rock", doer = "Knife",volume=0.5, world_space = true, done = true},
-            {sound = "sound/combat.fev/combat/materials/thin_metal/knife/knife", surface = "thin_metal", doer = "Knife",volume=0.5, world_space = true, done = true},
-            {sound = "sound/combat.fev/combat/materials/armor/knife/knife", surface = "armor", doer = "Knife",["volume"]=0.5, world_space = true, done = true},
-            {sound = "sound/combat.fev/combat/materials/flesh/knife/knife", surface = "flesh", doer = "Knife",volume=0.5, world_space = true, done = true},
-            {sound = "sound/combat.fev/combat/materials/membrane/knife/knife", surface = "membrane", doer = "Knife",volume=0.5, world_space = true, done = true},
-            {sound = "sound/combat.fev/combat/materials/organic/knife/knife", doer = "Knife",volume=0.5,  world_space = true,done = true},
+            {sound = "sound/ns2remake_combat.fev/combat/materials/metal/knife/knife", surface = "metal", doer = "Knife", volume=0.5,  world_space = true, done = true},
+            {sound = "sound/ns2remake_combat.fev/combat/materials/organic/knife/knife", surface = "organic", doer = "Knife",volume=0.5, world_space = true, done = true},
+            {sound = "sound/ns2remake_combat.fev/combat/materials/organic/knife/knife", surface = "infestation", doer = "Knife",volume=0.5, world_space = true, done = true},
+            {sound = "sound/ns2remake_combat.fev/combat/materials/rock/knife/knife", surface = "rock", doer = "Knife",volume=0.5, world_space = true, done = true},
+            {sound = "sound/ns2remake_combat.fev/combat/materials/thin_metal/knife/knife", surface = "thin_metal", doer = "Knife",volume=0.5, world_space = true, done = true},
+            {sound = "sound/ns2remake_combat.fev/combat/materials/armor/knife/knife", surface = "armor", doer = "Knife",["volume"]=0.5, world_space = true, done = true},
+            {sound = "sound/ns2remake_combat.fev/combat/materials/flesh/knife/knife", surface = "flesh", doer = "Knife",volume=0.5, world_space = true, done = true},
+            {sound = "sound/ns2remake_combat.fev/combat/materials/membrane/knife/knife", surface = "membrane", doer = "Knife",volume=0.5, world_space = true, done = true},
+            {sound = "sound/ns2remake_combat.fev/combat/materials/organic/knife/knife", doer = "Knife",volume=0.5,  world_space = true,done = true},
 
             {sound = "sound/NS2.fev/alien/skulk/parasite_hit", doer = "VolleyRappel", world_space = true, done = true},
         }

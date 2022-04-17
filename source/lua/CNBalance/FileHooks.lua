@@ -153,4 +153,4 @@ if AddHintModPanel then
     AddHintModPanel(panelMaterial, "https://docs.qq.com/doc/DUEZSeUtrR0tWTGJ4","阅读平衡修改文档")
 end
 
-Shared.Message("[CN] Natural Selection 2.0 Mounted 2022.3.19")
+Shared.Message("[CN] Natural Selection 2.0 Mounted 2022.4.16")

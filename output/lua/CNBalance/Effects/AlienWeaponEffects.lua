@@ -4,7 +4,7 @@ local kAdditionalEffects =
     {
         devourOutsideEffects = 
         {
-            {parented_sound = "sound/combat.fev/combat/abilities/alien/onos/devour", volume = 0.2, done = true},
+            {parented_sound = "sound/ns2remake_combat.fev/combat/abilities/alien/onos/devour", volume = 0.2, done = true},
         },
     },
     
@@ -12,7 +12,7 @@ local kAdditionalEffects =
     {
         devourInsideEffects = 
         {
-            {private_sound = "sound/combat.fev/combat/abilities/alien/onos/devour", done = true},
+            {private_sound = "sound/ns2remake_combat.fev/combat/abilities/alien/onos/devour", done = true},
         },
     },
     
@@ -20,7 +20,7 @@ local kAdditionalEffects =
     {
         devourEatEffects = 
         {
-            {sound = "sound/combat.fev/combat/common/alien/devour_in"},
+            {sound = "sound/ns2remake_combat.fev/combat/common/alien/devour_in"},
             {cinematic = "cinematics/alien/onos/devour_escape.cinematic", done = true},
         },
     },
@@ -29,7 +29,7 @@ local kAdditionalEffects =
     {
         devourEscapeEffects = 
         {
-            {sound = "sound/combat.fev/combat/common/alien/devour_out"},
+            {sound = "sound/ns2remake_combat.fev/combat/common/alien/devour_out"},
             {cinematic = "cinematics/alien/onos/devour_escape.cinematic", done = true},
         },
     },

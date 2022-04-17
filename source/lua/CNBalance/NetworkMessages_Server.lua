@@ -11,7 +11,7 @@ function OnCommandMarineBuildStructure(client, message)
     local dropStructureAbility = player:GetActiveWeapon()
     -- The player may not have an active weapon if the message is sent
     -- after the player has gone back to the ready room for example.
-    if dropStructureAbility.OnDropStructure then
+    if dropStructureAbility and dropStructureAbility.OnDropStructure then
         dropStructureAbility:OnDropStructure(origin, direction, structureIndex, lastClickedPosition)
     end
     

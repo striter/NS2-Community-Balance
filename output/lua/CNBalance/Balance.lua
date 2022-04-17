@@ -126,8 +126,8 @@ kSubMachineGunCost = 0
 
 kRifleMeleeDamage = 20
 
-kCombatBuilderCost = 20
-kCombatBuilderPointValue = 20
+kCombatBuilderCost = 15
+kCombatBuilderPointValue = 15
 
 --Knife
 kKnifeWeight = 0

@@ -25,6 +25,9 @@ local networkVars =
 	-- numPhaseGatesLeft = string.format("private integer (0 to %d)", kMaxStructures[kTechId.PhaseGate]),
 	-- numObservatoriesLeft = string.format("private integer (0 to %d)", kMaxStructures[kTechId.Observatory]),
 }
+
+AddMixinNetworkVars(PickupableWeaponMixin, networkVars)
+AddMixinNetworkVars(PointGiverMixin, networkVars)
 AddMixinNetworkVars(LiveMixin, networkVars)
 
 function CombatBuilder:GetAnimationGraphName()
@@ -51,6 +54,7 @@ function CombatBuilder:OnCreate()
     
     InitMixin(self, PickupableWeaponMixin)
     InitMixin(self, LiveMixin)
+    InitMixin(self,PointGiverMixin)
     
     if Server then
         self.lastCreatedId = Entity.invalidId
@@ -72,17 +76,6 @@ function CombatBuilder:OnInitialized()
     end
     
     Weapon.OnInitialized(self)
-    
-end
-
-function CombatBuilder:GetIsValidRecipient(recipient)
-
-    if self:GetParent() == nil and recipient and not GetIsVortexed(recipient) and recipient:isa("Marine") then
-        local welder = recipient:GetWeapon(CombatBuilder.kMapName)
-        return welder == nil
-    end
-    
-    return false
     
 end
 
@@ -678,6 +671,18 @@ if Client then
         UpdateGUI(self, self:GetParent())    
     end
     
+end
+
+if Server then
+
+    function CombatBuilder:GetDestroyOnKill()
+        return true
+    end
+    
+    function CombatBuilder:GetSendDeathMessageOverride()
+        return false
+    end 
+        
 end
 
 Shared.LinkClassToMap("CombatBuilder", CombatBuilder.kMapName, networkVars)

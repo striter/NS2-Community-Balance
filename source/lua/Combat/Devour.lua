@@ -209,7 +209,7 @@ function Devour:Attack(player)
         if target and HasMixin(target, "Live") and target:GetIsAlive() then            
             
             if target:isa("Player") and not target:isa("Exo") then
-                if target:GetTeamNumber() ~= self:GetTeamNumber() then
+                if GetAreEnemies(self,target) then
                     self.eatingPlayerId = target:GetId()
                     self.timeDevourEnd = Shared.GetTime() + Devour.kEatCoolDown
                     
