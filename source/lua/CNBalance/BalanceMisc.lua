@@ -33,9 +33,9 @@ kAlienRegenerationPercentage = 0.08
 kAlienMinRegeneration = 10
 kAlienMaxRegeneration = 80
 
-kAlienCrushDamagePercentByLevel = 0.07
+kAlienCrushDamagePercentByLevel = 0.111 --0.007
 
-kCelerityAddSpeed = 2
+kCelerityAddSpeed = 1.5 -- 1.5
 
 kFocusAttackSlowAtMax = 1
 kFocusDamageBonusAtMax = 0.66
@@ -64,7 +64,6 @@ kOnosCarapaceSpeedReduction = 0 --0.12
 kFadeAdrenalineSpeedReduction = 0
 
 kBiteLeapVampirismScalar = 0.05   --0.0466
-
 
 kParasiteVampirismScalar = 0.02    --0
 kSpitVampirismScalar = 0.05   --0.026

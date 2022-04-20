@@ -1,12 +1,36 @@
 Skulk.kAdrenalineEnergyRecuperationRate = 30
 
-Skulk.kGrenadeLauncherDamageReduction = 0.7
+local baseGetMaxSpeed = Skulk.GetMaxSpeed
+function Skulk:GetMaxSpeed(possible)
+    local maxSpeed = baseGetMaxSpeed(self,possible)
+    if GetHasTech(self,kTechId.SkulkBoost) then
+        maxSpeed = maxSpeed + kSkulkBoostMaxSpeed
+    end
+    return maxSpeed
+end
+
+local baseGetBaseHealth = Skulk.GetHealthPerBioMass
+function Skulk:GetHealthPerBioMass()
+    local baseHealth = baseGetBaseHealth(self)
+    if GetHasTech(self,kTechId.SkulkBoost) then
+        baseHealth = baseHealth+ kSkulkBoostHealthPerBiomass
+    end
+    return baseHealth
+end
+
+
+Skulk.kDamageReductionTable = {
+    ["grenade"] = 0.7,
+    ["impactgrenade"] = 0.7,
+    ["pulsegrenade"] = 0.7,
+    ["railgun"] = 0.7,
+}
 
 function Skulk:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
 
-        local className = string.lower(doer:GetClassName())
-        if className == "grenade" or className == "impactgrenade" or className == "pulsegrenade" then
-            damageTable.damage = damageTable.damage * Skulk.kGrenadeLauncherDamageReduction
+        local reduction = Skulk.kDamageReductionTable[string.lower(doer:GetClassName())]
+        if reduction then
+            damageTable.damage = damageTable.damage * reduction
             return
         end
 end

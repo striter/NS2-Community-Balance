@@ -184,6 +184,8 @@ kTechId = enum {
 ---------------
     -- Skulk abilities
     'Bite', 'Sneak', 'Parasite', 'Leap', 'Xenocide',
+    'SkulkBoost',
+    'XenocideFuel',
 
 -----------
     'Prowler','ProwlerMenu','ProwlerEgg','HallucinateProwler','UpgradeProwler',

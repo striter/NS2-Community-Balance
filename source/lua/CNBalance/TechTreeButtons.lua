@@ -24,7 +24,11 @@ kTechIdToMaterialOffset[kTechId.GrenadeLauncherDetectionShot] = 197
 
 kTechIdToMaterialOffset[kTechId.BuildAbility] = 114
 
-kTechIdToMaterialOffset[kTechId.ProwlerMenu] = 115
+kTechIdToMaterialOffset[kTechId.Xenocide] = 47
+kTechIdToMaterialOffset[kTechId.SkulkBoost] = 27
+kTechIdToMaterialOffset[kTechId.XenocideFuel] = 95
+
+kTechIdToMaterialOffset[kTechId.ProwlerMenu] = 208
 kTechIdToMaterialOffset[kTechId.Volley] = 106
 kTechIdToMaterialOffset[kTechId.Rappel] = 205
 kTechIdToMaterialOffset[kTechId.AcidSpray] = 206

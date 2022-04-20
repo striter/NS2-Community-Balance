@@ -55,16 +55,6 @@ if kTranslateMessage then
     kTranslateMessage["RESEARCH_CANNON"]="高斯枪研发"
     kTranslateMessage["RESEARCH_CANNON_TOOLTIP"]="*进行高斯枪研发.\n*适用于压制高机动目标."
 
-    kTranslateMessage["BUILD_ABILITY"]="建造者"
-    kTranslateMessage["BUILD_ABILITY_TOOLTIP"]="放置建筑,构建前线阵地.\n*刺花(造成远程伤害)\n*泥团(构建基础阵地)\n*酸液地雷(爆炸造成护甲伤害)\n*拌网(减缓敌方单位速度)"
-
-    kTranslateMessage["BELLY_SLIDE"]="滑行"
-    kTranslateMessage["BELLY_SLIDE_TOOLTIP"]="使用光滑的肚皮在地面滑行.\n*通过高低差获得加速度."
-    
-    kTranslateMessage["BABBLER_MINE"]="Babbler巢"
-    kTranslateMessage["BABBLER_MINE_TOOLTIP"]="自动感应式.\n*探测到临近敌方单位后.\n释放6个Babbler攻击敌方单位."
-    
-    
     kTranslateMessage["COMBATBUILDER"]="战斗套件"
     kTranslateMessage["COMBATBUILDER_BUYDESCRIPTION"]="给予基础建筑建造.\n*建造补给站以获取弹药与回复及临近机枪塔供电.\n*建造机枪塔攻击范围内敌方单位."
     
@@ -73,6 +63,24 @@ if kTranslateMessage then
     kTranslateMessage["WEAPON_CACHE_HINT"]="回复弹药与生命值"
     kTranslateMessage["BUYMENU_GROUPLABEL_GRENADES"]="投掷物"
     
+    kTranslateMessage["BUILD_ABILITY"]="建造者"
+    kTranslateMessage["BUILD_ABILITY_TOOLTIP"]="放置建筑,构建前线阵地.\n*刺花(造成远程伤害)\n*泥团(构建基础阵地)\n*酸液地雷(爆炸造成护甲伤害)\n*拌网(减缓敌方单位速度)"
+
+    kTranslateMessage["BELLY_SLIDE"]="滑行"
+    kTranslateMessage["BELLY_SLIDE_TOOLTIP"]="使用光滑的肚皮在地面滑行.\n*通过高低差获得加速度."
+    
+    kTranslateMessage["XENOCIDE_FUEL"]="自爆充能"
+    kTranslateMessage["XENOCIDE_FUEL_TOOLTIP"]="使Skulk的自爆变得更加致命.\n*增加自爆的范围.\n*增加自爆的伤害.\n*降低玩家复活所需时间."
+    
+    kTranslateMessage["SKULK_BOOST"]="Skulk 生物质"
+    kTranslateMessage["SKULK_BOOST_TOOLTIP"]="加强Skulk的作战效率.\n*增加Skulk的移动速度.\n*增加Skulk的生命值."
+
+    kTranslateMessage["BABBLER_MINE"]="Babbler巢"
+    kTranslateMessage["BABBLER_MINE_TOOLTIP"]="自动感应式.\n*探测到临近敌方单位后.\n释放6个Babbler攻击敌方单位."
+    
+    kTranslateMessage["UPGRADE_PROWLER"] = "Prowler 演化"
+    kTranslateMessage["UPGRADE_PROWLER_TOOLTIP"] = "解锁Prowler技能.\n*酸液飞弹"
+
     kTranslateMessage["PROWLER"] = "Prowler"
     kTranslateMessage["PROWLER_EGG"] = "蛹(Prowler)"
     kTranslateMessage["PROWLER_TOOLTIP"] = "地面远程骚然单位.\n*齐射钉刺远程输出\n*(进化)通过绳网快速移动\n*(进化)酸液投掷范围攻击."

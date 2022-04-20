@@ -39,9 +39,12 @@ function XenocideLeap:OnProcessMove(input)
                 local hitEntities = GetEntitiesWithMixinWithinRange("Live", xenoOrigin, kXenocideRange)
                 table.removevalue(hitEntities, player)
 
-                RadiusDamage(hitEntities, xenoOrigin, kXenocideRange, kXenocideDamage, self)
+                local xenocideFuel = GetHasTech(self,kTechId.XenocideFuel)
+                local damage = xenocideFuel and kXenocideFuelDamage or kXenocideDamage
+                local range = xenocideFuel and kXenocideFuelRange or kXenocideRange
+                RadiusDamage(hitEntities, xenoOrigin, range, damage, self)
 
-                -- player.spawnReductionTime = 4
+                player.spawnReductionTime = xenocideFuel and kXenocideFuelSpawnReduction or kXenocideSpawnReduction
 
                 player:SetBypassRagdoll(true)
 

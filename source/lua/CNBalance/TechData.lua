@@ -290,7 +290,6 @@ function BuildTechData()
         [kTechDataAllowConsumeDrop] = true, 
     })
 
-
 ----- Aliens
 
     -- Fix Gorge Visualize
@@ -326,7 +325,24 @@ function BuildTechData()
         [kTechDataHint] = "SPORE_MINE_TOOLTIP",
         [kTechDataTooltipInfo] = "SPORE_MINE_TOOLTIP", 
     })
+    --Skulk
+    table.insert(techData, {
+        [kTechDataId] = kTechId.SkulkBoost, 
+        [kTechDataCostKey] = kSkulkBoostCost,
+        [kTechDataResearchTimeKey] = kSkulkBoostTime, 
+        [kTechDataDisplayName] = "SKULK_BOOST",
+        [kTechDataTooltipInfo] = "SKULK_BOOST_TOOLTIP",
+        [kTechDataResearchName] = "SKULK_BOOST",
+    })
 
+    table.insert(techData, {
+        [kTechDataId] = kTechId.XenocideFuel, 
+        [kTechDataCostKey] = kXenocideFuelCost,
+        [kTechDataResearchTimeKey] = kXenocideFuelTime, 
+        [kTechDataDisplayName] = "XENOCIDE_FUEL",
+        [kTechDataTooltipInfo] = "XENOCIDE_FUEL_TOOLTIP",
+        [kTechDataResearchName] = "XENOCIDE_FUEL",
+    })
     --Prowler
 
     table.insert(techData, { 

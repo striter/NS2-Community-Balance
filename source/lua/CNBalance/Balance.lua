@@ -124,7 +124,8 @@ kSubMachineGunCost = 0
 -- kSubMachineGunPointValue = 1
 --
 
-kRifleMeleeDamage = 20
+kRifleMeleeDamage = 10
+kMachineGunMeleeDamage = 25
 
 kCombatBuilderCost = 15
 kCombatBuilderPointValue = 15
@@ -225,9 +226,6 @@ kClawRailgunExosuitCost = 40
 kOnosDevourCost = 15
 kOnosDevourTime = 60
 
-kXenocideResearchCost = 25
-kXenocideResearchTime = 60
-
 kUmbraBulletModifier = 0.8
 
 kDevourEnergyCost = 50 --50
@@ -250,10 +248,25 @@ kOnosEggCost = 100
 kTunnelEntranceCost = 6
 
 --Skulk
+kSkulkBoostCost = 25
+kSkulkBoostTime = 60
+kSkulkBoostMaxSpeed = 0.75
+kSkulkBoostHealthPerBiomass = 3
+
+kXenocideResearchCost = 20
+kXenocideResearchTime = 60
+
 kXenocideDamage = 120   --200
 kXenocideDamageType = kDamageType.Structural
 kXenocideRange = 9  -- 14
 kXenocideEnergyCost = 30
+kXenocideSpawnReduction = 2
+
+kXenocideFuelCost = 20
+kXenocideFuelTime = 60
+kXenocideFuelDamage = 200
+kXenocideFuelRange = 14
+kXenocideFuelSpawnReduction = 4
 
 kBileBombResearchCost = 10
 kBileBombResearchTime = 40

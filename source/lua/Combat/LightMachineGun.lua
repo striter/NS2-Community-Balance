@@ -248,7 +248,7 @@ function LightMachineGun:PerformMeleeAttack(player)
 
     player:TriggerEffects("rifle_alt_attack")
     
-    AttackMeleeCapsule(self, player, kRifleMeleeDamage, kButtRange, nil, true)
+    AttackMeleeCapsule(self, player, kMachineGunMeleeDamage, kButtRange, nil, true)
     
 end
 

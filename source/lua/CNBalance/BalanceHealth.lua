@@ -8,7 +8,7 @@ kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30    kOnosHealtPerBi
 
 kProwlerHealth = 140 kProwlerArmor  = 10 kProwlerPointValue = 10 kProwlerHealthPerBioMass = 4
 
-kParasitePlayerPointValue = 2
+kParasitePlayerPointValue = 1
 kAlienRegenerationPercentage = 0.08
 
 kSkulkBaseCarapaceUpgradeAmount = 15
@@ -24,24 +24,24 @@ kLerkCarapaceArmorPerBiomass  = 1.25
 kFadeCarapaceArmorPerBiomass  = 0
 kOnosCarapaceArmorPerBiomass  = 0
 
-kHiveHealth = 5200    kHiveArmor = 750
-kMatureHiveHealth = 7800 kMatureHiveArmor = 1400
+kHiveHealth = 5200    kHiveArmor = 750   --4000 750
+kMatureHiveHealth = 7800 kMatureHiveArmor = 1400    -- 6000 1400
 
 --2400 1050
 kExtractorHealth = 2400 kExtractorArmor = 1200 kExtractorPointValue = 15
 
 kSentryBatteryHealth = 700    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5
-kSentryHealth = 400    kSentryArmor = 50    kSentryPointValue = 2
+kSentryHealth = 500    kSentryArmor = 100    kSentryPointValue = 0
 
-kARCHealth = 2000    kARCArmor = 700    kARCPointValue = 5
-kARCDeployedHealth = 2000    kARCDeployedArmor = 0
+kARCHealth = 2600    kARCArmor = 600    kARCPointValue = 10   --2600 400
+kARCDeployedHealth = 2600    kARCDeployedArmor = 0      -- 2600 0
 
--- 1500  800
-kPhaseGateHealth = 1850    kPhaseGateArmor = 800    kPhaseGatePointValue = 10
+kPhaseGateHealth = 1850    kPhaseGateArmor = 800    kPhaseGatePointValue = 10 -- 1500  800  10
+kPowerPointHealth = 2200    kPowerPointArmor = 1250    kPowerPointPointValue = 15 -- 2000 1000  10
 
+--Alien
 kHarvesterHealth = 2000 kHarvesterArmor = 200 kHarvesterPointValue = 15
---2300 320
-kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 500
+kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 500  --2300 320
 
 
 kCystHealth = 50    kCystArmor = 1
@@ -67,8 +67,31 @@ kTunnelEntrancePointValue = 5
 kBabblerEggHealth = 50    kBabblerEggArmor = 0    kBabblerEggPointValue = 0
 kMatureBabblerEggHealth = 150 kMatureBabblerEggArmor = 0
 
+
+kCragHealth = 480    kCragArmor = 160    kCragPointValue = 10
+kMatureCragHealth = 560    kMatureCragArmor = 272    kMatureCragPointValue = 10
+        
+kWhipHealth = 650    kWhipArmor = 175    kWhipPointValue = 10
+kMatureWhipHealth = 720    kMatureWhipArmor = 240    kMatureWhipPointValue = 10
+
+kShadeHealth = 600    kShadeArmor = 0    kShadePointValue = 10
+kMatureShadeHealth = 1200    kMatureShadeArmor = 0    kMatureShadePointValue = 10
+
+kShiftHealth = 600    kShiftArmor = 60    kShiftPointValue = 10
+kMatureShiftHealth = 880    kMatureShiftArmor = 120    kMatureShiftPointValue = 10
+
+kShellHealth = 600     kShellArmor = 150     kShellPointValue = 12
+kMatureShellHealth = 1000     kMatureShellArmor = 300 -- 700 200
+   
+kSpurHealth = 800     kSpurArmor = 50     kSpurPointValue = 12
+kMatureSpurHealth = 900  kMatureSpurArmor = 300  kMatureSpurPointValue = 15  --900 100
+
+kVeilHealth = 900     kVeilArmor = 0     kVeilPointValue = 12
+kMatureVeilHealth = 1500     kMatureVeilArmor = 0     kVeilPointValue = 15  -- 1100 0
+
+
 --Combat
-kWeaponCacheHealth = 600    kWeaponCacheArmor = 150        kWeaponCachePointValue = 2
+kWeaponCacheHealth = 600    kWeaponCacheArmor = 150   kWeaponCachePointValue = 0
 
 kSporeMineHealth = 50 kSporeMineArmor = 0 kSporeMinepointValue=0
 kMatureSporeMineHealth = 100 kMatureSporeMineArmor = 0
