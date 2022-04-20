@@ -1,1 +1,0 @@
-SentryBattery.kRange = 7
