@@ -33,7 +33,7 @@ kTechId = enum {
     ------------/
 
     -- Marine classes + spectators
-    'Marine', 'Exo', 'MarineCommander', 'JetpackMarine', 'Spectator', 'AlienSpectator',
+    'Marine', 'Exo', 'MarineCommander', 'JetpackMarine' , 'HeavyMarine', 'Spectator', 'AlienSpectator',
 
     -- Marine alerts (specified alert sound and text in techdata if any)
     'MarineAlertAcknowledge', 'MarineAlertNeedMedpack', 'MarineAlertNeedAmmo', 'MarineAlertNeedOrder', 'MarineAlertNeedStructure', 'MarineAlertHostiles', 'MarineCommanderEjected', 'MACAlertConstructionComplete',
@@ -96,7 +96,7 @@ kTechId = enum {
     'Revolver','SubMachineGun','LightMachineGun','Knife','CombatBuilder',
 
     -- Armor
-    'Jetpack',  'Exosuit',
+    'Jetpack',  'Exosuit', 'Heavy',
 
     -- Marine upgrades
     'Weapons1', 'Weapons2', 'Weapons3', 
@@ -114,7 +114,7 @@ kTechId = enum {
     
     -- Weapon drop
     'DropWelder', 'DropMines', 'DropShotgun', 'DropHeavyMachineGun', 'DropGrenadeLauncher', 'DropFlamethrower',
-    'DropJetpack', 'DropExosuit',
+    'DropJetpack', 'DropExosuit', 'DropHeavy',
 
     ------------
     -- Aliens --
@@ -188,9 +188,14 @@ kTechId = enum {
     'XenocideFuel',
 
 -----------
-    'Prowler','ProwlerMenu','ProwlerEgg','HallucinateProwler','UpgradeProwler',
+    'Prowler','ProwlerMenu','ProwlerEgg','HallucinateProwler',
     'Volley','Rappel','AcidSpray',
 -----------
+
+--------
+    'Vokex','VokexMenu','VokexEgg','HallucinateVokex',
+    'SwipeShadowStep','MetabolizeShadowStep','AcidRocket',    
+--------
 
     -- gorge abilities
     'Spit', 'Spray', 'BellySlide', 'BabblerTech', 'BuildAbility', 'BabblerAbility', 'Babbler', 'BabblerEgg', 'GorgeTunnelTech',

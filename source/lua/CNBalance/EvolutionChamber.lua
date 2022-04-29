@@ -7,10 +7,13 @@ EvolutionChamber.kUpgradeButtons[kTechId.OnosMenu]= { kTechId.Devour, kTechId.Bo
 EvolutionChamber.kUpgradeButtons[kTechId.ProwlerMenu] = { kTechId.AcidSpray,kTechId.None, kTechId.None, kTechId.None,
                                                       kTechId.None, kTechId.None, kTechId.None, kTechId.None }
                       
+EvolutionChamber.kUpgradeButtons[kTechId.VokexMenu] = { kTechId.ShadowStep,kTechId.AcidRocket, kTechId.None, kTechId.None,
+                                                       kTechId.None, kTechId.None, kTechId.None, kTechId.None }
+
 function EvolutionChamber:GetTechButtons(techId)
 
     local techButtons = { kTechId.SkulkMenu, kTechId.GorgeMenu, kTechId.LerkMenu, kTechId.FadeMenu,
-                        kTechId.OnosMenu, kTechId.ProwlerMenu, kTechId.None, kTechId.None }
+                        kTechId.OnosMenu, kTechId.ProwlerMenu, kTechId.VokexMenu, kTechId.None }
 
     local returnButton = kTechId.Return
     if self.kUpgradeButtons[techId] then

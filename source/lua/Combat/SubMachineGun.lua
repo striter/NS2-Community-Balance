@@ -454,8 +454,8 @@ end
 
 if Server then
 
-    function SubMachineGun:OnKill()
-        DestroyEntity(self)
+    function SubMachineGun:GetDestroyOnKill()
+        return true
     end
     
     function SubMachineGun:GetSendDeathMessageOverride()

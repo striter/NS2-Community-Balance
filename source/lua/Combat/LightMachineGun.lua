@@ -456,8 +456,8 @@ end
 
 if Server then
 
-    function LightMachineGun:OnKill()
-        DestroyEntity(self)
+    function LightMachineGun:GetDestroyOnKill()
+        return true
     end
     
     function LightMachineGun:GetSendDeathMessageOverride()

@@ -25,7 +25,7 @@ local function GetTextureForTechId(techId)
         eggTextures[kTechId.Fade] = "ui/Fade.dds"
         eggTextures[kTechId.Onos] = "ui/Onos.dds"
         eggTextures[kTechId.Prowler] = "ui/Prowler.dds"
-    
+        eggTextures[kTechId.Vokex] = "ui/Fade.dds"
     end
     
     if eggTextures[techId] then

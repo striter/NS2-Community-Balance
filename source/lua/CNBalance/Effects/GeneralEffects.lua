@@ -24,6 +24,26 @@ local kAdditionalEffects = {
         
     },
     
+    vortexed_start =
+    {
+        vortexEffects = 
+        {
+            {sound = "", silenceupgrade = true, done = true},
+            {cinematic = "cinematics/alien/fade/vortex.cinematic"},
+            {sound = "sound/NS2.fev/alien/fade/vortex_start", done = true},   
+        }
+    },
+    
+    vortexed_end =
+    {
+        vortexEndEffects =
+        {
+            {cinematic = "cinematics/alien/fade/vortex_destroy.cinematic"},
+            {sound = "sound/NS2.fev/alien/fade/vortex_end", done = true}, 
+        }
+    },
+
+
 }
 
 GetEffectManager():AddEffectData("GeneralEffectData", kAdditionalEffects)

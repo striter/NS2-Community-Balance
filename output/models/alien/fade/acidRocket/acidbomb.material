@@ -1,0 +1,7 @@
+shader = "models/alien/babbler/babbler_ball.surface_shader"
+albedoMap = "models/alien/fade/acidRocket/acidRocket.dds"
+normalMap = "models/alien/fade/acidRocket/acidRocket_normals.dds"
+specularMap = "models/alien/fade/acidRocket/acidRocket_spec.dds"
+emissiveMap = "materials/dev/black.dds"
+highlight = 1
+surface = "organic"

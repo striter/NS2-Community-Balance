@@ -18,6 +18,8 @@ function Alien:GetPlayerStatusDesc()
                 status = kPlayerStatus.OnosEgg
             elseif self.gestationTypeTechId == kTechId.Prowler then
                 status = kPlayerStatus.ProwlerEgg
+            elseif self.gestationTypeTechId == kTechId.Vokex then
+                status = kPlayerStatus.VokexEgg
             else
                 status = kPlayerStatus.Embryo
             end

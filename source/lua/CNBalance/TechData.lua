@@ -290,6 +290,24 @@ function BuildTechData()
         [kTechDataAllowConsumeDrop] = true, 
     })
 
+    table.insert(techData,  {
+        [kTechDataId] = kTechId.Heavy,
+        [kTechDataMapName] = Heavy.kMapName,
+        [kTechDataDisplayName] = "HEAVY",
+        [kTechDataModel] = Heavy.kModelName,
+        [kTechDataCostKey] = kHeavyCost,
+        [kTechDataSpawnHeightOffset] = kCommanderEquipmentDropSpawnHeight,
+    })
+
+    table.insert(techData,  {
+        [kTechDataId] = kTechId.HeavyMarine,
+        [kTechDataDisplayName] = "HEAVYMARINE",
+        [kTechDataMapName] = HeavyMarine.kMapName,
+        [kTechDataModel] = MarineVariantMixin.kModelNames["male"]["green"],
+        [kTechDataMaxHealth] = HeavyMarine.kHealth,
+        [kTechDataEngagementDistance] = kPlayerEngagementDistance,
+        [kTechDataPointValue] = kHeavyMarinePointValue,
+    })
 ----- Aliens
 
     -- Fix Gorge Visualize
@@ -398,13 +416,93 @@ function BuildTechData()
         [kTechDataMapName] = ProwlerHallucination.kMapName,
         [kTechDataModel] = Prowler.kModelName,
         [kTechDataCostKey] = kProwlerCost,
-        [kTechDataMaxHealth] = kProwlerHallucinationHealth,
+        [kTechDataMaxHealth] = Prowler.kHealth,
         [kTechDataMaxArmor] = Prowler.kArmor,
         [kTechDataRequiresMature] = true, 
-        [kTechDataDisplayName] = "HALLUCINATE_DRIFTER", 
-        [kTechDataTooltipInfo] = "HALLUCINATE_DRIFTER_TOOLTIP", 
+        [kTechDataDisplayName] = "HALLUCINATE_PROWLER", 
+        [kTechDataTooltipInfo] = "HALLUCINATE_PROWLER_TOOLTIP", 
+    })
+    --Vokex
+    
+    table.insert(techData, { 
+        [kTechDataId] = kTechId.VokexMenu,            
+        [kTechDataDisplayName] = "UPGRADE_VOKEX",  
+        [kTechDataTooltipInfo] = "UPGRADE_VOKEX_TOOLTIP", 
+    })
+    table.insert(techData,  { 
+		[kTechDataId] = kTechId.Vokex, 
+		[kTechDataUpgradeCost] = kVokexUpgradeCost, 
+		[kTechDataMapName] = Vokex.kMapName, 
+		[kTechDataGestateName] = Vokex.kMapName,                      
+		[kTechDataGestateTime] = kVokexGestateTime, 
+		[kTechDataDisplayName] = "VOKEX",  
+		[kTechDataTooltipInfo] = "VOKEX_TOOLTIP",        
+		[kTechDataModel] = Vokex.kModelName, 
+		[kTechDataCostKey] = kVokexCost, 
+		[kTechDataMaxHealth] = Vokex.kHealth, 
+		[kTechDataMaxArmor] = Vokex.kArmor, 
+		[kTechDataMaxExtents] = Vector(Vokex.XZExtents, Vokex.YExtents, Vokex.XZExtents), 
+		[kTechDataPointValue] = kVokexPointValue,
+		[kTechDataEngagementDistance] = kPlayerEngagementDistance, 
+	})
+
+    table.insert(techData, { 
+        [kTechDataId] = kTechId.ShadowStep,
+        [kTechDataCategory] = kTechId.Vokex,
+        [kTechDataCostKey] = kShadowStepResearchCost,
+        [kTechDataResearchTimeKey] = kShadowStepResearchTime,
+        [kTechDataDisplayName] = "SHADOWSTEP",
+        [kTechDataTooltipInfo] = "SHADOWSTEP_TOOLTIP",
     })
 
+    table.insert(techData, { 
+        [kTechDataId] = kTechId.SwipeShadowStep,
+        [kTechDataMapName] = SwipeShadowStep.kMapName,
+        [kTechDataDamageType] = kSwipeDamageType,
+        [kTechDataDisplayName] = "SWIPE_SHADOWSTEP",
+        [kTechDataTooltipInfo] = "SWIPE_SHADOWSTEP_TOOLTIP",
+    })
+
+    table.insert(techData, { 
+        [kTechDataId] = kTechId.MetabolizeShadowStep,
+        [kTechDataMapName] = MetabolizeShadowStep.kMapName,
+        [kTechDataDisplayName] = "METABOLIZE_SHADOWSTEP",
+        [kTechDataTooltipInfo] = "METABOLIZE_SHADOWSTEP_TOOLTIP",
+    })
+
+    table.insert(techData, { 
+        [kTechDataId] = kTechId.MetabolizeShadowStep,
+        [kTechDataCategory] = kTechId.Vokex,
+        [kTechDataMapName] = MetabolizeShadowStep.kMapName,
+        [kTechDataCostKey] = kMetabolizeEnergyResearchCost,
+        [kTechDataResearchTimeKey] = kMetabolizeEnergyResearchTime,
+        [kTechDataDisplayName] = "METABOLIZE",
+        [kTechDataTooltipInfo] = "METABOLIZE_TOOLTIP",
+        [kTechDataResearchName] = "METABOLIZE",
+    })
+
+    table.insert(techData, { 
+        [kTechDataId] = kTechId.AcidRocket,
+        [kTechDataCategory] = kTechId.Vokex,
+        [kTechDataMapName] = AcidRocket.kMapName, 
+        [kTechDataCostKey] = kAcidRocketResearchCost,
+        [kTechDataResearchTimeKey] = kAcidRocketResearchTime,
+        [kTechDataDisplayName] = "ACIDROCKET",
+        [kTechDataTooltipInfo] = "ACIDROCKET_TOOLTIP",
+    })
+
+    table.insert(techData, { 
+        [kTechDataId] = kTechId.HallucinateVokex,             
+        [kTechDataMapName] = Fade.kMapName,
+        [kTechDataModel] = Vokex.kModelName,
+        [kTechDataCostKey] = kVokexCost,
+        [kTechDataMaxHealth] = Vokex.kHealth,
+        [kTechDataMaxArmor] = Vokex.kArmor,
+        [kTechDataRequiresMature] = true, 
+        [kTechDataDisplayName] = "HALLUCINATE_VOKEX", 
+        [kTechDataTooltipInfo] = "HALLUCINATE_VOKEX_TOOLTIP", 
+    })
+    
 
     -- Devour
     table.insert(techData, {

@@ -336,4 +336,46 @@ if Server then
         end
         
     end
+
+    
+    -- local kMaxWorldSoundDistance = 40
+
+    -- function NS2Gamerules:GetCanPlayerHearPlayer(listenerPlayer, speakerPlayer, channelType)
+
+    --     local canHear = false
+        
+    --     if Server.GetConfigSetting("alltalk") or Server.GetConfigSetting("pregamealltalk") and not self:GetGameStarted() then
+    --         return true
+    --     end
+
+    --     -- Check if the listerner has the speaker muted.
+    --     if listenerPlayer:GetClientMuted(speakerPlayer:GetClientIndex()) then
+    --         return false
+    --     end
+
+    --     local isCommander = listenerPlayer:GetIsCommander() or speakerPlayer:GetIsCommander()
+    --     local sameTeam = listenerPlayer:GetTeamNumber() == speakerPlayer:GetTeamNumber()
+    --     local closeEnough = listenerPlayer:GetDistance(speakerPlayer) < kMaxWorldSoundDistance
+    --     -- If both players have the same team number, they can hear each other
+    --     if sameTeam then
+    --         canHear = isCommander or closeEnough
+    --     else
+    --         canHear = not isCommander and closeEnough
+    --     end
+            
+    --     -- Or if cheats AND dev mode is on, they can hear each other
+    --     if(Shared.GetCheatsEnabled() and Shared.GetDevMode()) then
+    --         canHear = true
+    --     end
+        
+    --     -- NOTE: SCRIPT ERROR CAUSED IN THIS FUNCTION WHEN FP SPEC WAS ADDED.
+    --     -- This functionality never really worked anyway.
+    --     -- If we're spectating a player, we can hear their team (but not in tournamentmode, once that's in)
+    --     --if self:GetIsPlayerFollowingTeamNumber(listenerPlayer, speakerPlayer:GetTeamNumber()) then
+    --     --    canHear = true
+    --     --end
+        
+    --     return canHear
+        
+    -- end
 end

@@ -67,3 +67,5 @@ local function OnCommandChangeClass(className, teamNumber, extraValues)
 end
 
 Event.Hook("Console_prowler", OnCommandChangeClass("prowler", kTeam2Index))
+Event.Hook("Console_vokex", OnCommandChangeClass("vokex", kTeam2Index))
+Event.Hook("Console_heavy", OnCommandChangeClass("heavymarine", kTeam1Index))

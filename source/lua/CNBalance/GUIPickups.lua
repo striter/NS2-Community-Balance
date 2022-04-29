@@ -6,9 +6,11 @@ table.insert(kPickupTypes, "SubMachineGun")
 table.insert(kPickupTypes, "LightMachineGun")
 table.insert(kPickupTypes, "Cannon")
 table.insert(kPickupTypes, "CombatBuilder")
+table.insert(kPickupTypes, "Heavy")
 local kPickupTextureYOffsets = debug.getupvaluex(GetPickupTextureCoordinates, "kPickupTextureYOffsets")
 kPickupTextureYOffsets["Revolver"] = 13
 kPickupTextureYOffsets["SubMachineGun"] = 14
 kPickupTextureYOffsets["Cannon"] = 15
 kPickupTextureYOffsets["LightMachineGun"] = 16
 kPickupTextureYOffsets["CombatBuilder"] = 17
+kPickupTextureYOffsets["Heavy"] = 17

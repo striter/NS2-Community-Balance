@@ -1,8 +1,8 @@
 Lerk.kAdrenalineEnergyRecuperationRate = 18.0
 Lerk.kDamageReductionTable = {
     ["grenade"] = 0.8,
-    ["impactgrenade"] = 0.8,
     ["pulsegrenade"] = 0.8,
+    ["impactgrenade"] = 0.8,
     ["railgun"] = 0.8,
 }
 

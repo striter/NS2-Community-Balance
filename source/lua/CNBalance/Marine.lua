@@ -332,3 +332,23 @@ if Client then
 
     end
 end
+
+if Server then
+    function Marine:GiveHeavy()
+
+        local activeWeapon = self:GetActiveWeapon()
+        local activeWeaponMapName
+        local health = self:GetHealth()
+        
+        if activeWeapon ~= nil then
+            activeWeaponMapName = activeWeapon:GetMapName()
+        end
+        
+        local heavyMarine = self:Replace(HeavyMarine.kMapName, self:GetTeamNumber(), true, Vector(self:GetOrigin()))
+        
+        heavyMarine:SetActiveWeapon(activeWeaponMapName)
+        heavyMarine:SetHealth(health)
+        
+    end
+    
+end

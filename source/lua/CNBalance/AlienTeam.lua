@@ -13,6 +13,7 @@ function AlienTeam:InitTechTree()
     self.techTree:AddMenu(kTechId.SkulkMenu)
     self.techTree:AddMenu(kTechId.GorgeMenu)
     self.techTree:AddMenu(kTechId.ProwlerMenu)
+    self.techTree:AddMenu(kTechId.VokexMenu)
     self.techTree:AddMenu(kTechId.LerkMenu)
     self.techTree:AddMenu(kTechId.FadeMenu)
     self.techTree:AddMenu(kTechId.OnosMenu)
@@ -113,6 +114,7 @@ function AlienTeam:InitTechTree()
     self.techTree:AddAction(kTechId.Skulk,                     kTechId.None,                kTechId.None)
     self.techTree:AddAction(kTechId.Gorge,                     kTechId.None,                kTechId.None)
     self.techTree:AddAction(kTechId.Prowler,                   kTechId.None,                kTechId.None)
+    self.techTree:AddAction(kTechId.Vokex,                   kTechId.None,                kTechId.None)
     self.techTree:AddAction(kTechId.Lerk,                      kTechId.None,                kTechId.None)
     self.techTree:AddAction(kTechId.Fade,                      kTechId.None,                kTechId.None)
     self.techTree:AddAction(kTechId.Onos,                      kTechId.None,                kTechId.None)
@@ -241,6 +243,7 @@ function AlienTeam:InitTechTree()
 
     -- fade researches
     self.techTree:AddResearchNode(kTechId.MetabolizeEnergy,        kTechId.BioMassThree, kTechId.None, kTechId.AllAliens)
+    self.techTree:AddTargetedActivation(kTechId.MetabolizeShadowStep,        kTechId.MetabolizeEnergy, kTechId.None, kTechId.AllAliens)
     self.techTree:AddResearchNode(kTechId.MetabolizeHealth,        kTechId.BioMassFive, kTechId.MetabolizeEnergy, kTechId.AllAliens)
     self.techTree:AddResearchNode(kTechId.Stab,              kTechId.BioMassSeven, kTechId.None, kTechId.AllAliens)
 
@@ -256,6 +259,9 @@ function AlienTeam:InitTechTree()
     self.techTree:AddPassive(kTechId.Rappel)
     -- self.techTree:AddResearchNode(kTechId.Rappel,              kTechId.BioMassThree,  kTechId.None, kTechId.AllAliens)
     self.techTree:AddResearchNode(kTechId.AcidSpray,           kTechId.BioMassSix,  kTechId.None, kTechId.AllAliens) 
+    -- vokex researches
+    self.techTree:AddResearchNode(kTechId.ShadowStep,           kTechId.BioMassFour,  kTechId.None, kTechId.AllAliens) 
+    self.techTree:AddResearchNode(kTechId.AcidRocket,           kTechId.BioMassSeven,  kTechId.None, kTechId.AllAliens) 
 
     -- gorge structures
     self.techTree:AddBuildNode(kTechId.Hydra)

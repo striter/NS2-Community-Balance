@@ -41,6 +41,32 @@ local kAdditionalEffects =
             {sound = "sound/NS2.fev/alien/skulk/parasite", done = true},
         },
     },
+
+    draw = 
+    {
+		alienWeaponDrawSounds =
+        {
+			{player_sound = "sound/ns2remake_combat.fev/combat/abilities/alien/fade/acid_rocket/deploy", classname = "AcidRocket", done = true},
+        }
+    },
+
+    acidrocket_attack =
+    {
+        bilebombFireEffects = 
+        {   
+            {sound = "", silenceupgrade = true, done = true}, 
+            {player_sound = "sound/ns2remake_combat.fev/combat/abilities/alien/fade/acid_rocket/rocket_fire"},
+        },
+    },
+
+    acidrocket_hit =
+    {
+        bilebombHitEffects = 
+        {          
+            {cinematic = "cinematics/alien/gorge/bilebomb_impact.cinematic"},
+            {parented_sound = "sound/ns2remake_combat.fev/combat/abilities/alien/fade/acid_rocket/rocket_hit", done = true},
+        },
+    },
 }
 
 GetEffectManager():AddEffectData("kAdditionalEffects", kAdditionalEffects)

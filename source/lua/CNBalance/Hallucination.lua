@@ -61,6 +61,7 @@ local function GetTechIdAttacks(techId)
     if not gTechIdAttacking then
         gTechIdAttacking = {}
         gTechIdAttacking[kTechId.Prowler] = true
+        gTechIdAttacking[kTechId.Vokex] = true
         gTechIdAttacking[kTechId.Skulk] = true
         gTechIdAttacking[kTechId.Gorge] = true
         gTechIdAttacking[kTechId.Lerk] = true
@@ -80,6 +81,7 @@ function GetTechIdToEmulate(techId)
         ghallucinateIdToTechId = {}
         ghallucinateIdToTechId[kTechId.HallucinateDrifter] = kTechId.Drifter
         ghallucinateIdToTechId[kTechId.HallucinateProwler] = kTechId.Prowler
+        ghallucinateIdToTechId[kTechId.HallucinateVokex] = kTechId.Vokex
         ghallucinateIdToTechId[kTechId.HallucinateSkulk] = kTechId.Skulk
         ghallucinateIdToTechId[kTechId.HallucinateGorge] = kTechId.Gorge
         ghallucinateIdToTechId[kTechId.HallucinateLerk] = kTechId.Lerk
@@ -106,6 +108,7 @@ local function GetHallucinationCanMove(techId)
     if not gTechIdCanMove then
         gTechIdCanMove = {}
         gTechIdCanMove[kTechId.Prowler] = true
+        gTechIdCanMove[kTechId.Vokex] = true
         gTechIdCanMove[kTechId.Skulk] = true
         gTechIdCanMove[kTechId.Gorge] = true
         gTechIdCanMove[kTechId.Lerk] = true
@@ -143,6 +146,7 @@ local function GetAnimationGraph(techId)
     if not gTechIdAnimationGraph then
         gTechIdAnimationGraph = {}
         gTechIdAnimationGraph[kTechId.Prowler] = "models/alien/prowler/prowler.animation_graph"
+        gTechIdAnimationGraph[kTechId.Vokex] = "models/alien/vokex/fade.animation_graph"
         gTechIdAnimationGraph[kTechId.Skulk] = "models/alien/skulk/skulk.animation_graph"
         gTechIdAnimationGraph[kTechId.Gorge] = "models/alien/gorge/gorge.animation_graph"
         gTechIdAnimationGraph[kTechId.Lerk] = "models/alien/lerk/lerk.animation_graph"
@@ -170,6 +174,7 @@ local function GetMaxMovementSpeed(techId)
     if not gTechIdMaxMovementSpeed then
         gTechIdMaxMovementSpeed = {}
         gTechIdMaxMovementSpeed[kTechId.Prowler] = 8
+        gTechIdMaxMovementSpeed[kTechId.Vokex] = 7
         gTechIdMaxMovementSpeed[kTechId.Skulk] = 8
         gTechIdMaxMovementSpeed[kTechId.Gorge] = 5.1
         gTechIdMaxMovementSpeed[kTechId.Lerk] = 9

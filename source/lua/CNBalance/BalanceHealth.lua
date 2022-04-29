@@ -7,6 +7,7 @@ kFadeHealth = 250    kFadeArmor = 80     kFadePointValue = 20    kFadeHealthPerB
 kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30    kOnosHealtPerBioMass = 50
 
 kProwlerHealth = 140 kProwlerArmor  = 10 kProwlerPointValue = 10 kProwlerHealthPerBioMass = 4
+kVokexHealth = 200 kVokexArmor = 80 kVokexPointvalue = 25 kVokexHealthPerBioMass = 4
 
 kParasitePlayerPointValue = 1
 kAlienRegenerationPercentage = 0.08
@@ -18,11 +19,17 @@ kLerkBaseCarapaceUpgradeAmount  = 25
 kFadeBaseCarapaceUpgradeAmount  = 40
 kOnosBaseCarapaceUpgradeAmount  = 200
 
+kProwlerBaseCarapaceUpgradeAmount = 10.5
+kVokexBaseCarapaceUpgradeAmount = 50
+
 kSkulkCarapaceArmorPerBiomass = 1.25
 kGorgeCarapaceArmorPerBiomass = 1.25
 kLerkCarapaceArmorPerBiomass  = 1.25
 kFadeCarapaceArmorPerBiomass  = 0
 kOnosCarapaceArmorPerBiomass  = 0
+
+kProwlerCarapaceArmorPerBiomass = 1.5
+kVokexCarapaceArmorPerBiomass = 0
 
 kHiveHealth = 5200    kHiveArmor = 750   --4000 750
 kMatureHiveHealth = 7800 kMatureHiveArmor = 1400    -- 6000 1400
@@ -66,7 +73,6 @@ kTunnelEntrancePointValue = 5
 
 kBabblerEggHealth = 50    kBabblerEggArmor = 0    kBabblerEggPointValue = 0
 kMatureBabblerEggHealth = 150 kMatureBabblerEggArmor = 0
-
 
 kCragHealth = 480    kCragArmor = 160    kCragPointValue = 10
 kMatureCragHealth = 560    kMatureCragArmor = 272    kMatureCragPointValue = 10

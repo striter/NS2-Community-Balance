@@ -36,6 +36,7 @@ kTechIdToMaterialOffset[kTechId.AcidSpray] = 206
 kTechIdToMaterialOffset[kTechId.Prowler] = 115
 kTechIdToMaterialOffset[kTechId.ProwlerEgg] = 115
 
+
 kTechIdToMaterialOffset[kTechId.FastTunnel] = 189
 
 kTechIdToMaterialOffset[kTechId.Devour] = 109 

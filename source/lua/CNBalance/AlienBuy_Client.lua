@@ -2,6 +2,8 @@
 local indexToAlienTechIdTable = debug.getupvaluex(IndexToAlienTechId, "indexToAlienTechIdTable")
 table.insert(indexToAlienTechIdTable, kTechId.Prowler)
 kProwlerTechIdIndex = #indexToAlienTechIdTable
+table.insert(indexToAlienTechIdTable, kTechId.Vokex)
+kVokexTechIdIndex = #indexToAlienTechIdTable
 
 function AlienBuy_GetClassStats(idx)
 
@@ -22,6 +24,8 @@ function AlienBuy_GetClassStats(idx)
         return {"Onos", Onos.kHealth, Onos.kArmor, kOnosCost}
     elseif techId == kTechId.Prowler then
         return {"Prowler", Prowler.kHealth, Prowler.kArmor, kProwlerCost}
+    elseif techId == kTechId.Vokex then
+        return {"Vokex" , Vokex.kHealth, Vokex.kArmor, kVokexCost}
     else
         return {"Skulk", Skulk.kHealth, Skulk.kArmor, kSkulkCost}
     end
@@ -31,8 +35,8 @@ local oldAlienBuy_OnSelectAlien = AlienBuy_OnSelectAlien
 function AlienBuy_OnSelectAlien(type)
 	if type == "Prowler" then
         type = "Skulk"
+    elseif type == "Vokex" then
+        type = "Fade"
     end
     oldAlienBuy_OnSelectAlien(type)
-
 end
-

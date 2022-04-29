@@ -20,10 +20,10 @@ end
 
 
 Skulk.kDamageReductionTable = {
-    ["grenade"] = 0.7,
-    ["impactgrenade"] = 0.7,
-    ["pulsegrenade"] = 0.7,
-    ["railgun"] = 0.7,
+    ["grenade"] = 0.8,
+    ["pulsegrenade"] = 0.8,
+    ["impactgrenade"] = 0.8,
+    -- ["railgun"] = 0.7,
 }
 
 function Skulk:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud

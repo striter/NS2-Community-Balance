@@ -150,6 +150,13 @@ kLightMachineGunDamageType = kDamageType.Normal
 kLightMachineGunCost = 0
 --
 
+--
+kHeavyMarineHealth = 200
+kHeavyMarineArmor = 150
+kHeavyMarineArmorPerUpgradeLevel = 40
+--
+
+
 --Cannon
 kCannonTechResearchCost = 20
 kCannonTechResearchTime = 60
@@ -251,7 +258,7 @@ kTunnelEntranceCost = 6
 kSkulkBoostCost = 25
 kSkulkBoostTime = 60
 kSkulkBoostMaxSpeed = 0.75
-kSkulkBoostHealthPerBiomass = 3
+kSkulkBoostHealthPerBiomass = 2.5
 
 kXenocideResearchCost = 20
 kXenocideResearchTime = 60
@@ -264,8 +271,8 @@ kXenocideSpawnReduction = 2
 
 kXenocideFuelCost = 20
 kXenocideFuelTime = 60
-kXenocideFuelDamage = 200
-kXenocideFuelRange = 14
+kXenocideFuelDamage = 160
+kXenocideFuelRange = 12
 kXenocideFuelSpawnReduction = 4
 
 kBileBombResearchCost = 10
@@ -276,11 +283,6 @@ kSpikeSpread = Math.Radians(3.8)
 
 -- Prowler
 kProwlerCost = 16 --14
-
-kProwlerBaseCarapaceUpgradeAmount = 10.5
-kProwlerCarapaceArmorPerBiomass = 1.5
-
-kProwlerEggCost = 16
 kProwlerGestateTime = 6
 kProwlerUpgradeCost = 1
 kProwlerBabblerShieldPercent = 0.15
@@ -301,16 +303,43 @@ kAcidSprayEnergyCost = 19
 kAcidSprayDamage = 17  -- 3 missiles
 kAcidSprayDamageType = kDamageType.Heavy
 
-kProwlerHallucinationHealth = 180
 
 -- Fade
 kStabDamage = 150
 kStabDamageType = kDamageType.Structural
-kStabEnergyCost = 25
+kStabEnergyCost = 30
 
 kStartBlinkEnergyCost = 14
 kBlinkEnergyCost = 30
 kHealthOnBlink = 0
+
+--Vokex
+kVokexCost = 42
+kVokexUpgradeCost = 6
+
+kVokexShadowStepStartCost = 15
+kVokexShadowStepCost = 15
+
+kVokexGestateTime = 25
+kVokexEggCost = 80
+kVokexBabblerShieldPercent = 0.25
+
+kShadowStepResearchCost = 15
+kShadowStepResearchTime = 40
+
+kAcidRocketResearchCost = 25
+kAcidRocketResearchTime = 40
+
+kAcidRocketVelocity = 40
+kAcidRocketEnergyCost = 15
+kAcidRocketFireDelay = 0.01
+kAcidRocketBombDamageType = kDamageType.Normal
+kAcidRocketBombDamage = 30
+kAcidRocketBombRadius = 0.3
+kAcidRocketBombSplashRadius = 4
+kAcidRocketBombDotIntervall = 0.5
+kAcidRocketBombDotDamage = 10
+kAcidRocketBombDuration = 1
 
 -- Onos
 kChargeDamage = 30

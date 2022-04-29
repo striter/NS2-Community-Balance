@@ -5,7 +5,10 @@ function BuildClassToGrid()
     
 	ClassToGrid["DevouredPlayer"] = { 8, 2 }
     ClassToGrid["Prowler"] = { 1, 9 }
+
+    ClassToGrid["Vokex"] = { 8, 2 }
     ClassToGrid["WeaponCache"] = { 8, 5 }
+    ClassToGrid["HeavyMarine"] = { 7, 8 }
 
     return ClassToGrid
     
@@ -19,6 +22,8 @@ function GetTexCoordsForTechId(techId)
 		gTechIdPosition[kTechId.Devour] = kDeathMessageIcon.Devour
         gTechIdPosition[kTechId.AcidSpray] = kDeathMessageIcon.AcidSpray
         gTechIdPosition[kTechId.Rappel] = kDeathMessageIcon.Rappel
+        gTechIdPosition[kTechId.SwipeShadowStep] = kDeathMessageIcon.Swipe
+        gTechIdPosition[kTechId.AcidRocket] = kDeathMessageIcon.AcidRocket
 
 		gTechIdPosition[kTechId.Revolver] = kDeathMessageIcon.Revolver
 		gTechIdPosition[kTechId.SubMachineGun] = kDeathMessageIcon.SubMachineGun

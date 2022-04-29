@@ -1,0 +1,6 @@
+shader = "models/alien/fade/fade.surface_shader"
+albedoMap = "models/alien/fade/fade_colour.dds"
+normalMap = "models/alien/fade/fade_normal.dds"
+emissiveMap = "models/alien/fade/fade_illum.dds"
+specularMap = "models/alien/fade/fade_spec.dds"
+surface = "organic"

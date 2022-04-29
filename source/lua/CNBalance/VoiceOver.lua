@@ -7,14 +7,10 @@ local kAlienTauntSounds =
     [kTechId.Onos] = "sound/NS2.fev/alien/onos/wound_serious",
     [kTechId.Embryo] = "sound/NS2.fev/alien/common/swarm",
     [kTechId.ReadyRoomEmbryo] = "sound/NS2.fev/alien/common/swarm",
+    [kTechId.Prowler] = "sound/NS2.fev/alien/drifter/ordered",
+    [kTechId.Vokex] = "sound/NS2.fev/alien/fade/taunt",
+    
 }
-
-if Changeling then 
-    kAlienTauntSounds[kTechId.Changeling] = "sound/NS2.fev/alien/voiceovers/chuckle"
-end
-
-
-kAlienTauntSounds[kTechId.Prowler] = "sound/NS2.fev/alien/drifter/ordered"
 
 
 for _, tauntSound in pairs(kAlienTauntSounds) do
@@ -55,8 +51,4 @@ local kAlienMenu =
 }
 
 kRequestMenus["Prowler"] = kAlienMenu
-
-if Changeling then 
-    kRequestMenus["Changeling"] = kAlienMenu
-end
-
+kRequestMenus["Vokex"] = kAlienMenu

@@ -4,7 +4,8 @@ function GetHallucinationTechId(techId)
     
         gTechIdToHallucinateTechId = {}
         gTechIdToHallucinateTechId[kTechId.Drifter] = kTechId.HallucinateDrifter
-        gTechIdToHallucinateTechId[kTechId.Prowler] = kTechId.HallucinateProwler   
+        gTechIdToHallucinateTechId[kTechId.Prowler] = kTechId.HallucinateProwler  
+        gTechIdToHallucinateTechId[kTechId.Vokex] = kTechId.HallucinateVokex 
         gTechIdToHallucinateTechId[kTechId.Skulk] = kTechId.HallucinateSkulk
         gTechIdToHallucinateTechId[kTechId.Gorge] = kTechId.HallucinateGorge
         gTechIdToHallucinateTechId[kTechId.Lerk] = kTechId.HallucinateLerk
@@ -22,6 +23,7 @@ function GetHallucinationTechId(techId)
     elseif not gTechIdToHallucinateTechId[kTechId.Prowler] then
         
         gTechIdToHallucinateTechId[kTechId.Prowler] = kTechId.HallucinateProwler
+        gTechIdToHallucinateTechId[kTechId.Vokex] = kTechId.HallucinateVokex
     
     end
     

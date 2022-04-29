@@ -7,11 +7,18 @@
 local oldFunc = GUIAlienBuyMenu._InitializeBackground
 function GUIAlienBuyMenu:_InitializeBackground()
 	oldFunc(self)
-	local xpos = 3
+	local prowlerXpos = 3
+	-- local vokexXpos = 6
     for k, alienType in ipairs(GUIAlienBuyMenu.kAlienTypes) do
-		if alienType.XPos >= xpos then
+		
+		if alienType.XPos >= prowlerXpos then
 			alienType.XPos = alienType.XPos + 1
 		end
+
+		-- if alienType.XPos >= vokexXpos then
+			-- alienType.XPos = alienType.XPos + 1
+		-- end
 	end
-    table.insert(GUIAlienBuyMenu.kAlienTypes, { LocaleName = "Prowler", Name = "Prowler", Width = GUIScale(240), Height = GUIScale(170), XPos = xpos, Index = kProwlerTechIdIndex })
+    table.insert(GUIAlienBuyMenu.kAlienTypes, { LocaleName = "Prowler", Name = "Prowler", Width = GUIScale(240), Height = GUIScale(170), XPos = prowlerXpos, Index = kProwlerTechIdIndex })
+    -- table.insert(GUIAlienBuyMenu.kAlienTypes, { LocaleName = "Vokex", Name = "Vokex", Width = GUIScale(240), Height = GUIScale(170), XPos = vokexXpos, Index = kVokexTechIdIndex })
 end
