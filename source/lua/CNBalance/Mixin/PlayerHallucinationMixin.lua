@@ -26,7 +26,7 @@ function PlayerHallucinationMixin:OnUpdate(deltaTime)
             self.brain = OnosBrain()
         
         elseif self:isa("Prowler") then
-            self.brain = ProwlerBrain()
+            self.brain = SkulkBrain()
         
         end
         

@@ -1,28 +1,54 @@
 
 --Weapons
-local function GetPrimaryWeaponName(self)
-    return GetHasTech(self,kTechId.LightMachineGunUpgrade) and LightMachineGun.kMapName or Rifle.kMapName
-end
-
-local function GetThridWeaponName(self)
-    return GetHasTech(self,kTechId.AxeUpgrade) and Axe.kMapName or Knife.kMapName
-end
-
-function Marine:InitWeapons()
-
-    Player.InitWeapons(self)
+if Server then
     
-    local primaryWeapon = GetPrimaryWeaponName(self)
-    local meleeWeapon = GetThridWeaponName(self)
-    self:GiveItem(primaryWeapon)
-    self:GiveItem(meleeWeapon)
-    self:GiveItem(Pistol.kMapName)
-    self:GiveItem(Builder.kMapName)
+    function Marine:InitWeapons()
     
-    self:SetQuickSwitchTarget(Pistol.kMapName)
-    self:SetActiveWeapon(primaryWeapon)
+        Player.InitWeapons(self)
+        
+        local primaryWeapon = GetHasTech(self,kTechId.LightMachineGunUpgrade) and LightMachineGun.kMapName or Rifle.kMapName
+        local secondaryWeapon = Pistol.kMapName
+        local meleeWeapon = GetHasTech(self,kTechId.AxeUpgrade) and Axe.kMapName or Knife.kMapName
+        self:GiveItem(primaryWeapon)
+        self:GiveItem(secondaryWeapon)
+        self:GiveItem(meleeWeapon)
+        self:GiveItem(Builder.kMapName)
+        
+        self:SetQuickSwitchTarget(secondaryWeapon)
+        self:SetActiveWeapon(primaryWeapon)
+    end
 
+
+
+    local baseOnDropAllWeapons = Marine.DropAllWeapons
+    function Marine:DropAllWeapons()
+
+        local primaryWeapon = self:GetWeaponInHUDSlot(kPrimaryWeaponSlot)
+        if primaryWeapon then
+            self.primaryRespawn = primaryWeapon.kMapName
+        end
+
+        local secondaryWeapon = self:GetWeaponInHUDSlot(kSecondaryWeaponSlot)
+        if secondaryWeapon then
+            self.secondaryRespawn = secondaryWeapon.kMapName
+        end
+
+        baseOnDropAllWeapons(self)
+    end
+    
+    local onCopyPlayerDataFrom = Marine.CopyPlayerDataFrom
+    function Marine:CopyPlayerDataFrom(player)
+        onCopyPlayerDataFrom(self,player)
+        local playerInRR = player:GetTeamNumber() == kNeutralTeamType
+
+        if not playerInRR and GetGamerules():GetGameStarted() then
+            self.primaryRespawn = player.primaryRespawn
+            self.secondaryRespawn = player.secondaryRespawn
+        end
+
+    end
 end
+    
 
 local baseOnInitialized = Marine.OnInitialized
 function Marine:OnInitialized()
@@ -39,6 +65,10 @@ function Marine:OnInitialized()
             return true
         end, 1)
     end
+end
+
+function Marine:ShouldAutopickupWeapons()
+	return self.autoPickup
 end
 
 if Server then
@@ -348,7 +378,7 @@ if Server then
         
         heavyMarine:SetActiveWeapon(activeWeaponMapName)
         heavyMarine:SetHealth(health)
-        
     end
-    
+
+
 end

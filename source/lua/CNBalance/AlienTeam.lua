@@ -247,7 +247,7 @@ function AlienTeam:InitTechTree()
     self.techTree:AddResearchNode(kTechId.MetabolizeHealth,        kTechId.BioMassFive, kTechId.MetabolizeEnergy, kTechId.AllAliens)
     self.techTree:AddResearchNode(kTechId.Stab,              kTechId.BioMassSeven, kTechId.None, kTechId.AllAliens)
 
-    self.techTree:AddResearchNode(kTechId.FastTunnel ,kTechId.BioMassFive)
+    self.techTree:AddResearchNode(kTechId.FastTunnel , kTechId.BioMassFive)
     -- onos researches
     self.techTree:AddPassive(kTechId.Charge)
     self.techTree:AddResearchNode(kTechId.Devour,            kTechId.BioMassTwo, kTechId.None, kTechId.AllAliens)
@@ -260,8 +260,8 @@ function AlienTeam:InitTechTree()
     -- self.techTree:AddResearchNode(kTechId.Rappel,              kTechId.BioMassThree,  kTechId.None, kTechId.AllAliens)
     self.techTree:AddResearchNode(kTechId.AcidSpray,           kTechId.BioMassSix,  kTechId.None, kTechId.AllAliens) 
     -- vokex researches
-    self.techTree:AddResearchNode(kTechId.ShadowStep,           kTechId.BioMassFour,  kTechId.None, kTechId.AllAliens) 
-    self.techTree:AddResearchNode(kTechId.AcidRocket,           kTechId.BioMassSeven,  kTechId.None, kTechId.AllAliens) 
+--     self.techTree:AddResearchNode(kTechId.ShadowStep,           kTechId.BioMassFour,  kTechId.None, kTechId.AllAliens) 
+--     self.techTree:AddResearchNode(kTechId.AcidRocket,           kTechId.BioMassSeven,  kTechId.None, kTechId.AllAliens) 
 
     -- gorge structures
     self.techTree:AddBuildNode(kTechId.Hydra)

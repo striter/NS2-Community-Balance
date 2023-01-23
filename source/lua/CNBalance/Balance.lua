@@ -49,13 +49,13 @@ kHeavyMachineGunCost = 20
 kHeavyMachineGunDropCost = 12
 kHeavyMachineGunDropCooldown = 0
 
-kHeavyMachineGunDamage = 8  //8
+kHeavyMachineGunDamage = 7.5  //8
 kHeavyMachineGunDamageType = kDamageType.MachineGun
 kHeavyMachineGunClipSize = 150  //100
 kHeavyMachineGunClipNum = 3 //4
 kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
-kHeavyMachineGunSpread = Math.Radians(5.5)  //4
+kHeavyMachineGunSpread = Math.Radians(5.8)  //4
 
 -- Standard Supply
 kStandardSupplyResearchCost = 10
@@ -119,9 +119,9 @@ kSubMachineGunWeight = 0.08
 kSubMachineGunDamage = 11
 kSubMachineGunDamageType = kDamageType.Normal
 kSubMachineGunCost = 0
+kSubMachineGunPointValue = 0
 -- kSubMachineGunTechResearchCost = 15
 -- kSubMachineGunTechResearchTime = 30
--- kSubMachineGunPointValue = 1
 --
 
 kRifleMeleeDamage = 10
@@ -148,6 +148,7 @@ kLightMachineGunWeight = 0.2
 kLightMachineGunDamage = 10.7
 kLightMachineGunDamageType = kDamageType.Normal
 kLightMachineGunCost = 0
+kLightMachineGunPointValue = 0
 --
 
 --
@@ -162,7 +163,7 @@ kCannonTechResearchCost = 20
 kCannonTechResearchTime = 60
 kCannonCost = 20
 
-kCannonDamage = 80
+kCannonDamage = 90
 kCannonRateOfFire = 0.8
 kCannonAoeDamage = 0
 kCannonSelfDamage = kCannonAoeDamage
@@ -170,7 +171,7 @@ kCannonClipSize = 6
 kCannonPointValue = 15
 kCannonWeight = 0.18
 kCannonDamageType = kDamageType.Normal
-kCannonDropCost = 20
+kCannonDropCost = 12
 ---
 
 kFlamethrowerCost = 20
@@ -181,7 +182,7 @@ kBurnDamagePerSecond = 5
 kFlamethrowerBurnDuration = 1
 kFlamethrowerMaxBurnDuration = 6
 
-kMinigunDamage = 8.0
+kMinigunDamage = 8.5
 kMinigunDamageType = kDamageType.Exosuit
 kRailgunDamage = 10
 kRailgunChargeDamage = 140

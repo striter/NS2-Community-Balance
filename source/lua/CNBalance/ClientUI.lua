@@ -49,6 +49,7 @@ kShowOnTeam[kTeamReadyRoom] =
 
 kShowOnTeam[kTeam1Index] =
 {
+    GUIAlienSpectatorHUD = true,
 }
 
 kShowOnTeam[kTeam2Index] =

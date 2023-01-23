@@ -90,7 +90,8 @@ if kTranslateMessage then
     kTranslateMessage["RAPPEL_TOOLTIP"] = "将Prowler快速拉向目标.\n*对击中的敌方单位造成伤害."
     kTranslateMessage["ACID_SPRAY"] = "酸液投掷"
     kTranslateMessage["ACID_SPRAY_TOOLTIP"] = "投掷一串酸性炸弹.\n*抛物线弹道."
-    
+
+    kTranslateMessage["DEVOUR"] = "吞噬"
     kTranslateMessage["ONOS_DEVOUR"] = "吞噬"
     kTranslateMessage["ONOS_DEVOUR_TOOLTIP"] = "*Onos将陆战队员吞进肚子.\n*吞噬单位将无法使用武器\n-消化过程将遇到抵抗。"
 

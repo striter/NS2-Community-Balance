@@ -675,6 +675,10 @@ end
 
 if Server then
 
+    function CombatBuilder:GetIsValidRecipient(recipient)
+        return not recipient.isVirtual      --Don't give this to bot
+    end
+    
     function CombatBuilder:GetDestroyOnKill()
         return true
     end

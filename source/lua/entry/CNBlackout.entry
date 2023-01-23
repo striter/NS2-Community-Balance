@@ -1,0 +1,5 @@
+
+modEntry = {
+    FileHooks = "lua/Blackout/FileHooks.lua",
+    Priority = 500
+}

@@ -22,8 +22,8 @@ class 'Vokex' (Alien)
 Vokex.kMapName = "vokex"
 
 Vokex.kModelName = PrecacheAsset("models/alien/fade/vokex.model")
+local kVokexAnimationGraph = PrecacheAsset("models/alien/fade/vokex.animation_graph")
 local kViewModelName = PrecacheAsset("models/alien/fade/fade_view.model")
-local kVokexAnimationGraph = PrecacheAsset("models/alien/fade/fade.animation_graph")
 
 PrecacheAsset("models/alien/fade/fade.surface_shader")
 

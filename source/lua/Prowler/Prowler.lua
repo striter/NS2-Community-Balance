@@ -145,7 +145,7 @@ function Prowler:GetPlayInstantRagdoll()
 end
 
 function Prowler:GetMapBlipType()
-    return kMinimapBlipType.Prowler
+    return kMinimapBlipType.Skulk
 end
 
 function Prowler:OnInitialized()
