@@ -18,10 +18,12 @@ if Server then
 			if player.primaryRespawn then
 				player:GiveItem(player.primaryRespawn,true)
 			end
+			player.primaryRespawn = nil
 
 			if player.secondaryRespawn then
 				player:GiveItem(player.secondaryRespawn,false)
 			end
+			player.secondaryRespawn = nil
 		end
 		return player
 	end

@@ -18,19 +18,21 @@ if Server then
         self:SetActiveWeapon(primaryWeapon)
     end
 
-
-
     local baseOnDropAllWeapons = Marine.DropAllWeapons
     function Marine:DropAllWeapons()
 
         local primaryWeapon = self:GetWeaponInHUDSlot(kPrimaryWeaponSlot)
         if primaryWeapon then
-            self.primaryRespawn = primaryWeapon.kMapName
+            if primaryWeapon.kMapName == SubMachineGun.kMapName then
+                self.primaryRespawn = primaryWeapon.kMapName
+            end
         end
 
         local secondaryWeapon = self:GetWeaponInHUDSlot(kSecondaryWeaponSlot)
         if secondaryWeapon then
-            self.secondaryRespawn = secondaryWeapon.kMapName
+            if secondaryWeapon.kMapName == Revolver.kMapName then
+                self.secondaryRespawn = secondaryWeapon.kMapName
+            end
         end
 
         baseOnDropAllWeapons(self)

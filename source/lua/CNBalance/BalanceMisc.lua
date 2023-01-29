@@ -10,6 +10,7 @@ kGrenadeLauncherWeight = 0.15
 kFlamethrowerWeight = 0.14
 kShotgunWeight = 0.14
 
+kMaxInfantryPortalsPerCommandStation = 6
 kNumMines = 2
 -- Jetpack
 kUpgradedJetpackUseFuelRate = 0.18

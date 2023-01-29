@@ -1,5 +1,5 @@
 kPlayerResPerInterval  = 0.125
-kPlayingTeamInitialTeamRes = 65
+kPlayingTeamInitialTeamRes = 60
 kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
 

@@ -660,5 +660,39 @@ function BuildTechData()
         [kTechDataModel] = TunnelEntrance.kModelName,
         [kTechDataPointValue] = kTunnelEntrancePointValue,
     })
+
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.TunnelExit,
+        [kTechDataMaxExtents] = Vector(0.6,0.6,0.6),
+        [kTechDataTooltipInfo] = "TUNNEL_EXIT_TOOLTIP",
+        [kTechDataGhostModelClass] = "AlienGhostModel",
+        [kTechDataMapName] = TunnelEntrance.kMapName,
+        [kTechDataDisplayName] = "TUNNEL_EXIT",
+        [kTechDataHint] = "TUNNEL_ENTRANCE_HINT",
+        [kTechDataCostKey] = kTunnelExitCost,
+        [kTechDataMaxHealth] = kTunnelEntranceHealth,
+        [kTechDataMaxArmor] = kTunnelEntranceArmor,
+        [kTechDataBuildTime] = kTunnelBuildTime,
+        [kTechDataModel] = TunnelEntrance.kModelName,
+        [kTechDataPointValue] = kTunnelEntrancePointValue,
+        [kTechDataObstacleRadius] = 1.25,
+    })
+    
+    table.insert(techData, {
+        [kTechDataId] = kTechId.TunnelRelocate,
+        [kTechDataMaxExtents] = Vector(0.6,0.6,0.6),
+        [kTechDataTooltipInfo] = "TUNNEL_RELOCATE_TOOLTIP",
+        [kTechDataGhostModelClass] = "AlienGhostModel",
+        [kTechDataMapName] = TunnelEntrance.kMapName,
+        [kTechDataDisplayName] = "TUNNEL_ENTRANCE",
+        [kTechDataHint] = "TUNNEL_ENTRANCE_HINT",
+        [kTechDataCostKey] = kTunnelRelocateCost,
+        [kTechDataMaxHealth] = kTunnelEntranceHealth,
+        [kTechDataMaxArmor] = kTunnelEntranceArmor,
+        [kTechDataBuildTime] = kTunnelBuildTime,
+        [kTechDataModel] = TunnelEntrance.kModelName,
+        [kTechDataPointValue] = kTunnelEntrancePointValue,
+    })
     return techData
 end

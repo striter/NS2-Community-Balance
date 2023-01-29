@@ -48,20 +48,20 @@ TeamInfo.kRelevantTechIdsAlien =
 {
     kTechId.CragHive,
     kTechId.UpgradeToCragHive,
-    kTechId.Shell,
-    kTechId.TwoShells,
+    --kTechId.Shell,
+    --kTechId.TwoShells,
     kTechId.ThreeShells,
     
     kTechId.ShadeHive,
     kTechId.UpgradeToShadeHive,
-    kTechId.Veil,
-    kTechId.TwoVeils,
+    --kTechId.Veil,
+    --kTechId.TwoVeils,
     kTechId.ThreeVeils,
     
     kTechId.ShiftHive,
     kTechId.UpgradeToShiftHive,
-    kTechId.Spur,
-    kTechId.TwoSpurs,
+    --kTechId.Spur,
+    --kTechId.TwoSpurs,
     kTechId.ThreeSpurs,
     
     kTechId.ResearchBioMassOne,
