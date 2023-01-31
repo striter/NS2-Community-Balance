@@ -7,7 +7,7 @@
 -- ========= For more information, visit us at http://www.unknownworlds.com =====================
 
 ---------------- dude
-local kRagdollTime = 7 -- 3
+local kRagdollTime = 12 -- 3
 ------------------
 
 RagdollMixin = CreateMixin(RagdollMixin)

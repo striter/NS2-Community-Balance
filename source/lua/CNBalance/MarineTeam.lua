@@ -208,6 +208,16 @@ local function DestroyMarineStructure(self,structure)
     end
 end
 
+
+local preOnResetComplete = MarineTeam.OnResetComplete
+function MarineTeam:OnResetComplete()
+    preOnResetComplete(self)
+    local powerNodes = EntityListToTable(Shared.GetEntitiesWithClassname("PowerPoint"))
+    for i=1, #powerNodes do
+        powerNodes[i]:SetConstructionComplete()
+    end
+end
+
 local function RemoveMarineStructureFromClient(self, techId, clientId)
 
     local structureTypeTable = self.clientOwnedStructures[clientId]

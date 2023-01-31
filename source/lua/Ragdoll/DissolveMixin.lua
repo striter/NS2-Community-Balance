@@ -1,2 +1,2 @@
-﻿kDissolveSpeed = 4
-kDissolveDelay = 2
+﻿kDissolveSpeed = 3
+kDissolveDelay = 7

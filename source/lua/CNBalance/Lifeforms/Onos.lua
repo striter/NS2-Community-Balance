@@ -27,9 +27,9 @@ function Onos:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoin
         local className = string.lower(doer:GetClassName())
         local reduction = 0.25
         if className == "railgun" then
-            reduction = 0
+            reduction = .8
         elseif className == "grenade" then
-            reduction = 0.75
+            reduction = 0.7
         end
 
         if reduction ~= 0 then

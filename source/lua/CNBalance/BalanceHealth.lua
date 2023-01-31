@@ -44,7 +44,7 @@ kARCHealth = 2600    kARCArmor = 600    kARCPointValue = 10   --2600 400
 kARCDeployedHealth = 2600    kARCDeployedArmor = 0      -- 2600 0
 
 kPhaseGateHealth = 1850    kPhaseGateArmor = 800    kPhaseGatePointValue = 10 -- 1500  800  10
-kPowerPointHealth = 2200    kPowerPointArmor = 1250    kPowerPointPointValue = 15 -- 2000 1000  10
+kPowerPointHealth = 2200    kPowerPointArmor = 1250    kPowerPointPointValue = 7 -- 2000 1000  10
 
 --Alien
 kHarvesterHealth = 2000 kHarvesterArmor = 200 kHarvesterPointValue = 15
