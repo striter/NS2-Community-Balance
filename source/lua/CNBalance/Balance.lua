@@ -292,6 +292,9 @@ kVolleySpread = Math.Radians(3)
 kProwlerDamagePerPellet = 8 -- there are 6 pellets
 kVolleyRappelDamageType = kDamageType.Normal
 kVolleyEnergyCost = 8.0 --7.0
+kRappelDamage = 20
+kRappelWebTime = 1.5
+kRappelParasiteTime = 5
 
 kRappelResearchCost = 10
 kRappelResearchTime = 20

@@ -212,9 +212,59 @@ end
 local preOnResetComplete = MarineTeam.OnResetComplete
 function MarineTeam:OnResetComplete()
     preOnResetComplete(self)
-    local powerNodes = EntityListToTable(Shared.GetEntitiesWithClassname("PowerPoint"))
-    for i=1, #powerNodes do
-        powerNodes[i]:SetConstructionComplete()
+
+    local locations = GetLocations()
+    local initialTechPoint = self:GetInitialTechPoint()
+    local initialTechPointName = initialTechPoint:GetLocationName()
+    local locationGraph = GetLocationGraph()
+
+    local resourcePoints = EntityListToTable(Shared.GetEntitiesWithClassname("ResourcePoint"))
+    local resourceLocationNames = {}
+    for i=1, #resourcePoints do
+        local resourcePoint = resourcePoints[i]
+        local location = GetLocationForPoint(resourcePoint:GetOrigin())
+        if location then
+            local resourcePointName = location:GetName()
+            if not table.icontains(resourceLocationNames,resourcePointName) then
+                table.insert(resourceLocationNames,resourcePointName)
+            end
+        end
+    end
+
+    math.randomseed(tostring(os.time()):reverse():sub(1, 6))
+    for i = 1, 100 do math.random() end
+
+    local locationsWithoutTechPoint = {}
+    
+    for i=1, #locations do
+        local locationName = locations[i]:GetName()
+
+        if locationGraph.techPointLocations:Contains(locationName) then
+            if locationName == initialTechPointName then
+                GetPowerPointForLocation(locationName):SetConstructionComplete()
+            else
+                DestroyPowerForLocation(locationName, true)
+            end
+        else
+            if not table.icontains(locationsWithoutTechPoint,locationName) then
+                table.insert(locationsWithoutTechPoint,locationName)
+            end
+        end
+    end
+
+    local locationsWithoutTechPointCount = table.count(locationsWithoutTechPoint)
+    local destroyCount = math.floor(locationsWithoutTechPointCount * 0.3)
+    table.shuffle(locationsWithoutTechPoint)
+    for i = 1, locationsWithoutTechPointCount do
+        local locationName = table.remove(locationsWithoutTechPoint)
+        if i <= destroyCount then
+            DestroyPowerForLocation(locationName, true)
+        elseif not table.icontains(resourceLocationNames,locationName) then
+            local powerPoint = GetPowerPointForLocation(locationName)
+            if  powerPoint then
+                powerPoint:SetConstructionComplete()
+            end
+        end
     end
 end
 

@@ -557,7 +557,13 @@ function NoPowerLightWorker:Run()
         --        color = PowerPoint.kDisabledColor
         --    end
 
-        --else
+        else
+
+            if showCommanderLight then
+                intensity = renderLight.originalIntensity * kMinCommanderLightIntensityScalar
+            else
+                intensity = 0
+            end
 
             -- Deactivate from initial state
             self.activeLights:Remove(renderLight)

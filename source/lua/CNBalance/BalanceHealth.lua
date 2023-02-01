@@ -6,7 +6,7 @@ kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15    kLerkHealthPerB
 kFadeHealth = 250    kFadeArmor = 80     kFadePointValue = 20    kFadeHealthPerBioMass = 5
 kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30    kOnosHealtPerBioMass = 50
 
-kProwlerHealth = 140 kProwlerArmor  = 10 kProwlerPointValue = 10 kProwlerHealthPerBioMass = 4
+kProwlerHealth = 120 kProwlerArmor  = 20 kProwlerPointValue = 12 kProwlerHealthPerBioMass = 5
 kVokexHealth = 200 kVokexArmor = 80 kVokexPointvalue = 25 kVokexHealthPerBioMass = 4
 
 kParasitePlayerPointValue = 1
@@ -58,9 +58,9 @@ kMinMatureCystHealth = 200 kMinCystScalingDistance = 48 kMaxCystScalingDistance 
 kClogHealth = 250  kClogArmor = 0 kClogPointValue = 0
 kClogHealthPerBioMass = 30
 
-kHydraHealth = 125    kHydraArmor = 5    kHydraPointValue = 0
-kMatureHydraHealth = 160   kMatureHydraArmor = 20    kMatureHydraPointValue = 0
-kHydraHealthPerBioMass = 16
+kHydraHealth = 250    kHydraArmor = 15    kHydraPointValue = 0
+kMatureHydraHealth = 320   kMatureHydraArmor = 30    kMatureHydraPointValue = 0
+kHydraHealthPerBioMass = 20
 
 kBoneWallHealth = 100 kBoneWallArmor = 200    kBoneWallHealthPerBioMass = 75
 kContaminationHealth = 1000 kContaminationArmor = 0    kContaminationPointValue = 2
