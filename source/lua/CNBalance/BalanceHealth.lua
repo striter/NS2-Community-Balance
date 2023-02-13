@@ -44,22 +44,21 @@ kARCHealth = 2600    kARCArmor = 600    kARCPointValue = 10   --2600 400
 kARCDeployedHealth = 2600    kARCDeployedArmor = 0      -- 2600 0
 
 kPhaseGateHealth = 1850    kPhaseGateArmor = 800    kPhaseGatePointValue = 10 -- 1500  800  10
-kPowerPointHealth = 2200    kPowerPointArmor = 1250    kPowerPointPointValue = 7 -- 2000 1000  10
+kPowerPointHealth = 2200    kPowerPointArmor = 1250    kPowerPointPointValue = 15 -- 2000 1000  10
 
 --Alien
 kHarvesterHealth = 2000 kHarvesterArmor = 200 kHarvesterPointValue = 15
 kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 500  --2300 320
-
 
 kCystHealth = 50    kCystArmor = 1
 kMatureCystHealth = 400    kMatureCystArmor = 1    kCystPointValue = 1
 kMinMatureCystHealth = 200 kMinCystScalingDistance = 48 kMaxCystScalingDistance = 168
 
 kClogHealth = 250  kClogArmor = 0 kClogPointValue = 0
-kClogHealthPerBioMass = 30
+kClogHealthPerBioMass = 10
 
-kHydraHealth = 250    kHydraArmor = 15    kHydraPointValue = 0
-kMatureHydraHealth = 320   kMatureHydraArmor = 30    kMatureHydraPointValue = 0
+kHydraHealth = 125    kHydraArmor = 5    kHydraPointValue = 0
+kMatureHydraHealth = 160   kMatureHydraArmor = 20    kMatureHydraPointValue = 0
 kHydraHealthPerBioMass = 20
 
 kBoneWallHealth = 100 kBoneWallArmor = 200    kBoneWallHealthPerBioMass = 75

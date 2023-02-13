@@ -96,7 +96,7 @@ function RappelMixin:PerformSecondaryAttack(player)
                     hitTarget:SetWebbed(kRappelWebTime, true)
                 end
 
-                if hitTarget:isa("Marine") or hitTarget:isa("Exo") then
+                if hitTarget:isa("Marine") then -- or hitTarget:isa("Exo") then
                     
                     local mass = hitTarget.GetMass and hitTarget:GetMass() or Player.kMass
                     
@@ -108,7 +108,7 @@ function RappelMixin:PerformSecondaryAttack(player)
                     local reelForce = 7.5
 
                     local slapVel =  reelDirection * reelForce + Vector(0, reelUpForce * (1 - mass/1000), 0)
-                    Shared.Message(tostring(slapVel))
+                    --Shared.Message(tostring(slapVel))
                     hitTarget.stampedeVars = {
                         disableDur = disableDur,
                         velocity = slapVel

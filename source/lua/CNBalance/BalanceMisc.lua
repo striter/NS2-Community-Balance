@@ -49,10 +49,10 @@ kVolleyFocusAttackSlowAtMax = 0
 
 kAlienRegenerationCombatModifier = 0.5
 
-kHydrasPerHive = 4
-kClogsPerHive = 12
-kNumWebsPerGorge = 4
-kSentriesPerBattery = 5
+kHydrasPerHive = 3
+kClogsPerHive = 10
+kNumWebsPerGorge = 3
+kSentriesPerBattery = 4
 
 kMACSpeedAmount = 1
 
