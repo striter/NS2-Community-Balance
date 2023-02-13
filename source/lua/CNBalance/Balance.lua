@@ -308,9 +308,9 @@ kAcidSprayDamageType = kDamageType.Heavy
 
 
 -- Fade
-kStabDamage = 150
+kStabDamage = 140
 kStabDamageType = kDamageType.Structural
-kStabEnergyCost = 30
+kStabEnergyCost = 33
 
 kStartBlinkEnergyCost = 14
 kBlinkEnergyCost = 30

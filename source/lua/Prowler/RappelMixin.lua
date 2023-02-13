@@ -104,10 +104,10 @@ function RappelMixin:PerformSecondaryAttack(player)
                         reelDirection:Normalize()
     
                         local disableDur = 0.2
-                        local reelUpForce = 1.5
-                        local reelForce = 13
+                        --local reelUpForce = 1.5
+                        local reelForce = 11
     
-                        local slapVel =  reelDirection * reelForce + Vector(0, reelUpForce * (1 - mass/1000), 0)
+                        local slapVel =  reelDirection * reelForce --+ Vector(0, reelUpForce * (1 - mass/1000), 0)
                         --Shared.Message(tostring(slapVel))
                         hitTarget.stampedeVars = {
                             disableDur = disableDur,
