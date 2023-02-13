@@ -49,13 +49,13 @@ kHeavyMachineGunCost = 20
 kHeavyMachineGunDropCost = 12
 kHeavyMachineGunDropCooldown = 0
 
-kHeavyMachineGunDamage = 7.5  //8
+kHeavyMachineGunDamage = 8  //8
 kHeavyMachineGunDamageType = kDamageType.MachineGun
 kHeavyMachineGunClipSize = 150  //100
 kHeavyMachineGunClipNum = 3 //4
 kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
-kHeavyMachineGunSpread = Math.Radians(5.8)  //4
+kHeavyMachineGunSpread = Math.Radians(5.6)  //4
 
 -- Standard Supply
 kStandardSupplyResearchCost = 10
@@ -93,14 +93,13 @@ kGrenadeLauncherGrenadeDamage = 100
 kGrenadeLauncherGrenadeDamageRadius = 4.8
 kGrenadeLauncherDetectionShotRadius = 3
 
-kGrenadeLauncherImpactGrenadeDamage = 80
-kGrenadeLauncherAllyBlastReduction = 0.3
+kGrenadeLauncherImpactGrenadeDamage = 87
+kGrenadeLauncherAllyBlastReduction = 0.5
 
 kGrenadeLauncherClipSize = 4
 kGrenadeLauncherWeapons1DamageScalar = 1.08
 kGrenadeLauncherWeapons2DamageScalar = 1.17
 kGrenadeLauncherWeapons3DamageScalar = 1.25
-
 
 --Revolver
 kRevolverRateOfFire = 0.1
@@ -236,7 +235,7 @@ kOnosDevourTime = 60
 
 kUmbraBulletModifier = 0.8
 
-kDevourEnergyCost = 50 --50
+kDevourEnergyCost = 60 --50
 kDevourPunchDamage = 50 --100
 
 kFastTunnelCost = 15
@@ -283,22 +282,22 @@ kBileBombResearchTime = 40
 kSpikeSpread = Math.Radians(3.8)
 
 -- Prowler
-kProwlerCost = 16 --14
+kProwlerCost = 18 --14
 kProwlerGestateTime = 6
 kProwlerUpgradeCost = 1
-kProwlerBabblerShieldPercent = 0.15
+kProwlerBabblerShieldPercent = 0.2
 
 kVolleySpread = Math.Radians(3)
 kProwlerDamagePerPellet = 8 -- there are 6 pellets
 kVolleyRappelDamageType = kDamageType.Normal
 kVolleyEnergyCost = 8.0 --7.0
-kRappelDamage = 20
-kRappelWebTime = 1.5
+kRappelDamage = 10
 kRappelParasiteTime = 5
 
 kRappelResearchCost = 10
 kRappelResearchTime = 20
-kRappelEnergyCost = 15
+kRappelEnergyCost = 12
+kRappelReelEnergyCost = 20
 kRappelRange = 25
 
 kAcidSprayResearchCost = 15
@@ -388,7 +387,6 @@ kEchoEggCost = 1
 kObservatoryScanCost = 3
 kScanCooldown = 0
 kObservatoryDistressBeaconCost = 10
-
 
 kWeapons1ResearchTime = 75
 kWeapons2ResearchTime = 90

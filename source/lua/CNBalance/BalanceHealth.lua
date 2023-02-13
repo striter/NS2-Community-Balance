@@ -37,6 +37,8 @@ kMatureHiveHealth = 7800 kMatureHiveArmor = 1400    -- 6000 1400
 --2400 1050
 kExtractorHealth = 2400 kExtractorArmor = 1200 kExtractorPointValue = 15
 
+kMineHealth = 28    kMineArmor = 5    kMinePointValue = 5
+
 kSentryBatteryHealth = 700    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5
 kSentryHealth = 500    kSentryArmor = 100    kSentryPointValue = 0
 

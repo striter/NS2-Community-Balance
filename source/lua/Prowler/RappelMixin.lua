@@ -84,51 +84,51 @@ function RappelMixin:PerformSecondaryAttack(player)
             local hitTarget = trace.entity
             local direction = GetNormalizedVector(trace.endPoint - startPoint)
             local impactPoint = trace.endPoint - direction * kHitEffectOffset
-            
-            if hitTarget and HasMixin(hitTarget, "Team") and hitTarget:GetTeamNumber() ~= self:GetTeamNumber() then
-                self:DoDamage(kRappelDamage, hitTarget, impactPoint, direction, trace.surface, true, true)
+            local reel = false
 
-                if HasMixin(hitTarget, "ParasiteAble" ) then
-                    hitTarget:SetParasited( player, kRappelParasiteTime ) --Will give Commander point(s)
+            if hitTarget and HasMixin(hitTarget, "Team")  then
+                if hitTarget:GetTeamNumber() ~= self:GetTeamNumber() then
+                    self:DoDamage(kRappelDamage, hitTarget, impactPoint, direction, trace.surface, true, true)
+
+                    if HasMixin(hitTarget, "ParasiteAble" ) then
+                        hitTarget:SetParasited( player, kRappelParasiteTime ) --Will give Commander point(s)
+                    end
+
                 end
-
-                if HasMixin(hitTarget, "Webable") then
-                    hitTarget:SetWebbed(kRappelWebTime, true)
-                end
-
-                if hitTarget:isa("Marine") then -- or hitTarget:isa("Exo") then
-                    
+                
+                if hitTarget:isa("Player") then -- or hitTarget:isa("Exo") then
                     local mass = hitTarget.GetMass and hitTarget:GetMass() or Player.kMass
-                    
-                    local reelDirection =  player:GetOrigin() - hitTarget:GetOrigin()
-                    reelDirection:Normalize()
-
-                    local disableDur = 0.2
-                    local reelUpForce = 1
-                    local reelForce = 7.5
-
-                    local slapVel =  reelDirection * reelForce + Vector(0, reelUpForce * (1 - mass/1000), 0)
-                    --Shared.Message(tostring(slapVel))
-                    hitTarget.stampedeVars = {
-                        disableDur = disableDur,
-                        velocity = slapVel
-                    }
-
-                    hitTarget:AddTimedCallback(function(self)
-                        if not self.stampedeVars then return end
-
-                        self:DisableGroundMove(self.stampedeVars.disableDur)
-                        self:SetVelocity(self.stampedeVars.velocity)
-                        self.stampedeVars = nil
-                    end, 0 )
-
+                    reel = mass < 100
+                    if reel then
+                        local reelDirection =  player:GetOrigin() - hitTarget:GetOrigin()
+                        reelDirection:Normalize()
+    
+                        local disableDur = 0.2
+                        local reelUpForce = 1.5
+                        local reelForce = 13
+    
+                        local slapVel =  reelDirection * reelForce + Vector(0, reelUpForce * (1 - mass/1000), 0)
+                        --Shared.Message(tostring(slapVel))
+                        hitTarget.stampedeVars = {
+                            disableDur = disableDur,
+                            velocity = slapVel
+                        }
+    
+                        hitTarget:AddTimedCallback(function(self)
+                            if not self.stampedeVars then return end
+    
+                            self:DisableGroundMove(self.stampedeVars.disableDur)
+                            self:SetVelocity(self.stampedeVars.velocity)
+                            self.stampedeVars = nil
+                        end, 0 )
+                    end
                 end
             else
                 self:DoDamage(kRappelDamage, nil, impactPoint, direction, trace.surface, true, true)
             end
             
             self.rappelling = true
-            player:DeductAbilityEnergy(self:GetSecondaryEnergyCost())
+            player:DeductAbilityEnergy(reel and kRappelReelEnergyCost or kRappelEnergyCost)
             player:OnRappel(trace.endPoint, hitTarget)
             --player:TriggerEffects("spikes_attack")
             --self:TriggerEffects("spit_hit", { effecthostcoords = trace.endPoint:GetCoords() })

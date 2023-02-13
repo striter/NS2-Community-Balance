@@ -102,3 +102,6 @@ kMarineBuildBlockRadius = 0.75
 kMarineBuildRadius = 1.5
 
 kSporeMineMatureTime = 5
+
+kPlayerEnergyPerEnergize = 10  --15
+kEnergizeUpdateRate = 1

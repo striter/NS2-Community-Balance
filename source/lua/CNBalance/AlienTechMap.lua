@@ -30,7 +30,7 @@ kAlienTechMap =
     { kTechId.BioMassFive, 5.5, 7, nil, "5" }, {kTechId.MetabolizeHealth, 5.5, 8},{kTechId.FastTunnel,5.5 , 9},
     { kTechId.BioMassSix, 6.5, 7, nil, "6" },  {kTechId.AcidSpray, 6.5, 8},{kTechId.Umbra, 6.5, 9}, {kTechId.BoneShield, 6.5, 10},
     { kTechId.BioMassSeven, 7.5, 7, nil, "7" }, {kTechId.Xenocide, 7.5, 8},{kTechId.Stab, 7.5, 9}, --{kTechId.AcidRocket, 7.5, 10}, 
-    { kTechId.BioMassEight, 8.5, 7, nil, "8" }, {kTechId.Stomp, 8.5, 8},{kTechId.SkulkBoost,8.5,9},
+    { kTechId.BioMassEight, 8.5, 7, nil, "8" }, {kTechId.Stomp, 8.5, 8},--{kTechId.SkulkBoost,8.5,9},
     { kTechId.BioMassNine, 9.5, 7, nil, "9" },
     { kTechId.BioMassTen, 10.5, 7, nil, "10" }, {kTechId.Contamination, 10.5, 8},
     { kTechId.BioMassEleven, 11.5, 7, nil, "11" },

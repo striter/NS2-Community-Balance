@@ -17,7 +17,7 @@ SubMachineGun.kLaserSightWorldModelAttachPoint = "fxnode_riflemuzzle"
 SubMachineGun.kLaserSightViewModelAttachPoint = "fxnode_riflemuzzle"
 
 local kRange = 50
-local kSpread = Math.Radians(6.5)
+local kSpread = Math.Radians(6.0)
 
 local kButtRange = 1.1
 
