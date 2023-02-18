@@ -1,8 +1,4 @@
 if kLocales then
-    kLocales["NANO_SHIELD_SUPPORT"]="Nanoshield Support"
-    kLocales["CAT_PACK_SUPPORT"]="Catalyst Support"
-    kLocales["POWER_SURGE_SUPPORT"]="Powersurge Support"
-
     kLocales["PROTOS_MENU"]="Prototype menu"
     kLocales["PROTOS_MENU_TOOLTIP"]="Buy prototypes for ground units"
 
@@ -11,20 +7,12 @@ if kLocales then
     kLocales["LIFE_SUSTAIN"]="Life Sustain System"
     kLocales["LIFE_SUSTAIN_TOOLTIP"]="*Regen health after combat."
 
-    --kLocales["JETPACK_FUEL_TECH"] = "研发 喷气背包燃料"
-    --kLocales["JETPACK_FUEL_TOOLTIP"] = "*延长喷气背包的飞行时间."
-
     kLocales["STANDARD_SUPPLY"] = "Standard Supply"
     kLocales["STANDARD_SUPPLY_TOOLTIP"] = "Begin the standard equipment branch\n*Will disable other branch's research."
-    kLocales["AXE_UPGRADE"]="Melee upgrade"
-    kLocales["AXE_UPGRADE_TOOLTIP"]="*Upgrade marine's melee to <AXE>\n*Higher damage.\n*Longer Range."
     kLocales["LIGHTMACHINEGUN_UPGRADE"]="Rifle Upgrade"
     kLocales["LIGHTMACHINEGUN_UPGRADE_TOOLTIP"]="*Upgrade marine's main weapon to <Machine gune>\n*Higher damage.\n*More accurate."
     kLocales["MINES_UPGRADE"]="Mine coating"
     kLocales["MINES_UPGRADE_TOOLTIP"]="*Reduce mines' visibility for kharaa."
-
-    kLocales["KINEMATIC_SUPPLY"] = "Kinematic Supply"
-    kLocales["KINEMATIC_SUPPLY_TOOLTIP"] = "Begin the kinematic weapon branch\n*Will disable other branch's research."
     kLocales["DRAGON_BREATH"] = "Dragon breath"
     kLocales["DRAGON_BREATH_TOOLTIP"] = "*Bullets will ignite enemies."
 
@@ -45,22 +33,26 @@ if kLocales then
     kLocales["SUBMACHINEGUN"]="SMG"
     kLocales["STATUS_SUBMACHINEGUN"]="SMG"
     kLocales["SUBMACHINEGUN_BUYDESCRIPTION"]="Standard SMG.\n+*Higher damage,*Lighter.\n-Lower magazine side,higher spread."
-    kLocales["LIGHTMACHINEGUN"]="轻机枪"
-    kLocales["STATUS_LIGHTMACHINEGUN"]="Machine Gun"
+    kLocales["LIGHTMACHINEGUN"]="Machine Gun"
+    kLocales["STATUS_LIGHTMACHINEGUN"]="MG"
     kLocales["LIGHTMACHINEGUN_BUYDESCRIPTION"]="Standard Machine Gun.\n*Higher damage compare.\n*Higher accuracy compare."
     kLocales["CANNON"]="Gauss"
     kLocales["STATUS_CANNON"]="Gauss"
     kLocales["CANNON_BUYDESCRIPTION"]="Individual carry gauss cannon.\n*High point damage.\n.\n-Low fire rate and magazine size"
     kLocales["RESEARCH_CANNON"]="Gauss cannon"
     kLocales["RESEARCH_CANNON_TOOLTIP"]="*Begin gauss cannon research.\n*Good to use with high mobility lifeforms."
+    kLocales["CANNON_TOOLTIP"]="*Gauss cannon.\n*Handle high mobility lifeforms."
 
     kLocales["COMBATBUILDER"]="Combat Builder"
     kLocales["COMBATBUILDER_BUYDESCRIPTION"]="Battlefield engineering.\n*Build supply depot to refill nearby marine's health and ammo.\n*Build sentries to attack enemies in range"
 
-
-    kLocales["WEAPON_CACHE"]="Weapon cache"
+    kLocales["WEAPON_CACHE"]="Supply depot"
     kLocales["WEAPON_CACHE_HINT"]="Refill health and ammo"
+
     kLocales["BUYMENU_GROUPLABEL_GRENADES"]="Throwables"
+    kLocales["RESEARCH_GRENADES"]="Throwables Upgarde"
+    kLocales["GRENADES_TOOLTIP"]="+Unlock new grenade types.\nMarines throw grenades faster."
+    kLocales["RESEARCH_GRENADES_TITLE"]="Grenade Upgrade"
 
     kLocales["BUILD_ABILITY"]="Builder"
     kLocales["BUILD_ABILITY_TOOLTIP"]="Place frontline structures.\n*Hydra(Range damage dealer)\n*Clog(Damage receiver)\n*Babbler Egg(Attack nearby enemies)\n*Web(Slow target)"
@@ -82,7 +74,7 @@ if kLocales then
 
     kLocales["PROWLER"] = "Prowler"
     kLocales["PROWLER_EGG"] = "Egg(Prowler)"
-    kLocales["PROWLER_TOOLTIP"] = "Range attack lifeform.\n*Volley deals long range damage\n*(Evolve)Move fast by rappel\n*(Evolve)Acid spray range attack."
+    kLocales["PROWLER_TOOLTIP"] = "Range attack lifeform.\n*Volley deals range damage\n*(Evolve)Move fast by rappel\n*(Evolve)Acid spray range attack."
     kLocales["VOLLEY"] = "Volley"
     kLocales["VOLLEY_TOOLTIP"] = "Range attack.\n*High spread."
     kLocales["RAPPEL"] = "Rappel"
@@ -103,10 +95,6 @@ if kLocales then
 end
 
 if kTranslateMessage then
-    kTranslateMessage["NANO_SHIELD_SUPPORT"]="纳米护盾支援"
-    kTranslateMessage["CAT_PACK_SUPPORT"]="兴奋剂支援"
-    kTranslateMessage["POWER_SURGE_SUPPORT"]="应急供电支援支援"
-
     kTranslateMessage["PROTOS_MENU"]="原型装备"
     kTranslateMessage["PROTOS_MENU_TOOLTIP"]="给陆战队员发放原型装备"
 
@@ -115,20 +103,12 @@ if kTranslateMessage then
     kTranslateMessage["LIFE_SUSTAIN"]="生命维持装置"
     kTranslateMessage["LIFE_SUSTAIN_TOOLTIP"]="*陆战队员脱战后逐渐回复生命值."
 
-    --kTranslateMessage["JETPACK_FUEL_TECH"] = "研发 喷气背包燃料"
-    --kTranslateMessage["JETPACK_FUEL_TOOLTIP"] = "*延长喷气背包的飞行时间."
-
     kTranslateMessage["STANDARD_SUPPLY"] = "制式装备分支"
     kTranslateMessage["STANDARD_SUPPLY_TOOLTIP"] = "开始制式装备/工具的科技研发\n*将禁用其他的分支学习."
-    kTranslateMessage["AXE_UPGRADE"]="近战武器升级"
-    kTranslateMessage["AXE_UPGRADE_TOOLTIP"]="*制式近战武器升级为<折叠斧>\n*更高的伤害.\n*更远的攻击距离."
     kTranslateMessage["LIGHTMACHINEGUN_UPGRADE"]="制式步枪升级"
     kTranslateMessage["LIGHTMACHINEGUN_UPGRADE_TOOLTIP"]="*制式主武器升级为<轻机枪>\n*更高的伤害.\n*更高的精准度."
     kTranslateMessage["MINES_UPGRADE"]="地雷遮光涂层"
     kTranslateMessage["MINES_UPGRADE_TOOLTIP"]="*降低地雷对卡拉异形的可见性."
-
-    kTranslateMessage["KINEMATIC_SUPPLY"] = "动能武器分支"
-    kTranslateMessage["KINEMATIC_SUPPLY_TOOLTIP"] = "开始动能武器分支的科技研发\n*将禁用其他的分支学习."
     kTranslateMessage["DRAGON_BREATH"] = "龙息弹"
     kTranslateMessage["DRAGON_BREATH_TOOLTIP"] = "*子弹将点燃敌方单位."
 
@@ -142,7 +122,7 @@ if kTranslateMessage then
     kTranslateMessage["GRENADE_LAUNCHER_UPGRADE_TOOLTIP"] = "*改进装弹加速榴弹枪换弹."
     
     kTranslateMessage["KNIFE"]="步战刀"
-    kTranslateMessage["KNIFE_BUYDESCRIPTION"]="制式步战刀.\n+对建筑双倍伤害,无需弹药.\n-近距离搏斗."
+    kTranslateMessage["KNIFE_BUYDESCRIPTION"]="制式步战刀.\n+最快的移动速度.\n+对建筑双倍伤害,无需弹药.\n-近距离搏斗."
     kTranslateMessage["REVOLVER"]="左轮"
     kTranslateMessage["STATUS_REVOLVER"]="左轮"
     kTranslateMessage["REVOLVER_BUYDESCRIPTION"]="制式左轮手枪.\n+连射足以摧毁一切小型单位.\n-较低的载弹量."
@@ -154,17 +134,22 @@ if kTranslateMessage then
     kTranslateMessage["LIGHTMACHINEGUN_BUYDESCRIPTION"]="制式轻机枪.\n*相对步枪更高的伤害.\n*相对步枪更高的精准度."
     kTranslateMessage["CANNON"]="高斯枪"
     kTranslateMessage["STATUS_CANNON"]="高斯枪"
-    kTranslateMessage["CANNON_BUYDESCRIPTION"]="单兵携带式磁轨炮.\n*单发高额伤害,精准对点打击.\n.\n-较慢的射速与低载弹量"
+    kTranslateMessage["CANNON_BUYDESCRIPTION"]="单兵携带式磁轨炮.\n*单发高额伤害,精准对点打击.\n-较慢的射速与低载弹量"
     kTranslateMessage["RESEARCH_CANNON"]="高斯枪研发"
     kTranslateMessage["RESEARCH_CANNON_TOOLTIP"]="*进行高斯枪研发.\n*适用于压制高机动目标."
+    kTranslateMessage["CANNON_TOOLTIP"]="*单兵高斯枪研发.\n*适用于压制高机动目标."
 
-    kTranslateMessage["COMBATBUILDER"]="战斗套件"
-    kTranslateMessage["COMBATBUILDER_BUYDESCRIPTION"]="给予基础建筑建造.\n*建造补给站以获取弹药与回复及临近机枪塔供电.\n*建造机枪塔攻击范围内敌方单位."
+    kTranslateMessage["COMBATBUILDER"]="工程套件"
+    kTranslateMessage["COMBATBUILDER_BUYDESCRIPTION"]="给予基础建筑建造.\n*建造补给站以获取弹药.\n*建造机枪塔攻击范围内敌方单位."
     
-
     kTranslateMessage["WEAPON_CACHE"]="补给站"
     kTranslateMessage["WEAPON_CACHE_HINT"]="回复弹药与生命值"
+    
     kTranslateMessage["BUYMENU_GROUPLABEL_GRENADES"]="投掷物"
+    kTranslateMessage["RESEARCH_GRENADES"]="投掷物升级"
+    kTranslateMessage["GRENADES_TOOLTIP"]="+并解锁额外的手雷类型.\n*陆战队将更快的投掷手雷."
+    kTranslateMessage["RESEARCH_GRENADES_TITLE"]="投掷物升级"
+    kTranslateMessage["CLUSTERGRENADE_BUYDESCRIPTION"]="陆战队士兵常用的投掷物.\n*对建筑物有高额的伤害.\n*升级后将对建筑有产生额外子雷."
     
     kTranslateMessage["BUILD_ABILITY"]="建造者"
     kTranslateMessage["BUILD_ABILITY_TOOLTIP"]="放置建筑,构建前线阵地.\n*刺花(造成远程伤害)\n*泥团(构建基础阵地)\n*酸液地雷(爆炸造成护甲伤害)\n*拌网(减缓敌方单位速度)"

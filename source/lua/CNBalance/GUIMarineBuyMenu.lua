@@ -108,7 +108,6 @@ local kButtonShowStateDefinitions =
 -- Table of unscaled button positions, for each of the weapon group frames.
 local kWeaponGroupButtonPositions =
 {
-
     [GUIMarineBuyMenu.kButtonGroupFrame_Unlabeled_x2] =
     {
         Vector(4, 4, 0),
@@ -128,8 +127,7 @@ local kWeaponGroupButtonPositions =
         Vector(4, 143, 0),
         Vector(4, 262, 0),
         Vector(4, 380, 0)
-    }
-
+    },
 }
 
 local kSpecial = enum(
@@ -546,7 +544,7 @@ function GUIMarineBuyMenu:_GetButtonPixelCoordinatesForTechID(techId, isHover)
     local index = kTechIdInfo[techId].ButtonTextureIndex
     assert(index, "Could not find index for techid")
 
-    local x1 = hoverAdd
+    local x1 =  hoverAdd
     local x2 = x1 + buttonIconWidth
 
     local y1 = buttonIconHeight * index
@@ -905,20 +903,28 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     weaponGroupTopRight:SetSizeFromTexture()
     weaponGroupTopRight:SetOptionFlag(GUIItem.CorrectScaling)
 
----------------
-    local haveMelee =  PlayerUI_GetHasItem(kTechId.Axe) or PlayerUI_GetHasItem(kTechId.Knife)
-    local haveWelder = PlayerUI_GetHasItem(kTechId.Welder)
-
-    local buyMelee = PlayerUI_GetHasTech(kTechId.AxeUpgrade) and kTechId.Axe or kTechId.Knife
-
-    local thirdTech = haveMelee and kTechId.Welder or buyMelee
-    thirdTech = haveWelder and kTechId.CombatBuilder or thirdTech
+--------------- Third
     
+    local buyMelee = PlayerUI_GetHasItem(kTechId.Axe) and kTechId.Knife or kTechId.Axe
     self:_InitializeWeaponGroup(weaponGroupTopRight, x2ButtonPositions,
     {
-        thirdTech,
+        buyMelee, 
         kTechId.LayMines,
-    })
+    },2)
+
+    local weaponGroupAdditional = self:CreateAnimatedGraphicItem()
+    weaponGroupAdditional:SetIsScaling(false)
+    weaponGroupAdditional:AddAsChildTo(self.background)
+    weaponGroupAdditional:SetPosition(Vector(weaponGroupTopRight:GetPosition().x + weaponGroupTopRight:GetSize().x + paddingXWeaponGroups, paddingY, 0))
+    weaponGroupAdditional:SetTexture(self.kButtonGroupFrame_Unlabeled_x2)
+    weaponGroupAdditional:SetSizeFromTexture()
+    weaponGroupAdditional:SetOptionFlag(GUIItem.CorrectScaling)
+    self:_InitializeWeaponGroup(weaponGroupAdditional, x2ButtonPositions,
+    {
+        kTechId.Welder,
+        kTechId.CombatBuilder
+    },2)
+    
 --------------
 
     local weaponGroupBottomRight = self:CreateAnimatedGraphicItem()
@@ -952,11 +958,14 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     local rightSideStartPos = weaponGroupTopRight:GetPosition()
     rightSideStartPos.x = rightSideStartPos.x + weaponGroupTopRight:GetSize().x
     rightSideStartPos.x = rightSideStartPos.x + paddingXWeaponGroupsToRightSide
-    self:_CreateRightSide(rightSideStartPos)
+    
+    local yOffset =  weaponGroupTopRight:GetSize().y + paddingYWeaponGroups
+    rightSideStartPos.y = rightSideStartPos.y + yOffset
+    self:_CreateRightSide(rightSideStartPos,yOffset)
 
 end
 
-function GUIMarineBuyMenu:_CreateRightSide(startPos)
+function GUIMarineBuyMenu:_CreateRightSide(startPos,bigPicOffset)
 
     -- This is created here to eliminate common code
     self.buyButtonHighlight = self:CreateAnimatedGraphicItem()
@@ -1037,7 +1046,7 @@ function GUIMarineBuyMenu:_CreateRightSide(startPos)
     self.currentMoneyTextIcon:SetOptionFlag(GUIItem.CorrectScaling)
     self.currentMoneyTextIcon:SetPosition(Vector(-9, 0, 0))
 
-    y = y + 80
+    y = y + 70
 
     local vsXPos = 145
     local vsTextPadding = 32
@@ -1127,27 +1136,40 @@ function GUIMarineBuyMenu:_CreateRightSide(startPos)
     self.itemDescription:SetColor(Color(164/255, 196/255, 201/255))
     self.itemDescription:SetOptionFlag(GUIItem.CorrectScaling)
     GUIMakeFontScale(self.itemDescription, "kAgencyFB", vsTextFontSize)
-
-    y = y + 75
-
+    
+    y = y + 85
+    
     local bigPicturesTexture = self.kArmoryBigPicturesTexture
     if self.hostStructure:isa("PrototypeLab") then
         bigPicturesTexture = self.kPrototypeLabBigPicturesTexture
     end
 
+    if bigPicOffset then
+        y = y - bigPicOffset
+    end
+    
     self.bigPicturePositionY = y
     self.bigPicturePositionYDiff = 75
 
     self.bigPicture = self:CreateAnimatedGraphicItem()
-    self.bigPicture:AddAsChildTo(self.rightSideRoot)
+    if not bigPicOffset then
+        self.bigPicture:AddAsChildTo(self.rightSideRoot)
+        self.bigPicture:SetAnchor(GUIItem.Left,GUIItem.Top)
+        self.bigPicture:SetPosition(Vector(0, y, 0))
+    else
+        local pictureWidth = 651 -- armory dimensions
+        local pictureHeight = 319
+        
+        self.bigPicture:AddAsChildTo(self.background)
+        self.bigPicture:SetAnchor(GUIItem.Right,GUIItem.Bottom)
+        self.bigPicture:SetPosition(Vector(-pictureWidth/2 - 200, -pictureHeight/2, 0))
+    end
     self.bigPicture:SetIsScaling(false)
-    self.bigPicture:SetPosition(Vector(0, y, 0))
     self.bigPicture:SetTexture(bigPicturesTexture)
     local bigPictureCoords = self:_GetPigPicturePixelCoordinatesForTechID(kTechId.Pistol)
     self.bigPicture:SetSize(GUIGetSizeFromCoords(bigPictureCoords))
     self.bigPicture:SetTexturePixelCoordinates(GUIUnpackCoords(bigPictureCoords))
     self.bigPicture:SetOptionFlag(GUIItem.CorrectScaling)
-
     y = y + self.bigPicture:GetSize().y
 
     self.specialFrame = self:CreateAnimatedGraphicItem()
@@ -1294,7 +1316,7 @@ function GUIMarineBuyMenu:_SetDetailsSectionTechId(techId, techCost)
         self:_UpdateStatBar(self.vsLifeformBar, stats.LifeFormDamage)
         self:_UpdateStatBar(self.vsStructuresBar, stats.StructureDamage)
         self.itemDescription:SetPosition(Vector(0, self.itemDescriptionPositionY, 0))
-        self.bigPicture:SetPosition(Vector(0, self.bigPicturePositionY, 0))
+        --self.bigPicture:SetPosition(Vector(0, self.bigPicturePositionY, 0))
 
     else
 
@@ -1307,7 +1329,7 @@ function GUIMarineBuyMenu:_SetDetailsSectionTechId(techId, techCost)
         self.vsLifeformsText:SetIsVisible(false)
 
         self.itemDescription:SetPosition(Vector(0, self.statBarsStartPosY, 0))
-        self.bigPicture:SetPosition(Vector(0, self.bigPicturePositionY - self.bigPicturePositionYDiff, 0))
+        --self.bigPicture:SetPosition(Vector(0, self.bigPicturePositionY - self.bigPicturePositionYDiff, 0))
 
     end
 

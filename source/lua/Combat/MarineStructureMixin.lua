@@ -14,39 +14,40 @@ MarineStructureMixin.expectedCallbacks =
 }
 
 if Server then
-    local kSelfDamagePercentPerSecond = .05
-    local kCheckInverval = 1
+    --local kSelfDamagePercentPerSecond = .05
+    local kTickInterval = 1
     local kAutoBuildPerSecond = 0.75
 
-    local function CheckShouldDestroy(self)
+    local function Tick(self)
 
         local player = nil
-        
+        --
         if self.ownerClientId then
 
             local client = Server.GetClientById(self.ownerClientId)
-            
+
             if client then
                 player = client:GetControllingPlayer()
             end
-        
+
         end
         local valid = player ~= nil
-        if valid then
-            valid = player.GetWeapon and player:GetWeapon(CombatBuilder.kMapName) ~= nil
-        end
+        --if valid then
+        --    valid = player.GetWeapon and player:GetWeapon(CombatBuilder.kMapName) ~= nil
+        --end
         
         if valid then
-            if not self:GetIsBuilt() then
-                self:Construct(kAutoBuildPerSecond * kCheckInverval,self.owner)
-            end
+            --if not self:GetIsBuilt() then
+            --    self:Construct(kAutoBuildPerSecond * kTickInterval,self.owner)
+            --end
         else
             if self:GetIsGhostStructure() then
                 self:PerformAction(GetTechTree(self:GetTeamNumber()):GetTechNode(kTechId.Cancel))
             elseif self:GetCanDie() then
-                local deductHealth = kCheckInverval*kSelfDamagePercentPerSecond*self:GetMaxHealth()
-                self.recycled=self:GetHealth() <= deductHealth
-                self:DeductHealth(deductHealth, nil, self , true)
+                --local deductHealth = kTickInterval *kSelfDamagePercentPerSecond*self:GetMaxHealth()
+                --self.recycled=self:GetHealth() <= deductHealth
+                --self:DeductHealth(deductHealth, nil, self , true)
+                self:Kill()
             end
         end
         
@@ -58,7 +59,7 @@ if Server then
         local owner = self:GetOwner()
         if owner then 
             self.ownerClientId = Server.GetOwner(owner):GetId()
-            self:AddTimedCallback(CheckShouldDestroy, kCheckInverval)
+            self:AddTimedCallback(Tick, kTickInterval)
         end
     end
 

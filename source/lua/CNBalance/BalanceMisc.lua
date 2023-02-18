@@ -18,7 +18,7 @@ kJetpackingAccel = 0.8
 kJetpackUseFuelRate = 0.21
 kJetpackReplenishFuelRate = 0.21
 
-kItemStayTime = 5
+kItemStayTime = 20
 kWeaponStayTime = 20
 kWeaponDropRateLimit = 0.2
 

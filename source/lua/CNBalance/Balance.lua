@@ -24,9 +24,9 @@ kWelderDropCooldown = 0
 kGrenadeTechResearchCost = 10   //10
 kGrenadeTechResearchTime = 30   //45
 
-kMineCost = 9
+kMineCost = 10
 kMineDamage = 135
-kDropMineCost = 8
+kDropMineCost = 10
 kDropMineCooldown = 0
 
 kShotgunTechResearchCost = 15
@@ -59,27 +59,22 @@ kHeavyMachineGunSpread = Math.Radians(5.6)  //4
 
 -- Standard Supply
 kStandardSupplyResearchCost = 10
-kStandardSupplyResearchTime = 30
-kAxeUpgradeCost = 10
-kAxeUpgradeResearchTime = 45
-kLightMachineGunUpgradeCost = 20
+kStandardSupplyResearchTime = 45
+kDragonBreathResearchCost = 15
+kDragonBreathResearchTime = 60
+kLightMachineGunUpgradeCost = 25
 kLightMachineGunUpgradeTime = 60
-kMinesUpgradeResearchCost = 10
-kMinesUpgradeResearchTime = 30
-
--- Kinematic Supply
-kKinematicSupplyResearchCost = 10
-kKinematicSupplyResearchTime = 45
-
-kDragonBreathResearchCost = 25
-kDragonBreathResearchTime = 90
+kCannonTechResearchCost = 25
+kCannonTechResearchTime = 90
 
 --Explosive Supply
 kExplosiveSupplyResearchCost = 10
 kExplosiveSupplyResearchTime = 45
-kGrenadeLauncherDetectionShotResearchCost = 15
+kMinesUpgradeResearchCost = 10
+kMinesUpgradeResearchTime = 30
+kGrenadeLauncherDetectionShotResearchCost = 20
 kGrenadeLauncherDetectionShotResearchTime = 60
-kGrenadeLauncherAllyBlastResearchCost = 10
+kGrenadeLauncherAllyBlastResearchCost = 15
 kGrenadeLauncherAllyBlastResearchTime = 45
 kGrenadeLauncherUpgradeResearchCost = 15
 kGrenadeLauncherUpgradeResearchTime = 60
@@ -94,7 +89,7 @@ kGrenadeLauncherGrenadeDamageRadius = 4.8
 kGrenadeLauncherDetectionShotRadius = 3
 
 kGrenadeLauncherImpactGrenadeDamage = 87
-kGrenadeLauncherAllyBlastReduction = 0.5
+kGrenadeLauncherAllyBlastReduction = 0.7
 
 kGrenadeLauncherClipSize = 4
 kGrenadeLauncherWeapons1DamageScalar = 1.08
@@ -126,18 +121,15 @@ kSubMachineGunPointValue = 0
 kRifleMeleeDamage = 10
 kMachineGunMeleeDamage = 25
 
-kCombatBuilderCost = 15
-kCombatBuilderPointValue = 15
-
 --Knife
-kKnifeWeight = 0
-kKnifeDamage = 25
-kKnifeRange = 1.5
+kKnifeWeight = -0.05
+kKnifeDamage = 20
+kKnifeRange = 1.3
 kKnifeCost = 0
 kKnifeDamageType = kDamageType.Structural
 --
 
-kAxeDamage = 40
+kAxeDamage = 25
 kAxeDamageType = kDamageType.Structural
 
 --Light Machine Gun
@@ -158,18 +150,16 @@ kHeavyMarineArmorPerUpgradeLevel = 40
 
 
 --Cannon
-kCannonTechResearchCost = 20
-kCannonTechResearchTime = 60
 kCannonCost = 20
 
-kCannonDamage = 90
-kCannonRateOfFire = 0.8
+kCannonDamage = 100
+kCannonRateOfFire = 0.7
 kCannonAoeDamage = 0
 kCannonSelfDamage = kCannonAoeDamage
 kCannonClipSize = 6
 kCannonPointValue = 15
 kCannonWeight = 0.18
-kCannonDamageType = kDamageType.Normal
+kCannonDamageType = kDamageType.Structural
 kCannonDropCost = 12
 ---
 
@@ -177,7 +167,7 @@ kFlamethrowerCost = 20
 kFlamethrowerDropCost = 12
 kFlamethrowerDropCooldown = 0
 
-kBurnDamagePerSecond = 5
+kBurnDamagePerSecond = 8
 kFlamethrowerBurnDuration = 1
 kFlamethrowerMaxBurnDuration = 6
 
@@ -192,7 +182,6 @@ kPulseGrenadeEnergyDamageRadius = 4
 kPulseGrenadeDamage = 90  --75->90
 kPulseGrenadeEnergyDamage = 35  --25->35
 
-
 kClusterGrenadeDamageRadius = 10
 kClusterGrenadeDamage = 72
 kClusterGrenadeDamageType = kDamageType.ClusterFlame
@@ -203,12 +192,11 @@ kClusterGrenadeFragmentDamageType = kDamageType.ClusterFlameFragment
 
 kInfantryPortalBuildTime = 5
 
-
 kSentryDamage = 3
 kSentryCost = 2
 kSentryBatteryCost = 10
 kSentryBatteryBuildTime = 5
-kSentryBuildTime = 2
+kSentryBuildTime = 3
 
 kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 75 --90->75
@@ -235,7 +223,7 @@ kOnosDevourTime = 60
 
 kUmbraBulletModifier = 0.8
 
-kDevourEnergyCost = 60 --50
+kDevourEnergyCost = 65 --50
 kDevourPunchDamage = 50 --100
 
 kFastTunnelCost = 15
@@ -410,8 +398,6 @@ kAmmoPackCooldown = 0
 kMedPackCost = 1
 kMedPackCooldown = 0
 
-kCatPackSupportCost = 10
-kCatPackSupportTime = 60
 kCatPackCost = 1
 kCatPackCooldown = 0
 kCatPackMoveAddSpeed = 1.25
@@ -419,8 +405,6 @@ kCatPackWeaponSpeed = 1.5
 kCatPackDuration = 5
 kCatPackPickupDelay = 4
 
-kPowerSurgeSupportCost = 10
-kPowerSurgeSupportTime = 60
 kPowerSurgeCost = 3
 kPowerSurgeCooldown = 5
 kPowerSurgeDuration = 10
@@ -429,16 +413,20 @@ kPowerSurgeEMPDamage = 25
 kPowerSurgeEMPDamageRadius = 6
 kPowerSurgeEMPElectrifiedDuration = 2
 
-kNanoShieldSupportCost = 10
-kNanoShieldSupportTime = 60
 kNanoShieldPlayerDuration = 3
 kNanoShieldStructureDuration = 3
 kNanoShieldCost = 3
 kNanoShieldCooldown = 5
 kNanoShieldDamageReductionDamage = 0.68
 
-kWeaponCacheCost = 0
-kWeaponCacheBuildTime = 4
+kCombatBuilderCost = 5
+kCombatBuilderPointValue = 5
+
+kWeaponCachePersonalCost = 6
+kWeaponCacheBuildTime = 6
+kWeaponCachePersonalCarries = 1
+kSentryPersonalCost = 3
+kSentryPersonalCarries = 3
 
 kSporeMineCost = 0
 kSporeMineBuildTime = 2

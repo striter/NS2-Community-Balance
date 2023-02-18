@@ -59,15 +59,19 @@ end
 function MarineBuild_GetCanAffordAbility(techId)
 
     local player = Client.GetLocalPlayer()
-    -- local abilityCost = LookupTechData(techId, kTechDataCostKey, 0)
-    local exceededLimit = not MarineBuild_AllowConsumeDrop(techId) and MarineBuild_GetNumStructureBuilt(techId) >= MarineBuild_GetMaxNumStructure(techId)
+    local abilityCost = LookupTechData(techId, kTechDataPersonalCostKey, 0)
+    
+    local canAfford = player:GetResources() >= abilityCost
 
-    return Shared.GetCheatsEnabled() or not exceededLimit
+    --local exceededLimit = not MarineBuild_AllowConsumeDrop(techId) and MarineBuild_GetNumStructureBuilt(techId) >= MarineBuild_GetMaxNumStructure(techId)
+    --canAfford = canAfford and not exceededLimit
+    
+    return Shared.GetCheatsEnabled() or canAfford
 
 end
 
 function MarineBuild_GetStructureCost(techId)
-    return LookupTechData(techId, kTechDataCostKey, 0)
+    return LookupTechData(techId, kTechDataPersonalCostKey, 0)
 end
 
 local function MarineBuild_GetKeybindForIndex(index)
@@ -122,13 +126,13 @@ GUIMarineBuildMenu.kPersonalResourceIcon = { Width = 0, Height = 0, X = 0, Y = 0
 GUIMarineBuildMenu.kPersonalResourceIcon.Width = 32
 GUIMarineBuildMenu.kPersonalResourceIcon.Height = 32
 GUIMarineBuildMenu.kResourceTexture = "ui/alien_commander_textures.dds"
-GUIMarineBuildMenu.kIconTextXOffset = 5
+GUIMarineBuildMenu.kIconTextXOffset = 12
 
 local kBackgroundNoiseTexture = "ui/alien_commander_bg_smoke.dds"
 local kSmokeyBackgroundSize = GUIScale(Vector(220, 400, 0))
 
 local kDefaultStructureCountPos = Vector(-48, -24, 0)
-local kCenteredStructureCountPos = Vector(0, -24, 0)
+local kCenteredStructureCountPos = Vector(0, -22, 0)
 
 --selection circle animation callbacks
 function PulseOutAnimation(script, item)
@@ -214,8 +218,8 @@ local function UpdateButton(button, index)
     local spriteRow = math.min(row, 4)
     button.graphicItem:SetTexturePixelCoordinates(GUIGetSprite(col, spriteRow, GUIMarineBuildMenu.kPixelSize, GUIMarineBuildMenu.kPixelSize))
     button.description:SetColor(color)
-    -- button.costIcon:SetColor(color)
-    -- button.costText:SetColor(color)
+    button.costIcon:SetColor(color)
+    button.costText:SetColor(color)
 
     local numLeft = MarineBuild_GetNumStructureBuilt(button.techId)
     -- if numLeft == -1 then
@@ -238,20 +242,15 @@ local function UpdateButton(button, index)
         
     -- end    
     
-    -- local cost = MarineBuild_GetStructureCost(button.techId)
-    -- if cost == 0 then        
-    
-        -- button.costIcon:SetIsVisible(false)
-        button.structuresLeft:SetPosition(kCenteredStructureCountPos)
-        
-    -- else
-    
-        -- button.costIcon:SetIsVisible(true)
-        -- button.costText:SetText(ToString(cost))
-        -- button.structuresLeft:SetPosition(kDefaultStructureCountPos)
-        
-        
-    -- end
+     local cost = MarineBuild_GetStructureCost(button.techId)
+     if cost == 0 then        
+        button.costIcon:SetIsVisible(false)
+        --button.structuresLeft:SetPosition(kCenteredStructureCountPos)
+     else
+        button.costIcon:SetIsVisible(true)
+        button.costText:SetText(ToString(cost))
+        --button.structuresLeft:SetPosition(kDefaultStructureCountPos)
+     end
     
     
 end
@@ -309,8 +308,8 @@ function GUIMarineBuildMenu:CreateButton(techId, scale, frame, keybind, position
         keybind = keybind,
         techId = techId,
         structuresLeft = self:CreateAnimatedTextItem(),
-        -- costIcon = self:CreateAnimatedGraphicItem(),
-        -- costText = self:CreateAnimatedTextItem(),
+         costIcon = self:CreateAnimatedGraphicItem(),
+         costText = self:CreateAnimatedTextItem(),
     }
     
     button.frame:SetUniformScale(scale)
@@ -351,35 +350,35 @@ function GUIMarineBuildMenu:CreateButton(techId, scale, frame, keybind, position
     button.structuresLeft:SetTextAlignmentY(GUIItem.Align_Center)
     button.structuresLeft:SetFontSize(28)
     button.structuresLeft:SetFontName(kFontName)
-    button.structuresLeft:SetPosition(kDefaultStructureCountPos)
+    button.structuresLeft:SetPosition(kCenteredStructureCountPos)
     button.structuresLeft:SetFontIsBold(true)
     button.structuresLeft:SetColor(GUIMarineBuildMenu.kAvailableColor)
     
     -- Personal display.
-    -- button.costIcon:SetSize(Vector(GUIMarineBuildMenu.kPersonalResourceIcon.Width, GUIMarineBuildMenu.kPersonalResourceIcon.Height, 0))
-    -- button.costIcon:SetAnchor(GUIItem.Middle, GUIItem.Bottom)
-    -- button.costIcon:SetTexture(GUIMarineBuildMenu.kResourceTexture)
-    -- button.costIcon:SetPosition(Vector(0, -GUIMarineBuildMenu.kPersonalResourceIcon.Height * .5 - 24, 0))
-    -- button.costIcon:SetUniformScale(scale)
-    -- GUISetTextureCoordinatesTable(button.costIcon, GUIMarineBuildMenu.kPersonalResourceIcon.Coords)
-
-    -- button.costText:SetUniformScale(scale)
-    -- button.costText:SetAnchor(GUIItem.Right, GUIItem.Center)
-    -- button.costText:SetTextAlignmentX(GUIItem.Align_Min)
-    -- button.costText:SetTextAlignmentY(GUIItem.Align_Center)
-    -- button.costText:SetPosition(Vector(GUIMarineBuildMenu.kIconTextXOffset, 0, 0))
-    -- button.costText:SetColor(Color(1, 1, 1, 1))
-    -- button.costText:SetFontIsBold(true)    
-    -- button.costText:SetFontSize(28)
-    -- button.costText:SetFontName(kFontName)
-    -- button.costText:SetColor(GUIMarineBuildMenu.kAvailableColor)
-    -- button.costIcon:AddChild(button.costText)
+    button.costIcon:SetSize(Vector(GUIMarineBuildMenu.kPersonalResourceIcon.Width, GUIMarineBuildMenu.kPersonalResourceIcon.Height, 0))
+    button.costIcon:SetAnchor(GUIItem.Middle, GUIItem.Top)
+    button.costIcon:SetTexture(GUIMarineBuildMenu.kResourceTexture)
+    button.costIcon:SetPosition(Vector(0, GUIMarineBuildMenu.kPersonalResourceIcon.Height * .5 + 4 , 0))
+    button.costIcon:SetUniformScale(scale)
+    GUISetTextureCoordinatesTable(button.costIcon, GUIMarineBuildMenu.kPersonalResourceIcon.Coords)
+    
+    button.costText:SetUniformScale(scale)
+    button.costText:SetAnchor(GUIItem.Middle, GUIItem.Middle)
+    button.costText:SetTextAlignmentX(GUIItem.Align_Min)
+    button.costText:SetTextAlignmentY(GUIItem.Align_Center)
+    button.costText:SetPosition(Vector(GUIMarineBuildMenu.kIconTextXOffset, 3, 0))
+    button.costText:SetColor(Color(1, 1, 1, 1))
+    button.costText:SetFontIsBold(true)    
+    button.costText:SetFontSize(28)
+    button.costText:SetFontName(kFontName)
+    button.costText:SetColor(GUIMarineBuildMenu.kAvailableColor)
+    button.costIcon:AddChild(button.costText)
     
     button.background:AddChild(button.graphicItem)    
     button.graphicItem:AddChild(button.description)
     button.graphicItem:AddChild(button.structuresLeft)
     button.graphicItem:AddChild(button.keyIcon)   
-    -- button.graphicItem:AddChild(button.costIcon)
+    button.graphicItem:AddChild(button.costIcon)
 
     return button
 

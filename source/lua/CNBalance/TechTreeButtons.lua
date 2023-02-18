@@ -4,16 +4,9 @@ local kTechIdToMaterialOffset = debug.getupvaluex(GetMaterialXYOffset, "kTechIdT
 kTechIdToMaterialOffset[kTechId.NanoArmor] = 195
 kTechIdToMaterialOffset[kTechId.LifeSustain] = 198
 
-kTechIdToMaterialOffset[kTechId.NanoShieldSupport] = 55
-kTechIdToMaterialOffset[kTechId.CatPackSupport] = 164
-kTechIdToMaterialOffset[kTechId.PowerSurgeSupport] = 119
-
 kTechIdToMaterialOffset[kTechId.StandardSupply] = 201
-kTechIdToMaterialOffset[kTechId.AxeUpgrade] = 202
 kTechIdToMaterialOffset[kTechId.LightMachineGunUpgrade] = 192
 kTechIdToMaterialOffset[kTechId.MinesUpgrade] = 194
-
-kTechIdToMaterialOffset[kTechId.KinematicSupply] = 199
 kTechIdToMaterialOffset[kTechId.DragonBreath] = 203
 kTechIdToMaterialOffset[kTechId.CannonTech] = 204
 

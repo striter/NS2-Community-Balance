@@ -1,7 +1,6 @@
 TeamInfo.kRelevantTechIdsMarine =
 {
     kTechId.ShotgunTech,
-
     kTechId.MinesTech,
     kTechId.GrenadeTech,
 
@@ -26,18 +25,12 @@ TeamInfo.kRelevantTechIdsMarine =
 
     kTechId.PhaseTech,
 
-    kTechId.CatPackSupport,
-    kTechId.PowerSurgeSupport,
-    kTechId.NanoShieldSupport,
-    --kTechId.StandardSupply,
-    kTechId.AxeUpgrade,
+    kTechId.StandardSupply,
     kTechId.LightMachineGunUpgrade,
-
-    --kTechId.KinematicSupply,
     kTechId.DragonBreath,
     kTechId.Cannon,
 
-    --kTechId.ExplosiveSupply,
+    kTechId.ExplosiveSupply,
     kTechId.GrenadeLauncherDetectionShot,
     kTechId.GrenadeLauncherAllyBlast,
     kTechId.GrenadeLauncherUpgrade,

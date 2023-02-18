@@ -8,7 +8,7 @@ if Server then
         
         local primaryWeapon = GetHasTech(self,kTechId.LightMachineGunUpgrade) and LightMachineGun.kMapName or Rifle.kMapName
         local secondaryWeapon = Pistol.kMapName
-        local meleeWeapon = GetHasTech(self,kTechId.AxeUpgrade) and Axe.kMapName or Knife.kMapName
+        local meleeWeapon = Axe.kMapName
         self:GiveItem(primaryWeapon)
         self:GiveItem(secondaryWeapon)
         self:GiveItem(meleeWeapon)
@@ -18,9 +18,8 @@ if Server then
         self:SetActiveWeapon(primaryWeapon)
     end
 
-    local baseOnDropAllWeapons = Marine.DropAllWeapons
-    function Marine:DropAllWeapons()
-
+    local baseOnKill = Marine.OnKill
+    function Marine:OnKill(attacker, doer, point, direction)
         local primaryWeapon = self:GetWeaponInHUDSlot(kPrimaryWeaponSlot)
         if primaryWeapon then
             if primaryWeapon.kMapName == SubMachineGun.kMapName then
@@ -35,7 +34,14 @@ if Server then
             end
         end
 
-        baseOnDropAllWeapons(self)
+        local meleeWeapon = self:GetWeaponInHUDSlot(kTertiaryWeaponSlot)
+        if meleeWeapon then
+            if meleeWeapon.kMapName == Knife.kMapName then
+                self.meleeRespawn = meleeWeapon.kMapName
+            end
+        end
+        
+        baseOnKill(self,attacker,doer,point,direction)
     end
     
     local onCopyPlayerDataFrom = Marine.CopyPlayerDataFrom
@@ -46,6 +52,7 @@ if Server then
         if not playerInRR and GetGamerules():GetGameStarted() then
             self.primaryRespawn = player.primaryRespawn
             self.secondaryRespawn = player.secondaryRespawn
+            self.meleeRespawn = player.meleeRespawn
         end
 
     end
@@ -97,7 +104,7 @@ if Server then
                     setActive = false
                 end
                 
-            elseif itemMapName == Welder.kMapName then
+            elseif itemMapName == Welder.kMapName  then
                 -- since axe cannot be dropped we need to delete it before adding the welder (shared hud slot)
 
                 local meleeWeapon = self:GetWeapon(Axe.kMapName) or self:GetWeapon(Knife.kMapName)
@@ -108,9 +115,18 @@ if Server then
                 else
                     continue = false -- don't give a second welder
                 end
-            
+                
+            else if itemMapName == Axe.kMapName or itemMapName == Knife.kMapName then
+
+                local meleeWeapon = self:GetWeapon(Axe.kMapName) or self:GetWeapon(Knife.kMapName)
+                if meleeWeapon then
+                    self:RemoveWeapon(meleeWeapon)
+                    DestroyEntity(meleeWeapon)
+                end
+                
             end
-            
+                
+            end            
             if continue == true then
                 return Player.GiveItem(self, itemMapName, setActive, suppressError)
             end

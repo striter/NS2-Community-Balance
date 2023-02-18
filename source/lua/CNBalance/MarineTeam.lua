@@ -27,11 +27,13 @@ function MarineTeam:InitTechTree()
     self.techTree:AddBuildNode(kTechId.ArmsLab,                   kTechId.CommandStation,                kTechId.None)
     self.techTree:AddManufactureNode(kTechId.MAC,                 kTechId.RoboticsFactory,                kTechId.None,  true)
 
-    self.techTree:AddBuyNode(kTechId.Knife,                       kTechId.None,                kTechId.None)
     self.techTree:AddBuyNode(kTechId.Pistol,                      kTechId.None,                kTechId.None)
     self.techTree:AddBuyNode(kTechId.Rifle,                       kTechId.None,                kTechId.None)
+    self.techTree:AddBuyNode(kTechId.Axe,                         kTechId.None,                kTechId.None)
+    
     self.techTree:AddBuyNode(kTechId.SubMachineGun,               kTechId.None,                kTechId.None)
     self.techTree:AddBuyNode(kTechId.Revolver,                    kTechId.None,                kTechId.None)
+    self.techTree:AddBuyNode(kTechId.Knife,                       kTechId.None,                kTechId.None)
 
     self.techTree:AddBuildNode(kTechId.SentryBattery,             kTechId.RoboticsFactory,      kTechId.None)
 
@@ -42,15 +44,6 @@ function MarineTeam:InitTechTree()
     self.techTree:AddTargetedActivation(kTechId.MedPack,          kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.AmmoPack,         kTechId.None)
 
-    self.techTree:AddResearchNode(kTechId.PowerSurgeSupport)
-    self.techTree:AddTargetedActivation(kTechId.PowerSurge,             kTechId.PowerSurgeSupport)
-    
-    self.techTree:AddResearchNode(kTechId.CatPackSupport)
-    self.techTree:AddTargetedActivation(kTechId.CatPack,             kTechId.CatPackSupport)
-
-    self.techTree:AddResearchNode(kTechId.NanoShieldSupport)
-    self.techTree:AddTargetedActivation(kTechId.NanoShield,             kTechId.NanoShieldSupport)
-    
     self.techTree:AddTargetedActivation(kTechId.Scan,             kTechId.Observatory)
 
     self.techTree:AddAction(kTechId.SelectObservatory)
@@ -89,11 +82,12 @@ function MarineTeam:InitTechTree()
     self.techTree:AddTargetedActivation(kTechId.DropMines,      kTechId.Armory)
     self.techTree:AddTargetedBuyNode(kTechId.LayMines,          kTechId.MinesTech)
     
+    
     self.techTree:AddResearchNode(kTechId.GrenadeTech,           kTechId.Armory)
-    self.techTree:AddTargetedBuyNode(kTechId.ClusterGrenade,     kTechId.Armory,kTechId.GrenadeTech)
-    self.techTree:AddTargetedBuyNode(kTechId.GasGrenade,         kTechId.Armory,kTechId.GrenadeTech)
-    self.techTree:AddTargetedBuyNode(kTechId.PulseGrenade,       kTechId.Armory,kTechId.GrenadeTech)
-
+    self.techTree:AddTargetedBuyNode(kTechId.ClusterGrenade,          kTechId.Armory,        kTechId.None)
+    --self.techTree:AddTargetedBuyNode(kTechId.ClusterGrenade,     kTechId.Armory, kTechId.GrenadeTech)
+    self.techTree:AddTargetedBuyNode(kTechId.GasGrenade,         kTechId.Armory, kTechId.GrenadeTech)
+    self.techTree:AddTargetedBuyNode(kTechId.PulseGrenade,       kTechId.Armory, kTechId.GrenadeTech)
 
     self.techTree:AddTargetedBuyNode(kTechId.Welder,          kTechId.Armory,        kTechId.None)
     self.techTree:AddTargetedBuyNode(kTechId.CombatBuilder,   kTechId.Armory,       kTechId.None)
@@ -121,23 +115,24 @@ function MarineTeam:InitTechTree()
 
     -- Standard
     self.techTree:AddResearchNode(kTechId.StandardSupply,  kTechId.Armory)
-    self.techTree:AddResearchNode(kTechId.AxeUpgrade,  kTechId.StandardSupply)
+    self.techTree:AddTargetedActivation(kTechId.NanoShield,         kTechId.StandardSupply)
+    self.techTree:AddTargetedActivation(kTechId.CatPack,            kTechId.StandardSupply)
+    
+    self.techTree:AddResearchNode(kTechId.DragonBreath, kTechId.StandardSupply)
     self.techTree:AddResearchNode(kTechId.LightMachineGunUpgrade,  kTechId.StandardSupply)
-    self.techTree:AddBuyNode(kTechId.Axe,                       kTechId.AxeUpgrade)
+    self.techTree:AddResearchNode(kTechId.CannonTech,   kTechId.StandardSupply,     kTechId.LightMachineGunUpgrade)
+    
     self.techTree:AddBuyNode(kTechId.LightMachineGun,               kTechId.LightMachineGunUpgrade)
+    self.techTree:AddBuyNode(kTechId.Cannon,                        kTechId.CannonTech)
 
-    --- Kinematic
-    self.techTree:AddResearchNode(kTechId.KinematicSupply,  kTechId.Armory)
-    self.techTree:AddResearchNode(kTechId.DragonBreath,  kTechId.KinematicSupply)
-    self.techTree:AddResearchNode(kTechId.CannonTech,               kTechId.KinematicSupply,                kTechId.None)
-    self.techTree:AddBuyNode(kTechId.Cannon,               kTechId.CannonTech,                kTechId.None)
-
+    --Explosive
     self.techTree:AddResearchNode(kTechId.ExplosiveSupply,  kTechId.Armory)
+    self.techTree:AddTargetedActivation(kTechId.PowerSurge,             kTechId.ExplosiveSupply)
     self.techTree:AddResearchNode(kTechId.MinesUpgrade,  kTechId.MinesTech,kTechId.ExplosiveSupply )
     self.techTree:AddResearchNode(kTechId.GrenadeLauncherDetectionShot,      kTechId.ExplosiveSupply,kTechId.AdvancedArmory)
     self.techTree:AddResearchNode(kTechId.GrenadeLauncherAllyBlast , kTechId.ExplosiveSupply,kTechId.AdvancedArmory)
     self.techTree:AddResearchNode(kTechId.GrenadeLauncherUpgrade, kTechId.GrenadeLauncherAllyBlast,kTechId.AdvancedArmory)
-    
+
     self.techTree:AddBuildNode(kTechId.PrototypeLab,          kTechId.AdvancedArmory,              kTechId.None)
 
     -- Jetpack

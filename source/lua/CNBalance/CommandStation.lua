@@ -1,3 +1,3 @@
 function CommandStation:GetTechButtons()
-    return {  kTechId.CatPackSupport, kTechId.NanoShieldSupport, kTechId.PowerSurgeSupport,kTechId.None}
+    return {  kTechId.None, kTechId.None, kTechId.None,kTechId.None}
 end

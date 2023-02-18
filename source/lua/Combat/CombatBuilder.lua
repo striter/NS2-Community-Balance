@@ -222,7 +222,9 @@ function CombatBuilder:PerformPrimaryAttack(player)
     local coords, valid = self:GetPositionForStructure(player:GetEyePos(), player:GetViewCoords().zAxis, self:GetActiveStructure(), self.lastClickedPosition)
     local secondClick = true
     
-    if LookupTechData(self:GetActiveStructure().GetDropStructureId(), kTechDataSpecifyOrientation, false) then
+    local structureID = self:GetActiveStructure().GetDropStructureId()
+    
+    if LookupTechData(structureID, kTechDataSpecifyOrientation, false) then
         secondClick = self.lastClickedPosition ~= nil
     end
     
@@ -231,14 +233,14 @@ function CombatBuilder:PerformPrimaryAttack(player)
         if valid then
 
             -- Ensure they have enough resources.
-            -- local cost = GetCostForTech(self:GetActiveStructure().GetDropStructureId())
-            -- if player:GetResources() >= cost then --and not self:GetHasDropCooldown() then
-            local message = BuildMarineDropStructureMessage(player:GetEyePos(), player:GetViewCoords().zAxis, self.activeStructure, self.lastClickedPosition)
-            Client.SendNetworkMessage("MarineBuildStructure", message, true)
-            self.timeLastDrop = Shared.GetTime()
-            success = true
+             local cost = LookupTechData(structureID, kTechDataPersonalCostKey, 0)
+             if player:GetResources() >= cost then --and not self:GetHasDropCooldown() then
+                local message = BuildMarineDropStructureMessage(player:GetEyePos(), player:GetViewCoords().zAxis, self.activeStructure, self.lastClickedPosition)
+                Client.SendNetworkMessage("MarineBuildStructure", message, true)
+                self.timeLastDrop = Shared.GetTime()
+                success = true
 
-            -- end
+             end
         
         end
 
@@ -270,8 +272,8 @@ local function DropStructure(self, player, origin, direction, structureAbility, 
             maxStructures = LookupTechData(techId, kTechDataMaxAmount, 0) 
         end
         
-        -- local cost = LookupTechData(structureAbility:GetDropStructureId(), kTechDataCostKey, 0)
-        -- local enoughRes = player:GetResources() >= cost
+        local cost = LookupTechData(structureAbility:GetDropStructureId(), kTechDataPersonalCostKey, 0)
+        local enoughRes = player:GetResources() >= cost
         
         if valid and structureAbility:IsAllowed(player) and not self:GetHasDropCooldown() then
         
@@ -290,7 +292,7 @@ local function DropStructure(self, player, origin, direction, structureAbility, 
                     angles:BuildFromCoords(coords)
                     structure:SetAngles(angles)
                     
-                    -- player:AddResources(-cost)
+                     player:AddResources(-cost)
                     
                     if structureAbility:GetStoreBuildId() then
                         self.lastCreatedId = structure:GetId()
@@ -563,9 +565,9 @@ if Client then
 
             self.ghostCoords, self.placementValid = self:GetPositionForStructure(player:GetEyePos(), viewDirection, self:GetActiveStructure(), self.lastClickedPosition)
             
-            -- if player:GetResources() < LookupTechData(self:GetActiveStructure():GetDropStructureId(), kTechDataCostKey) then
-                -- self.placementValid = false
-            -- end
+             if player:GetResources() < LookupTechData(self:GetActiveStructure():GetDropStructureId(), kTechDataPersonalCostKey) then
+                 self.placementValid = false
+             end
         
         end
         

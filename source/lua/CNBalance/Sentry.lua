@@ -11,14 +11,18 @@ local function UpdateBatteryState(self)
         self.lastBatteryCheckTime = time
 
         ----------------
-        local weaponCaches = GetEntitiesForTeamWithinRange("WeaponCache",self:GetTeamNumber(), self:GetOrigin() ,WeaponCache.kSentryRange)
-        for index,ent in ipairs(weaponCaches) do
-
-            if GetIsUnitActive(ent) and ent:GetLocationName() == self:GetLocationName() then
-                self.attachedToBattery = true
-                return
-            end
+        if HasMixin(self,MarineStructureMixin.type ) then
+            self.attachedToBattery = true
         end
+        
+        --local weaponCaches = GetEntitiesForTeamWithinRange("WeaponCache",self:GetTeamNumber(), self:GetOrigin() ,WeaponCache.kSentryRange)
+        --for index,ent in ipairs(weaponCaches) do
+        --
+        --    if GetIsUnitActive(ent) and ent:GetLocationName() == self:GetLocationName() then
+        --        self.attachedToBattery = true
+        --        return
+        --    end
+        --end
         --------------
 
         local sentryBatteries = GetEntitiesForTeamWithinRange("SentryBattery", self:GetTeamNumber(), self:GetOrigin(), SentryBattery.kRange)

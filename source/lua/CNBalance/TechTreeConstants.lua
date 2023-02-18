@@ -64,9 +64,7 @@ kTechId = enum {
     'WeaponCache',
 
     'StandardSupply',
-    'AxeUpgrade','LightMachineGunUpgrade',
-
-    'KinematicSupply',
+    'LightMachineGunUpgrade',
     'DragonBreath',
     'Cannon','CannonTech','DropCannon',
 
@@ -78,7 +76,7 @@ kTechId = enum {
     'FlamethrowerAlt',
 
     -- Research
-    'AdvancedMarineSupport','CatPackSupport','PowerSurgeSupport','NanoShieldSupport',
+    'AdvancedMarineSupport',
     'PhaseTech', 'MACSpeedTech', 'MACEMPTech', 'ARCArmorTech', 'ARCSplashTech', 'JetpackTech', 'ExosuitTech',
     'DualMinigunTech', 'DualMinigunExosuit', 'UpgradeToDualMinigun',
     'ClawRailgunTech', 'ClawRailgunExosuit',

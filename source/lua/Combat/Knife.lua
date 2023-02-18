@@ -153,4 +153,5 @@ function Knife:GetCatalystSpeedBase()
     return 1
 end
 
+
 Shared.LinkClassToMap("Knife", Knife.kMapName, networkVars)

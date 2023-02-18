@@ -1,3 +1,6 @@
+
+kTechDataPersonalCostKey                      = "costpersonalkey"
+
 local oldBuildTechData = BuildTechData
 function BuildTechData()
     
@@ -22,44 +25,6 @@ function BuildTechData()
     })        
 
     table.insert(techData, {
-        [kTechDataId] = kTechId.PowerSurgeSupport,
-        [kTechDataCostKey] = kPowerSurgeSupportCost,
-        [kTechDataResearchTimeKey] = kPowerSurgeSupportTime,
-        [kTechDataDisplayName] = "POWER_SURGE_SUPPORT",
-        [kTechDataTooltipInfo] = "POWER_SURGE_TOOLTIP",
-        [kTechDataResearchName] = "POWER_SURGE_SUPPORT",
-    })
-
-    table.insert(techData, {
-        [kTechDataId] = kTechId.NanoShieldSupport,
-        [kTechDataCostKey] = kNanoShieldSupportCost,
-        [kTechDataResearchTimeKey] = kNanoShieldSupportTime,
-        [kTechDataDisplayName] = "NANO_SHIELD_SUPPORT",
-        [kTechDataTooltipInfo] = "NANO_SHIELD_TOOLTIP",
-        [kTechDataResearchName] = "NANO_SHIELD_SUPPORT",
-    })
-
-    table.insert(techData, {
-        [kTechDataId] = kTechId.CatPackSupport,
-        [kTechDataCostKey] = kCatPackSupportCost,
-        [kTechDataResearchTimeKey] = kCatPackSupportTime,
-        [kTechDataDisplayName] = "CAT_PACK_SUPPORT",
-        [kTechDataTooltipInfo] = "CAT_PACK_TOOLTIP",
-        [kTechDataResearchName] = "CAT_PACK_SUPPORT",
-    })
-
-
-    table.insert(techData, {
-        [kTechDataId] = kTechId.JetpackFuelTech,
-        [kTechDataCostKey] = kJetpackFuelTechResearchCost,
-        [kTechDataResearchTimeKey] = kJetpackFuelTechResearchTime,
-        [kTechDataDisplayName] = "JETPACK_FUEL_TECH",
-        [kTechDataTooltipInfo] = "JETPACK_FUEL_TOOLTIP",
-        [kTechDataResearchName] = "JETPACK_FUEL_TECH",
-        [kTechDataHotkey] = Move.F,
-    })        
-                
-    table.insert(techData, {
         [kTechDataId] = kTechId.StandardSupply,
         [kTechDataCostKey] = kStandardSupplyResearchCost,
         [kTechDataResearchTimeKey] = kStandardSupplyResearchTime,
@@ -69,30 +34,12 @@ function BuildTechData()
     })
                 
     table.insert(techData, {
-        [kTechDataId] = kTechId.AxeUpgrade,
-        [kTechDataCostKey] = kAxeUpgradeCost,
-        [kTechDataResearchTimeKey] = kAxeUpgradeResearchTime,
-        [kTechDataDisplayName] = "AXE_UPGRADE",
-        [kTechDataTooltipInfo] = "AXE_UPGRADE_TOOLTIP",
-        [kTechDataResearchName] = "AXE_UPGRADE",
-    })
-                
-    table.insert(techData, {
         [kTechDataId] = kTechId.LightMachineGunUpgrade,
         [kTechDataCostKey] = kLightMachineGunUpgradeCost,
         [kTechDataResearchTimeKey] = kLightMachineGunUpgradeTime,
         [kTechDataDisplayName] = "LIGHTMACHINEGUN_UPGRADE",
         [kTechDataTooltipInfo] = "LIGHTMACHINEGUN_UPGRADE_TOOLTIP",
         [kTechDataResearchName] = "LIGHTMACHINEGUN_UPGRADE",
-    })
-                
-    table.insert(techData, {
-        [kTechDataId] = kTechId.KinematicSupply,
-        [kTechDataCostKey] = kKinematicSupplyResearchCost,
-        [kTechDataResearchTimeKey] = kKinematicSupplyResearchTime,
-        [kTechDataDisplayName] = "KINEMATIC_SUPPLY",
-        [kTechDataTooltipInfo] = "KINEMATIC_SUPPLY_TOOLTIP",
-        [kTechDataResearchName] = "KINEMATIC_SUPPLY",
     })
 
     table.insert(techData, {
@@ -213,7 +160,7 @@ function BuildTechData()
         [kTechDataCostKey] = kCannonTechResearchCost,
         [kTechDataResearchTimeKey] = kCannonTechResearchTime,
         [kTechDataDisplayName] = "RESEARCH_CANNON",
-        [kTechDataTooltipInfo] = "CANNON_TOOLTIP", 
+        [kTechDataTooltipInfo] = "RESEARCH_CANNON_TOOLTIP", 
     } )
 
     table.insert(techData,{ 
@@ -253,10 +200,11 @@ function BuildTechData()
         [kTechDataModel] = WeaponCache.kModelName, 
         [kTechDataPointValue] = kWeaponCachePointValue, 
         [kTechDataNotOnInfestation] = kPreventMarineStructuresOnInfestation,
-        [kTechDataCostKey] = kWeaponCacheCost,             
+        [kTechDataCostKey] = kWeaponCachePersonalCost,             
         -- [kTechDataTooltipInfo] = "WEAPONCACHE_TOOLIP", 
         [kTechDataAllowConsumeDrop] = true, 
-        [kTechDataMaxAmount] = 1 
+        [kTechDataMaxAmount] = kWeaponCachePersonalCarries,
+        [kTechDataPersonalCostKey] = kWeaponCachePersonalCost,
     })
 
     table.insert(techData,  {
@@ -286,8 +234,9 @@ function BuildTechData()
         [kTechDataBuildRequiresMethod] = GetCheckSentryLimit,
         [kTechDataGhostGuidesMethod] = GetBatteryInRange,
         [kTechDataObstacleRadius] = 0.25,
-        [kTechDataMaxAmount] = 2,
-        [kTechDataAllowConsumeDrop] = true, 
+        [kTechDataAllowConsumeDrop] = true,
+        [kTechDataMaxAmount] = kSentryPersonalCarries,
+        [kTechDataPersonalCostKey] = kSentryPersonalCost,
     })
 
     table.insert(techData,  {

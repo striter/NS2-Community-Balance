@@ -26,13 +26,11 @@ end
 
 local function IsSupplyTech(techId)
     return techId == kTechId.StandardSupply or 
-    kTechId == kTechId.KinematicSupply or 
     kTechId == kTechId.ExplosiveSupply
 end
 
 function Armory:GetSupplyUnavailable()
     local researched=GetHasTech(self,kTechId.StandardSupply) or 
-    GetHasTech(self,kTechId.KinematicSupply) or
     GetHasTech(self,kTechId.ExplosiveSupply)
 
     if researched then
@@ -40,7 +38,6 @@ function Armory:GetSupplyUnavailable()
     end
 
     local researching = GetIsTechResearching(self,kTechId.StandardSupply) or
-    GetIsTechResearching(self,kTechId.KinematicSupply) or
     GetIsTechResearching(self,kTechId.ExplosiveSupply)
     return researching
 end
@@ -58,8 +55,7 @@ function Armory:GetTechButtons(techId)
     local supplyAvailable = self:GetSupplyUnavailable()
     if not supplyAvailable then
         techButtons[2] = kTechId.StandardSupply
-        techButtons[3] = kTechId.KinematicSupply
-        techButtons[4] = kTechId.ExplosiveSupply
+        techButtons[3] = kTechId.ExplosiveSupply
     end
 
     if GetHasTech(self,kTechId.ExplosiveSupply)  then
@@ -70,13 +66,11 @@ function Armory:GetTechButtons(techId)
         if GetHasTech(self,kTechId.GrenadeLauncherAllyBlast) then
             techButtons[4] = kTechId.GrenadeLauncherUpgrade
         end
-    elseif GetHasTech(self,kTechId.KinematicSupply) then
-        techButtons[2] = kTechId.DragonBreath
-        techButtons[3] = kTechId.CannonTech
     elseif GetHasTech(self,kTechId.StandardSupply) then
-        
-        techButtons[2] = kTechId.AxeUpgrade
+
+        techButtons[2] = kTechId.DragonBreath
         techButtons[3] = kTechId.LightMachineGunUpgrade
+        techButtons[4] = kTechId.CannonTech
     end
 
     -- Show button to upgraded to advanced armory
