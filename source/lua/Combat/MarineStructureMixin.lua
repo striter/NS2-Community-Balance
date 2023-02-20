@@ -1,5 +1,5 @@
 MarineStructureMixin = CreateMixin(MarineStructureMixin)
-MarineStructureMixin.type = "MarineStructureMixin"
+MarineStructureMixin.type = "MarineStructure"
 
 MarineStructureMixin.networkVars =
 {

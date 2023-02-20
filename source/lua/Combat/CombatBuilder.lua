@@ -282,6 +282,7 @@ local function DropStructure(self, player, origin, direction, structureAbility, 
             if structure then
             
                 structure:SetOwner(player)
+                structure:Construct(0.01,player)
                 InitMixin(structure, MarineStructureMixin)
 				player:GetTeam():AddMarineStructure(player, structure)
                 

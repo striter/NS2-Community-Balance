@@ -292,6 +292,7 @@ function BuildTechData()
         [kTechDataHint] = "SPORE_MINE_TOOLTIP",
         [kTechDataTooltipInfo] = "SPORE_MINE_TOOLTIP", 
     })
+    
     --Skulk
     table.insert(techData, {
         [kTechDataId] = kTechId.SkulkBoost, 

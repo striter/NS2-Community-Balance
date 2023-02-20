@@ -1,3 +1,8 @@
+
+function Sentry:GetCanRecycleOverride()
+    return not HasMixin(self,"MarineStructure")
+end
+
 if not Server then return end
 
 local function UpdateBatteryState(self)

@@ -248,6 +248,10 @@ function WeaponCache:GetTechButtons(techId)
     
 end
 
+function WeaponCache:GetCanRecycleOverride()
+    return false
+end
+
 function WeaponCache:GetTechAllowed(techId, techNode, player)
 
     local allowed, canAfford = ScriptActor.GetTechAllowed(self, techId, techNode, player)

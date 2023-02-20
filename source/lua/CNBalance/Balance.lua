@@ -1,4 +1,6 @@
-kPlayerResPerInterval  = 0.125
+kResourceTowerResourceInterval = 6.5
+kPlayerResPerInterval = 0.125
+kTeamResourcePerTick = 1
 kPlayingTeamInitialTeamRes = 60
 kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
@@ -60,11 +62,11 @@ kHeavyMachineGunSpread = Math.Radians(5.6)  //4
 -- Standard Supply
 kStandardSupplyResearchCost = 10
 kStandardSupplyResearchTime = 45
-kDragonBreathResearchCost = 15
+kDragonBreathResearchCost = 20
 kDragonBreathResearchTime = 60
-kLightMachineGunUpgradeCost = 25
+kLightMachineGunUpgradeCost = 30
 kLightMachineGunUpgradeTime = 60
-kCannonTechResearchCost = 25
+kCannonTechResearchCost = 35
 kCannonTechResearchTime = 90
 
 --Explosive Supply
@@ -152,7 +154,7 @@ kHeavyMarineArmorPerUpgradeLevel = 40
 --Cannon
 kCannonCost = 20
 
-kCannonDamage = 100
+kCannonDamage = 95
 kCannonRateOfFire = 0.7
 kCannonAoeDamage = 0
 kCannonSelfDamage = kCannonAoeDamage
@@ -192,7 +194,7 @@ kClusterGrenadeFragmentDamageType = kDamageType.ClusterFlameFragment
 
 kInfantryPortalBuildTime = 5
 
-kSentryDamage = 3
+kSentryDamage = 3.3
 kSentryCost = 2
 kSentryBatteryCost = 10
 kSentryBatteryBuildTime = 5
@@ -288,12 +290,11 @@ kRappelEnergyCost = 12
 kRappelReelEnergyCost = 20
 kRappelRange = 25
 
-kAcidSprayResearchCost = 15
+kAcidSprayResearchCost = 10
 kAcidSprayResearchTime = 60
 kAcidSprayEnergyCost = 19
 kAcidSprayDamage = 17  -- 3 missiles
 kAcidSprayDamageType = kDamageType.Heavy
-
 
 -- Fade
 kStabDamage = 140
@@ -414,19 +415,19 @@ kPowerSurgeEMPDamageRadius = 6
 kPowerSurgeEMPElectrifiedDuration = 2
 
 kNanoShieldPlayerDuration = 3
-kNanoShieldStructureDuration = 3
+kNanoShieldStructureDuration = 5
 kNanoShieldCost = 3
 kNanoShieldCooldown = 5
 kNanoShieldDamageReductionDamage = 0.68
 
-kCombatBuilderCost = 5
+kCombatBuilderCost = 2
 kCombatBuilderPointValue = 5
 
-kWeaponCachePersonalCost = 6
+kWeaponCachePersonalCost = 7
 kWeaponCacheBuildTime = 6
 kWeaponCachePersonalCarries = 1
-kSentryPersonalCost = 3
-kSentryPersonalCarries = 3
+kSentryPersonalCost = 4
+kSentryPersonalCarries = 2
 
 kSporeMineCost = 0
 kSporeMineBuildTime = 2
