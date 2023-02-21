@@ -1,4 +1,4 @@
-kResourceTowerResourceInterval = 6.5
+kResourceTowerResourceInterval = 7
 kPlayerResPerInterval = 0.125
 kTeamResourcePerTick = 1
 kPlayingTeamInitialTeamRes = 60
