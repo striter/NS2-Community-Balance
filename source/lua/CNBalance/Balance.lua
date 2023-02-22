@@ -194,7 +194,7 @@ kClusterGrenadeFragmentDamageType = kDamageType.ClusterFlameFragment
 
 kInfantryPortalBuildTime = 5
 
-kSentryDamage = 3.3
+kSentryDamage = 3
 kSentryCost = 2
 kSentryBatteryCost = 10
 kSentryBatteryBuildTime = 5
@@ -421,12 +421,12 @@ kNanoShieldCooldown = 5
 kNanoShieldDamageReductionDamage = 0.68
 
 kCombatBuilderCost = 2
-kCombatBuilderPointValue = 5
+kCombatBuilderPointValue = 2
 
 kWeaponCachePersonalCost = 7
 kWeaponCacheBuildTime = 6
 kWeaponCachePersonalCarries = 1
-kSentryPersonalCost = 4
+kSentryPersonalCost = 5
 kSentryPersonalCarries = 2
 
 kSporeMineCost = 0

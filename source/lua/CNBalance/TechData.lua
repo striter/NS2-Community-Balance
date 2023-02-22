@@ -200,7 +200,7 @@ function BuildTechData()
         [kTechDataModel] = WeaponCache.kModelName, 
         [kTechDataPointValue] = kWeaponCachePointValue, 
         [kTechDataNotOnInfestation] = kPreventMarineStructuresOnInfestation,
-        [kTechDataCostKey] = kWeaponCachePersonalCost,             
+        --[kTechDataCostKey] = kWeaponCachePersonalCost,             
         -- [kTechDataTooltipInfo] = "WEAPONCACHE_TOOLIP", 
         [kTechDataAllowConsumeDrop] = true, 
         [kTechDataMaxAmount] = kWeaponCachePersonalCarries,
