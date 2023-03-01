@@ -44,6 +44,7 @@ if kLocales then
     kLocales["CANNON_TOOLTIP"]="*Gauss cannon.\n*Handle high mobility lifeforms."
 
     kLocales["COMBATBUILDER"]="Combat Builder"
+    kLocales["COMBATBUILDER"]="Marines acquire battlefield engineering."
     kLocales["COMBATBUILDER_BUYDESCRIPTION"]="Battlefield engineering.\n*Build supply depot to refill nearby marine's health and ammo.\n*Build sentries to attack enemies in range"
 
     kLocales["WEAPON_CACHE"]="Supply depot"
@@ -139,7 +140,9 @@ if kTranslateMessage then
     kTranslateMessage["RESEARCH_CANNON_TOOLTIP"]="*进行高斯枪研发.\n*适用于压制高机动目标."
     kTranslateMessage["CANNON_TOOLTIP"]="*单兵高斯枪研发.\n*适用于压制高机动目标."
 
+    
     kTranslateMessage["COMBATBUILDER"]="工程套件"
+    kTranslateMessage["COMBATBUILDER_TOOLTIP"]="给予陆战队员基础建筑建造."
     kTranslateMessage["COMBATBUILDER_BUYDESCRIPTION"]="给予基础建筑建造.\n*建造补给站以获取弹药.\n*建造机枪塔攻击范围内敌方单位."
     
     kTranslateMessage["WEAPON_CACHE"]="补给站"

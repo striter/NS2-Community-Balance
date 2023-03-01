@@ -26,7 +26,7 @@ kWelderDropCooldown = 0
 kGrenadeTechResearchCost = 10   //10
 kGrenadeTechResearchTime = 30   //45
 
-kMineCost = 10
+kMineCost = 9
 kMineDamage = 135
 kDropMineCost = 10
 kDropMineCooldown = 0
@@ -65,9 +65,9 @@ kStandardSupplyResearchTime = 45
 kDragonBreathResearchCost = 20
 kDragonBreathResearchTime = 60
 kLightMachineGunUpgradeCost = 30
-kLightMachineGunUpgradeTime = 60
+kLightMachineGunUpgradeTime = 75
 kCannonTechResearchCost = 35
-kCannonTechResearchTime = 90
+kCannonTechResearchTime = 105
 
 --Explosive Supply
 kExplosiveSupplyResearchCost = 10
@@ -160,7 +160,6 @@ kCannonAoeDamage = 0
 kCannonSelfDamage = kCannonAoeDamage
 kCannonClipSize = 6
 kCannonPointValue = 15
-kCannonWeight = 0.18
 kCannonDamageType = kDamageType.Structural
 kCannonDropCost = 12
 ---
@@ -419,6 +418,9 @@ kNanoShieldStructureDuration = 5
 kNanoShieldCost = 3
 kNanoShieldCooldown = 5
 kNanoShieldDamageReductionDamage = 0.68
+
+kCombatBuilderResearchCost = 10
+kCombatBuilderResearchTime = 60
 
 kCombatBuilderCost = 2
 kCombatBuilderPointValue = 2

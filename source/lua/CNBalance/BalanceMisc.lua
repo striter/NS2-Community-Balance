@@ -6,6 +6,7 @@ kPistolWeight = 0.0
 kRifleWeight = 0.13
 kHeavyRifleWeight = 0.25
 kHeavyMachineGunWeight = 0.23
+kCannonWeight = 0.26
 kGrenadeLauncherWeight = 0.15
 kFlamethrowerWeight = 0.14
 kShotgunWeight = 0.14

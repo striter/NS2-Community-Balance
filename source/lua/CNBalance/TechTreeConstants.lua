@@ -101,6 +101,7 @@ kTechId = enum {
     'Armor1', 'Armor2', 'Armor3',
 
 ---------------
+    'CombatBuilderTech',
     'LifeSustain','NanoArmor',
 ---------------
     -- Activations

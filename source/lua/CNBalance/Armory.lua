@@ -46,38 +46,37 @@ function Armory:GetTechButtons(techId)
 
     local techButtons = 
     {
-        kTechId.ShotgunTech,kTechId.None, kTechId.None, kTechId.None, 
-        kTechId.None, kTechId.MinesTech, kTechId.GrenadeTech, kTechId.None 
+        kTechId.ShotgunTech,kTechId.MinesTech, kTechId.GrenadeTech, kTechId.CombatBuilderTech, 
+        kTechId.None, kTechId.None, kTechId.None, kTechId.None 
     }
     
-
-    local advancedArmory = self:GetTechId() == kTechId.AdvancedArmory
-    local supplyAvailable = self:GetSupplyUnavailable()
-    if not supplyAvailable then
-        techButtons[2] = kTechId.StandardSupply
-        techButtons[3] = kTechId.ExplosiveSupply
-    end
-
-    if GetHasTech(self,kTechId.ExplosiveSupply)  then
-        techButtons[2] = kTechId.MinesUpgrade
-        techButtons[3] = kTechId.GrenadeLauncherDetectionShot
-        techButtons[4] = kTechId.GrenadeLauncherAllyBlast
-
-        if GetHasTech(self,kTechId.GrenadeLauncherAllyBlast) then
-            techButtons[4] = kTechId.GrenadeLauncherUpgrade
-        end
-    elseif GetHasTech(self,kTechId.StandardSupply) then
-
-        techButtons[2] = kTechId.DragonBreath
-        techButtons[3] = kTechId.LightMachineGunUpgrade
-        techButtons[4] = kTechId.CannonTech
-    end
-
     -- Show button to upgraded to advanced armory
+    local advancedArmory = self:GetTechId() == kTechId.AdvancedArmory
     if not advancedArmory then
         techButtons[5] = kTechId.AdvancedArmoryUpgrade
-    end
+    else
+        local supplyAvailable = self:GetSupplyUnavailable()
+        if not supplyAvailable then
+            techButtons[5] = kTechId.StandardSupply
+            techButtons[6] = kTechId.ExplosiveSupply
+        end
 
+        if GetHasTech(self,kTechId.ExplosiveSupply)  then
+            techButtons[5] = kTechId.MinesUpgrade
+            techButtons[6] = kTechId.GrenadeLauncherDetectionShot
+            techButtons[7] = kTechId.GrenadeLauncherAllyBlast
+
+            if GetHasTech(self,kTechId.GrenadeLauncherAllyBlast) then
+                techButtons[7] = kTechId.GrenadeLauncherUpgrade
+            end
+        elseif GetHasTech(self,kTechId.StandardSupply) then
+
+            techButtons[5] = kTechId.DragonBreath
+            techButtons[6] = kTechId.LightMachineGunUpgrade
+            techButtons[7] = kTechId.CannonTech
+        end
+    end
+    
     return techButtons
 
 end

@@ -7,6 +7,7 @@ local function extGetIsResearchRelevant(techId)
         relevantResearchIds = {}
         relevantResearchIds[kTechId.LifeSustain] = 1
         relevantResearchIds[kTechId.NanoArmor] = 1
+        relevantResearchIds[kTechId.CombatBuilderTech] = 2
         
         relevantResearchIds[kTechId.StandardSupply] = 2
         relevantResearchIds[kTechId.LightMachineGunUpgrade] = 2

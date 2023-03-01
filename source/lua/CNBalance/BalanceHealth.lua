@@ -37,10 +37,10 @@ kMatureHiveHealth = 7800 kMatureHiveArmor = 1400    -- 6000 1400
 --2400 1050
 kExtractorHealth = 2400 kExtractorArmor = 1200 kExtractorPointValue = 15
 
-kMineHealth = 28    kMineArmor = 5    kMinePointValue = 5
+kMineHealth = 26    kMineArmor = 5    kMinePointValue = 5
 
 kSentryBatteryHealth = 700    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5
-kSentryHealth = 400    kSentryArmor = 100    kSentryPointValue = 3
+kSentryHealth = 300    kSentryArmor = 150    kSentryPointValue = 4
 
 kARCHealth = 2600    kARCArmor = 600    kARCPointValue = 10   --2600 400
 kARCDeployedHealth = 2600    kARCDeployedArmor = 0      -- 2600 0
@@ -98,7 +98,7 @@ kMatureVeilHealth = 1500     kMatureVeilArmor = 0     kVeilPointValue = 15  -- 1
 
 
 --Combat
-kWeaponCacheHealth = 600    kWeaponCacheArmor = 150   kWeaponCachePointValue = 5
+kWeaponCacheHealth = 500    kWeaponCacheArmor = 150   kWeaponCachePointValue = 5
 
 kSporeMineHealth = 50 kSporeMineArmor = 0 kSporeMinepointValue=0
 kMatureSporeMineHealth = 100 kMatureSporeMineArmor = 0

@@ -210,13 +210,6 @@ local kTechIdStats =
         Range = 0.1,
     },
 
-    [kTechId.CombatBuilder] =
-    {
-        LifeFormDamage = 0,
-        StructureDamage = 0.1,
-        Range = 0,
-    },
-
     [kTechId.Revolver]=
     {   
         LifeFormDamage = 1,
@@ -372,7 +365,7 @@ local kTechIdInfo =
         ButtonTextureIndex = 18,
         BigPictureIndex = 16,
         Description = "LIGHTMACHINEGUN_BUYDESCRIPTION",    
-        Stats = GetStatsForTechId(kTechId.Revolver)
+        Stats = GetStatsForTechId(kTechId.LightMachineGun)
     },
 
     [kTechId.SubMachineGun] =
@@ -908,8 +901,8 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     local buyMelee = PlayerUI_GetHasItem(kTechId.Axe) and kTechId.Knife or kTechId.Axe
     self:_InitializeWeaponGroup(weaponGroupTopRight, x2ButtonPositions,
     {
-        buyMelee, 
-        kTechId.LayMines,
+        buyMelee,
+        kTechId.Welder,
     },2)
 
     local weaponGroupAdditional = self:CreateAnimatedGraphicItem()
@@ -921,7 +914,7 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     weaponGroupAdditional:SetOptionFlag(GUIItem.CorrectScaling)
     self:_InitializeWeaponGroup(weaponGroupAdditional, x2ButtonPositions,
     {
-        kTechId.Welder,
+        kTechId.LayMines,
         kTechId.CombatBuilder
     },2)
     

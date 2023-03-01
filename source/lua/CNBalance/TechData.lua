@@ -7,6 +7,15 @@ function BuildTechData()
     local techData = oldBuildTechData()
 
     table.insert(techData, {
+        [kTechDataId] = kTechId.CombatBuilderTech,
+        [kTechDataCostKey] = kCombatBuilderResearchCost,
+        [kTechDataResearchTimeKey] = kCombatBuilderResearchTime,
+        [kTechDataDisplayName] = "COMBATBUILDER",
+        [kTechDataTooltipInfo] = "COMBATBUILDER_TOOLTIP",
+        [kTechDataResearchName] = "COMBATBUILDER",
+    })
+    
+    table.insert(techData, {
         [kTechDataId] = kTechId.NanoArmor,
         [kTechDataCostKey] = kNanoArmorResearchCost,
         [kTechDataResearchTimeKey] = kNanoArmorResearchTime,

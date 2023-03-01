@@ -81,7 +81,9 @@ function MarineTeam:InitTechTree()
     self.techTree:AddResearchNode(kTechId.MinesTech,            kTechId.Armory)
     self.techTree:AddTargetedActivation(kTechId.DropMines,      kTechId.Armory)
     self.techTree:AddTargetedBuyNode(kTechId.LayMines,          kTechId.MinesTech)
-    
+
+    self.techTree:AddResearchNode(kTechId.CombatBuilderTech,            kTechId.Armory)
+    self.techTree:AddTargetedBuyNode(kTechId.CombatBuilder,   kTechId.CombatBuilderTech,       kTechId.None)
     
     self.techTree:AddResearchNode(kTechId.GrenadeTech,           kTechId.Armory)
     self.techTree:AddTargetedBuyNode(kTechId.ClusterGrenade,          kTechId.Armory,        kTechId.None)
@@ -90,7 +92,6 @@ function MarineTeam:InitTechTree()
     self.techTree:AddTargetedBuyNode(kTechId.PulseGrenade,       kTechId.Armory, kTechId.GrenadeTech)
 
     self.techTree:AddTargetedBuyNode(kTechId.Welder,          kTechId.Armory,        kTechId.None)
-    self.techTree:AddTargetedBuyNode(kTechId.CombatBuilder,   kTechId.Armory,       kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.DropWelder,   kTechId.Armory,        kTechId.None)
 
     -- Door actions
@@ -114,7 +115,7 @@ function MarineTeam:InitTechTree()
     self.techTree:AddTargetedBuyNode(kTechId.Flamethrower ,kTechId.AdvancedArmory)
 
     -- Standard
-    self.techTree:AddResearchNode(kTechId.StandardSupply,  kTechId.Armory)
+    self.techTree:AddResearchNode(kTechId.StandardSupply,  kTechId.AdvancedArmory)
     self.techTree:AddTargetedActivation(kTechId.NanoShield,         kTechId.StandardSupply)
     self.techTree:AddTargetedActivation(kTechId.CatPack,            kTechId.StandardSupply)
     
@@ -126,7 +127,7 @@ function MarineTeam:InitTechTree()
     self.techTree:AddBuyNode(kTechId.Cannon,                        kTechId.CannonTech)
 
     --Explosive
-    self.techTree:AddResearchNode(kTechId.ExplosiveSupply,  kTechId.Armory)
+    self.techTree:AddResearchNode(kTechId.ExplosiveSupply,  kTechId.AdvancedArmory)
     self.techTree:AddTargetedActivation(kTechId.PowerSurge,             kTechId.ExplosiveSupply)
     self.techTree:AddResearchNode(kTechId.MinesUpgrade,  kTechId.MinesTech,kTechId.ExplosiveSupply )
     self.techTree:AddResearchNode(kTechId.GrenadeLauncherDetectionShot,      kTechId.ExplosiveSupply,kTechId.AdvancedArmory)
