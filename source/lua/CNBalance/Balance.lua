@@ -1,14 +1,14 @@
-kResourceTowerResourceInterval = 7
+kResourceTowerResourceInterval = 7.5
 kPlayerResPerInterval = 0.125
 kTeamResourcePerTick = 1
-kPlayingTeamInitialTeamRes = 60
+kPlayingTeamInitialTeamRes = 60   --60
 kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
 
 kMarineRespawnTime = 9
 
 kAlienSpawnTime = 10
-kEggGenerationRate = 10  //13
+kEggGenerationRate = 10  --13
 kAlienEggsPerHive = 2
 
 kNanoArmorResearchCost = 15
@@ -17,14 +17,11 @@ kNanoArmorResearchTime = 60
 kLifeSustainResearchCost = 10
 kLifeSustainResearchTime = 45
 
-kPistolRateOfFire = 0.01
-kPistolDamage = 20
-
 kWelderDropCost = 3
 kWelderDropCooldown = 0
 
-kGrenadeTechResearchCost = 10   //10
-kGrenadeTechResearchTime = 30   //45
+kGrenadeTechResearchCost = 10   --10
+kGrenadeTechResearchTime = 60   --45
 
 kMineCost = 9
 kMineDamage = 135
@@ -36,6 +33,9 @@ kShotgunTechResearchTime = 45
 kShotgunCost = 20
 kShotgunDropCost = 12
 kShotgunDropCooldown = 0
+
+kPistolRateOfFire = 0.01
+kPistolDamage = 20
 
 kShotgunFireRate = 0.88
 kShotgunDamage = 12.33 //11.33
@@ -180,8 +180,8 @@ kRailgunDamageType = kDamageType.Exosuit
 
 kPulseGrenadeDamageRadius = 4
 kPulseGrenadeEnergyDamageRadius = 4
-kPulseGrenadeDamage = 90  --75->90
-kPulseGrenadeEnergyDamage = 35  --25->35
+kPulseGrenadeDamage = 90  --75
+kPulseGrenadeEnergyDamage = 35  --25
 
 kClusterGrenadeDamageRadius = 10
 kClusterGrenadeDamage = 72
