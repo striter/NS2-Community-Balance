@@ -300,8 +300,8 @@ kStabDamage = 140
 kStabDamageType = kDamageType.Structural
 kStabEnergyCost = 33
 
-kStartBlinkEnergyCost = 14
-kBlinkEnergyCost = 30
+kStartBlinkEnergyCost = 12
+kBlinkEnergyCost = 28
 kHealthOnBlink = 0
 
 --Vokex
