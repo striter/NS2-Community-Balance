@@ -300,7 +300,7 @@ kStabDamage = 140
 kStabDamageType = kDamageType.Structural
 kStabEnergyCost = 33
 
-kStartBlinkEnergyCost = 12
+kStartBlinkEnergyCost = 14
 kBlinkEnergyCost = 28
 kHealthOnBlink = 0
 
