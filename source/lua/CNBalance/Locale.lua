@@ -44,7 +44,7 @@ if kLocales then
     kLocales["CANNON_TOOLTIP"]="*Gauss cannon.\n*Handle high mobility lifeforms."
 
     kLocales["COMBATBUILDER"]="Combat Builder"
-    kLocales["COMBATBUILDER"]="Grant marines battlefield engineering."
+    kLocales["COMBATBUILDER_TOOLTIP"]="Grant marines battlefield engineering."
     kLocales["COMBATBUILDER_BUYDESCRIPTION"]="Battlefield engineering.\n*Build supply depot to refill nearby marine's health and ammo.\n*Build sentries to attack enemies in range"
 
     kLocales["WEAPON_CACHE"]="Supply depot"
