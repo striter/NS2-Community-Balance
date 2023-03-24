@@ -50,7 +50,7 @@ class 'MarineSentry' (ScriptActor)
 
 MarineSentry.kMapName = "marinesentry"
 
-MarineSentry.kModelName = PrecacheAsset("models/marine/psentry/sentry.model")
+MarineSentry.kModelName = PrecacheAsset("models/marine/combat/sentry.model")
 MarineSentry.kConfusedSound = PrecacheAsset("sound/NS2.fev/marine/structures/sentry_confused")
 MarineSentry.kFireShellEffect = PrecacheAsset("cinematics/marine/sentry/fire_shell.cinematic")
 
