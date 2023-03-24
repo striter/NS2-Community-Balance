@@ -1,6 +1,0 @@
-shader = "models/marine/marine.surface_shader"
-albedoMap = "models/marine/psentry/sentry.dds"
-normalMap = "models/marine/psentry/sentry_normal.dds"
-emissiveMap = "models/marine/psentry/sentry_illum.dds"
-specularMap = "models/marine/psentry/sentry_spec.dds"
-surface = "metal"
