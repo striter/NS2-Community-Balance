@@ -1,0 +1,6 @@
+shader = "models/marine/marine.surface_shader"
+albedoMap = "models/marine/combat/sentry.dds"
+normalMap = "models/marine/combat/sentry_normal.dds"
+emissiveMap = "models/marine/combat/sentry_illum.dds"
+specularMap = "models/marine/combat/sentry_spec.dds"
+surface = "metal"
