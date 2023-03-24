@@ -116,15 +116,13 @@ if Server then
                     continue = false -- don't give a second welder
                 end
                 
-            else if itemMapName == Axe.kMapName or itemMapName == Knife.kMapName then
+            elseif itemMapName == Axe.kMapName or itemMapName == Knife.kMapName then
 
                 local meleeWeapon = self:GetWeapon(Axe.kMapName) or self:GetWeapon(Knife.kMapName)
                 if meleeWeapon then
                     self:RemoveWeapon(meleeWeapon)
                     DestroyEntity(meleeWeapon)
                 end
-                
-            end
                 
             end            
             if continue == true then
