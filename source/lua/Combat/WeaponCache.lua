@@ -14,7 +14,7 @@ Script.Load("lua/CommanderGlowMixin.lua")
 Script.Load("lua/ScriptActor.lua")
 Script.Load("lua/RagdollMixin.lua")
 Script.Load("lua/NanoShieldMixin.lua")
-Script.Load("lua/ObstacleMixin.lua")
+--Script.Load("lua/ObstacleMixin.lua")
 Script.Load("lua/WeldableMixin.lua")
 Script.Load("lua/UnitStatusMixin.lua")
 Script.Load("lua/DissolveMixin.lua")
@@ -23,9 +23,9 @@ Script.Load("lua/GhostStructureMixin.lua")
 Script.Load("lua/MapBlipMixin.lua")
 Script.Load("lua/CombatMixin.lua")
 Script.Load("lua/InfestationTrackerMixin.lua")
-Script.Load("lua/SupplyUserMixin.lua")
 Script.Load("lua/IdleMixin.lua")
 Script.Load("lua/ParasiteMixin.lua")
+Script.Load("lua/Combat/MarineStructureMixin.lua")
 
 class 'WeaponCache' (ScriptActor)
 
@@ -79,7 +79,7 @@ AddMixinNetworkVars(RecycleMixin, networkVars)
 AddMixinNetworkVars(SelectableMixin, networkVars)
 
 AddMixinNetworkVars(NanoShieldMixin, networkVars)
-AddMixinNetworkVars(ObstacleMixin, networkVars)
+--AddMixinNetworkVars(ObstacleMixin, networkVars)
 AddMixinNetworkVars(DissolveMixin, networkVars)
 AddMixinNetworkVars(PowerConsumerMixin, networkVars)
 AddMixinNetworkVars(GhostStructureMixin, networkVars)
@@ -106,7 +106,7 @@ function WeaponCache:OnCreate()
     InitMixin(self, ResearchMixin)
     InitMixin(self, RecycleMixin)
     InitMixin(self, RagdollMixin)
-    InitMixin(self, ObstacleMixin)
+    --InitMixin(self, ObstacleMixin)
     InitMixin(self, DissolveMixin)
     InitMixin(self, GhostStructureMixin)
     InitMixin(self, CombatMixin)
@@ -185,7 +185,7 @@ function WeaponCache:OnInitialized()
         
         InitMixin(self, StaticTargetMixin)
         InitMixin(self, InfestationTrackerMixin)
-        InitMixin(self, SupplyUserMixin)
+        InitMixin(self, MarineStructureMixin)
         
     elseif Client then
     
@@ -246,10 +246,6 @@ function WeaponCache:GetTechButtons(techId)
 
     return techButtons
     
-end
-
-function WeaponCache:GetCanRecycleOverride()
-    return false
 end
 
 function WeaponCache:GetTechAllowed(techId, techNode, player)

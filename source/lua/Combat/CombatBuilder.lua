@@ -1,6 +1,5 @@
 Script.Load("lua/Combat/SentryAbility.lua")
 Script.Load("lua/Combat/ArmoryAbility.lua")
-Script.Load("lua/Combat/MarineStructureMixin.lua")
 Script.Load("lua/PickupableWeaponMixin.lua")
 Script.Load("lua/LiveMixin.lua")
 
@@ -107,7 +106,7 @@ end
 
 function CombatBuilder:GetNumStructuresBuilt(techId)
 
-    if techId == kTechId.Sentry then
+    if techId == kTechId.MarineSentry then
         return self.numSentriesLeft
     end
 	
@@ -283,7 +282,6 @@ local function DropStructure(self, player, origin, direction, structureAbility, 
             
                 structure:SetOwner(player)
                 structure:Construct(0.01,player)
-                InitMixin(structure, MarineStructureMixin)
 				player:GetTeam():AddMarineStructure(player, structure)
                 
                 -- Check for space
@@ -502,13 +500,13 @@ function CombatBuilder:ProcessMoveOnWeapon(input)
 
             -- This is where you limit the number of entities that are alive
 			local team = player:GetTeam()
-            local numAllowedSentries = LookupTechData(kTechId.Sentry, kTechDataMaxAmount, -1) 
+            local numAllowedSentries = LookupTechData(kTechId.MarineSentry, kTechDataMaxAmount, -1) 
             local numAllowedMiniArmories = LookupTechData(kTechId.WeaponCache, kTechDataMaxAmount, -1) 
             -- local numAllowedPhaseGates = LookupTechData(kTechId.PhaseGate, kTechDataMaxAmount, -1) 
             -- local numAllowedObservatories = LookupTechData(kTechId.Observatory, kTechDataMaxAmount, -1) 
 
             if numAllowedSentries >= 0 then     
-                self.numSentriesLeft = team:GetNumDroppedMarineStructures(player, kTechId.Sentry)           
+                self.numSentriesLeft = team:GetNumDroppedMarineStructures(player, kTechId.MarineSentry)           
             end
    
             if numAllowedMiniArmories >= 0 then     

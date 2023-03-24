@@ -7,7 +7,7 @@ Script.Load("lua/Mixins/CrouchMoveMixin.lua")
 Script.Load("lua/Mixins/JumpMoveMixin.lua")
 Script.Load("lua/CelerityMixin.lua")
 Script.Load("lua/Mixins/CameraHolderMixin.lua")
---Script.Load("lua/WallMovementMixin.lua")
+Script.Load("lua/WallMovementMixin.lua")
 Script.Load("lua/DissolveMixin.lua")
 Script.Load("lua/BabblerClingMixin.lua")
 Script.Load("lua/TunnelUserMixin.lua")
@@ -95,7 +95,7 @@ AddMixinNetworkVars(JumpMoveMixin, networkVars)
 AddMixinNetworkVars(CrouchMoveMixin, networkVars)
 AddMixinNetworkVars(CelerityMixin, networkVars)
 AddMixinNetworkVars(CameraHolderMixin, networkVars)
---AddMixinNetworkVars( WallMovementMixin, networkVars)
+AddMixinNetworkVars(WallMovementMixin, networkVars)
 AddMixinNetworkVars(DissolveMixin, networkVars)
 AddMixinNetworkVars(BabblerClingMixin, networkVars)
 AddMixinNetworkVars(TunnelUserMixin, networkVars)
@@ -111,7 +111,7 @@ function Prowler:OnCreate()
     InitMixin(self, CrouchMoveMixin)
     InitMixin(self, CelerityMixin)
     InitMixin(self, CameraHolderMixin, { kFov = kProwlerFov })
-    --InitMixin(self, WallMovementMixin)
+    InitMixin(self, WallMovementMixin)
 
     Alien.OnCreate(self)
 
@@ -416,16 +416,20 @@ end
 end--]]
 
 --local oldOnAdjustModelCoords = Prowler.OnAdjustModelCoords
-function Prowler:OnAdjustModelCoords(modelCoords)
-    --modelCoords = oldOnAdjustModelCoords(self, modelCoords)
-    --modelCoords.xAxis = modelCoords.xAxis * kProwlerScale
-    --modelCoords.yAxis = modelCoords.yAxis * kModelYScale
-    --modelCoords.zAxis = modelCoords.zAxis * kProwlerScale
-    modelCoords.origin.y = modelCoords.origin.y + kProwlerVertAdjust
-    --if self.primaryAttacking then
-    --    modelCoords.origin.y = modelCoords.origin.y + kProwlerAttackVertAdjust
-    --end
-    return modelCoords
+--function Prowler:OnAdjustModelCoords(modelCoords)
+--    --modelCoords = oldOnAdjustModelCoords(self, modelCoords)
+--    --modelCoords.xAxis = modelCoords.xAxis * kProwlerScale
+--    --modelCoords.yAxis = modelCoords.yAxis * kModelYScale
+--    --modelCoords.zAxis = modelCoords.zAxis * kProwlerScale
+--    modelCoords.origin.y = modelCoords.origin.y + kProwlerVertAdjust
+--    --if self.primaryAttacking then
+--    --    modelCoords.origin.y = modelCoords.origin.y + kProwlerAttackVertAdjust
+--    --end
+--    return modelCoords
+--end
+
+function Prowler:GetIsWallGripping()
+    return self.wallGripping and self.wallGripAllowed
 end
 
 function Prowler:GetIsUsingBodyYaw()
@@ -433,7 +437,11 @@ function Prowler:GetIsUsingBodyYaw()
 end
 
 function Prowler:GetDesiredAngles(deltaTime)
-
+    
+    if self:GetIsWallGripping() then
+        return self:GetAnglesFromWallNormal( self.wallGripNormalGoal )
+    end
+    
     local desiredAngles = Angles()
     if self.onGround then
         desiredAngles.pitch = 0
@@ -460,46 +468,50 @@ function Prowler:OnWorldCollision(normal)
     
 end
 
+Prowler.kWallGripRange = 0.2
+Prowler.kWallGripFeelerSize = 0.25
+
 function Prowler:PreUpdateMove(input, runningPrediction)
 
     PROFILE("Prowler:PreUpdateMove")
 
-    --local notRecentlyJumped = Shared.GetTime() - self.timeOfLastJump > 0.09
-    --local glideDesired = bit.band(input.commands, Move.Jump) ~= 0 and self.rappelling --notRecentlyJumped and not self:GetIsOnGround()
+    local wallGripPressed = bit.band(input.commands, Move.MovementModifier) ~= 0 and bit.band(input.commands, Move.Jump) == 0
 
-    --self.gliding = glideDesired
+    if not self:GetIsWallGripping() and wallGripPressed and self.wallGripAllowed then
 
-    
-    --[[if self.timeRappelStart + kRappelDuration < Shared.GetTime() then
-        self.rappelling = false
-    end--]]
-    local wallChecked = (Shared.GetTime() - self.timeLastWallWalkCheck < 0.09)
-    self.wallGripAllowed = wallChecked and (Shared.GetTime() - self.timeOfLastJump > 0.19)
-    
-    local wallGripPressed = bit.band(input.commands, Move.MovementModifier) ~= 0 -- and bit.band(input.commands, Move.Jump) == 0
-    local breakWallGrip = --[[bit.band(input.commands, Move.Jump) ~= 0 or--]] input.move:GetLength() > 0 and not self.wallGripAllowed or self:GetCrouching()
-    -- we always abandon wall gripping if we crouch, or try to move without holding sneak key
-                              
-    if breakWallGrip then
-    
-            --self.wallGripNormal = nil
+        -- check if we can grab anything around us
+        local wallNormal = self:GetAverageWallWalkingNormal(Prowler.kWallGripRange, Prowler.kWallGripFeelerSize)
+
+        if wallNormal then
+            self.wallGripping = true
+            self.wallGripNormalGoal = wallNormal
+            self:SetVelocity(Vector(0,0,0))
+
+        end
+
+    else
+
+        local breakWallGrip = bit.band(input.commands, Move.Jump) ~= 0 or input.move:GetLength() > 0 or self:GetCrouching()
+
+        if breakWallGrip then
+
             self.wallGripping = false
+            self.wallGripNormal = nil
             self.wallGripAllowed = false
-            
-    elseif not self.wallGripping and self.wallGripAllowed and wallGripPressed then
 
-        self:SetVelocity(Vector(0,0,0))
-        self.wallGripping = true
-        self.jumping = false
-        --self.rappelling = false
+        end
+
     end
-        
 end
 
 local kRappelFollowDistance = 1.5
 
 function Prowler:ModifyVelocity(input, velocity, deltaTime)
 
+    if self.movementModiferState then
+        return
+    end
+    
     if self.rappelling and self.rappelPoint ~= nil and not self.wallGripping then
         -- fly toward rappel anchor point/target
         local origin = self:GetModelOrigin()
@@ -647,6 +659,10 @@ end--]]
 function Prowler:OnRappel(impactPoint, hitEntity)
 
     --self:RappelMove()
+
+    if self.movementModiferState then
+        return
+    end
     
     self.rappelDirection = self:GetViewCoords().zAxis
     
@@ -666,9 +682,8 @@ function Prowler:OnRappel(impactPoint, hitEntity)
     self.rappelling = true
     self.rappelPoint = self.rappelling and impactPoint or nil
     self.rappelFollow = hitEntity and hitEntity:GetId() or Entity.invalidId
-    self:DisableGroundMove(0.15)
     self.timeRappelStart = Shared.GetTime()
-    self.wallGripping = false
+    self:DisableGroundMove(0.15)
     self.wallGripAllowed = false
     
     --[[if Server then

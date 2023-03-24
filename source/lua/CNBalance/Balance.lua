@@ -193,11 +193,11 @@ kClusterGrenadeFragmentDamageType = kDamageType.ClusterFlameFragment
 
 kInfantryPortalBuildTime = 5
 
-kSentryDamage = 3
-kSentryCost = 2
+kSentryDamage = 5
+kSentryCost = 5
+kSentryBuildTime = 3
 kSentryBatteryCost = 10
 kSentryBatteryBuildTime = 5
-kSentryBuildTime = 3
 
 kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 75 --90->75
@@ -425,11 +425,17 @@ kCombatBuilderResearchTime = 60
 kCombatBuilderCost = 2
 kCombatBuilderPointValue = 2
 
+kMarineSentryCost = 1
+kMarineSentryDamage = 3
+kMarineSentryBuildTime = 3
+
+kWeaponCacheCost = 2
 kWeaponCachePersonalCost = 7
 kWeaponCacheBuildTime = 6
 kWeaponCachePersonalCarries = 1
-kSentryPersonalCost = 5
-kSentryPersonalCarries = 2
+
+kMarineSentryPersonalCost = 5
+kMarineSentryPersonalCarries = 2
 
 kSporeMineCost = 0
 kSporeMineBuildTime = 2

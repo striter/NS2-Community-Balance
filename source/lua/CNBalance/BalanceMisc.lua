@@ -53,7 +53,6 @@ kAlienRegenerationCombatModifier = 0.5
 kHydrasPerHive = 3
 kClogsPerHive = 10
 kNumWebsPerGorge = 3
-kSentriesPerBattery = 4
 
 kMACSpeedAmount = 1
 
@@ -81,11 +80,12 @@ kMACSupply = 5
 kArmorySupply = 5
 kObservatorySupply = 15
 kARCSupply = 20
-kSentrySupply = 0
-kSentryBatterySupply = 25
+kSentrySupply = 5
+kSentryBatterySupply = 10
 kRoboticsFactorySupply = 5
 kInfantryPortalSupply = 0
 kPhaseGateSupply = 10
+kSentriesPerBattery = 3
 
 kDrifterSupply = 5
 kWhipSupply = 15

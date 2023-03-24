@@ -49,7 +49,10 @@ if kLocales then
 
     kLocales["WEAPON_CACHE"]="Supply depot"
     kLocales["WEAPON_CACHE_HINT"]="Refill health and ammo"
-
+    
+    kLocales["MARINE_SENTRY"]="Portable sentry"
+    kLocales["MARINE_SENTRY_HINT"]="Track and damage living target"
+    
     kLocales["BUYMENU_GROUPLABEL_GRENADES"]="Throwables"
     kLocales["RESEARCH_GRENADES"]="Throwables Upgarde"
     kLocales["GRENADES_TOOLTIP"]="+Unlock new grenade types.\nMarines throw grenades faster."
@@ -147,6 +150,9 @@ if kTranslateMessage then
     
     kTranslateMessage["WEAPON_CACHE"]="补给站"
     kTranslateMessage["WEAPON_CACHE_HINT"]="回复弹药与生命值"
+
+    kTranslateMessage["MARINE_SENTRY"]="单兵机枪塔"
+    kTranslateMessage["MARINE_SENTRY_HINT"]="自动索敌并攻击."
     
     kTranslateMessage["BUYMENU_GROUPLABEL_GRENADES"]="投掷物"
     kTranslateMessage["RESEARCH_GRENADES"]="投掷物升级"

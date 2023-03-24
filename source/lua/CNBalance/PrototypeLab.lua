@@ -6,3 +6,12 @@ function PrototypeLab:GetTechButtons(techId)
              
     return techTable
 end
+
+
+--function PrototypeLab:GetCanBeUsed(player, useSuccessTable)
+--
+--    if player:isa("Exo") then
+--        useSuccessTable.useSuccess = false
+--    end
+--
+--end

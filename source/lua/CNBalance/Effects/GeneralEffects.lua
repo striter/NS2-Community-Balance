@@ -3,7 +3,8 @@ local kAdditionalEffects = {
     {
         deploySoundEffects =
         {
-            {sound = "sound/NS2.fev/marine/structures/sentry_deploy", classname = "WeaponCache", done = true},                   
+            {sound = "sound/NS2.fev/marine/structures/sentry_deploy", classname = "WeaponCache", done = true},
+            {sound = "sound/NS2.fev/marine/structures/sentry_deploy", classname = "MarineSentry", done = true},
         },
 
     }, 
@@ -14,12 +15,14 @@ local kAdditionalEffects = {
         spawnEffects =
         {
             {cinematic = "cinematics/marine/structures/spawn_building.cinematic", classname = "WeaponCache", done = true},
+            {cinematic = "cinematics/marine/structures/spawn_building.cinematic", classname = "MarineSentry", done = true},
         
         },
         
         spawnSoundEffects =
         {
             {sound = "sound/NS2.fev/marine/structures/generic_spawn", classname = "WeaponCache", done = true},
+            {sound = "sound/NS2.fev/marine/structures/generic_spawn", classname = "MarineSentry", done = true},
         }
         
     },

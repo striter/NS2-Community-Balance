@@ -58,7 +58,7 @@ function MarineTeam:InitTechTree()
     self.techTree:AddResearchNode(kTechId.Armor3,                 kTechId.Armor2, kTechId.None)
 
     self.techTree:AddResearchNode(kTechId.LifeSustain,  kTechId.ArmsLab)
-    self.techTree:AddResearchNode(kTechId.NanoArmor,  kTechId.LifeSustain)
+    self.techTree:AddResearchNode(kTechId.NanoArmor)
 
     self.techTree:AddResearchNode(kTechId.Weapons1,               kTechId.ArmsLab)
     self.techTree:AddResearchNode(kTechId.Weapons2,               kTechId.Weapons1, kTechId.None)

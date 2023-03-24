@@ -149,7 +149,7 @@ local function GetRowForTechId(techId)
     if not rowTable then
     
         rowTable = {}
-        rowTable[kTechId.Sentry] = 1
+        rowTable[kTechId.MarineSentry] = 1
         rowTable[kTechId.WeaponCache] = 2
 		rowTable[kTechId.Observatory] = 3
 		rowTable[kTechId.PhaseGate] = 4

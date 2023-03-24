@@ -80,23 +80,23 @@ function SentryAbility:GetEnergyCost(player)
 end
 
 function SentryAbility:GetGhostModelName(ability)
-    return Sentry.kModelName
+    return MarineSentry.kModelName
 end
 
 function SentryAbility:GetDropStructureId()
-    return kTechId.Sentry
+    return kTechId.MarineSentry
 end
 
 function SentryAbility:GetSuffixName()
-    return "Sentry"
+    return "MarineSentry"
 end
 
 function SentryAbility:GetDropClassName()
-    return "Sentry"
+    return "MarineSentry"
 end
 
 function SentryAbility:GetDropMapName()
-    return Sentry.kMapName
+    return MarineSentry.kMapName
 end
 
 function SentryAbility:CreateStructure()
