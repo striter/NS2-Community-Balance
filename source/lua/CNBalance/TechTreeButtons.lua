@@ -23,16 +23,17 @@ kTechIdToMaterialOffset[kTechId.SkulkBoost] = 27
 kTechIdToMaterialOffset[kTechId.XenocideFuel] = 95
 
 kTechIdToMaterialOffset[kTechId.ProwlerMenu] = 208
+kTechIdToMaterialOffset[kTechId.Prowler] = 208
+kTechIdToMaterialOffset[kTechId.ProwlerEgg] = 208
+
+
 kTechIdToMaterialOffset[kTechId.Volley] = 106
 kTechIdToMaterialOffset[kTechId.Rappel] = 205
 kTechIdToMaterialOffset[kTechId.AcidSpray] = 206
-
-kTechIdToMaterialOffset[kTechId.Prowler] = 115
-kTechIdToMaterialOffset[kTechId.ProwlerEgg] = 115
-
 
 kTechIdToMaterialOffset[kTechId.FastTunnel] = 189
 
 kTechIdToMaterialOffset[kTechId.Devour] = 109 
 
 kTechIdToMaterialOffset[kTechId.WeaponCache] = 1
+kTechIdToMaterialOffset[kTechId.MarineSentry] = 5
