@@ -35,15 +35,17 @@ debug.appendtoenum(kTechId, "MarineSentry")
 debug.appendtoenum(kTechId, "Heavy")
 debug.appendtoenum(kTechId, "HeavyMarine")
 
-
 --Alien
 debug.appendtoenum(kTechId, "FastTunnel")
 debug.appendtoenum(kTechId, "SkulkBoost")
 debug.appendtoenum(kTechId, "XenocideFuel")
+
 --Gorger
 debug.appendtoenum(kTechId, "SporeMine")
+
 --Onos
 debug.appendtoenum(kTechId, "Devour")
+
 --Prowler
 debug.appendtoenum(kTechId, "Prowler")
 debug.appendtoenum(kTechId, "ProwlerMenu")
@@ -52,6 +54,7 @@ debug.appendtoenum(kTechId, "HallucinateProwler")
 debug.appendtoenum(kTechId, "Volley")
 debug.appendtoenum(kTechId, "Rappel")
 debug.appendtoenum(kTechId, "AcidSpray")
+
 --Vokex ?
 debug.appendtoenum(kTechId, "Vokex")
 debug.appendtoenum(kTechId, "VokexMenu")
