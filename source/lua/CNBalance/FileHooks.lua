@@ -23,13 +23,17 @@ ModLoader.SetupFileHook("lua/MarineTechMap.lua", "lua/CNBalance/MarineTechMap.lu
 ModLoader.SetupFileHook("lua/TeamInfo.lua", "lua/CNBalance/TeamInfo.lua", "post")
 ModLoader.SetupFileHook("lua/PlayingTeam.lua", "lua/CNBalance/PlayingTeam.lua", "post")
 ModLoader.SetupFileHook("lua/DamageTypes.lua", "lua/CNBalance/DamageTypes.lua", "replace")
-ModLoader.SetupFileHook("lua/Commander_Server.lua", "lua/CNBalance/Commander_Server.lua", "post" )
 ModLoader.SetupFileHook("lua/CommandStructure_Server.lua", "lua/CNBalance/CommandStructure_Server.lua", "post" )
-ModLoader.SetupFileHook("lua/AlienCommander.lua", "lua/CNBalance/AlienCommander.lua", "post" )
 ModLoader.SetupFileHook("lua/ReadyRoomTeam.lua", "lua/CNBalance/ReadyRoomTeam.lua", "post" )
 ModLoader.SetupFileHook("lua/ReadyRoomEmbryo.lua", "lua/CNBalance/ReadyRoomEmbryo.lua", "post" )
 ModLoader.SetupFileHook("lua/Scoreboard.lua", "lua/CNBalance/Scoreboard.lua", "post" )
 ModLoader.SetupFileHook("lua/ServerStats.lua", "lua/CNBalance/ServerStats.lua", "post" )
+
+--Commander
+ModLoader.SetupFileHook("lua/Commander_Buttons.lua", "lua/CNBalance/Commander_Buttons.lua", "post" )
+ModLoader.SetupFileHook("lua/Commander_Server.lua", "lua/CNBalance/Commander_Server.lua", "post" )
+ModLoader.SetupFileHook("lua/AlienCommander.lua", "lua/CNBalance/AlienCommander.lua", "post" )
+ModLoader.SetupFileHook("lua/MarineCommander.lua", "lua/CNBalance/MarineCommander.lua", "replace")
 
 --Effects
 ModLoader.SetupFileHook("lua/GeneralEffects.lua", "lua/CNBalance/Effects/GeneralEffects.lua", "post" )
@@ -76,11 +80,11 @@ ModLoader.SetupFileHook("lua/ARC.lua", "lua/CNBalance/ARC.lua", "post")
 ModLoader.SetupFileHook("lua/MedPack.lua", "lua/CNBalance/MedPack.lua", "post")
 ModLoader.SetupFileHook("lua/Mine.lua", "lua/CNBalance/Mine.lua", "post")
 
-ModLoader.SetupFileHook("lua/MarineCommander.lua", "lua/CNBalance/MarineCommander.lua", "replace")
 ModLoader.SetupFileHook("lua/Marine.lua", "lua/CNBalance/Marine.lua", "post")
 ModLoader.SetupFileHook("lua/MarineSpectator.lua", "lua/CNBalance/MarineSpectator.lua", "post")
 ModLoader.SetupFileHook("lua/JetpackMarine.lua", "lua/CNBalance/JetpackMarine.lua", "post")
 ModLoader.SetupFileHook("lua/Exo.lua", "lua/CNBalance/Exo.lua", "post")
+ModLoader.SetupFileHook("lua/Exosuit.lua", "lua/CNBalance/Exosuit.lua", "post")
 
 ModLoader.SetupFileHook("lua/Weapons/WeaponDisplayManager.lua", "lua/CNBalance/Weapons/WeaponDisplayManager.lua", "post" )
 ModLoader.SetupFileHook("lua/Weapons/Weapon.lua", "lua/CNBalance/Weapons/Weapon.lua", "post")

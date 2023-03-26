@@ -212,11 +212,11 @@ kJetpackDropCooldown = 0
 
 kExosuitTechResearchCost = 25
 kDualExosuitCost = 55
-kDualRailgunExosuitCost = 55
-kExosuitDropCost = 100
+kDualRailgunExosuitCost = 40
+kExosuitDropCost = 40
 kExosuitDropCooldown = 0
 
-kExosuitCost = 40
+kExosuitCost = 55
 kClawRailgunExosuitCost = 40
 
 kOnosDevourCost = 15
@@ -423,6 +423,7 @@ kCombatBuilderResearchCost = 10
 kCombatBuilderResearchTime = 60
 
 kCombatBuilderCost = 2
+kCombatBuilderDropCost = 5
 kCombatBuilderPointValue = 2
 
 kMarineSentryCost = 1

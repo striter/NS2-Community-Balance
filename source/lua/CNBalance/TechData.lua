@@ -1,5 +1,6 @@
 
 kTechDataPersonalCostKey                      = "costpersonalkey"
+kTechDataLayoutKey                      = "layoutKey"
 
 local oldBuildTechData = BuildTechData
 function BuildTechData()
@@ -175,11 +176,10 @@ function BuildTechData()
     table.insert(techData,{ 
         [kTechDataId] = kTechId.DropCannon,
         [kTechDataMapName] = Cannon.kMapName,
-        [kTechDataDisplayName] = "CANNON_DROP",
-        [kTechIDShowEnables] = false,
+        [kTechDataDisplayName] = "CANNON",
         [kTechDataTooltipInfo] = "CANNON_TOOLTIP",
         [kTechDataModel] = Cannon.kModelName,
-        [kTechDataCostKey] = kCannonCost,
+        [kTechDataCostKey] = kCannonDropCost,
         [kStructureAttachId] = { kTechId.AdvancedArmory },
         [kStructureAttachRange] = kArmoryWeaponAttachRange,
         [kStructureAttachRequiresPower] = true, 
@@ -194,7 +194,19 @@ function BuildTechData()
         [kTechDataMaxHealth] = kMarineWeaponHealth,
         [kTechDataPointValue] = kCombatBuilderPointValue,
     })
-    
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.DropCombatBuilder,
+        [kTechDataMapName] = CombatBuilder.kMapName,
+        [kTechDataDisplayName] = "COMBATBUILDER",
+        [kTechDataTooltipInfo] = "COMBATBUILDER_TOOLTIP",
+        [kTechDataModel] = CombatBuilder.kModelName,
+        [kTechDataCostKey] = kCombatBuilderDropCost,
+        [kStructureAttachId] = { kTechId.Armory, kTechId.AdvancedArmory },
+        [kStructureAttachRange] = kArmoryWeaponAttachRange,
+        [kStructureAttachRequiresPower] = true,
+    } )
+
     table.insert(techData,{ 
         [kTechDataId] = kTechId.WeaponCache, 	          
         [kTechDataDisplayName] = "WEAPON_CACHE",    
@@ -237,7 +249,42 @@ function BuildTechData()
         [kTechDataPersonalCostKey] = kMarineSentryPersonalCost,
         [kTechDataAllowConsumeDrop] = true,
     })
+
+    table.insert(techData,
+    {
+        [kTechDataId] = kTechId.ProtosMenu,
+        [kTechDataDisplayName] = "PROTOS_MENU",
+        [kTechDataTooltipInfo] = "PROTOS_MENU_TOOLTIP",
+    })
     
+    table.insert(techData,
+    {
+        [kTechDataId] = kTechId.DropDualMinigunExosuit,
+        [kTechDataMapName] = Exosuit.kMapName,
+        [kTechDataModel] = Exosuit.kModelName,
+        [kTechDataDisplayName] = "DUAL_MINIGUN",
+        [kTechDataTooltipInfo] = "DUAL_MINIGUN_TOOLTIP",
+        [kTechDataLayoutKey] = "MinigunMinigun",
+        [kTechDataCostKey] = kDualExosuitCost,
+        [kStructureAttachId] = kTechId.PrototypeLab,
+        [kStructureAttachRange] = kArmoryWeaponAttachRange,
+        [kStructureAttachRequiresPower] = true,
+    })
+
+    table.insert(techData,
+    {
+        [kTechDataId] = kTechId.DropDualRailgunExosuit,
+        [kTechDataMapName] = Exosuit.kMapName,
+        [kTechDataModel] = Exosuit.kModelName,
+        [kTechDataDisplayName] = "DUAL_RAILGUN",
+        [kTechDataTooltipInfo] = "DUAL_RAILGUN_TOOLTIP",
+        [kTechDataLayoutKey] = "RailgunRailgun",
+        [kTechDataCostKey] = kDualExosuitCost,
+        [kStructureAttachId] = kTechId.PrototypeLab,
+        [kStructureAttachRange] = kArmoryWeaponAttachRange,
+        [kStructureAttachRequiresPower] = true,
+    })
+
     table.insert(techData,  {
         [kTechDataId] = kTechId.Heavy,
         [kTechDataMapName] = Heavy.kMapName,

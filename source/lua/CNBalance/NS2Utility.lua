@@ -107,3 +107,41 @@ function CanEntityDoDamageTo(attacker, target, cheats, devMode, friendlyFire, da
     return teamsOK
 
 end
+
+if Server then
+    function CreateEntityForTeam(techId, position, teamNumber, player)
+
+        local newEnt
+
+        local mapName = LookupTechData(techId, kTechDataMapName)
+        if mapName ~= nil then
+
+            -- Allow entities to be positioned off ground (eg, hive hovers over tech point)
+            local spawnHeight = LookupTechData(techId, kTechDataSpawnHeightOffset, 0)
+            local spawnHeightPosition = Vector(position.x,
+                    position.y + spawnHeight,
+                    position.z)
+
+            newEnt = CreateEntity( mapName, spawnHeightPosition, teamNumber )
+
+            -- Hook it up to attach entity
+            local attachEntity = GetAttachEntity(techId, position)
+            if attachEntity then
+                newEnt:SetAttached(attachEntity)
+            end
+
+
+            local layout = LookupTechData(techId, kTechDataLayoutKey)
+            if layout then
+                newEnt:SetLayout(layout)
+            end
+            
+        else
+            Print("CreateEntityForTeam(%s): Couldn't kTechDataMapName for entity.", EnumToString(kTechId, techId))
+            assert(false)
+        end
+
+        return newEnt
+
+    end
+end 
