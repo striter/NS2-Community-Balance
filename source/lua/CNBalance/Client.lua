@@ -1,5 +1,5 @@
 local kAlwaysShowDoerTracers = debug.getupvaluex(CreateTracer, "kAlwaysShowDoerTracers")
 
-kAlwaysShowDoerTracers[Volley] = true
+kAlwaysShowDoerTracers["VolleyRappel"] = true
 
 PrecacheAsset("ui/inventory_icons_revolver.dds")
