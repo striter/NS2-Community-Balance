@@ -212,12 +212,8 @@ kJetpackDropCooldown = 0
 
 kExosuitTechResearchCost = 25
 kDualExosuitCost = 55
-kDualRailgunExosuitCost = 40
-kExosuitDropCost = 40
-kExosuitDropCooldown = 0
-
-kExosuitCost = 55
-kClawRailgunExosuitCost = 40
+kDualRailgunExosuitCost = 55
+kDualExosuitDropCost = 40
 
 kOnosDevourCost = 15
 kOnosDevourTime = 60
