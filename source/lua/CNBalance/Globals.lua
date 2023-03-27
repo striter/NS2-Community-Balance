@@ -5,6 +5,7 @@ debug.appendtoenum(kPlayerStatus, "Revolver")
 debug.appendtoenum(kPlayerStatus, "SubMachineGun")
 debug.appendtoenum(kPlayerStatus, "LightMachineGun")
 debug.appendtoenum(kPlayerStatus, "Cannon")
+
 debug.appendtoenum(kPlayerStatus, "Vokex")
 debug.appendtoenum(kPlayerStatus, "VokexEgg")
 

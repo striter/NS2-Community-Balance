@@ -14,6 +14,8 @@ debug.appendtoenum(kTechId, "LifeSustain")
 debug.appendtoenum(kTechId, "NanoArmor")
 
 debug.appendtoenum(kTechId, "ProtosMenu")
+debug.appendtoenum(kTechId, "DropDualMinigunExosuit")
+debug.appendtoenum(kTechId, "DropDualRailgunExosuit")
 
 --Weapons
 debug.appendtoenum(kTechId, "Knife")
@@ -25,6 +27,7 @@ debug.appendtoenum(kTechId, "Cannon")
 debug.appendtoenum(kTechId, "CannonTech")
 debug.appendtoenum(kTechId, "DropCannon")
 debug.appendtoenum(kTechId, "CombatBuilder")
+debug.appendtoenum(kTechId, "DropCombatBuilder")
 debug.appendtoenum(kTechId, "CombatBuilderTech")
 
 --Structures
