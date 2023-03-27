@@ -75,12 +75,12 @@ function MarineTeam:InitTechTree()
     self.techTree:AddActivation(kTechId.ReversePhaseGate,         kTechId.None)
 
     self.techTree:AddResearchNode(kTechId.ShotgunTech,           kTechId.Armory)
-    self.techTree:AddTargetedActivation(kTechId.DropShotgun,     kTechId.Armory)
     self.techTree:AddTargetedBuyNode(kTechId.Shotgun,            kTechId.ShotgunTech)
+    self.techTree:AddTargetedActivation(kTechId.DropShotgun,     kTechId.ShotgunTech)
 
     self.techTree:AddResearchNode(kTechId.MinesTech,            kTechId.Armory)
-    self.techTree:AddTargetedActivation(kTechId.DropMines,      kTechId.Armory)
     self.techTree:AddTargetedBuyNode(kTechId.LayMines,          kTechId.MinesTech)
+    self.techTree:AddTargetedActivation(kTechId.DropMines,      kTechId.MinesTech)
 
     self.techTree:AddResearchNode(kTechId.CombatBuilderTech,            kTechId.Armory)
     self.techTree:AddTargetedBuyNode(kTechId.CombatBuilder,   kTechId.CombatBuilderTech,       kTechId.None)
