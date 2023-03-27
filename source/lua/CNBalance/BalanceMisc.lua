@@ -12,18 +12,19 @@ kFlamethrowerWeight = 0.14
 kShotgunWeight = 0.14
 
 kMaxInfantryPortalsPerCommandStation = 6
-kNumMines = 2
+kNumMines = 4
+
 -- Jetpack
 kUpgradedJetpackUseFuelRate = 0.18
 kJetpackingAccel = 0.8
 kJetpackUseFuelRate = 0.21
 kJetpackReplenishFuelRate = 0.21
 
-kItemStayTime = 20
-kWeaponStayTime = 20
+kItemStayTime = 30
+kWeaponStayTime = 30
 kWeaponDropRateLimit = 0.2
 
-kAlienStructureMoveSpeed = 1.5
+kAlienStructureMoveSpeed = 1.73
 
 kAlienRegenerationTime = 2
 
@@ -40,7 +41,7 @@ kAlienCrushDamagePercentByLevel = 0.111 --0.007
 kCelerityAddSpeed = 1.5 -- 1.5
 
 kFocusAttackSlowAtMax = 1
-kFocusDamageBonusAtMax = 0.66
+kFocusDamageBonusAtMax = 1
 
 kSpitFocusAttackSlowAtMax = 0
 kSpitFocusDamageBonusAtMax = 0.66

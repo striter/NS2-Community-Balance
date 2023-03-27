@@ -847,15 +847,10 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     weaponGroupTopLeft:SetOptionFlag(GUIItem.CorrectScaling)
     self.background:AddChild(weaponGroupTopLeft)
 ---------------
-    local havePrimary = PlayerUI_GetHasItem(kTechId.LightMachineGun) or PlayerUI_GetHasItem(kTechId.Rifle)
-    local buyPrimary = PlayerUI_GetHasTech(kTechId.LightMachineGunUpgrade) and kTechId.LightMachineGun or kTechId.Rifle
-    
-    local primaryTech =  havePrimary and kTechId.SubMachineGun or buyPrimary
-    local secondaryTech = PlayerUI_GetHasItem(kTechId.Pistol) and kTechId.Revolver or kTechId.Pistol
     self:_InitializeWeaponGroup(weaponGroupTopLeft, x2ButtonPositions,
     {
-        primaryTech,
-        secondaryTech,
+        kTechId.Axe,
+        kTechId.Knife,
     })
 --------------
 
@@ -866,12 +861,13 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     weaponGroupBottomLeft:SetSizeFromTexture()
     weaponGroupBottomLeft:SetOptionFlag(GUIItem.CorrectScaling)
     self.background:AddChild(weaponGroupBottomLeft)
+    local secondaryTech = PlayerUI_GetHasItem(kTechId.Pistol) and kTechId.Revolver or kTechId.Pistol
     self:_InitializeWeaponGroup(weaponGroupBottomLeft, x4ButtonPositions,
     {
-        kTechId.Shotgun,
-        kTechId.Flamethrower,
-        kTechId.HeavyMachineGun,
-        kTechId.Cannon,
+        kTechId.Rifle,
+        kTechId.SubMachineGun,
+        kTechId.LightMachineGun,
+        secondaryTech,
     })
 
     local x4LabelStartX = 335
@@ -896,29 +892,11 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     weaponGroupTopRight:SetSizeFromTexture()
     weaponGroupTopRight:SetOptionFlag(GUIItem.CorrectScaling)
 
---------------- Third
-    
-    local buyMelee = PlayerUI_GetHasItem(kTechId.Axe) and kTechId.Knife or kTechId.Axe
     self:_InitializeWeaponGroup(weaponGroupTopRight, x2ButtonPositions,
-    {
-        buyMelee,
-        kTechId.Welder,
-    },2)
-
-    local weaponGroupAdditional = self:CreateAnimatedGraphicItem()
-    weaponGroupAdditional:SetIsScaling(false)
-    weaponGroupAdditional:AddAsChildTo(self.background)
-    weaponGroupAdditional:SetPosition(Vector(weaponGroupTopRight:GetPosition().x + weaponGroupTopRight:GetSize().x + paddingXWeaponGroups, paddingY, 0))
-    weaponGroupAdditional:SetTexture(self.kButtonGroupFrame_Unlabeled_x2)
-    weaponGroupAdditional:SetSizeFromTexture()
-    weaponGroupAdditional:SetOptionFlag(GUIItem.CorrectScaling)
-    self:_InitializeWeaponGroup(weaponGroupAdditional, x2ButtonPositions,
-    {
-        kTechId.LayMines,
-        kTechId.CombatBuilder
-    },2)
-    
---------------
+            {
+                kTechId.Welder,
+                kTechId.CombatBuilder
+            },2)
 
     local weaponGroupBottomRight = self:CreateAnimatedGraphicItem()
     weaponGroupBottomRight:SetIsScaling(false)
@@ -927,13 +905,13 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     weaponGroupBottomRight:SetTexture(self.kButtonGroupFrame_Labeled_x4)
     weaponGroupBottomRight:SetSizeFromTexture()
     weaponGroupBottomRight:SetOptionFlag(GUIItem.CorrectScaling)
---------------
+    
     self:_InitializeWeaponGroup(weaponGroupBottomRight, x4ButtonPositions,
     {
         kTechId.GasGrenade,
         kTechId.ClusterGrenade,
         kTechId.PulseGrenade,
-        kTechId.GrenadeLauncher
+        kTechId.LayMines
     })
 
     local labelItemBottomRight = self:CreateAnimatedTextItem()
@@ -951,14 +929,11 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     local rightSideStartPos = weaponGroupTopRight:GetPosition()
     rightSideStartPos.x = rightSideStartPos.x + weaponGroupTopRight:GetSize().x
     rightSideStartPos.x = rightSideStartPos.x + paddingXWeaponGroupsToRightSide
-    
-    local yOffset =  weaponGroupTopRight:GetSize().y + paddingYWeaponGroups
-    rightSideStartPos.y = rightSideStartPos.y + yOffset
-    self:_CreateRightSide(rightSideStartPos,yOffset)
+    self:_CreateRightSide(rightSideStartPos)
 
 end
 
-function GUIMarineBuyMenu:_CreateRightSide(startPos,bigPicOffset)
+function GUIMarineBuyMenu:_CreateRightSide(startPos)
 
     -- This is created here to eliminate common code
     self.buyButtonHighlight = self:CreateAnimatedGraphicItem()
@@ -1039,7 +1014,7 @@ function GUIMarineBuyMenu:_CreateRightSide(startPos,bigPicOffset)
     self.currentMoneyTextIcon:SetOptionFlag(GUIItem.CorrectScaling)
     self.currentMoneyTextIcon:SetPosition(Vector(-9, 0, 0))
 
-    y = y + 70
+    y = y + 80
 
     local vsXPos = 145
     local vsTextPadding = 32
@@ -1129,40 +1104,27 @@ function GUIMarineBuyMenu:_CreateRightSide(startPos,bigPicOffset)
     self.itemDescription:SetColor(Color(164/255, 196/255, 201/255))
     self.itemDescription:SetOptionFlag(GUIItem.CorrectScaling)
     GUIMakeFontScale(self.itemDescription, "kAgencyFB", vsTextFontSize)
-    
-    y = y + 85
-    
+
+    y = y + 75
+
     local bigPicturesTexture = self.kArmoryBigPicturesTexture
     if self.hostStructure:isa("PrototypeLab") then
         bigPicturesTexture = self.kPrototypeLabBigPicturesTexture
     end
 
-    if bigPicOffset then
-        y = y - bigPicOffset
-    end
-    
     self.bigPicturePositionY = y
     self.bigPicturePositionYDiff = 75
 
     self.bigPicture = self:CreateAnimatedGraphicItem()
-    if not bigPicOffset then
-        self.bigPicture:AddAsChildTo(self.rightSideRoot)
-        self.bigPicture:SetAnchor(GUIItem.Left,GUIItem.Top)
-        self.bigPicture:SetPosition(Vector(0, y, 0))
-    else
-        local pictureWidth = 651 -- armory dimensions
-        local pictureHeight = 319
-        
-        self.bigPicture:AddAsChildTo(self.background)
-        self.bigPicture:SetAnchor(GUIItem.Right,GUIItem.Bottom)
-        self.bigPicture:SetPosition(Vector(-pictureWidth/2 - 200, -pictureHeight/2, 0))
-    end
+    self.bigPicture:AddAsChildTo(self.rightSideRoot)
     self.bigPicture:SetIsScaling(false)
+    self.bigPicture:SetPosition(Vector(0, y, 0))
     self.bigPicture:SetTexture(bigPicturesTexture)
     local bigPictureCoords = self:_GetPigPicturePixelCoordinatesForTechID(kTechId.Pistol)
     self.bigPicture:SetSize(GUIGetSizeFromCoords(bigPictureCoords))
     self.bigPicture:SetTexturePixelCoordinates(GUIUnpackCoords(bigPictureCoords))
     self.bigPicture:SetOptionFlag(GUIItem.CorrectScaling)
+
     y = y + self.bigPicture:GetSize().y
 
     self.specialFrame = self:CreateAnimatedGraphicItem()

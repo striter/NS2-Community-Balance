@@ -1,6 +1,11 @@
+kMarinePResPerKill = 1
+kAlienPResPerKill = 1
+kMarineTResPerKill = 2
+kAlienTResPerKill = 1
+
 kResourceTowerResourceInterval = 7.5 --6
-kPlayerResPerInterval = 0.125
-kTeamResourcePerTick = 1
+kPlayerResPerInterval = 0.125 --0.125
+kTeamResourcePerTick = 1 --1
 kPlayingTeamInitialTeamRes = 60   --60
 kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
@@ -15,41 +20,30 @@ kNanoArmorResearchCost = 15
 kNanoArmorResearchTime = 60
 
 kLifeSustainResearchCost = 10
-kLifeSustainResearchTime = 45
+kLifeSustainResearchTime = 60
 
-kWelderDropCost = 3
-kWelderDropCooldown = 0
 
 kGrenadeTechResearchCost = 10   --10
 kGrenadeTechResearchTime = 60   --45
 
-kMineCost = 9
 kMineDamage = 135
-kDropMineCost = 10
-kDropMineCooldown = 0
 
-kShotgunTechResearchCost = 15
-kShotgunTechResearchTime = 45
-kShotgunCost = 20
-kShotgunDropCost = 12
-kShotgunDropCooldown = 0
+kShotgunTechResearchCost = 20
+kShotgunTechResearchTime = 60
 
 kPistolRateOfFire = 0.01
 kPistolDamage = 20
 
 kShotgunFireRate = 0.88
-kShotgunDamage = 12.33 //11.33
+kShotgunDamage = 12.33 --11.33
 kShotgunDamageType = kDamageType.Normal
 kShotgunClipSize = 6
 kShotgunBulletsPerShot = 13
 kShotgunSpreadDistance = 10
-kShotgunWeapons1DamageScalar = 1.059
-kShotgunWeapons2DamageScalar = 1.118
-kShotgunWeapons3DamageScalar = 1.177
-
-kHeavyMachineGunCost = 20
-kHeavyMachineGunDropCost = 12
-kHeavyMachineGunDropCooldown = 0
+local kShotgunDamagePerUpgradeScalar = 0.0784
+kShotgunWeapons1DamageScalar = 1 + kShotgunDamagePerUpgradeScalar
+kShotgunWeapons2DamageScalar = 1 + kShotgunDamagePerUpgradeScalar * 2
+kShotgunWeapons3DamageScalar = 1 + kShotgunDamagePerUpgradeScalar * 3
 
 kHeavyMachineGunDamage = 8  //8
 kHeavyMachineGunDamageType = kDamageType.MachineGun
@@ -80,10 +74,6 @@ kGrenadeLauncherAllyBlastResearchCost = 15
 kGrenadeLauncherAllyBlastResearchTime = 45
 kGrenadeLauncherUpgradeResearchCost = 15
 kGrenadeLauncherUpgradeResearchTime = 60
-
-kGrenadeLauncherCost = 20
-kGrenadeLauncherDropCost = 12
-kGrenadeLauncherDropCooldown = 0
 
 kGrenadeLauncherGrenadeDamageType = kDamageType.GrenadeLauncher
 kGrenadeLauncherGrenadeDamage = 100
@@ -152,8 +142,6 @@ kHeavyMarineArmorPerUpgradeLevel = 40
 
 
 --Cannon
-kCannonCost = 20
-
 kCannonDamage = 95
 kCannonRateOfFire = 0.7
 kCannonAoeDamage = 0
@@ -161,12 +149,8 @@ kCannonSelfDamage = kCannonAoeDamage
 kCannonClipSize = 6
 kCannonPointValue = 15
 kCannonDamageType = kDamageType.Structural
-kCannonDropCost = 12
 ---
 
-kFlamethrowerCost = 20
-kFlamethrowerDropCost = 12
-kFlamethrowerDropCooldown = 0
 
 kBurnDamagePerSecond = 8
 kFlamethrowerBurnDuration = 1
@@ -206,22 +190,128 @@ kPrototypeLabCost = 30
 
 kJetpackTechResearchCost = 15
 kJetpackTechResearchTime = 90
-kJetpackCost = 12
-kJetpackDropCost = 12
-kJetpackDropCooldown = 0
 
 kExosuitTechResearchCost = 25
-kDualExosuitCost = 55
-kDualRailgunExosuitCost = 55
-kDualExosuitDropCost = 40
 
+kObservatoryScanCost = 3
+kScanCooldown = 0
+kObservatoryDistressBeaconCost = 10
+
+kWeapons1ResearchCost = 20
+kWeapons2ResearchCost = 30
+kWeapons3ResearchCost = 40
+
+kWeapons1ResearchTime = 75
+kWeapons2ResearchTime = 90
+kWeapons3ResearchTime = 120
+
+kArmor1ResearchCost = 20
+kArmor2ResearchCost = 30
+kArmor3ResearchCost = 30
+
+kArmor1ResearchTime = 75
+kArmor2ResearchTime = 90
+kArmor3ResearchTime = 90
+
+kAdvancedMarineSupportResearchCost = 20
+kAdvancedMarineSupportResearchTime = 90
+kAmmoPackCost = 1
+kAmmoPackCooldown = 0
+kMedPackCost = 1
+kMedPackCooldown = 0
+
+kCatPackCost = 1
+kCatPackCooldown = 0
+kCatPackMoveAddSpeed = 1.25
+kCatPackWeaponSpeed = 1.5
+kCatPackDuration = 5
+kCatPackPickupDelay = 4
+
+kPowerSurgeCost = 3
+kPowerSurgeCooldown = 5
+kPowerSurgeDuration = 10
+kPowerSurgeTriggerEMP = true
+kPowerSurgeEMPDamage = 25
+kPowerSurgeEMPDamageRadius = 6
+kPowerSurgeEMPElectrifiedDuration = 2
+
+kNanoShieldPlayerDuration = 3
+kNanoShieldStructureDuration = 5
+kNanoShieldCost = 3
+kNanoShieldCooldown = 5
+kNanoShieldDamageReductionDamage = 0.68
+
+kCombatBuilderResearchCost = 10
+kCombatBuilderResearchTime = 60
+
+kCombatBuilderPointValue = 2
+kWeaponCacheCost = 2
+kMarineSentryCost = 1
+
+kSporeMineCost = 0
+kSporeMineBuildTime = 2
+kNumSporeMinesPerGorge = 3
+kSporeMineDamage = 125 -- per second
+kSporeMineDamageType = kDamageType.Corrode
+kSporeMineDamageDuration = 3
+kSporeMineDamageRadius = 7
+kSporeMineDotInterval = 0.4
+
+---Marine Equipments
+kWelderCost = 2
+kCombatBuilderCost = 2
+kClusterGrenadeCost = 2
+kGasGrenadeCost = 2
+kPulseGrenadeCost = 2
+kMineCost = 20
+kShotgunCost = 40
+kHeavyMachineGunCost = 40
+kGrenadeLauncherCost = 40
+kFlamethrowerCost = 40
+kCannonCost = 50
+kJetpackCost = 30
+kDualExosuitCost = 90
+kDualRailgunExosuitCost = 90
+
+kWelderDropCost = 3
+kCombatBuilderDropCost = 5
+kDropMineCost = 20
+kShotgunDropCost = 20
+kHeavyMachineGunDropCost = 20
+kGrenadeLauncherDropCost = 20
+kFlamethrowerDropCost = 20
+kCannonDropCost = 20
+kJetpackDropCost = 15
+kDualExosuitDropCost = 55
+
+kWelderDropCooldown = 0
+kDropMineCooldown = 0
+kShotgunDropCooldown = 0
+kHeavyMachineGunDropCooldown = 0
+kGrenadeLauncherDropCooldown = 0
+kFlamethrowerDropCooldown = 0
+kJetpackDropCooldown = 0
+
+kWeaponCachePersonalCost = 8
+kWeaponCacheBuildTime = 6
+kWeaponCachePersonalCarries = 1
+
+kMarineSentryPersonalCost = 6
+kMarineSentryPersonalCarries = 2
+
+kMarineSentryDamage = 3
+kMarineSentryBuildTime = 3
+--
+
+
+--Aliens
 kOnosDevourCost = 15
 kOnosDevourTime = 60
+kDevourEnergyCost = 65 --50
+kDevourPunchDamage = 50 --100
 
 kUmbraBulletModifier = 0.8
 
-kDevourEnergyCost = 65 --50
-kDevourPunchDamage = 50 --100
 
 kFastTunnelCost = 15
 kFastTunnelTime = 60
@@ -367,78 +457,3 @@ kEchoVeilCost = 0
 kEchoSpurCost = 0
 kEchoShellCost = 0
 kEchoEggCost = 1
-
-kObservatoryScanCost = 3
-kScanCooldown = 0
-kObservatoryDistressBeaconCost = 10
-
-kWeapons1ResearchTime = 75
-kWeapons2ResearchTime = 90
-kWeapons3ResearchTime = 120
-
-kWeapons1ResearchCost = 20
-kWeapons2ResearchCost = 30
-kWeapons3ResearchCost = 40
-
-kArmor1ResearchTime = 75
-kArmor2ResearchTime = 90
-kArmor3ResearchTime = 90
-kArmor1ResearchCost = 20
-kArmor2ResearchCost = 30
-kArmor3ResearchCost = 30
-
-kAdvancedMarineSupportResearchCost = 20
-kAdvancedMarineSupportResearchTime = 90
-kAmmoPackCost = 1
-kAmmoPackCooldown = 0
-kMedPackCost = 1
-kMedPackCooldown = 0
-
-kCatPackCost = 1
-kCatPackCooldown = 0
-kCatPackMoveAddSpeed = 1.25
-kCatPackWeaponSpeed = 1.5
-kCatPackDuration = 5
-kCatPackPickupDelay = 4
-
-kPowerSurgeCost = 3
-kPowerSurgeCooldown = 5
-kPowerSurgeDuration = 10
-kPowerSurgeTriggerEMP = true
-kPowerSurgeEMPDamage = 25
-kPowerSurgeEMPDamageRadius = 6
-kPowerSurgeEMPElectrifiedDuration = 2
-
-kNanoShieldPlayerDuration = 3
-kNanoShieldStructureDuration = 5
-kNanoShieldCost = 3
-kNanoShieldCooldown = 5
-kNanoShieldDamageReductionDamage = 0.68
-
-kCombatBuilderResearchCost = 10
-kCombatBuilderResearchTime = 60
-
-kCombatBuilderCost = 2
-kCombatBuilderDropCost = 5
-kCombatBuilderPointValue = 2
-
-kMarineSentryCost = 1
-kMarineSentryDamage = 3
-kMarineSentryBuildTime = 3
-
-kWeaponCacheCost = 2
-kWeaponCachePersonalCost = 7
-kWeaponCacheBuildTime = 6
-kWeaponCachePersonalCarries = 1
-
-kMarineSentryPersonalCost = 5
-kMarineSentryPersonalCarries = 2
-
-kSporeMineCost = 0
-kSporeMineBuildTime = 2
-kNumSporeMinesPerGorge = 3
-kSporeMineDamage = 125 -- per second
-kSporeMineDamageType = kDamageType.Corrode
-kSporeMineDamageDuration = 3
-kSporeMineDamageRadius = 7
-kSporeMineDotInterval = 0.4

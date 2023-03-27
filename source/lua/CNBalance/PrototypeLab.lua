@@ -8,10 +8,11 @@ function PrototypeLab:GetTechButtons(techId)
 end
 
 
---function PrototypeLab:GetCanBeUsed(player, useSuccessTable)
---
---    if player:isa("Exo") then
---        useSuccessTable.useSuccess = false
---    end
---
---end
+function PrototypeLab:GetCanBeUsed(player, useSuccessTable)
+
+    useSuccessTable.useSuccess = false
+    --if player:isa("Exo") then
+    --    useSuccessTable.useSuccess = false
+    --end
+
+end
