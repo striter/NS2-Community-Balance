@@ -1,5 +1,8 @@
 kHealingClampMaxHPAmount = 0.20
 
+kExosuitHealth = 100    kExosuitArmor = 390    kExosuitPointValue = 20
+kExosuitArmorPerUpgradeLevel = 30
+
 kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5    kSkulkHealthPerBioMass = 3
 kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7    kGorgeHealthPerBioMass = 3
 kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15    kLerkHealthPerBioMass = 3

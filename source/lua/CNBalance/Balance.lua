@@ -151,7 +151,6 @@ kCannonPointValue = 15
 kCannonDamageType = kDamageType.Structural
 ---
 
-
 kBurnDamagePerSecond = 8
 kFlamethrowerBurnDuration = 1
 kFlamethrowerMaxBurnDuration = 6
@@ -184,7 +183,7 @@ kSentryBatteryCost = 10
 kSentryBatteryBuildTime = 5
 
 kAdvancedArmoryUpgradeCost = 25
-kAdvancedArmoryResearchTime = 75 --90->75
+kAdvancedArmoryResearchTime = 90 --90->75
 
 kPrototypeLabCost = 30
 
@@ -201,7 +200,7 @@ kWeapons1ResearchCost = 20
 kWeapons2ResearchCost = 30
 kWeapons3ResearchCost = 40
 
-kWeapons1ResearchTime = 75
+kWeapons1ResearchTime = 60
 kWeapons2ResearchTime = 90
 kWeapons3ResearchTime = 120
 
@@ -209,9 +208,9 @@ kArmor1ResearchCost = 20
 kArmor2ResearchCost = 30
 kArmor3ResearchCost = 30
 
-kArmor1ResearchTime = 75
+kArmor1ResearchTime = 60
 kArmor2ResearchTime = 90
-kArmor3ResearchTime = 90
+kArmor3ResearchTime = 120
 
 kAdvancedMarineSupportResearchCost = 20
 kAdvancedMarineSupportResearchTime = 90
@@ -275,7 +274,7 @@ kDualRailgunExosuitCost = 90
 
 kWelderDropCost = 3
 kCombatBuilderDropCost = 5
-kDropMineCost = 20
+kDropMineCost = 15
 kShotgunDropCost = 15
 kHeavyMachineGunDropCost = 18
 kGrenadeLauncherDropCost = 12
