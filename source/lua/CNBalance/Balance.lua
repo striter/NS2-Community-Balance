@@ -1,9 +1,10 @@
-kMarinePResPerKill = 1
-kAlienPResPerKill = 1
-kMarineTResPerKill = 2
-kAlienTResPerKill = 1
+kMarinePResPerKill = 0
+kMarineTResPerKill = 1.5
 
-kResourceTowerResourceInterval = 7.5 --6
+kAlienPResPerKill = 0.25
+kAlienTResPerKill = 0.5
+
+kResourceTowerResourceInterval = 6 --6
 kPlayerResPerInterval = 0.125 --0.125
 kTeamResourcePerTick = 1 --1
 kPlayingTeamInitialTeamRes = 60   --60
@@ -22,7 +23,6 @@ kNanoArmorResearchTime = 60
 kLifeSustainResearchCost = 10
 kLifeSustainResearchTime = 60
 
-
 kGrenadeTechResearchCost = 10   --10
 kGrenadeTechResearchTime = 60   --45
 
@@ -35,20 +35,18 @@ kPistolRateOfFire = 0.01
 kPistolDamage = 20
 
 kShotgunFireRate = 0.88
-kShotgunDamage = 12.33 --11.33
+kShotgunDamage = 12 --11.33
 kShotgunDamageType = kDamageType.Normal
-kShotgunClipSize = 6
-kShotgunBulletsPerShot = 13
-kShotgunSpreadDistance = 10
-local kShotgunDamagePerUpgradeScalar = 0.0784
-kShotgunWeapons1DamageScalar = 1 + kShotgunDamagePerUpgradeScalar
-kShotgunWeapons2DamageScalar = 1 + kShotgunDamagePerUpgradeScalar * 2
-kShotgunWeapons3DamageScalar = 1 + kShotgunDamagePerUpgradeScalar * 3
+kShotgunClipSize = 7
+kShotgunSpreadDistance = 9
+kShotgunWeapons1DamageScalar = 1.1
+kShotgunWeapons2DamageScalar = 1.2
+kShotgunWeapons3DamageScalar = 1.3
 
-kHeavyMachineGunDamage = 8  //8
+kHeavyMachineGunDamage = 8.5  --8
 kHeavyMachineGunDamageType = kDamageType.MachineGun
-kHeavyMachineGunClipSize = 150  //100
-kHeavyMachineGunClipNum = 3 //4
+kHeavyMachineGunClipSize = 150  --100
+kHeavyMachineGunClipNum = 3 --4
 kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
 kHeavyMachineGunSpread = Math.Radians(5.6)  //4
@@ -142,11 +140,11 @@ kHeavyMarineArmorPerUpgradeLevel = 40
 
 
 --Cannon
-kCannonDamage = 95
+kCannonDamage = 110
 kCannonRateOfFire = 0.7
 kCannonAoeDamage = 0
 kCannonSelfDamage = kCannonAoeDamage
-kCannonClipSize = 6
+kCannonClipSize = 8
 kCannonPointValue = 15
 kCannonDamageType = kDamageType.Structural
 ---
@@ -177,9 +175,9 @@ kClusterGrenadeFragmentDamageType = kDamageType.ClusterFlameFragment
 kInfantryPortalBuildTime = 5
 
 kSentryDamage = 5
-kSentryCost = 5
+kSentryCost = 6
 kSentryBuildTime = 3
-kSentryBatteryCost = 10
+kSentryBatteryCost = 8
 kSentryBatteryBuildTime = 5
 
 kAdvancedArmoryUpgradeCost = 25
@@ -200,13 +198,13 @@ kWeapons1ResearchCost = 20
 kWeapons2ResearchCost = 30
 kWeapons3ResearchCost = 40
 
-kWeapons1ResearchTime = 60
-kWeapons2ResearchTime = 90
-kWeapons3ResearchTime = 120
+kWeapons1ResearchTime = 75
+kWeapons2ResearchTime = 105
+kWeapons3ResearchTime = 135
 
 kArmor1ResearchCost = 20
 kArmor2ResearchCost = 30
-kArmor3ResearchCost = 30
+kArmor3ResearchCost = 40
 
 kArmor1ResearchTime = 60
 kArmor2ResearchTime = 90
@@ -257,12 +255,12 @@ kSporeMineDamageRadius = 7
 kSporeMineDotInterval = 0.4
 
 ---Marine Equipments
-kWelderCost = 2
-kCombatBuilderCost = 2
-kClusterGrenadeCost = 2
-kGasGrenadeCost = 2
-kPulseGrenadeCost = 2
-kMineCost = 20
+kWelderCost = 3
+kCombatBuilderCost = 6
+kClusterGrenadeCost = 3
+kGasGrenadeCost = 3
+kPulseGrenadeCost = 3
+kMineCost = 40
 kShotgunCost = 40
 kHeavyMachineGunCost = 40
 kGrenadeLauncherCost = 40
@@ -274,14 +272,14 @@ kDualRailgunExosuitCost = 90
 
 kWelderDropCost = 3
 kCombatBuilderDropCost = 5
-kDropMineCost = 15
-kShotgunDropCost = 15
-kHeavyMachineGunDropCost = 18
+kDropMineCost = 12
+kShotgunDropCost = 12
+kHeavyMachineGunDropCost = 15
 kGrenadeLauncherDropCost = 12
 kFlamethrowerDropCost = 12
-kCannonDropCost = 20
-kJetpackDropCost = 15
-kDualExosuitDropCost = 40
+kCannonDropCost = 18
+kJetpackDropCost = 12
+kDualExosuitDropCost = 36
 
 kWelderDropCooldown = 0
 kDropMineCooldown = 0
@@ -291,11 +289,11 @@ kGrenadeLauncherDropCooldown = 0
 kFlamethrowerDropCooldown = 0
 kJetpackDropCooldown = 0
 
-kWeaponCachePersonalCost = 8
+kWeaponCachePersonalCost = 10
 kWeaponCacheBuildTime = 6
 kWeaponCachePersonalCarries = 1
 
-kMarineSentryPersonalCost = 6
+kMarineSentryPersonalCost = 7.5
 kMarineSentryPersonalCarries = 2
 
 kMarineSentryDamage = 3
