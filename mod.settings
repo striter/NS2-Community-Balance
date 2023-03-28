@@ -1,10 +1,20 @@
 name        = "[CN] Natural Selection 1.0a"
 source_dir  = "source"
 output_dir  = "output"
-description = [=[
-NS1.0 out of the box
-Trying to bring more possibility for commanders
-]=]
+description = [=[[h1]| What is this?[/h1]
+- Alpha version of Natural Selection 1.0.
+- This mod is based on Natural Selection 2.0.Which contains huge tons of fun stuff than vanilla.
+[h1]| Why NS1.0?[/h1]
+- Grants marine commander more possibilities.
+- Reduce ground marines's "individualistic heroism".
+- Make the game more unstable,and commander brains required.
+- A small take to bring back the old old times
+[h1]| What it does?[/h1]
+- Overhauled echonomy system
+- Kills grants Pres&Tres for both team.
+- Remove weapons/equipments accessbility for marines(can still buy utilities/nades/standard weapons).
+- Marine Commander now needs to manually drop equipments/weapons for ground troopers.
+- Aliens stays the same & awaiting further development.]=]
 image       = "preview.jpg"
 tag_modtype = "Gameplay Tweak"
 tag_support = "Must be run on Server"
