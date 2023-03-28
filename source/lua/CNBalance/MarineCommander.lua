@@ -174,7 +174,7 @@ if Server then
 
         return techId == kTechId.DropWelder or techId == kTechId.DropMines or techId == kTechId.DropShotgun or techId == kTechId.DropHeavyMachineGun or techId == kTechId.DropGrenadeLauncher or
                 techId == kTechId.DropFlamethrower or techId == kTechId.DropJetpack or techId == kTechId.DropExosuit
-        or techId == kTechId.DropCombatBuilder or techId == kTechId.DropCombatBuilder or techId == kTechId.DropDualMinigunExosuit or techId == kTechId.DropDualRailgunExosuit
+        or techId == kTechId.DropCombatBuilder or techId == kTechId.DropCannon or techId == kTechId.DropDualMinigunExosuit or techId == kTechId.DropDualRailgunExosuit
 
     end
 
