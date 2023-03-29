@@ -15,10 +15,10 @@ kMaxInfantryPortalsPerCommandStation = 6
 kNumMines = 4
 
 -- Jetpack
-kUpgradedJetpackUseFuelRate = 0.18
+kUpgradedJetpackUseFuelRate = 0.14
 kJetpackingAccel = 0.8
-kJetpackUseFuelRate = 0.21
-kJetpackReplenishFuelRate = 0.21
+kJetpackUseFuelRate = 0.16
+kJetpackReplenishFuelRate = 0.25
 
 kItemStayTime = 30
 kWeaponStayTime = 30
@@ -85,7 +85,7 @@ kSentrySupply = 5
 kSentryBatterySupply = 10
 kRoboticsFactorySupply = 5
 kInfantryPortalSupply = 0
-kPhaseGateSupply = 10
+kPhaseGateSupply = 0
 kSentriesPerBattery = 3
 
 kDrifterSupply = 5

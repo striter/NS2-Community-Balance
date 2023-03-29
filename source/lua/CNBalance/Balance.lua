@@ -1,8 +1,8 @@
 kMarinePResPerKill = 0
 kMarineTResPerKill = 1.5
 
-kAlienPResPerKill = 0.25
-kAlienTResPerKill = 0.5
+kAlienPResPerKill = 0.125
+kAlienTResPerKill = 0
 
 kResourceTowerResourceInterval = 6 --6
 kPlayerResPerInterval = 0.125 --0.125
@@ -153,7 +153,7 @@ kBurnDamagePerSecond = 8
 kFlamethrowerBurnDuration = 1
 kFlamethrowerMaxBurnDuration = 6
 
-kMinigunDamage = 8.5
+kMinigunDamage = 9
 kMinigunDamageType = kDamageType.Exosuit
 kRailgunDamage = 10
 kRailgunChargeDamage = 140
@@ -172,12 +172,17 @@ kClusterFragmentDamageRadius = 6
 kClusterFragmentDamage = 20
 kClusterGrenadeFragmentDamageType = kDamageType.ClusterFlameFragment
 
-kInfantryPortalBuildTime = 5
+kInfantryPortalBuildTime = 7 --7
+
+kRoboticsFactoryCost = 5  --5
+kUpgradeRoboticsFactoryCost = 10 --10
+kUpgradeRoboticsFactoryTime = 30 --20
+kARCCost = 12 --15
 
 kSentryDamage = 5
-kSentryCost = 6
+kSentryCost = 3
 kSentryBuildTime = 3
-kSentryBatteryCost = 8
+kSentryBatteryCost = 6
 kSentryBatteryBuildTime = 5
 
 kAdvancedArmoryUpgradeCost = 25
@@ -279,7 +284,8 @@ kGrenadeLauncherDropCost = 12
 kFlamethrowerDropCost = 12
 kCannonDropCost = 18
 kJetpackDropCost = 12
-kDualExosuitDropCost = 36
+kMinigunExosuitDropCost = 36
+kRailgunExosuitDropCost = 32
 
 kWelderDropCooldown = 0
 kDropMineCooldown = 0

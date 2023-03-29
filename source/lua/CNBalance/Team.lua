@@ -1,7 +1,7 @@
 ﻿local function GetExtendedTime()
     local gameRules = GetGamerules()
     local gameLength = Shared.GetTime() - gameRules:GetGameStartTime()
-    local estimateLength = math.max(0,gameLength - 1200)   --activate since 20 min pow(max(x-1200,0)/450,2) * 2
+    local estimateLength = math.max(0,gameLength - 1800)   --activate since 20 min pow(max(x-1200,0)/450,2) * 2
     local parameter = estimateLength / 450
     local extendTime = parameter * parameter * 2
     return extendTime

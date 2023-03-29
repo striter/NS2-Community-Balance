@@ -3,7 +3,7 @@ kHealingClampMaxHPAmount = 0.20
 kExosuitHealth = 100    kExosuitArmor = 390    kExosuitPointValue = 20
 kExosuitArmorPerUpgradeLevel = 30
 
-kJetpackMarineArmor = 50 kJetpackMarineArmorPerUpgradeLevel = 25
+kJetpackMarineArmor = 70 kJetpackMarineArmorPerUpgradeLevel = 20
 
 kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5    kSkulkHealthPerBioMass = 3
 kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7    kGorgeHealthPerBioMass = 3
@@ -44,8 +44,8 @@ kExtractorHealth = 2400 kExtractorArmor = 1200 kExtractorPointValue = 15
 
 kMineHealth = 26    kMineArmor = 5    kMinePointValue = 5
 
-kSentryBatteryHealth = 700    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5
-kSentryHealth = 500    kSentryArmor = 100    kSentryPointValue = 4
+kSentryBatteryHealth = 700    kSentryBatteryArmor = 250    kSentryBatteryPointValue = 5
+kSentryHealth = 550    kSentryArmor = 100    kSentryPointValue = 3
 
 kARCHealth = 2600    kARCArmor = 600    kARCPointValue = 10   --2600 400
 kARCDeployedHealth = 2600    kARCDeployedArmor = 0      -- 2600 0
