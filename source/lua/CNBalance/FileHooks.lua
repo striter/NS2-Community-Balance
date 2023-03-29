@@ -162,8 +162,8 @@ if AddHintModPanel then
     local panelMaterial = PrecacheAsset("materials/CNPlaygroundBalance/Banner.material")
     AddHintModPanel(panelMaterial, "https://docs.qq.com/doc/DUEZSeUtrR0tWTGJ4","看看司马策划又改了什么东西")
 
-    local panelMaterial = PrecacheAsset("materials/CNPlaygroundBalance/Banner2.material")
-    AddHintModPanel(panelMaterial, "https://docs.qq.com/doc/DUGJvTUVhZ1dwdnZt","马润现在不能自己买枪了?")
+    local ns1material = PrecacheAsset("materials/CNPlaygroundBalance/Banner2.material")
+    AddHintModPanel(ns1material, "https://docs.qq.com/doc/DUGJvTUVhZ1dwdnZt","马润现在不能自己买枪了?")
 end
 
 Shared.Message("[CN] Natural Selection 2.0 Mounted 2023.1.7")

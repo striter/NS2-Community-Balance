@@ -2,7 +2,7 @@ shader = "shaders/Model_emissive_alpha.surface_shader"
 albedoMap = "materials/CNPlaygroundBalance/Banner2.dds"
 specularMap = "materials/CNPlaygroundBalance/Banner2.dds"
 opacityMap = "materials/CNPlaygroundBalance/Banner_Opacity.dds"
-emissiveMap = "materials/CNPlaygroundBalance/Banner.dds"
+emissiveMap = "materials/CNPlaygroundBalance/Banner2.dds"
 normalMap = "materials/dev/dev_normal.dds"
 specularMap = "materials/dev/black.dds"
 
