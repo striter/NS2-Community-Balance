@@ -33,7 +33,7 @@ local kSecondaryTracerName = PrecacheAsset("cinematics/marine/railgun/tracer_sma
 local kSecondaryTracerResidueName = PrecacheAsset("cinematics/marine/railgun/tracer_residue_small.cinematic")
 local kMuzzleEffectName = PrecacheAsset("cinematics/marine/shotgun/muzzle_flash.cinematic")
 
-local kSecondaryAttackDamage = 70
+local kSecondaryAttackDamage = 80
 local function FireSecondary(self,player)
     -- self:TriggerEffects("shotgun_attack_sound")
     self:TriggerEffects("shotgun_attack_secondary")
