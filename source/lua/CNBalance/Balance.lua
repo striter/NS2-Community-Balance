@@ -2,7 +2,7 @@ kMarinePResPerKill = 0
 kMarineTResPerKill = 1.5
 
 kAlienPResPerKill = 0.125
-kAlienTResPerKill = 0
+kAlienTResPerKill = 0.5
 
 kResourceTowerResourceInterval = 6 --6
 kPlayerResPerInterval = 0.125 --0.125
@@ -386,9 +386,13 @@ kAcidSprayDamage = 17  -- 3 missiles
 kAcidSprayDamageType = kDamageType.Heavy
 
 -- Fade
-kStabDamage = 140
+kSwipeDamageType = kDamageType.Puncture
+kSwipeDamage = 40
+kSwipeEnergyCost = 7
+
+kStabDamage = 120
 kStabDamageType = kDamageType.Structural
-kStabEnergyCost = 33
+kStabEnergyCost = 30
 
 kStartBlinkEnergyCost = 12
 kBlinkEnergyCost = 28
