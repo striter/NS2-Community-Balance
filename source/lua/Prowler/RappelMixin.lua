@@ -93,7 +93,10 @@ function RappelMixin:PerformSecondaryAttack(player)
                     if HasMixin(hitTarget, "ParasiteAble" ) then
                         hitTarget:SetParasited( player, kRappelParasiteTime ) --Will give Commander point(s)
                     end
-
+                    
+                    if HasMixin(hitTarget, "Webable") then
+                        hitTarget:SetWebbed(kRappelWebTime, true)
+                    end
                 end
                 
                 if hitTarget:isa("Player") then -- or hitTarget:isa("Exo") then
