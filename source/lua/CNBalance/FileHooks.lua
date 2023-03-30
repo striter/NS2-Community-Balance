@@ -166,4 +166,4 @@ if AddHintModPanel then
     AddHintModPanel(ns1material, "https://docs.qq.com/doc/DUGJvTUVhZ1dwdnZt","马润现在不能自己买枪了?")
 end
 
-Shared.Message("[CN] Natural Selection 2.0 Mounted 2023.1.7")
+Shared.Message("[CN] Natural Selection 1.0 v2023.3.30")
