@@ -305,7 +305,7 @@ kWeaponCachePersonalCarries = 1
 kMarineSentryPersonalCost = 12
 kMarineSentryPersonalCarries = 2
 
-kMarineSentryDamage = 2.5
+kMarineSentryDamage = 3
 kMarineSentryBuildTime = 3
 --
 
