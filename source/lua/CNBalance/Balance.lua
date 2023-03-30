@@ -194,7 +194,10 @@ kJetpackTechResearchCost = 15
 kJetpackTechResearchTime = 90
 
 kExosuitTechResearchCost = 25
-
+kObservatoryCost = 15
+kPhaseGateCost = 15
+kPhaseTechResearchCost = 10
+kReversePGCooldown = 5
 kObservatoryScanCost = 3
 kScanCooldown = 0
 kObservatoryDistressBeaconCost = 10

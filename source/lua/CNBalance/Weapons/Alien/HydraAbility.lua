@@ -1,4 +1,4 @@
 
 function HydraStructureAbility:GetEnergyCost()
-    return 27
+    return 20
 end

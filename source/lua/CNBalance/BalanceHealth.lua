@@ -7,8 +7,8 @@ kJetpackMarineArmor = 70 kJetpackMarineArmorPerUpgradeLevel = 20
 
 kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5    kSkulkHealthPerBioMass = 3
 kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7    kGorgeHealthPerBioMass = 3
-kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15    kLerkHealthPerBioMass = 3
-kFadeHealth = 250    kFadeArmor = 80     kFadePointValue = 20    kFadeHealthPerBioMass = 5
+kLerkHealth = 180    kLerkArmor = 35     kLerkPointValue = 15    kLerkHealthPerBioMass = 3      --180 30
+kFadeHealth = 250    kFadeArmor = 80     kFadePointValue = 20    kFadeHealthPerBioMass = 5      --250 
 kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30    kOnosHealtPerBioMass = 50
 
 kProwlerHealth = 120 kProwlerArmor  = 20 kProwlerPointValue = 12 kProwlerHealthPerBioMass = 5
