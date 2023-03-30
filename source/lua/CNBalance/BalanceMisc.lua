@@ -38,7 +38,7 @@ kAlienMaxRegeneration = 80
 
 kAlienCrushDamagePercentByLevel = 0.111 --0.007
 
-kCelerityAddSpeed = 1.5 -- 1.5
+kCelerityAddSpeed = 2 -- 1.5
 
 kFocusAttackSlowAtMax = 1
 kFocusDamageBonusAtMax = 1

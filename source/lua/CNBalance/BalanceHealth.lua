@@ -44,10 +44,10 @@ kExtractorHealth = 2400 kExtractorArmor = 1200 kExtractorPointValue = 15
 
 kMineHealth = 26    kMineArmor = 5    kMinePointValue = 5
 
-kSentryBatteryHealth = 700    kSentryBatteryArmor = 250    kSentryBatteryPointValue = 5
-kSentryHealth = 550    kSentryArmor = 100    kSentryPointValue = 3
+kSentryBatteryHealth = 700    kSentryBatteryArmor = 250    kSentryBatteryPointValue = 5  --600 200
+kSentryHealth = 600    kSentryArmor = 100    kSentryPointValue = 3  --500 100
 
-kARCHealth = 2600    kARCArmor = 600    kARCPointValue = 10   --2600 400
+kARCHealth = 2600    kARCArmor = 800    kARCPointValue = 10   --2600 400
 kARCDeployedHealth = 2600    kARCDeployedArmor = 0      -- 2600 0
 
 kPhaseGateHealth = 1850    kPhaseGateArmor = 800    kPhaseGatePointValue = 10 -- 1500  800  10

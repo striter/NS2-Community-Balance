@@ -26,7 +26,7 @@ kLifeSustainResearchTime = 60
 kGrenadeTechResearchCost = 10   --10
 kGrenadeTechResearchTime = 60   --45
 
-kMineDamage = 135
+kMineDamage = 120
 
 kShotgunTechResearchCost = 20
 kShotgunTechResearchTime = 60
@@ -276,7 +276,7 @@ kDualExosuitCost = 90
 kDualRailgunExosuitCost = 90
 
 kWelderDropCost = 3
-kCombatBuilderDropCost = 5
+kCombatBuilderDropCost = 6
 kDropMineCost = 12
 kShotgunDropCost = 12
 kHeavyMachineGunDropCost = 15
@@ -295,14 +295,14 @@ kGrenadeLauncherDropCooldown = 0
 kFlamethrowerDropCooldown = 0
 kJetpackDropCooldown = 0
 
-kWeaponCachePersonalCost = 10
+kWeaponCachePersonalCost = 15
 kWeaponCacheBuildTime = 6
 kWeaponCachePersonalCarries = 1
 
-kMarineSentryPersonalCost = 7.5
+kMarineSentryPersonalCost = 12
 kMarineSentryPersonalCarries = 2
 
-kMarineSentryDamage = 3
+kMarineSentryDamage = 2.5
 kMarineSentryBuildTime = 3
 --
 
@@ -389,7 +389,7 @@ kStabDamage = 140
 kStabDamageType = kDamageType.Structural
 kStabEnergyCost = 33
 
-kStartBlinkEnergyCost = 14
+kStartBlinkEnergyCost = 12
 kBlinkEnergyCost = 28
 kHealthOnBlink = 0
 

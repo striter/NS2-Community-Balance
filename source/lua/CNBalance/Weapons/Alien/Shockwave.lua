@@ -52,7 +52,7 @@ function Shockwave:Detonate()
         for _, enemy in ipairs(enemies) do
         
             local enemyId = enemy:GetId()
-            if enemy:GetIsAlive() and not enemy:isa("JetpackMarine") and not table.contains(self.damagedEntIds, enemyId) and math.abs(enemy:GetOrigin().y - groundTrace.endPoint.y) < 0.8 then
+            if enemy:GetIsAlive()  and not table.contains(self.damagedEntIds, enemyId) and math.abs(enemy:GetOrigin().y - groundTrace.endPoint.y) < 0.8 then
                 
                 self:DoDamage(kStompDamage, enemy, enemy:GetOrigin(), GetNormalizedVector(enemy:GetOrigin() - groundTrace.endPoint), "none")
                 table.insert(self.damagedEntIds, enemyId)
@@ -61,7 +61,7 @@ function Shockwave:Detonate()
                     self:TriggerEffects("shockwave_hit", { effecthostcoords = enemy:GetCoords() })
                 end
 
-                if HasMixin(enemy, "Stun") then
+                if HasMixin(enemy, "Stun") and not enemy:isa("JetpackMarine") then
                     enemy:SetStun(kDisruptMarineTime)
                 end  
                 
