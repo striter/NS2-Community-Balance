@@ -371,6 +371,7 @@ kVolleyRappelDamageType = kDamageType.Normal
 kVolleyEnergyCost = 8.0 --7.0
 kRappelDamage = 10
 kRappelParasiteTime = 5
+kRappelWebTime = 1
 
 kRappelResearchCost = 10
 kRappelResearchTime = 20
