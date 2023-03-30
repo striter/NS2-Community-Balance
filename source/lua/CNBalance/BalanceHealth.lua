@@ -11,7 +11,7 @@ kLerkHealth = 180    kLerkArmor = 35     kLerkPointValue = 15    kLerkHealthPerB
 kFadeHealth = 250    kFadeArmor = 80     kFadePointValue = 20    kFadeHealthPerBioMass = 5      --250 
 kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30    kOnosHealtPerBioMass = 50
 
-kProwlerHealth = 135 kProwlerArmor  = 30 kProwlerPointValue = 12 kProwlerHealthPerBioMass = 5
+kProwlerHealth = 135 kProwlerArmor  = 25 kProwlerPointValue = 12 kProwlerHealthPerBioMass = 5
 kVokexHealth = 200 kVokexArmor = 80 kVokexPointvalue = 25 kVokexHealthPerBioMass = 4
 
 kParasitePlayerPointValue = 1
