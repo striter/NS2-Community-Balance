@@ -202,9 +202,9 @@ kObservatoryScanCost = 3
 kScanCooldown = 0
 kObservatoryDistressBeaconCost = 10
 
-kWeapons1ResearchCost = 20
-kWeapons2ResearchCost = 30
-kWeapons3ResearchCost = 40
+kWeapons1ResearchCost = 25
+kWeapons2ResearchCost = 35
+kWeapons3ResearchCost = 45
 
 kWeapons1ResearchTime = 75
 kWeapons2ResearchTime = 105
@@ -214,9 +214,9 @@ kArmor1ResearchCost = 20
 kArmor2ResearchCost = 30
 kArmor3ResearchCost = 40
 
-kArmor1ResearchTime = 60
-kArmor2ResearchTime = 90
-kArmor3ResearchTime = 120
+kArmor1ResearchTime = 75
+kArmor2ResearchTime = 105
+kArmor3ResearchTime = 135
 
 kAdvancedMarineSupportResearchCost = 20
 kAdvancedMarineSupportResearchTime = 90
