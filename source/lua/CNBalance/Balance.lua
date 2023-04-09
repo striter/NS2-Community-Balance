@@ -1,8 +1,8 @@
-kMarinePResPerKill = 0
-kMarineTResPerKill = 1.5
+kMarinePresPerResKill = 5   kMarineTresPerResKill = 0
+kAlienPresPerResKill = 2    kAlienTresPerResKill = 0
 
-kAlienPResPerKill = 0.125
-kAlienTResPerKill = 0.5
+kMarinePResPerKill = 0     kMarineTResPerKill = 1.5
+kAlienPResPerKill = 0.125  kAlienTResPerKill = 0.5
 
 kResourceTowerResourceInterval = 6 --6
 kPlayerResPerInterval = 0.125 --0.125

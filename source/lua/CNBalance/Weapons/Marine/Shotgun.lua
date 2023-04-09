@@ -1,17 +1,5 @@
-Shotgun.kDamageFalloffStart = 5 -- in meters, full damage closer than this.
-Shotgun.kDamageFalloffEnd = 15 -- in meters, minimum damage further than this, gradient between start/end.
+
 Shotgun.kDamageFalloffReductionFactor = 1 -- 50% reduction
-
-Shotgun.kShotgunRings =
-{
-    { pelletCount = 1, distance = 0.0000, pelletSize = 0.016, pelletDamage = 10, thetaOffset = 0},
-    { pelletCount = 4, distance = 0.3500, pelletSize = 0.016, pelletDamage = 10, thetaOffset = 0},
-    { pelletCount = 4, distance = 0.6364, pelletSize = 0.016, pelletDamage = 10, thetaOffset = math.pi * 0.25},
-    { pelletCount = 4, distance = 1.0000, pelletSize = 0.016, pelletDamage = 10, thetaOffset = 0},
-    { pelletCount = 4, distance = 1.1314, pelletSize = 0.016, pelletDamage = 10, thetaOffset = math.pi * 0.25}
-}
-
-Shotgun._RecalculateSpreadVectors()
 
 local baseOnPrimaryAttack = Shotgun.OnPrimaryAttack
 function Shotgun:OnPrimaryAttack(player)
