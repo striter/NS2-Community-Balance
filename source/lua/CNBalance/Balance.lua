@@ -1,3 +1,8 @@
+kMarinePresPerResKill = 2
+kAlienPresPerResKill = 2
+kMarineTresPerResKill = 0
+kAlienTresPerResKill = 0
+
 kResourceTowerResourceInterval = 6 --6
 kPlayerResPerInterval = 0.125
 kTeamResourcePerTick = 1
@@ -23,14 +28,14 @@ kWelderDropCooldown = 0
 kGrenadeTechResearchCost = 10   --10
 kGrenadeTechResearchTime = 60   --45
 
-kMineCost = 9
+kMineCost = 10
 kMineDamage = 135
 kDropMineCost = 10
 kDropMineCooldown = 0
 
-kShotgunTechResearchCost = 15
-kShotgunTechResearchTime = 45
-kShotgunCost = 18
+kShotgunTechResearchCost = 20
+kShotgunTechResearchTime = 60
+kShotgunCost = 20
 kShotgunDropCost = 12
 kShotgunDropCooldown = 0
 
