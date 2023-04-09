@@ -15,7 +15,7 @@ if Server then
 
         local selfIsPlayer = self:isa("Player")
         local selfIsExtractor = self:isa("Extractor") or self:isa("ResourceTower")
-        local selfIsMarineTeam = attacker:GetTeamNumber() == kMarineTeamType
+        local selfIsMarineTeam = self:GetTeamNumber() == kMarineTeamType
         local attackerIsPlayer = attacker and attacker:isa("Player")
 
         local pResReward = 0
