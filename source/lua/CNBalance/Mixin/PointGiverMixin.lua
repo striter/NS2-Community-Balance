@@ -14,18 +14,18 @@ if Server then
         local points = self:GetPointValue()
 
         local selfIsPlayer = self:isa("Player")
-        local attackerIsPlayer = attacker and attacker:isa("Player")
         local selfIsExtractor = self:isa("Extractor") or self:isa("ResourceTower")
-        local attackerIsMarineTeam = attacker:GetTeamNumber() == kMarineTeamType
+        local selfIsMarineTeam = self:GetTeamNumber() == kMarineTeamType
+        local attackerIsPlayer = attacker and attacker:isa("Player")
         
         local pResReward = 0
         local tResReward = 0
         if selfIsPlayer then
-            pResReward = attackerIsMarineTeam and kMarinePResPerKill or kAlienPResPerKill
-            tResReward = attackerIsMarineTeam and kMarineTResPerKill or kAlienTResPerKill
+            pResReward = selfIsMarineTeam and kAlienPResPerKill or kMarinePResPerKill 
+            tResReward = selfIsMarineTeam and kAlienTResPerKill or kMarineTResPerKill 
         elseif selfIsExtractor then
-            pResReward = attackerIsMarineTeam and kMarinePresPerResKill or kAlienPresPerResKill
-            tResReward = attackerIsMarineTeam and kMarineTresPerResKill or kAlienTresPerResKill
+            pResReward = selfIsMarineTeam and kAlienPresPerResKill or kMarinePresPerResKill
+            tResReward = selfIsMarineTeam and kAlienTresPerResKill or kMarineTresPerResKill
         end
 
         -- award partial res and score to players who assisted
