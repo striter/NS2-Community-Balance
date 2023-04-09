@@ -1,4 +1,4 @@
-kResourceTowerResourceInterval = 7.5 --6
+kResourceTowerResourceInterval = 6 --6
 kPlayerResPerInterval = 0.125
 kTeamResourcePerTick = 1
 kPlayingTeamInitialTeamRes = 60   --60
@@ -14,8 +14,8 @@ kAlienEggsPerHive = 2
 kNanoArmorResearchCost = 15
 kNanoArmorResearchTime = 60
 
-kLifeSustainResearchCost = 10
-kLifeSustainResearchTime = 45
+kLifeSustainResearchCost = 15
+kLifeSustainResearchTime = 60
 
 kWelderDropCost = 3
 kWelderDropCooldown = 0
@@ -30,7 +30,7 @@ kDropMineCooldown = 0
 
 kShotgunTechResearchCost = 15
 kShotgunTechResearchTime = 45
-kShotgunCost = 20
+kShotgunCost = 18
 kShotgunDropCost = 12
 kShotgunDropCooldown = 0
 
@@ -38,26 +38,25 @@ kPistolRateOfFire = 0.01
 kPistolDamage = 20
 
 kShotgunFireRate = 0.88
-kShotgunDamage = 12.33 //11.33
+kShotgunDamage = 11.33 --11.33
 kShotgunDamageType = kDamageType.Normal
 kShotgunClipSize = 6
-kShotgunBulletsPerShot = 13
 kShotgunSpreadDistance = 10
-kShotgunWeapons1DamageScalar = 1.059
-kShotgunWeapons2DamageScalar = 1.118
-kShotgunWeapons3DamageScalar = 1.177
+kShotgunWeapons1DamageScalar = 1.1
+kShotgunWeapons2DamageScalar = 1.2
+kShotgunWeapons3DamageScalar = 1.3
 
 kHeavyMachineGunCost = 20
 kHeavyMachineGunDropCost = 12
 kHeavyMachineGunDropCooldown = 0
 
-kHeavyMachineGunDamage = 8  //8
+kHeavyMachineGunDamage = 8.5  --8
 kHeavyMachineGunDamageType = kDamageType.MachineGun
 kHeavyMachineGunClipSize = 150  //100
 kHeavyMachineGunClipNum = 3 //4
 kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
-kHeavyMachineGunSpread = Math.Radians(5.6)  //4
+kHeavyMachineGunSpread = Math.Radians(5.2)  //4
 
 -- Standard Supply
 kStandardSupplyResearchCost = 10
@@ -90,7 +89,7 @@ kGrenadeLauncherGrenadeDamage = 100
 kGrenadeLauncherGrenadeDamageRadius = 4.8
 kGrenadeLauncherDetectionShotRadius = 3
 
-kGrenadeLauncherImpactGrenadeDamage = 87
+kGrenadeLauncherImpactGrenadeDamage = 100
 kGrenadeLauncherAllyBlastReduction = 0.7
 
 kGrenadeLauncherClipSize = 4
@@ -297,8 +296,8 @@ kStabDamage = 140
 kStabDamageType = kDamageType.Structural
 kStabEnergyCost = 33
 
-kStartBlinkEnergyCost = 14
-kBlinkEnergyCost = 28
+kStartBlinkEnergyCost = 12 --12
+kBlinkEnergyCost = 32 --32
 kHealthOnBlink = 0
 
 --Vokex
@@ -374,8 +373,8 @@ kScanCooldown = 0
 kObservatoryDistressBeaconCost = 10
 
 kWeapons1ResearchTime = 75
-kWeapons2ResearchTime = 90
-kWeapons3ResearchTime = 120
+kWeapons2ResearchTime = 105
+kWeapons3ResearchTime = 135
 
 kWeapons1ResearchCost = 20
 kWeapons2ResearchCost = 30
@@ -383,10 +382,10 @@ kWeapons3ResearchCost = 40
 
 kArmor1ResearchTime = 75
 kArmor2ResearchTime = 90
-kArmor3ResearchTime = 90
+kArmor3ResearchTime = 120
 kArmor1ResearchCost = 20
 kArmor2ResearchCost = 30
-kArmor3ResearchCost = 30
+kArmor3ResearchCost = 40
 
 kAdvancedMarineSupportResearchCost = 20
 kAdvancedMarineSupportResearchTime = 90
