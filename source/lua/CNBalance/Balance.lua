@@ -249,6 +249,9 @@ kSkulkBoostTime = 60
 kSkulkBoostMaxSpeed = 0.75
 kSkulkBoostHealthPerBiomass = 2.5
 
+kParasiteEnergyCost = 30
+kAdrenalineParasiteEnergyCost = 18
+
 kXenocideResearchCost = 20
 kXenocideResearchTime = 60
 
