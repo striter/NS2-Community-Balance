@@ -16,7 +16,6 @@ if Server then
         local selfIsPlayer = self:isa("Player")
         local selfIsExtractor = self:isa("Extractor") or self:isa("ResourceTower")
         local selfIsMarineTeam = self:GetTeamNumber() == kMarineTeamType
-        local attackerIsPlayer = attacker and attacker:isa("Player")
         
         local pResReward = 0
         local tResReward = 0
@@ -48,15 +47,13 @@ if Server then
 
             end
 
-            if selfIsPlayer and attacker and GetAreEnemies(self, attacker) then
+        end
 
-                if attackerIsPlayer then
-                    attacker:AddKill()
-                end
-
-                attacker:GetTeam():AddTeamResources(tResReward,true) -- pve kills count
+        if selfIsPlayer and attacker and GetAreEnemies(self, attacker) then
+            if attacker:isa("Player") then
+                attacker:AddKill()
             end
-
+            attacker:GetTeam():AddTeamResources(tResReward,true) -- pve kills count
         end
     end
     
