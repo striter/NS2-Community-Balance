@@ -435,11 +435,11 @@ kMarineSentryDamage = 3
 kMarineSentryBuildTime = 3
 
 kWeaponCacheCost = 2
-kWeaponCachePersonalCost = 7
+kWeaponCachePersonalCost = 12
 kWeaponCacheBuildTime = 6
 kWeaponCachePersonalCarries = 1
 
-kMarineSentryPersonalCost = 5
+kMarineSentryPersonalCost = 8
 kMarineSentryPersonalCarries = 2
 
 kSporeMineCost = 0

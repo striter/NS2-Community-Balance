@@ -99,7 +99,7 @@ kMatureVeilHealth = 1500     kMatureVeilArmor = 0     kVeilPointValue = 15  -- 1
 
 --Combat
 kWeaponCacheHealth = 500    kWeaponCacheArmor = 150   kWeaponCachePointValue = 5
-kMarineSentryHealth = 300    kMarineSentryArmor = 150    kMarineSentryPointValue = 3
+kMarineSentryHealth = 225    kMarineSentryArmor = 155    kMarineSentryPointValue = 3
 
 kSporeMineHealth = 50 kSporeMineArmor = 0 kSporeMinepointValue=0
 kMatureSporeMineHealth = 100 kMatureSporeMineArmor = 0

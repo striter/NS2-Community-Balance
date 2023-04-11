@@ -76,12 +76,12 @@ kSwipeVampirismScalar = 0.03
 kStabVampirismScalar = 0.07
 kGoreVampirismScalar = 0.02
 
-kMACSupply = 5
+kMACSupply = 2
 kArmorySupply = 5
-kObservatorySupply = 15
-kARCSupply = 20
+kObservatorySupply = 20
+kARCSupply = 20 
 kSentrySupply = 5
-kSentryBatterySupply = 10
+kSentryBatterySupply = 20
 kRoboticsFactorySupply = 5
 kInfantryPortalSupply = 0
 kPhaseGateSupply = 10
