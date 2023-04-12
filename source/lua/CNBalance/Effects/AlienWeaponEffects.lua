@@ -4,7 +4,7 @@ local kAdditionalEffects =
     {
         devourOutsideEffects = 
         {
-            {parented_sound = "sound/ns2remake_combat.fev/combat/abilities/alien/onos/devour", volume = 0.2, done = true},
+            {parented_sound = "sound/ns2plus.fev/abilities/onos/devour", volume = 0.2, done = true},
         },
     },
     
@@ -12,7 +12,7 @@ local kAdditionalEffects =
     {
         devourInsideEffects = 
         {
-            {private_sound = "sound/ns2remake_combat.fev/combat/abilities/alien/onos/devour", done = true},
+            {private_sound = "sound/ns2plus.fev/abilities/onos/devour", done = true},
         },
     },
     
@@ -20,7 +20,7 @@ local kAdditionalEffects =
     {
         devourEatEffects = 
         {
-            {sound = "sound/ns2remake_combat.fev/combat/common/alien/devour_in"},
+            {sound = "sound/ns2plus.fev/common/alien/devour_in"},
             {cinematic = "cinematics/alien/onos/devour_escape.cinematic", done = true},
         },
     },
@@ -29,7 +29,7 @@ local kAdditionalEffects =
     {
         devourEscapeEffects = 
         {
-            {sound = "sound/ns2remake_combat.fev/combat/common/alien/devour_out"},
+            {sound = "sound/ns2plus.fev/common/alien/devour_out"},
             {cinematic = "cinematics/alien/onos/devour_escape.cinematic", done = true},
         },
     },
@@ -46,7 +46,7 @@ local kAdditionalEffects =
     {
 		alienWeaponDrawSounds =
         {
-			{player_sound = "sound/ns2remake_combat.fev/combat/abilities/alien/fade/acid_rocket/deploy", classname = "AcidRocket", done = true},
+			{player_sound = "sound/ns2plus.fev/abilities/fade/acid_rocket/deploy", classname = "AcidRocket", done = true},
         }
     },
 
@@ -55,7 +55,7 @@ local kAdditionalEffects =
         bilebombFireEffects = 
         {   
             {sound = "", silenceupgrade = true, done = true}, 
-            {player_sound = "sound/ns2remake_combat.fev/combat/abilities/alien/fade/acid_rocket/rocket_fire"},
+            {player_sound = "sound/ns2plus.fev/abilities/fade/acid_rocket/rocket_fire"},
         },
     },
 
@@ -64,7 +64,7 @@ local kAdditionalEffects =
         bilebombHitEffects = 
         {          
             {cinematic = "cinematics/alien/gorge/bilebomb_impact.cinematic"},
-            {parented_sound = "sound/ns2remake_combat.fev/combat/abilities/alien/fade/acid_rocket/rocket_hit", done = true},
+            {parented_sound = "sound/ns2plus.fev/abilities/fade/acid_rocket/rocket_hit", done = true},
         },
     },
 }

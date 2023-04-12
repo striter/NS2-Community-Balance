@@ -23,10 +23,10 @@ local kButtRange = 1.1
 
 local kNumberOfVariants = 3
 
-local kOneShotSoundName = PrecacheAsset("sound/ns2remake_combat.fev/combat/weapons/marine/lmg/lmg_fire_oneshot")
-local kAttackSoundName = PrecacheAsset("sound/ns2remake_combat.fev/combat/weapons/marine/lmg/fire")
-local kLocalAttackSoundName = PrecacheAsset("sound/ns2remake_combat.fev/combat/weapons/marine/lmg/fire_client")
-local kEndSound = PrecacheAsset("sound/ns2remake_combat.fev/combat/weapons/marine/lmg/fire_dropoff")
+local kOneShotSoundName = PrecacheAsset("sound/ns2plus.fev/weapons/marine/lmg/lmg_fire_oneshot")
+local kAttackSoundName = PrecacheAsset("sound/ns2plus.fev/weapons/marine/lmg/fire")
+local kLocalAttackSoundName = PrecacheAsset("sound/ns2plus.fev/weapons/marine/lmg/fire")
+local kEndSound = PrecacheAsset("sound/ns2plus.fev/weapons/marine/lmg/fire_dropoff")
 
 local kLoopingShellCinematic = PrecacheAsset("cinematics/marine/rifle/shell_looping.cinematic")
 local kLoopingShellCinematicFirstPerson = PrecacheAsset("cinematics/marine/rifle/shell_looping_1p.cinematic")
@@ -316,12 +316,7 @@ if Client then
         local player = self:GetParent()
 		
 		StartSoundEffectAtOrigin(kOneShotSoundName, self:GetOrigin())
-		if player and player:GetIsLocalPlayer() then
-			Shared.PlaySound(self, kLocalAttackSoundName)
-		else
-			Shared.PlaySound(self, kAttackSoundName)
-		end
-        
+        Shared.PlaySound(self, kAttackSoundName)
         
         if not self.muzzleCinematic then            
             CreateMuzzleEffect(self)                

@@ -32,11 +32,6 @@ local networkVars =
 
 AddMixinNetworkVars(LiveMixin, networkVars)
 
-local kMuzzleEffect = PrecacheAsset("cinematics/marine/cannon_muzzle_flash.cinematic")
-local kMuzzleAttachPoint = "fxnode_hcmuzzle"
-
-local kAttackSoundName = PrecacheAsset("sound/ns2remake_combat.fev/combat/weapons/marine/heavy_cannon/fire")
-local kLocalAttackSoundName = PrecacheAsset("sound/ns2remake_combat.fev/combat/weapons/marine/heavy_cannon/fire_client")
 
 function Cannon:OnCreate()
 

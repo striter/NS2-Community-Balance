@@ -1,0 +1,182 @@
+Warning: QPainter::begin: Paint device returned engine == 0, type: 1
+Warning: QPainter::setPen: Painter not active
+Warning: QPainter::setBrush: Painter not active
+Warning: QPainter::setRenderHint: Painter must be active to set rendering hints
+Warning: QPainter::setPen: Painter not active
+Debug: "17:07:53 ..\..\src\propertyeditor.cpp:1508 EM: Set Name" 
+Debug: 
+Building project 'ns2plus'...
+Debug: Building project E:\Github\NS2-Playground-Balance\audio\ns2plus.fev...
+Debug: Unique sound defs 1/35
+Debug: Retrieving sound file info...
+Debug: Retrieving reverb info...
+Debug: FEV file written ok
+Debug: Unique Envelope Points: 0 of 0
+Debug: Unique Strings: 1709 characters of 1825
+Debug: Caching sound file details for ''...
+Debug: source\Combat - Kharaa.mp3
+Debug: source\Combat - Marine.mp3
+Debug: source\acid_rocket_deploy.wav
+Debug: source\acidrocketfire.wav
+Debug: source\acidrockethit.wav
+Debug: source\cannon_fire.wav
+Debug: source\cannon_fire_2.wav
+Debug: source\cannon_reload.wav
+Debug: source\cannon_reload1.wav
+Debug: source\devour_ambience.wav
+Debug: source\devour_in.wav
+Debug: source\devour_out.wav
+Debug: source\knife-hit-1.wav
+Debug: source\knife-hit-2.wav
+Debug: source\knife_attack1.wav
+Debug: source\knife_attack2.wav
+Debug: source\knife_deploy.wav
+Debug: source\knife_thin_metal.wav
+Debug: source\knife_thin_metal2.wav
+Debug: source\lmg_draw.wav
+Debug: source\lmg_fire.wav
+Debug: source\lmg_fire_dropoff.wav
+Debug: source\lmg_fire_oneshot.wav
+Debug: source\lmg_reload.wav
+Debug: source\lmg_reload1.wav
+Debug: source\onos_punch_l.wav
+Debug: source\onos_punch_r.wav
+Debug: source\reolver_fire.wav
+Debug: source\revolver_draw.wav
+Debug: source\revolver_reload0.wav
+Debug: source\revolver_reload1.wav
+Debug: source\sentry_deploy.wav
+Debug: source\sentry_deploy1.wav
+Debug: source\sentry_deploy2.wav
+Debug: source\sentry_deploy3.wav
+Debug: Building 'NSReforge_bank00.fsb'
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\Combat - Kharaa.mp3
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\Combat - Marine.mp3
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\acid_rocket_deploy.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\acidrocketfire.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\acidrockethit.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\cannon_fire.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\cannon_fire_2.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\cannon_reload.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\cannon_reload1.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\devour_ambience.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\devour_in.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\devour_out.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\knife-hit-2.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\knife-hit-1.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\knife_attack1.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\knife_attack2.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\knife_deploy.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\knife_thin_metal.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\knife_thin_metal2.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\lmg_draw.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\lmg_fire.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\lmg_fire_dropoff.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\lmg_fire_oneshot.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\lmg_reload.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\lmg_reload1.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\onos_punch_l.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\onos_punch_r.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\reolver_fire.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\revolver_draw.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\revolver_reload0.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\revolver_reload1.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\sentry_deploy.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\sentry_deploy1.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\sentry_deploy2.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\sentry_deploy3.wav
+Debug: Writing FSB...
+Debug: Finished building FSB
+Debug: 
+Debug: 
+Summary of build:
+SUCCESS: E:/Github/NS2-Playground-Balance/audio/ns2plus.fev
+SUCCESS: NSReforge_bank00.fsb
+Debug: 
+Building project 'ns2plus'...
+Debug: Building project E:\Github\NS2-Playground-Balance\audio\ns2plus.fev...
+Debug: Unique sound defs 1/35
+Debug: Retrieving sound file info...
+Debug: Retrieving reverb info...
+Debug: FEV file written ok
+Debug: Unique Envelope Points: 0 of 0
+Debug: Unique Strings: 1709 characters of 1825
+Debug: Caching sound file details for ''...
+Debug: source\Combat - Kharaa.mp3
+Debug: source\Combat - Marine.mp3
+Debug: source\acid_rocket_deploy.wav
+Debug: source\acidrocketfire.wav
+Debug: source\acidrockethit.wav
+Debug: source\cannon_fire.wav
+Debug: source\cannon_fire_2.wav
+Debug: source\cannon_reload.wav
+Debug: source\cannon_reload1.wav
+Debug: source\devour_ambience.wav
+Debug: source\devour_in.wav
+Debug: source\devour_out.wav
+Debug: source\knife-hit-1.wav
+Debug: source\knife-hit-2.wav
+Debug: source\knife_attack1.wav
+Debug: source\knife_attack2.wav
+Debug: source\knife_deploy.wav
+Debug: source\knife_thin_metal.wav
+Debug: source\knife_thin_metal2.wav
+Debug: source\lmg_draw.wav
+Debug: source\lmg_fire.wav
+Debug: source\lmg_fire_dropoff.wav
+Debug: source\lmg_fire_oneshot.wav
+Debug: source\lmg_reload.wav
+Debug: source\lmg_reload1.wav
+Debug: source\onos_punch_l.wav
+Debug: source\onos_punch_r.wav
+Debug: source\reolver_fire.wav
+Debug: source\revolver_draw.wav
+Debug: source\revolver_reload0.wav
+Debug: source\revolver_reload1.wav
+Debug: source\sentry_deploy.wav
+Debug: source\sentry_deploy1.wav
+Debug: source\sentry_deploy2.wav
+Debug: source\sentry_deploy3.wav
+Debug: Building 'NSReforge_bank00.fsb'
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\Combat - Kharaa.mp3
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\Combat - Marine.mp3
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\acid_rocket_deploy.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\acidrockethit.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\acidrocketfire.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\cannon_fire.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\cannon_fire_2.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\cannon_reload.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\cannon_reload1.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\devour_ambience.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\devour_in.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\devour_out.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\knife-hit-1.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\knife-hit-2.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\knife_attack1.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\knife_attack2.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\knife_deploy.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\knife_thin_metal2.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\knife_thin_metal.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\lmg_draw.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\lmg_fire.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\lmg_fire_dropoff.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\lmg_fire_oneshot.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\lmg_reload.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\lmg_reload1.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\onos_punch_r.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\onos_punch_l.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\reolver_fire.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\revolver_draw.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\revolver_reload0.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\revolver_reload1.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\sentry_deploy.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\sentry_deploy1.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\sentry_deploy2.wav
+Debug: Encoded E:\Github\NS2-Playground-Balance\audio\source\sentry_deploy3.wav
+Debug: Writing FSB...
+Debug: Finished building FSB
+Debug: 
+Debug: 
+Summary of build:
+SUCCESS: E:/Github/NS2-Playground-Balance/audio/ns2plus.fev
+SUCCESS: NSReforge_bank00.fsb

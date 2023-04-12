@@ -3,8 +3,8 @@ local kAdditionalEffects = {
     {
         deploySoundEffects =
         {
-            {sound = "sound/NS2.fev/marine/structures/sentry_deploy", classname = "WeaponCache", done = true},
-            {sound = "sound/NS2.fev/marine/structures/sentry_deploy", classname = "MarineSentry", done = true},
+            {sound = "sound/ns2plus.fev/structures/marine/weaponcache_deploy", classname = "WeaponCache", done = true},
+            {sound = "sound/ns2plus.fev/structures/marine/sentry_deploy2", classname = "MarineSentry", done = true},
         },
 
     }, 
