@@ -373,6 +373,7 @@ if Server then
     end
     
     function MarineSentry:OnConstructionComplete()
+        self:TriggerEffects("deploy")
         self:AddTimedCallback(OnDeploy, kDeployTime)      
     end
     
