@@ -1,5 +1,5 @@
-kMarinePresPerResKill = 2
-kAlienPresPerResKill = 2
+kMarinePresPerResKill = 2.5
+kAlienPresPerResKill = 2.5
 kMarineTresPerResKill = 0
 kAlienTresPerResKill = 0
 
