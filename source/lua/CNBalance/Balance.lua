@@ -79,12 +79,13 @@ kGrenadeLauncherGrenadeDamageRadius = 4.8
 kGrenadeLauncherDetectionShotRadius = 3
 
 kGrenadeLauncherImpactGrenadeDamage = 87
-kGrenadeLauncherAllyBlastReduction = 0.7
+kGrenadeLauncherSelfDamageReduction = 0.7
+kGrenadeLauncherAllyBlastReduction = 0.4
 
 kGrenadeLauncherClipSize = 4
-kGrenadeLauncherWeapons1DamageScalar = 1.08
-kGrenadeLauncherWeapons2DamageScalar = 1.17
-kGrenadeLauncherWeapons3DamageScalar = 1.25
+kGrenadeLauncherWeapons1DamageScalar = 1.15
+kGrenadeLauncherWeapons2DamageScalar = 1.27
+kGrenadeLauncherWeapons3DamageScalar = 1.40
 
 --Revolver
 kRevolverRateOfFire = 0.1
@@ -188,16 +189,14 @@ kSentryBatteryBuildTime = 5
 kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 90 --90->75
 
-kPrototypeLabCost = 30
+kPrototypeLabCost = 35
 
-kJetpackTechResearchCost = 15
+kJetpackTechResearchCost = 20
 kJetpackTechResearchTime = 90
 
-kJetpackCost = 15
-kJetpackDropCost = 12
-kJetpackDropCooldown = 0
-
 kExosuitTechResearchCost = 25
+kExosuitTechResearchTime = 90
+
 kObservatoryCost = 15
 kPhaseGateCost = 15
 kPhaseTechResearchCost = 10
@@ -286,11 +285,11 @@ kWelderDropCost = 3
 kCombatBuilderDropCost = 6
 kDropMineCost = 12
 kShotgunDropCost = 12
-kHeavyMachineGunDropCost = 15
+kHeavyMachineGunDropCost = 14
 kGrenadeLauncherDropCost = 12
 kFlamethrowerDropCost = 12
 kCannonDropCost = 18
-kJetpackDropCost = 12
+kJetpackDropCost = 14
 kMinigunExosuitDropCost = 36
 kRailgunExosuitDropCost = 32
 
@@ -313,7 +312,6 @@ kMarineSentryDamage = 3
 kMarineSentryBuildTime = 3
 --
 
-
 --Aliens
 kOnosDevourCost = 15
 kOnosDevourTime = 60
@@ -321,7 +319,6 @@ kDevourEnergyCost = 65 --50
 kDevourPunchDamage = 50 --100
 
 kUmbraBulletModifier = 0.8
-
 
 kFastTunnelCost = 15
 kFastTunnelTime = 60
