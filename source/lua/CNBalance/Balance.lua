@@ -209,13 +209,14 @@ kAdvancedArmoryResearchTime = 75 --90->75
 
 kPrototypeLabCost = 30
 
-kJetpackTechResearchCost = 15
+kJetpackTechResearchCost = 20
 kJetpackTechResearchTime = 90
 kJetpackCost = 15
 kJetpackDropCost = 12
 kJetpackDropCooldown = 0
 
 kExosuitTechResearchCost = 25
+kExosuitTechResearchTime = 90
 kDualExosuitCost = 55
 kDualRailgunExosuitCost = 55
 kDualExosuitDropCost = 40
