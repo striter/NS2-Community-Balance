@@ -210,7 +210,7 @@ kPrototypeLabCost = 30
 
 kJetpackTechResearchCost = 15
 kJetpackTechResearchTime = 90
-kJetpackCost = 12
+kJetpackCost = 15
 kJetpackDropCost = 12
 kJetpackDropCooldown = 0
 
@@ -282,15 +282,15 @@ kProwlerBabblerShieldPercent = 0.2
 kVolleySpread = Math.Radians(3)
 kProwlerDamagePerPellet = 8 -- there are 6 pellets
 kVolleyRappelDamageType = kDamageType.Normal
-kVolleyEnergyCost = 8.0 --7.0
+kVolleyEnergyCost = 7.0 --7.0
 kRappelDamage = 10
 kRappelParasiteTime = 5
-kRappelWebTime = 1
+kRappelWebTime = 2
 
 kRappelResearchCost = 10
 kRappelResearchTime = 20
-kRappelEnergyCost = 12
-kRappelReelEnergyCost = 20
+kRappelEnergyCost = 10
+kRappelReelEnergyCost = 15
 kRappelRange = 25
 
 kAcidSprayResearchCost = 10

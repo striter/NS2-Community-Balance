@@ -6,7 +6,7 @@ kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15    kLerkHealthPerB
 kFadeHealth = 250    kFadeArmor = 80     kFadePointValue = 20    kFadeHealthPerBioMass = 5
 kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30    kOnosHealtPerBioMass = 50
 
-kProwlerHealth = 135 kProwlerArmor  = 25 kProwlerPointValue = 12 kProwlerHealthPerBioMass = 5
+kProwlerHealth = 140 kProwlerArmor  = 25 kProwlerPointValue = 12 kProwlerHealthPerBioMass = 5
 kVokexHealth = 200 kVokexArmor = 80 kVokexPointvalue = 25 kVokexHealthPerBioMass = 4
 
 kParasitePlayerPointValue = 1
@@ -98,8 +98,8 @@ kMatureVeilHealth = 1500     kMatureVeilArmor = 0     kVeilPointValue = 15  -- 1
 
 
 --Combat
-kWeaponCacheHealth = 500    kWeaponCacheArmor = 150   kWeaponCachePointValue = 5
-kMarineSentryHealth = 225    kMarineSentryArmor = 155    kMarineSentryPointValue = 3
+kWeaponCacheHealth = 500    kWeaponCacheArmor = 150   kWeaponCachePointValue = 10
+kMarineSentryHealth = 200    kMarineSentryArmor = 125    kMarineSentryPointValue = 6
 
 kSporeMineHealth = 50 kSporeMineArmor = 0 kSporeMinepointValue=0
 kMatureSporeMineHealth = 100 kMatureSporeMineArmor = 0
