@@ -41,7 +41,7 @@ Prowler.kWalljumpForce = 8
 
 Prowler.kHealth = kProwlerHealth
 Prowler.kArmor  = kProwlerArmor
-Prowler.kAdrenalineEnergyRecuperationRate = 14.5
+Prowler.kAdrenalineEnergyRecuperationRate = 18
 
 local kProwlerScale = 1.50  -- unused
 local kModelYScale = 1.10   -- unused
