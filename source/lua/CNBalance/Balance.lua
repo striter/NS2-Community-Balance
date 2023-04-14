@@ -95,7 +95,8 @@ kGrenadeLauncherGrenadeDamageRadius = 4.8
 kGrenadeLauncherDetectionShotRadius = 3
 
 kGrenadeLauncherImpactGrenadeDamage = 100
-kGrenadeLauncherAllyBlastReduction = 0.7
+kGrenadeLauncherSelfDamageReduction = 0.8
+kGrenadeLauncherAllyBlastReduction = 0.6
 
 kGrenadeLauncherClipSize = 4
 kGrenadeLauncherWeapons1DamageScalar = 1.08

@@ -68,20 +68,21 @@ end
 
 local baseDoDamage = DamageMixin.DoDamage
 function DamageMixin:DoDamage(damage, target, point, direction, surface, altMode, showtracer)
-    if GetHasTech(self,kTechId.GrenadeLauncherAllyBlast) then
-        local attacker = nil
-        -- Get the attacker
-        if self:GetParent() and self:GetParent():isa("Player") then
+    local attacker = nil
+    -- Get the attacker
+    if self:GetParent() and self:GetParent():isa("Player") then
         attacker = self:GetParent()
-        elseif HasMixin(self, "Owner") and self:GetOwner() and self:GetOwner():isa("Player") then
+    elseif HasMixin(self, "Owner") and self:GetOwner() and self:GetOwner():isa("Player") then
         attacker = self:GetOwner()
-        end
-    
-        
-        if (target and attacker and attacker:GetId() == target:GetId()) then
+    end
+
+    if (target and attacker and attacker:GetId() == target:GetId()) then
+        if GetHasTech(self,kTechId.GrenadeLauncherAllyBlast) then
             damage = damage * kGrenadeLauncherAllyBlastReduction
+        else
+            damage = damage * kGrenadeLauncherSelfDamageReduction
         end
     end
 
-   return baseDoDamage(self, damage, target, point, direction, surface, altMode, showtracer)
+    return baseDoDamage(self, damage, target, point, direction, surface, altMode, showtracer)
 end
