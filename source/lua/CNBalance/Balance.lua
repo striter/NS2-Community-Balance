@@ -20,7 +20,7 @@ kNanoArmorResearchCost = 15
 kNanoArmorResearchTime = 60
 
 kLifeSustainResearchCost = 15
-kLifeSustainResearchTime = 60
+kLifeSustainResearchTime = 90
 
 kWelderDropCost = 3
 kWelderDropCooldown = 0
@@ -55,13 +55,13 @@ kHeavyMachineGunCost = 20
 kHeavyMachineGunDropCost = 12
 kHeavyMachineGunDropCooldown = 0
 
-kHeavyMachineGunDamage = 8.5  --8
+kHeavyMachineGunDamage = 8.2  --8
 kHeavyMachineGunDamageType = kDamageType.MachineGun
-kHeavyMachineGunClipSize = 150  //100
-kHeavyMachineGunClipNum = 3 //4
+kHeavyMachineGunClipSize = 150  --100
+kHeavyMachineGunClipNum = 3 --4
 kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
-kHeavyMachineGunSpread = Math.Radians(5.2)  //4
+kHeavyMachineGunSpread = Math.Radians(5.2)  --4
 
 -- Standard Supply
 kStandardSupplyResearchCost = 10
@@ -428,7 +428,7 @@ kNanoShieldDamageReductionDamage = 0.68
 kCombatBuilderResearchCost = 10
 kCombatBuilderResearchTime = 60
 
-kCombatBuilderCost = 2
+kCombatBuilderCost = 3
 kCombatBuilderDropCost = 5
 kCombatBuilderPointValue = 2
 

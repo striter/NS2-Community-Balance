@@ -170,7 +170,8 @@ function BuildTechData()
         [kTechDataCostKey] = kCannonTechResearchCost,
         [kTechDataResearchTimeKey] = kCannonTechResearchTime,
         [kTechDataDisplayName] = "RESEARCH_CANNON",
-        [kTechDataTooltipInfo] = "RESEARCH_CANNON_TOOLTIP", 
+        [kTechDataTooltipInfo] = "RESEARCH_CANNON_TOOLTIP",
+        [kTechDataResearchName] = "RESEARCH_CANNON",
     } )
 
     table.insert(techData,{ 
