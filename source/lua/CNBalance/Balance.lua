@@ -55,13 +55,13 @@ kHeavyMachineGunCost = 20
 kHeavyMachineGunDropCost = 12
 kHeavyMachineGunDropCooldown = 0
 
-kHeavyMachineGunDamage = 8.2  --8
+kHeavyMachineGunDamage = 7.5  --8
 kHeavyMachineGunDamageType = kDamageType.MachineGun
 kHeavyMachineGunClipSize = 150  --100
 kHeavyMachineGunClipNum = 3 --4
 kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
-kHeavyMachineGunSpread = Math.Radians(5.2)  --4
+kHeavyMachineGunSpread = Math.Radians(5)  --4
 
 -- Standard Supply
 kStandardSupplyResearchCost = 10
@@ -205,7 +205,7 @@ kSentryBatteryCost = 10
 kSentryBatteryBuildTime = 5
 
 kAdvancedArmoryUpgradeCost = 25
-kAdvancedArmoryResearchTime = 75 --90->75
+kAdvancedArmoryResearchTime = 90
 
 kPrototypeLabCost = 30
 
@@ -229,8 +229,8 @@ kUmbraBulletModifier = 0.8
 kDevourEnergyCost = 65 --50
 kDevourPunchDamage = 50 --100
 
-kFastTunnelCost = 15
-kFastTunnelTime = 60
+kFastTunnelCost = 25
+kFastTunnelTime = 120
 
 kEggGestateTime = 15
 kUmbraResearchCost = 20
