@@ -27,6 +27,7 @@ ModLoader.SetupFileHook("lua/CommandStructure_Server.lua", "lua/CNBalance/Comman
 ModLoader.SetupFileHook("lua/ReadyRoomTeam.lua", "lua/CNBalance/ReadyRoomTeam.lua", "post" )
 ModLoader.SetupFileHook("lua/ReadyRoomEmbryo.lua", "lua/CNBalance/ReadyRoomEmbryo.lua", "post" )
 ModLoader.SetupFileHook("lua/Scoreboard.lua", "lua/CNBalance/Scoreboard.lua", "post" )
+ModLoader.SetupFileHook("lua/ScoringMixin.lua", "lua/CNBalance/ScoringMixin.lua", "post" )
 ModLoader.SetupFileHook("lua/ServerStats.lua", "lua/CNBalance/ServerStats.lua", "post" )
 
 --Effects

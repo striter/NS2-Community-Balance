@@ -5,6 +5,9 @@ kPlayingTeamInitialTeamRes = 60   --60
 kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
 
+kBountyMinKills = 6
+kPResPerBountyKills = 0.5
+
 kMarineRespawnTime = 9
 
 kAlienSpawnTime = 10
@@ -191,7 +194,8 @@ kClusterFragmentDamageRadius = 6
 kClusterFragmentDamage = 20
 kClusterGrenadeFragmentDamageType = kDamageType.ClusterFlameFragment
 
-kInfantryPortalBuildTime = 5
+kInfantryPortalBuildTime = 7
+kInfantryPortalCost = 15
 
 kSentryDamage = 5
 kSentryCost = 5

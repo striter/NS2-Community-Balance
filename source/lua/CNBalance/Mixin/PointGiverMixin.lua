@@ -19,6 +19,12 @@ if Server then
         local pResReward = LookupTechData(techID,kTechDataPersonalResOnKillKey,0)
         local tResReward = LookupTechData(techID,kTechDataTeamResOnKillKey,0)
 
+        if selfIsPlayer then
+            local kills = self:GetKillsCurrentLife()
+            local bounty = math.max(kills - kBountyMinKills,0) * kPResPerBountyKills
+            pResReward = pResReward + bounty
+        end
+        
         -- award partial res and score to players who assisted
         for _, attackerId in ipairs(self.damagePoints.attackers) do
 
