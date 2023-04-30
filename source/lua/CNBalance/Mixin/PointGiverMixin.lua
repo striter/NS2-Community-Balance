@@ -14,16 +14,10 @@ if Server then
         local points = self:GetPointValue()
 
         local selfIsPlayer = self:isa("Player")
-        local selfIsExtractor = self:isa("Extractor") or self:isa("ResourceTower")
-        local selfIsMarineTeam = self:GetTeamNumber() == kMarineTeamType
-        local attackerIsPlayer = attacker and attacker:isa("Player")
 
-        local pResReward = 0
-        local tResReward = 0
-        if selfIsExtractor then
-            pResReward = selfIsMarineTeam and kAlienPresPerResKill or kMarinePresPerResKill
-            tResReward = selfIsMarineTeam and kAlienTresPerResKill or kMarineTresPerResKill
-        end
+        local techID = self:GetTechId()
+        local pResReward = LookupTechData(techID,kTechDataPersonalResOnKillKey,0)
+        local tResReward = LookupTechData(techID,kTechDataTeamResOnKillKey,0)
 
         -- award partial res and score to players who assisted
         for _, attackerId in ipairs(self.damagePoints.attackers) do
@@ -47,14 +41,11 @@ if Server then
 
         end
 
-        if selfIsPlayer and attacker and GetAreEnemies(self, attacker) then
-
-            if attackerIsPlayer then
+        if attacker and GetAreEnemies(self, attacker) then
+            if selfIsPlayer and attacker:isa("Player") then
                 attacker:AddKill()
             end
-
             attacker:GetTeam():AddTeamResources(tResReward,true) -- pve kills count
         end
-
     end
 end

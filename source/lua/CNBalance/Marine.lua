@@ -266,14 +266,14 @@ if Server then
         end
 
         local now = Shared.GetTime()
-        if self.nanoArmorResearched and now > self.timeNextWeld then 
-            self.timeNextWeld = now + AutoWeldMixin.kWeldInterval
-            self:OnWeld(self, AutoWeldMixin.kWeldInterval, self, kNanoArmorHealPerSecond)
-        end
-
         if self.lifeSustainResearched and  now > self.timeNextSustain then
             self.timeNextSustain = now + kLifeSustainHealInterval
             self:AddRegeneration(kLifeSustainHealInterval * kLifeSustainHealPerSecond)
+        end
+        
+        if self.nanoArmorResearched and now > self.timeNextWeld then 
+            self.timeNextWeld = now + AutoWeldMixin.kWeldInterval
+            self:OnWeld(self, AutoWeldMixin.kWeldInterval, self, kNanoArmorHealPerSecond)
         end
     end
     

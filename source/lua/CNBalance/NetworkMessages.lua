@@ -79,4 +79,12 @@ function BuildMarineDropStructureMessage(origin, direction, structureIndex, last
     t.lastClickedPosition = lastClickedPosition or Vector(0,0,0)
 
     return t
-end    
+end
+
+local kScoreUpdate =
+{
+    points = "integer (0 to " .. kMaxScore .. ")",
+    res = "float (0 to " .. kMaxPersonalResources ..  " by 0.1)",
+    wasKill = "boolean"
+}
+Shared.RegisterNetworkMessage("ScoreUpdate", kScoreUpdate)

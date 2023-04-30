@@ -34,19 +34,21 @@ kVokexCarapaceArmorPerBiomass = 0
 kHiveHealth = 5200    kHiveArmor = 750   --4000 750
 kMatureHiveHealth = 7800 kMatureHiveArmor = 1400    -- 6000 1400
 
---2400 1050
-kExtractorHealth = 2400 kExtractorArmor = 1200 kExtractorPointValue = 15
+kExtractorHealth = 2400 kExtractorArmor = 1200 kExtractorPointValue = 15 --2400 1050
 
 kMineHealth = 26    kMineArmor = 5    kMinePointValue = 5
 
 kSentryBatteryHealth = 700    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5
 kSentryHealth = 500    kSentryArmor = 100    kSentryPointValue = 4
 
+kObservatoryHealth = 700    kObservatoryArmor = 400    kObservatoryPointValue = 10
+
 kARCHealth = 2600    kARCArmor = 600    kARCPointValue = 10   --2600 400
 kARCDeployedHealth = 2600    kARCDeployedArmor = 0      -- 2600 0
 
 kPhaseGateHealth = 1850    kPhaseGateArmor = 800    kPhaseGatePointValue = 10 -- 1500  800  10
-kPowerPointHealth = 2200    kPowerPointArmor = 1250    kPowerPointPointValue = 15 -- 2000 1000  10
+kPowerPointHealth = 2200    kPowerPointArmor = 1250    kPowerPointPointValue = 10 -- 2000 1000  10
+kCommandStationHealth = 3000    kCommandStationArmor = 1500    kCommandStationPointValue = 20
 
 --Alien
 kHarvesterHealth = 2000 kHarvesterArmor = 200 kHarvesterPointValue = 15

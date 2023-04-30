@@ -1,8 +1,3 @@
-kMarinePresPerResKill = 2.5
-kAlienPresPerResKill = 2.5
-kMarineTresPerResKill = 0
-kAlienTresPerResKill = 0
-
 kResourceTowerResourceInterval = 6 --6
 kPlayerResPerInterval = 0.125
 kTeamResourcePerTick = 1

@@ -76,10 +76,12 @@ kSwipeVampirismScalar = 0.03
 kStabVampirismScalar = 0.07
 kGoreVampirismScalar = 0.02
 
+-- Supply
+
 kMACSupply = 2
 kArmorySupply = 5
 kObservatorySupply = 20
-kARCSupply = 20 
+kARCSupply = 20
 kSentrySupply = 0
 kSentryBatterySupply = 30
 kRoboticsFactorySupply = 10
@@ -93,6 +95,29 @@ kCragSupply = 20
 kShadeSupply = 20
 kShiftSupply = 20
 
+--Personal Res On Kill
+kExtractorPersonalResOnKill = 2.5
+kARCPersonalResOnKill = 2.5
+kObservatoryPersonalResOnKill = 2.5
+kPhaseGatePersonalResOnKill = 5
+kPowerPointPersonalResOnKill = 0.5
+kCommandStationPersonalResOnKill = 10
+kHarvesterPersonalResOnKill = 5
+kTunnelPersonalResOnKill = 5
+kHivePersonalResOnKill = 40
+
+--Team Res On Kill
+kExtractorTeamResOnKill = 0
+kARCTeamResOnKill = 5
+kObservatoryTeamResOnKill = 0
+kPhaseGateTeamResOnKill = 0
+kPowerPointTeamResOnKill = 0
+kCommandStationTeamResOnKill = 20
+kHarvesterTeamResOnKill = 0
+kTunnelTeamResOnKill = 0
+kHiveTeamResOnKill = 20
+
+-- Nanoarmor & Lifesustain
 kNanoArmorHealPerSecond = 3
 kLifeSustainHealPerSecond = 10
 kLifeSustainHealInterval = 0.5
