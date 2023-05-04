@@ -447,7 +447,7 @@ kWeaponCachePersonalCost = 12
 kWeaponCacheBuildTime = 6
 kWeaponCachePersonalCarries = 1
 
-kMarineSentryPersonalCost = 6
+kMarineSentryPersonalCost = 8
 kMarineSentryPersonalCarries = 2
 
 kSporeMineCost = 0
