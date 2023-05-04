@@ -32,7 +32,7 @@ kAlienTechMap =
     { kTechId.BioMassSeven, 7.5, 7, nil, "7" }, {kTechId.Xenocide, 7.5, 8},{kTechId.Stab, 7.5, 9}, --{kTechId.AcidRocket, 7.5, 10}, 
     { kTechId.BioMassEight, 8.5, 7, nil, "8" }, {kTechId.Stomp, 8.5, 8},--{kTechId.SkulkBoost,8.5,9},
     { kTechId.BioMassNine, 9.5, 7, nil, "9" },
-    { kTechId.BioMassTen, 10.5, 7, nil, "10" }, {kTechId.Contamination, 10.5, 8},
+    { kTechId.BioMassTen, 10.5, 7, nil, "10" }, {kTechId.Contamination, 10.5, 8}, {kTechId.XenocideFuel, 10.5, 9},
     { kTechId.BioMassEleven, 11.5, 7, nil, "11" },
-    { kTechId.BioMassTwelve, 12.5, 7, nil, "12" }, {kTechId.XenocideFuel, 12.5, 8},
+    { kTechId.BioMassTwelve, 12.5, 7, nil, "12" },
 }

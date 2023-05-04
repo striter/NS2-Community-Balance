@@ -69,7 +69,7 @@ function Marine:OnInitialized()
         self.nanoArmorResearched = false
         self.lifeSustainResearched = false
         self:AddTimedCallback(function(self)
-            self.nanoArmorResearched = GetHasTech(self,kTechId.NanoArmor)
+            self.nanoArmorResearched = GetHasTech(self,kTechId.ArmorRegen)
             self.lifeSustainResearched = GetHasTech(self,kTechId.LifeSustain)
             return true
         end, 1)

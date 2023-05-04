@@ -3,15 +3,21 @@
 
 --Researches
 debug.appendtoenum(kTechId, "StandardSupply")
+debug.appendtoenum(kTechId, "StandardStation")
 debug.appendtoenum(kTechId, "LightMachineGunUpgrade")
 debug.appendtoenum(kTechId, "DragonBreath")
+
 debug.appendtoenum(kTechId, "ExplosiveSupply")
+debug.appendtoenum(kTechId, "ExplosiveStation")
 debug.appendtoenum(kTechId, "MinesUpgrade")
 debug.appendtoenum(kTechId, "GrenadeLauncherDetectionShot")
 debug.appendtoenum(kTechId, "GrenadeLauncherAllyBlast")
 debug.appendtoenum(kTechId, "GrenadeLauncherUpgrade")
+
+debug.appendtoenum(kTechId, "ArmorSupply")
+debug.appendtoenum(kTechId, "ArmorStation")
 debug.appendtoenum(kTechId, "LifeSustain")
-debug.appendtoenum(kTechId, "NanoArmor")
+debug.appendtoenum(kTechId, "ArmorRegen")
 
 debug.appendtoenum(kTechId, "ProtosMenu")
 debug.appendtoenum(kTechId, "DropDualMinigunExosuit")

@@ -63,13 +63,11 @@ local kMarineCommanderTechPath =
         kTechId.ShotgunTech,
         kTechId.CombatBuilderTech,
         kTechId.Weapons2,
-        kTechId.LifeSustain
     },
     -- Tier 4
     {
         kTechId.AdvancedArmoryUpgrade, -- Flamethrower, GL, HMG all unlocked by this upgrade
         kTechId.PrototypeLab,
-        kTechId.NanoArmor,
     },
 
     -- Tier 5

@@ -3,7 +3,6 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.ShotgunTech,
     kTechId.MinesTech,
     kTechId.GrenadeTech,
-    kTechId.CombatBuilderTech,
 
     kTechId.AdvancedArmoryUpgrade,
 
@@ -13,8 +12,6 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.Armor1,
     kTechId.Armor2,
     kTechId.Armor3,
-    kTechId.NanoArmor,
-    kTechId.LifeSustain,
 
     kTechId.PrototypeLab,
 
@@ -36,6 +33,11 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.GrenadeLauncherAllyBlast,
     kTechId.GrenadeLauncherUpgrade,
     kTechId.MinesUpgrade,
+
+    kTechId.ArmorSupply,
+    kTechId.ArmorRegen,
+    kTechId.LifeSustain,
+    kTechId.CombatBuilderTech,
 }
 
 TeamInfo.kRelevantTechIdsAlien =

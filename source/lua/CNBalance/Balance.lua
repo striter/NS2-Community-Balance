@@ -5,7 +5,7 @@ kPlayingTeamInitialTeamRes = 60   --60
 kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
 
-kBountyMinKills = 6
+kBountyMinKills = 4
 kPResPerBountyKills = 0.5
 
 kMarineRespawnTime = 9
@@ -13,12 +13,6 @@ kMarineRespawnTime = 9
 kAlienSpawnTime = 10
 kEggGenerationRate = 10  --13
 kAlienEggsPerHive = 2
-
-kNanoArmorResearchCost = 15
-kNanoArmorResearchTime = 60
-
-kLifeSustainResearchCost = 15
-kLifeSustainResearchTime = 90
 
 kWelderDropCost = 3
 kWelderDropCooldown = 0
@@ -61,27 +55,27 @@ kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
 kHeavyMachineGunSpread = Math.Radians(5)  --4
 
+kCommandStationCost = 20
+kCommandStationUpgradeCost = 10
+kCommandStationUpgradeTime = 60
+kUpgradedCommandStationCost = 30
 -- Standard Supply
-kStandardSupplyResearchCost = 10
-kStandardSupplyResearchTime = 45
-kDragonBreathResearchCost = 20
-kDragonBreathResearchTime = 60
-kLightMachineGunUpgradeCost = 30
-kLightMachineGunUpgradeTime = 75
-kCannonTechResearchCost = 35
-kCannonTechResearchTime = 105
+kLightMachineGunUpgradeCost = 15
+kLightMachineGunUpgradeTime = 90
+kDragonBreathResearchCost = 25
+kDragonBreathResearchTime = 90
+kCannonTechResearchCost = 30
+kCannonTechResearchTime = 120
 
 --Explosive Supply
-kExplosiveSupplyResearchCost = 10
-kExplosiveSupplyResearchTime = 45
 kMinesUpgradeResearchCost = 10
-kMinesUpgradeResearchTime = 30
+kMinesUpgradeResearchTime = 60
 kGrenadeLauncherDetectionShotResearchCost = 20
 kGrenadeLauncherDetectionShotResearchTime = 60
 kGrenadeLauncherAllyBlastResearchCost = 15
-kGrenadeLauncherAllyBlastResearchTime = 45
+kGrenadeLauncherAllyBlastResearchTime = 90
 kGrenadeLauncherUpgradeResearchCost = 15
-kGrenadeLauncherUpgradeResearchTime = 60
+kGrenadeLauncherUpgradeResearchTime = 90
 
 kGrenadeLauncherCost = 20
 kGrenadeLauncherDropCost = 12
@@ -95,6 +89,16 @@ kGrenadeLauncherDetectionShotRadius = 3
 kGrenadeLauncherImpactGrenadeDamage = 100
 kGrenadeLauncherSelfDamageReduction = 0.8
 kGrenadeLauncherAllyBlastReduction = 0.6
+
+--Armor Supply
+kCombatBuilderResearchCost = 10
+kCombatBuilderResearchTime = 60
+kLifeSustainResearchCost = 20
+kLifeSustainResearchTime = 120
+kNanoArmorResearchCost = 25
+kNanoArmorResearchTime = 120
+
+
 
 kGrenadeLauncherClipSize = 4
 kGrenadeLauncherWeapons1DamageScalar = 1.08
@@ -262,8 +266,8 @@ kXenocideRange = 9  -- 14
 kXenocideEnergyCost = 30
 kXenocideSpawnReduction = 2
 
-kXenocideFuelCost = 20
-kXenocideFuelTime = 60
+kXenocideFuelCost = 35
+kXenocideFuelTime = 120
 kXenocideFuelDamage = 160
 kXenocideFuelRange = 12
 kXenocideFuelSpawnReduction = 4
@@ -292,7 +296,7 @@ kRappelResearchCost = 10
 kRappelResearchTime = 20
 kRappelEnergyCost = 10
 kRappelReelEnergyCost = 15
-kRappelRange = 25
+kRappelRange = 35
 
 kAcidSprayResearchCost = 10
 kAcidSprayResearchTime = 60
@@ -301,6 +305,10 @@ kAcidSprayDamage = 17  -- 3 missiles
 kAcidSprayDamageType = kDamageType.Heavy
 
 -- Fade
+kSwipeDamageType = kDamageType.Puncture
+kSwipeDamage = 40
+kSwipeEnergyCost = 7
+
 kStabDamage = 140
 kStabDamageType = kDamageType.Structural
 kStabEnergyCost = 33
@@ -338,6 +346,8 @@ kAcidRocketBombDotDamage = 10
 kAcidRocketBombDuration = 1
 
 -- Onos
+kStompResearchCost = 35
+kStompResearchTime = 90
 kChargeDamage = 30
 kStompEnergyCost = 30
 kStompDamageType = kDamageType.Heavy
@@ -423,9 +433,6 @@ kNanoShieldStructureDuration = 5
 kNanoShieldCost = 3
 kNanoShieldCooldown = 5
 kNanoShieldDamageReductionDamage = 0.68
-
-kCombatBuilderResearchCost = 10
-kCombatBuilderResearchTime = 60
 
 kCombatBuilderCost = 3
 kCombatBuilderDropCost = 5

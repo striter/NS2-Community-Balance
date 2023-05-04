@@ -4,32 +4,21 @@ kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5    kSkulkHealthPer
 kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7    kGorgeHealthPerBioMass = 3
 kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15    kLerkHealthPerBioMass = 3
 kFadeHealth = 250    kFadeArmor = 80     kFadePointValue = 20    kFadeHealthPerBioMass = 5
-kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30    kOnosHealtPerBioMass = 50
+kOnosHealth = 750    kOnosArmor = 500    kOnosPointValue = 30    kOnosHealtPerBioMass = 50
 
 kProwlerHealth = 140 kProwlerArmor  = 25 kProwlerPointValue = 12 kProwlerHealthPerBioMass = 5
-kVokexHealth = 200 kVokexArmor = 80 kVokexPointvalue = 25 kVokexHealthPerBioMass = 4
+kVokexHealth = 200   kVokexArmor = 80    kVokexPointvalue = 25   kVokexHealthPerBioMass = 4
 
 kParasitePlayerPointValue = 1
 kAlienRegenerationPercentage = 0.08
 
-kSkulkBaseCarapaceUpgradeAmount = 15
-kGorgeBaseCarapaceUpgradeAmount = 25
-kProwlerArmorFullyUpgradedAmount = 28
-kLerkBaseCarapaceUpgradeAmount  = 25
-kFadeBaseCarapaceUpgradeAmount  = 40
-kOnosBaseCarapaceUpgradeAmount  = 200
-
-kProwlerBaseCarapaceUpgradeAmount = 10.5
-kVokexBaseCarapaceUpgradeAmount = 50
-
-kSkulkCarapaceArmorPerBiomass = 1.25
-kGorgeCarapaceArmorPerBiomass = 1.25
-kLerkCarapaceArmorPerBiomass  = 1.25
-kFadeCarapaceArmorPerBiomass  = 0
-kOnosCarapaceArmorPerBiomass  = 0
-
-kProwlerCarapaceArmorPerBiomass = 1.5
-kVokexCarapaceArmorPerBiomass = 0
+kSkulkBaseCarapaceUpgradeAmount = 15    kSkulkCarapaceArmorPerBiomass = 1.25
+kGorgeBaseCarapaceUpgradeAmount = 25    kGorgeCarapaceArmorPerBiomass = 1.25
+kVokexCarapaceArmorPerBiomass = 0       kProwlerBaseCarapaceUpgradeAmount = 10.5  --kProwlerArmorFullyUpgradedAmount = 28
+kLerkBaseCarapaceUpgradeAmount  = 25    kLerkCarapaceArmorPerBiomass  = 1.25
+kFadeBaseCarapaceUpgradeAmount  = 40    kFadeCarapaceArmorPerBiomass  = 0
+kOnosBaseCarapaceUpgradeAmount  = 150   kOnosCarapaceArmorPerBiomass  = 10
+kVokexBaseCarapaceUpgradeAmount = 50    kProwlerCarapaceArmorPerBiomass = 0
 
 kHiveHealth = 5200    kHiveArmor = 750   --4000 750
 kMatureHiveHealth = 7800 kMatureHiveArmor = 1400    -- 6000 1400
@@ -41,14 +30,14 @@ kMineHealth = 26    kMineArmor = 5    kMinePointValue = 5
 kSentryBatteryHealth = 700    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5
 kSentryHealth = 500    kSentryArmor = 100    kSentryPointValue = 4
 
-kObservatoryHealth = 700    kObservatoryArmor = 400    kObservatoryPointValue = 10
+kObservatoryHealth = 700    kObservatoryArmor = 500    kObservatoryPointValue = 10
 
 kARCHealth = 2600    kARCArmor = 600    kARCPointValue = 10   --2600 400
 kARCDeployedHealth = 2600    kARCDeployedArmor = 0      -- 2600 0
 
 kPhaseGateHealth = 1850    kPhaseGateArmor = 800    kPhaseGatePointValue = 10 -- 1500  800  10
 kPowerPointHealth = 2200    kPowerPointArmor = 1250    kPowerPointPointValue = 10 -- 2000 1000  10
-kCommandStationHealth = 3000    kCommandStationArmor = 1500    kCommandStationPointValue = 20
+kCommandStationHealth = 3000    kCommandStationArmor = 1500    kCommandStationPointValue = 20   --2000 -1500
 
 --Alien
 kHarvesterHealth = 2000 kHarvesterArmor = 200 kHarvesterPointValue = 15

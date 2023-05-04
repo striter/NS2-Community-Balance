@@ -225,7 +225,7 @@ function AlienTeam:InitTechTree()
     self.techTree:AddResearchNode(kTechId.Leap,              kTechId.BioMassFour, kTechId.None, kTechId.AllAliens)
     self.techTree:AddResearchNode(kTechId.Xenocide,          kTechId.BioMassSeven, kTechId.None, kTechId.AllAliens)
     self.techTree:AddResearchNode(kTechId.SkulkBoost,          kTechId.BioMassEight, kTechId.None, kTechId.AllAliens)
-    self.techTree:AddResearchNode(kTechId.XenocideFuel,          kTechId.BioMassTwelve, kTechId.Xenocide, kTechId.AllAliens)
+    self.techTree:AddResearchNode(kTechId.XenocideFuel,          kTechId.BioMassTen, kTechId.Xenocide, kTechId.AllAliens)
 
     -- gorge researches
     self.techTree:AddBuyNode(kTechId.BabblerAbility,        kTechId.None)

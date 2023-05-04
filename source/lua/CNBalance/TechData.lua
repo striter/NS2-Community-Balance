@@ -10,41 +10,32 @@ function BuildTechData()
     local techData = oldBuildTechData()
 
     table.insert(techData, {
-        [kTechDataId] = kTechId.CombatBuilderTech,
-        [kTechDataCostKey] = kCombatBuilderResearchCost,
-        [kTechDataResearchTimeKey] = kCombatBuilderResearchTime,
-        [kTechDataDisplayName] = "COMBATBUILDER",
-        [kTechDataTooltipInfo] = "COMBATBUILDER_TOOLTIP",
-        [kTechDataResearchName] = "COMBATBUILDER",
-    })
-
-    table.insert(techData, {
-        [kTechDataId] = kTechId.NanoArmor,
-        [kTechDataCostKey] = kNanoArmorResearchCost,
-        [kTechDataResearchTimeKey] = kNanoArmorResearchTime,
-        [kTechDataDisplayName] = "NANO_ARMOR",
-        [kTechDataTooltipInfo] = "NANO_ARMOR_TOOLTIP",
-        [kTechDataResearchName] = "NANO_ARMOR",
-    })
-
-    table.insert(techData, {
-        [kTechDataId] = kTechId.LifeSustain,
-        [kTechDataCostKey] = kLifeSustainResearchCost,
-        [kTechDataResearchTimeKey] = kLifeSustainResearchTime,
-        [kTechDataDisplayName] = "LIFE_SUSTAIN",
-        [kTechDataTooltipInfo] = "LIFE_SUSTAIN_TOOLTIP",
-        [kTechDataResearchName] = "LIFE_SUSTAIN",
-    })
-
-    table.insert(techData, {
         [kTechDataId] = kTechId.StandardSupply,
-        [kTechDataCostKey] = kStandardSupplyResearchCost,
-        [kTechDataResearchTimeKey] = kStandardSupplyResearchTime,
+        [kTechDataCostKey] = kCommandStationUpgradeCost,
+        [kTechDataResearchTimeKey] = kCommandStationUpgradeTime,
         [kTechDataDisplayName] = "STANDARD_SUPPLY",
         [kTechDataTooltipInfo] = "STANDARD_SUPPLY_TOOLTIP",
         [kTechDataResearchName] = "STANDARD_SUPPLY",
     })
-
+    
+    table.insert(techData,{
+        [kTechDataId] = kTechId.StandardStation,
+        [kTechDataMapName] = StandardStation.kMapName,
+        [kTechDataModel] = CommandStation.kModelName,
+        [kTechDataMaxHealth] = kCommandStationHealth,
+        [kTechDataMaxArmor] = kCommandStationArmor,
+        [kTechDataHint] = "STANDARD_STATION_HINT",
+        [kTechDataDisplayName] = "STANDARD_STATION",
+        [kTechDataTooltipInfo] = "STANDARD_STATION_TOOLTIP",
+        [kStructureAttachClass] = "TechPoint",
+        [kTechDataPersonalResOnKillKey] = kCommandStationPersonalResOnKill,
+        [kTechDataTeamResOnKillKey] = kCommandStationTeamResOnKill,
+        [kTechDataGhostModelClass] = "MarineGhostModel",
+        [kTechDataCostKey] = kUpgradedCommandStationCost,
+        [kTechDataEngagementDistance] = kCommandStationEngagementDistance,
+        [kTechDataPointValue] = kCommandStationPointValue,
+    })
+    
     table.insert(techData, {
         [kTechDataId] = kTechId.LightMachineGunUpgrade,
         [kTechDataCostKey] = kLightMachineGunUpgradeCost,
@@ -64,14 +55,86 @@ function BuildTechData()
     })
 
     table.insert(techData, {
-        [kTechDataId] = kTechId.ExplosiveSupply,
-        [kTechDataCostKey] = kExplosiveSupplyResearchCost,
-        [kTechDataResearchTimeKey] = kExplosiveSupplyResearchTime,
-        [kTechDataDisplayName] = "EXPLOSIVE_SUPPLY",
-        [kTechDataTooltipInfo] = "EXPLOSIVE_SUPPLY_TOOLTIP",
-        [kTechDataResearchName] = "EXPLOSIVE_SUPPLY",
+        [kTechDataId] = kTechId.ArmorSupply,
+        [kTechDataCostKey] = kCommandStationUpgradeCost,
+        [kTechDataResearchTimeKey] = kCommandStationUpgradeTime,
+        [kTechDataDisplayName] = "ARMOR_SUPPLY",
+        [kTechDataTooltipInfo] = "ARMOR_SUPPLY_TOOLTIP",
+        [kTechDataResearchName] = "ARMOR_SUPPLY",
     })
 
+    table.insert(techData,{
+        [kTechDataId] = kTechId.ArmorStation,
+        [kTechDataMapName] = ArmorStation.kMapName,
+        [kTechDataModel] = CommandStation.kModelName,
+        [kTechDataMaxHealth] = kCommandStationHealth,
+        [kTechDataMaxArmor] = kCommandStationArmor,
+        [kTechDataHint] = "ARMOR_STATION_HINT",
+        [kTechDataDisplayName] = "ARMOR_STATION",
+        [kTechDataTooltipInfo] = "ARMOR_STATION_TOOLTIP",
+        [kStructureAttachClass] = "TechPoint",
+        [kTechDataPersonalResOnKillKey] = kCommandStationPersonalResOnKill,
+        [kTechDataTeamResOnKillKey] = kCommandStationTeamResOnKill,
+        [kTechDataGhostModelClass] = "MarineGhostModel",
+        [kTechDataCostKey] = kUpgradedCommandStationCost,
+        [kTechDataEngagementDistance] = kCommandStationEngagementDistance,
+        [kTechDataPointValue] = kCommandStationPointValue,
+    })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.CombatBuilderTech,
+        [kTechDataCostKey] = kCombatBuilderResearchCost,
+        [kTechDataResearchTimeKey] = kCombatBuilderResearchTime,
+        [kTechDataDisplayName] = "COMBATBUILDER",
+        [kTechDataTooltipInfo] = "COMBATBUILDER_TOOLTIP",
+        [kTechDataResearchName] = "COMBATBUILDER",
+    })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.ArmorRegen,
+        [kTechDataCostKey] = kNanoArmorResearchCost,
+        [kTechDataResearchTimeKey] = kNanoArmorResearchTime,
+        [kTechDataDisplayName] = "NANO_ARMOR",
+        [kTechDataTooltipInfo] = "NANO_ARMOR_TOOLTIP",
+        [kTechDataResearchName] = "NANO_ARMOR",
+    })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.LifeSustain,
+        [kTechDataCostKey] = kLifeSustainResearchCost,
+        [kTechDataResearchTimeKey] = kLifeSustainResearchTime,
+        [kTechDataDisplayName] = "LIFE_SUSTAIN",
+        [kTechDataTooltipInfo] = "LIFE_SUSTAIN_TOOLTIP",
+        [kTechDataResearchName] = "LIFE_SUSTAIN",
+    })
+
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.ExplosiveSupply,
+        [kTechDataCostKey] = kCommandStationUpgradeCost,
+        [kTechDataResearchTimeKey] = kCommandStationUpgradeTime,
+        [kTechDataDisplayName] = "EXPLOSIVE_SUPPLY",
+        [kTechDataResearchName] = "EXPLOSIVE_SUPPLY",
+        [kTechDataTooltipInfo] = "EXPLOSIVE_SUPPLY_TOOLTIP",
+    })
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.ExplosiveStation,
+        [kTechDataMapName] = ExplosiveStation.kMapName,
+        [kTechDataModel] = CommandStation.kModelName,
+        [kTechDataMaxHealth] = kCommandStationHealth,
+        [kTechDataMaxArmor] = kCommandStationArmor,
+        [kTechDataHint] = "EXPLOSIVE_STATION_HINT",
+        [kTechDataDisplayName] = "EXPLOSIVE_STATION",
+        [kStructureAttachClass] = "TechPoint",
+        [kTechDataPersonalResOnKillKey] = kCommandStationPersonalResOnKill,
+        [kTechDataTeamResOnKillKey] = kCommandStationTeamResOnKill,
+        [kTechDataGhostModelClass] = "MarineGhostModel",
+        [kTechDataCostKey] = kUpgradedCommandStationCost,
+        [kTechDataEngagementDistance] = kCommandStationEngagementDistance,
+        [kTechDataPointValue] = kCommandStationPointValue,
+    })
+    
     table.insert(techData, {
         [kTechDataId] = kTechId.MinesUpgrade,
         [kTechDataCostKey] = kMinesUpgradeResearchCost,
@@ -107,6 +170,7 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_UPGRADE_TOOLTIP",
         [kTechDataResearchName] = "GRENADE_LAUNCHER_UPGRADE",
     })
+    
 
     table.insert(techData, {
         [kTechDataId] = kTechId.Knife,
@@ -179,7 +243,7 @@ function BuildTechData()
     table.insert(techData,{
         [kTechDataId] = kTechId.DropCannon,
         [kTechDataMapName] = Cannon.kMapName,
-        [kTechDataDisplayName] = "CANNON",
+        [kTechDataDisplayName] = "CANNON_DROP",
         [kTechDataTooltipInfo] = "CANNON_TOOLTIP",
         [kTechDataModel] = Cannon.kModelName,
         [kTechDataCostKey] = kCannonDropCost,

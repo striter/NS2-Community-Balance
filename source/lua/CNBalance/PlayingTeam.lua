@@ -5,21 +5,23 @@ local function extGetIsResearchRelevant(techId)
 
     if not relevantResearchIds then
         relevantResearchIds = {}
-        relevantResearchIds[kTechId.LifeSustain] = 1
-        relevantResearchIds[kTechId.NanoArmor] = 1
-        relevantResearchIds[kTechId.CombatBuilderTech] = 2
         
-        relevantResearchIds[kTechId.StandardSupply] = 2
+        relevantResearchIds[kTechId.StandardSupply] = 1
         relevantResearchIds[kTechId.LightMachineGunUpgrade] = 2
         relevantResearchIds[kTechId.DragonBreath] = 2
         relevantResearchIds[kTechId.CannonTech] = 2
         
-        relevantResearchIds[kTechId.ExplosiveSupply] = 2
+        relevantResearchIds[kTechId.ExplosiveSupply] = 1
         relevantResearchIds[kTechId.MinesUpgrade] = 2
         relevantResearchIds[kTechId.GrenadeLauncherDetectionShot] = 2
         relevantResearchIds[kTechId.GrenadeLauncherAllyBlast] = 2
         relevantResearchIds[kTechId.GrenadeLauncherUpgrade] = 2
 
+        relevantResearchIds[kTechId.ArmorSupply] = 1
+        relevantResearchIds[kTechId.LifeSustain] = 2
+        relevantResearchIds[kTechId.ArmorRegen] = 2
+        relevantResearchIds[kTechId.CombatBuilderTech] = 2
+        
         relevantResearchIds[kTechId.Devour] = 1
         relevantResearchIds[kTechId.FastTunnel] = 1
         

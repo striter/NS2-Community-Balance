@@ -1,22 +1,29 @@
 --MOD
 local kTechIdToMaterialOffset = debug.getupvaluex(GetMaterialXYOffset, "kTechIdToMaterialOffset")
 
-kTechIdToMaterialOffset[kTechId.NanoArmor] = 195
-kTechIdToMaterialOffset[kTechId.LifeSustain] = 198
+kTechIdToMaterialOffset[kTechId.AdvancedArmory] = 99
 
 kTechIdToMaterialOffset[kTechId.StandardSupply] = 201
+kTechIdToMaterialOffset[kTechId.StandardStation] = 201
 kTechIdToMaterialOffset[kTechId.LightMachineGunUpgrade] = 192
 kTechIdToMaterialOffset[kTechId.MinesUpgrade] = 194
 kTechIdToMaterialOffset[kTechId.DragonBreath] = 203
 kTechIdToMaterialOffset[kTechId.CannonTech] = 204
 kTechIdToMaterialOffset[kTechId.DropCannon] = 204
-kTechIdToMaterialOffset[kTechId.CombatBuilderTech] = 207
-kTechIdToMaterialOffset[kTechId.DropCombatBuilder] = 207
 
 kTechIdToMaterialOffset[kTechId.ExplosiveSupply] = 200
+kTechIdToMaterialOffset[kTechId.ExplosiveStation] = 200
 kTechIdToMaterialOffset[kTechId.GrenadeLauncherAllyBlast] = 196
 kTechIdToMaterialOffset[kTechId.GrenadeLauncherUpgrade] = 193
 kTechIdToMaterialOffset[kTechId.GrenadeLauncherDetectionShot] = 197
+
+kTechIdToMaterialOffset[kTechId.ArmorSupply] = 209
+kTechIdToMaterialOffset[kTechId.ArmorStation] = 209
+kTechIdToMaterialOffset[kTechId.LifeSustain] = 198
+kTechIdToMaterialOffset[kTechId.ArmorRegen] = 195
+kTechIdToMaterialOffset[kTechId.CombatBuilderTech] = 207
+kTechIdToMaterialOffset[kTechId.DropCombatBuilder] = 207
+
 
 kTechIdToMaterialOffset[kTechId.ProtosMenu] = 25
 kTechIdToMaterialOffset[kTechId.DropDualMinigunExosuit] = 84
@@ -31,7 +38,6 @@ kTechIdToMaterialOffset[kTechId.XenocideFuel] = 95
 kTechIdToMaterialOffset[kTechId.ProwlerMenu] = 208
 kTechIdToMaterialOffset[kTechId.Prowler] = 208
 kTechIdToMaterialOffset[kTechId.ProwlerEgg] = 208
-
 
 kTechIdToMaterialOffset[kTechId.Volley] = 106
 kTechIdToMaterialOffset[kTechId.Rappel] = 205

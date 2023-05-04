@@ -11,7 +11,7 @@ kGrenadeLauncherWeight = 0.15
 kFlamethrowerWeight = 0.14
 kShotgunWeight = 0.14
 
-kMaxInfantryPortalsPerCommandStation = 6
+kMaxInfantryPortalsPerCommandStation = 5
 kNumMines = 2
 -- Jetpack
 kUpgradedJetpackUseFuelRate = 0.18
@@ -97,9 +97,9 @@ kShiftSupply = 20
 
 --Personal Res On Kill
 kExtractorPersonalResOnKill = 2.5
-kARCPersonalResOnKill = 2.5
-kObservatoryPersonalResOnKill = 2.5
-kPhaseGatePersonalResOnKill = 5
+kARCPersonalResOnKill = 2
+kObservatoryPersonalResOnKill = 2
+kPhaseGatePersonalResOnKill = 4
 kPowerPointPersonalResOnKill = 0.5
 kCommandStationPersonalResOnKill = 10
 kHarvesterPersonalResOnKill = 5
@@ -107,14 +107,14 @@ kTunnelPersonalResOnKill = 5
 kHivePersonalResOnKill = 40
 
 --Team Res On Kill
-kExtractorTeamResOnKill = 0
+kExtractorTeamResOnKill = 2
 kARCTeamResOnKill = 5
 kObservatoryTeamResOnKill = 0
 kPhaseGateTeamResOnKill = 0
 kPowerPointTeamResOnKill = 0
 kCommandStationTeamResOnKill = 20
-kHarvesterTeamResOnKill = 0
-kTunnelTeamResOnKill = 0
+kHarvesterTeamResOnKill = 2
+kTunnelTeamResOnKill = 3
 kHiveTeamResOnKill = 20
 
 -- Nanoarmor & Lifesustain

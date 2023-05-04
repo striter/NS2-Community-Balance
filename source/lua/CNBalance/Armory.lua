@@ -24,57 +24,18 @@ function AdvancedArmory:GetItemList(forPlayer)
 	return itemList
 end
 
-local function IsSupplyTech(techId)
-    return techId == kTechId.StandardSupply or 
-    kTechId == kTechId.ExplosiveSupply
-end
-
-function Armory:GetSupplyUnavailable()
-    local researched=GetHasTech(self,kTechId.StandardSupply) or 
-    GetHasTech(self,kTechId.ExplosiveSupply)
-
-    if researched then
-        return true
-    end
-
-    local researching = GetIsTechResearching(self,kTechId.StandardSupply) or
-    GetIsTechResearching(self,kTechId.ExplosiveSupply)
-    return researching
-end
-
 function Armory:GetTechButtons(techId)
 
     local techButtons = 
     {
-        kTechId.ShotgunTech,kTechId.MinesTech, kTechId.GrenadeTech, kTechId.CombatBuilderTech, 
-        kTechId.None, kTechId.None, kTechId.None, kTechId.None 
+        kTechId.ShotgunTech,kTechId.None, kTechId.None, kTechId.None,
+        kTechId.MinesTech, kTechId.GrenadeTech, kTechId.None, kTechId.None 
     }
     
     -- Show button to upgraded to advanced armory
     local advancedArmory = self:GetTechId() == kTechId.AdvancedArmory
     if not advancedArmory then
-        techButtons[5] = kTechId.AdvancedArmoryUpgrade
-    else
-        local supplyAvailable = self:GetSupplyUnavailable()
-        if not supplyAvailable then
-            techButtons[5] = kTechId.StandardSupply
-            techButtons[6] = kTechId.ExplosiveSupply
-        end
-
-        if GetHasTech(self,kTechId.ExplosiveSupply)  then
-            techButtons[5] = kTechId.MinesUpgrade
-            techButtons[6] = kTechId.GrenadeLauncherDetectionShot
-            techButtons[7] = kTechId.GrenadeLauncherAllyBlast
-
-            if GetHasTech(self,kTechId.GrenadeLauncherAllyBlast) then
-                techButtons[7] = kTechId.GrenadeLauncherUpgrade
-            end
-        elseif GetHasTech(self,kTechId.StandardSupply) then
-
-            techButtons[5] = kTechId.DragonBreath
-            techButtons[6] = kTechId.LightMachineGunUpgrade
-            techButtons[7] = kTechId.CannonTech
-        end
+        techButtons[4] = kTechId.AdvancedArmoryUpgrade
     end
     
     return techButtons
