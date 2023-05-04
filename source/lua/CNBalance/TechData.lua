@@ -170,8 +170,36 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_UPGRADE_TOOLTIP",
         [kTechDataResearchName] = "GRENADE_LAUNCHER_UPGRADE",
     })
-    
 
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.InfantryPortal,
+        [kTechDataHint] = "INFANTRY_PORTAL_HINT",
+        [kTechDataSupply] = kInfantryPortalSupply,
+        [kTechDataGhostModelClass] = "MarineGhostModel",
+        [kTechDataRequiresPower] = true,
+        [kTechDataGhostGuidesMethod] = GetInfantryPortalGhostGuides,
+        [kTechDataBuildRequiresMethod] = GetCommandStationIsBuilt,
+        [kTechDataMapName] = InfantryPortal.kMapName,
+        [kTechDataDisplayName] = "INFANTRY_PORTAL",
+        [kTechDataCostKey] = kInfantryPortalCost,
+        [kTechDataPointValue] = kInfantryPortalPointValue,
+        [kTechDataBuildTime] = kInfantryPortalBuildTime,
+        [kTechDataMaxHealth] = kInfantryPortalHealth,
+        [kTechDataMaxArmor] = kInfantryPortalArmor,
+        [kTechDataModel] = InfantryPortal.kModelName,
+        [kStructureBuildNearClass] = "CommandStation",
+        [kStructureAttachId] = {kTechId.CommandStation,kTechId.StandardStation,kTechId.ArmorStation,kTechId.ExplosiveStation},
+        [kStructureAttachRange] = kInfantryPortalAttachRange,
+        [kTechDataEngagementDistance] = kInfantryPortalEngagementDistance,
+        [kTechDataHotkey] = Move.P,
+        [kTechDataNotOnInfestation] = kPreventMarineStructuresOnInfestation,
+        [kTechDataTooltipInfo] = "INFANTRY_PORTAL_TOOLTIP",
+        [kTechDataObstacleRadius] = 1.125,
+        [kTechDataPersonalResOnKillKey] = kInfantryPortalPersonalResOnKill,
+        [kTechDataTeamResOnKillKey] = kInfantryPortalTeamResOnKill,
+    })
+    
     table.insert(techData, {
         [kTechDataId] = kTechId.Knife,
         [kTechDataMapName] = Knife.kMapName,
