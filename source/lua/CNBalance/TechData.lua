@@ -293,8 +293,35 @@ function BuildTechData()
         [kTechDataMaxAmount] = kWeaponCachePersonalCarries,
         [kTechDataPersonalCostKey] = kWeaponCachePersonalCost,
         [kTechDataAllowConsumeDrop] = true,
+        [kTechDataPersonalResOnKillKey] = kWeaponCachePersonalResOnKill,
+        [kTechDataTeamResOnKillKey] = kWeaponCacheTeamResOnKill,
     })
 
+    table.insert(techData,  {
+        [kTechDataId] = kTechId.SentryBattery,
+        [kTechDataSupply] = kSentryBatterySupply,
+        [kTechDataBuildRequiresMethod] = GetRoomHasNoSentryBattery,
+        [kTechDataBuildMethodFailedMessage] = "COMMANDERERROR_ONLY_ONE_BATTERY_PER_ROOM",
+        [kTechDataHint] = "SENTRY_BATTERY_HINT",
+        [kTechDataGhostModelClass] = "MarineGhostModel",
+        [kTechDataMapName] = SentryBattery.kMapName,
+        [kTechDataDisplayName] = "SENTRY_BATTERY",
+        [kTechDataCostKey] = kSentryBatteryCost,
+        [kTechDataPointValue] = kSentryBatteryPointValue,
+        [kTechDataModel] = SentryBattery.kModelName,
+        [kTechDataEngagementDistance] = 2,
+        [kTechDataBuildTime] = kSentryBatteryBuildTime,
+        [kTechDataMaxHealth] = kSentryBatteryHealth,
+        [kTechDataMaxArmor] = kSentryBatteryArmor,
+        [kTechDataTooltipInfo] = "SENTRY_BATTERY_TOOLTIP",
+        [kTechDataHotkey] = Move.S,
+        [kTechDataNotOnInfestation] = kPreventMarineStructuresOnInfestation,
+        [kVisualRange] = SentryBattery.kRange,
+        [kTechDataObstacleRadius] = 0.55,
+        [kTechDataPersonalResOnKillKey] = kSentryBatteryPersonalResOnKill,
+        [kTechDataTeamResOnKillKey] = kSentryBatteryTeamResOnKill,
+    })
+    
     table.insert(techData,  {
         [kTechDataId] = kTechId.MarineSentry,
         [kTechDataMapName] = MarineSentry.kMapName,
@@ -315,42 +342,44 @@ function BuildTechData()
         [kTechDataMaxAmount] = kMarineSentryPersonalCarries,
         [kTechDataPersonalCostKey] = kMarineSentryPersonalCost,
         [kTechDataAllowConsumeDrop] = true,
+        [kTechDataPersonalResOnKillKey] = kPortableSentryPersonalResOnKill,
+        [kTechDataTeamResOnKillKey] = kPortableSentryTeamResOnKill,
     })
 
     table.insert(techData,
-            {
-                [kTechDataId] = kTechId.ProtosMenu,
-                [kTechDataDisplayName] = "PROTOS_MENU",
-                [kTechDataTooltipInfo] = "PROTOS_MENU_TOOLTIP",
-            })
+    {
+        [kTechDataId] = kTechId.ProtosMenu,
+        [kTechDataDisplayName] = "PROTOS_MENU",
+        [kTechDataTooltipInfo] = "PROTOS_MENU_TOOLTIP",
+    })
 
     table.insert(techData,
-            {
-                [kTechDataId] = kTechId.DropDualMinigunExosuit,
-                [kTechDataMapName] = Exosuit.kMapName,
-                [kTechDataModel] = Exosuit.kModelName,
-                [kTechDataDisplayName] = "DUAL_MINIGUN",
-                [kTechDataTooltipInfo] = "DUAL_MINIGUN_TOOLTIP",
-                [kTechDataLayoutKey] = "MinigunMinigun",
-                [kTechDataCostKey] = kDualExosuitDropCost,
-                [kStructureAttachId] = kTechId.PrototypeLab,
-                [kStructureAttachRange] = kArmoryWeaponAttachRange,
-                [kStructureAttachRequiresPower] = true,
-            })
+    {
+        [kTechDataId] = kTechId.DropDualMinigunExosuit,
+        [kTechDataMapName] = Exosuit.kMapName,
+        [kTechDataModel] = Exosuit.kModelName,
+        [kTechDataDisplayName] = "DUAL_MINIGUN",
+        [kTechDataTooltipInfo] = "DUAL_MINIGUN_TOOLTIP",
+        [kTechDataLayoutKey] = "MinigunMinigun",
+        [kTechDataCostKey] = kDualExosuitDropCost,
+        [kStructureAttachId] = kTechId.PrototypeLab,
+        [kStructureAttachRange] = kArmoryWeaponAttachRange,
+        [kStructureAttachRequiresPower] = true,
+    })
 
     table.insert(techData,
-            {
-                [kTechDataId] = kTechId.DropDualRailgunExosuit,
-                [kTechDataMapName] = Exosuit.kMapName,
-                [kTechDataModel] = Exosuit.kModelName,
-                [kTechDataDisplayName] = "DUAL_RAILGUN",
-                [kTechDataTooltipInfo] = "DUAL_RAILGUN_TOOLTIP",
-                [kTechDataLayoutKey] = "RailgunRailgun",
-                [kTechDataCostKey] = kDualExosuitDropCost,
-                [kStructureAttachId] = kTechId.PrototypeLab,
-                [kStructureAttachRange] = kArmoryWeaponAttachRange,
-                [kStructureAttachRequiresPower] = true,
-            })
+    {
+        [kTechDataId] = kTechId.DropDualRailgunExosuit,
+        [kTechDataMapName] = Exosuit.kMapName,
+        [kTechDataModel] = Exosuit.kModelName,
+        [kTechDataDisplayName] = "DUAL_RAILGUN",
+        [kTechDataTooltipInfo] = "DUAL_RAILGUN_TOOLTIP",
+        [kTechDataLayoutKey] = "RailgunRailgun",
+        [kTechDataCostKey] = kDualExosuitDropCost,
+        [kStructureAttachId] = kTechId.PrototypeLab,
+        [kStructureAttachRange] = kArmoryWeaponAttachRange,
+        [kStructureAttachRequiresPower] = true,
+    })
 
     table.insert(techData,  {
         [kTechDataId] = kTechId.Heavy,

@@ -105,6 +105,9 @@ kCommandStationPersonalResOnKill = 10
 kHarvesterPersonalResOnKill = 5
 kTunnelPersonalResOnKill = 5
 kHivePersonalResOnKill = 40
+kPortableSentryPersonalResOnKill = 1
+kWeaponCachePersonalResOnKill = 2
+kSentryBatteryPersonalResOnKill = 4
 
 --Team Res On Kill
 kExtractorTeamResOnKill = 2
@@ -116,6 +119,9 @@ kCommandStationTeamResOnKill = 20
 kHarvesterTeamResOnKill = 2
 kTunnelTeamResOnKill = 3
 kHiveTeamResOnKill = 20
+kPortableSentryTeamResOnKill = 0
+kWeaponCacheTeamResOnKill = 0
+kSentryBatteryTeamResOnKill = 0
 
 -- Nanoarmor & Lifesustain
 kNanoArmorHealPerSecond = 3
