@@ -42,13 +42,11 @@ local function UpdateDevour(self)
             local player = Shared.GetEntity(self.eatingPlayerId)            
             if player then
                 local timeNow = Shared.GetTime()
-                local timeDevourRemaining = math.max(0, self.timeDevourEnd - timeNow)
                 local coords = onos:GetCoords()
                 player:SetCoords(coords)                
 		
 				if player:GetIsAlive() and player:isa("Marine") then
                     self.lastDevourTime = self.lastDevourTime or timeNow
-                    local healRate = 0
                     local deltaTime = timeNow - self.lastDevourTime
                     local damage = Devour.damage * deltaTime
                     onos:AddEnergy(Devour.energyRate * deltaTime)

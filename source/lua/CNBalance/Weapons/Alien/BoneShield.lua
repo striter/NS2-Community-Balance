@@ -48,6 +48,7 @@ function BoneShield:SetFuel(fuel)
 end
 
 function BoneShield:GetFuel()
+    
     if self.primaryAttacking then
         return Clamp(self.fuelAtChange - (Shared.GetTime() - self.timeFuelChanged) / kBoneShieldMaxDuration, 0, 1)
     else
@@ -64,7 +65,11 @@ function BoneShield:GetHUDSlot()
 end
 
 function BoneShield:GetCooldownFraction()
-    return 1 - self:GetFuel()
+    local fuelFraction = 1 - self:GetFuel()
+
+    local player = self:GetParent()
+    local canUse = player and self:GetCanUseBoneShield(self:GetParent())
+    return canUse and fuelFraction or 1
 end
 
 function BoneShield:IsOnCooldown()
@@ -72,14 +77,21 @@ function BoneShield:IsOnCooldown()
 end
 
 function BoneShield:GetCanUseBoneShield(player)
-    return not self:IsOnCooldown()
+    local canUse = not self:IsOnCooldown()
+            and player:GetIsOnGround()
             and not self.secondaryAttacking
             and not player.charging and Shared.GetTime() - self.lastShieldTime > .5
+    local devourWeapon = player:GetWeapon(Devour.kMapName)
+    if devourWeapon then
+        local devouring = devourWeapon.devouringScalar and devourWeapon.devouringScalar > 0.01
+        canUse = canUse and not devouring
+    end
+    return canUse
 end
 
 function BoneShield:OnPrimaryAttack(player)
     if not self.primaryAttacking then
-        if player:GetIsOnGround() and self:GetCanUseBoneShield(player) then
+        if self:GetCanUseBoneShield(player) then
             self:SetFuel( self:GetFuel() ) -- set it now, because it will go down from this point
             self.primaryAttacking = true
 

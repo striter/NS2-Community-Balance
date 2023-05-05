@@ -39,7 +39,7 @@ kAlienCrushDamagePercentByLevel = 0.111 --0.007
 
 kCelerityAddSpeed = 1.5 -- 1.5
 
-kFocusAttackSlowAtMax = 1.5
+kFocusAttackSlowAtMax = 2
 kFocusDamageBonusAtMax = 1
 
 kSpitFocusAttackSlowAtMax = 0
