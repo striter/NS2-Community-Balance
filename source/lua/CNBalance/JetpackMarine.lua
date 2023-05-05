@@ -24,3 +24,33 @@
 --     end
     
 -- end
+
+function JetpackMarine:GetArmorAmount(armorLevels)
+
+    if not armorLevels then
+
+        armorLevels = 0
+
+        if GetHasTech(self, kTechId.Armor3, true) then
+            armorLevels = 3
+        elseif GetHasTech(self, kTechId.Armor2, true) then
+            armorLevels = 2
+        elseif GetHasTech(self, kTechId.Armor1, true) then
+            armorLevels = 1
+        end
+
+    end
+
+    return kJetpackMarineArmor + armorLevels * kJetpackMarineArmorPerUpgradeLevel
+
+end
+
+function JetpackMarine:GetIsStunAllowed()
+    return false
+end
+
+--function JetpackMarine:OnWebbed()   --突然离世
+--    if not self:GetIsOnGround() then
+--        self:SetStun(kDisruptMarineTime)
+--    end
+--end

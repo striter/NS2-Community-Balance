@@ -212,13 +212,13 @@ kAdvancedArmoryResearchTime = 90
 
 kPrototypeLabCost = 30
 
-kJetpackTechResearchCost = 20
+kJetpackTechResearchCost = 25
 kJetpackTechResearchTime = 90
-kJetpackCost = 15
-kJetpackDropCost = 12
+kJetpackCost = 30
+kJetpackDropCost = 20
 kJetpackDropCooldown = 0
 
-kExosuitTechResearchCost = 25
+kExosuitTechResearchCost = 20
 kExosuitTechResearchTime = 90
 kDualExosuitCost = 55
 kDualRailgunExosuitCost = 55
@@ -309,9 +309,9 @@ kSwipeDamageType = kDamageType.Puncture
 kSwipeDamage = 40
 kSwipeEnergyCost = 7
 
-kStabDamage = 140
+kStabDamage = 119
 kStabDamageType = kDamageType.Structural
-kStabEnergyCost = 33
+kStabEnergyCost = 29
 
 kStartBlinkEnergyCost = 12 --12
 kBlinkEnergyCost = 32 --32
@@ -346,7 +346,7 @@ kAcidRocketBombDotDamage = 10
 kAcidRocketBombDuration = 1
 
 -- Onos
-kStompResearchCost = 35
+kStompResearchCost = 25
 kStompResearchTime = 90
 kChargeDamage = 30
 kStompEnergyCost = 30

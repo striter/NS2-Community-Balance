@@ -129,6 +129,7 @@ ModLoader.SetupFileHook("lua/Lerk.lua", "lua/CNBalance/Lifeforms/Lerk.lua", "pos
 ModLoader.SetupFileHook("lua/Fade.lua", "lua/CNBalance/Lifeforms/Fade.lua", "post")
 ModLoader.SetupFileHook("lua/Gorge.lua", "lua/CNBalance/Lifeforms/Gorge.lua", "post")
 ModLoader.SetupFileHook("lua/Onos.lua", "lua/CNBalance/Lifeforms/Onos.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Alien/Shockwave.lua", "lua/CNBalance/Weapons/Alien/Shockwave.lua", "post")
 
 ModLoader.SetupFileHook("lua/GUIEggDisplay.lua", "lua/CNBalance/GUIEggDisplay.lua", "post" )
 ModLoader.SetupFileHook("lua/GUIAlienBuyMenu.lua", "lua/CNBalance/GUIAlienBuyMenu.lua", "post" )

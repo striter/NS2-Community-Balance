@@ -16,8 +16,8 @@ kNumMines = 2
 -- Jetpack
 kUpgradedJetpackUseFuelRate = 0.18
 kJetpackingAccel = 0.8
-kJetpackUseFuelRate = 0.21
-kJetpackReplenishFuelRate = 0.21
+kJetpackUseFuelRate = 0.18  --0.21
+kJetpackReplenishFuelRate = 0.24 --0.21
 
 kItemStayTime = 20
 kWeaponStayTime = 20
@@ -39,8 +39,8 @@ kAlienCrushDamagePercentByLevel = 0.111 --0.007
 
 kCelerityAddSpeed = 1.5 -- 1.5
 
-kFocusAttackSlowAtMax = 1
-kFocusDamageBonusAtMax = 0.66
+kFocusAttackSlowAtMax = 1.5
+kFocusDamageBonusAtMax = 1
 
 kSpitFocusAttackSlowAtMax = 0
 kSpitFocusDamageBonusAtMax = 0.66
