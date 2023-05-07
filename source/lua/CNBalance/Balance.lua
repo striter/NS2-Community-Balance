@@ -37,7 +37,7 @@ kPistolDamage = 20
 kShotgunFireRate = 0.88
 kShotgunDamage = 11.33 --11.33
 kShotgunDamageType = kDamageType.Normal
-kShotgunClipSize = 6
+kShotgunClipSize = 7
 kShotgunSpreadDistance = 10
 kShotgunWeapons1DamageScalar = 1.1
 kShotgunWeapons2DamageScalar = 1.2
@@ -145,7 +145,7 @@ kAxeDamageType = kDamageType.Structural
 kLightMachineGunClipSize = 50
 kLightMachineGunClipNum = 4
 kLightMachineGunWeight = 0.2
-kLightMachineGunDamage = 10.7
+kLightMachineGunDamage = 10.5
 kLightMachineGunDamageType = kDamageType.Normal
 kLightMachineGunCost = 0
 kLightMachineGunPointValue = 0
@@ -214,8 +214,8 @@ kPrototypeLabCost = 30
 
 kJetpackTechResearchCost = 25
 kJetpackTechResearchTime = 90
-kJetpackCost = 30
-kJetpackDropCost = 20
+kJetpackCost = 25
+kJetpackDropCost = 18
 kJetpackDropCooldown = 0
 
 kExosuitTechResearchCost = 20
@@ -230,7 +230,7 @@ kOnosDevourTime = 60
 kUmbraBulletModifier = 0.8
 
 kDevourEnergyCost = 65 --50
-kDevourPunchDamage = 65 --100
+kDevourPunchDamage = 70 --100
 
 kFastTunnelCost = 25
 kFastTunnelTime = 120

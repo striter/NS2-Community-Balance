@@ -20,15 +20,17 @@ end
 
 
 Skulk.kDamageReductionTable = {
-    ["grenade"] = 0.8,
-    ["pulsegrenade"] = 0.8,
-    ["impactgrenade"] = 0.8,
-    -- ["railgun"] = 0.7,
+    ["Shotgun"] = 0.9,
+    ["Railgun"] = 0.9,
+    ["Cannon"] = 0.9,
+    ["Grenade"] = 0.8,
+    ["PulseGrenade"] = 0.8,
+    ["ImpactGrenade"] = 0.8,
 }
 
 function Skulk:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
 
-        local reduction = Skulk.kDamageReductionTable[string.lower(doer:GetClassName())]
+        local reduction = Skulk.kDamageReductionTable[doer:GetClassName()]
         if reduction then
             damageTable.damage = damageTable.damage * reduction
             return

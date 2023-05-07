@@ -5,8 +5,8 @@ kMaxTunnelCount = {1,3,3,4,4,4,4,4,4,4}
 kPistolWeight = 0.0
 kRifleWeight = 0.13
 kHeavyRifleWeight = 0.25
-kHeavyMachineGunWeight = 0.23
-kCannonWeight = 0.26
+kHeavyMachineGunWeight = 0.2
+kCannonWeight = 0.28
 kGrenadeLauncherWeight = 0.15
 kFlamethrowerWeight = 0.14
 kShotgunWeight = 0.14
@@ -97,33 +97,37 @@ kShiftSupply = 20
 
 --Personal Res On Kill
 kExtractorPersonalResOnKill = 2.5
-kARCPersonalResOnKill = 2.5
-kObservatoryPersonalResOnKill = 2.5
-kPhaseGatePersonalResOnKill = 5
+kARCPersonalResOnKill = 2
+kObservatoryPersonalResOnKill = 2
+kPhaseGatePersonalResOnKill = 4
 kPowerPointPersonalResOnKill = 0.5
 kCommandStationPersonalResOnKill = 10
-kInfantryPortalPersonalResOnKill = 3
+kInfantryPortalPersonalResOnKill = 2
+kPortableSentryPersonalResOnKill = 0.5
+kWeaponCachePersonalResOnKill = 1
+kSentryBatteryPersonalResOnKill = 4
+kCystPersonalResOnKill = 0.2
 kHarvesterPersonalResOnKill = 5
 kTunnelPersonalResOnKill = 5
 kHivePersonalResOnKill = 40
-kPortableSentryPersonalResOnKill = 1
-kWeaponCachePersonalResOnKill = 2
-kSentryBatteryPersonalResOnKill = 4
+kTraitPersonalResOnKill = 8
 
 --Team Res On Kill
-kExtractorTeamResOnKill = 2
+kExtractorTeamResOnKill = 0
 kARCTeamResOnKill = 5
 kObservatoryTeamResOnKill = 0
-kPhaseGateTeamResOnKill = 3
+kPhaseGateTeamResOnKill = 0
 kPowerPointTeamResOnKill = 0
-kCommandStationTeamResOnKill = 20
-kInfantryPortalTeamResOnKill = 0
-kHarvesterTeamResOnKill = 2
-kTunnelTeamResOnKill = 3
-kHiveTeamResOnKill = 25
+kCommandStationTeamResOnKill = 15
+kInfantryPortalTeamResOnKill = 2
 kPortableSentryTeamResOnKill = 0
 kWeaponCacheTeamResOnKill = 0
 kSentryBatteryTeamResOnKill = 0
+kCystTeamResOnKill = 0
+kHarvesterTeamResOnKill = 0
+kTunnelTeamResOnKill = 0
+kHiveTeamResOnKill = 20
+kTraitTeamResOnKill = 2
 
 -- Nanoarmor & Lifesustain
 kNanoArmorHealPerSecond = 3

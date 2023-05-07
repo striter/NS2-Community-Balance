@@ -889,5 +889,22 @@ function Prowler:GetCarapaceBonusPerBiomass()
     return kProwlerCarapaceArmorPerBiomass
 end
 
+Prowler.kDamageReductionTable = {    
+    --["Shotgun"] = 0.9,
+    ["Railgun"] = 0.85,
+    ["Cannon"] = 0.85,
+    ["Grenade"] = 0.75,
+    ["PulseGrenade"] = 0.75,
+    ["ImpactGrenade"] = 0.75,
+}
+
+function Prowler:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
+    local reduction = Prowler.kDamageReductionTable[doer:GetClassName()]
+    if reduction then
+        damageTable.damage = damageTable.damage * reduction
+        return
+    end
+end
+
 
 Shared.LinkClassToMap("Prowler", Prowler.kMapName, networkVars, true)

@@ -7,13 +7,13 @@
 --3    280    4   |2     5   |3      4|2         4(3)|2
 --Jetpack Marine
 --A    ehp    Skulk      Lerk        Fade        Onos
---0    200    3|2        4(3)|2      3   |2      3(2)|2(1)
---1    250    4|2        5(4)|3(2)   4(3)|2      3   |2
---2    300    4|2        5   |3      4   |2      4(3)|2
---3    350    5|3        6   |3      5   |3      4   |2
+--0    210    3|2        4(3)|2      3   |2      3(2)|2(1)
+--1    260    4|2        5(4)|3(2)   4(3)|2      3   |2
+--2    310    5|3        5   |3      4   |2      4   |2
+--3    360    5|3        6   |3      5   |3      4   |2
 
 kMarineHealth = 100    kMarineArmor = 30    kMarinePointValue = 5
-kJetpackMarineArmor = 50    kJetpackMarineArmorPerUpgradeLevel = 25
+kJetpackMarineArmor = 55    kJetpackMarineArmorPerUpgradeLevel = 25
 kExosuitHealth = 100    kExosuitArmor = 320    kExosuitPointValue = 20
 kExosuitArmorPerUpgradeLevel = 30
 
@@ -36,8 +36,6 @@ kPhaseGateHealth = 1850    kPhaseGateArmor = 800    kPhaseGatePointValue = 10 --
 --Alien
 kHealingClampMaxHPAmount = 0.20
 
-
-
 kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5    kSkulkHealthPerBioMass = 3
 kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7    kGorgeHealthPerBioMass = 3
 kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15    kLerkHealthPerBioMass = 3
@@ -50,7 +48,7 @@ kVokexHealth = 200   kVokexArmor = 80    kVokexPointvalue = 25   kVokexHealthPer
 kParasitePlayerPointValue = 1
 kAlienRegenerationPercentage = 0.08
 
-kSkulkBaseCarapaceUpgradeAmount = 15    kSkulkCarapaceArmorPerBiomass = 1.25
+kSkulkBaseCarapaceUpgradeAmount = 10    kSkulkCarapaceArmorPerBiomass = 1.875
 kGorgeBaseCarapaceUpgradeAmount = 25    kGorgeCarapaceArmorPerBiomass = 1.25
 kVokexCarapaceArmorPerBiomass = 0       kProwlerBaseCarapaceUpgradeAmount = 10.5  --kProwlerArmorFullyUpgradedAmount = 28
 kLerkBaseCarapaceUpgradeAmount  = 25    kLerkCarapaceArmorPerBiomass  = 1.25

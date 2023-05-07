@@ -1062,6 +1062,32 @@ function BuildTechData()
             [kTechDataPersonalResOnKillKey] = kHivePersonalResOnKill,
             [kTechDataTeamResOnKillKey] = kHiveTeamResOnKill,
         })
+
+        table.insert(techData,{
+            [kTechDataId] = kTechId.Cyst,
+            [kTechDataSpawnBlock] = true,
+            [kTechDataBuildMethodFailedMessage] = "COMMANDERERROR_NO_CYST_PARENT_FOUND",
+            [kTechDataOverrideCoordsMethod] = AlignCyst,
+            [kTechDataHint] = "CYST_HINT",
+            [kTechDataCooldown] = kCystCooldown,
+            [kTechDataGhostModelClass] = "CystGhostModel",
+            [kTechDataMapName] = Cyst.kMapName,
+            [kTechDataDisplayName] = "CYST",
+            [kTechDataTooltipInfo] = "CYST_TOOLTIP",
+            [kTechDataCostKey] = kCystCost,
+            [kTechDataBuildTime] = kCystBuildTime,
+            [kTechDataMaxHealth] = kCystHealth,
+            [kTechDataMaxArmor] = kCystArmor,
+            [kTechDataModel] = Cyst.kModelName,
+            [kVisualRange] = kInfestationRadius,
+            [kTechDataRequiresInfestation] = false,
+            [kTechDataPointValue] = kCystPointValue,
+            [kTechDataGrows] = false,
+            [kTechDataBuildRequiresMethod] = GetCystParentAvailable,
+            [kTechDataAllowStacking] = true,
+            [kTechDataPersonalResOnKillKey] = kCystPersonalResOnKill,
+            [kTechDataTeamResOnKillKey] = kCystTeamResOnKill,
+        })
     
         table.insert(techData,{
             [kTechDataId] = kTechId.CragHive,
@@ -1130,6 +1156,73 @@ function BuildTechData()
             [kTechDataObstacleRadius] = 2.35,
             [kTechDataPersonalResOnKillKey] = kHivePersonalResOnKill,
             [kTechDataTeamResOnKillKey] = kHiveTeamResOnKill,
+        })
+
+
+    table.insert(techData,{
+            [kTechDataId] = kTechId.Veil,
+            [kTechDataBioMass] = kVeilBiomass,
+            [kTechDataHint] = "VEIL_HINT",
+            [kTechDataGhostModelClass] = "AlienGhostModel",
+            [kTechDataMapName] = Veil.kMapName,
+            [kTechDataDisplayName] = "VEIL",
+            [kTechDataCostKey] = kVeilCost,
+            [kTechDataRequiresInfestation] = true,
+            [kTechDataHotkey] = Move.C,
+            [kTechDataBuildTime] = kVeilBuildTime,
+            [kTechDataModel] = Veil.kModelName,
+            [kTechDataMaxHealth] = kVeilHealth,
+            [kTechDataMaxArmor] = kVeilArmor,
+            [kTechDataPointValue] = kVeilPointValue,
+            [kTechDataTooltipInfo] = "VEIL_TOOLTIP",
+            [kTechDataGrows] = true,
+            [kTechDataObstacleRadius] = 0.5,
+            [kTechDataPersonalResOnKillKey] = kTraitPersonalResOnKill,
+            [kTechDataTeamResOnKillKey] = kTraitTeamResOnKill,
+        })
+
+        table.insert(techData,{
+            [kTechDataId] = kTechId.Shell,
+            [kTechDataBioMass] = kShellBiomass,
+            [kTechDataHint] = "SHELL_HINT",
+            [kTechDataGhostModelClass] = "AlienGhostModel",
+            [kTechDataMapName] = Shell.kMapName,
+            [kTechDataDisplayName] = "SHELL",
+            [kTechDataCostKey] = kShellCost,
+            [kTechDataRequiresInfestation] = true,
+            [kTechDataHotkey] = Move.C,
+            [kTechDataBuildTime] = kShellBuildTime,
+            [kTechDataModel] = Shell.kModelName,
+            [kTechDataMaxHealth] = kShellHealth,
+            [kTechDataMaxArmor] = kShellArmor,
+            [kTechDataPointValue] = kShellPointValue,
+            [kTechDataTooltipInfo] = "SHELL_TOOLTIP",
+            [kTechDataGrows] = true,
+            [kTechDataObstacleRadius] = 0.8,
+            [kTechDataPersonalResOnKillKey] = kTraitPersonalResOnKill,
+            [kTechDataTeamResOnKillKey] = kTraitTeamResOnKill,
+        })
+    
+        table.insert(techData,{
+            [kTechDataId] = kTechId.Spur,
+            [kTechDataBioMass] = kSpurBiomass,
+            [kTechDataHint] = "SPUR_HINT",
+            [kTechDataGhostModelClass] = "AlienGhostModel",
+            [kTechDataMapName] = Spur.kMapName,
+            [kTechDataDisplayName] = "SPUR",
+            [kTechDataCostKey] = kSpurCost,
+            [kTechDataRequiresInfestation] = true,
+            [kTechDataHotkey] = Move.C,
+            [kTechDataBuildTime] = kSpurBuildTime,
+            [kTechDataModel] = Spur.kModelName,
+            [kTechDataMaxHealth] = kSpurHealth,
+            [kTechDataMaxArmor] = kSpurArmor,
+            [kTechDataPointValue] = kSpurPointValue,
+            [kTechDataTooltipInfo] = "SPUR_TOOLTIP",
+            [kTechDataGrows] = true,
+            [kTechDataObstacleRadius] = 0.725,
+            [kTechDataPersonalResOnKillKey] = kTraitPersonalResOnKill,
+            [kTechDataTeamResOnKillKey] = kTraitTeamResOnKill,
         })
     return techData
 end
