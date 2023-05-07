@@ -1,11 +1,11 @@
 --(*) In replaced of special condition,usually receive few damage.  |*| Stands for Focus
---Marine
+-- Marine
 --A    ehp    Skulk      Lerk        Fade        Onos
 --0    160    3(2)|2(1)  3   |2      2|1         2   |1
 --1    200    3   |2     4(3)|2      3|2         3(2)|2(1)
 --2    240    4   |2     4   |2      3|2         3   |2
 --3    280    4   |2     5   |3      4|2         4(3)|2
---Jetpack Marine
+-- Jetpack Marine
 --A    ehp    Skulk      Lerk        Fade        Onos
 --0    210    3|2        4(3)|2      3   |2      3(2)|2(1)
 --1    260    4|2        5(4)|3(2)   4(3)|2      3   |2
@@ -23,10 +23,12 @@ kExtractorHealth = 2400 kExtractorArmor = 1200 kExtractorPointValue = 15 --2400 
 
 kMineHealth = 26    kMineArmor = 5    kMinePointValue = 5
 
+kObservatoryHealth = 750    kObservatoryArmor = 500    kObservatoryPointValue = 10
+
+kRoboticsFactoryHealth = 1900    kRoboticsFactoryArmor = 400    kRoboticsFactoryPointValue = 5
+kARCRoboticsFactoryHealth = 3000    kARCRoboticsFactoryArmor = 600    kARCRoboticsFactoryPointValue = 7
 kSentryBatteryHealth = 700    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5
 kSentryHealth = 500    kSentryArmor = 100    kSentryPointValue = 4
-
-kObservatoryHealth = 700    kObservatoryArmor = 500    kObservatoryPointValue = 10
 
 kARCHealth = 2600    kARCArmor = 600    kARCPointValue = 10   --2600 400
 kARCDeployedHealth = 2600    kARCDeployedArmor = 0      -- 2600 0

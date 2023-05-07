@@ -14,9 +14,8 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.Armor3,
 
     kTechId.PrototypeLab,
-
     kTechId.JetpackTech,
-    kTechId.JetpackFuelTech,
+    --kTechId.JetpackFuelTech,
     kTechId.ExosuitTech,
 
     kTechId.UpgradeRoboticsFactory,
@@ -29,10 +28,10 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.Cannon,
 
     kTechId.ExplosiveSupply,
+    kTechId.MinesUpgrade,
     kTechId.GrenadeLauncherDetectionShot,
     kTechId.GrenadeLauncherAllyBlast,
     kTechId.GrenadeLauncherUpgrade,
-    kTechId.MinesUpgrade,
 
     kTechId.ArmorSupply,
     kTechId.ArmorRegen,

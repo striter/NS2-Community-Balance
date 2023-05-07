@@ -201,6 +201,12 @@ kClusterGrenadeFragmentDamageType = kDamageType.ClusterFlameFragment
 kInfantryPortalBuildTime = 7
 kInfantryPortalCost = 15
 
+kRoboticsFactoryCost = 5
+kUpgradeRoboticsFactoryCost = 10
+kUpgradeRoboticsFactoryTime = 30
+kARCCost = 15
+kARCBuildTime = 20
+
 kSentryDamage = 5
 kSentryCost = 5
 kSentryBuildTime = 3
@@ -209,6 +215,7 @@ kSentryBatteryBuildTime = 5
 
 kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 90
+kRoboticsFactoryBuildTime = 8
 
 kPrototypeLabCost = 30
 

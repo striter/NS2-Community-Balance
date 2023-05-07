@@ -78,12 +78,12 @@ kGoreVampirismScalar = 0.02
 
 -- Supply
 
-kMACSupply = 2
+kMACSupply = 10
 kArmorySupply = 5
 kObservatorySupply = 20
 kARCSupply = 20
 kSentrySupply = 0
-kSentryBatterySupply = 30
+kSentryBatterySupply = 35
 kRoboticsFactorySupply = 10
 kInfantryPortalSupply = 0
 kPhaseGateSupply = 10
