@@ -6,7 +6,7 @@ kPistolWeight = 0.0
 kRifleWeight = 0.13
 kHeavyRifleWeight = 0.25
 kHeavyMachineGunWeight = 0.2
-kCannonWeight = 0.28
+kCannonWeight = 0.23
 kGrenadeLauncherWeight = 0.15
 kFlamethrowerWeight = 0.14
 kShotgunWeight = 0.14
@@ -130,7 +130,7 @@ kHiveTeamResOnKill = 20
 kTraitTeamResOnKill = 2
 
 -- Nanoarmor & Lifesustain
-kNanoArmorHealPerSecond = 3
+kNanoArmorHealPerSecond = 4
 kLifeSustainHealPerSecond = 10
 kLifeSustainHealInterval = 0.5
 

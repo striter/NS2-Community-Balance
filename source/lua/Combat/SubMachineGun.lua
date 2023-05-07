@@ -4,6 +4,7 @@ Script.Load("lua/LiveMixin.lua")
 Script.Load("lua/EntityChangeMixin.lua")
 Script.Load("lua/Weapons/ClientWeaponEffectsMixin.lua")
 Script.Load("lua/PointGiverMixin.lua")
+Script.Load("lua/Combat/CombatWeaponVariantMixin.lua")
 
 class 'SubMachineGun' (ClipWeapon)
 
@@ -45,6 +46,7 @@ local networkVars =
 }
 
 AddMixinNetworkVars(LiveMixin, networkVars)
+AddMixinNetworkVars(CombatWeaponVariant,networkVars)
 local kMuzzleEffect = PrecacheAsset("cinematics/marine/rifle/muzzle_flash.cinematic")
 local kMuzzleAttachPoint = "fxnode_riflemuzzle"
 
@@ -125,7 +127,8 @@ end
 function SubMachineGun:OnCreate()
 
     ClipWeapon.OnCreate(self)
-    
+
+    InitMixin(self, CombatWeaponVariant)
     InitMixin(self, PickupableWeaponMixin)
     InitMixin(self, EntityChangeMixin)
     InitMixin(self, LiveMixin)

@@ -1,8 +1,8 @@
 if Client then
-    kBmacMaterialViewIndices["Knife"] = 1
     kBmacMaterialViewIndices["CombatBuilder"] = 2
-    kBmacMaterialViewIndices["LightMachineGun"] = 2
-    kBmacMaterialViewIndices["SubMachineGun"] = 2
-    kBmacMaterialViewIndices["Revolver"] = 2
-    kBmacMaterialViewIndices["Cannon"] = 2
+    kBmacMaterialViewIndices["Knife"] = 0
+    kBmacMaterialViewIndices["LightMachineGun"] = 0
+    kBmacMaterialViewIndices["SubMachineGun"] = 0
+    kBmacMaterialViewIndices["Revolver"] = 0
+    kBmacMaterialViewIndices["Cannon"] = 0
 end

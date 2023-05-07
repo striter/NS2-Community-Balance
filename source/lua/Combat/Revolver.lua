@@ -2,6 +2,7 @@ Script.Load("lua/Weapons/Marine/ClipWeapon.lua")
 Script.Load("lua/PickupableWeaponMixin.lua")
 Script.Load("lua/LiveMixin.lua")
 Script.Load("lua/Weapons/Marine/Pistol.lua")
+Script.Load("lua/Combat/CombatWeaponVariantMixin.lua")
 
 class 'Revolver' (ClipWeapon)
 
@@ -21,13 +22,15 @@ local networkVars =
     queuedShots = "private compensated integer (0 to 10)",
 }
 
+AddMixinNetworkVars(CombatWeaponVariant,networkVars)
 AddMixinNetworkVars(PickupableWeaponMixin, networkVars)
 AddMixinNetworkVars(LiveMixin, networkVars)
 
 function Revolver:OnCreate()
 
     ClipWeapon.OnCreate(self)
-    
+
+    InitMixin(self, CombatWeaponVariant)
     InitMixin(self, PickupableWeaponMixin)
     InitMixin(self, LiveMixin)
     

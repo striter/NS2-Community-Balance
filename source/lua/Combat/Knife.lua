@@ -1,4 +1,5 @@
 Script.Load("lua/Weapons/Weapon.lua")
+Script.Load("lua/Combat/CombatWeaponVariantMixin.lua")
 
 class 'Knife' (Weapon)
 
@@ -12,10 +13,12 @@ local networkVars =
 {
     sprintAllowed = "boolean",
 }
+AddMixinNetworkVars(CombatWeaponVariant,networkVars)
 
 function Knife:OnCreate()
 
     Weapon.OnCreate(self)
+    InitMixin(self, CombatWeaponVariant)
     
     self.sprintAllowed = true
     

@@ -5,6 +5,7 @@ Script.Load("lua/LiveMixin.lua")
 Script.Load("lua/EntityChangeMixin.lua")
 Script.Load("lua/Weapons/ClientWeaponEffectsMixin.lua")
 Script.Load("lua/PointGiverMixin.lua")
+Script.Load("lua/Combat/CombatWeaponVariantMixin.lua")
 
 class 'Cannon' (ClipWeapon)
 
@@ -31,12 +32,14 @@ local networkVars =
 }
 
 AddMixinNetworkVars(LiveMixin, networkVars)
+AddMixinNetworkVars(CombatWeaponVariant,networkVars)
 
 
 function Cannon:OnCreate()
 
     ClipWeapon.OnCreate(self)
     
+    InitMixin(self, CombatWeaponVariant)
     InitMixin(self, PickupableWeaponMixin)
     InitMixin(self, EntityChangeMixin)
     InitMixin(self, LiveMixin)

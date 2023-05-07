@@ -34,7 +34,6 @@ kShotgunDropCooldown = 0
 kPistolRateOfFire = 0.01
 kPistolDamage = 20
 
-kShotgunFireRate = 0.88
 kShotgunDamage = 11.33 --11.33
 kShotgunDamageType = kDamageType.Normal
 kShotgunClipSize = 7
@@ -59,10 +58,11 @@ kCommandStationCost = 20
 kCommandStationUpgradeCost = 10
 kCommandStationUpgradeTime = 60
 kUpgradedCommandStationCost = 30
+
 -- Standard Supply
-kLightMachineGunUpgradeCost = 15
+kLightMachineGunUpgradeCost = 20
 kLightMachineGunUpgradeTime = 90
-kDragonBreathResearchCost = 25
+kDragonBreathResearchCost = 20
 kDragonBreathResearchTime = 90
 kCannonTechResearchCost = 30
 kCannonTechResearchTime = 120
@@ -70,11 +70,11 @@ kCannonTechResearchTime = 120
 --Explosive Supply
 kMinesUpgradeResearchCost = 10
 kMinesUpgradeResearchTime = 60
-kGrenadeLauncherDetectionShotResearchCost = 20
+kGrenadeLauncherDetectionShotResearchCost = 15
 kGrenadeLauncherDetectionShotResearchTime = 60
 kGrenadeLauncherAllyBlastResearchCost = 15
-kGrenadeLauncherAllyBlastResearchTime = 90
-kGrenadeLauncherUpgradeResearchCost = 15
+kGrenadeLauncherAllyBlastResearchTime = 60
+kGrenadeLauncherUpgradeResearchCost = 20
 kGrenadeLauncherUpgradeResearchTime = 90
 
 kGrenadeLauncherCost = 20
@@ -144,19 +144,16 @@ kAxeDamageType = kDamageType.Structural
 --Light Machine Gun
 kLightMachineGunClipSize = 50
 kLightMachineGunClipNum = 4
-kLightMachineGunWeight = 0.2
+kLightMachineGunWeight = 0.11
 kLightMachineGunDamage = 10.5
 kLightMachineGunDamageType = kDamageType.Normal
 kLightMachineGunCost = 0
 kLightMachineGunPointValue = 0
---
 
---
+--Heavy Marine
 kHeavyMarineHealth = 200
 kHeavyMarineArmor = 150
 kHeavyMarineArmorPerUpgradeLevel = 40
---
-
 
 --Cannon
 kCannonCost = 20
@@ -169,7 +166,6 @@ kCannonClipSize = 6
 kCannonPointValue = 15
 kCannonDamageType = kDamageType.Structural
 kCannonDropCost = 12
----
 
 kFlamethrowerCost = 20
 kFlamethrowerDropCost = 12
@@ -191,7 +187,7 @@ kPulseGrenadeDamage = 90  --75
 kPulseGrenadeEnergyDamage = 35  --25
 
 kClusterGrenadeDamageRadius = 10
-kClusterGrenadeDamage = 72
+kClusterGrenadeDamage = 80
 kClusterGrenadeDamageType = kDamageType.ClusterFlame
 
 kClusterFragmentDamageRadius = 6

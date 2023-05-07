@@ -2,6 +2,7 @@ Script.Load("lua/Combat/SentryAbility.lua")
 Script.Load("lua/Combat/ArmoryAbility.lua")
 Script.Load("lua/PickupableWeaponMixin.lua")
 Script.Load("lua/LiveMixin.lua")
+Script.Load("lua/BuilderVariantMixin.lua")
 
 class 'CombatBuilder' (Weapon)
 
@@ -25,6 +26,7 @@ local networkVars =
 	-- numObservatoriesLeft = string.format("private integer (0 to %d)", kMaxStructures[kTechId.Observatory]),
 }
 
+AddMixinNetworkVars(BuilderVariantMixin, networkVars)
 AddMixinNetworkVars(PickupableWeaponMixin, networkVars)
 AddMixinNetworkVars(PointGiverMixin, networkVars)
 AddMixinNetworkVars(LiveMixin, networkVars)
@@ -50,7 +52,8 @@ function CombatBuilder:OnCreate()
     self.dropping = false
     self.mouseDown = false
     self.activeStructure = nil
-    
+
+    InitMixin(self, BuilderVariantMixin)
     InitMixin(self, PickupableWeaponMixin)
     InitMixin(self, LiveMixin)
     InitMixin(self,PointGiverMixin)
@@ -68,14 +71,8 @@ function CombatBuilder:OnCreate()
 end
 
 function CombatBuilder:OnInitialized()
-
-    local worldModel = LookupTechData(self:GetTechId(), kTechDataModel)
-    if worldModel ~= nil then
-        self:SetModel(worldModel)
-    end
-    
     Weapon.OnInitialized(self)
-    
+    self:SetModel(CombatBuilder.kModelName)
 end
 
 function CombatBuilder:GetViewModelName(sex, variant)

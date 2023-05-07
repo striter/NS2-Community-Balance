@@ -1,5 +1,18 @@
 Shotgun.kDamageFalloffReductionFactor = 1 -- 50% reduction
 
+local kShotgunFireSpeedMult = 1.08
+local kShotgunFireAnimationLength = 0.8474577069282532 / kShotgunFireSpeedMult -- defined by art asset.     --0.8474577069282532
+Shotgun.kFireDuration = kShotgunFireAnimationLength -- same duration for now.
+
+function Shotgun:GetPrimaryMinFireDelay()
+    return kShotgunFireAnimationLength
+end
+
+function Shotgun:OnUpdateAnimationInput(modelMixin)
+    ClipWeapon.OnUpdateAnimationInput(self, modelMixin)
+    modelMixin:SetAnimationInput("attack_mult", kShotgunFireSpeedMult)
+end
+
 --local kSecondaryTracerName = PrecacheAsset("cinematics/marine/railgun/tracer_small.cinematic")
 --local kSecondaryTracerResidueName = PrecacheAsset("cinematics/marine/railgun/tracer_residue_small.cinematic")
 --local kMuzzleEffectName = PrecacheAsset("cinematics/marine/shotgun/muzzle_flash.cinematic")

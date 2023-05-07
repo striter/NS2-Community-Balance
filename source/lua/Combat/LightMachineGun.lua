@@ -4,6 +4,7 @@ Script.Load("lua/LiveMixin.lua")
 Script.Load("lua/EntityChangeMixin.lua")
 Script.Load("lua/Weapons/ClientWeaponEffectsMixin.lua")
 Script.Load("lua/PointGiverMixin.lua")
+Script.Load("lua/Combat/CombatWeaponVariantMixin.lua")
 
 class 'LightMachineGun' (ClipWeapon)
 
@@ -17,7 +18,7 @@ LightMachineGun.kLaserSightWorldModelAttachPoint = "fxnode_riflemuzzle"
 LightMachineGun.kLaserSightViewModelAttachPoint = "fxnode_riflemuzzle"
 
 local kRange = 100
-local kSpread = Math.Radians(2)
+local kSpread = Math.Radians(2.4)
 
 local kButtRange = 1.1
 
@@ -44,7 +45,9 @@ local networkVars =
     shooting = "boolean"
 }
 
+AddMixinNetworkVars(CombatWeaponVariant,networkVars)
 AddMixinNetworkVars(LiveMixin, networkVars)
+
 local kMuzzleEffect = PrecacheAsset("cinematics/marine/rifle/muzzle_flash.cinematic")
 local kMuzzleAttachPoint = "fxnode_riflemuzzle"
 
@@ -125,7 +128,8 @@ end
 function LightMachineGun:OnCreate()
 
     ClipWeapon.OnCreate(self)
-    
+
+    InitMixin(self, CombatWeaponVariant)
     InitMixin(self, PickupableWeaponMixin)
     InitMixin(self, EntityChangeMixin)
     InitMixin(self, LiveMixin)

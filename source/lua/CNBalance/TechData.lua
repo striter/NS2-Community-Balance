@@ -284,7 +284,6 @@ function BuildTechData()
         [kTechDataId] = kTechId.CombatBuilder,
         [kTechDataDisplayName] = "COMBATBUILDER",
         [kTechDataMapName] = CombatBuilder.kMapName,
-        [kTechDataModel] = CombatBuilder.kModelName,
         [kTechDataCostKey] = kCombatBuilderCost,
         [kTechDataMaxHealth] = kMarineWeaponHealth,
         [kTechDataPointValue] = kCombatBuilderPointValue,
