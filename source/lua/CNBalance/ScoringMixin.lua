@@ -30,5 +30,12 @@ if Server then
         baseCopyPlayerDataFrom(self,player)    
         self.killsCurrentLife = player.killsCurrentLife
     end
+
+
+    local baseResetScores = ScoringMixin.ResetScores
+    function ScoringMixin:ResetScores()
+        baseResetScores(self)
+        self.killsCurrentLife = 0
+    end
 end 
 
