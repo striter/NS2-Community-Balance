@@ -41,7 +41,7 @@ kHealingClampMaxHPAmount = 0.20
 kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5    kSkulkHealthPerBioMass = 3
 kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7    kGorgeHealthPerBioMass = 3
 kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15    kLerkHealthPerBioMass = 3
-kFadeHealth = 250    kFadeArmor = 80     kFadePointValue = 20    kFadeHealthPerBioMass = 5
+kFadeHealth = 280    kFadeArmor = 80     kFadePointValue = 20    kFadeHealthPerBioMass = 5
 kOnosHealth = 800    kOnosArmor = 500    kOnosPointValue = 30    kOnosHealtPerBioMass = 50
 
 kProwlerHealth = 140 kProwlerArmor  = 25 kProwlerPointValue = 12 kProwlerHealthPerBioMass = 5
@@ -54,7 +54,7 @@ kSkulkBaseCarapaceUpgradeAmount = 10    kSkulkCarapaceArmorPerBiomass = 1.25
 kGorgeBaseCarapaceUpgradeAmount = 25    kGorgeCarapaceArmorPerBiomass = 1.25
 kVokexCarapaceArmorPerBiomass = 0       kProwlerBaseCarapaceUpgradeAmount = 10.5  --kProwlerArmorFullyUpgradedAmount = 28
 kLerkBaseCarapaceUpgradeAmount  = 25    kLerkCarapaceArmorPerBiomass  = 1.25
-kFadeBaseCarapaceUpgradeAmount  = 40    kFadeCarapaceArmorPerBiomass  = 0
+kFadeBaseCarapaceUpgradeAmount  = 30    kFadeCarapaceArmorPerBiomass  = 2.5
 kOnosBaseCarapaceUpgradeAmount  = 150   kOnosCarapaceArmorPerBiomass  = 10
 kVokexBaseCarapaceUpgradeAmount = 50    kProwlerCarapaceArmorPerBiomass = 0
 

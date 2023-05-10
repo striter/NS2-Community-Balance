@@ -267,13 +267,13 @@ kXenocideDamage = 120   --200
 kXenocideDamageType = kDamageType.Structural
 kXenocideRange = 9  -- 14
 kXenocideEnergyCost = 30
-kXenocideSpawnReduction = 2
+kXenocideSpawnReduction = 0.8
 
 kXenocideFuelCost = 35
 kXenocideFuelTime = 120
 kXenocideFuelDamage = 160
 kXenocideFuelRange = 12
-kXenocideFuelSpawnReduction = 4
+kXenocideFuelSpawnReduction = 0.6
 
 kBileBombResearchCost = 10
 kBileBombResearchTime = 40

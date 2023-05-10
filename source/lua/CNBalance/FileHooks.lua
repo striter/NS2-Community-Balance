@@ -32,6 +32,8 @@ ModLoader.SetupFileHook("lua/ReadyRoomEmbryo.lua", "lua/CNBalance/ReadyRoomEmbry
 ModLoader.SetupFileHook("lua/Scoreboard.lua", "lua/CNBalance/Scoreboard.lua", "post" )
 ModLoader.SetupFileHook("lua/ScoringMixin.lua", "lua/CNBalance/ScoringMixin.lua", "post" )
 ModLoader.SetupFileHook("lua/ServerStats.lua", "lua/CNBalance/ServerStats.lua", "replace" )
+--GUI
+ModLoader.SetupFileHook("lua/GUIMinimapFrame.lua", "lua/CNBalance/GUIMinimapFrame.lua", "post")
 
 --Effects
 ModLoader.SetupFileHook("lua/GeneralEffects.lua", "lua/CNBalance/Effects/GeneralEffects.lua", "post" )
@@ -172,4 +174,4 @@ if AddHintModPanel then
     AddHintModPanel(panelMaterial, "https://docs.qq.com/doc/DUEZSeUtrR0tWTGJ4","看看司马策划又改了什么东西")
 end
 
-Shared.Message("[CN] Natural Selection 2.0 Mounted 2023.1.7")
+Shared.Message("[CN] Natural Selection 2.0 Mounted 2023.5.10")

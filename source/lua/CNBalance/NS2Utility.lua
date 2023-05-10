@@ -144,4 +144,30 @@ if Server then
         return newEnt
 
     end
-end 
+end
+
+
+function PlayerUI_GetGameTimeString()
+
+    local gameTime, state = PlayerUI_GetGameLengthTime()
+    if state < kGameState.PreGame then
+        gameTime = 0
+    end
+
+    local minutes = math.floor(gameTime / 60)
+    local seconds = math.floor(gameTime % 60)
+    local team = PlayerUI_GetTeamType()
+    local gameTimeString = string.format("%s - %d:%.2d", Locale.ResolveString(string.format("GAME_LENGTH_TEAM%i",team)), minutes, seconds)
+    
+    local respawnExtend = GetRespawnTimeExtend(gameTime)
+
+    if team == kMarineTeamType then
+        respawnExtend = respawnExtend + kMarineRespawnTime
+    elseif team == kAlienTeamType then
+        respawnExtend = respawnExtend + kAlienSpawnTime
+    end
+    
+    gameTimeString = gameTimeString .. string.format("\n%s - %is", Locale.ResolveString(string.format("RESPAWN_EXTEND_TEAM%i",team)),respawnExtend)
+    return gameTimeString
+
+end

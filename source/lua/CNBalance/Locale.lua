@@ -1,5 +1,14 @@
 
 if kTranslateMessage then
+    kTranslateMessage["GAME_LENGTH_TEAM1"] = "站点清理中"
+    kTranslateMessage["RESPAWN_EXTEND_TEAM1"] = "增援耗时"
+    kTranslateMessage["NEXT_SPAWN_IN_TEAM1"] = "等待增援:%i"
+    kTranslateMessage["WAITING_SPAWN_TEAM1"] = "等待传送中..."
+    
+    kTranslateMessage["GAME_LENGTH_TEAM2"] = "区域侵入中"
+    kTranslateMessage["RESPAWN_EXTEND_TEAM2"] = "生物质重构"
+    kTranslateMessage["NEXT_SPAWN_IN_TEAM2"] = "生物质重构:%i"
+    kTranslateMessage["WAITING_SPAWN_TEAM2"] = "等待孵化中..."
 
     kTranslateMessage["STANDARD_SUPPLY"] = "制式武器研发站"
     kTranslateMessage["STANDARD_SUPPLY_TOOLTIP"] = "升级为制式武器研发基地."
@@ -115,7 +124,16 @@ if kTranslateMessage then
 end
 
 if kLocales then
+    kLocales["GAME_LENGTH_TEAM1"] = "Cleaning"
+    kLocales["RESPAWN_EXTEND_TEAM1"] = "Reinforce:"
+    kLocales["NEXT_SPAWN_IN_TEAM1"] = "Reinforcing:%i"
+    kLocales["WAITING_SPAWN_TEAM1"] = "Teleport Awaiting..."
+    kLocales["GAME_LENGTH_TEAM2"] = "Infesting:"
+    kLocales["RESPAWN_EXTEND_TEAM2"] = "Reformation:"
+    kLocales["NEXT_SPAWN_IN_TEAM2"] = "Biomass Reformation:%i"
+    kLocales["WAITING_SPAWN_TEAM2"] = "Hatch Awaiting..."
 
+    
     kLocales["STANDARD_SUPPLY"] = "Weapon Supply"
     kLocales["STANDARD_SUPPLY_TOOLTIP"] = "Begin the standard weapon research."
     kLocales["STANDARD_STATION"] = "Command Station (Weapons Lab)"

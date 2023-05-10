@@ -1,12 +1,4 @@
-﻿local function GetExtendedTime()
-    local gameRules = GetGamerules()
-    local gameLength = Shared.GetTime() - gameRules:GetGameStartTime()
-    local estimateLength = math.max(0,gameLength - 1200)   --activate since 20 min pow(max(x-1200,0)/450,2) * 2
-    local parameter = estimateLength / 450
-    local extendTime = parameter * parameter * 2
-    return extendTime
-end
-
+﻿
 function Team:PutPlayerInRespawnQueue(player)
 
     assert(player)
@@ -33,14 +25,15 @@ function Team:PutPlayerInRespawnQueue(player)
             extraTime = math.max(0, player.spawnBlockTime - Shared.GetTime())
         end
         
+    --////Extent the respawn time to prevent "bie bie le"
+        extraTime = extraTime + GetRespawnTimeExtend(Shared.GetTime() - GetGamerules():GetGameStartTime())
+    --///
+
         if player.spawnReductionTime then
-            extraTime = extraTime - player.spawnReductionTime
+            extraTime = extraTime * player.spawnReductionTime
             player.spawnReductionTime = nil
         end
-    
-    --////Extent the respawn time to prevent "bie bie le"
-        extraTime = extraTime + GetExtendedTime()
-    --///
+
         player:SetRespawnQueueEntryTime(Shared.GetTime() + extraTime)
         self.respawnQueue:Insert(player:GetId())
         
@@ -52,7 +45,6 @@ function Team:PutPlayerInRespawnQueue(player)
     
 end
 
---Since its only used by the infantry portal,make it 
 function Team:GetOldestQueuedPlayer()
 
     local playerToSpawn
@@ -67,8 +59,9 @@ function Team:GetOldestQueuedPlayer()
         if player and player.GetRespawnQueueEntryTime then
         
             local currentPlayerTime = player:GetRespawnQueueEntryTime()
-            
+
             -------------------------//////////////////////////// Ensure its awaited
+
             if currentPlayerTime and currentPlayerTime <= curTime and (earliestTime == -1 or currentPlayerTime < earliestTime) then
             
                 playerToSpawn = player

@@ -20,7 +20,7 @@ end
 
 
 Skulk.kDamageReductionTable = {
-    ["Shotgun"] = 0.9,
+    ["Shotgun"] = 0.8,
     ["Railgun"] = 0.9,
     ["Cannon"] = 0.9,
     ["Grenade"] = 0.8,
