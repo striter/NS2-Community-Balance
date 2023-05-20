@@ -19,18 +19,9 @@ function Skulk:GetHealthPerBioMass()
 end
 
 
-Skulk.kDamageReductionTable = {
-    ["Shotgun"] = 0.8,
-    ["Railgun"] = 0.9,
-    ["Cannon"] = 0.9,
-    ["Grenade"] = 0.8,
-    ["PulseGrenade"] = 0.8,
-    ["ImpactGrenade"] = 0.8,
-}
-
 function Skulk:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
 
-        local reduction = Skulk.kDamageReductionTable[doer:GetClassName()]
+        local reduction = kSkulkDamageReduction[doer:GetClassName()]
         if reduction then
             damageTable.damage = damageTable.damage * reduction
             return

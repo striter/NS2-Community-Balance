@@ -107,10 +107,11 @@ kPortableSentryPersonalResOnKill = 0.5
 kWeaponCachePersonalResOnKill = 1
 kSentryBatteryPersonalResOnKill = 4
 kCystPersonalResOnKill = 0.2
-kHarvesterPersonalResOnKill = 5
-kTunnelPersonalResOnKill = 5
+kHarvesterPersonalResOnKill = 8
+kTunnelPersonalResOnKill = 8
 kHivePersonalResOnKill = 40
 kTraitPersonalResOnKill = 8
+kTowerPersonalResOnKill = 8
 
 --Team Res On Kill
 kExtractorTeamResOnKill = 0
@@ -127,7 +128,8 @@ kCystTeamResOnKill = 0
 kHarvesterTeamResOnKill = 0
 kTunnelTeamResOnKill = 0
 kHiveTeamResOnKill = 20
-kTraitTeamResOnKill = 2
+kTraitTeamResOnKill = 4
+kTowerTeamResOnKill = 0
 
 -- Nanoarmor & Lifesustain
 kNanoArmorHealPerSecond = 4

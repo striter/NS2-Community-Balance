@@ -24,8 +24,8 @@ kAlienTechMap =
     { kTechId.Regeneration, 11, 5 },
 
     { kTechId.BioMassOne, 1.5, 7, nil, "1" }, { kTechId.BabblerEgg, 1.5, 8 },--{kTechId.ShadowStep, 1.5, 9}, 
-    { kTechId.BioMassTwo, 2.5, 7, nil, "2" }, {kTechId.Rupture, 2.5, 8}, {kTechId.BileBomb, 2.5, 9}, { kTechId.Devour, 2.5, 10 },
-    { kTechId.BioMassThree, 3.5, 7, nil, "3" }, {kTechId.BoneWall, 3.5, 8}, { kTechId.MetabolizeEnergy, 3.5, 9 },
+    { kTechId.BioMassTwo, 2.5, 7, nil, "2" }, {kTechId.Rupture, 2.5, 8}, { kTechId.Devour, 2.5, 9 },
+    { kTechId.BioMassThree, 3.5, 7, nil, "3" }, {kTechId.BoneWall, 3.5, 8}, { kTechId.MetabolizeEnergy, 3.5, 9 }, {kTechId.BileBomb, 3.5, 10},
     { kTechId.BioMassFour, 4.5, 7, nil, "4" }, {kTechId.Leap, 4.5, 8}, {kTechId.Spores, 4.5, 9},
     { kTechId.BioMassFive, 5.5, 7, nil, "5" }, {kTechId.MetabolizeHealth, 5.5, 8},{kTechId.FastTunnel,5.5 , 9},
     { kTechId.BioMassSix, 6.5, 7, nil, "6" },  {kTechId.AcidSpray, 6.5, 8},{kTechId.Umbra, 6.5, 9}, {kTechId.BoneShield, 6.5, 10},

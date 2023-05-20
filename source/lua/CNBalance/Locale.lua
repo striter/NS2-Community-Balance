@@ -67,6 +67,7 @@ if kTranslateMessage then
     kTranslateMessage["WEAPON_CACHE"]="补给站"
     kTranslateMessage["WEAPON_CACHE_HINT"]="回复弹药与生命值"
 
+    kTranslateMessage["MARINESENTRY"]="工程步哨"
     kTranslateMessage["MARINE_SENTRY"]="工程步哨"
     kTranslateMessage["MARINE_SENTRY_HINT"]="自动索敌并攻击."
 

@@ -13,6 +13,7 @@ set {
     "Claw",
     "Flamethrower",
     "Grenade", -- Grenade Launcher
+    "ImpactGrenade",
     "Mine",
     "Revolver",
     "SubMachineGun",
@@ -27,9 +28,7 @@ function Onos:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoin
         local className = string.lower(doer:GetClassName())
         local reduction = 0.225
         if className == "railgun" then
-            reduction = 0.75
-        elseif className == "grenade" then
-            reduction = 0.6
+            reduction = 0
         end
 
         if reduction ~= 0 then
@@ -37,7 +36,12 @@ function Onos:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoin
             --TODO Exclude local player and trigger local-player only effect
             self:TriggerEffects("boneshield_blocked", { effecthostcoords = Coords.GetTranslation(hitPoint) } )
         end
-        
+    end
+    
+    local reduction = kOnosDamageReduction[doer:GetClassName()]
+    if reduction then
+        damageTable.damage = damageTable.damage * reduction
+        return
     end
 end
 

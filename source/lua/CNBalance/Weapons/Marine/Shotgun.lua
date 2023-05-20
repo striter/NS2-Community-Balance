@@ -13,6 +13,11 @@ function Shotgun:OnUpdateAnimationInput(modelMixin)
     modelMixin:SetAnimationInput("attack_mult", kShotgunFireSpeedMult)
 end
 
+function Shotgun:GetMaxClips()
+    return kShotGunClipNum
+end
+
+
 --local kSecondaryTracerName = PrecacheAsset("cinematics/marine/railgun/tracer_small.cinematic")
 --local kSecondaryTracerResidueName = PrecacheAsset("cinematics/marine/railgun/tracer_residue_small.cinematic")
 --local kMuzzleEffectName = PrecacheAsset("cinematics/marine/shotgun/muzzle_flash.cinematic")

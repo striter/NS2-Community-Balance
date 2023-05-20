@@ -37,6 +37,7 @@ kPistolDamage = 20
 kShotgunDamage = 11.33 --11.33
 kShotgunDamageType = kDamageType.Normal
 kShotgunClipSize = 7
+kShotGunClipNum = 3
 kShotgunSpreadDistance = 10
 kShotgunWeapons1DamageScalar = 1.1
 kShotgunWeapons2DamageScalar = 1.2
@@ -55,15 +56,15 @@ kHeavyMachineGunSecondaryRange = 1.1
 kHeavyMachineGunSpread = Math.Radians(5)  --4
 
 kCommandStationCost = 20
-kCommandStationUpgradeCost = 10
-kCommandStationUpgradeTime = 60
-kUpgradedCommandStationCost = 30
+kCommandStationUpgradeCost = 15
+kCommandStationUpgradeTime = 90
+kUpgradedCommandStationCost = 35
 
 -- Standard Supply
+kDragonBreathResearchCost = 15
+kDragonBreathResearchTime = 90
 kLightMachineGunUpgradeCost = 20
 kLightMachineGunUpgradeTime = 90
-kDragonBreathResearchCost = 20
-kDragonBreathResearchTime = 90
 kCannonTechResearchCost = 30
 kCannonTechResearchTime = 120
 
@@ -97,8 +98,6 @@ kLifeSustainResearchCost = 20
 kLifeSustainResearchTime = 120
 kNanoArmorResearchCost = 25
 kNanoArmorResearchTime = 120
-
-
 
 kGrenadeLauncherClipSize = 4
 kGrenadeLauncherWeapons1DamageScalar = 1.08
@@ -232,14 +231,13 @@ kOnosDevourTime = 60
 
 kUmbraBulletModifier = 0.8
 
-kDevourEnergyCost = 65 --50
+kDevourEnergyCost = 60 --50
 kDevourPunchDamage = 70 --100
 
 kFastTunnelCost = 25
 kFastTunnelTime = 120
 
 kEggGestateTime = 15
-kUmbraResearchCost = 20
 kGorgeCost = 10
 kGorgeEggCost = 15
 kLerkCost = 21
@@ -275,11 +273,14 @@ kXenocideFuelDamage = 160
 kXenocideFuelRange = 12
 kXenocideFuelSpawnReduction = 0.6
 
-kBileBombResearchCost = 10
-kBileBombResearchTime = 40
+kBileBombResearchCost = 15
+kBileBombResearchTime = 75
 
 --Lerk
 kSpikeSpread = Math.Radians(3.8)
+kUmbraResearchCost = 20
+kSporesResearchCost = 20
+kSporesResearchTime = 120
 
 -- Prowler
 kProwlerCost = 18 --14
@@ -304,8 +305,8 @@ kRappelRange = 35
 kAcidSprayResearchCost = 10
 kAcidSprayResearchTime = 60
 kAcidSprayEnergyCost = 19
-kAcidSprayDamage = 17  -- 3 missiles
-kAcidSprayDamageType = kDamageType.Heavy
+kAcidSprayDamage = 22.5  -- 3 missiles
+kAcidSprayDamageType = kDamageType.Structural
 
 -- Fade
 kSwipeDamageType = kDamageType.Puncture
@@ -316,8 +317,8 @@ kStabDamage = 119
 kStabDamageType = kDamageType.Structural
 kStabEnergyCost = 29
 
-kStartBlinkEnergyCost = 12 --12
-kBlinkEnergyCost = 32 --32
+kStartBlinkEnergyCost = 11 --12
+kBlinkEnergyCost = 30 --32
 kHealthOnBlink = 0
 
 --Vokex
@@ -352,8 +353,8 @@ kAcidRocketBombDuration = 1
 kStompResearchCost = 25
 kStompResearchTime = 90
 kChargeDamage = 30
-kStompEnergyCost = 30
-kStompDamageType = kDamageType.Heavy
+kStompEnergyCost = 25
+kStompDamageType = kDamageType.Structural
 kStompDamage = 40
 kStompRange = 12
 
@@ -385,9 +386,9 @@ kEchoWhipCost = 2
 kEchoCragCost = 2
 kEchoShadeCost = 2
 kEchoShiftCost = 2
-kEchoVeilCost = 0
-kEchoSpurCost = 0
-kEchoShellCost = 0
+kEchoVeilCost = 4
+kEchoSpurCost = 4
+kEchoShellCost = 4
 kEchoEggCost = 1
 
 kObservatoryScanCost = 3
@@ -437,7 +438,7 @@ kNanoShieldCost = 3
 kNanoShieldCooldown = 5
 kNanoShieldDamageReductionDamage = 0.68
 
-kCombatBuilderCost = 3
+kCombatBuilderCost = 2
 kCombatBuilderDropCost = 5
 kCombatBuilderPointValue = 2
 
