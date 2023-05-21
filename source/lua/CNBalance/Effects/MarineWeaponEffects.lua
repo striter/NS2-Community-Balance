@@ -17,7 +17,7 @@ local kAdditionalEffects =
         {
             {player_sound = "sound/NS2.fev/marine/rifle/draw", classname = "Cannon", done = true},
 			{player_sound = "sound/ns2plus.fev/weapons/marine/revolver/draw", classname = "Revolver", volume = 0.5, done = true},
-            {player_sound = "sound/ns2plus.fev/weapons/marine/knife/deploy", classname = "Knife", done = true},
+            {player_sound = "sound/ns2plus.fev/weapons/marine/knife/draw", classname = "Knife", done = true},
 			{player_sound = "sound/ns2plus.fev/weapons/marine/lmg/draw", classname = "LightMachineGun", done = true},
             {player_sound = "sound/ns2plus.fev/weapons/marine/lmg/draw", classname = "SubMachineGun", done = true},
         },

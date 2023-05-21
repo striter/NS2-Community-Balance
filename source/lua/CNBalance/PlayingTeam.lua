@@ -23,7 +23,7 @@ local function extGetIsResearchRelevant(techId)
         relevantResearchIds[kTechId.CombatBuilderTech] = 2
         
         relevantResearchIds[kTechId.Devour] = 1
-        relevantResearchIds[kTechId.FastTunnel] = 1
+        relevantResearchIds[kTechId.ShiftTunnel] = 1
         
         relevantResearchIds[kTechId.XenocideFuel] = 1
         relevantResearchIds[kTechId.SkulkBoost] = 1

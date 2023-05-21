@@ -639,14 +639,31 @@ function BuildTechData()
 
     --Tunnels
     table.insert(techData, {
-        [kTechDataId] = kTechId.FastTunnel,
-        [kTechDataCostKey] = kFastTunnelCost,
-        [kTechDataResearchTimeKey] = kFastTunnelTime,
-        [kTechDataDisplayName] = "FAST_TUNNEL",
-        [kTechDataTooltipInfo] = "FAST_TUNNEL_TOOLTIP",
-        [kTechDataResearchName] = "FAST_TUNNEL",
+        [kTechDataId] = kTechId.ShiftTunnel,
+        [kTechDataCostKey] = kTunnelUpgradeCost,
+        [kTechDataResearchTimeKey] = kTunnelUpgradeTime,
+        [kTechDataDisplayName] = "SHIFT_TUNNEL",
+        [kTechDataTooltipInfo] = "SHIFT_TUNNEL_TOOLTIP",
+        [kTechDataResearchName] = "SHIFT_TUNNEL",
     })
 
+    table.insert(techData, {
+        [kTechDataId] = kTechId.CragTunnel,
+        [kTechDataCostKey] = kTunnelUpgradeCost,
+        [kTechDataResearchTimeKey] = kTunnelUpgradeTime,
+        [kTechDataDisplayName] = "CRAG_TUNNEL",
+        [kTechDataTooltipInfo] = "CRAG_TUNNEL_TOOLTIP",
+        [kTechDataResearchName] = "CRAG_TUNNEL",
+    })
+    
+    table.insert(techData, {
+        [kTechDataId] = kTechId.ShadeTunnel,
+        [kTechDataCostKey] = kTunnelUpgradeCost,
+        [kTechDataResearchTimeKey] = kTunnelUpgradeTime,
+        [kTechDataDisplayName] = "SHADE_TUNNEL",
+        [kTechDataTooltipInfo] = "SHADE_TUNNEL_TOOLTIP",
+        [kTechDataResearchName] = "SHADE_TUNNEL",
+    })
 
     table.insert(techData, {
         [kTechDataId] = kTechId.BuildTunnelEntryOne,

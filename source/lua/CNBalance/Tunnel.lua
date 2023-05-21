@@ -9,7 +9,7 @@ if Server then
         
         local entranceId = entrance:GetId()
 
-        if GetHasTech(self,kTechId.FastTunnel) then
+        if entrance.hasShiftUpgrade then
             if entranceId == self.exitAId then
                 self.timeExitAUsed = Shared.GetTime()   
                 self:UseExit(player, self:GetExitB(), kTunnelExitSide.B)

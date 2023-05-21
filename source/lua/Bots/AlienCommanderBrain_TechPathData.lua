@@ -34,7 +34,7 @@ local kAlienCommanderTechPath =
     {
         kTechId.Umbra, -- Bio 6
         kTechId.MetabolizeHealth, -- Bio 5
-        kTechId.FastTunnel, --Bio 5
+        kTechId.ShiftTunnel, --Bio 5
         kTechId.BoneShield, -- Bio 6
     },
 

@@ -62,7 +62,7 @@ kUpgradedCommandStationCost = 35
 
 -- Standard Supply
 kDragonBreathResearchCost = 15
-kDragonBreathResearchTime = 90
+kDragonBreathResearchTime = 60
 kLightMachineGunUpgradeCost = 20
 kLightMachineGunUpgradeTime = 90
 kCannonTechResearchCost = 30
@@ -234,8 +234,8 @@ kUmbraBulletModifier = 0.8
 kDevourEnergyCost = 60 --50
 kDevourPunchDamage = 70 --100
 
-kFastTunnelCost = 25
-kFastTunnelTime = 120
+kTunnelUpgradeCost = 15
+kTunnelUpgradeTime = 90
 
 kEggGestateTime = 15
 kGorgeCost = 10
@@ -248,6 +248,7 @@ kOnosCost = 62
 kOnosEggCost = 100
 
 kTunnelEntranceCost = 6
+kTunnelRelocateCost = 4
 
 --Skulk
 kSkulkBoostCost = 25

@@ -9,7 +9,9 @@ kAlienTechMap =
     { kTechId.CystCelerity, 3, 3 }, { kTechId.CystCamouflage, 6, 3 }, { kTechId.CystCarapace, 9, 3 },
 
     --FIXME Update and correct all icon positions
-    { kTechId.Spur, 4, 4, SetSpurIcon }, { kTechId.Veil, 7, 4, SetVeilIcon }, { kTechId.Shell, 10, 4, SetShellIcon },
+    { kTechId.ShiftTunnel,3.5 , 4},{ kTechId.Spur, 4.5, 4, SetSpurIcon },
+    { kTechId.ShadeTunnel,6.5 , 4},{ kTechId.Veil, 7.5, 4, SetVeilIcon },
+    { kTechId.CragTunnel,9.5 , 4},{ kTechId.Shell, 10.5, 4, SetShellIcon },
 
     { kTechId.Crush, 3, 5 },
     { kTechId.Celerity, 4, 5 },
@@ -27,7 +29,7 @@ kAlienTechMap =
     { kTechId.BioMassTwo, 2.5, 7, nil, "2" }, {kTechId.Rupture, 2.5, 8}, { kTechId.Devour, 2.5, 9 },
     { kTechId.BioMassThree, 3.5, 7, nil, "3" }, {kTechId.BoneWall, 3.5, 8}, { kTechId.MetabolizeEnergy, 3.5, 9 }, {kTechId.BileBomb, 3.5, 10},
     { kTechId.BioMassFour, 4.5, 7, nil, "4" }, {kTechId.Leap, 4.5, 8}, {kTechId.Spores, 4.5, 9},
-    { kTechId.BioMassFive, 5.5, 7, nil, "5" }, {kTechId.MetabolizeHealth, 5.5, 8},{kTechId.FastTunnel,5.5 , 9},
+    { kTechId.BioMassFive, 5.5, 7, nil, "5" }, {kTechId.MetabolizeHealth, 5.5, 8},
     { kTechId.BioMassSix, 6.5, 7, nil, "6" },  {kTechId.AcidSpray, 6.5, 8},{kTechId.Umbra, 6.5, 9}, {kTechId.BoneShield, 6.5, 10},
     { kTechId.BioMassSeven, 7.5, 7, nil, "7" }, {kTechId.Xenocide, 7.5, 8},{kTechId.Stab, 7.5, 9}, --{kTechId.AcidRocket, 7.5, 10}, 
     { kTechId.BioMassEight, 8.5, 7, nil, "8" }, {kTechId.Stomp, 8.5, 8},--{kTechId.SkulkBoost,8.5,9},

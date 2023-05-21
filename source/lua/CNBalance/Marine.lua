@@ -266,9 +266,15 @@ if Server then
         end
 
         local now = Shared.GetTime()
-        if self.lifeSustainResearched and  now > self.timeNextSustain then
-            self.timeNextSustain = now + kLifeSustainHealInterval
-            self:AddRegeneration(kLifeSustainHealInterval * kLifeSustainHealPerSecond)
+        
+        if now > self.timeNextSustain then
+            self.timeNextSustain = now + kLifeRegenTick
+            local healthCap = self.lifeSustainResearched and kLifeSustainMaxCap or kLifeRegenMaxCap
+            local healthToRegen = self:GetMaxHealth() * healthCap - self:GetHealth()
+            if healthToRegen > 0 then
+                local regenPerSecond = self.lifeSustainResearched and kLifeSustainHPS or kLifeRegenHPS
+                self:AddRegeneration( math.min(kLifeRegenTick * regenPerSecond,healthToRegen))
+            end
         end
         
         if self.nanoArmorResearched and now > self.timeNextWeld then 

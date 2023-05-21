@@ -78,7 +78,7 @@ ModLoader.SetupFileHook("lua/Sentry.lua", "lua/CNBalance/Sentry.lua", "replace")
 ModLoader.SetupFileHook("lua/SentryBattery.lua", "lua/CNBalance/SentryBattery.lua", "post")
 ModLoader.SetupFileHook("lua/ARC.lua", "lua/CNBalance/ARC.lua", "post")
 ModLoader.SetupFileHook("lua/MedPack.lua", "lua/CNBalance/MedPack.lua", "post")
-ModLoader.SetupFileHook("lua/Mine.lua", "lua/CNBalance/Mine.lua", "post")
+ModLoader.SetupFileHook("lua/Mine.lua", "lua/CNBalance/Mine.lua", "replace")
 
 ModLoader.SetupFileHook("lua/Marine.lua", "lua/CNBalance/Marine.lua", "post")
 ModLoader.SetupFileHook("lua/MarineSpectator.lua", "lua/CNBalance/MarineSpectator.lua", "post")
@@ -143,7 +143,7 @@ ModLoader.SetupFileHook("lua/AlienTunnelManager.lua", "lua/CNBalance/AlienTunnel
 ModLoader.SetupFileHook("lua/Hive.lua", "lua/CNBalance/Hive.lua", "post")
 ModLoader.SetupFileHook("lua/Tunnel.lua", "lua/CNBalance/Tunnel.lua", "post")
 ModLoader.SetupFileHook("lua/Crag.lua", "lua/CNBalance/Crag.lua", "post")
-ModLoader.SetupFileHook("lua/TunnelEntrance.lua", "lua/CNBalance/TunnelEntrance.lua", "post")
+ModLoader.SetupFileHook("lua/TunnelEntrance.lua", "lua/CNBalance/TunnelEntrance.lua", "replace")
 
 ModLoader.SetupFileHook("lua/Cyst_Server.lua", "lua/CNBalance/Cyst_Server.lua", "post")
 ModLoader.SetupFileHook("lua/Cyst.lua", "lua/CNBalance/Cyst.lua", "post")

@@ -15,7 +15,6 @@ TeamInfo.kRelevantTechIdsMarine =
 
     kTechId.PrototypeLab,
     kTechId.JetpackTech,
-    --kTechId.JetpackFuelTech,
     kTechId.ExosuitTech,
 
     kTechId.UpgradeRoboticsFactory,
@@ -28,7 +27,6 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.Cannon,
 
     kTechId.ExplosiveSupply,
-    kTechId.MinesUpgrade,
     kTechId.GrenadeLauncherDetectionShot,
     kTechId.GrenadeLauncherAllyBlast,
     kTechId.GrenadeLauncherUpgrade,
@@ -36,7 +34,6 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.ArmorSupply,
     kTechId.ArmorRegen,
     kTechId.LifeSustain,
-    kTechId.CombatBuilderTech,
 }
 
 TeamInfo.kRelevantTechIdsAlien =
@@ -62,7 +59,9 @@ TeamInfo.kRelevantTechIdsAlien =
     kTechId.ResearchBioMassOne,
     kTechId.ResearchBioMassTwo,
     kTechId.ResearchBioMassThree,
-    kTechId.FastTunnel,
+    kTechId.ShiftTunnel,
+    kTechId.CragTunnel,
+    kTechId.ShadeTunnel,
 
     kTechId.Leap,
     kTechId.Xenocide,

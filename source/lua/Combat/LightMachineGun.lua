@@ -24,7 +24,7 @@ local kButtRange = 1.1
 
 local kNumberOfVariants = 3
 
-local kOneShotSoundName = PrecacheAsset("sound/ns2plus.fev/weapons/marine/lmg/lmg_fire_oneshot")
+local kOneShotSoundName = PrecacheAsset("sound/ns2plus.fev/weapons/marine/lmg/fire_oneshot")
 local kAttackSoundName = PrecacheAsset("sound/ns2plus.fev/weapons/marine/lmg/fire")
 local kLocalAttackSoundName = PrecacheAsset("sound/ns2plus.fev/weapons/marine/lmg/fire")
 local kEndSound = PrecacheAsset("sound/ns2plus.fev/weapons/marine/lmg/fire_dropoff")

@@ -30,8 +30,8 @@ kARCRoboticsFactoryHealth = 3000    kARCRoboticsFactoryArmor = 600    kARCRoboti
 kSentryBatteryHealth = 700    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5
 kSentryHealth = 500    kSentryArmor = 100    kSentryPointValue = 4
 
-kARCHealth = 2900    kARCArmor = 600    kARCPointValue = 10   --2600 400
-kARCDeployedHealth = 2900    kARCDeployedArmor = 0      -- 2600 0
+kARCHealth = 3100    kARCArmor = 400    kARCPointValue = 10   --2600 400
+kARCDeployedHealth = 3100    kARCDeployedArmor = 0      -- 2600 0
 
 kPhaseGateHealth = 1850    kPhaseGateArmor = 800    kPhaseGatePointValue = 10 -- 1500  800  10
 
@@ -70,7 +70,7 @@ kOnosDamageReduction = {
     ["Shotgun"] = 0.8,
 }
 
-kProwlerHealth = 120 kProwlerArmor  = 25 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 7
+kProwlerHealth = 130 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 5
 kProwlerDamageReduction = {
     --["Shotgun"] = 0.9,
     ["Railgun"] = 0.85,
@@ -111,10 +111,11 @@ kMatureHydraHealth = 120   kMatureHydraArmor = 10  kHydraHealthPerBioMass = 25  
 kBoneWallHealth = 100 kBoneWallArmor = 200    kBoneWallHealthPerBioMass = 75
 kContaminationHealth = 1000 kContaminationArmor = 0    kContaminationPointValue = 2
 
-kTunnelEntranceHealth = 1050   kTunnelEntranceArmor = 250    --1000 ---100
-kMatureTunnelEntranceHealth = 1300    kMatureTunnelEntranceArmor = 350    --1250 -200
-kInfestedTunnelEntranceHealth = 1300    kInfestedTunnelEntranceArmor = 350  --1250 200
-kMatureInfestedTunnelEntranceHealth = 1450    kMatureInfestedTunnelEntranceArmor = 400    --1400 250
+kTunnelEntranceHealth = 1050   kTunnelEntranceArmor = 250  --1000 ---100  
+kMatureTunnelEntranceHealth = 1300    kMatureTunnelEntranceArmor = 350  kMatureCragTunnelEntranceArmor = 750  --1250 -200
+
+kInfestedTunnelEntranceHealth = 1300    kInfestedTunnelEntranceArmor = 350 --1250 200
+kMatureInfestedTunnelEntranceHealth = 1450    kMatureInfestedTunnelEntranceArmor = 400 kMatureCragInfestedTunnelEntranceArmor = 800   --1400 250
 kTunnelEntrancePointValue = 5
 
 kBabblerEggHealth = 50    kBabblerEggArmor = 0    kBabblerEggPointValue = 0

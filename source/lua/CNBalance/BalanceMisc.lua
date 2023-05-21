@@ -97,13 +97,13 @@ kShiftSupply = 20
 
 --Personal Res On Kill
 kExtractorPersonalResOnKill = 2.5
-kARCPersonalResOnKill = 2
-kObservatoryPersonalResOnKill = 2
+kARCPersonalResOnKill = 2.5
+kObservatoryPersonalResOnKill = 2.5
 kPhaseGatePersonalResOnKill = 4
 kPowerPointPersonalResOnKill = 0.5
 kCommandStationPersonalResOnKill = 10
 kInfantryPortalPersonalResOnKill = 2
-kPortableSentryPersonalResOnKill = 0.5
+kPortableSentryPersonalResOnKill = 0.8
 kWeaponCachePersonalResOnKill = 1
 kSentryBatteryPersonalResOnKill = 4
 kCystPersonalResOnKill = 0.2
@@ -133,8 +133,12 @@ kTowerTeamResOnKill = 0
 
 -- Nanoarmor & Lifesustain
 kNanoArmorHealPerSecond = 4
-kLifeSustainHealPerSecond = 10
-kLifeSustainHealInterval = 0.5
+kLifeRegenHPS = 5
+kLifeRegenMaxCap = 0.8
+kLifeRegenTick = 0.5
+
+kLifeSustainHPS = 10
+kLifeSustainMaxCap = 1
 
 kProwlerFov = 100
 

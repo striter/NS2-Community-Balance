@@ -120,8 +120,12 @@ if kTranslateMessage then
     kTranslateMessage["ONOS_DEVOUR"] = "吞噬"
     kTranslateMessage["ONOS_DEVOUR_TOOLTIP"] = "*Onos将陆战队员吞进肚子.\n*吞噬单位将无法使用武器\n-消化过程将遇到抵抗。"
 
-    kTranslateMessage["FAST_TUNNEL"] = "快速通道"
-    kTranslateMessage["FAST_TUNNEL_TOOLTIP"] = "*通道使用者不再需要长途跋涉."
+    kTranslateMessage["SHIFT_TUNNEL"] = "快速虫洞"
+    kTranslateMessage["SHIFT_TUNNEL_TOOLTIP"] = "*虫洞使用者不再需要长途跋涉."
+    kTranslateMessage["CRAG_TUNNEL"] = "坚甲虫洞"
+    kTranslateMessage["CRAG_TUNNEL_TOOLTIP"] = "*虫洞护甲将获得大量提升."
+    kTranslateMessage["SHADE_TUNNEL"] = "拟态虫洞"
+    kTranslateMessage["SHADE_TUNNEL_TOOLTIP"] = "*虫洞脱战后将对地方单位不可见."
 end
 
 if kLocales then
@@ -243,6 +247,10 @@ if kLocales then
     kLocales["ONOS_DEVOUR"] = "Devour"
     kLocales["ONOS_DEVOUR_TOOLTIP"] = "*Onos can devour marines.\n-Will gain resistance when digesting。"
 
-    kLocales["FAST_TUNNEL"] = "Tunnel Muscle"
-    kLocales["FAST_TUNNEL_TOOLTIP"] = "*No more travelling for tunnel users."
+    kLocales["SHIFT_TUNNEL"] = "Tunnel Muscle"
+    kLocales["SHIFT_TUNNEL_TOOLTIP"] = "*No more travelling for tunnel users."
+    kLocales["CRAG_TUNNEL"] = "Tunnel Shells"
+    kLocales["CRAG_TUNNEL_TOOLTIP"] = "*Makes tunnel tougher."
+    kLocales["SHADE_TUNNEL"] = "Tunnel Camouflage"
+    kLocales["SHADE_TUNNEL_TOOLTIP"] = "*Tunnel became invisible when out of combat."
 end

@@ -45,9 +45,13 @@ debug.appendtoenum(kTechId, "Heavy")
 debug.appendtoenum(kTechId, "HeavyMarine")
 
 --Alien
-debug.appendtoenum(kTechId, "FastTunnel")
+debug.appendtoenum(kTechId, "ShiftTunnel")
+debug.appendtoenum(kTechId, "CragTunnel")
+debug.appendtoenum(kTechId, "ShadeTunnel")
+
 debug.appendtoenum(kTechId, "SkulkBoost")
 debug.appendtoenum(kTechId, "XenocideFuel")
+
 
 --Gorger
 debug.appendtoenum(kTechId, "SporeMine")

@@ -12,12 +12,15 @@ function Hive:GetTechButtons()
     elseif techId == kTechId.CragHive then
         techButtons[5] = kTechId.DrifterRegeneration
         techButtons[6] = kTechId.CystCarapace
+        techButtons[7] = kTechId.CragTunnel
     elseif techId == kTechId.ShiftHive then
         techButtons[5] = kTechId.DrifterCelerity
         techButtons[6] = kTechId.CystCelerity
+        techButtons[7] = kTechId.ShiftTunnel
     elseif techId == kTechId.ShadeHive then
         techButtons[5] = kTechId.DrifterCamouflage
         techButtons[6] = kTechId.CystCamouflage
+        techButtons[7] = kTechId.ShadeTunnel
     end
     
     if self.bioMassLevel <= 1 then
@@ -27,9 +30,21 @@ function Hive:GetTechButtons()
     elseif self.bioMassLevel <= 3 then
         techButtons[2] = kTechId.ResearchBioMassThree
     end
-    
-    techButtons[3] = kTechId.FastTunnel
+
 
     return techButtons
     
 end
+
+if Server then
+    local baseOnResearchComplete = Hive.OnResearchComplete
+    function Hive:OnResearchComplete(researchId)
+        baseOnResearchComplete(self,researchId)
+
+        if researchId == kTechId.CragTunnel then        --Inform matured tunnel to update armor amount
+            for _, tunnel in ipairs(GetEntitiesForTeam("TunnelEntrance", self:GetTeamNumber())) do
+                tunnel:UpdateMaturity(true)
+            end
+        end
+    end
+end 
