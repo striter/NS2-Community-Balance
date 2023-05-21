@@ -1547,7 +1547,7 @@
 <notes></notes>
 <event>
 <name>fire</name>
-<guid>{f6e36dfe-be7f-4e2e-a3db-8a8346f43e2c}</guid>
+<guid>{62a9c0db-2b9a-4023-975d-2c556c3e8d9a}</guid>
 <parameter_nextid>3</parameter_nextid>
 <layer_nextid>11</layer_nextid>
 <layer>
@@ -1581,7 +1581,8 @@
 <dsp_name>Volume</dsp_name>
 <dsp_paramindex>0</dsp_paramindex>
 <colour>#ff0000</colour>
-<point>0,1,1,1</point>
+<point>0,0.989691,1,1</point>
+<point>0.060241,0.507732,0,1</point>
 <point>0.370337,0,0,1</point>
 <parametername>(distance)</parametername>
 <controlparameter>(distance)</controlparameter>
@@ -1666,7 +1667,7 @@
 <point>0,0.793814,1,1</point>
 <point>0.00986547,1,0,1</point>
 <point>0.070852,0.717391,0,1</point>
-<point>0.981166,0.541063,0,2</point>
+<point>0.981166,0.270619,0,2</point>
 <parametername>failsafe</parametername>
 <controlparameter>failsafe</controlparameter>
 <_PC_enable>1</_PC_enable>
@@ -1729,12 +1730,13 @@
 <dsp_name>Volume</dsp_name>
 <dsp_paramindex>0</dsp_paramindex>
 <colour>#ff0000</colour>
-<point>0,1,1,1</point>
-<point>0.976067,0.34981,0,2</point>
+<point>0,0.0570309,1,1</point>
+<point>0.0819277,0.467679,0,1</point>
+<point>0.976067,0.072242,0,2</point>
 <point>1,0,0,1</point>
 <parametername>failsafe</parametername>
 <controlparameter>failsafe</controlparameter>
-<_PC_enable>1</_PC_enable>
+<_PC_enable>0</_PC_enable>
 <_XBOX360_enable>1</_XBOX360_enable>
 <_PSP_enable>1</_PSP_enable>
 <_PS3_enable>1</_PS3_enable>
@@ -1864,7 +1866,7 @@
 <flags>0</flags>
 <exflags>0</exflags>
 </envelope>
-<_PC_enable>1</_PC_enable>
+<_PC_enable>0</_PC_enable>
 <_XBOX360_enable>1</_XBOX360_enable>
 <_PSP_enable>1</_PSP_enable>
 <_PS3_enable>1</_PS3_enable>
@@ -1877,7 +1879,7 @@
 </layer>
 <parameter>
 <name>failsafe</name>
-<guid>{d7098709-49c5-4dbb-872b-2b3dbaf07747}</guid>
+<guid>{bd440a39-2886-481f-ab13-afdb45203cd0}</guid>
 <primary>1</primary>
 <loopmode>0</loopmode>
 <rangeunits></rangeunits>
@@ -1890,7 +1892,7 @@
 </parameter>
 <parameter>
 <name>(distance)</name>
-<guid>{e422be24-43b9-4924-841b-16e215caffcf}</guid>
+<guid>{a9e941bd-2292-493c-a4f9-87d32506130c}</guid>
 <primary>0</primary>
 <loopmode>2</loopmode>
 <rangeunits></rangeunits>
@@ -1905,8 +1907,8 @@
 <car_rpmsmooth>0.075</car_rpmsmooth>
 <car_loadsmooth>0.05</car_loadsmooth>
 <car_loadscale>6</car_loadscale>
-<volume_db>-8.29</volume_db>
-<pitch>0.2000000000000000111</pitch>
+<volume_db>-4</volume_db>
+<pitch>0.14999999999999999445</pitch>
 <pitch_units>Octaves</pitch_units>
 <pitch_randomization>0</pitch_randomization>
 <pitch_randomization_units>Octaves</pitch_randomization_units>
@@ -2006,7 +2008,7 @@
 </event>
 <event>
 <name>fire_oneshot</name>
-<guid>{c6cc65a0-bf90-4c41-8747-301446ff2aae}</guid>
+<guid>{769fac87-2359-4471-8ec1-f9cc5ce91f12}</guid>
 <parameter_nextid>1</parameter_nextid>
 <layer_nextid>2</layer_nextid>
 <layer>
@@ -2194,7 +2196,7 @@
 </layer>
 <parameter>
 <name>(distance)</name>
-<guid>{d42386bc-de35-4201-8577-8fdb03500c4c}</guid>
+<guid>{28d62af4-aa40-403e-a310-fc898b020096}</guid>
 <primary>1</primary>
 <loopmode>0</loopmode>
 <rangeunits></rangeunits>
@@ -2207,7 +2209,7 @@
 </parameter>
 <parameter>
 <name>param01</name>
-<guid>{998c24f6-49cf-4c2d-8a02-9411eea53f58}</guid>
+<guid>{82399d3c-c396-4795-868f-424b61377f06}</guid>
 <primary>0</primary>
 <loopmode>0</loopmode>
 <rangeunits></rangeunits>
@@ -2223,7 +2225,7 @@
 <car_loadsmooth>0.05</car_loadsmooth>
 <car_loadscale>6</car_loadscale>
 <volume_db>-8.25</volume_db>
-<pitch>0.2000000000000000111</pitch>
+<pitch>0.14999999999999999445</pitch>
 <pitch_units>Octaves</pitch_units>
 <pitch_randomization>0</pitch_randomization>
 <pitch_randomization_units>Octaves</pitch_randomization_units>
