@@ -19,7 +19,7 @@ kExosuitArmorPerUpgradeLevel = 30
 
 kCommandStationHealth = 3000    kCommandStationArmor = 1800    kCommandStationPointValue = 20   --2000 -1800
 kPowerPointHealth = 2200    kPowerPointArmor = 1250    kPowerPointPointValue = 10 -- 2000 1000  10
-kExtractorHealth = 2400 kExtractorArmor = 1200 kExtractorPointValue = 15 --2400 1050
+kExtractorHealth = 2400 kExtractorArmor = 1350 kExtractorPointValue = 15 --2400 1050
 
 kMineHealth = 26    kMineArmor = 5    kMinePointValue = 5
 
@@ -65,9 +65,10 @@ kFadeHealth = 280    kFadeArmor = 80     kFadePointValue = 20    kFadeHealthPerB
 kOnosHealth = 750    kOnosArmor = 500    kOnosPointValue = 30    kOnosHealtPerBioMass = 50
 kOnosDamageReduction = {
     ["Rifle"] = 0.9,
-    ["SubMachineGun"] = 0.9,
-    ["LightMachineGun"] = 0.9,
-    ["Shotgun"] = 0.8,
+    ["SubMachineGun"] = 0.92,
+    ["LightMachineGun"] = 0.92,
+    ["Shotgun"] = 0.9,
+    ["HeavyMachineGun"] = 1.05
 }
 
 kProwlerHealth = 130 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 5
@@ -113,6 +114,7 @@ kContaminationHealth = 1000 kContaminationArmor = 0    kContaminationPointValue 
 
 kTunnelEntranceHealth = 1050   kTunnelEntranceArmor = 250  --1000 ---100  
 kMatureTunnelEntranceHealth = 1300    kMatureTunnelEntranceArmor = 350  kMatureCragTunnelEntranceArmor = 750  --1250 -200
+kInfantryPortalHealth = 1825    kInfantryPortalArmor = 500    kInfantryPortalPointValue = 10
 
 kInfestedTunnelEntranceHealth = 1300    kInfestedTunnelEntranceArmor = 350 --1250 200
 kMatureInfestedTunnelEntranceHealth = 1450    kMatureInfestedTunnelEntranceArmor = 400 kMatureCragInfestedTunnelEntranceArmor = 800   --1400 250

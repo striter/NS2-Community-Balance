@@ -2225,7 +2225,7 @@
 <car_loadsmooth>0.05</car_loadsmooth>
 <car_loadscale>6</car_loadscale>
 <volume_db>-8.25</volume_db>
-<pitch>0</pitch>
+<pitch>0.14999999999999999445</pitch>
 <pitch_units>Octaves</pitch_units>
 <pitch_randomization>0</pitch_randomization>
 <pitch_randomization_units>Octaves</pitch_randomization_units>

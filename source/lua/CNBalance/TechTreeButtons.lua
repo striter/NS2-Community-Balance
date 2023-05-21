@@ -7,7 +7,7 @@ kTechIdToMaterialOffset[kTechId.StandardSupply] = 215
 kTechIdToMaterialOffset[kTechId.StandardStation] = 215
 kTechIdToMaterialOffset[kTechId.LightMachineGunUpgrade] = 192
 kTechIdToMaterialOffset[kTechId.MinesUpgrade] = 194
-kTechIdToMaterialOffset[kTechId.DragonBreath] = 222
+kTechIdToMaterialOffset[kTechId.DragonBreath] = 212
 kTechIdToMaterialOffset[kTechId.CannonTech] = 204
 kTechIdToMaterialOffset[kTechId.DropCannon] = 204
 

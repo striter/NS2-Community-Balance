@@ -55,10 +55,10 @@ kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
 kHeavyMachineGunSpread = Math.Radians(5)  --4
 
-kCommandStationCost = 20
-kCommandStationUpgradeCost = 15
+kCommandStationCost = 15
+kCommandStationUpgradeCost = 10
 kCommandStationUpgradeTime = 90
-kUpgradedCommandStationCost = 35
+kUpgradedCommandStationCost = 25
 
 -- Standard Supply
 kDragonBreathResearchCost = 15
@@ -174,7 +174,7 @@ kBurnDamagePerSecond = 8
 kFlamethrowerBurnDuration = 1
 kFlamethrowerMaxBurnDuration = 6
 
-kMinigunDamage = 8.5
+kMinigunDamage = 9
 kMinigunDamageType = kDamageType.Exosuit
 kRailgunDamage = 10
 kRailgunChargeDamage = 140
@@ -247,8 +247,8 @@ kFadeEggCost = 70
 kOnosCost = 62
 kOnosEggCost = 100
 
-kTunnelEntranceCost = 6
-kTunnelRelocateCost = 4
+kTunnelEntranceCost = 8
+kTunnelRelocateCost = 6
 
 --Skulk
 kSkulkBoostCost = 25
@@ -395,6 +395,8 @@ kEchoEggCost = 1
 kObservatoryScanCost = 3
 kScanCooldown = 0
 kObservatoryDistressBeaconCost = 10
+
+kArmsLabCost = 15
 
 kWeapons1ResearchTime = 75
 kWeapons2ResearchTime = 105
