@@ -40,12 +40,12 @@ kHealingClampMaxHPAmount = 0.15
 
 kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5    kSkulkHealthPerBioMass = 3
 kSkulkDamageReduction = {
-    ["Shotgun"] = 0.9,
+    ["Shotgun"] = 0.85,
     ["Grenade"] = 0.8,
     ["ImpactGrenade"] = 0.8,
-    ["Railgun"] = 0.9,
     ["Cannon"] = 0.9,
     ["PulseGrenade"] = 0.8,
+    --["Railgun"] = 0.9,
 }
 
 kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7    kGorgeHealthPerBioMass = 3
@@ -53,10 +53,10 @@ kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7    kGorgeHealthPer
 kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15    kLerkHealthPerBioMass = 3
 kLerkDamageReduction = {
     ["Shotgun"] = 0.9,
-    ["Railgun"] = 0.8,
     ["Cannon"] = 0.8,
     ["Grenade"] = 0.75,
     ["ImpactGrenade"] = 0.75,
+    --["Railgun"] = 0.8,
     --["PulseGrenade"] = 0.75,
 }
 
@@ -67,19 +67,25 @@ kFadeDamageReduction = {
 }
 
 kOnosHealth = 750    kOnosArmor = 500    kOnosPointValue = 30    kOnosHealtPerBioMass = 50
+kOnosBoneShieldDefaultReduction = 0.2
+kOnosBoneShieldDamageReduction = {
+    ["HeavyMachineGun"] = 0.25,
+    ["Minigun"] = 0.32,
+    ["Railgun"] = 0,
+}
 kOnosDamageReduction = {
-    ["Rifle"] = 0.95,
-    ["SubMachineGun"] = 0.95,
-    ["LightMachineGun"] = 0.95,
-    ["Shotgun"] = 0.9,
+    ["Rifle"] = 0.92,
+    ["SubMachineGun"] = 0.92,
+    ["LightMachineGun"] = 0.92,
+    ["Shotgun"] = 0.88,
     ["HeavyMachineGun"] = 1.05
 }
 
 kProwlerHealth = 130 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 5
 kProwlerDamageReduction = {
     --["Shotgun"] = 0.9,
-    ["Railgun"] = 0.85,
-    ["Cannon"] = 0.85,
+    ["Railgun"] = 0.9,
+    ["Cannon"] = 0.9,
     ["Grenade"] = 0.75,
     ["PulseGrenade"] = 0.75,
     ["ImpactGrenade"] = 0.75,

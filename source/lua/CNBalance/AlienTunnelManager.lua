@@ -1,5 +1,3 @@
-
-
 local buttonIndexToNetVarMap = {
     "entryOne",
     "entryTwo",
@@ -31,14 +29,13 @@ function AlienTunnelManager:GetTechAllowed(techId)
         else
             otherIndex = techIndex - 4
         end
-        -----------
-        local maxTunnels=kMaxTunnelCount[numHives]
-        if self[buttonIndexToNetVarMap[otherIndex + 1]] ~= 0 then -- map index from 1 to 8, so we have to shift by 1
-            allowed = maxTunnels > self.numTunnels
+        
+        local allowedTunnels =kMaxTunnelCount[numHives] -- numHives
+        if self[buttonIndexToNetVarMap[otherIndex + 1]] ~= Entity.invalidId then -- map index from 1 to 8, so we have to shift by 1
+            allowed = allowedTunnels > self.numTunnels
         else
-            allowed = maxTunnels > (techIndex % 4) and maxTunnels > self.numTunnels
+            allowed = allowedTunnels > (techIndex % 4) and allowedTunnels > self.numTunnels
         end
-        --------
         canAfford = teamInfo:GetTeamResources() >= GetCostForTech(techId)
     end
 

@@ -23,22 +23,18 @@ set {
 
 function Onos:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
 
+    local classname = doer:GetClassName()
     if hitPoint ~= nil and self:GetIsBoneShieldActive() and self:GetHitsBoneShield(doer, hitPoint) then
-
-        local className = string.lower(doer:GetClassName())
-        local reduction = 0.225
-        if className == "railgun" then
-            reduction = 0
-        end
-
+        local reduction = kOnosBoneShieldDamageReduction[classname] or kOnosBoneShieldDefaultReduction
+        --TODO Exclude local player and trigger local-player only effect
         if reduction ~= 0 then
             damageTable.damage = damageTable.damage * reduction
-            --TODO Exclude local player and trigger local-player only effect
             self:TriggerEffects("boneshield_blocked", { effecthostcoords = Coords.GetTranslation(hitPoint) } )
         end
+        return
     end
     
-    local reduction = kOnosDamageReduction[doer:GetClassName()]
+    local reduction = kOnosDamageReduction[classname]
     if reduction then
         damageTable.damage = damageTable.damage * reduction
         return

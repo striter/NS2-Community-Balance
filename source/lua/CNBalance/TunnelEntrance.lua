@@ -365,7 +365,7 @@ function TunnelEntrance:GetCanTriggerCollapse()
 end
 
 function TunnelEntrance:GetCanRelocate()
-    return self:GetHasOtherEntrance() and self:GetIsBuilt() and not self:GetIsCollapsing()
+    return self:GetHasOtherEntrance()  and not self:GetIsCollapsing() -- and self:GetIsBuilt()
 end
 
 function TunnelEntrance:GetCanUpgradeToInfestedTunnel()

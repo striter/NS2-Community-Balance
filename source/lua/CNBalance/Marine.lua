@@ -76,10 +76,6 @@ function Marine:OnInitialized()
     end
 end
 
-function Marine:ShouldAutopickupWeapons()
-	return self.autoPickup
-end
-
 if Server then
     
     function Marine:GiveItem(itemMapName,setActive, suppressError)

@@ -55,10 +55,10 @@ kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
 kHeavyMachineGunSpread = Math.Radians(5)  --4
 
-kCommandStationCost = 15
+kCommandStationCost = 20
 kCommandStationUpgradeCost = 10
 kCommandStationUpgradeTime = 90
-kUpgradedCommandStationCost = 25
+kUpgradedCommandStationCost = 30
 
 -- Standard Supply
 kDragonBreathResearchCost = 15
@@ -247,8 +247,8 @@ kFadeEggCost = 70
 kOnosCost = 62
 kOnosEggCost = 100
 
-kTunnelEntranceCost = 8
-kTunnelRelocateCost = 6
+kTunnelEntranceCost = 7
+kTunnelRelocateCost = 5
 
 --Skulk
 kSkulkBoostCost = 25

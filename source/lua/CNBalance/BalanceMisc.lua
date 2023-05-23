@@ -1,6 +1,6 @@
 -- kInitialMACs = 1
 -- kInitialDrifters = 1
-kMaxTunnelCount = {1,3,3,4,4,4,4,4,4,4}
+kMaxTunnelCount = {1,3,4,4,4,4,4,4,4,4}
 
 kPistolWeight = 0.0
 kRifleWeight = 0.13
