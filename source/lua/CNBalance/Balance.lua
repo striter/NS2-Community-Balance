@@ -234,8 +234,8 @@ kUmbraBulletModifier = 0.8
 kDevourEnergyCost = 60 --50
 kDevourPunchDamage = 70 --100
 
-kTunnelUpgradeCost = 15
-kTunnelUpgradeTime = 90
+kTunnelUpgradeCost = 10
+kTunnelUpgradeTime = 60
 
 kEggGestateTime = 15
 kGorgeCost = 10
@@ -274,8 +274,8 @@ kXenocideFuelDamage = 160
 kXenocideFuelRange = 12
 kXenocideFuelSpawnReduction = 0.6
 
-kBileBombResearchCost = 15
-kBileBombResearchTime = 75
+kBileBombResearchCost = 10
+kBileBombResearchTime = 40
 
 --Lerk
 kSpikeSpread = Math.Radians(3.8)
@@ -351,12 +351,14 @@ kAcidRocketBombDotDamage = 10
 kAcidRocketBombDuration = 1
 
 -- Onos
+kBoneShieldResearchCost = 20
+kBoneShieldResearchTime = 40
 kStompResearchCost = 25
 kStompResearchTime = 90
 kChargeDamage = 30
 kStompEnergyCost = 25
 kStompDamageType = kDamageType.Structural
-kStompDamage = 40
+kStompDamage = 45
 kStompRange = 12
 
 kDisruptMarineTime = 1
@@ -450,11 +452,11 @@ kMarineSentryDamage = 3
 kMarineSentryBuildTime = 3
 
 kWeaponCacheCost = 2
-kWeaponCachePersonalCost = 12
+kWeaponCachePersonalCost = 10
 kWeaponCacheBuildTime = 6
 kWeaponCachePersonalCarries = 1
 
-kMarineSentryPersonalCost = 8
+kMarineSentryPersonalCost = 6
 kMarineSentryPersonalCarries = 2
 
 kSporeMineCost = 0

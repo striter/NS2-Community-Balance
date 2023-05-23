@@ -41,3 +41,10 @@ function Fade:ModifyVelocity(input, velocity, deltaTime)
     end
 
 end
+
+function Fade:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
+    local reduction = kFadeDamageReduction[doer:GetClassName()]
+    if reduction then
+        damageTable.damage = damageTable.damage * reduction
+    end
+end

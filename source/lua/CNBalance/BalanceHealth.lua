@@ -40,7 +40,7 @@ kHealingClampMaxHPAmount = 0.15
 
 kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5    kSkulkHealthPerBioMass = 3
 kSkulkDamageReduction = {
-    ["Shotgun"] = 0.8,
+    ["Shotgun"] = 0.9,
     ["Grenade"] = 0.8,
     ["ImpactGrenade"] = 0.8,
     ["Railgun"] = 0.9,
@@ -61,12 +61,16 @@ kLerkDamageReduction = {
 }
 
 kFadeHealth = 280    kFadeArmor = 80     kFadePointValue = 20    kFadeHealthPerBioMass = 5
+kFadeDamageReduction = {
+    ["MarineSentry"] = 1.33,
+    ["Mine"] = 1.1,
+}
 
 kOnosHealth = 750    kOnosArmor = 500    kOnosPointValue = 30    kOnosHealtPerBioMass = 50
 kOnosDamageReduction = {
-    ["Rifle"] = 0.9,
-    ["SubMachineGun"] = 0.92,
-    ["LightMachineGun"] = 0.92,
+    ["Rifle"] = 0.95,
+    ["SubMachineGun"] = 0.95,
+    ["LightMachineGun"] = 0.95,
     ["Shotgun"] = 0.9,
     ["HeavyMachineGun"] = 1.05
 }
@@ -103,8 +107,7 @@ kCystHealth = 50    kCystArmor = 1
 kMatureCystHealth = 400    kMatureCystArmor = 1    kCystPointValue = 1
 kMinMatureCystHealth = 200 kMinCystScalingDistance = 48 kMaxCystScalingDistance = 168
 
-kClogHealth = 250  kClogArmor = 0 kClogPointValue = 0
-kClogHealthPerBioMass = 10
+kClogHealth = 250  kClogArmor = 0  kClogHealthPerBioMass = 10 kClogPointValue = 0
 
 kHydraHealth = 100    kHydraArmor = 5    kHydraPointValue = 0
 kMatureHydraHealth = 120   kMatureHydraArmor = 10  kHydraHealthPerBioMass = 25  kMatureHydraPointValue = 0
