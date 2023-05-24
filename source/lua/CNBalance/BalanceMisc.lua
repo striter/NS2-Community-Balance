@@ -13,6 +13,8 @@ kShotgunWeight = 0.14
 
 kMaxInfantryPortalsPerCommandStation = 5
 kNumMines = 2
+kGrenadeLauncherPlayersAlert = 5
+kFlameThrowerPlayersAlert = 3
 -- Jetpack
 kUpgradedJetpackUseFuelRate = 0.18
 kJetpackingAccel = 0.8

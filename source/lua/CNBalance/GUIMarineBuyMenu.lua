@@ -46,6 +46,7 @@ GUIMarineBuyMenu.kCostTextColor_NotEnoughMoney   = Color(174/255, 51/255, 51/255
 
 GUIMarineBuyMenu.kTeamTextColor_None             = Color(97/255,  97/255,  97/255)
 GUIMarineBuyMenu.kTeamTextColor_HasPlayers       = Color(109/255, 158/255, 167/255)
+GUIMarineBuyMenu.kTeamTextColor_TooManyPlayers   = Color(174/255, 91/255, 51/255)
 GUIMarineBuyMenu.kSpecialTextContentColor        = Color(162/255, 195/255, 200/255)
 GUIMarineBuyMenu.kSpecialTextContentColor_Debuff = Color(239/255, 94/255,  80/255)
 
@@ -635,6 +636,7 @@ function GUIMarineBuyMenu:_CreateButton(parent, buttonPosition, buttonTechId)
     buyButton:SetOptionFlag(GUIItem.CorrectScaling)
 
     local techCost = LookupTechData(buttonTechId, kTechDataCostKey, nil)
+    local techRestriction = LookupTechData(buttonTechId,kTechDataPlayersRestrictionKey,nil)
     local costHasPrice = false
     local costString
     if techCost then
@@ -720,6 +722,7 @@ function GUIMarineBuyMenu:_CreateButton(parent, buttonPosition, buttonTechId)
         TeamText = teamText,
         CostText = costText,
         Initialized = false,
+        PlayersRestriction = techRestriction,
         LastShowState = kButtonShowState.Uninitialized,
         Disabled = self:GetTechIDDisabled(buttonTechId)
     }
@@ -869,9 +872,9 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     self:_InitializeWeaponGroup(weaponGroupBottomLeft, x4ButtonPositions,
     {
         kTechId.Shotgun,
-        kTechId.Flamethrower,
         kTechId.HeavyMachineGun,
         kTechId.Cannon,
+        kTechId.Flamethrower,
     })
 
     local x4LabelStartX = 335
@@ -1377,11 +1380,13 @@ function GUIMarineBuyMenu:_UpdateRealTimeElements(buttonTable, techId, techAvail
         local netVarName = TeamInfo_GetUserTrackerNetvarName(techMapName)
         local numUsers = teamInfo[netVarName]
         assert(numUsers, string.format("Netvar %s does not exist in MarineTeamInfo!", netVarName))
-        teamText:SetText(string.format("%d", numUsers))
-        teamText:SetColor(ConditionalValue(numUsers > 0, self.kTeamTextColor_HasPlayers, self.kTeamTextColor_None))
+        local hasPlayers = numUsers > 0
+        local tooManyPlayers = buttonTable.PlayersRestriction and numUsers >= buttonTable.PlayersRestriction
+        local color = ConditionalValue(hasPlayers,ConditionalValue(tooManyPlayers,self.kTeamTextColor_TooManyPlayers, self.kTeamTextColor_HasPlayers), self.kTeamTextColor_None)
+        teamText:SetColor(color)
+        teamText:SetText(tooManyPlayers and string.format(Locale.ResolveString("BUYMENU_RESTRICTION"),numUsers)
+                or string.format("%d", numUsers))
     end
-
-
 end
 
 function GUIMarineBuyMenu:_UpdateBuyButtonAvailability(buttonTable, hoverStateChanged, useHoverTexture, buttonState)

@@ -84,6 +84,8 @@ if kTranslateMessage then
     kTranslateMessage["RESEARCH_GRENADES_TITLE"]="投掷物升级"
     kTranslateMessage["CLUSTERGRENADE_BUYDESCRIPTION"]="陆战队士兵常用的投掷物.\n*对建筑物有高额的伤害.\n*升级后将对建筑有产生额外子雷."
 
+    kTranslateMessage["BUYMENU_RESTRICTION"] = "%i(过多持有)"
+    
     kTranslateMessage["BUILD_ABILITY"]="建造者"
     kTranslateMessage["BUILD_ABILITY_TOOLTIP"]="放置建筑,构建前线阵地.\n*刺花(造成远程伤害)\n*泥团(构建基础阵地)\n*酸液地雷(爆炸造成护甲伤害)\n*拌网(减缓敌方单位速度)"
 
@@ -199,6 +201,8 @@ if kLocales then
     kLocales["MARINE_SENTRY"]="Portable sentry"
     kLocales["MARINE_SENTRY_HINT"]="Track and damage living target"
 
+    kLocales["BUYMENU_RESTRICTION"] = "%i(TooMany)"
+    
     kLocales["PROTOS_MENU"]="Prototype menu"
     kLocales["PROTOS_MENU_TOOLTIP"]="Buy prototypes for ground units"
     kLocales["DUAL_MINIGUN"]="Minigun Exosuit"

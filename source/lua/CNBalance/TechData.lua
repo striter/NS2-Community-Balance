@@ -1,4 +1,5 @@
 
+kTechDataPlayersRestrictionKey = "playersrestrictionkey"
 kTechDataPersonalCostKey = "costpersonalkey"
 kTechDataLayoutKey     = "layoutKey"
 kTechDataPersonalResOnKillKey = "pResOnKillKey"
@@ -247,6 +248,38 @@ function BuildTechData()
         [kTechDataCostKey] = kLightMachineGunCost,
     })
 
+    table.insert(techData,{
+        [kTechDataId] = kTechId.GrenadeLauncher,
+        [kTechDataMaxHealth] = kMarineWeaponHealth,
+        [kTechDataPointValue] = kGrenadeLauncherPointValue,
+        [kTechDataMapName] = GrenadeLauncher.kMapName,
+        [kTechDataDisplayName] = "GRENADE_LAUNCHER",
+        [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_TOOLTIP",
+        [kTechDataModel] = GrenadeLauncher.kModelName,
+        [kTechDataDamageType] = kRifleDamageType,
+        [kTechDataCostKey] = kGrenadeLauncherCost,
+        [kStructureAttachId] = kTechId.Armory,
+        [kStructureAttachRange] = kArmoryWeaponAttachRange,
+        [kStructureAttachRequiresPower] = true,
+        [kTechDataPlayersRestrictionKey] = kGrenadeLauncherPlayersAlert,
+    } )
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.Flamethrower,
+        [kTechDataMaxHealth] = kMarineWeaponHealth,
+        [kTechDataPointValue] = kFlamethrowerPointValue,
+        [kTechDataMapName] = Flamethrower.kMapName,
+        [kTechDataDisplayName] = "FLAMETHROWER",
+        [kTechDataTooltipInfo] = "FLAMETHROWER_TOOLTIP",
+        [kTechDataModel] = Flamethrower.kModelName,
+        [kTechDataDamageType] = kFlamethrowerDamageType,
+        [kTechDataCostKey] = kFlamethrowerCost,
+        [kStructureAttachId] = kTechId.Armory,
+        [kStructureAttachRange] = kArmoryWeaponAttachRange,
+        [kStructureAttachRequiresPower] = true,
+        [kTechDataPlayersRestrictionKey] = kFlameThrowerPlayersAlert,
+    } )
+    
     table.insert(techData,{
         [kTechDataId] = kTechId.Cannon,
         [kTechDataMaxHealth] = kMarineWeaponHealth,
