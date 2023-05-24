@@ -167,12 +167,13 @@ ModLoader.SetupFileHook("lua/AlienCommander.lua", "lua/CNBalance/AlienCommander.
 ModLoader.SetupFileHook("lua/MarineCommander.lua", "lua/CNBalance/MarineCommander.lua", "replace")
 
 --Bot
-ModLoader.SetupFileHook("lua/bots/MarineCommanerBrain_TechPath.lua", "lua/Bots/MarineCommanderBrain_TechPath.lua", "replace" )
-ModLoader.SetupFileHook("lua/bots/AlienCommanderBrain_TechPathData.lua", "lua/Bots/AlienCommanderBrain_TechPathData.lua", "replace" )
+ModLoader.SetupFileHook("lua/bots/MarineCommanerBrain_TechPath.lua", "lua/CNBalance/Bots/MarineCommanderBrain_TechPath.lua", "replace" )
+ModLoader.SetupFileHook("lua/bots/AlienCommanderBrain_TechPathData.lua", "lua/CNBalance/Bots/AlienCommanderBrain_TechPathData.lua", "replace" )
+ModLoader.SetupFileHook("lua/bots/MarineBrain_Data.lua", "lua/CNBalance/Bots/MarineBrain_Data.lua", "post" )
 
 if AddHintModPanel then
     local panelMaterial = PrecacheAsset("materials/CNPlaygroundBalance/Banner.material")
     AddHintModPanel(panelMaterial, "https://docs.qq.com/doc/DUEZSeUtrR0tWTGJ4","看看司马策划又改了什么东西")
 end
 
-Shared.Message("[CN] Natural Selection 2.0 Mounted 2023.5.10")
+Shared.Message("[CN] Natural Selection 2.0 Mounted 2023.5.24")
