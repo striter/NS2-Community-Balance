@@ -65,7 +65,6 @@ TeamInfo.kRelevantTechIdsAlien =
 
     kTechId.Leap,
     kTechId.Xenocide,
-    kTechId.SkulkBoost,
     kTechId.XenocideFuel,
     
     kTechId.BileBomb,

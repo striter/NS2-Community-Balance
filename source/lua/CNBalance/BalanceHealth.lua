@@ -21,7 +21,7 @@ kCommandStationHealth = 3000    kCommandStationArmor = 1800    kCommandStationPo
 kPowerPointHealth = 2200    kPowerPointArmor = 1250    kPowerPointPointValue = 10 -- 2000 1000  10
 kExtractorHealth = 2400 kExtractorArmor = 1350 kExtractorPointValue = 15 --2400 1050
 
-kMineHealth = 26    kMineArmor = 5    kMinePointValue = 5
+kMineHealth = 30    kMineArmor = 9    kMinePointValue = 5
 
 kObservatoryHealth = 1050    kObservatoryArmor = 500    kObservatoryPointValue = 15     -- 750 500
 
@@ -33,7 +33,7 @@ kSentryHealth = 500    kSentryArmor = 100    kSentryPointValue = 4
 kARCHealth = 3100    kARCArmor = 400    kARCPointValue = 10   --2600 400
 kARCDeployedHealth = 3100    kARCDeployedArmor = 0      -- 2600 0
 
-kPhaseGateHealth = 1850    kPhaseGateArmor = 800    kPhaseGatePointValue = 10 -- 1500  800  10
+kPhaseGateHealth = 1950    kPhaseGateArmor = 800    kPhaseGatePointValue = 10 -- 1500  800  10
 
 --Alien
 kHealingClampMaxHPAmount = 0.15
@@ -64,12 +64,13 @@ kFadeHealth = 280    kFadeArmor = 80     kFadePointValue = 20    kFadeHealthPerB
 kFadeDamageReduction = {
     ["MarineSentry"] = 1.33,
     ["Mine"] = 1.1,
+    ["HeavyMachineGun"] = 0.92,
 }
 
 kOnosHealth = 750    kOnosArmor = 500    kOnosPointValue = 30    kOnosHealtPerBioMass = 50
 kOnosBoneShieldDefaultReduction = 0.2
 kOnosBoneShieldDamageReduction = {
-    ["HeavyMachineGun"] = 0.25,
+    ["HeavyMachineGun"] = 0.28,
     ["Minigun"] = 0.32,
     ["Railgun"] = 0,
 }
@@ -81,12 +82,12 @@ kOnosDamageReduction = {
     ["HeavyMachineGun"] = 1.05
 }
 
-kProwlerHealth = 130 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 5
+kProwlerHealth = 135 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 5
 kProwlerDamageReduction = {
     --["Shotgun"] = 0.9,
+    ["Grenade"] = 0.75,
     ["Railgun"] = 0.9,
     ["Cannon"] = 0.9,
-    ["Grenade"] = 0.75,
     ["PulseGrenade"] = 0.75,
     ["ImpactGrenade"] = 0.75,
 }
@@ -98,7 +99,7 @@ kAlienRegenerationPercentage = 0.08
 
 kSkulkBaseCarapaceUpgradeAmount = 10    kSkulkCarapaceArmorPerBiomass = 1.25
 kGorgeBaseCarapaceUpgradeAmount = 25    kGorgeCarapaceArmorPerBiomass = 1.25
-kProwlerBaseCarapaceUpgradeAmount = 8  kProwlerCarapaceArmorPerBiomass = 1 --kProwlerArmorFullyUpgradedAmount = 28
+kProwlerBaseCarapaceUpgradeAmount = 10  kProwlerCarapaceArmorPerBiomass = 1.25 --kProwlerArmorFullyUpgradedAmount = 28
 kLerkBaseCarapaceUpgradeAmount  = 25    kLerkCarapaceArmorPerBiomass  = 1.25
 kFadeBaseCarapaceUpgradeAmount  = 30    kFadeCarapaceArmorPerBiomass  = 2.5
 kOnosBaseCarapaceUpgradeAmount  = 150   kOnosCarapaceArmorPerBiomass  = 10
@@ -107,7 +108,7 @@ kVokexBaseCarapaceUpgradeAmount = 50    kVokexCarapaceArmorPerBiomass = 0
 kHiveHealth = 5200    kHiveArmor = 750   --4000 750
 kMatureHiveHealth = 7800 kMatureHiveArmor = 1400    -- 6000 1400
 kHarvesterHealth = 2000 kHarvesterArmor = 200 kHarvesterPointValue = 15
-kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 500  --2300 320
+kMatureHarvesterHealth = 2500 kMatureHarvesterArmor = 500  --2300 320
 
 kCystHealth = 50    kCystArmor = 1
 kMatureCystHealth = 400    kMatureCystArmor = 1    kCystPointValue = 1
@@ -115,8 +116,8 @@ kMinMatureCystHealth = 200 kMinCystScalingDistance = 48 kMaxCystScalingDistance 
 
 kClogHealth = 250  kClogArmor = 0  kClogHealthPerBioMass = 10 kClogPointValue = 0
 
-kHydraHealth = 100    kHydraArmor = 5    kHydraPointValue = 0
-kMatureHydraHealth = 120   kMatureHydraArmor = 10  kHydraHealthPerBioMass = 25  kMatureHydraPointValue = 0
+kHydraHealth = 100    kHydraArmor = 10    kHydraPointValue = 0
+kMatureHydraHealth = 130   kMatureHydraArmor = 20  kHydraHealthPerBioMass = 20  kMatureHydraPointValue = 0
 
 kBoneWallHealth = 100 kBoneWallArmor = 200    kBoneWallHealthPerBioMass = 75
 kContaminationHealth = 1000 kContaminationArmor = 0    kContaminationPointValue = 2

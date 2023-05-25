@@ -174,7 +174,7 @@ kBurnDamagePerSecond = 8
 kFlamethrowerBurnDuration = 1
 kFlamethrowerMaxBurnDuration = 6
 
-kMinigunDamage = 9
+kMinigunDamage = 8.5
 kMinigunDamageType = kDamageType.Exosuit
 kRailgunDamage = 10
 kRailgunChargeDamage = 140
@@ -226,8 +226,8 @@ kDualExosuitCost = 55
 kDualRailgunExosuitCost = 55
 kDualExosuitDropCost = 40
 
-kOnosDevourCost = 15
-kOnosDevourTime = 60
+kOnosDevourCost = 10
+kOnosDevourTime = 40
 
 kUmbraBulletModifier = 0.8
 
@@ -251,11 +251,6 @@ kTunnelEntranceCost = 7
 kTunnelRelocateCost = 5
 
 --Skulk
-kSkulkBoostCost = 25
-kSkulkBoostTime = 60
-kSkulkBoostMaxSpeed = 0.75
-kSkulkBoostHealthPerBiomass = 2.5
-
 kParasiteEnergyCost = 30
 kAdrenalineParasiteEnergyCost = 18
 
@@ -281,7 +276,7 @@ kBileBombResearchTime = 40
 kSpikeSpread = Math.Radians(3.8)
 kUmbraResearchCost = 20
 kSporesResearchCost = 20
-kSporesResearchTime = 120
+kSporesResearchTime = 60
 
 -- Prowler
 kProwlerCost = 18 --14
@@ -295,7 +290,7 @@ kVolleyRappelDamageType = kDamageType.Normal
 kVolleyEnergyCost = 7.0 --7.0
 kRappelDamage = 10
 kRappelParasiteTime = 5
-kRappelWebTime = 2
+kRappelWebTime = 2.5
 
 kRappelResearchCost = 10
 kRappelResearchTime = 20

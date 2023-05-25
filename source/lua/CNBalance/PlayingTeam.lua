@@ -26,7 +26,6 @@ local function extGetIsResearchRelevant(techId)
         relevantResearchIds[kTechId.ShiftTunnel] = 1
         
         relevantResearchIds[kTechId.XenocideFuel] = 1
-        relevantResearchIds[kTechId.SkulkBoost] = 1
     end
 
     local relevant = relevantResearchIds[techId]

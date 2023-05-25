@@ -108,8 +108,7 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "LIFE_SUSTAIN_TOOLTIP",
         [kTechDataResearchName] = "LIFE_SUSTAIN",
     })
-
-
+    
     table.insert(techData, {
         [kTechDataId] = kTechId.ExplosiveSupply,
         [kTechDataCostKey] = kCommandStationUpgradeCost,
@@ -497,15 +496,6 @@ function BuildTechData()
     })
 
     --Skulk
-    table.insert(techData, {
-        [kTechDataId] = kTechId.SkulkBoost,
-        [kTechDataCostKey] = kSkulkBoostCost,
-        [kTechDataResearchTimeKey] = kSkulkBoostTime,
-        [kTechDataDisplayName] = "SKULK_BOOST",
-        [kTechDataTooltipInfo] = "SKULK_BOOST_TOOLTIP",
-        [kTechDataResearchName] = "SKULK_BOOST",
-    })
-
     table.insert(techData, {
         [kTechDataId] = kTechId.XenocideFuel,
         [kTechDataCostKey] = kXenocideFuelCost,

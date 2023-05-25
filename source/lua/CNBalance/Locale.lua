@@ -95,9 +95,6 @@ if kTranslateMessage then
     kTranslateMessage["XENOCIDE_FUEL"]="自爆充能"
     kTranslateMessage["XENOCIDE_FUEL_TOOLTIP"]="使Skulk的自爆变得更加致命.\n*增加自爆的范围.\n*增加自爆的伤害.\n*降低玩家复活所需时间."
 
-    kTranslateMessage["SKULK_BOOST"]="Skulk 生物质"
-    kTranslateMessage["SKULK_BOOST_TOOLTIP"]="加强Skulk的作战效率.\n*增加Skulk的移动速度.\n*增加Skulk的生命值."
-
     kTranslateMessage["BABBLER_MINE"]="Babbler巢"
     kTranslateMessage["BABBLER_MINE_TOOLTIP"]="自动感应式.\n*探测到临近敌方单位后.\n释放6个Babbler攻击敌方单位."
 
@@ -223,9 +220,6 @@ if kLocales then
 
     kLocales["XENOCIDE_FUEL"]="Xenocide fuel"
     kLocales["XENOCIDE_FUEL_TOOLTIP"]="Make xenocide deadlier.\n*Increase the range for xenocide.\n*Increase the damage for xenocide.\n*Reduce the respawn time when successfully."
-
-    kLocales["SKULK_BOOST"]="Skulk Biomaxx"
-    kLocales["SKULK_BOOST_TOOLTIP"]="Increase skulk battle efficiency.\n*Increase skulk speed.\n*Increase skulk health."
 
     kLocales["BABBLER_MINE"]="Babbler Egg"
     kLocales["BABBLER_MINE_TOOLTIP"]="Mine.\n*Hatch when enemies nearby.\n*Release six babblers to chase the target."
