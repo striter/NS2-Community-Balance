@@ -92,7 +92,7 @@ kPhaseGateSupply = 10
 kSentriesPerBattery = 3
 
 kDrifterSupply = 5
-kWhipSupply = 15
+kWhipSupply = 5
 kCragSupply = 20
 kShadeSupply = 20
 kShiftSupply = 20
@@ -109,11 +109,11 @@ kPortableSentryPersonalResOnKill = 0.8
 kWeaponCachePersonalResOnKill = 1
 kSentryBatteryPersonalResOnKill = 4
 kCystPersonalResOnKill = 0.2
-kHarvesterPersonalResOnKill = 8
-kTunnelPersonalResOnKill = 8
-kHivePersonalResOnKill = 40
-kTraitPersonalResOnKill = 8
-kTowerPersonalResOnKill = 8
+kHarvesterPersonalResOnKill = 6
+kTunnelPersonalResOnKill = 6
+kHivePersonalResOnKill = 30
+kTraitPersonalResOnKill = 4
+kTowerPersonalResOnKill = 3
 
 --Team Res On Kill
 kExtractorTeamResOnKill = 0
@@ -121,8 +121,8 @@ kARCTeamResOnKill = 5
 kObservatoryTeamResOnKill = 0
 kPhaseGateTeamResOnKill = 0
 kPowerPointTeamResOnKill = 0
-kCommandStationTeamResOnKill = 15
-kInfantryPortalTeamResOnKill = 2
+kCommandStationTeamResOnKill = 20
+kInfantryPortalTeamResOnKill = 0
 kPortableSentryTeamResOnKill = 0
 kWeaponCacheTeamResOnKill = 0
 kSentryBatteryTeamResOnKill = 0
@@ -130,12 +130,12 @@ kCystTeamResOnKill = 0
 kHarvesterTeamResOnKill = 0
 kTunnelTeamResOnKill = 0
 kHiveTeamResOnKill = 20
-kTraitTeamResOnKill = 4
+kTraitTeamResOnKill = 0
 kTowerTeamResOnKill = 0
 
 -- Nanoarmor & Lifesustain
 kNanoArmorHealPerSecond = 4
-kLifeRegenHPS = 5
+kLifeRegenHPS = 4
 kLifeRegenMaxCap = 0.8
 kLifeRegenTick = 0.5
 

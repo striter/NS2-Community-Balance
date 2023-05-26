@@ -1,3 +1,6 @@
+local kMetabolizeEnergyRegain = 20
+local kMetabolizeHealthRegain = 20
+
 local kBlinkSpeed = 14    --14 Blink desire speed
 local kBlinkAcceleration = 40   --40 Speed up per second
 local kBlinkAddAcceleration = 1  --1 Speed after holding
@@ -48,3 +51,13 @@ function Fade:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoin
         damageTable.damage = damageTable.damage * reduction
     end
 end
+
+local baseHandleButtons = Fade.HandleButtons
+function Fade:HandleButtons(input)
+    
+    if self.ethereal and Shared.GetTime() - self.etherealStartTime > 0.12 then
+        input.commands = bit.bor(input.commands, Move.Crouch)
+    end
+    baseHandleButtons(self,input)
+end
+

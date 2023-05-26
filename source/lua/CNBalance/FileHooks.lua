@@ -137,28 +137,32 @@ ModLoader.SetupFileHook("lua/Gorge.lua", "lua/CNBalance/Lifeforms/Gorge.lua", "p
 ModLoader.SetupFileHook("lua/Onos.lua", "lua/CNBalance/Lifeforms/Onos.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/Shockwave.lua", "lua/CNBalance/Weapons/Alien/Shockwave.lua", "post")
 
-ModLoader.SetupFileHook("lua/GUIEggDisplay.lua", "lua/CNBalance/GUIEggDisplay.lua", "post" )
-ModLoader.SetupFileHook("lua/GUIAlienBuyMenu.lua", "lua/CNBalance/GUIAlienBuyMenu.lua", "post" )
-ModLoader.SetupFileHook("lua/EvolutionChamber.lua", "lua/CNBalance/EvolutionChamber.lua", "post")
-ModLoader.SetupFileHook("lua/AlienTunnelManager.lua", "lua/CNBalance/AlienTunnelManager.lua", "post")
-ModLoader.SetupFileHook("lua/Hive.lua", "lua/CNBalance/Hive.lua", "post")
-ModLoader.SetupFileHook("lua/Tunnel.lua", "lua/CNBalance/Tunnel.lua", "post")
-ModLoader.SetupFileHook("lua/Crag.lua", "lua/CNBalance/Crag.lua", "post")
-ModLoader.SetupFileHook("lua/TunnelEntrance.lua", "lua/CNBalance/TunnelEntrance.lua", "replace")
-
-ModLoader.SetupFileHook("lua/Cyst_Server.lua", "lua/CNBalance/Cyst_Server.lua", "post")
-ModLoader.SetupFileHook("lua/Cyst.lua", "lua/CNBalance/Cyst.lua", "post")
-ModLoader.SetupFileHook("lua/Hydra.lua", "lua/CNBalance/Hydra.lua", "post")
-ModLoader.SetupFileHook("lua/BabblerEgg.lua", "lua/CNBalance/BabblerEgg.lua", "post")
-
 ModLoader.SetupFileHook("lua/Weapons/Alien/Ability.lua", "lua/CNBalance/Weapons/Alien/Ability.lua", "post")
-ModLoader.SetupFileHook("lua/Weapons/Alien/Web.lua", "lua/CNBalance/Weapons/Alien/Web.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/Parasite.lua", "lua/CNBalance/Weapons/Alien/Parasite.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/XenocideLeap.lua", "lua/CNBalance/Weapons/Alien/XenocideLeap.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/Metabolize.lua", "lua/CNBalance/Weapons/Alien/Metabolize.lua", "replace")
 ModLoader.SetupFileHook("lua/Weapons/Alien/BoneShield.lua", "lua/CNBalance/Weapons/Alien/BoneShield.lua", "replace")
 ModLoader.SetupFileHook("lua/Weapons/Alien/BabblerPheromone.lua", "lua/CNBalance/Weapons/Alien/BabblerPheromone.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/HydraAbility.lua", "lua/CNBalance/Weapons/Alien/HydraAbility.lua", "post")
+
+ModLoader.SetupFileHook("lua/GUIEggDisplay.lua", "lua/CNBalance/GUIEggDisplay.lua", "post" )
+ModLoader.SetupFileHook("lua/GUIAlienBuyMenu.lua", "lua/CNBalance/GUIAlienBuyMenu.lua", "post" )
+ModLoader.SetupFileHook("lua/EvolutionChamber.lua", "lua/CNBalance/EvolutionChamber.lua", "post")
+ModLoader.SetupFileHook("lua/AlienTunnelManager.lua", "lua/CNBalance/AlienTunnelManager.lua", "post")
+
+--Structures
+ModLoader.SetupFileHook("lua/Hive.lua", "lua/CNBalance/Structures/Alien/Hive.lua", "post")
+ModLoader.SetupFileHook("lua/TunnelEntrance.lua", "lua/CNBalance/Structures/Alien/TunnelEntrance.lua", "replace")
+ModLoader.SetupFileHook("lua/Tunnel.lua", "lua/CNBalance/Structures/Alien/Tunnel.lua", "post")
+ModLoader.SetupFileHook("lua/Hydra.lua", "lua/CNBalance/Structures/Alien/Hydra.lua", "post")
+ModLoader.SetupFileHook("lua/Cyst_Server.lua", "lua/CNBalance/Structures/Alien/Cyst_Server.lua", "post")
+ModLoader.SetupFileHook("lua/Cyst.lua", "lua/CNBalance/Structures/Alien/Cyst.lua", "post")
+ModLoader.SetupFileHook("lua/Crag.lua", "lua/CNBalance/Structures/Alien/Crag.lua", "post")
+ModLoader.SetupFileHook("lua/Shift.lua", "lua/CNBalance/Structures/Alien/Shift.lua", "post")
+ModLoader.SetupFileHook("lua/Shade.lua", "lua/CNBalance/Structures/Alien/Shade.lua", "post")
+ModLoader.SetupFileHook("lua/Whip.lua", "lua/CNBalance/Structures/Alien/Whip.lua", "post")
+ModLoader.SetupFileHook("lua/BabblerEgg.lua", "lua/CNBalance/Structures/Alien/BabblerEgg.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Alien/Web.lua", "lua/CNBalance/Structures/Alien/Web.lua", "post")
 
 --Commander
 ModLoader.SetupFileHook("lua/Commander_Buttons.lua", "lua/CNBalance/Commander_Buttons.lua", "post" )
@@ -167,6 +171,7 @@ ModLoader.SetupFileHook("lua/AlienCommander.lua", "lua/CNBalance/AlienCommander.
 ModLoader.SetupFileHook("lua/MarineCommander.lua", "lua/CNBalance/MarineCommander.lua", "replace")
 
 --Bot
+ModLoader.SetupFileHook("lua/Clog.lua", "lua/CNBalance/Bots/Clog.lua", "post" )
 ModLoader.SetupFileHook("lua/bots/MarineCommanerBrain_TechPath.lua", "lua/CNBalance/Bots/MarineCommanderBrain_TechPath.lua", "replace" )
 ModLoader.SetupFileHook("lua/bots/AlienCommanderBrain_TechPathData.lua", "lua/CNBalance/Bots/AlienCommanderBrain_TechPathData.lua", "replace" )
 ModLoader.SetupFileHook("lua/bots/MarineBrain_Data.lua", "lua/CNBalance/Bots/MarineBrain_Data.lua", "post" )
@@ -176,4 +181,4 @@ if AddHintModPanel then
     AddHintModPanel(panelMaterial, "https://docs.qq.com/doc/DUEZSeUtrR0tWTGJ4","看看司马策划又改了什么东西")
 end
 
-Shared.Message("[CN] Natural Selection 2.0 Mounted 2023.5.24")
+Shared.Message("[CN] Natural Selection 2.0 Mounted 2023.5.26")

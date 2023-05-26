@@ -1,3 +1,15 @@
+Script.Load("lua/BiomassHealthMixin.lua")
+
+local baseOnCreate = Crag.OnCreate
+function Crag:OnCreate()
+    baseOnCreate(self)
+    InitMixin(self, BiomassHealthMixin)
+end
+
+function Crag:GetHealthPerBioMass()
+    return kCragHealthPerBioMass
+end
+
 if Server then
 
     local kTechIdToLifeformHeal =
@@ -7,6 +19,7 @@ if Server then
         [kTechId.Lerk] = 16,
         [kTechId.Fade] = 25,
         [kTechId.Onos] = 80,
+        [kTechId.Prowler] = 18,
     }
 
     function Crag:TryHeal(target)

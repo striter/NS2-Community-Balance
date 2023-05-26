@@ -132,18 +132,18 @@ kTunnelEntrancePointValue = 5
 
 kBabblerEggHealth = 50    kBabblerEggArmor = 0    kBabblerEggPointValue = 0
 kMatureBabblerEggHealth = 150 kMatureBabblerEggArmor = 0
+   
+kWhipHealth = 650    kWhipArmor = 175    kWhipPointValue = 10
+kMatureWhipHealth = 720    kMatureWhipArmor = 240  kWhipHealthPerBioMass = 120  kMatureWhipPointValue = 10
 
 kCragHealth = 480    kCragArmor = 160    kCragPointValue = 10
-kMatureCragHealth = 560    kMatureCragArmor = 272    kMatureCragPointValue = 10
-        
-kWhipHealth = 650    kWhipArmor = 175    kWhipPointValue = 10
-kMatureWhipHealth = 720    kMatureWhipArmor = 240    kMatureWhipPointValue = 10
+kMatureCragHealth = 560    kMatureCragArmor = 272  kCragHealthPerBioMass = 130  kMatureCragPointValue = 10
 
 kShadeHealth = 600    kShadeArmor = 0    kShadePointValue = 10
-kMatureShadeHealth = 1200    kMatureShadeArmor = 0    kMatureShadePointValue = 10
+kMatureShadeHealth = 1200    kMatureShadeArmor = 0  kShadeHealthPerBioMass = 100  kMatureShadePointValue = 10
 
 kShiftHealth = 600    kShiftArmor = 60    kShiftPointValue = 10
-kMatureShiftHealth = 880    kMatureShiftArmor = 120    kMatureShiftPointValue = 10
+kMatureShiftHealth = 880    kMatureShiftArmor = 120  kShiftHealthPerBioMass = 120  kMatureShiftPointValue = 10
 
 kShellHealth = 600     kShellArmor = 150     kShellPointValue = 12
 kMatureShellHealth = 1000     kMatureShellArmor = 300 -- 700 200
