@@ -35,12 +35,14 @@ if Server then
         baseSlapTarget(self,target)
         local infested = self:GetGameEffectMask(kGameEffect.OnInfestation)
         if not infested then
+            local attacker 
             local selfDamage = kUnrootDefaultSelfDamage
             if target:isa("Player") then
                 selfDamage = kUnrootPlayerSelfDamage
+                attacker = target
             end
 
-            self:DeductHealth(self:GetMaxHealth()* selfDamage, target)
+            self:DeductHealth(self:GetMaxHealth()* selfDamage, attacker)
         end
     end
 
