@@ -113,7 +113,8 @@ kHarvesterPersonalResOnKill = 6
 kTunnelPersonalResOnKill = 6
 kHivePersonalResOnKill = 30
 kTraitPersonalResOnKill = 4
-kTowerPersonalResOnKill = 3
+kTowerPersonalResOnKill = 6
+kWhipPersonalResOnKill = 3
 
 --Team Res On Kill
 kExtractorTeamResOnKill = 0
@@ -132,6 +133,7 @@ kTunnelTeamResOnKill = 0
 kHiveTeamResOnKill = 20
 kTraitTeamResOnKill = 0
 kTowerTeamResOnKill = 0
+kWhipTeamResOnKill = 0
 
 -- Nanoarmor & Lifesustain
 kNanoArmorHealPerSecond = 4

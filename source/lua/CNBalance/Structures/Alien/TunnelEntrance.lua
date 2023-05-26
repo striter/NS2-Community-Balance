@@ -927,9 +927,11 @@ end
 local baseOnUpdate = TunnelEntrance.OnUpdate
 function TunnelEntrance:OnUpdate(deltaTime)
     baseOnUpdate(self,deltaTime)
-    self.hasShiftUpgrade = GetHasTech(self,kTechId.ShiftTunnel)
-    self.hasShadeUpgrade = GetHasTech(self,kTechId.ShadeTunnel)
-    self.camouflaged = self.hasShadeUpgrade and not self:GetIsInCombat()
+    if Server then
+        self.hasShiftUpgrade = GetHasTech(self,kTechId.ShiftTunnel)
+        self.hasShadeUpgrade = GetHasTech(self,kTechId.ShadeTunnel)
+        self.camouflaged = self.hasShadeUpgrade and not self:GetIsInCombat()
+    end
 end
 
 function TunnelEntrance:GetIsCamouflaged()

@@ -48,6 +48,9 @@ debug.appendtoenum(kTechId, "HeavyMarine")
 debug.appendtoenum(kTechId, "ShiftTunnel")
 debug.appendtoenum(kTechId, "CragTunnel")
 debug.appendtoenum(kTechId, "ShadeTunnel")
+--debug.appendtoenum(kTechId, "ShiftWhip")
+--debug.appendtoenum(kTechId, "CragWhip")
+--debug.appendtoenum(kTechId, "ShadeWhip")
 
 debug.appendtoenum(kTechId, "XenocideFuel")
 

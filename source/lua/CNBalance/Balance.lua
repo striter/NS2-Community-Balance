@@ -67,7 +67,7 @@ kDragonBreathResearchTime = 60
 kLightMachineGunUpgradeCost = 20
 kLightMachineGunUpgradeTime = 90
 kCannonTechResearchCost = 30
-kCannonTechResearchTime = 120
+kCannonTechResearchTime = 90
 
 --Explosive Supply
 kMinesUpgradeResearchCost = 10
@@ -77,7 +77,7 @@ kGrenadeLauncherDetectionShotResearchTime = 60
 kGrenadeLauncherAllyBlastResearchCost = 15
 kGrenadeLauncherAllyBlastResearchTime = 60
 kGrenadeLauncherUpgradeResearchCost = 20
-kGrenadeLauncherUpgradeResearchTime = 90
+kGrenadeLauncherUpgradeResearchTime = 60
 
 kGrenadeLauncherCost = 20
 kGrenadeLauncherDropCost = 12

@@ -1369,8 +1369,8 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "WHIP_TOOLTIP",
         [kTechDataGrows] = true,
         [kTechDataObstacleRadius] = 0.85,
-        [kTechDataPersonalResOnKillKey] = kTowerPersonalResOnKill,
-        [kTechDataTeamResOnKillKey] = kTowerTeamResOnKill,
+        [kTechDataPersonalResOnKillKey] = kWhipPersonalResOnKill,
+        [kTechDataTeamResOnKillKey] = kWhipTeamResOnKill,
     })
     return techData
 end

@@ -1,3 +1,5 @@
+local kUnrootPlayerSelfDamage = .25
+local kUnrootDefaultSelfDamage = .07
 Script.Load("lua/BiomassHealthMixin.lua")
 
 local baseOnCreate = Whip.OnCreate
@@ -33,9 +35,13 @@ if Server then
         baseSlapTarget(self,target)
         local infested = self:GetGameEffectMask(kGameEffect.OnInfestation)
         if not infested then
-            self:DeductHealth(self:GetMaxHealth()*.2, target)
+            local selfDamage = kUnrootDefaultSelfDamage
+            if target:isa("Player") then
+                selfDamage = kUnrootPlayerSelfDamage
+            end
+
+            self:DeductHealth(self:GetMaxHealth()* selfDamage, target)
         end
-        
     end
 
 
