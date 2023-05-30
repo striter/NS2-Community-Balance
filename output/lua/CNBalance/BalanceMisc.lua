@@ -136,11 +136,14 @@ kTowerTeamResOnKill = 0
 kWhipTeamResOnKill = 0
 
 -- Nanoarmor & Lifesustain
-kNanoArmorHealPerSecond = 4
+kMarineNanoArmorPerSecond = 4
+kJetpackMarineArmorPerSecond = 3
+kJetpackMarineNanoArmorPerSecond = 6
+kExoArmorPerSecond = 8
+kExoNanoArmorPerSecond = 15
+
 kLifeRegenHPS = 4
 kLifeRegenMaxCap = 0.8
-kLifeRegenTick = 0.5
-
 kLifeSustainHPS = 10
 kLifeSustainMaxCap = 1
 

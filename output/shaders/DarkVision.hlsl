@@ -122,7 +122,8 @@ float4 SFXDarkVisionPS(PS_INPUT input) : COLOR0
 
     } else // world geometry
     {
-        float4 geometryColor = geometryEdgeColor * edge;
+        float geometryStrength = edge * step(1,edge) * step( depth1.r , 100 );
+        float4 geometryColor = geometryEdgeColor * geometryStrength;
 
         //Let there be light
         float luminance = inputPixel.r * 0.2126729f + inputPixel.g * 0.7151522f + inputPixel.b * 0.0721750f;
@@ -130,14 +131,12 @@ float4 SFXDarkVisionPS(PS_INPUT input) : COLOR0
         
         float3 normal = tex2D(normalTexture, texCoord).xyz;
         normal = abs(normal - 0.5);
-        float normalIntensity = pow((normal.x + normal.y + normal.z) * 1.4 , 8) * 0.5;
+        float normalIntensity = saturate(pow((normal.x + normal.y + normal.z) * 1.4 , 8)) * 0.5;
         
-        float geometryStrength = edge * step(1,edge);
         float surfaceIntensity = darkParameter * normalIntensity;    
-        geometryColor += geometrySurfaceColor * surfaceIntensity;
+        geometryColor += geometrySurfaceColor * surfaceIntensity *  saturate(smoothstep(20,5,depth1.r));
         //Lights out
         
-        float mask = step( depth1.r , 100 ) * ( 0.01 * amount ) ;       //Exclude Skybox + Animation
-        return lerp(inputPixel, geometryColor, mask);
+        return lerp(inputPixel, geometryColor, ( 0.01 * amount ));  //Animation
     }
 }

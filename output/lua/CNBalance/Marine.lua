@@ -1,4 +1,11 @@
 
+Script.Load("lua/AutoWeldMixin.lua")
+local baseOnCreate = Marine.OnCreate
+function Marine:OnCreate()
+    baseOnCreate(self)
+    InitMixin(self,AutoWeldMixin)
+end
+
 --Weapons
 if Server then
     
@@ -55,24 +62,6 @@ if Server then
             self.meleeRespawn = player.meleeRespawn
         end
 
-    end
-end
-    
-
-local baseOnInitialized = Marine.OnInitialized
-function Marine:OnInitialized()
-    baseOnInitialized(self)
-
-    if Server then
-        self.timeNextWeld = 0
-        self.timeNextSustain = 0
-        self.nanoArmorResearched = false
-        self.lifeSustainResearched = false
-        self:AddTimedCallback(function(self)
-            self.nanoArmorResearched = GetHasTech(self,kTechId.ArmorRegen)
-            self.lifeSustainResearched = GetHasTech(self,kTechId.LifeSustain)
-            return true
-        end, 1)
     end
 end
 
@@ -254,47 +243,16 @@ if Server then
     end
 ----------    
 
-    -- Auto heal/weld
-    local function SharedUpdate(self)
     
-        if self:GetIsInCombat() then
-            return
-        end
-
-        local now = Shared.GetTime()
-        
-        if now > self.timeNextSustain then
-            self.timeNextSustain = now + kLifeRegenTick
-            local healthCap = self.lifeSustainResearched and kLifeSustainMaxCap or kLifeRegenMaxCap
-            local healthToRegen = self:GetMaxHealth() * healthCap - self:GetHealth()
-            if healthToRegen > 0 then
-                local regenPerSecond = self.lifeSustainResearched and kLifeSustainHPS or kLifeRegenHPS
-                self:AddRegeneration( math.min(kLifeRegenTick * regenPerSecond,healthToRegen))
-            end
-        end
-        
-        if self.nanoArmorResearched and now > self.timeNextWeld then 
-            self.timeNextWeld = now + AutoWeldMixin.kWeldInterval
-            self:OnWeld(self, AutoWeldMixin.kWeldInterval, self, kNanoArmorHealPerSecond)
-        end
+    --AutoHeal NanoArmor
+    function Marine:GetAutoHealPerSecond(lifeSustainResearched)
+        return lifeSustainResearched and kLifeSustainHPS or kLifeRegenHPS
     end
     
-    local baseOnProcessMove=Marine.OnProcessMove
-    function Marine:OnProcessMove(input)
-        baseOnProcessMove(self,input)
-        SharedUpdate(self)
+    function Marine:GetAutoWeldArmorPerSecond(nanoArmorResearched)
+        return nanoArmorResearched and kMarineNanoArmorPerSecond or 0
     end
     
-    local baseOnUpdate = Marine.OnUpdate
-    function Marine:OnUpdate(deltaTime)
-        baseOnUpdate(self,deltaTime)
-        SharedUpdate(self)
-    end
-    
-    function Marine:GetCanSelfWeld()
-        return true
-    end
-    --
 end
 
 

@@ -49,6 +49,13 @@ function JetpackMarine:GetIsStunAllowed()
     return false
 end
 
+if Server then
+    
+    function JetpackMarine:GetAutoWeldArmorPerSecond(nanoArmorResearched)
+        return nanoArmorResearched and kJetpackMarineNanoArmorPerSecond or kJetpackMarineArmorPerSecond
+    end
+end
+
 --function JetpackMarine:OnWebbed()   --突然离世
 --    if not self:GetIsOnGround() then
 --        self:SetStun(kDisruptMarineTime)

@@ -35,4 +35,7 @@ if Server then
 
     end
 
+    function Exo:GetAutoWeldArmorPerSecond(nanoArmorResearched)
+        return nanoArmorResearched and kExoNanoArmorPerSecond or kExoArmorPerSecond
+    end
 end

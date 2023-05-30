@@ -64,4 +64,9 @@ if Server then
 
     end
 
+
+    function Exosuit:GetAutoWeldArmorPerSecond(nanoArmorResearched)
+        return nanoArmorResearched and kExoNanoArmorPerSecond or kExoArmorPerSecond
+    end
+
 end
