@@ -122,9 +122,9 @@ if kTranslateMessage then
     kTranslateMessage["SHIFT_TUNNEL"] = "快速虫洞"
     kTranslateMessage["SHIFT_TUNNEL_TOOLTIP"] = "*虫洞使用者不再需要长途跋涉."
     kTranslateMessage["CRAG_TUNNEL"] = "坚甲虫洞"
-    kTranslateMessage["CRAG_TUNNEL_TOOLTIP"] = "*虫洞护甲将获得大量提升."
+    kTranslateMessage["CRAG_TUNNEL_TOOLTIP"] = "*虫洞护甲将获得大量提升.\n*出虫洞时将获得一层粘膜."
     kTranslateMessage["SHADE_TUNNEL"] = "拟态虫洞"
-    kTranslateMessage["SHADE_TUNNEL_TOOLTIP"] = "*虫洞脱战后将对地方单位不可见."
+    kTranslateMessage["SHADE_TUNNEL_TOOLTIP"] = "*虫洞入口脱战后将对敌方单位不可见."
 end
 
 if kLocales then
@@ -248,7 +248,7 @@ if kLocales then
     kLocales["SHIFT_TUNNEL"] = "Tunnel Muscle"
     kLocales["SHIFT_TUNNEL_TOOLTIP"] = "*No more travelling for tunnel users."
     kLocales["CRAG_TUNNEL"] = "Tunnel Shells"
-    kLocales["CRAG_TUNNEL_TOOLTIP"] = "*Makes tunnel tougher."
+    kLocales["CRAG_TUNNEL_TOOLTIP"] = "*Makes tunnel tougher.\n*Tunnel user receives mucous shield"
     kLocales["SHADE_TUNNEL"] = "Tunnel Camouflage"
-    kLocales["SHADE_TUNNEL_TOOLTIP"] = "*Tunnel became invisible when out of combat."
+    kLocales["SHADE_TUNNEL_TOOLTIP"] = "*Entrance gets camouflage when out of combat."
 end

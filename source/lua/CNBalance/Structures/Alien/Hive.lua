@@ -12,15 +12,15 @@ function Hive:GetTechButtons()
     elseif techId == kTechId.CragHive then
         techButtons[5] = kTechId.DrifterRegeneration
         techButtons[6] = kTechId.CystCarapace
-        techButtons[7] = kTechId.CragTunnel
+        techButtons[3] = kTechId.CragTunnel
     elseif techId == kTechId.ShiftHive then
         techButtons[5] = kTechId.DrifterCelerity
         techButtons[6] = kTechId.CystCelerity
-        techButtons[7] = kTechId.ShiftTunnel
+        techButtons[3] = kTechId.ShiftTunnel
     elseif techId == kTechId.ShadeHive then
         techButtons[5] = kTechId.DrifterCamouflage
         techButtons[6] = kTechId.CystCamouflage
-        techButtons[7] = kTechId.ShadeTunnel
+        techButtons[3] = kTechId.ShadeTunnel
     end
     
     if self.bioMassLevel <= 1 then
