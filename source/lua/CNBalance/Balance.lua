@@ -235,7 +235,7 @@ kUmbraBulletModifier = 0.8
 kDevourEnergyCost = 60 --50
 kDevourPunchDamage = 70 --100
 
-kTunnelUpgradeCost = 10
+kTunnelUpgradeCost = 20
 kTunnelUpgradeTime = 60
 
 kEggGestateTime = 15
@@ -283,7 +283,6 @@ kSporesResearchTime = 60
 kProwlerCost = 18 --14
 kProwlerGestateTime = 6
 kProwlerUpgradeCost = 1
-kProwlerBabblerShieldPercent = 0.2
 
 kVolleySpread = Math.Radians(3)
 kProwlerDamagePerPellet = 8 -- there are 6 pellets
@@ -361,12 +360,13 @@ kDisruptMarineTime = 1
 kDisruptMarineTimeout = 2
 
 kBabblerShieldPercent = 0.1
-kSkulkBabblerShieldPercent = 0.35
-kGorgeBabblerShieldPercent = 0.2
-kLerkBabblerShieldPercent = 0.2
-kFadeBabblerShieldPercent = 0.25
+kSkulkBabblerShieldPercent = 0.23
+kGorgeBabblerShieldPercent = 0.15
+kLerkBabblerShieldPercent = 0.16
+kFadeBabblerShieldPercent = 0.16
+kProwlerBabblerShieldPercent = 0.18
 
-kBabblerShieldMaxAmount = 200
+kBabblerShieldMaxAmount = 120
 kWebZeroVisDistance = 3.0
 kWebFullVisDistance = 2.0
 kWhipCost = 8

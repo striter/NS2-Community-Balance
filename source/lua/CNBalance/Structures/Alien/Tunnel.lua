@@ -1,6 +1,15 @@
 
 if Server then
 
+    local baseUseExit =Tunnel.UseExit
+    function Tunnel:UseExit(entity, exit, exitSide)
+        baseUseExit(self,entity,exit,exitSide)
+        if exit.hasCragUpgrade then
+            if entity and HasMixin(entity, "Mucousable") then
+                entity:SetMucousShield()
+            end
+        end
+    end
     
     function Tunnel:MovePlayerToTunnel(player, entrance)
     
@@ -8,7 +17,6 @@ if Server then
         assert(entrance)
         
         local entranceId = entrance:GetId()
-
         if entrance.hasShiftUpgrade then
             if entranceId == self.exitAId then
                 self.timeExitAUsed = Shared.GetTime()   

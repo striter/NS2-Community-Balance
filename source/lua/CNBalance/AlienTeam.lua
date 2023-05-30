@@ -143,7 +143,6 @@ function AlienTeam:InitTechTree()
     self.techTree:AddSpecial(kTechId.TwoSpurs, kTechId.Spur)
     self.techTree:AddSpecial(kTechId.ThreeSpurs, kTechId.TwoSpurs)
 
-
     -- personal upgrades (all alien types)
     self.techTree:AddBuyNode(kTechId.Vampirism, kTechId.Shell, kTechId.None, kTechId.AllAliens)
     self.techTree:AddBuyNode(kTechId.Carapace, kTechId.Shell, kTechId.None, kTechId.AllAliens)
@@ -156,7 +155,6 @@ function AlienTeam:InitTechTree()
     self.techTree:AddBuyNode(kTechId.Crush, kTechId.Spur, kTechId.None, kTechId.AllAliens)
     self.techTree:AddBuyNode(kTechId.Celerity, kTechId.Spur, kTechId.None, kTechId.AllAliens)
     self.techTree:AddBuyNode(kTechId.Adrenaline, kTechId.Spur, kTechId.None, kTechId.AllAliens)
-
 
     -- Crag
     self.techTree:AddPassive(kTechId.CragHeal)
@@ -246,9 +244,9 @@ function AlienTeam:InitTechTree()
     self.techTree:AddResearchNode(kTechId.MetabolizeHealth,        kTechId.BioMassFive, kTechId.MetabolizeEnergy, kTechId.AllAliens)
     self.techTree:AddResearchNode(kTechId.Stab,              kTechId.BioMassSeven, kTechId.None, kTechId.AllAliens)
 
-    self.techTree:AddResearchNode(kTechId.ShiftTunnel , kTechId.BioMassSix)
-    self.techTree:AddResearchNode(kTechId.CragTunnel , kTechId.BioMassFour)
-    self.techTree:AddResearchNode(kTechId.ShadeTunnel , kTechId.BioMassFour)
+    self.techTree:AddResearchNode(kTechId.ShiftTunnel , kTechId.ShiftHive)
+    self.techTree:AddResearchNode(kTechId.CragTunnel , kTechId.CragHive)
+    self.techTree:AddResearchNode(kTechId.ShadeTunnel , kTechId.ShadeHive)
     -- onos researches
     self.techTree:AddPassive(kTechId.Charge)
     self.techTree:AddResearchNode(kTechId.Devour,            kTechId.BioMassTwo, kTechId.None, kTechId.AllAliens)

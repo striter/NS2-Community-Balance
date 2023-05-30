@@ -930,6 +930,7 @@ function TunnelEntrance:OnUpdate(deltaTime)
     if Server then
         self.hasShiftUpgrade = GetHasTech(self,kTechId.ShiftTunnel)
         self.hasShadeUpgrade = GetHasTech(self,kTechId.ShadeTunnel)
+        self.hasCragUpgrade = GetHasTech(self,kTechId.CragTunnel)
         self.camouflaged = self.hasShadeUpgrade and not self:GetIsInCombat()
     end
 end
@@ -944,7 +945,7 @@ end
 
 --Armor 
 function TunnelEntrance:GetMatureMaxArmor()
-    local hasCragUpgrade = GetHasTech(self,kTechId.CragTunnel)
+    local hasCragUpgrade = GetHasTech(self,kTechId.CragTunnel)       --Calls before update
     if self:GetIsInfested() then
         return hasCragUpgrade and kMatureCragInfestedTunnelEntranceArmor or kMatureInfestedTunnelEntranceArmor
     end
