@@ -24,7 +24,7 @@ if kTranslateMessage then
     kTranslateMessage["ARMOR_STATION"] = "指挥站 (制式装备研发)"
     kTranslateMessage["ARMOR_STATION_HINT"] = "陆战队基地"
     kTranslateMessage["NANO_ARMOR"]="纳米护甲"
-    kTranslateMessage["NANO_ARMOR_TOOLTIP"]="*陆战队员脱战后缓慢回复护甲."
+    kTranslateMessage["NANO_ARMOR_TOOLTIP"]="*陆战队员脱战后缓慢回复护甲.\n*强化喷漆背包与机甲的脱战维修数值."
     kTranslateMessage["LIFE_SUSTAIN"]="生命维持装置"
     kTranslateMessage["LIFE_SUSTAIN_TOOLTIP"]="*陆战队员脱战后逐渐回复生命值."
     
@@ -154,7 +154,7 @@ if kLocales then
     kLocales["ARMOR_STATION"] = "Command Station (Equipments Lab)"
     kLocales["ARMOR_STATION_HINT"] = "Marine Base"
     kLocales["NANO_ARMOR"]="Nano Armor"
-    kLocales["NANO_ARMOR_TOOLTIP"]="*Regen armor after combat."
+    kLocales["NANO_ARMOR_TOOLTIP"]="*Regen armor after combat.\n*Strengthen autoweld of jetpack & exo"
     kLocales["LIFE_SUSTAIN"]="Life Sustain System"
     kLocales["LIFE_SUSTAIN_TOOLTIP"]="*Regen health after combat."
     
