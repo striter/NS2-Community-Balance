@@ -81,6 +81,7 @@ ModLoader.SetupFileHook("lua/SentryBattery.lua", "lua/CNBalance/SentryBattery.lu
 ModLoader.SetupFileHook("lua/ARC.lua", "lua/CNBalance/ARC.lua", "post")
 ModLoader.SetupFileHook("lua/MedPack.lua", "lua/CNBalance/MedPack.lua", "post")
 ModLoader.SetupFileHook("lua/Mine.lua", "lua/CNBalance/Mine.lua", "replace")
+ModLoader.SetupFileHook("lua/MAC.lua", "lua/CNBalance/MAC.lua", "replace")
 
 ModLoader.SetupFileHook("lua/Marine.lua", "lua/CNBalance/Marine.lua", "post")
 ModLoader.SetupFileHook("lua/MarineSpectator.lua", "lua/CNBalance/MarineSpectator.lua", "post")

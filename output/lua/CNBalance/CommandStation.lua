@@ -21,9 +21,8 @@ function CommandStation:GetTechButtons()
         techButtons[2] = ConditionalValue(GetSupplyResearchAllowed(self,kTechId.ArmorSupply),kTechId.ArmorSupply,kTechId.None)
         techButtons[3] = ConditionalValue(GetSupplyResearchAllowed(self,kTechId.ExplosiveSupply),kTechId.ExplosiveSupply,kTechId.None)
     elseif techId == kTechId.ExplosiveStation then
-        techButtons[1] = kTechId.GrenadeLauncherDetectionShot
-        techButtons[2] = kTechId.GrenadeLauncherAllyBlast
-        techButtons[3] = kTechId.GrenadeLauncherUpgrade
+        techButtons[1] = kTechId.MACEMPBlast
+        techButtons[2] = kTechId.GrenadeLauncherUpgrade
     elseif techId == kTechId.StandardStation then
         techButtons[1] = kTechId.DragonBreath
         techButtons[2] = kTechId.LightMachineGunUpgrade

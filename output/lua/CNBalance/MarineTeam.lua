@@ -140,9 +140,11 @@ function MarineTeam:InitTechTree()
     self.techTree:AddUpgradeNode(kTechId.ExplosiveSupply, kTechId.CommandStation)
     self.techTree:AddTargetedActivation(kTechId.PowerSurge, kTechId.ExplosiveStation)
     self.techTree:AddActivation(kTechId.MinesUpgrade, kTechId.ExplosiveStation,kTechId.MinesTech)
-    self.techTree:AddResearchNode(kTechId.GrenadeLauncherDetectionShot, kTechId.ExplosiveStation,kTechId.AdvancedArmory)
-    self.techTree:AddResearchNode(kTechId.GrenadeLauncherAllyBlast,kTechId.ExplosiveStation,kTechId.AdvancedArmory)
-    self.techTree:AddResearchNode(kTechId.GrenadeLauncherUpgrade,kTechId.GrenadeLauncherAllyBlast)
+    
+    --self.techTree:AddResearchNode(kTechId.GrenadeLauncherDetectionShot, kTechId.ExplosiveStation,kTechId.AdvancedArmory)
+    --self.techTree:AddResearchNode(kTechId.GrenadeLauncherAllyBlast,kTechId.ExplosiveStation,kTechId.AdvancedArmory)
+    self.techTree:AddResearchNode(kTechId.GrenadeLauncherUpgrade,kTechId.ExplosiveStation)
+    self.techTree:AddResearchNode(kTechId.MACEMPBlast,kTechId.ExplosiveStation)
 
     self.techTree:AddBuildNode(kTechId.PrototypeLab,          kTechId.AdvancedArmory,              kTechId.None)
 

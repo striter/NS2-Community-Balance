@@ -124,7 +124,7 @@ if Server then
 
         PredictedProjectile.OnUpdate(self, deltaTime)
 
-        if GetHasTech(self,kTechId.GrenadeLauncherDetectionShot) then
+        if GetHasTech(self,kTechId.GrenadeLauncherUpgrade) then
 
             for _, enemy in ipairs( GetEntitiesForTeamWithinRange("Alien", GetEnemyTeamNumber(self:GetTeamNumber()), self:GetOrigin(), kGrenadeLauncherDetectionShotRadius) ) do
             

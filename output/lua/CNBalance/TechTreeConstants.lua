@@ -1,6 +1,4 @@
 --Marine
-
-
 --Researches
 debug.appendtoenum(kTechId, "StandardSupply")
 debug.appendtoenum(kTechId, "StandardStation")
@@ -10,8 +8,9 @@ debug.appendtoenum(kTechId, "DragonBreath")
 debug.appendtoenum(kTechId, "ExplosiveSupply")
 debug.appendtoenum(kTechId, "ExplosiveStation")
 debug.appendtoenum(kTechId, "MinesUpgrade")
-debug.appendtoenum(kTechId, "GrenadeLauncherDetectionShot")
-debug.appendtoenum(kTechId, "GrenadeLauncherAllyBlast")
+--debug.appendtoenum(kTechId, "GrenadeLauncherDetectionShot")
+--debug.appendtoenum(kTechId, "GrenadeLauncherAllyBlast")
+debug.appendtoenum(kTechId, "MACEMPBlast")
 debug.appendtoenum(kTechId, "GrenadeLauncherUpgrade")
 
 debug.appendtoenum(kTechId, "ArmorSupply")

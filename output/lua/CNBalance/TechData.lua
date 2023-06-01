@@ -144,23 +144,23 @@ function BuildTechData()
         [kTechDataResearchName] = "MINES_UPGRADE",
     })
 
-    table.insert(techData, {
-        [kTechDataId] = kTechId.GrenadeLauncherDetectionShot,
-        [kTechDataCostKey] = kGrenadeLauncherDetectionShotResearchCost,
-        [kTechDataResearchTimeKey] = kGrenadeLauncherDetectionShotResearchTime,
-        [kTechDataDisplayName] = "GRENADE_LAUNCHER_DETECTION_SHOT",
-        [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_DETECTION_SHOT_TOOLTIP",
-        [kTechDataResearchName] = "GRENADE_LAUNCHER_DETECTION_SHOT",
-    })
-
-    table.insert(techData, {
-        [kTechDataId] = kTechId.GrenadeLauncherAllyBlast,
-        [kTechDataCostKey] = kGrenadeLauncherAllyBlastResearchCost,
-        [kTechDataResearchTimeKey] = kGrenadeLauncherAllyBlastResearchTime,
-        [kTechDataDisplayName] = "GRENADE_LAUNCHER_ALLY_BLAST",
-        [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_ALLY_BLAST_TOOLTIP",
-        [kTechDataResearchName] = "GRENADE_LAUNCHER_ALLY_BLAST",
-    })
+    --table.insert(techData, {
+    --    [kTechDataId] = kTechId.GrenadeLauncherDetectionShot,
+    --    [kTechDataCostKey] = kGrenadeLauncherDetectionShotResearchCost,
+    --    [kTechDataResearchTimeKey] = kGrenadeLauncherDetectionShotResearchTime,
+    --    [kTechDataDisplayName] = "GRENADE_LAUNCHER_DETECTION_SHOT",
+    --    [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_DETECTION_SHOT_TOOLTIP",
+    --    [kTechDataResearchName] = "GRENADE_LAUNCHER_DETECTION_SHOT",
+    --})
+    --
+    --table.insert(techData, {
+    --    [kTechDataId] = kTechId.GrenadeLauncherAllyBlast,
+    --    [kTechDataCostKey] = kGrenadeLauncherAllyBlastResearchCost,
+    --    [kTechDataResearchTimeKey] = kGrenadeLauncherAllyBlastResearchTime,
+    --    [kTechDataDisplayName] = "GRENADE_LAUNCHER_ALLY_BLAST",
+    --    [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_ALLY_BLAST_TOOLTIP",
+    --    [kTechDataResearchName] = "GRENADE_LAUNCHER_ALLY_BLAST",
+    --})
 
     table.insert(techData, {
         [kTechDataId] = kTechId.GrenadeLauncherUpgrade,
@@ -171,6 +171,14 @@ function BuildTechData()
         [kTechDataResearchName] = "GRENADE_LAUNCHER_UPGRADE",
     })
 
+    table.insert(techData, {
+        [kTechDataId] = kTechId.MACEMPBlast,
+        [kTechDataCostKey] = kMACEMPBlastResearchCost,
+        [kTechDataResearchTimeKey] = kMACEMPBlastResearchTime,
+        [kTechDataDisplayName] = "MAC_EMP_BLAST",
+        [kTechDataTooltipInfo] = "MAC_EMP_BLAST_TOOLTIP",
+        [kTechDataResearchName] = "MAC_EMP_BLAST",
+    })
 
     table.insert(techData, {
         [kTechDataId] = kTechId.InfantryPortal,
@@ -905,8 +913,30 @@ function BuildTechData()
             [kTechDataPersonalResOnKillKey] = kARCPersonalResOnKill,
             [kTechDataTeamResOnKillKey] = kARCTeamResOnKill,
         })
-    
-        table.insert(techData,{
+
+    table.insert(techData,{
+            [kTechDataId] = kTechId.MAC,
+            [kTechDataSupply] = kMACSupply,
+            [kTechDataHint] = "MAC_HINT",
+            [kTechDataMapName] = MAC.kMapName,
+            [kTechDataDisplayName] = "MAC",
+            [kTechDataMaxHealth] = MAC.kHealth,
+            [kTechDataMaxArmor] = MAC.kArmor,
+            [kTechDataCostKey] = kMACCost,
+            [kTechDataResearchTimeKey] = kMACBuildTime,
+            [kTechDataModel] = MAC.kModelName,
+            [kTechDataDamageType] = kMACAttackDamageType,
+            [kTechDataInitialEnergy] = kMACInitialEnergy,
+            [kTechDataMaxEnergy] = kMACMaxEnergy,
+            [kTechDataMenuPriority] = 2,
+            [kTechDataPointValue] = kMACPointValue,
+            [kTechDataHotkey] = Move.M,
+            [kTechDataTooltipInfo] = "MAC_TOOLTIP",
+            [kTechDataPersonalResOnKillKey] = kMACPersonalResOnKill,
+            [kTechDataTeamResOnKillKey] = kMACTeamResOnKill,
+    })
+
+    table.insert(techData,{
             [kTechDataId] = kTechId.Observatory,
             [kTechDataSupply] = kObservatorySupply,
             [kTechDataHint] = "OBSERVATORY_HINT",

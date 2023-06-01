@@ -131,10 +131,10 @@ float4 SFXDarkVisionPS(PS_INPUT input) : COLOR0
         
         float3 normal = tex2D(normalTexture, texCoord).xyz;
         normal = abs(normal - 0.5);
-        float normalIntensity = saturate(pow((normal.x + normal.y + normal.z) * 1.4 , 8)) * 0.5;
+        float normalIntensity = saturate(pow((normal.x + normal.y + normal.z) * 1.4 , 8));
         
         float surfaceIntensity = darkParameter * normalIntensity;    
-        geometryColor += geometrySurfaceColor * surfaceIntensity *  saturate(smoothstep(20,5,depth1.r));
+        geometryColor += geometrySurfaceColor * surfaceIntensity * saturate(smoothstep(20,15,depth1.r));
         //Lights out
         
         return lerp(inputPixel, geometryColor, ( 0.01 * amount ));  //Animation

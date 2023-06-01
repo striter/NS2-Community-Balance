@@ -72,12 +72,18 @@ kCannonTechResearchTime = 90
 --Explosive Supply
 kMinesUpgradeResearchCost = 10
 kMinesUpgradeResearchTime = 60
-kGrenadeLauncherDetectionShotResearchCost = 15
-kGrenadeLauncherDetectionShotResearchTime = 60
-kGrenadeLauncherAllyBlastResearchCost = 15
-kGrenadeLauncherAllyBlastResearchTime = 60
-kGrenadeLauncherUpgradeResearchCost = 20
-kGrenadeLauncherUpgradeResearchTime = 60
+kGrenadeLauncherUpgradeResearchCost = 30
+kGrenadeLauncherUpgradeResearchTime = 90
+kMACEMPBlastResearchCost = 15
+kMACEMPBlastResearchTime = 60
+kMACEmpBlastDetectInterval = 0.5
+kMACEmpBlastDetectRadius = 4
+kMACEmpBlastTriggerInterval = 5
+
+--kGrenadeLauncherDetectionShotResearchCost = 15
+--kGrenadeLauncherDetectionShotResearchTime = 60
+--kGrenadeLauncherAllyBlastResearchCost = 15
+--kGrenadeLauncherAllyBlastResearchTime = 60
 
 kGrenadeLauncherCost = 20
 kGrenadeLauncherDropCost = 12
@@ -89,8 +95,8 @@ kGrenadeLauncherGrenadeDamageRadius = 4.8
 kGrenadeLauncherDetectionShotRadius = 3
 
 kGrenadeLauncherImpactGrenadeDamage = 100
-kGrenadeLauncherSelfDamageReduction = 0.8
-kGrenadeLauncherAllyBlastReduction = 0.6
+kGrenadeLauncherSelfDamageReduction = 0.7
+kGrenadeLauncherAllyBlastReduction = 0.4
 
 --Armor Supply
 kCombatBuilderResearchCost = 10
@@ -202,6 +208,7 @@ kUpgradeRoboticsFactoryCost = 10
 kUpgradeRoboticsFactoryTime = 30
 kARCCost = 15
 kARCBuildTime = 20
+kMACCost = 4
 
 kSentryDamage = 5
 kSentryCost = 5
@@ -429,7 +436,7 @@ kPowerSurgeCost = 3
 kPowerSurgeCooldown = 5
 kPowerSurgeDuration = 10
 kPowerSurgeTriggerEMP = true
-kPowerSurgeEMPDamage = 25
+kPowerSurgeEMPDamage = 20
 kPowerSurgeEMPDamageRadius = 6
 kPowerSurgeEMPElectrifiedDuration = 2
 
@@ -438,6 +445,7 @@ kNanoShieldStructureDuration = 5
 kNanoShieldCost = 3
 kNanoShieldCooldown = 5
 kNanoShieldDamageReductionDamage = 0.68
+
 
 kCombatBuilderCost = 2
 kCombatBuilderDropCost = 5

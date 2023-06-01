@@ -77,7 +77,7 @@ function DamageMixin:DoDamage(damage, target, point, direction, surface, altMode
     end
 
     if (target and attacker and attacker:GetId() == target:GetId()) then
-        if GetHasTech(self,kTechId.GrenadeLauncherAllyBlast) then
+        if GetHasTech(self,kTechId.GrenadeLauncherUpgrade) then
             damage = damage * kGrenadeLauncherAllyBlastReduction
         else
             damage = damage * kGrenadeLauncherSelfDamageReduction
