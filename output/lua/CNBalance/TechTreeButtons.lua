@@ -15,6 +15,9 @@ kTechIdToMaterialOffset[kTechId.ExplosiveSupply] = 214
 kTechIdToMaterialOffset[kTechId.ExplosiveStation] = 214
 kTechIdToMaterialOffset[kTechId.GrenadeLauncherUpgrade] = 196
 kTechIdToMaterialOffset[kTechId.MACEMPBlast] = 43
+kTechIdToMaterialOffset[kTechId.PoweredExtractor] = 211
+kTechIdToMaterialOffset[kTechId.PoweredExtractorTech] = 211
+kTechIdToMaterialOffset[kTechId.PoweredExtractorUpgrade] = 211
 --kTechIdToMaterialOffset[kTechId.GrenadeLauncherAllyBlast] = 196
 --kTechIdToMaterialOffset[kTechId.GrenadeLauncherDetectionShot] = 197
 

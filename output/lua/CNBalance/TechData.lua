@@ -23,8 +23,9 @@ function BuildTechData()
         [kTechDataId] = kTechId.StandardStation,
         [kTechDataMapName] = StandardStation.kMapName,
         [kTechDataModel] = CommandStation.kModelName,
-        [kTechDataMaxHealth] = kCommandStationHealth,
-        [kTechDataMaxArmor] = kCommandStationArmor,
+        [kTechDataMaxHealth] = kUpgradedCommandStationHealth,
+        [kTechDataMaxArmor] = kUpgradedCommandStationArmor,
+        [kTechDataPointValue] = kUpgradedCommandStationPointValue,
         [kTechDataHint] = "STANDARD_STATION_HINT",
         [kTechDataDisplayName] = "STANDARD_STATION",
         [kTechDataTooltipInfo] = "STANDARD_STATION_TOOLTIP",
@@ -34,7 +35,6 @@ function BuildTechData()
         [kTechDataGhostModelClass] = "MarineGhostModel",
         [kTechDataCostKey] = kUpgradedCommandStationCost,
         [kTechDataEngagementDistance] = kCommandStationEngagementDistance,
-        [kTechDataPointValue] = kCommandStationPointValue,
     })
     
     table.insert(techData, {
@@ -68,8 +68,9 @@ function BuildTechData()
         [kTechDataId] = kTechId.ArmorStation,
         [kTechDataMapName] = ArmorStation.kMapName,
         [kTechDataModel] = CommandStation.kModelName,
-        [kTechDataMaxHealth] = kCommandStationHealth,
-        [kTechDataMaxArmor] = kCommandStationArmor,
+        [kTechDataMaxHealth] = kUpgradedCommandStationHealth,
+        [kTechDataMaxArmor] = kUpgradedCommandStationArmor,
+        [kTechDataPointValue] = kUpgradedCommandStationPointValue,
         [kTechDataHint] = "ARMOR_STATION_HINT",
         [kTechDataDisplayName] = "ARMOR_STATION",
         [kTechDataTooltipInfo] = "ARMOR_STATION_TOOLTIP",
@@ -79,7 +80,6 @@ function BuildTechData()
         [kTechDataGhostModelClass] = "MarineGhostModel",
         [kTechDataCostKey] = kUpgradedCommandStationCost,
         [kTechDataEngagementDistance] = kCommandStationEngagementDistance,
-        [kTechDataPointValue] = kCommandStationPointValue,
     })
 
     table.insert(techData, {
@@ -122,8 +122,9 @@ function BuildTechData()
         [kTechDataId] = kTechId.ExplosiveStation,
         [kTechDataMapName] = ExplosiveStation.kMapName,
         [kTechDataModel] = CommandStation.kModelName,
-        [kTechDataMaxHealth] = kCommandStationHealth,
-        [kTechDataMaxArmor] = kCommandStationArmor,
+        [kTechDataMaxHealth] = kUpgradedCommandStationHealth,
+        [kTechDataMaxArmor] = kUpgradedCommandStationArmor,
+        [kTechDataPointValue] = kUpgradedCommandStationPointValue,
         [kTechDataHint] = "EXPLOSIVE_STATION_HINT",
         [kTechDataDisplayName] = "EXPLOSIVE_STATION",
         [kStructureAttachClass] = "TechPoint",
@@ -132,7 +133,6 @@ function BuildTechData()
         [kTechDataGhostModelClass] = "MarineGhostModel",
         [kTechDataCostKey] = kUpgradedCommandStationCost,
         [kTechDataEngagementDistance] = kCommandStationEngagementDistance,
-        [kTechDataPointValue] = kCommandStationPointValue,
     })
     
     table.insert(techData, {
@@ -179,7 +179,24 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "MAC_EMP_BLAST_TOOLTIP",
         [kTechDataResearchName] = "MAC_EMP_BLAST",
     })
+    table.insert(techData, {
+        [kTechDataId] = kTechId.PoweredExtractorTech,
+        [kTechDataCostKey] = kPoweredExtractorResearchCost,
+        [kTechDataResearchTimeKey] = kPoweredExtractorResearchTime,
+        [kTechDataDisplayName] = "POWERED_EXTRACTOR_TECH",
+        [kTechDataTooltipInfo] = "POWERED_EXTRACTOR_TECH_TOOLTIP",
+        [kTechDataResearchName] = "POWERED_EXTRACTOR_TECH",
+    })
 
+    table.insert(techData, {
+        [kTechDataId] = kTechId.PoweredExtractorUpgrade,
+        [kTechDataCostKey] = kPoweredExtractorUpgradeCost,
+        [kTechDataResearchTimeKey] = kPoweredExtractorUpgradeTime,
+        [kTechDataDisplayName] = "POWERED_EXTRACTOR_TECH",
+        [kTechDataTooltipInfo] = "POWERED_EXTRACTOR_TECH_TOOLTIP",
+        [kTechDataResearchName] = "POWERED_EXTRACTOR_TECH",
+    })
+    
     table.insert(techData, {
         [kTechDataId] = kTechId.InfantryPortal,
         [kTechDataHint] = "INFANTRY_PORTAL_HINT",
@@ -890,6 +907,33 @@ function BuildTechData()
             [kTechDataObstacleRadius] = 1.35,
             [kTechDataPersonalResOnKillKey] = kExtractorPersonalResOnKill,
             [kTechDataTeamResOnKillKey] = kExtractorTeamResOnKill,
+        })
+
+        table.insert(techData,{
+            [kTechDataId] = kTechId.PoweredExtractor,
+            [kTechDataIgnorePathingMesh] = true,
+            [kTechDataSpawnBlock] = true,
+            [kTechDataCollideWithWorldOnly] = true,
+            [kTechDataAllowStacking] = true,
+            [kTechDataGhostModelClass] = "MarineGhostModel",
+            [kTechDataRequiresPower] = true,
+            [kTechDataMapName] = PoweredExtractor.kMapName,
+            [kTechDataDisplayName] = "POWERED_EXTRACTOR",
+            [kTechDataBuildTime] = kExtractorBuildTime,
+            [kTechDataEngagementDistance] = kExtractorEngagementDistance,
+            [kTechDataModel] = Extractor.kModelName,
+            [kStructureAttachClass] = "ResourcePoint",
+            [kTechDataHotkey] = Move.E,
+            [kTechDataNotOnInfestation] = kPreventMarineStructuresOnInfestation,
+            [kTechDataTooltipInfo] = "POWERED_EXTRACTOR_TOOLTIP",
+            [kTechDataHint] = "POWERED_EXTRACTOR_HINT",
+            [kTechDataObstacleRadius] = 1.35,
+            [kTechDataMaxHealth] = kPoweredExtractorHealth,
+            [kTechDataMaxArmor] = kPoweredExtractorArmor,
+            [kTechDataPointValue] = kPoweredExtractorPointValue,
+            [kTechDataCostKey] = kPoweredExtractorCost,
+            [kTechDataPersonalResOnKillKey] = kPoweredExtractorPersonalResOnKill,
+            [kTechDataTeamResOnKillKey] = kPoweredExtractorPersonalTeamOnKill,
         })
     
         table.insert(techData,{

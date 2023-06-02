@@ -61,6 +61,9 @@ kCommandStationUpgradeCost = 10
 kCommandStationUpgradeTime = 90
 kUpgradedCommandStationCost = 30
 
+kExtractorCost = 10
+kPoweredExtractorCost = 40
+
 -- Standard Supply
 kDragonBreathResearchCost = 15
 kDragonBreathResearchTime = 60
@@ -80,6 +83,14 @@ kMACEmpBlastDetectInterval = 0.5
 kMACEmpBlastDetectRadius = 4
 kMACEmpBlastTriggerInterval = 5
 
+kPoweredExtractorResearchCost = 10
+kPoweredExtractorResearchTime = 60
+kPoweredExtractorUpgradeCost = 30
+kPoweredExtractorUpgradeTime = 45
+kPoweredExtractorChargingInterval = 3.5
+kPoweredExtractorDamageDistance = 5
+kPoweredExtractorDamage = 35
+kPoweredExtractorElectrifyDuration = 3.5
 --kGrenadeLauncherDetectionShotResearchCost = 15
 --kGrenadeLauncherDetectionShotResearchTime = 60
 --kGrenadeLauncherAllyBlastResearchCost = 15

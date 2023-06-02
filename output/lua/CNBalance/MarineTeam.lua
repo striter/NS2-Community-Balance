@@ -14,9 +14,10 @@ function MarineTeam:InitTechTree()
     self.techTree:AddTechInheritance(kTechId.CommandStation,kTechId.ArmorStation)
     
     self.techTree:AddBuildNode(kTechId.Extractor,                 kTechId.None,                kTechId.None)
-
-    self.techTree:AddUpgradeNode(kTechId.ExtractorArmor)
-
+    self.techTree:AddTechInheritance(kTechId.Extractor, kTechId.PoweredExtractor)
+    self.techTree:AddBuildNode(kTechId.PoweredExtractor,          kTechId.Extractor,           kTechId.None)
+    self.techTree:AddUpgradeNode(kTechId.PoweredExtractorUpgrade , kTechId.PoweredExtractorTech)
+    
     -- Count recycle like an upgrade so we can have multiples
     self.techTree:AddUpgradeNode(kTechId.Recycle, kTechId.None, kTechId.None)
 
@@ -145,6 +146,7 @@ function MarineTeam:InitTechTree()
     --self.techTree:AddResearchNode(kTechId.GrenadeLauncherAllyBlast,kTechId.ExplosiveStation,kTechId.AdvancedArmory)
     self.techTree:AddResearchNode(kTechId.GrenadeLauncherUpgrade,kTechId.ExplosiveStation)
     self.techTree:AddResearchNode(kTechId.MACEMPBlast,kTechId.ExplosiveStation)
+    self.techTree:AddResearchNode(kTechId.PoweredExtractorTech,kTechId.ExplosiveStation)
 
     self.techTree:AddBuildNode(kTechId.PrototypeLab,          kTechId.AdvancedArmory,              kTechId.None)
 

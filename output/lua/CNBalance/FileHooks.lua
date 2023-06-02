@@ -64,24 +64,28 @@ ModLoader.SetupFileHook("lua/BalanceHealth.lua", "lua/CNBalance/BalanceHealth.lu
 ModLoader.SetupFileHook("lua/BalanceMisc.lua", "lua/CNBalance/BalanceMisc.lua", "post")
 
 --Marines
-ModLoader.SetupFileHook("lua/AmmoPack.lua", "lua/CNBalance/AmmoPack.lua", "post")
 ModLoader.SetupFileHook("lua/GUIMarineBuyMenu.lua", "lua/CNBalance/GUIMarineBuyMenu.lua", "replace" )
 ModLoader.SetupFileHook("lua/MarineBuy_Client.lua", "lua/CNBalance/MarineBuy_Client.lua", "post" )
 ModLoader.SetupFileHook("lua/GUIActionIcon.lua", "lua/CNBalance/GUIActionIcon.lua", "replace")
 ModLoader.SetupFileHook("lua/GUIPickups.lua", "lua/CNBalance/GUIPickups.lua", "post")
 ModLoader.SetupFileHook("lua/MarineTeam.lua", "lua/CNBalance/MarineTeam.lua", "post")
 ModLoader.SetupFileHook("lua/MarineTeamInfo.lua", "lua/CNBalance/MarineTeamInfo.lua", "replace")
-ModLoader.SetupFileHook("lua/ArmsLab.lua", "lua/CNBalance/ArmsLab.lua", "post")
-ModLoader.SetupFileHook("lua/PrototypeLab.lua", "lua/CNBalance/PrototypeLab.lua", "post")
-ModLoader.SetupFileHook("lua/CommandStation.lua", "lua/CNBalance/CommandStation.lua", "post")
-ModLoader.SetupFileHook("lua/Armory.lua", "lua/CNBalance/Armory.lua", "post")
-ModLoader.SetupFileHook("lua/Observatory.lua", "lua/CNBalance/Observatory.lua", "post")
-ModLoader.SetupFileHook("lua/Sentry.lua", "lua/CNBalance/Sentry.lua", "replace")
-ModLoader.SetupFileHook("lua/SentryBattery.lua", "lua/CNBalance/SentryBattery.lua", "post")
-ModLoader.SetupFileHook("lua/ARC.lua", "lua/CNBalance/ARC.lua", "post")
+
+ModLoader.SetupFileHook("lua/AmmoPack.lua", "lua/CNBalance/AmmoPack.lua", "post")
 ModLoader.SetupFileHook("lua/MedPack.lua", "lua/CNBalance/MedPack.lua", "post")
 ModLoader.SetupFileHook("lua/Mine.lua", "lua/CNBalance/Mine.lua", "replace")
-ModLoader.SetupFileHook("lua/MAC.lua", "lua/CNBalance/MAC.lua", "replace")
+
+--Strutcures
+ModLoader.SetupFileHook("lua/Sentry.lua", "lua/CNBalance/Structures/Marine/Sentry.lua", "replace")
+ModLoader.SetupFileHook("lua/SentryBattery.lua", "lua/CNBalance/Structures/Marine/SentryBattery.lua", "post")
+ModLoader.SetupFileHook("lua/ARC.lua", "lua/CNBalance/Structures/Marine/ARC.lua", "post")
+ModLoader.SetupFileHook("lua/ArmsLab.lua", "lua/CNBalance/Structures/Marine/ArmsLab.lua", "post")
+ModLoader.SetupFileHook("lua/PrototypeLab.lua", "lua/CNBalance/Structures/Marine/PrototypeLab.lua", "post")
+ModLoader.SetupFileHook("lua/CommandStation.lua", "lua/CNBalance/Structures/Marine/CommandStation.lua", "post")
+ModLoader.SetupFileHook("lua/Extractor.lua", "lua/CNBalance/Structures/Marine/Extractor.lua", "replace")
+ModLoader.SetupFileHook("lua/Armory.lua", "lua/CNBalance/Structures/Marine/Armory.lua", "post")
+ModLoader.SetupFileHook("lua/Observatory.lua", "lua/CNBalance/Structures/Marine/Observatory.lua", "post")
+ModLoader.SetupFileHook("lua/MAC.lua", "lua/CNBalance/Structures/Marine/MAC.lua", "replace")
 
 ModLoader.SetupFileHook("lua/Marine.lua", "lua/CNBalance/Marine.lua", "post")
 ModLoader.SetupFileHook("lua/MarineSpectator.lua", "lua/CNBalance/MarineSpectator.lua", "post")

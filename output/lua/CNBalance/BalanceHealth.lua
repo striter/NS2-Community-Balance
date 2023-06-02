@@ -18,8 +18,10 @@ kExosuitHealth = 100    kExosuitArmor = 320    kExosuitPointValue = 20
 kExosuitArmorPerUpgradeLevel = 30
 
 kCommandStationHealth = 3000    kCommandStationArmor = 1800    kCommandStationPointValue = 20   --2000 -1800
+kUpgradedCommandStationHealth = 3200 kUpgradedCommandStationArmor = 1900 kUpgradedCommandStationPointValue = 30
 kPowerPointHealth = 2200    kPowerPointArmor = 1250    kPowerPointPointValue = 10 -- 2000 1000  10
 kExtractorHealth = 2400 kExtractorArmor = 1350 kExtractorPointValue = 15 --2400 1050
+kPoweredExtractorHealth = 3000 kPoweredExtractorArmor = 1600 kPoweredExtractorPointValue = 30
 
 kMineHealth = 30    kMineArmor = 9    kMinePointValue = 5
 
@@ -79,7 +81,7 @@ kOnosDamageReduction = {
     ["SubMachineGun"] = 0.92,
     ["LightMachineGun"] = 0.92,
     ["Shotgun"] = 0.88,
-    ["HeavyMachineGun"] = 1.05
+    ["HeavyMachineGun"] = 1.08,
 }
 
 kProwlerHealth = 135 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 5

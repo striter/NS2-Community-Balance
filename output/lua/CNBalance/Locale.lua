@@ -42,7 +42,11 @@ if kTranslateMessage then
     kTranslateMessage["GRENADE_LAUNCHER_UPGRADE_TOOLTIP"] = "+改进装弹加速榴弹枪换弹.\n+降低爆燃对使用者的伤害.\n+撞击榴弹内置智能引信."
     kTranslateMessage["MAC_EMP_BLAST"] = "电磁芯片"
     kTranslateMessage["MAC_EMP_BLAST_TOOLTIP"] = "+探测到临近敌方单位时.\nMAC将触发一道冲击波."
-
+    kTranslateMessage["POWERED_EXTRACTOR_TECH"] = "采集器电极升级"
+    kTranslateMessage["POWERED_EXTRACTOR_TECH_TOOLTIP"] = "+强化采集器耐久度.\n+受伤时对攻击单位造成伤害."
+    kTranslateMessage["POWERED_EXTRACTOR"] = "电极采集器"
+    kTranslateMessage["POWERED_EXTRACTOR_HINT"] = "团队/玩家收入. 受到攻击时将尝试电击单位."
+    
     kTranslateMessage["KNIFE"]="步战刀"
     kTranslateMessage["KNIFE_BUYDESCRIPTION"]="制式步战刀.\n+最快的移动速度.\n+对建筑双倍伤害,无需弹药.\n-近距离搏斗."
     kTranslateMessage["REVOLVER"]="左轮"
@@ -97,8 +101,8 @@ if kTranslateMessage then
     kTranslateMessage["XENOCIDE_FUEL"]="自爆充能"
     kTranslateMessage["XENOCIDE_FUEL_TOOLTIP"]="使Skulk的自爆变得更加致命.\n*增加自爆的范围.\n*增加自爆的伤害.\n*降低玩家复活所需时间."
 
-    kTranslateMessage["BABBLER_MINE"]="Babbler巢"
-    kTranslateMessage["BABBLER_MINE_TOOLTIP"]="自动感应式.\n*探测到临近敌方单位后.\n释放6个Babbler攻击敌方单位."
+    kTranslateMessage["BABBLER_MINE"]="虫巢"
+    kTranslateMessage["BABBLER_MINE_TOOLTIP"]="自动感应式.\n*探测到临近敌方单位后.\n释放6个子虫攻击敌方单位."
 
     kTranslateMessage["UPGRADE_PROWLER"] = "Prowler 演化"
     kTranslateMessage["UPGRADE_PROWLER_TOOLTIP"] = "解锁Prowler技能.\n*酸液飞弹"
@@ -172,6 +176,10 @@ if kLocales then
     kLocales["GRENADE_LAUNCHER_UPGRADE_TOOLTIP"] = "*Increase reload speed using GL.\n*Lower the damage dealt to the user.\n*Impact shot will self detonate when enemies nearby."
     kLocales["MAC_EMP_BLAST"] = "MAC EMP Blast"
     kLocales["MAC_EMP_BLAST_TOOLTIP"] = "MAC Triggers EMP When enemies Nearby"
+    kLocales["POWERED_EXTRACTOR_TECH"] = "Extractor Fusion Core"
+    kLocales["POWERED_EXTRACTOR_TECH_TOOLTIP"] = "+Increase health.\n+Will try deal damage to attacker when damaged."
+    kLocales["POWERED_EXTRACTOR"] = "Fusion Extractor"
+    kLocales["POWERED_EXTRACTOR_HINT"] = "Team/Personal Imcome. Will try deal damage to attacker."
 
     kLocales["KNIFE"]="Knife"
     kLocales["KNIFE_BUYDESCRIPTION"]="Standard Knife.\n+Double damage to structure,cost no ammo.\n-Close combat."

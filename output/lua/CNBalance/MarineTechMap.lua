@@ -1,6 +1,6 @@
 kMarineTechMap =
 {
-                                { kTechId.Extractor, 7, -1 },
+                                { kTechId.Extractor, 7, -1 },{ kTechId.PoweredExtractor, 9, -1 },
         
                                         { kTechId.ARCRoboticsFactory, 10, 0},{ kTechId.ARC, 11, 0 },
         { kTechId.RoboticsFactory, 9, 1 },{ kTechId.MAC, 10, 1 },
@@ -31,14 +31,15 @@ kMarineTechMap =
         
                                                                                                                                                                     { kTechId.CommandStation, 7, 7 }, {kTechId.InfantryPortal, 9, 7 },
                         { kTechId.LightMachineGunUpgrade, 2.5, 9 }, { kTechId.StandardStation, 3.5, 9 },{kTechId.CatPack, 4.5 ,9 },                       { kTechId.CombatBuilderTech, 6, 9 },       { kTechId.ArmorStation, 7, 9 },  { kTechId.NanoShield, 8, 9 },                                                       { kTechId.MinesUpgrade,9.5,9}, { kTechId.ExplosiveStation, 10.5, 9 }, { kTechId.PowerSurge, 11.5, 9 },
-                                                        { kTechId.DragonBreath,3 , 10 },{ kTechId.CannonTech,4 ,10 },                                                           { kTechId.LifeSustain, 6.5, 10 }, { kTechId.ArmorRegen, 7.5, 10 },                                                                               { kTechId.GrenadeLauncherUpgrade, 10, 10},   { kTechId.MACEMPBlast, 11, 10 },
-                                                                                                                                                                                                                                                                                                                                                                       
+                                                { kTechId.DragonBreath,3 , 10 },{ kTechId.CannonTech,4 ,10 },                                                           { kTechId.LifeSustain, 6.5, 10 }, { kTechId.ArmorRegen, 7.5, 10 },                                                                               { kTechId.GrenadeLauncherUpgrade, 9.5, 10},   { kTechId.MACEMPBlast, 10.5, 10 }, { kTechId.PoweredExtractorTech, 11.5, 10},
+
 }
 
 
 kMarineLines = 
 {
     { 7, 5.5, 7, -1 },
+    GetLinePositionForTechMap(kMarineTechMap, kTechId.Extractor, kTechId.PoweredExtractor),
     
     --Arms lab
     { 7, 2, 5, 2 },
@@ -102,6 +103,7 @@ kMarineLines =
     GetLinePositionForTechMap(kMarineTechMap, kTechId.ExplosiveStation, kTechId.PowerSurge),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.ExplosiveStation, kTechId.MACEMPBlast),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.ExplosiveStation, kTechId.GrenadeLauncherUpgrade),
+    GetLinePositionForTechMap(kMarineTechMap, kTechId.ExplosiveStation, kTechId.PoweredExtractorTech),
 
     --Prototype Lab
     GetLinePositionForTechMap(kMarineTechMap, kTechId.AdvancedArmory, kTechId.PrototypeLab),

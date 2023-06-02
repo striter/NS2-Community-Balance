@@ -99,6 +99,7 @@ kShiftSupply = 20
 
 --Personal Res On Kill
 kExtractorPersonalResOnKill = 2.5
+kPoweredExtractorPersonalResOnKill = 4
 kARCPersonalResOnKill = 2.5
 kMACPersonalResOnKill = 0.25
 kObservatoryPersonalResOnKill = 2.5
@@ -119,8 +120,9 @@ kWhipPersonalResOnKill = 3
 
 --Team Res On Kill
 kExtractorTeamResOnKill = 0
+kPoweredExtractorTeamResOnKill = 0
 kARCTeamResOnKill = 4
-kMACTeamResOnKill = 0.25
+kMACTeamResOnKill = 0
 kObservatoryTeamResOnKill = 0
 kPhaseGateTeamResOnKill = 0
 kPowerPointTeamResOnKill = 0

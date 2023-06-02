@@ -31,6 +31,8 @@ TeamInfo.kRelevantTechIdsMarine =
     --kTechId.GrenadeLauncherAllyBlast,
     kTechId.GrenadeLauncherUpgrade,
     kTechId.MACEMPBlast,
+    kTechId.PoweredExtractorTech,
+    kTechId.PoweredExtractorUpgrade,
 
     kTechId.ArmorSupply,
     kTechId.ArmorRegen,

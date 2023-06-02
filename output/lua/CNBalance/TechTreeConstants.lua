@@ -18,6 +18,10 @@ debug.appendtoenum(kTechId, "ArmorStation")
 debug.appendtoenum(kTechId, "LifeSustain")
 debug.appendtoenum(kTechId, "ArmorRegen")
 
+debug.appendtoenum(kTechId, "PoweredExtractorTech")
+debug.appendtoenum(kTechId, "PoweredExtractorUpgrade")
+debug.appendtoenum(kTechId, "PoweredExtractor")
+
 debug.appendtoenum(kTechId, "ProtosMenu")
 debug.appendtoenum(kTechId, "DropDualMinigunExosuit")
 debug.appendtoenum(kTechId, "DropDualRailgunExosuit")
