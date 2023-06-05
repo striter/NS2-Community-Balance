@@ -990,13 +990,9 @@ local function UpdateOrders(self, deltaTime)
 end
 
 local function TriggerEMPBlast(self)
-
-    if not self.empBlast then return end
     
-    if Shared.GetTime() - self.empTriggeredTime > kMACEmpBlastTriggerInterval then
-        self.empTriggeredTime = Shared.GetTime()
-        CreateEntity(EMPBlast.kMapName, self:GetOrigin(), self:GetTeamNumber())
-    end
+    self.empTriggeredTime = Shared.GetTime()
+    CreateEntity(EMPBlast.kMapName, self:GetOrigin(), self:GetTeamNumber())
 
 end
 
@@ -1025,7 +1021,8 @@ function MAC:OnUpdate(deltaTime)
         end
 
         local empBlastResearched = GetHasTech(self,kTechId.MACEMPBlast)
-        if empBlastResearched and Shared.GetTime() - self.empDetectionTime > kMACEmpBlastDetectInterval then
+        self.empBlast = empBlastResearched and Shared.GetTime() - self.empTriggeredTime > kMACEmpBlastTriggerInterval
+        if self.empBlast and Shared.GetTime() - self.empDetectionTime > kMACEmpBlastDetectInterval then
             self.empDetectionTime = Shared.GetTime()
 
             local ents = GetEntitiesWithMixinForTeamWithinRange("Live", GetEnemyTeamNumber(self:GetTeamNumber()), self:GetOrigin(), kMACEmpBlastDetectRadius)
@@ -1037,8 +1034,6 @@ function MAC:OnUpdate(deltaTime)
                 end
             end
         end
-        
-        self.empBlast = empBlastResearched and Shared.GetTime() - self.empTriggeredTime > kMACEmpBlastTriggerInterval
         
             -- client side build / weld effects
     elseif Client and self:GetIsAlive() then
@@ -1105,10 +1100,14 @@ function MAC:OnUpdate(deltaTime)
 end
 
 
+if Server then
 function MAC:OnKill()
-    TriggerEMPBlast(self)
+    local empBlastResearched = GetHasTech(self,kTechId.MACEMPBlast)
+    if empBlastResearched then
+        TriggerEMPBlast(self)
+    end
 end
-
+end
 function MAC:OnOrderComplete(order)
     if self.autoReturning then
         self.leashedPosition = nil

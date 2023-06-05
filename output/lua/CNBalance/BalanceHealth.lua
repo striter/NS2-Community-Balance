@@ -27,7 +27,7 @@ kMineHealth = 30    kMineArmor = 9    kMinePointValue = 5
 
 kObservatoryHealth = 1050    kObservatoryArmor = 500    kObservatoryPointValue = 15     -- 750 500
 
-kRoboticsFactoryHealth = 1900    kRoboticsFactoryArmor = 400    kRoboticsFactoryPointValue = 5
+kRoboticsFactoryHealth = 2500    kRoboticsFactoryArmor = 400    kRoboticsFactoryPointValue = 5
 kARCRoboticsFactoryHealth = 3000    kARCRoboticsFactoryArmor = 600    kARCRoboticsFactoryPointValue = 7
 kSentryBatteryHealth = 700    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5
 kSentryHealth = 500    kSentryArmor = 100    kSentryPointValue = 4

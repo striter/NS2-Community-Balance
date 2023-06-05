@@ -80,7 +80,7 @@ kGoreVampirismScalar = 0.02
 
 -- Supply
 
-kMACSupply = 10
+kMACSupply = 0
 kArmorySupply = 5
 kObservatorySupply = 20
 kARCSupply = 20
@@ -100,8 +100,9 @@ kShiftSupply = 20
 --Personal Res On Kill
 kExtractorPersonalResOnKill = 2.5
 kPoweredExtractorPersonalResOnKill = 4
+kRoboticsFactoryPersonalResOnKill = 2.5
 kARCPersonalResOnKill = 2.5
-kMACPersonalResOnKill = 0.25
+kMACPersonalResOnKill = 0.1
 kObservatoryPersonalResOnKill = 2.5
 kPhaseGatePersonalResOnKill = 4
 kPowerPointPersonalResOnKill = 0.5
@@ -121,6 +122,7 @@ kWhipPersonalResOnKill = 3
 --Team Res On Kill
 kExtractorTeamResOnKill = 0
 kPoweredExtractorTeamResOnKill = 0
+kRoboticsFactoryTeamResOnKill = 0
 kARCTeamResOnKill = 4
 kMACTeamResOnKill = 0
 kObservatoryTeamResOnKill = 0

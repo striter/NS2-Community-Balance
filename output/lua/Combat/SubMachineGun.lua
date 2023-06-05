@@ -205,7 +205,7 @@ end
 function SubMachineGun:GetDeathIconIndex()
 
     if self:GetSecondaryAttacking() then
-        return kDeathMessageIcon.RifleButt
+        return kDeathMessageIcon.Knife
     end
     return kDeathMessageIcon.SubMachineGun
     
@@ -250,9 +250,13 @@ end
 function SubMachineGun:PerformMeleeAttack(player)
 
     player:TriggerEffects("rifle_alt_attack")
-    
-    AttackMeleeCapsule(self, player, kMachineGunMeleeDamage, kButtRange, nil, true)
-    
+
+    local coords = player:GetViewAngles():GetCoords()
+    local didHit, target = AttackMeleeCapsule(self, player, kKnifeDamage, kKnifeRange, nil, true)
+
+    if not (didHit and target) and coords then -- Only for webs
+        MarineMeleeBoxDamage(self,player,coords,kKnifeRange,kKnifeDamage)
+    end
 end
 
 function SubMachineGun:OnTag(tagName)

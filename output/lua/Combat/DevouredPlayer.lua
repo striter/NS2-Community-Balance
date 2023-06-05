@@ -164,6 +164,14 @@ function DevouredPlayer:GetCanTakeDamageOverride()
     return true
 end
 
+function DevouredPlayer:HandleButtons(input)
+	PROFILE("DevouredPlayer:HandleButtons")
+
+	Player.HandleButtons(self, input)
+	
+	return true
+end
+
 --[[function DevouredPlayer:GetCanDieOverride()
 	if self:GetHealth() <= 0 then
 		return true

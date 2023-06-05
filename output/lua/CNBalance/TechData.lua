@@ -935,6 +935,57 @@ function BuildTechData()
             [kTechDataPersonalResOnKillKey] = kPoweredExtractorPersonalResOnKill,
             [kTechDataTeamResOnKillKey] = kPoweredExtractorPersonalTeamOnKill,
         })
+
+        table.insert(techData,{
+            [kTechDataId] = kTechId.RoboticsFactory,
+            [kTechDataSupply] = kRoboticsFactorySupply,
+            [kTechDataHint] = "ROBOTICS_FACTORY_HINT",
+            [kTechDataGhostModelClass] = "MarineGhostModel",
+            [kTechDataRequiresPower] = true,
+            [kTechDataDisplayName] = "ROBOTICS_FACTORY",
+            [kTechDataMapName] = RoboticsFactory.kMapName,
+            [kTechDataCostKey] = kRoboticsFactoryCost,
+            [kTechDataModel] = RoboticsFactory.kModelName,
+            [kTechDataEngagementDistance] = kRoboticsFactorEngagementDistance,
+            [kTechDataSpecifyOrientation] = true,
+            [kTechDataBuildTime] = kRoboticsFactoryBuildTime,
+            [kTechDataMaxHealth] = kRoboticsFactoryHealth,
+            [kTechDataMaxArmor] = kRoboticsFactoryArmor,
+            [kTechDataPointValue] = kRoboticsFactoryPointValue,
+            [kTechDataHotkey] = Move.R,
+            [kTechDataNotOnInfestation] = kPreventMarineStructuresOnInfestation,
+            [kTechDataTooltipInfo] = "ROBOTICS_FACTORY_TOOLTIP",
+            [kTechDataObstacleRadius] = 2.1,
+            [kTechDataBuildRequiresMethod] = GetRoboticsFactoryBuildValid,
+            [kTechDataBuildMethodFailedMessage] = "COMMANDERERROR_CANT_BUILD_TOO_CLOSE",
+            [kTechDataPersonalResOnKillKey] = kRoboticsFactoryPersonalResOnKill,
+            [kTechDataTeamResOnKillKey] = kRoboticsFactoryTeamResOnKill,
+        })
+    
+        table.insert(techData,{
+            [kTechDataId] = kTechId.ARCRoboticsFactory,
+            [kTechDataUpgradeTech] = kTechId.RoboticsFactory,
+            [kTechDataCostKey] = kRoboticsFactoryCost + kUpgradeRoboticsFactoryCost,
+            [kTechDataSupply] = kRoboticsFactorySupply,
+            [kTechDataHint] = "ARC_ROBOTICS_FACTORY_HINT",
+            [kTechDataRequiresPower] = true,
+            [kTechIDShowEnables] = false,
+            [kTechDataDisplayName] = "ARC_ROBOTICS_FACTORY",
+            [kTechDataMapName] = ARCRoboticsFactory.kMapName,
+            [kTechDataModel] = RoboticsFactory.kModelName,
+            [kTechDataEngagementDistance] = kRoboticsFactorEngagementDistance,
+            [kTechDataSpecifyOrientation] = true,
+            [kTechDataBuildTime] = kRoboticsFactoryBuildTime,
+            [kTechDataMaxHealth] = kARCRoboticsFactoryHealth,
+            [kTechDataMaxArmor] = kARCRoboticsFactoryArmor,
+            [kTechDataPointValue] = kARCRoboticsFactoryPointValue,
+            [kTechDataHotkey] = Move.R,
+            [kTechDataNotOnInfestation] = kPreventMarineStructuresOnInfestation,
+            [kTechDataTooltipInfo] = "ARC_ROBOTICS_FACTORY_TOOLTIP",
+            [kTechDataObstacleRadius] = 2.1,
+            [kTechDataPersonalResOnKillKey] = kRoboticsFactoryPersonalResOnKill,
+            [kTechDataTeamResOnKillKey] = kRoboticsFactoryTeamResOnKill,
+        })
     
         table.insert(techData,{
             [kTechDataId] = kTechId.ARC,
@@ -1338,7 +1389,7 @@ function BuildTechData()
             [kTechDataTeamResOnKillKey] = kTraitTeamResOnKill,
         })
 
-    table.insert(techData,{
+        table.insert(techData,{
             [kTechDataId] = kTechId.Shift,
             [kTechDataBioMass] = kShiftBiomass,
             [kTechDataSupply] = kShiftSupply,
@@ -1365,7 +1416,7 @@ function BuildTechData()
             [kTechDataObstacleRadius] = 1.3,
             [kTechDataPersonalResOnKillKey] = kTowerPersonalResOnKill,
             [kTechDataTeamResOnKillKey] = kTowerTeamResOnKill,
-        })
+    })
 
     table.insert(techData,{
         [kTechDataId] = kTechId.Crag,

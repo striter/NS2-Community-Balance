@@ -93,24 +93,6 @@ end
 
 
 function Knife:Knife_HitCheck(coords, player)
-
-    local boxTrace = Shared.TraceBox(Vector(0.07,0.07,0.07),
-                                     player:GetEyePos(),
-                                     player:GetEyePos() + coords.zAxis * (0.50 + self:GetRange()),
-                                     CollisionRep.Default, PhysicsMask.AllButPCsAndRagdolls,
-                                     EntityFilterTwo(player, self))
-    -- Log("Boxtrace entity: %s, target: %s", boxTrace.entity, target)
-    if boxTrace.entity and boxTrace.entity:isa("Web") then
-        self:DoDamage(kKnifeDamage, boxTrace.entity, boxTrace.endPoint, coords.zAxis, "organic", false)
-    else
-        -- local rayTrace = Shared.TraceRay(eyePos, targetOrigin, CollisionRep.LOS, PhysicsMask.All, EntityFilterAll())
-        local rayTrace = Shared.TraceRay(player:GetEyePos(), player:GetEyePos() + coords.zAxis * (0.50 + self:GetRange()), CollisionRep.Default, PhysicsMask.AllButPCsAndRagdolls, EntityFilterTwo(player, self))
-        -- Log("Raytrace entity: %s", rayTrace.entity)
-        if rayTrace.entity and rayTrace.entity:isa("Web") then
-            self:DoDamage(kKnifeDamage, boxTrace.entity, boxTrace.endPoint, coords.zAxis, "organic", false)
-        end
-    end
-
 end
 
 function Knife:OnTag(tagName)
@@ -127,7 +109,7 @@ function Knife:OnTag(tagName)
         local didHit, target = AttackMeleeCapsule(self, player, kKnifeDamage, self:GetRange())
 
         if not (didHit and target) and coords then -- Only for webs
-            self:Knife_HitCheck(coords, player)
+            MarineMeleeBoxDamage(self,player,coords,self:GetRange(),kKnifeDamage)
         end
         
     elseif tagName == "attack_end" then

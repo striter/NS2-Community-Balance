@@ -90,7 +90,7 @@ kPoweredExtractorUpgradeTime = 45
 kPoweredExtractorChargingInterval = 2.5
 kPoweredExtractorDamageDistance = 5
 kPoweredExtractorDamage = 50
-kPoweredExtractorElectrifyDuration = 3
+kPoweredExtractorElectrifyDuration = 5
 --kGrenadeLauncherDetectionShotResearchCost = 15
 --kGrenadeLauncherDetectionShotResearchTime = 60
 --kGrenadeLauncherAllyBlastResearchCost = 15
@@ -145,7 +145,6 @@ kSubMachineGunPointValue = 0
 --
 
 kRifleMeleeDamage = 10
-kMachineGunMeleeDamage = 25
 
 --Knife
 kKnifeWeight = -0.05
@@ -214,7 +213,7 @@ kClusterGrenadeFragmentDamageType = kDamageType.ClusterFlameFragment
 kInfantryPortalBuildTime = 7
 kInfantryPortalCost = 15
 
-kRoboticsFactoryCost = 5
+kRoboticsFactoryCost = 10
 kUpgradeRoboticsFactoryCost = 10
 kUpgradeRoboticsFactoryTime = 30
 kARCCost = 15
@@ -231,7 +230,7 @@ kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 90
 kRoboticsFactoryBuildTime = 8
 
-kPrototypeLabCost = 30
+kPrototypeLabCost = 35
 
 kJetpackTechResearchCost = 25
 kJetpackTechResearchTime = 90

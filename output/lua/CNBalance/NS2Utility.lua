@@ -171,3 +171,22 @@ function PlayerUI_GetGameTimeString()
     return gameTimeString
 
 end
+
+function MarineMeleeBoxDamage(self,player,coords,range,damage)
+    local boxTrace = Shared.TraceBox(Vector(0.07,0.07,0.07),
+            player:GetEyePos(),
+            player:GetEyePos() + coords.zAxis * (0.50 + range),
+            CollisionRep.Default, PhysicsMask.AllButPCsAndRagdolls,
+            EntityFilterTwo(player, self))
+    -- Log("Boxtrace entity: %s, target: %s", boxTrace.entity, target)
+    if boxTrace.entity and boxTrace.entity:isa("Web") then
+        self:DoDamage(damage, boxTrace.entity, boxTrace.endPoint, coords.zAxis, "organic", false)
+        return 
+    end
+    -- local rayTrace = Shared.TraceRay(eyePos, targetOrigin, CollisionRep.LOS, PhysicsMask.All, EntityFilterAll())
+    local rayTrace = Shared.TraceRay(player:GetEyePos(), player:GetEyePos() + coords.zAxis * (0.50 + self:GetRange()), CollisionRep.Default, PhysicsMask.AllButPCsAndRagdolls, EntityFilterTwo(player, self))
+    -- Log("Raytrace entity: %s", rayTrace.entity)
+    if rayTrace.entity and rayTrace.entity:isa("Web") then
+        self:DoDamage(damage, boxTrace.entity, boxTrace.endPoint, coords.zAxis, "organic", false)
+    end
+end

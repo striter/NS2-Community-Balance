@@ -85,6 +85,7 @@ ModLoader.SetupFileHook("lua/CommandStation.lua", "lua/CNBalance/Structures/Mari
 ModLoader.SetupFileHook("lua/Extractor.lua", "lua/CNBalance/Structures/Marine/Extractor.lua", "replace")
 ModLoader.SetupFileHook("lua/Armory.lua", "lua/CNBalance/Structures/Marine/Armory.lua", "post")
 ModLoader.SetupFileHook("lua/Observatory.lua", "lua/CNBalance/Structures/Marine/Observatory.lua", "post")
+ModLoader.SetupFileHook("lua/RoboticsFactory.lua", "lua/CNBalance/Structures/Marine/RoboticsFactory.lua", "post")
 ModLoader.SetupFileHook("lua/MAC.lua", "lua/CNBalance/Structures/Marine/MAC.lua", "replace")
 
 ModLoader.SetupFileHook("lua/Marine.lua", "lua/CNBalance/Marine.lua", "post")
