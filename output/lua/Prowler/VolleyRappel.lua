@@ -26,15 +26,19 @@ VolleyRappel.kSpreadVectors =
     GetNormalizedVector(Vector(0.0, 3.0, kSpreadDistance)),
     GetNormalizedVector(Vector(0.0, -3.0, kSpreadDistance)),--]]
     
-    GetNormalizedVector(Vector(0.0, 0.08, kSpreadDistance)),
-    GetNormalizedVector(Vector(0.0, -0.4, kSpreadDistance)),
-    
     GetNormalizedVector(Vector(-0.44, 0.1, kSpreadDistance)),
     GetNormalizedVector(Vector( 0.44, 0.1, kSpreadDistance)),
     
     GetNormalizedVector(Vector(-0.88, -0.05, kSpreadDistance)),
     GetNormalizedVector(Vector( 0.88, -0.05, kSpreadDistance)),
     
+    GetNormalizedVector(Vector(0.0, 0.08, kSpreadDistance)),
+    GetNormalizedVector(Vector(0.0, -0.4, kSpreadDistance)),
+    GetNormalizedVector(Vector(0.0, -0.08, kSpreadDistance)),
+
+    GetNormalizedVector(Vector(-1.22, -0.05, kSpreadDistance)),
+    GetNormalizedVector(Vector(1.22, -0.05, kSpreadDistance)),
+
     --GetNormalizedVector(Vector(-0.7, -0.7, kSpreadDistance)),
     --GetNormalizedVector(Vector( 0.7, -0.7, kSpreadDistance)),
     --GetNormalizedVector(Vector( 0.7,  0.7, kSpreadDistance)),
@@ -99,7 +103,16 @@ end
 function VolleyRappel:GetTracerResidueEffectName()
     return kVolleyRappelTracer
 end
+
 function VolleyRappel:GetBulletsPerShot()
+    local player = self:GetParent()
+    if player then
+        local teamInfo = GetTeamInfoEntity(player:GetTeamNumber())
+        local biomassLevel = (teamInfo and teamInfo.GetBioMassLevel) and teamInfo:GetBioMassLevel() or 0
+        
+        return 5 + biomassLevel / 3
+    end
+    
     return 6
 end
 

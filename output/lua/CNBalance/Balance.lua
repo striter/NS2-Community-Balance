@@ -18,8 +18,11 @@ kAlienEggsPerHive = 2
 kWelderDropCost = 3
 kWelderDropCooldown = 0
 
+kMineResearchCost  = 10
+kMineResearchTime  = 45
+
 kGrenadeTechResearchCost = 10   --10
-kGrenadeTechResearchTime = 60   --45
+kGrenadeTechResearchTime = 45   --45
 
 kMineCost = 10
 kMineDamage = 135
@@ -58,7 +61,7 @@ kHeavyMachineGunSpread = Math.Radians(5)  --4
 
 kCommandStationCost = 20
 kCommandStationUpgradeCost = 10
-kCommandStationUpgradeTime = 90
+kCommandStationUpgradeTime = 60
 kUpgradedCommandStationCost = 30
 
 kExtractorCost = 10
@@ -112,10 +115,10 @@ kGrenadeLauncherAllyBlastReduction = 0.4
 --Armor Supply
 kCombatBuilderResearchCost = 10
 kCombatBuilderResearchTime = 60
-kLifeSustainResearchCost = 20
-kLifeSustainResearchTime = 120
+kLifeSustainResearchCost = 15
+kLifeSustainResearchTime = 90
 kNanoArmorResearchCost = 25
-kNanoArmorResearchTime = 120
+kNanoArmorResearchTime = 90
 
 kGrenadeLauncherClipSize = 4
 kGrenadeLauncherWeapons1DamageScalar = 1.08
@@ -188,8 +191,14 @@ kFlamethrowerDropCost = 12
 kFlamethrowerDropCooldown = 0
 
 kBurnDamagePerSecond = 8
-kFlamethrowerBurnDuration = 1
-kFlamethrowerMaxBurnDuration = 6
+
+kFireStructureBurnDuration = 2.1
+kFireStructureMaxBurnDuration = 6
+
+kFireDurationDefault = 1
+kFireDurationWeapons1 = 1.6
+kFireDurationWeapons2 = 2.2
+kFireDurationWeapons3 = 2.8
 
 kMinigunDamage = 8.5
 kMinigunDamageType = kDamageType.Exosuit
@@ -447,6 +456,7 @@ kPowerSurgeCooldown = 5
 kPowerSurgeDuration = 10
 kPowerSurgeTriggerEMP = true
 kPowerSurgeEMPDamage = 20
+kEMPDamageWeapons1Scalar = 1.2 kEMPDamageWeapons2Scalar = 1.35 kEMPDamageWeapons3Scalar = 1.5
 kPowerSurgeEMPDamageRadius = 6
 kPowerSurgeEMPElectrifiedDuration = 2
 

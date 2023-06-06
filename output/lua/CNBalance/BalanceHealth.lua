@@ -84,7 +84,7 @@ kOnosDamageReduction = {
     ["HeavyMachineGun"] = 1.08,
 }
 
-kProwlerHealth = 135 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 5
+kProwlerHealth = 120 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 7
 kProwlerDamageReduction = {
     --["Shotgun"] = 0.9,
     ["Grenade"] = 0.75,

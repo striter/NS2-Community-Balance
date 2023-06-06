@@ -70,6 +70,7 @@ function NS2Gamerules_GetUpgradedDamageScalar( attacker, weaponTechId )
             [kTechId.Shotgun]         = { kShotgunWeapons1DamageScalar,         kShotgunWeapons2DamageScalar,         kShotgunWeapons3DamageScalar },
             [kTechId.GrenadeLauncher] = { kGrenadeLauncherWeapons1DamageScalar, kGrenadeLauncherWeapons2DamageScalar, kGrenadeLauncherWeapons3DamageScalar },
             [kTechId.Flamethrower]    = { kFlamethrowerWeapons1DamageScalar,    kFlamethrowerWeapons2DamageScalar,    kFlamethrowerWeapons3DamageScalar },
+            [kTechId.PowerSurge]    =   { kEMPDamageWeapons1Scalar,    kEMPDamageWeapons2Scalar,    kEMPDamageWeapons3Scalar },
             ["Default"]               = { kWeapons1DamageScalar,                kWeapons2DamageScalar,                kWeapons3DamageScalar },
         }
 
@@ -90,6 +91,18 @@ function NS2Gamerules_GetUpgradedDamageScalar( attacker, weaponTechId )
 
     return 1.0
 
+end
+
+function NS2Gamerules_GetPlayerFireDuration(attacker)
+
+    if GetHasTech(attacker, kTechId.Weapons3, true) then
+        return kFireDurationWeapons3
+    elseif GetHasTech(attacker, kTechId.Weapons2, true) then
+        return kFireDurationWeapons2
+    elseif GetHasTech(attacker, kTechId.Weapons1, true) then
+        return kFireDurationWeapons1
+    end
+    return kFireDurationDefault
 end
 
 -- Use this function to change damage according to current upgrades

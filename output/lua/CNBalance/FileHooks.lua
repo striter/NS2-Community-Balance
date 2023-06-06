@@ -45,7 +45,8 @@ ModLoader.SetupFileHook("lua/AlienWeaponEffects.lua", "lua/CNBalance/Effects/Ali
 ModLoader.SetupFileHook("lua/SoundEffect.lua", "lua/CNBalance/SoundEffect.lua", "post" )
 
 --Mixin
-ModLoader.SetupFileHook("lua/Weapons/BulletsMixin.lua", "lua/CNBalance/Weapons/BulletsMixin.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/BulletsMixin.lua", "lua/CNBalance/Mixin/BulletsMixin.lua", "post")
+ModLoader.SetupFileHook("lua/FireMixin.lua", "lua/CNBalance/Mixin/FireMixin.lua", "post")
 ModLoader.SetupFileHook("lua/CloakableMixin.lua", "lua/CNBalance/Mixin/CloakableMixin.lua", "replace")
 ModLoader.SetupFileHook("lua/BabblerOwnerMixin.lua", "lua/CNBalance/Mixin/BabblerOwnerMixin.lua", "post")
 ModLoader.SetupFileHook("lua/RegenerationMixin.lua", "lua/CNBalance/Mixin/RegenerationMixin.lua", "post")
@@ -102,6 +103,7 @@ ModLoader.SetupFileHook("lua/Weapons/Marine/Welder.lua", "lua/CNBalance/Weapons/
 ModLoader.SetupFileHook("lua/Weapons/Marine/Axe.lua", "lua/CNBalance/Weapons/Marine/Axe.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/Pistol.lua", "lua/CNBalance/Weapons/Marine/Pistol.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/Rifle.lua", "lua/CNBalance/Weapons/Marine/Rifle.lua", "post")
+ModLoader.SetupFileHook("lua/CommAbilities/Marine/EMPBlast.lua", "lua/CNBalance/Weapons/Marine/EMPBlast.lua", "post")
 -- ModLoader.SetupFileHook("lua/Weapons/Marine/PulseGrenade.lua", "lua/CNBalance/Weapons/Marine/PulseGrenade.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/ClusterGrenade.lua", "lua/CNBalance/Weapons/Marine/ClusterGrenade.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/Shotgun.lua", "lua/CNBalance/Weapons/Marine/Shotgun.lua", "post")
