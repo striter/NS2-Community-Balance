@@ -38,10 +38,10 @@ local kAdditionalEffects =
     {
         gunReloadEffects =
         {
-			{player_sound = "sound/ns2plus.fev/weapons/marine/revolver/reload1", classname = "Revolver", done = true},
-            {player_sound = "sound/ns2plus.fev/weapons/marine/heavy_cannon/reload1", classname = "Cannon", done = true},
-			{player_sound = "sound/ns2plus.fev/weapons/marine/lmg/reload1", classname = "LightMachineGun", done = true},
-            {player_sound = "sound/ns2plus.fev/weapons/marine/lmg/reload1", classname = "SubMachineGun", done = true},
+			--{player_sound = "sound/ns2plus.fev/weapons/marine/revolver/reload1", classname = "Revolver", done = true},
+            --{player_sound = "sound/ns2plus.fev/weapons/marine/heavy_cannon/reload1", classname = "Cannon", done = true},
+			--{player_sound = "sound/ns2plus.fev/weapons/marine/lmg/reload1", classname = "LightMachineGun", done = true},
+            --{player_sound = "sound/ns2plus.fev/weapons/marine/lmg/reload1", classname = "SubMachineGun", done = true},
         },
     },
 	
@@ -50,13 +50,13 @@ local kAdditionalEffects =
         gunReloadCancelEffects =
         {
 			{stop_sound = "sound/ns2plus.fev/weapons/marine/revolver/reload0", classname = "Revolver"},
-			{stop_sound = "sound/ns2plus.fev/weapons/marine/revolver/reload1", classname = "Revolver", done = true},
+			--{stop_sound = "sound/ns2plus.fev/weapons/marine/revolver/reload1", classname = "Revolver", done = true},
 			{stop_sound = "sound/ns2plus.fev/weapons/marine/heavy_cannon/reload0", classname = "Cannon"},
-			{stop_sound = "sound/ns2plus.fev/weapons/marine/heavy_cannon/reload1", classname = "Cannon", done = true},
+			--{stop_sound = "sound/ns2plus.fev/weapons/marine/heavy_cannon/reload1", classname = "Cannon", done = true},
 			{stop_sound = "sound/ns2plus.fev/weapons/marine/lmg/reload0", classname = "LightMachineGun"},
-			{stop_sound = "sound/ns2plus.fev/weapons/marine/lmg/reload1", classname = "LightMachineGun", done = true},
+			--{stop_sound = "sound/ns2plus.fev/weapons/marine/lmg/reload1", classname = "LightMachineGun", done = true},
             {stop_sound = "sound/ns2plus.fev/weapons/marine/lmg/reload0", classname = "SubMachineGun"},
-            {stop_sound = "sound/ns2plus.fev/weapons/marine/lmg/reload1", classname = "SubMachineGun", done = true},
+            --{stop_sound = "sound/ns2plus.fev/weapons/marine/lmg/reload1", classname = "SubMachineGun", done = true},
         },
     },
 

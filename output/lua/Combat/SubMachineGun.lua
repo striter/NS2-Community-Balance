@@ -442,11 +442,11 @@ function SubMachineGun:OnReload(player)
     if self:CanReload() then
 		self.reloading = true
 	
-		if player and player:GetHasCatPackBoost()then
-			self:TriggerEffects("reload_speed1")
-		else
+		--if player and player:GetHasCatPackBoost()then
+		--	self:TriggerEffects("reload_speed1")
+		--else
 			self:TriggerEffects("reload_speed0")
-		end
+		--end
     end
 end
 
