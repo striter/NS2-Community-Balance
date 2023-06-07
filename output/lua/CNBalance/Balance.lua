@@ -108,9 +108,15 @@ kGrenadeLauncherGrenadeDamage = 100
 kGrenadeLauncherGrenadeDamageRadius = 4.8
 kGrenadeLauncherDetectionShotRadius = 3
 
+kGrenadeLauncherClipSize = 4
+
 kGrenadeLauncherImpactGrenadeDamage = 100
 kGrenadeLauncherSelfDamageReduction = 0.7
 kGrenadeLauncherAllyBlastReduction = 0.4
+
+kGrenadeLauncherWeapons1DamageScalar = 1.1
+kGrenadeLauncherWeapons2DamageScalar = 1.2
+kGrenadeLauncherWeapons3DamageScalar = 1.3
 
 --Armor Supply
 kCombatBuilderResearchCost = 10
@@ -120,10 +126,6 @@ kLifeSustainResearchTime = 90
 kNanoArmorResearchCost = 25
 kNanoArmorResearchTime = 90
 
-kGrenadeLauncherClipSize = 4
-kGrenadeLauncherWeapons1DamageScalar = 1.08
-kGrenadeLauncherWeapons2DamageScalar = 1.17
-kGrenadeLauncherWeapons3DamageScalar = 1.25
 
 --Revolver
 kRevolverRateOfFire = 0.1
@@ -277,11 +279,11 @@ kOnosEggCost = 100
 kTunnelEntranceCost = 7
 kTunnelRelocateCost = 5
 
-kResearchBioMassOneCost = 30
-kBioMassOneTime = 75
+kResearchBioMassOneCost = 35
+kBioMassOneTime = 90
 kResearchBioMassTwoCost = 45
-kBioMassTwoTime = 105
-kResearchBioMassThreeCost = 65
+kBioMassTwoTime = 120
+kResearchBioMassThreeCost = 60
 kBioMassThreeTime = 150
 kResearchBioMassFourCost = 100      --?
 kBioMassFourTime = 80
@@ -409,9 +411,9 @@ kShadeCost = 10
 kShiftCost = 10
 kCragCost = 10
 
-kSpurCost = 18
-kShellCost = 18
-kVeilCost = 18
+kSpurCost = 15
+kShellCost = 15
+kVeilCost = 15
 
 kContaminationCost = 5
 kContaminationCooldown = 10

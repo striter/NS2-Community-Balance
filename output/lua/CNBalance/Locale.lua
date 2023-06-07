@@ -46,7 +46,8 @@ if kTranslateMessage then
     kTranslateMessage["POWERED_EXTRACTOR_TECH_TOOLTIP"] = "+强化采集器耐久度.\n+受伤时对攻击单位造成伤害."
     kTranslateMessage["POWERED_EXTRACTOR"] = "电极采集器"
     kTranslateMessage["POWERED_EXTRACTOR_HINT"] = "团队/玩家收入. 受攻击时将尝试电击单位."
-    
+
+    kTranslateMessage["WELDER_BUYDESCRIPTION"]="制式维修工具.\n*修复陆战队护甲以及机甲.\n*修复建筑以及电力节点,加速建造建筑.\n*对菌毯造成高额伤害,可以灼烧孢子云."
     kTranslateMessage["KNIFE"]="步战刀"
     kTranslateMessage["KNIFE_BUYDESCRIPTION"]="制式步战刀.\n+最快的移动速度.\n+对建筑双倍伤害,无需弹药.\n-近距离搏斗."
     kTranslateMessage["REVOLVER"]="左轮"

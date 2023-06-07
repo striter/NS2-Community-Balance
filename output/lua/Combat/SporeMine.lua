@@ -24,9 +24,9 @@ class 'SporeMine' (ScriptActor)
 
 local kStartScale = 0.5
 local kFinalScale = 1.2
-local kCollisionRadius = 0.5
+local kCollisionRadius = 0.37
 SporeMine.kMapName = "sporemine"
-SporeMine.kDropRange = 2
+SporeMine.kDropRange = 3
 
 SporeMine.kModelName = PrecacheAsset("models/alien/sporemine/sporemine.model")
 local kAnimationGraph = PrecacheAsset("models/alien/sporemine/sporemine.animation_graph")
@@ -195,6 +195,8 @@ if Server then
 
     function SporeMine:Explode(_destination)
 
+        local owner = self:GetOwner()
+        
         local dotMarker = CreateEntity(DotMarker.kMapName, self:GetOrigin(), self:GetTeamNumber())
         dotMarker:SetTechId(kTechId.SporeMine)
         dotMarker:SetDamageType(kSporeMineDamageType)
@@ -205,7 +207,7 @@ if Server then
         dotMarker:SetDotMarkerType(DotMarker.kType.Static)
         dotMarker:SetTargetEffectName("bilebomb_onstructure")
         dotMarker:SetDeathIconIndex(kDeathMessageIcon.SporeMine)
-        dotMarker:SetOwner(self:GetOwner())
+        dotMarker:SetOwner(owner)
 
         local function NoFalloff()
             return 0
@@ -214,9 +216,9 @@ if Server then
 
         dotMarker:TriggerEffects("bilebomb_hit")
 
-        if _destination and GetHasTech(self,kTechId.Spores) then
+        if GetIsTechUnlocked(self,kTechId.Spores) and _destination then
             local position = self:GetOrigin()
-            local spores = CreateEntity( SporeCloud.kMapName,position , self:GetTeamNumber() )
+            local spores = CreateEntity( SporeCloud.kMapName,position , self:GetTeamNumber())
             local direction = _destination - position
             spores:SetTravelDestination( position + GetNormalizedVector(direction) * math.min(direction:GetLength(), kSporeMineDamageRadius) )
         end
@@ -244,9 +246,8 @@ if Server then
 
             Shared.SortEntitiesByDistance(self:GetOrigin(), enemies)
             for _, ent in ipairs(enemies) do
-                local dir = self:GetCoords().yAxis
                 local startPoint = ent:GetEngagementPoint()
-                local endPoint = self:GetOrigin() + dir * self:GetExtents().y
+                local endPoint = self:GetOrigin() + self:GetCoords().yAxis * (kCollisionRadius - 0.1)
                 local filter = self:DetectThreatFilter()
 
                 local trace = Shared.TraceRay(startPoint, endPoint, CollisionRep.Move, PhysicsMask.Bullets, filter)

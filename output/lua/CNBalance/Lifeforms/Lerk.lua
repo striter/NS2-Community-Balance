@@ -5,3 +5,13 @@ function Lerk:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoin
             damageTable.damage = damageTable.damage * reduction
         end
 end
+
+if Server then
+    function Lerk:GetTierTwoTechId()
+        return kTechId.Spores
+    end
+
+    function Lerk:GetTierThreeTechId()
+        return kTechId.Umbra
+    end
+end

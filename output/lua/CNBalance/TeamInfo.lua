@@ -62,6 +62,7 @@ TeamInfo.kRelevantTechIdsAlien =
     kTechId.ResearchBioMassOne,
     kTechId.ResearchBioMassTwo,
     kTechId.ResearchBioMassThree,
+    
     kTechId.ShiftTunnel,
     kTechId.CragTunnel,
     kTechId.ShadeTunnel,

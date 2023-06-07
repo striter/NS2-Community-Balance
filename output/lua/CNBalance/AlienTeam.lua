@@ -238,12 +238,12 @@ function AlienTeam:InitTechTree()
     self.techTree:AddBuyNode(kTechId.BabblerEgg,            kTechId.BioMassFour)
 
     -- lerk researches
-    self.techTree:AddTargetedActivation(kTechId.Spores,              kTechId.BioMassFive, kTechId.None)
+    self.techTree:AddTargetedActivation(kTechId.Spores,              kTechId.BioMassFour, kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.Umbra,               kTechId.BioMassSix, kTechId.None)
 
     -- fade researches
     self.techTree:AddTargetedActivation(kTechId.MetabolizeEnergy,        kTechId.BioMassThree, kTechId.None)
-    self.techTree:AddTargetedActivation(kTechId.MetabolizeHealth,        kTechId.BioMassFive, kTechId.MetabolizeEnergy)
+    self.techTree:AddTargetedActivation(kTechId.MetabolizeHealth,        kTechId.BioMassFive, kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.Stab,              kTechId.BioMassSeven, kTechId.None)
 
     self.techTree:AddResearchNode(kTechId.ShiftTunnel , kTechId.ShiftHive)
