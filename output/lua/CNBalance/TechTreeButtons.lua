@@ -46,6 +46,10 @@ kTechIdToMaterialOffset[kTechId.Volley] = 106
 kTechIdToMaterialOffset[kTechId.Rappel] = 205
 kTechIdToMaterialOffset[kTechId.AcidSpray] = 206
 
+kTechIdToMaterialOffset[kTechId.ShadowStep] = 160
+kTechIdToMaterialOffset[kTechId.AcidRocket] = 209
+kTechIdToMaterialOffset[kTechId.BabblerEgg] = 210
+
 kTechIdToMaterialOffset[kTechId.TunnelRelocate] = 189
 kTechIdToMaterialOffset[kTechId.ShiftTunnel] = 203
 kTechIdToMaterialOffset[kTechId.CragTunnel] = 202

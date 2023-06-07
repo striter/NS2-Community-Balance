@@ -1,7 +1,7 @@
 
 function Hive:GetTechButtons()
 
-    local techButtons = { kTechId.ShiftHatch, kTechId.None, kTechId.None, kTechId.LifeFormMenu,
+    local techButtons = { kTechId.ShiftHatch, kTechId.None, kTechId.None, kTechId.None, --kTechId.LifeFormMenu,
                           kTechId.None, kTechId.None, kTechId.None, kTechId.None }
 
     local techId = self:GetTechId()

@@ -134,7 +134,10 @@ kTunnelEntrancePointValue = 5
 
 kBabblerEggHealth = 50    kBabblerEggArmor = 0    kBabblerEggPointValue = 0
 kMatureBabblerEggHealth = 150 kMatureBabblerEggArmor = 0
-   
+
+kSporeMineHealth = 50 kSporeMineArmor = 0 kSporeMinepointValue=0
+kMatureSporeMineHealth = 100 kMatureSporeMineArmor = 0
+
 kWhipHealth = 650    kWhipArmor = 175    kWhipPointValue = 6
 kMatureWhipHealth = 720    kMatureWhipArmor = 240  kWhipHealthPerBioMass = 120  kMatureWhipPointValue = 6
 
@@ -159,6 +162,3 @@ kMatureVeilHealth = 1500     kMatureVeilArmor = 0     kVeilPointValue = 15  -- 1
 --Combat
 kWeaponCacheHealth = 800    kWeaponCacheArmor = 150   kWeaponCachePointValue = 10
 kMarineSentryHealth = 500    kMarineSentryArmor = 125    kMarineSentryPointValue = 8
-
-kSporeMineHealth = 50 kSporeMineArmor = 0 kSporeMinepointValue=0
-kMatureSporeMineHealth = 100 kMatureSporeMineArmor = 0

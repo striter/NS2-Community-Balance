@@ -101,6 +101,8 @@ if kTranslateMessage then
     kTranslateMessage["XENOCIDE_FUEL"]="自爆充能"
     kTranslateMessage["XENOCIDE_FUEL_TOOLTIP"]="使Skulk的自爆变得更加致命.\n*增加自爆的范围.\n*增加自爆的伤害.\n*降低玩家复活所需时间."
 
+    kTranslateMessage["SPOREMINE"]="孢子团块"
+    kTranslateMessage["SPOREMINE_TOOLTIP"]="自动感应式.\n*探测到临近敌方单位后.\n自爆以释放酸液攻击敌人."
     kTranslateMessage["BABBLER_MINE"]="虫巢"
     kTranslateMessage["BABBLER_MINE_TOOLTIP"]="自动感应式.\n*探测到临近敌方单位后.\n释放6个子虫攻击敌方单位."
 
@@ -233,7 +235,9 @@ if kLocales then
     kLocales["XENOCIDE_FUEL"]="Xenocide fuel"
     kLocales["XENOCIDE_FUEL_TOOLTIP"]="Make xenocide deadlier.\n*Increase the range for xenocide.\n*Increase the damage for xenocide.\n*Reduce the respawn time when successfully."
 
-    kLocales["BABBLER_MINE"]="Babbler Egg"
+    kLocales["SPOREMINE"]="Spore Chunk"
+    kLocales["SPOREMINE_TOOLTIP"]="Mine.\n*Explode when enemies nearby."
+    kLocales["BABBLER_MINE"]="Babbler Hive"
     kLocales["BABBLER_MINE_TOOLTIP"]="Mine.\n*Hatch when enemies nearby.\n*Release six babblers to chase the target."
 
     kLocales["UPGRADE_PROWLER"] = "Prowler Evolve"

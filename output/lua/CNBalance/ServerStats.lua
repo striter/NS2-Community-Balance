@@ -189,6 +189,8 @@ local notLoggedBuildings = set {
 	"BoneWall",
 	"Hallucination",
 	"Mine",
+	"SporeMine",
+	"MAC",
 }
 
 function StatsUI_GetBuildingBlockedFromLog(structureName)

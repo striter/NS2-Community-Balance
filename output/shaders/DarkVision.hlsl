@@ -58,9 +58,13 @@ const float4 edgeColorOrange = float4(1.0, 0.05, 0.0, 0) * 8.0;
 const float4 edgeColorDarkOrange = float4(0.8, 0.2, 0, 0) * 6.0;
 const float4 edgeColorGreen = float4(0.2, 0.7, 0.00, 0) * 4.0;
 
-const float4 geometryEdgeColor = float4(1.0, 1.0, 1.0, 0) * 0.25;
+const float4 geometryEdgeColor = float4(0.25, 0.25, 0.25, 0);
 const float4 geometryDarkEdgeColor = float4(0.67,0.92,0.77,0);
-const float4 geometryDarkSurfaceColor = float4(0.13, 0.6, 0.33,0) * .25;
+const float4 geometryDarkSurfaceColor = float4(0.25, 0.5, 0.35,0) ;
+
+float invlerp(float _a, float _b, float _value){
+    return (_value - _a) * rcp(_b - _a);
+}
 
 float4 SFXDarkVisionPS(PS_INPUT input) : COLOR0
 {
@@ -131,12 +135,12 @@ float4 SFXDarkVisionPS(PS_INPUT input) : COLOR0
         darkParameter *= darkParameter;
         
         float3 normal = tex2D(normalTexture, texCoord).xyz;
-        float normalIntensity = pow((abs(normal.z - 0.5) + abs(normal.y - 0.5) + abs(normal.x - 0.5)) * 1.3, 8);
+        float normalIntensity = saturate(pow((abs(normal.z - 0.5) + abs(normal.y - 0.5) + abs(normal.x - 0.5)) * 1.3, 8));
         
         float surfaceIntensity = darkParameter * normalIntensity;
         
         float4 geometryColor = lerp(geometryEdgeColor,geometryDarkEdgeColor ,darkParameter )  * geometryStrength;
-        geometryColor += geometryDarkSurfaceColor * surfaceIntensity * saturate(smoothstep(20,15,depth1.r));
+        geometryColor += geometryDarkSurfaceColor * surfaceIntensity * saturate(invlerp(15.0,12.0,depth1.r));
         //Lights out
         
         return lerp(inputPixel, geometryColor, ( 0.01 * amount ));  //Animation

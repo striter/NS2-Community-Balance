@@ -24,7 +24,7 @@ function GetTexCoordsForTechId(techId)
         gTechIdPosition[kTechId.AcidSpray] = kDeathMessageIcon.AcidSpray
         gTechIdPosition[kTechId.Rappel] = kDeathMessageIcon.Rappel
         gTechIdPosition[kTechId.SwipeShadowStep] = kDeathMessageIcon.Swipe
---         gTechIdPosition[kTechId.AcidRocket] = kDeathMessageIcon.AcidRocket
+        gTechIdPosition[kTechId.AcidRocket] = kDeathMessageIcon.AcidRocket
 
 		gTechIdPosition[kTechId.Revolver] = kDeathMessageIcon.Revolver
 		gTechIdPosition[kTechId.SubMachineGun] = kDeathMessageIcon.SubMachineGun
@@ -32,6 +32,7 @@ function GetTexCoordsForTechId(techId)
 		gTechIdPosition[kTechId.Knife] = kDeathMessageIcon.Knife
 		gTechIdPosition[kTechId.Cannon] = kDeathMessageIcon.Cannon
 		gTechIdPosition[kTechId.CombatBuilder] = kDeathMessageIcon.CombatBuilder
+        gTechIdPosition[kTechId.SporeMine] = kDeathMessageIcon.SporeMine
 		loadAdditional = false
 	end
 	return oldGetTexCoordsForTechId(techId)

@@ -1,1 +1,1 @@
-kBabblerHatchTime = 1
+kBabblerHatchTime = 1.5

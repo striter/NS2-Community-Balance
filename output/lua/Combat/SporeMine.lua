@@ -17,10 +17,14 @@ Script.Load("lua/UmbraMixin.lua")
 Script.Load("lua/FireMixin.lua")
 Script.Load("lua/IdleMixin.lua")
 Script.Load("lua/DetectableMixin.lua")
+Script.Load("lua/Weapons/DotMarker.lua")
 Script.Load("lua/CloakableMixin.lua")
 
 class 'SporeMine' (ScriptActor)
 
+local kStartScale = 0.5
+local kFinalScale = 1.2
+local kCollisionRadius = 0.5
 SporeMine.kMapName = "sporemine"
 SporeMine.kDropRange = 2
 
@@ -70,7 +74,7 @@ function SporeMine:OnCreate()
     if Server then
         self.silenced = false
     end
-    
+
     self:SetRelevancyDistance(kMaxRelevancyDistance)
 
 end
@@ -104,10 +108,36 @@ function SporeMine:OnInitialized()
 
     end
 
-    self.scale = kStartScale
-    self:SetPhysicsGroup(PhysicsGroup.SmallStructuresGroup)
-    InitMixin(self, IdleMixin)
     
+    self:MarkPhysicsDirty()
+
+    self.physicsBody = Shared.CreatePhysicsSphereBody(false, kCollisionRadius, 0,  self:GetCoords() )
+    self.physicsBody:SetCollisionEnabled(true)
+    self.physicsBody:SetGroup(PhysicsGroup.SmallStructuresGroup)
+    self.physicsBody:SetPhysicsType(CollisionObject.Static)
+    self.physicsBody:SetEntity(self)
+
+    InitMixin(self, IdleMixin)
+end
+
+function SporeMine:OnDestroy()
+
+    ScriptActor.OnDestroy(self)
+    if self.physicsBody then
+        Shared.DestroyCollisionObject(self.physicsBody)
+        self.physicsBody = nil
+    end
+
+    if Client then
+        Client.DestroyRenderDecal(self.decal)
+        self.decal = nil
+    elseif Server then
+        self.preventEntityChangeCallback = true
+    end
+end
+
+function SporeMine:GetPhysicsModelAllowedOverride()
+    return false
 end
 
 function SporeMine:GetCanSleep()
@@ -139,26 +169,31 @@ function SporeMine:GetUseMaxRange()
 end
 
 function SporeMine:OnAdjustModelCoords(modelCoords)
-    modelCoords.xAxis = modelCoords.xAxis * self.buildFraction
-    modelCoords.yAxis = modelCoords.yAxis * self.buildFraction
-    modelCoords.zAxis = modelCoords.zAxis * self.buildFraction
+    local scale = kStartScale + self.buildFraction * (kFinalScale - kStartScale)
+    modelCoords.xAxis = modelCoords.xAxis * scale
+    modelCoords.yAxis = modelCoords.yAxis * scale
+    modelCoords.zAxis = modelCoords.zAxis * scale
     return modelCoords
 end
 
 if Server then
 
+    function SporeMine:GetSendDeathMessageOverride()
+        return not self.consumed
+    end
+    
     function SporeMine:OnTakeDamage(_, attacker, doer)
         if self:GetIsBuilt() then
             local owner = self:GetOwner()
             local doerClassName = doer and doer:GetClassName()
 
             if owner and doer and attacker == owner and doerClassName == "Spit" then
-                self:Explode()
+                self:Explode(attacker:GetOrigin())
             end
         end
     end
 
-    function SporeMine:Explode()
+    function SporeMine:Explode(_destination)
 
         local dotMarker = CreateEntity(DotMarker.kMapName, self:GetOrigin(), self:GetTeamNumber())
         dotMarker:SetTechId(kTechId.SporeMine)
@@ -179,6 +214,13 @@ if Server then
 
         dotMarker:TriggerEffects("bilebomb_hit")
 
+        if _destination and GetHasTech(self,kTechId.Spores) then
+            local position = self:GetOrigin()
+            local spores = CreateEntity( SporeCloud.kMapName,position , self:GetTeamNumber() )
+            local direction = _destination - position
+            spores:SetTravelDestination( position + GetNormalizedVector(direction) * math.min(direction:GetLength(), kSporeMineDamageRadius) )
+        end
+        
         DestroyEntity(self)
     end
 
@@ -218,7 +260,7 @@ if Server then
                 end
 
                 if visibleTarget and trace.fraction < 1 then
-                    self:Explode()
+                    self:Explode(startPoint)
                     break
                 end
             end
@@ -242,9 +284,8 @@ if Server then
     end
 
     function SporeMine:OnKill(attacker, doer, point, direction)
-    
+        self:Explode(attacker and attacker:GetOrigin() or nil)
         self:TriggerEffects("death")
-        
     end
     
     function SporeMine:SetOwner(owner)
@@ -253,19 +294,6 @@ if Server then
             self.silenced = true
         end
     
-    end
-    
-end
-
-function SporeMine:OnDestroy()
-    
-    ScriptActor.OnDestroy(self)
-    
-    if Client then
-        Client.DestroyRenderDecal(self.decal)
-        self.decal = nil
-    elseif Server then
-        self.preventEntityChangeCallback = true
     end
     
 end

@@ -277,6 +277,15 @@ kOnosEggCost = 100
 kTunnelEntranceCost = 7
 kTunnelRelocateCost = 5
 
+kResearchBioMassOneCost = 30
+kBioMassOneTime = 75
+kResearchBioMassTwoCost = 45
+kBioMassTwoTime = 105
+kResearchBioMassThreeCost = 65
+kBioMassThreeTime = 150
+kResearchBioMassFourCost = 100      --?
+kBioMassFourTime = 80
+
 --Skulk
 kParasiteEnergyCost = 30
 kAdrenalineParasiteEnergyCost = 18
@@ -399,6 +408,11 @@ kWhipCost = 8
 kShadeCost = 10
 kShiftCost = 10
 kCragCost = 10
+
+kSpurCost = 18
+kShellCost = 18
+kVeilCost = 18
+
 kContaminationCost = 5
 kContaminationCooldown = 10
 kBoneWallCost = 3
@@ -484,10 +498,26 @@ kMarineSentryPersonalCost = 6
 kMarineSentryPersonalCarries = 2
 
 kSporeMineCost = 0
-kSporeMineBuildTime = 2
-kNumSporeMinesPerGorge = 3
+kSporeMineBuildTime = 4
+kNumSporeMinesPerGorge = 1
 kSporeMineDamage = 125 -- per second
 kSporeMineDamageType = kDamageType.Corrode
 kSporeMineDamageDuration = 3
-kSporeMineDamageRadius = 7
+kSporeMineDamageRadius = 5
 kSporeMineDotInterval = 0.4
+
+
+--Explode
+kBabblerEggBuildTime = 8
+kNumBabblerEggsPerGorge = 1
+kBabblerEggDamage = 125
+kBabblerEggDamageType = kDamageType.Corrode
+kBabblerEggDamageDuration = 3
+kBabblerEggDamageRadius = 7
+kBabblerEggDotInterval = 0.4
+
+--Hatch
+kBabblerExplodeAmount = 6
+kBabblerHatchMaxAmount = 12
+kBabblerEggHatchInterval = 4
+kBabblerEggHatchRadius = 17

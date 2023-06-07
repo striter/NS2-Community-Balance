@@ -515,11 +515,41 @@ function BuildTechData()
         [kTechDataMaxHealth] = kSporeMineHealth,
         [kTechDataMaxArmor] = kSporeMineArmor,
         [kTechDataPointValue] = kSporeMinepointValue,
-        [kTechDataDisplayName] = "SPORE_MINE",
-        [kTechDataHint] = "SPORE_MINE_TOOLTIP",
-        [kTechDataTooltipInfo] = "SPORE_MINE_TOOLTIP",
+        [kTechDataDisplayName] = "SPOREMINE",
+        [kTechDataTooltipInfo] = "SPOREMINE_TOOLTIP",
     })
 
+    table.insert(techData,{
+        [kTechDataId] = kTechId.BabblerEgg,
+        --[kTechDataCategory] = kTechId.Gorge,
+        [kTechDataAllowConsumeDrop] = true,
+        [kTechDataMaxAmount] = kNumBabblerEggsPerGorge,
+        [kTechDataCostKey] = kBabblerCost,
+        [kTechDataBuildTime] = kBabblerEggBuildTime,
+        [kTechDataMapName] = BabblerEgg.kMapName,
+        [kTechDataDisplayName] = "BABBLER_MINE",
+        [kTechDataModel] = BabblerEgg.kModelName,
+        [kTechDataMaxHealth] = kBabblerEggHealth,
+        [kTechDataMaxArmor] = kBabblerEggArmor,
+        [kTechDataPointValue] = kBabblerEggPointValue,
+        [kTechDataTooltipInfo] = "BABBLER_MINE_TOOLTIP",
+        [kVisualRange] = kBabblerEggHatchRadius,
+    })
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.Web,
+        [kTechDataMapName] = Web.kMapName,
+        --[kTechDataCategory] = kTechId.Gorge,
+        [kTechDataMaxHealth] = kWebHealth,
+        [kTechDataModel] = Web.kRootModelName,
+        [kTechDataSpecifyOrientation] = true,
+        [kTechDataGhostModelClass] = "WebGhostModel",
+        [kTechDataMaxAmount] = kNumWebsPerGorge,
+        [kTechDataAllowConsumeDrop] = true,
+        [kTechDataDisplayName] = "WEB",
+        [kTechDataCostKey] = kWebBuildCost,
+        [kTechDataTooltipInfo] = "WEB_TOOLTIP",
+    })
     --Skulk
     table.insert(techData, {
         [kTechDataId] = kTechId.XenocideFuel,

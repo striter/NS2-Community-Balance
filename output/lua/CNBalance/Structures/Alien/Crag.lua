@@ -51,7 +51,7 @@ if Server then
                 babbler:SetOwner(target)
                 babbler.clinged = true
                 babbler:Detach(true)
-                babbler:SetMoveType(kBabblerMoveType.Cling, target, position, true)
+                babbler:SetMoveType(kBabblerMoveType.Cling, target, target:GetOrigin(), true)
                 target.timeLastCragHeal = Shared.GetTime()
             end
             
