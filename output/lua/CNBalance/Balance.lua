@@ -83,7 +83,7 @@ kGrenadeLauncherUpgradeResearchTime = 90
 kMACEMPBlastResearchCost = 15
 kMACEMPBlastResearchTime = 60
 kMACEmpBlastDetectInterval = 0.5
-kMACEmpBlastDetectRadius = 4
+kMACEmpBlastDetectRadius = kPowerSurgeEMPDamageRadius
 kMACEmpBlastTriggerInterval = 5
 
 kPoweredExtractorResearchCost = 10
@@ -279,12 +279,12 @@ kOnosEggCost = 100
 kTunnelEntranceCost = 7
 kTunnelRelocateCost = 5
 
-kResearchBioMassOneCost = 35
+kResearchBioMassOneCost = 30
 kBioMassOneTime = 90
 kResearchBioMassTwoCost = 45
 kBioMassTwoTime = 120
 kResearchBioMassThreeCost = 60
-kBioMassThreeTime = 150
+kBioMassThreeTime = 180
 kResearchBioMassFourCost = 100      --?
 kBioMassFourTime = 80
 
@@ -472,7 +472,7 @@ kPowerSurgeCooldown = 5
 kPowerSurgeDuration = 10
 kPowerSurgeTriggerEMP = true
 kPowerSurgeEMPDamage = 20
-kEMPDamageWeapons1Scalar = 1.2 kEMPDamageWeapons2Scalar = 1.35 kEMPDamageWeapons3Scalar = 1.5
+kEMPDamageWeapons1Scalar = 1.25 kEMPDamageWeapons2Scalar = 1.5 kEMPDamageWeapons3Scalar = 1.75
 kPowerSurgeEMPDamageRadius = 6
 kPowerSurgeEMPElectrifiedDuration = 2
 
@@ -508,6 +508,7 @@ kSporeMineDamageDuration = 3
 kSporeMineDamageRadius = 5
 kSporeMineDotInterval = 0.4
 
+--Babbler Egg
 
 --Explode
 kBabblerEggBuildTime = 8
@@ -521,5 +522,5 @@ kBabblerEggDotInterval = 0.4
 --Hatch
 kBabblerExplodeAmount = 6
 kBabblerHatchMaxAmount = 12
-kBabblerEggHatchInterval = 4
+kBabblerEggHatchInterval = 2.5
 kBabblerEggHatchRadius = 17

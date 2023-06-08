@@ -1100,14 +1100,15 @@ function MAC:OnUpdate(deltaTime)
 end
 
 
-if Server then
-function MAC:OnKill()
-    local empBlastResearched = GetHasTech(self,kTechId.MACEMPBlast)
-    if empBlastResearched then
-        TriggerEMPBlast(self)
-    end
-end
-end
+--if Server then
+--    function MAC:OnKill()
+--        local empBlastResearched = GetHasTech(self,kTechId.MACEMPBlast)
+--        if empBlastResearched then
+--            TriggerEMPBlast(self)
+--        end
+--    end
+--end
+
 function MAC:OnOrderComplete(order)
     if self.autoReturning then
         self.leashedPosition = nil
