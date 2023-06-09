@@ -279,12 +279,12 @@ kOnosEggCost = 100
 kTunnelEntranceCost = 7
 kTunnelRelocateCost = 5
 
-kResearchBioMassOneCost = 30
-kBioMassOneTime = 90
+kResearchBioMassOneCost = 35
+kBioMassOneTime = 60
 kResearchBioMassTwoCost = 45
-kBioMassTwoTime = 120
+kBioMassTwoTime = 60
 kResearchBioMassThreeCost = 60
-kBioMassThreeTime = 180
+kBioMassThreeTime = 90
 kResearchBioMassFourCost = 100      --?
 kBioMassFourTime = 80
 
