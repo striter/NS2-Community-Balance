@@ -254,8 +254,8 @@ kHealthPointsPerArmor = 2
 kHeavyHealthPerArmor = 1
 
 kFlameableMultiplier = 2.5
-kCorrodeDamagePlayerArmorScalar = 0.12
-kCorrodeDamageExoArmorScalar = 0.4
+kCorrodeDamagePlayerArmorScalar = 0.06      -- 0.12 =  0.04 * 3
+kCorrodeDamageExoArmorScalar = 0.24      -- 0.4 ?
 
 kStructureLightHealthPerArmor = 9
 kStructureLightArmorUseFraction = 0.9

@@ -39,7 +39,7 @@ function XenocideLeap:OnProcessMove(input)
                 local hitEntities = GetEntitiesWithMixinWithinRange("Live", xenoOrigin, kXenocideRange)
                 table.removevalue(hitEntities, player)
 
-                local xenocideFuel = GetHasTech(self,kTechId.XenocideFuel)
+                local xenocideFuel = GetIsTechUnlocked(self,kTechId.XenocideFuel)
                 local damage = xenocideFuel and kXenocideFuelDamage or kXenocideDamage
                 local range = xenocideFuel and kXenocideFuelRange or kXenocideRange
                 RadiusDamage(hitEntities, xenoOrigin, range, damage, self)

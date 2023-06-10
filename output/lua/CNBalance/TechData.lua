@@ -587,10 +587,10 @@ function BuildTechData()
         [kTechDataId] = kTechId.AcidSpray,
         [kTechDataCategory] = kTechId.Prowler,
         [kTechDataMapName] = AcidSpray.kMapName,
-        [kTechDataDisplayName] = "ACID_SPRAY",
+        [kTechDataDisplayName] = "ACIDSPRAY",
         [kTechDataCostKey] = kAcidSprayResearchCost,
         [kTechDataResearchTimeKey] = kAcidSprayResearchTime,
-        [kTechDataTooltipInfo] = "ACID_SPRAY_TOOLTIP"
+        [kTechDataTooltipInfo] = "ACIDSPRAY_TOOLTIP"
     })
     table.insert(techData,  {
         [kTechDataId] = kTechId.Prowler,

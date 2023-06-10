@@ -117,8 +117,8 @@ if kTranslateMessage then
     kTranslateMessage["VOLLEY_TOOLTIP"] = "齐射一轮远程钉刺.\n*直线瞬发弹道."
     kTranslateMessage["RAPPEL"] = "网绳"
     kTranslateMessage["RAPPEL_TOOLTIP"] = "将Prowler快速拉向目标.\n*对击中的敌方单位造成伤害."
-    kTranslateMessage["ACID_SPRAY"] = "酸液投掷"
-    kTranslateMessage["ACID_SPRAY_TOOLTIP"] = "投掷一串酸性炸弹.\n*抛物线弹道."
+    kTranslateMessage["ACIDSPRAY"] = "酸液投掷"
+    kTranslateMessage["ACIDSPRAY_TOOLTIP"] = "投掷一串酸性炸弹.\n*抛物线弹道."
 
     kTranslateMessage["DEVOUR"] = "吞噬"
     kTranslateMessage["ONOS_DEVOUR"] = "吞噬"
@@ -251,8 +251,8 @@ if kLocales then
     kLocales["VOLLEY_TOOLTIP"] = "Range attack.\n*High spread."
     kLocales["RAPPEL"] = "Rappel"
     kLocales["RAPPEL_TOOLTIP"] = "Pull Prowler to target.\n*Deal damage to target."
-    kLocales["ACID_SPRAY"] = "Acid spray"
-    kLocales["ACID_SPRAY_TOOLTIP"] = "Acid bombardment.\n*Projectile."
+    kLocales["ACIDSPRAY"] = "Acid spray"
+    kLocales["ACIDSPRAY_TOOLTIP"] = "Acid bombardment.\n*Projectile."
 
     kLocales["DEVOUR"] = "Devour"
     kLocales["ONOS_DEVOUR"] = "Devour"
