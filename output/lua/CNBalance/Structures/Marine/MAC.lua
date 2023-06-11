@@ -203,6 +203,7 @@ function MAC:OnCreate()
     self:SetPhysicsType(PhysicsType.Kinematic)
     self:SetPhysicsGroup(PhysicsGroup.SmallStructuresGroup)
 
+    self.empBlast = false
     self.empTriggeredTime = Shared.GetTime()
     self.empDetectionTime = Shared.GetTime()
 end
@@ -990,10 +991,12 @@ local function UpdateOrders(self, deltaTime)
 end
 
 local function TriggerEMPBlast(self)
-    
-    self.empTriggeredTime = Shared.GetTime()
-    CreateEntity(EMPBlast.kMapName, self:GetOrigin(), self:GetTeamNumber())
-
+    if self.empBlast then
+        self.empTriggeredTime = Shared.GetTime()
+        self.empBlast = false
+        
+        CreateEntity(EMPBlast.kMapName, self:GetOrigin(), self:GetTeamNumber())
+    end
 end
 
 function MAC:OnUpdate(deltaTime)
@@ -1020,17 +1023,21 @@ function MAC:OnUpdate(deltaTime)
             self.jetsSound:Stop()
         end
 
-        local empBlastResearched = GetHasTech(self,kTechId.MACEMPBlast)
-        self.empBlast = empBlastResearched and Shared.GetTime() - self.empTriggeredTime > kMACEmpBlastTriggerInterval
-        if self.empBlast and Shared.GetTime() - self.empDetectionTime > kMACEmpBlastDetectInterval then
+        --EMP Blast during update
+        if  Shared.GetTime() - self.empDetectionTime > kMACEmpBlastDetectInterval then
             self.empDetectionTime = Shared.GetTime()
+            
+            local empBlastResearched = GetHasTech(self,kTechId.MACEMPBlast)
+            self.empBlast = empBlastResearched and Shared.GetTime() - self.empTriggeredTime > kMACEmpBlastTriggerInterval
 
-            local ents = GetEntitiesWithMixinForTeamWithinRange("Live", GetEnemyTeamNumber(self:GetTeamNumber()), self:GetOrigin(), kMACEmpBlastDetectRadius)
-            for e = 1, #ents do
-                local entity = ents[e]
-                if entity:isa("Player") and entity:GetIsAlive() and not entity.electrified then
-                    TriggerEMPBlast(self)
-                    break;
+            if self.empBlast then
+                local ents = GetEntitiesWithMixinForTeamWithinRange("Live", GetEnemyTeamNumber(self:GetTeamNumber()), self:GetOrigin(), kMACEmpBlastDetectRadius)
+                for e = 1, #ents do
+                    local entity = ents[e]
+                    if entity:isa("Player") and entity:GetIsAlive() and not entity.electrified then
+                        TriggerEMPBlast(self)
+                        break;
+                    end
                 end
             end
         end
@@ -1100,14 +1107,11 @@ function MAC:OnUpdate(deltaTime)
 end
 
 
---if Server then
---    function MAC:OnKill()
---        local empBlastResearched = GetHasTech(self,kTechId.MACEMPBlast)
---        if empBlastResearched then
---            TriggerEMPBlast(self)
---        end
---    end
---end
+if Server then
+    function MAC:OnKill()
+        TriggerEMPBlast(self)
+    end
+end
 
 function MAC:OnOrderComplete(order)
     if self.autoReturning then
