@@ -62,7 +62,7 @@ kHeavyMachineGunSpread = Math.Radians(5)  --4
 kCommandStationCost = 20
 kCommandStationUpgradeCost = 10
 kCommandStationUpgradeTime = 60
-kUpgradedCommandStationCost = 30
+kUpgradedCommandStationCost = kCommandStationCost + kCommandStationUpgradeCost
 
 kExtractorCost = 10
 kPoweredExtractorCost = 30
@@ -125,7 +125,6 @@ kLifeSustainResearchCost = 15
 kLifeSustainResearchTime = 90
 kNanoArmorResearchCost = 25
 kNanoArmorResearchTime = 90
-
 
 --Revolver
 kRevolverRateOfFire = 0.1
@@ -197,10 +196,10 @@ kBurnDamagePerSecond = 8
 kFireStructureBurnDuration = 2.1
 kFireStructureMaxBurnDuration = 6
 
-kFireDurationDefault = 1
-kFireDurationWeapons1 = 1.6
-kFireDurationWeapons2 = 2.2
-kFireDurationWeapons3 = 2.8
+kFireDurationDefault = 1.0
+kFireDurationWeapons1 = 1.5
+kFireDurationWeapons2 = 2.0
+kFireDurationWeapons3 = 2.5
 
 kMinigunDamage = 8.5
 kMinigunDamageType = kDamageType.Exosuit
@@ -263,7 +262,7 @@ kUmbraBulletModifier = 0.8
 kDevourEnergyCost = 60 --50
 kDevourPunchDamage = 70 --100
 
-kTunnelUpgradeCost = 20
+kTunnelUpgradeCost = 15
 kTunnelUpgradeTime = 60
 
 kEggGestateTime = 15
@@ -279,11 +278,11 @@ kOnosEggCost = 100
 kTunnelEntranceCost = 7
 kTunnelRelocateCost = 5
 
-kResearchBioMassOneCost = 35
-kBioMassOneTime = 60
-kResearchBioMassTwoCost = 45
+kResearchBioMassOneCost = 30
+kBioMassOneTime = 45
+kResearchBioMassTwoCost = 40
 kBioMassTwoTime = 60
-kResearchBioMassThreeCost = 60
+kResearchBioMassThreeCost = 55
 kBioMassThreeTime = 90
 kResearchBioMassFourCost = 100      --?
 kBioMassFourTime = 80

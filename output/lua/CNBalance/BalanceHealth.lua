@@ -64,7 +64,7 @@ kLerkDamageReduction = {
 
 kFadeHealth = 280    kFadeArmor = 80     kFadePointValue = 20    kFadeHealthPerBioMass = 5
 kFadeDamageReduction = {
-    ["MarineSentry"] = 1.33,
+    ["MarineSentry"] = 1.1,
     ["Mine"] = 1.1,
     ["HeavyMachineGun"] = 0.92,
 }

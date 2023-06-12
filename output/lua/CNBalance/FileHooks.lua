@@ -127,12 +127,15 @@ ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/Cannon.
 ModLoader.SetupFileHook("lua/Weapons/Marine/Welder.lua", "lua/Combat/CombatBuilder.lua", "post")
 
 -- Aliens
+ModLoader.SetupFileHook("lua/GUIHiveStatus.lua", "lua/CNBalance/GUI/GUIHiveStatus.lua", "replace")
+
 ModLoader.SetupFileHook( "lua/CommAbilities/Alien/HallucinationCloud.lua", "lua/CNBalance/HallucinationCloud.lua", "post" )
 ModLoader.SetupFileHook( "lua/AlienHallucination.lua", "lua/CNBalance/AlienHallucination.lua", "post" )
 ModLoader.SetupFileHook( "lua/Hallucination.lua", "lua/CNBalance/Hallucination.lua", "replace" )
 
 ModLoader.SetupFileHook("lua/AlienBuy_Client.lua", "lua/CNBalance/AlienBuy_Client.lua", "post" )
 ModLoader.SetupFileHook("lua/AlienTeam.lua", "lua/CNBalance/AlienTeam.lua", "post")
+ModLoader.SetupFileHook("lua/AlienTeamInfo.lua", "lua/CNBalance/AlienTeamInfo.lua", "replace")
 ModLoader.SetupFileHook("lua/AlienTechMap.lua", "lua/CNBalance/AlienTechMap.lua", "post")
 
 ModLoader.SetupFileHook("lua/Alien.lua", "lua/CNBalance/Alien.lua", "post")
@@ -197,4 +200,4 @@ if AddHintModPanel then
     AddHintModPanel(panelMaterial, "https://docs.qq.com/doc/DUEZSeUtrR0tWTGJ4","看看司马策划又改了什么东西")
 end
 
-Shared.Message("[CN] Natural Selection 2.0 Mounted 2023.5.26")
+Shared.Message("[CN] Natural Selection 2.0 Mounted 2023.6.12")
