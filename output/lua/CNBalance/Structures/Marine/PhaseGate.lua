@@ -42,11 +42,7 @@ function PhaseGate:Phase(user)
         TransformPlayerCoordsForPhaseGate(user, self:GetCoords(), destinationCoords)
 
         if user.DeductArmorWithAutoWeld then
-            local time = Shared.GetTime()
-            if not user.timeLastPhased or time - user.timeLastPhased > kMarinePhaseArmorDeductCooldown then
-                user:DeductArmorWithAutoWeld(kMarinePhaseArmorDeduct)
-                user.timeLastPhased = time
-            end
+            user:DeductArmorWithAutoWeld(kMarinePhaseArmorDeduct)
         end
         
         user:SetOrigin(self.destinationEndpoint)

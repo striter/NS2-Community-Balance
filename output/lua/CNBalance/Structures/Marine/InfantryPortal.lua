@@ -421,7 +421,7 @@ local function SpawnPlayer(self)
         local success, player = team:ReplaceRespawnPlayer(queuedPlayer, spawnOrigin, queuedPlayer:GetAngles())
         if success then
             
-            --local weapon = player:GetWeapon(Rifle.kMapName)
+            --local weapon = player:GetWeaponInHUDSlot(1)
             --if weapon then
             --    weapon.deployed = true -- start the rifle already deployed
             --    weapon.skipDraw = true
@@ -429,9 +429,6 @@ local function SpawnPlayer(self)
             
             player:SetCameraDistance(0)
 
-            if player.DeductArmorWithAutoWeld then
-                player:DeductArmorWithAutoWeld(kMarineRespawnArmorDeduct)
-            end
             
             if HasMixin( player, "Controller" ) and HasMixin( player, "AFKMixin" ) then
                 

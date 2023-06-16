@@ -194,10 +194,10 @@ kBurnDamagePerSecond = 8
 kFireStructureBurnDuration = 2.1
 kFireStructureMaxBurnDuration = 6
 
-kFireDurationDefault = 1.0
-kFireDurationWeapons1 = 1.5
-kFireDurationWeapons2 = 2.0
-kFireDurationWeapons3 = 2.5
+kFireDurationDefault = 0.8
+kFireDurationWeapons1 = 1.2
+kFireDurationWeapons2 = 1.6
+kFireDurationWeapons3 = 2.1
 
 kMinigunDamage = 8.5
 kMinigunDamageType = kDamageType.Exosuit

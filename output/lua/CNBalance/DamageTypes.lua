@@ -489,7 +489,7 @@ local function ExosuitForStructure(target, _, _, damage, armorFractionUsed, heal
 end
 ----
 local kClusterStructuralDamageScalar = 3  -- 2.5
-local kClusterPlayerDamageScalar = 0.5 -- 0.2
+local kClusterPlayerDamageScalar = 0.3 -- 0.2
 ----
 local function ClusterFlameModifier(target, _, _, damage, armorFractionUsed, healthPerArmor, damageType)
     if target:isa("Player") then

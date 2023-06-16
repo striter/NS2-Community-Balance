@@ -129,10 +129,8 @@ kTechDataTeamResOnKill = {
 }
 
 -- Nanoarmor 
-kMarineRespawnArmorDeduct = 30
 kMarinePhaseArmorDeduct = 20
-kMarinePhaseArmorDeductCooldown = 5
-kMarineArmorDeductRegen = 10
+kMarineArmorDeductRegen = 20
 
 kMarineNanoArmorPerSecond = 4
 kJetpackMarineArmorPerSecond = 3
