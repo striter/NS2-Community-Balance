@@ -260,7 +260,6 @@ if Client then
                 function(self2)
                     local teamNumber = self2:GetTeamNumber()
                     local eventName = string.format("OnTeam%dSupplyMaxChanged", teamNumber)
-                    Shared.Message(tostring(self2.maxSupply))
                     GetGlobalEventDispatcher():FireEvent(eventName, self2.maxSupply)
                     return true -- preserve field watcher
                 end)
