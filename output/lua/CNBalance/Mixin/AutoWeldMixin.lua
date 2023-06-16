@@ -29,13 +29,18 @@ local function GetIsInCombat_WithoutCombatMixin(self, time)
     return time < timeLastDamage + kCombatTimeOut
 end
 
+local function ResetTimer(self)
+    self.timeNextWeld = Shared.GetTime() + AutoWeldMixin.kWeldInterval
+    self.timeNextSustain =  Shared.GetTime() + AutoWeldMixin.kRegenInterval
+end
+
 function AutoWeldMixin:__initmixin()
     
     PROFILE("AutoWeldMixin:__initmixin")
     
     if Server then
-        self.timeNextWeld = 0
-        self.timeNextSustain = 0
+        ResetTimer(self)
+        self.armorRegenStack = 0
         
         -- Use combat mixin if we can find it, otherwise just use LiveMixin's GetTimeOfLastDamage()
         -- method.
@@ -63,10 +68,18 @@ if Server then
     
         if now > self.timeNextWeld then
             self.timeNextWeld = now + AutoWeldMixin.kWeldInterval
+            
+            local armorRegen = self:GetAutoWeldArmorPerSecond(GetHasTech(self, kTechId.ArmorRegen))
+            
+            if self.armorRegenStack > 0 then
+                self.armorRegenStack = math.max(0, self.armorRegenStack - kMarineArmorDeductRegen * AutoWeldMixin.kWeldInterval)
+                armorRegen = armorRegen + kMarineArmorDeductRegen
+            end
 
-
-            local armorRegenPerSecond = self:GetAutoWeldArmorPerSecond(GetHasTech(self, kTechId.ArmorRegen))
-            self:OnWeld(self, AutoWeldMixin.kWeldInterval, self, armorRegenPerSecond)
+            if armorRegen > 0 then
+                self:OnWeld(self, AutoWeldMixin.kWeldInterval, self, armorRegen)
+                
+            end
         end
 
         if self.GetAutoHealPerSecond and now > self.timeNextSustain then
@@ -97,4 +110,13 @@ if Server then
         return true
     end
     
+    function AutoWeldMixin:DeductArmorWithAutoWeld(amount)
+        amount = math.min(self:GetArmor(),amount)
+
+        ResetTimer(self)
+        self.armorRegenStack = self.armorRegenStack + amount
+        
+        local engagePoint = HasMixin(self, "Target") and self:GetEngagementPoint() or self:GetOrigin()
+        self:TakeDamage(amount, self, nil, engagePoint, nil, amount, 0, kDamageType.ArmorOnly, nil)
+    end
 end

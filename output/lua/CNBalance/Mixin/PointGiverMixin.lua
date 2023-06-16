@@ -16,8 +16,8 @@ if Server then
         local selfIsPlayer = self:isa("Player")
 
         local techID = self:GetTechId()
-        local pResReward = LookupTechData(techID,kTechDataPersonalResOnKillKey,0)
-        local tResReward = LookupTechData(techID,kTechDataTeamResOnKillKey,0)
+        local pResReward = kTechDataPersonalResOnKill[techID] or 0
+        local tResReward = kTechDataTeamResOnKill[techID] or 0
 
         if selfIsPlayer then
             local kills = self:GetKillsCurrentLife()

@@ -160,7 +160,7 @@ function PlayerUI_GetGameTimeString()
     local team = PlayerUI_GetTeamType()
     local gameTimeString = string.format("%s - %d:%.2d", Locale.ResolveString(string.format("GAME_LENGTH_TEAM%i",team)), minutes, seconds)
     
-    local respawnExtend = GetRespawnTimeExtend(gameTime)
+    local respawnExtend = GetRespawnTimeExtend(team,gameTime)
 
     if team == kMarineTeamType then
         respawnExtend = respawnExtend + kMarineRespawnTime
@@ -190,4 +190,27 @@ function MarineMeleeBoxDamage(self,player,coords,range,damage)
     if rayTrace.entity and rayTrace.entity:isa("Web") then
         self:DoDamage(damage, boxTrace.entity, boxTrace.endPoint, coords.zAxis, "organic", false)
     end
+end
+
+function GetMaxSupplyForTeam(teamNumber)
+
+    local maxSupply = 0
+
+    if Server then
+
+        local team = GetGamerules():GetTeam(teamNumber)
+        if team and team.GetMaxSupply then
+            maxSupply = team:GetMaxSupply()
+        end
+
+    else    
+
+        local teamInfoEnt = GetTeamInfoEntity(teamNumber)
+        if teamInfoEnt and teamInfoEnt.GetMaxSupply then
+            maxSupply = teamInfoEnt:GetMaxSupply()
+        end
+
+    end   
+
+    return maxSupply 
 end

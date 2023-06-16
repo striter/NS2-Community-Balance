@@ -80,6 +80,9 @@ kGoreVampirismScalar = 0.02
 
 -- Supply
 
+kStartSupply = 120
+kSupplyEachTechPoint = 40
+
 kMACSupply = 0
 kArmorySupply = 5
 kObservatorySupply = 20
@@ -97,57 +100,46 @@ kCragSupply = 20
 kShadeSupply = 20
 kShiftSupply = 20
 
---Personal Res On Kill
-kExtractorPersonalResOnKill = 2.5
-kPoweredExtractorPersonalResOnKill = 4
-kRoboticsFactoryPersonalResOnKill = 2.5
-kARCPersonalResOnKill = 2.5
-kMACPersonalResOnKill = 0.2
-kObservatoryPersonalResOnKill = 2.5
-kPhaseGatePersonalResOnKill = 4
-kPowerPointPersonalResOnKill = 0.5
-kCommandStationPersonalResOnKill = 10
-kInfantryPortalPersonalResOnKill = 2
-kPortableSentryPersonalResOnKill = 0.8
-kWeaponCachePersonalResOnKill = 1
-kSentryBatteryPersonalResOnKill = 4
-kCystPersonalResOnKill = 0.2
-kHarvesterPersonalResOnKill = 6
-kTunnelPersonalResOnKill = 6
-kHivePersonalResOnKill = 30
-kTraitPersonalResOnKill = 4
-kTowerPersonalResOnKill = 6
-kWhipPersonalResOnKill = 3
+kBountyMinKills = 4
+kPResPerBountyKills = 0.5
+kTechDataPersonalResOnKill = {
+    --Marines
+    [kTechId.Extractor] = 2.5, [kTechId.PoweredExtractor] = 4,
+    [kTechId.RoboticsFactory] = 2.5, [kTechId.ARCRoboticsFactory] = 2.5,
+    [kTechId.Armory] = 1,[kTechId.Observatory] = 2.5, [kTechId.PhaseGate] = 4,
+    [kTechId.CommandStation] = 10, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15,
+    [kTechId.Mine] = 0.2, [kTechId.InfantryPortal] = 2, [kTechId.MarineSentry] = 0.8,   --PPVE
+    [kTechId.MAC] = 0.2,    [kTechId.SentryBattery] = 4, [kTechId.Sentry] = 1,[kTechId.ARC] = 2.5,      --CPVE
+    --[kTechId.JetpackMarine] = 5, [kTechId.Exo] = 10, [kTechId.Exosuit] = 20,
 
---Team Res On Kill
-kExtractorTeamResOnKill = 0
-kPoweredExtractorTeamResOnKill = 0
-kRoboticsFactoryTeamResOnKill = 0
-kARCTeamResOnKill = 4
-kMACTeamResOnKill = 0
-kObservatoryTeamResOnKill = 0
-kPhaseGateTeamResOnKill = 0
-kPowerPointTeamResOnKill = 0
-kCommandStationTeamResOnKill = 20
-kInfantryPortalTeamResOnKill = 0
-kPortableSentryTeamResOnKill = 0
-kWeaponCacheTeamResOnKill = 0
-kSentryBatteryTeamResOnKill = 0
-kCystTeamResOnKill = 0
-kHarvesterTeamResOnKill = 0
-kTunnelTeamResOnKill = 0
-kHiveTeamResOnKill = 20
-kTraitTeamResOnKill = 0
-kTowerTeamResOnKill = 0
-kWhipTeamResOnKill = 0
+    --Aliens
+    [kTechId.Harvester] = 6,
+    [kTechId.Cyst] = 0.2,
+    [kTechId.Hive] = 20, [kTechId.ShiftHive] = 30, [kTechId.CragHive] = 30, [kTechId.ShadeHive] = 30,
+    [kTechId.Shell] = 4, [kTechId.Veil] = 4, [kTechId.Spur] = 4,
+    [kTechId.Whip] = 3, [kTechId.Shift] = 6, [kTechId.Crag] = 6, [kTechId.Shade] = 6,       --CPVE
+    [kTechId.Tunnel] = 6, [kTechId.InfestedTunnel] = 8,
+    --[kTechId.Gorge] = 1,[kTechId.Prowler] = 2,[kTechId.Lerk] = 3,[kTechId.Fade] = 5,[kTechId.Onos] = 10,
+}
 
--- Nanoarmor & Lifesustain
+kTechDataTeamResOnKill = {
+    [kTechId.ARC] = 4,
+    [kTechId.CommandStation] = 15, [kTechId.StandardStation] = 20, [kTechId.ExplosiveStation] = 20, [kTechId.ArmorStation] = 20,
+    [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20,
+}
+
+-- Nanoarmor 
+kMarineRespawnArmorDeduct = 30
+kMarinePhaseArmorDeduct = 20
+kMarinePhaseArmorDeductCooldown = 5
+kMarineArmorDeductRegen = 10
+
 kMarineNanoArmorPerSecond = 4
 kJetpackMarineArmorPerSecond = 3
 kJetpackMarineNanoArmorPerSecond = 6
 kExoArmorPerSecond = 8
 kExoNanoArmorPerSecond = 15
-
+--& Lifesustain
 kLifeRegenHPS = 4
 kLifeRegenMaxCap = 0.8
 kLifeSustainHPS = 10

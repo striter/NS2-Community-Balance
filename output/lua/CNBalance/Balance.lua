@@ -6,8 +6,6 @@ kPlayingTeamInitialTeamRes = 60   --60
 kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
 
-kBountyMinKills = 4
-kPResPerBountyKills = 0.5
 
 kMarineRespawnTime = 9
 
@@ -280,9 +278,9 @@ kTunnelRelocateCost = 5
 
 kResearchBioMassOneCost = 30
 kBioMassOneTime = 45
-kResearchBioMassTwoCost = 40
+kResearchBioMassTwoCost = 45
 kBioMassTwoTime = 60
-kResearchBioMassThreeCost = 55
+kResearchBioMassThreeCost = 60
 kBioMassThreeTime = 90
 kResearchBioMassFourCost = 100      --?
 kBioMassFourTime = 80

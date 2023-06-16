@@ -1,3 +1,14 @@
+
+Script.Load("lua/CNBalance/Mixin/SupplyProviderMixin.lua")
+local baseOnInitialized = CommandStation.OnInitialized
+function CommandStation:OnInitialized()
+    baseOnInitialized(self)
+    if Server then
+        InitMixin(self, SupplyProviderMixin)
+    end
+end
+
+
 kResearchToStationType =
 {
     [kTechId.StandardSupply] = kTechId.StandardStation,

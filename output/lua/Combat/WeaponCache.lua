@@ -341,10 +341,6 @@ function WeaponCache:GetReceivesStructuralDamage()
     return true
 end
 
-function WeaponCache:GetDamagedAlertId()
-    return kTechId.MarineAlertStructureUnderAttack
-end
-
 -- function WeaponCache:GetItemList(forPlayer)
     
 --     local itemList = {   

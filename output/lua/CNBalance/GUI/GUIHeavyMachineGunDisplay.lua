@@ -5,6 +5,8 @@ weaponAmmo     = 0
 weaponVariant  = 1
 globalTime     = 0
 lowAmmoWarning = "true"
+local backgroundSize = Vector(256, 160, 0)
+local textScale = 1.061
 
 local prevWeaponVariant = 1
 
@@ -16,6 +18,19 @@ local magWidth = 220 - 31
 local magTopY = 174
 local magHeight = 30
 local magYOffset = 68
+local textYOffset = 58
+
+local kTextures =
+{
+    "ui/hmgdisplay0.dds", -- normal
+    "ui/hmgdisplay4.dds", -- kodiak
+    "ui/hmgdisplay2.dds", -- tundra
+    "ui/hmgdisplay3.dds", -- forge
+    "ui/hmgdisplay1.dds", -- sandstorm
+    "ui/hmgdisplay5.dds", -- chroma
+}
+
+local self = {} -- provide some encapsulation
 
 function Update(deltaTime)
 
@@ -88,3 +103,47 @@ function Update(deltaTime)
 
 end
 
+function Initialize()
+
+    GUI.SetSize(backgroundSize.x, backgroundSize.y)
+
+    local texName = "ui/hmgdisplay" .. weaponVariant - 1 .. ".dds"
+
+    self.background = GUI.CreateItem()
+    self.background:SetSize(backgroundSize)
+    self.background:SetTexture(texName)
+    self.background:SetTexturePixelCoordinates(0, 0, backgroundSize.x, backgroundSize.y)
+
+    self.lowAmmoOverlay = GUI.CreateItem()
+    self.lowAmmoOverlay:SetSize(backgroundSize)
+    self.lowAmmoOverlay:SetIsVisible(false)
+
+    self.ammoText = GUI.CreateItem()
+    self.ammoText:SetOptionFlag(GUIItem.ManageRender)
+    self.ammoText:SetFontName("fonts/AgencyFB_huge.fnt")
+    self.ammoText:SetTextAlignmentX(GUIItem.Align_Center)
+    self.ammoText:SetTextAlignmentY(GUIItem.Align_Center)
+    self.ammoText:SetPosition(Vector(backgroundSize.x * 0.5, textYOffset, 0))
+    self.ammoText:SetScale(Vector(textScale, textScale, 0))
+
+    -- Magazines split into 3 sections: top, middle, and bottom.  Middle scales with ammo fraction.
+    -- Top and bottom do not scale.  Bottom does not move.  Middle moves down as it scales down with
+    -- ammo fraction.  Top moves down to stay on top of middle.
+    self.mags = {}
+    for i=1, magCount do
+        local newMag = GUI.CreateItem()
+        newMag:SetTexture(texName)
+        newMag:SetLayer(1)
+        newMag:SetSize(Vector(backgroundSize.x * 0.25, magHeight, 0))
+        local magLeftX = backgroundSize.x * 0.25 * (i-1)
+        local magRightX = backgroundSize.x * 0.25 * i
+        newMag:SetTexturePixelCoordinates(magLeftX, magTopY, magRightX, magTopY + magHeight)
+        newMag:SetPosition(Vector(magLeftX, magTopY - magYOffset, 0))
+        newMag:SetBlendTechnique(GUIItem.Add)
+
+        self.mags[i] = newMag
+    end
+
+end
+
+Initialize()

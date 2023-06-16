@@ -1,4 +1,14 @@
 
+Script.Load("lua/CNBalance/Mixin/SupplyProviderMixin.lua")
+local baseOnInitialized = Hive.OnInitialized
+function Hive:OnInitialized()
+    baseOnInitialized(self)
+    if Server then
+        InitMixin(self, SupplyProviderMixin)
+    end
+end
+
+
 function Hive:GetTechButtons()
 
     local techButtons = { kTechId.ShiftHatch, kTechId.None, kTechId.None, kTechId.None, --kTechId.LifeFormMenu,

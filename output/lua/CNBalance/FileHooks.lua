@@ -23,7 +23,7 @@ ModLoader.SetupFileHook("lua/TechTree.lua", "lua/CNBalance/TechTree.lua", "post"
 ModLoader.SetupFileHook("lua/TechTreeButtons.lua", "lua/CNBalance/TechTreeButtons.lua", "post")
 ModLoader.SetupFileHook("lua/BuildUtility.lua", "lua/CNBalance/BuildUtility.lua", "post")
 ModLoader.SetupFileHook("lua/MarineTechMap.lua", "lua/CNBalance/MarineTechMap.lua", "post")
-ModLoader.SetupFileHook("lua/TeamInfo.lua", "lua/CNBalance/TeamInfo.lua", "post")
+ModLoader.SetupFileHook("lua/TeamInfo.lua", "lua/CNBalance/TeamInfo.lua", "replace")
 ModLoader.SetupFileHook("lua/PlayingTeam.lua", "lua/CNBalance/PlayingTeam.lua", "post")
 ModLoader.SetupFileHook("lua/DamageTypes.lua", "lua/CNBalance/DamageTypes.lua", "replace")
 ModLoader.SetupFileHook("lua/CommandStructure_Server.lua", "lua/CNBalance/CommandStructure_Server.lua", "post" )
@@ -34,6 +34,8 @@ ModLoader.SetupFileHook("lua/ScoringMixin.lua", "lua/CNBalance/ScoringMixin.lua"
 ModLoader.SetupFileHook("lua/ServerStats.lua", "lua/CNBalance/ServerStats.lua", "replace" )
 --GUI
 ModLoader.SetupFileHook("lua/GUIMinimapFrame.lua", "lua/CNBalance/GUIMinimapFrame.lua", "post")
+ModLoader.SetupFileHook("lua/Hud2/topBar/GUIHudTopBarObjectClasses.lua", "lua/CNBalance/GUI/GUIHudTopBarObjectClasses.lua", "replace")
+
 
 --Effects
 ModLoader.SetupFileHook("lua/GeneralEffects.lua", "lua/CNBalance/Effects/GeneralEffects.lua", "post" )
@@ -89,6 +91,8 @@ ModLoader.SetupFileHook("lua/Extractor.lua", "lua/CNBalance/Structures/Marine/Ex
 ModLoader.SetupFileHook("lua/Armory.lua", "lua/CNBalance/Structures/Marine/Armory.lua", "post")
 ModLoader.SetupFileHook("lua/Observatory.lua", "lua/CNBalance/Structures/Marine/Observatory.lua", "post")
 ModLoader.SetupFileHook("lua/RoboticsFactory.lua", "lua/CNBalance/Structures/Marine/RoboticsFactory.lua", "post")
+ModLoader.SetupFileHook("lua/InfantryPortal.lua", "lua/CNBalance/Structures/Marine/InfantryPortal.lua", "post")
+ModLoader.SetupFileHook("lua/PhaseGate.lua", "lua/CNBalance/Structures/Marine/PhaseGate.lua", "post")
 ModLoader.SetupFileHook("lua/MAC.lua", "lua/CNBalance/Structures/Marine/MAC.lua", "replace")
 
 ModLoader.SetupFileHook("lua/Marine.lua", "lua/CNBalance/Marine.lua", "post")
@@ -110,7 +114,6 @@ ModLoader.SetupFileHook("lua/CommAbilities/Marine/EMPBlast.lua", "lua/CNBalance/
 ModLoader.SetupFileHook("lua/Weapons/Marine/ClusterGrenade.lua", "lua/CNBalance/Weapons/Marine/ClusterGrenade.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/Shotgun.lua", "lua/CNBalance/Weapons/Marine/Shotgun.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/HeavyMachineGun.lua", "lua/CNBalance/Weapons/Marine/HeavyMachineGun.lua", "post")
-ModLoader.SetupFileHook("lua/GUIHeavyMachineGunDisplay.lua", "lua/CNBalance/GUI/GUIHeavyMachineGunDisplay.lua", "post")
 
 ModLoader.SetupFileHook("lua/Weapons/Marine/GrenadeThrower.lua", "lua/CNBalance/Weapons/Marine/GrenadeThrower.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/GrenadeLauncher.lua", "lua/CNBalance/Weapons/Marine/GrenadeLauncher.lua", "post")

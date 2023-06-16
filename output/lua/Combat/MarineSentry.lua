@@ -381,10 +381,6 @@ if Server then
         self:Confuse(duration)
     end
     
-    function MarineSentry:GetDamagedAlertId()
-        return kTechId.MarineAlertSentryUnderAttack
-    end
-    
     function MarineSentry:FireBullets()
 
         local fireCoords = Coords.GetLookIn(Vector(0,0,0), self.targetDirection)     
