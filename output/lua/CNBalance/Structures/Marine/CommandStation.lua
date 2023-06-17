@@ -59,12 +59,12 @@ end
 
 class 'StandardStation' (CommandStation)
 StandardStation.kMapName = "standard_station"
-Shared.LinkClassToMap("StandardStation", StandardStation.kMapName, { })
-
+--Shared.LinkClassToMap("StandardStation", StandardStation.kMapName, { })
+--
 class 'ExplosiveStation' (CommandStation)
 ExplosiveStation.kMapName = "explosive_station"
-Shared.LinkClassToMap("ExplosiveStation",ExplosiveStation.kMapName , { })
-
+--Shared.LinkClassToMap("ExplosiveStation",ExplosiveStation.kMapName , { })
+--
 class 'ArmorStation' (CommandStation)
 ArmorStation.kMapName = "armor_station"
-Shared.LinkClassToMap("ExplosiveStation",ArmorStation.kMapName , { })
+--Shared.LinkClassToMap("ExplosiveStation",ArmorStation.kMapName , { })

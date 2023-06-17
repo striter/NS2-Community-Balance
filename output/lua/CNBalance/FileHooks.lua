@@ -174,7 +174,7 @@ ModLoader.SetupFileHook("lua/EvolutionChamber.lua", "lua/CNBalance/EvolutionCham
 ModLoader.SetupFileHook("lua/AlienTunnelManager.lua", "lua/CNBalance/AlienTunnelManager.lua", "post")
 
 --Structures
-ModLoader.SetupFileHook("lua/Hive.lua", "lua/CNBalance/Structures/Alien/Hive.lua", "post")
+ModLoader.SetupFileHook("lua/Hive.lua", "lua/CNBalance/Structures/Alien/Hive.lua", "replace")
 ModLoader.SetupFileHook("lua/TunnelEntrance.lua", "lua/CNBalance/Structures/Alien/TunnelEntrance.lua", "replace")
 ModLoader.SetupFileHook("lua/Tunnel.lua", "lua/CNBalance/Structures/Alien/Tunnel.lua", "post")
 ModLoader.SetupFileHook("lua/Hydra.lua", "lua/CNBalance/Structures/Alien/Hydra.lua", "post")
