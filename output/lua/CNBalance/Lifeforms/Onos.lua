@@ -48,6 +48,10 @@ function Onos:GetHasMovementSpecial()
     return true
 end
 
+function Onos:GetHealthPerTeamExceed()
+    return kOnosHealthPerPlayerAboveLimit
+end
+
 if Server then
 
     function Onos:GetTierOneTechId()

@@ -14,6 +14,7 @@ kResearchToStationType =
     [kTechId.StandardSupply] = kTechId.StandardStation,
     [kTechId.ExplosiveSupply] = kTechId.ExplosiveStation,
     [kTechId.ArmorSupply] = kTechId.ArmorStation,
+    [kTechId.ElectronicSupply] = kTechId.ElectronicStation,
 }
 
 local function GetSupplyResearchAllowed(self, techId)
@@ -23,22 +24,20 @@ end
 
 function CommandStation:GetTechButtons()
 
-    local techButtons = { kTechId.ShiftHatch, kTechId.None, kTechId.None, kTechId.LifeFormMenu,
+    local techButtons = { kTechId.None, kTechId.None, kTechId.None, kTechId.None,
                           kTechId.None, kTechId.None, kTechId.None, kTechId.None }
 
     local techId = self:GetTechId()
     if techId == kTechId.CommandStation then
         techButtons[1] = ConditionalValue(GetSupplyResearchAllowed(self,kTechId.StandardSupply),kTechId.StandardSupply,kTechId.None)
         techButtons[2] = ConditionalValue(GetSupplyResearchAllowed(self,kTechId.ArmorSupply),kTechId.ArmorSupply,kTechId.None)
-        techButtons[3] = ConditionalValue(GetSupplyResearchAllowed(self,kTechId.ExplosiveSupply),kTechId.ExplosiveSupply,kTechId.None)
-    elseif techId == kTechId.ExplosiveStation then
+        techButtons[3] = ConditionalValue(GetSupplyResearchAllowed(self,kTechId.ElectronicSupply),kTechId.ElectronicSupply,kTechId.None)
+        --techButtons[4] = ConditionalValue(GetSupplyResearchAllowed(self,kTechId.ExplosiveSupply),kTechId.ExplosiveSupply,kTechId.None)
+    elseif techId == kTechId.ElectronicStation then
         techButtons[1] = kTechId.MACEMPBlast
-        techButtons[2] = kTechId.PoweredExtractorTech
-        techButtons[3] = kTechId.GrenadeLauncherUpgrade
     elseif techId == kTechId.StandardStation then
         techButtons[1] = kTechId.DragonBreath
         techButtons[2] = kTechId.LightMachineGunUpgrade
-        techButtons[3] = kTechId.CannonTech
     elseif techId == kTechId.ArmorStation then
         techButtons[1] = kTechId.LifeSustain
         techButtons[2] = kTechId.ArmorRegen
@@ -54,6 +53,8 @@ function CommandStation:OnResearchComplete(researchId)
         self:UpgradeToTechId(kTechId.StandardStation)
     elseif researchId == kTechId.ArmorSupply then
         self:UpgradeToTechId(kTechId.ArmorStation)
+    elseif researchId == kTechId.ElectronicSupply then
+        self:UpgradeToTechId(kTechId.ElectronicStation)
     end
 end
 
@@ -68,3 +69,5 @@ ExplosiveStation.kMapName = "explosive_station"
 class 'ArmorStation' (CommandStation)
 ArmorStation.kMapName = "armor_station"
 --Shared.LinkClassToMap("ExplosiveStation",ArmorStation.kMapName , { })
+class 'ElectronicStation' (CommandStation)
+ElectronicStation.kMapName = "electronic_station"

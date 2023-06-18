@@ -49,17 +49,20 @@ ModLoader.SetupFileHook("lua/SoundEffect.lua", "lua/CNBalance/SoundEffect.lua", 
 
 --Mixin
 ModLoader.SetupFileHook("lua/Weapons/BulletsMixin.lua", "lua/CNBalance/Mixin/BulletsMixin.lua", "post")
-ModLoader.SetupFileHook("lua/FireMixin.lua", "lua/CNBalance/Mixin/FireMixin.lua", "post")
+ModLoader.SetupFileHook("lua/FireMixin.lua", "lua/CNBalance/Mixin/FireMixin.lua", "replace")
+ModLoader.SetupFileHook("lua/Weapons/Alien/HealSprayMixin.lua", "lua/CNBalance/Mixin/HealSprayMixin.lua", "replace")
+
 ModLoader.SetupFileHook("lua/CloakableMixin.lua", "lua/CNBalance/Mixin/CloakableMixin.lua", "replace")
 ModLoader.SetupFileHook("lua/ClogFallMixin.lua", "lua/CNBalance/Mixin/ClogFallMixin.lua", "replace")
-ModLoader.SetupFileHook("lua/BabblerOwnerMixin.lua", "lua/CNBalance/Mixin/BabblerOwnerMixin.lua", "post")
-ModLoader.SetupFileHook("lua/RegenerationMixin.lua", "lua/CNBalance/Mixin/RegenerationMixin.lua", "post")
 ModLoader.SetupFileHook("lua/ShieldableMixin.lua", "lua/CNBalance/Mixin/ShieldableMixin.lua", "post" )
 ModLoader.SetupFileHook("lua/PlayerHallucinationMixin.lua", "lua/CNBalance/Mixin/PlayerHallucinationMixin.lua", "post" )
 ModLoader.SetupFileHook("lua/UmbraMixin.lua", "lua/CNBalance/Mixin/UmbraMixin.lua", "post" )
 ModLoader.SetupFileHook("lua/AutoWeldMixin.lua", "lua/CNBalance/Mixin/AutoWeldMixin.lua", "post")
 ModLoader.SetupFileHook("lua/TeamDeathMessageMixin.lua", "lua/CNBalance/Mixin/TeamDeathMessageMixin.lua", "post" )
 ModLoader.SetupFileHook("lua/PointGiverMixin.lua", "lua/CNBalance/Mixin/PointGiverMixin.lua", "post" )
+ModLoader.SetupFileHook("lua/BabblerOwnerMixin.lua", "lua/CNBalance/Mixin/BabblerOwnerMixin.lua", "post")
+ModLoader.SetupFileHook("lua/RegenerationMixin.lua", "lua/CNBalance/Mixin/RegenerationMixin.lua", "post")
+ModLoader.SetupFileHook("lua/BiomassHealthMixin.lua", "lua/CNBalance/Mixin/BiomassHealthMixin.lua", "replace")
 
 ModLoader.SetupFileHook("lua/Player.lua", "lua/CNBalance/Player.lua", "post" )
 ModLoader.SetupFileHook("lua/HitSounds.lua", "lua/CNBalance/HitSounds.lua", "post" )
@@ -123,7 +126,7 @@ ModLoader.SetupFileHook("lua/GUIInsight_PlayerHealthbars.lua", "lua/CNBalance/GU
 
 --Combat Weapon Hacks
 ModLoader.SetupFileHook("lua/Weapons/Marine/Axe.lua", "lua/Combat/Knife.lua", "post")
-ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/Revolver.lua", "post") 
+ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/Revolver.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/SubMachineGun.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/LightMachineGun.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/Cannon.lua", "post")

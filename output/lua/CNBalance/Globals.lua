@@ -33,21 +33,24 @@ debug.appendtoenum(kMinimapBlipType, "MarineSentry")
 --zoneA:  min(max(0,x-900)/420 * 5 , 5)
 --zoneB:  pow(max(0,(x-1320) / 400),2) * 3.3
 
-local kExtendMinPlayers = 12
-local kExtendPerPlayer = 1
+function GetPlayersAboveLimit(team)
+    local info = GetTeamInfoEntity(team)
+    if not info then return 0 end
+    return math.max(0,info.playerCount - kMatchMinPlayers)
+end
+
 function GetRespawnTimeExtend(team,_gameLength)
     --_gameLength = _gameLength * 30
     local x = _gameLength
-    
+
     local respawnTA = math.max(0,x-900)/420
     respawnTA = math.min(respawnTA * 5 , 5)
-    
+
     local respawnTB = math.max(0,x-1320)/ 400
     respawnTB = respawnTB * respawnTB
     respawnTB = respawnTB * 3.3
 
-    local info = GetTeamInfoEntity(team)
-    local respawnTP = math.max(0,info.playerCount - kExtendMinPlayers) * kExtendPerPlayer
-    
+    local respawnTP = GetPlayersAboveLimit(team) * kRespawnTimeExtendPerPlayer
+
     return math.min(respawnTA + respawnTB , 72 ) + respawnTP
 end

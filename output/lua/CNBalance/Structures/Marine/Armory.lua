@@ -36,6 +36,9 @@ function Armory:GetTechButtons(techId)
     local advancedArmory = self:GetTechId() == kTechId.AdvancedArmory
     if not advancedArmory then
         techButtons[4] = kTechId.AdvancedArmoryUpgrade
+    else
+        techButtons[2] = kTechId.GrenadeLauncherUpgrade
+        techButtons[7] = kTechId.CombatBuilderTech
     end
     
     return techButtons

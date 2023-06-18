@@ -93,16 +93,15 @@ function NS2Gamerules_GetUpgradedDamageScalar( attacker, weaponTechId )
 
 end
 
-function NS2Gamerules_GetPlayerFireDuration(attacker)
-
+function NS2Gamerules_GetPlayerWeaponUpgradeIndex(attacker)
     if GetHasTech(attacker, kTechId.Weapons3, true) then
-        return kFireDurationWeapons3
+        return 4
     elseif GetHasTech(attacker, kTechId.Weapons2, true) then
-        return kFireDurationWeapons2
+        return 3
     elseif GetHasTech(attacker, kTechId.Weapons1, true) then
-        return kFireDurationWeapons1
+        return 2
     end
-    return kFireDurationDefault
+    return 1
 end
 
 -- Use this function to change damage according to current upgrades
@@ -502,7 +501,7 @@ local function ClusterFlameModifier(target, _, _, damage, armorFractionUsed, hea
         if target.GetIsFlameAble and target:GetIsFlameAble(damageType) then -- GetIsFlameAble is only used for structures at the moment.
 
             -- If damage is <= 0 (friendly fire), also disable fire damage.
-            local wouldBeFireDamage = ConditionalValue(damage <= 0, 0, kBurnDamagePerSecond * kFlamethrowerBurnDuration)
+            local wouldBeFireDamage = ConditionalValue(damage <= 0, 0, kPlayerFireDOTPerSecond * kFlamethrowerBurnDuration)
 
             local multi = kFlameableMultiplier
             if target.GetIsFlameableMultiplier then

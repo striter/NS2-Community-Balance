@@ -1,3 +1,36 @@
+local function UpdateBiomassHealth(self, biomassChanged,biomassLevel)
+
+    local teamPlayers = GetPlayersAboveLimit(self:GetTeamType())
+    local ents = GetEntitiesWithMixin("BiomassHealth")
+    for i = 1, #ents do
+        local ent = ents[i]
+        if biomassChanged or (ent.GetHealthPerTeamExceed)  then
+            ent:UpdateHealthAmount(biomassLevel,teamPlayers)
+        end
+    end
+end
+
+
+function AlienTeam:AddPlayer(player)
+    local available = Team.AddPlayer(self,player)
+    UpdateBiomassHealth(self,false,self.bioMassLevel)
+    return available
+end
+
+function AlienTeam:RemovePlayer(player)
+    Team.RemovePlayer(self,player)
+    UpdateBiomassHealth(self,false,self.bioMassLevel)
+end
+
+
+
+function AlienTeam:OnUpdateBiomass(oldBiomass, newBiomass)
+    if self.techtree then
+        self.techTree:SetTechChanged()
+    end
+    UpdateBiomassHealth(self,true,newBiomass)
+end
+
 
 function AlienTeam:InitTechTree()
 
@@ -262,7 +295,7 @@ function AlienTeam:InitTechTree()
     -- self.techTree:AddResearchNode(kTechId.Rappel,              kTechId.BioMassThree,  kTechId.None, kTechId.AllAliens)
     self.techTree:AddTargetedActivation(kTechId.AcidSpray,           kTechId.BioMassFive,  kTechId.None,kTechId.AllAliens)
     -- vokex researches
-    self.techTree:AddPassive(kTechId.ShadowStep,           kTechId.None) 
+    self.techTree:AddPassive(kTechId.ShadowStep,           kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.AcidRocket,           kTechId.BioMassFive,  kTechId.None,kTechId.AllAliens)
     self.techTree:AddTargetedActivation(kTechId.MetabolizeShadowStep,        kTechId.BioMassThree, kTechId.None)
 
@@ -281,7 +314,7 @@ function AlienTeam:OnResetComplete()
     local commander = self:GetCommander()
     local gameInfo = GetGameInfoEntity()
     local teamIdx = self:GetTeamNumber()
-    
+
     if commander then
 
         local commStructSkin = commander:GetCommanderStructureSkin()
@@ -290,7 +323,7 @@ function AlienTeam:OnResetComplete()
         local commEggSkin = commander:GetCommanderEggSkin()
         local commCystSkin = commander:GetCommanderCystSkin()
         local commTunnelSkin = commander:GetCommanderTunnelSkin()
-        
+
         if commStructSkin then
             self.activeStructureSkin = commStructSkin
             local skinnedEnts = GetEntitiesWithMixinForTeam( "AlienStructureVariant", teamIdx )
@@ -353,7 +386,7 @@ function AlienTeam:OnResetComplete()
         gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot4, kDefaultEggVariant )
         gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot5, kDefaultAlienCystVariant )
         gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot6, kDefaultAlienDrifterVariant )
-        
+
     end
 
 end

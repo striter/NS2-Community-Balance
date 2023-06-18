@@ -4,8 +4,9 @@ local kGrenadeMinShakeIntensity = 0.01
 local kGrenadeMaxShakeIntensity = 0.12
 
 function ClusterGrenade:Detonate(targetHit)
+    local grenadeTech = GetHasTech(self,kTechId.GrenadeTech)
     ----
-        if GetHasTech(self,kTechId.GrenadeTech) then
+        if grenadeTech then
             self:CreateFragments()
         end
     -----
@@ -15,6 +16,9 @@ function ClusterGrenade:Detonate(targetHit)
     if targetHit then
         table.removevalue(hitEntities, targetHit)
         self:DoDamage(kClusterGrenadeDamage, targetHit, targetHit:GetOrigin(), GetNormalizedVector(targetHit:GetOrigin() - self:GetOrigin()), "none")
+        --if grenadeTech and targetHit.SetOnFire then
+        --    targetHit:SetOnFire(self,self)
+        --end
     end
 
     RadiusDamage(hitEntities, self:GetOrigin(), kClusterGrenadeDamageRadius, kClusterGrenadeDamage, self)

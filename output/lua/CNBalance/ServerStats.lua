@@ -160,6 +160,8 @@ function StatsUI_AddBuildingStat(teamNumber, techId, lost)
 			techId = kTechId.CommandStation
 		elseif techId == kTechId.ExplosiveStation then
 			techId = kTechId.CommandStation
+		elseif techId == kTechId.ElectronicStation then
+			techId = kTechId.CommandStation
 		end
 
 		local stat = STATS_BuildingSummary[teamNumber][techId]

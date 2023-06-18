@@ -10,7 +10,7 @@ kAlienInitialIndivRes = 12
 kMarineRespawnTime = 9
 
 kAlienSpawnTime = 10
-kEggGenerationRate = 10  --13
+kEggGenerationRate = 11  --13
 kAlienEggsPerHive = 2
 
 kWelderDropCost = 3
@@ -116,11 +116,12 @@ kGrenadeLauncherWeapons1DamageScalar = 1.1
 kGrenadeLauncherWeapons2DamageScalar = 1.2
 kGrenadeLauncherWeapons3DamageScalar = 1.3
 
---Armor Supply
-kCombatBuilderResearchCost = 10
+kCombatBuilderResearchCost = 15
 kCombatBuilderResearchTime = 60
+
+--Armor Supply
 kLifeSustainResearchCost = 15
-kLifeSustainResearchTime = 90
+kLifeSustainResearchTime = 60
 kNanoArmorResearchCost = 25
 kNanoArmorResearchTime = 90
 
@@ -189,15 +190,16 @@ kFlamethrowerCost = 20
 kFlamethrowerDropCost = 12
 kFlamethrowerDropCooldown = 0
 
-kBurnDamagePerSecond = 8
-
-kFireStructureBurnDuration = 2.1
-kFireStructureMaxBurnDuration = 6
-
-kFireDurationDefault = 0.8
-kFireDurationWeapons1 = 1.2
-kFireDurationWeapons2 = 1.6
-kFireDurationWeapons3 = 2.1
+kFirePlayerDOTDelay = 1
+kPlayerFireDOTPerSecond = 5.0
+kDragonBreathPlayerFireDamagePerStack = { kPlayerFireDOTPerSecond / 5, kPlayerFireDOTPerSecond / 4.3, kPlayerFireDOTPerSecond / 3.6, kPlayerFireDOTPerSecond / 3}
+kFlameThrowerPlayerFireDamagePerStack = { kPlayerFireDOTPerSecond, kPlayerFireDOTPerSecond, kPlayerFireDOTPerSecond, kPlayerFireDOTPerSecond }
+kPlayerFireDamageMaxStack = { kPlayerFireDOTPerSecond * 2, kPlayerFireDOTPerSecond * 3,kPlayerFireDOTPerSecond * 4,kPlayerFireDOTPerSecond * 5 }
+kFireStructureDOTDelay = 0.5
+kStructureFireDOTPerSecond = 8.0
+kDragonBreathStructureFireDamagePerStack = { kStructureFireDOTPerSecond / 100, kStructureFireDOTPerSecond / 90,kStructureFireDOTPerSecond/ 80, kStructureFireDOTPerSecond / 70 }--kStructureFireDOTPerSecond / 20, kStructureFireDOTPerSecond / 18, kStructureFireDOTPerSecond / 16, kStructureFireDOTPerSecond / 14}
+kFlamethrowerStructureDamagePerStack = { kStructureFireDOTPerSecond, kStructureFireDOTPerSecond, kStructureFireDOTPerSecond, kStructureFireDOTPerSecond }
+kStructureFireDamageMaxStack = { kStructureFireDOTPerSecond * 3 , kStructureFireDOTPerSecond * 4, kStructureFireDOTPerSecond * 5, kStructureFireDOTPerSecond * 6  }
 
 kMinigunDamage = 8.5
 kMinigunDamageType = kDamageType.Exosuit
@@ -384,7 +386,7 @@ kBoneShieldResearchCost = 20
 kBoneShieldResearchTime = 40
 kStompResearchCost = 25
 kStompResearchTime = 90
-kChargeDamage = 30
+kChargeDamage = 12
 kStompEnergyCost = 25
 kStompDamageType = kDamageType.Structural
 kStompDamage = 45

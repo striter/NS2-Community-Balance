@@ -2,6 +2,9 @@
 local kTechIdToMaterialOffset = debug.getupvaluex(GetMaterialXYOffset, "kTechIdToMaterialOffset")
 
 kTechIdToMaterialOffset[kTechId.AdvancedArmory] = 99
+kTechIdToMaterialOffset[kTechId.GrenadeLauncherUpgrade] = 196
+kTechIdToMaterialOffset[kTechId.CombatBuilderTech] = 207
+kTechIdToMaterialOffset[kTechId.DropCombatBuilder] = 207
 
 kTechIdToMaterialOffset[kTechId.StandardSupply] = 215
 kTechIdToMaterialOffset[kTechId.StandardStation] = 215
@@ -11,9 +14,12 @@ kTechIdToMaterialOffset[kTechId.DragonBreath] = 212
 kTechIdToMaterialOffset[kTechId.CannonTech] = 204
 kTechIdToMaterialOffset[kTechId.DropCannon] = 204
 
-kTechIdToMaterialOffset[kTechId.ExplosiveSupply] = 214
-kTechIdToMaterialOffset[kTechId.ExplosiveStation] = 214
-kTechIdToMaterialOffset[kTechId.GrenadeLauncherUpgrade] = 196
+--kTechIdToMaterialOffset[kTechId.ExplosiveSupply] = 214
+--kTechIdToMaterialOffset[kTechId.ExplosiveStation] = 214
+
+kTechIdToMaterialOffset[kTechId.ElectronicSupply] = 200
+kTechIdToMaterialOffset[kTechId.ElectronicStation] = 200
+
 kTechIdToMaterialOffset[kTechId.MACEMPBlast] = 43
 kTechIdToMaterialOffset[kTechId.PoweredExtractor] = 211
 kTechIdToMaterialOffset[kTechId.PoweredExtractorTech] = 211
@@ -25,8 +31,6 @@ kTechIdToMaterialOffset[kTechId.ArmorSupply] = 213
 kTechIdToMaterialOffset[kTechId.ArmorStation] = 213 
 kTechIdToMaterialOffset[kTechId.LifeSustain] = 198
 kTechIdToMaterialOffset[kTechId.ArmorRegen] = 195
-kTechIdToMaterialOffset[kTechId.CombatBuilderTech] = 207
-kTechIdToMaterialOffset[kTechId.DropCombatBuilder] = 207
 
 
 kTechIdToMaterialOffset[kTechId.ProtosMenu] = 25

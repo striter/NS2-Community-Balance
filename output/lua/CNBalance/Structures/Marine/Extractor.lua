@@ -223,6 +223,6 @@ Shared.LinkClassToMap("Extractor", Extractor.kMapName, networkVars)
 
 
 class 'PoweredExtractor' (Extractor)
-PoweredExtractor.kMapName = "powered_extractor"
+PoweredExtractor.kMapName = Extractor.kMapName
 PoweredExtractor.kElectrifiedThirdpersonMaterialName = "cinematics/vfx_materials/pulse_gre_elec.material"
-Shared.LinkClassToMap("PoweredExtractor",PoweredExtractor.kMapName , {})
+--Shared.LinkClassToMap("PoweredExtractor",PoweredExtractor.kMapName , {})

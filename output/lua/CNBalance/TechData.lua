@@ -11,6 +11,24 @@ function BuildTechData()
     local techData = oldBuildTechData()
 
     table.insert(techData, {
+        [kTechDataId] = kTechId.CombatBuilderTech,
+        [kTechDataCostKey] = kCombatBuilderResearchCost,
+        [kTechDataResearchTimeKey] = kCombatBuilderResearchTime,
+        [kTechDataDisplayName] = "COMBATBUILDER",
+        [kTechDataTooltipInfo] = "COMBATBUILDER_TOOLTIP",
+        [kTechDataResearchName] = "COMBATBUILDER",
+    })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.GrenadeLauncherUpgrade,
+        [kTechDataCostKey] = kGrenadeLauncherUpgradeResearchCost,
+        [kTechDataResearchTimeKey] = kGrenadeLauncherUpgradeResearchTime,
+        [kTechDataDisplayName] = "GRENADE_LAUNCHER_UPGRADE",
+        [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_UPGRADE_TOOLTIP",
+        [kTechDataResearchName] = "GRENADE_LAUNCHER_UPGRADE",
+    })
+    
+    table.insert(techData, {
         [kTechDataId] = kTechId.StandardSupply,
         [kTechDataCostKey] = kCommandStationUpgradeCost,
         [kTechDataResearchTimeKey] = kCommandStationUpgradeTime,
@@ -21,7 +39,7 @@ function BuildTechData()
     
     table.insert(techData,{
         [kTechDataId] = kTechId.StandardStation,
-        [kTechDataMapName] = StandardStation.kMapName,
+        [kTechDataMapName] = CommandStation.kMapName,
         [kTechDataModel] = CommandStation.kModelName,
         [kTechDataMaxHealth] = kUpgradedCommandStationHealth,
         [kTechDataMaxArmor] = kUpgradedCommandStationArmor,
@@ -64,7 +82,7 @@ function BuildTechData()
 
     table.insert(techData,{
         [kTechDataId] = kTechId.ArmorStation,
-        [kTechDataMapName] = ArmorStation.kMapName,
+        [kTechDataMapName] = CommandStation.kMapName,
         [kTechDataModel] = CommandStation.kModelName,
         [kTechDataMaxHealth] = kUpgradedCommandStationHealth,
         [kTechDataMaxArmor] = kUpgradedCommandStationArmor,
@@ -79,12 +97,12 @@ function BuildTechData()
     })
 
     table.insert(techData, {
-        [kTechDataId] = kTechId.CombatBuilderTech,
-        [kTechDataCostKey] = kCombatBuilderResearchCost,
-        [kTechDataResearchTimeKey] = kCombatBuilderResearchTime,
-        [kTechDataDisplayName] = "COMBATBUILDER",
-        [kTechDataTooltipInfo] = "COMBATBUILDER_TOOLTIP",
-        [kTechDataResearchName] = "COMBATBUILDER",
+        [kTechDataId] = kTechId.MinesUpgrade,
+        [kTechDataCostKey] = kMinesUpgradeResearchCost,
+        [kTechDataResearchTimeKey] = kMinesUpgradeResearchTime,
+        [kTechDataDisplayName] = "MINES_UPGRADE",
+        [kTechDataTooltipInfo] = "MINES_UPGRADE_TOOLTIP",
+        [kTechDataResearchName] = "MINES_UPGRADE",
     })
 
     table.insert(techData, {
@@ -116,7 +134,7 @@ function BuildTechData()
 
     table.insert(techData,{
         [kTechDataId] = kTechId.ExplosiveStation,
-        [kTechDataMapName] = ExplosiveStation.kMapName,
+        [kTechDataMapName] = CommandStation.kMapName,
         [kTechDataModel] = CommandStation.kModelName,
         [kTechDataMaxHealth] = kUpgradedCommandStationHealth,
         [kTechDataMaxArmor] = kUpgradedCommandStationArmor,
@@ -129,15 +147,6 @@ function BuildTechData()
         [kTechDataEngagementDistance] = kCommandStationEngagementDistance,
     })
     
-    table.insert(techData, {
-        [kTechDataId] = kTechId.MinesUpgrade,
-        [kTechDataCostKey] = kMinesUpgradeResearchCost,
-        [kTechDataResearchTimeKey] = kMinesUpgradeResearchTime,
-        [kTechDataDisplayName] = "MINES_UPGRADE",
-        [kTechDataTooltipInfo] = "MINES_UPGRADE_TOOLTIP",
-        [kTechDataResearchName] = "MINES_UPGRADE",
-    })
-
     --table.insert(techData, {
     --    [kTechDataId] = kTechId.GrenadeLauncherDetectionShot,
     --    [kTechDataCostKey] = kGrenadeLauncherDetectionShotResearchCost,
@@ -156,15 +165,31 @@ function BuildTechData()
     --    [kTechDataResearchName] = "GRENADE_LAUNCHER_ALLY_BLAST",
     --})
 
-    table.insert(techData, {
-        [kTechDataId] = kTechId.GrenadeLauncherUpgrade,
-        [kTechDataCostKey] = kGrenadeLauncherUpgradeResearchCost,
-        [kTechDataResearchTimeKey] = kGrenadeLauncherUpgradeResearchTime,
-        [kTechDataDisplayName] = "GRENADE_LAUNCHER_UPGRADE",
-        [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_UPGRADE_TOOLTIP",
-        [kTechDataResearchName] = "GRENADE_LAUNCHER_UPGRADE",
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.ElectronicSupply,
+        [kTechDataCostKey] = kCommandStationUpgradeCost,
+        [kTechDataResearchTimeKey] = kCommandStationUpgradeTime,
+        [kTechDataDisplayName] = "ELECTRONIC_SUPPLY",
+        [kTechDataResearchName] = "ELECTRONIC_SUPPLY",
+        [kTechDataTooltipInfo] = "ELECTRONIC_SUPPLY_TOOLTIP",
     })
 
+    table.insert(techData,{
+        [kTechDataId] = kTechId.ElectronicStation,
+        [kTechDataMapName] = CommandStation.kMapName,
+        [kTechDataModel] = CommandStation.kModelName,
+        [kTechDataMaxHealth] = kUpgradedCommandStationHealth,
+        [kTechDataMaxArmor] = kUpgradedCommandStationArmor,
+        [kTechDataPointValue] = kUpgradedCommandStationPointValue,
+        [kTechDataHint] = "ELECTRONIC_STATION_HINT",
+        [kTechDataDisplayName] = "ELECTRONIC_STATION",
+        [kStructureAttachClass] = "TechPoint",
+        [kTechDataGhostModelClass] = "MarineGhostModel",
+        [kTechDataCostKey] = kUpgradedCommandStationCost,
+        [kTechDataEngagementDistance] = kCommandStationEngagementDistance,
+    })
+    
     table.insert(techData, {
         [kTechDataId] = kTechId.MACEMPBlast,
         [kTechDataCostKey] = kMACEMPBlastResearchCost,
@@ -208,7 +233,7 @@ function BuildTechData()
         [kTechDataMaxArmor] = kInfantryPortalArmor,
         [kTechDataModel] = InfantryPortal.kModelName,
         [kStructureBuildNearClass] = "CommandStation",
-        [kStructureAttachId] = {kTechId.CommandStation,kTechId.StandardStation,kTechId.ArmorStation,kTechId.ExplosiveStation},
+        [kStructureAttachId] = {kTechId.CommandStation,kTechId.StandardStation,kTechId.ArmorStation,kTechId.ExplosiveStation,kTechId.ElectronicStation},
         [kStructureAttachRange] = kInfantryPortalAttachRange,
         [kTechDataEngagementDistance] = kInfantryPortalEngagementDistance,
         [kTechDataHotkey] = Move.P,

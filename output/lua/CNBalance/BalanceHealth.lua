@@ -1,3 +1,6 @@
+kMatchMinPlayers = 10
+kRespawnTimeExtendPerPlayer = 1
+
 --(*) In replaced of special condition,usually receive few damage.  |*| Stands for Focus
 -- Marine
 --A    ehp    Skulk      Lerk        Fade        Onos
@@ -40,9 +43,9 @@ kPhaseGateHealth = 1950    kPhaseGateArmor = 800    kPhaseGatePointValue = 10 --
 --Alien
 kHealingClampMaxHPAmount = 0.15
 
-kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5    kSkulkHealthPerBioMass = 3
+kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5    kSkulkHealthPerBioMass = 3 kSkulkHealthPerPlayerAboveLimit = 1
 kSkulkDamageReduction = {
-    ["Shotgun"] = 0.85,
+    ["Shotgun"] = 0.88,
     ["Grenade"] = 0.8,
     ["ImpactGrenade"] = 0.8,
     ["Cannon"] = 0.9,
@@ -50,9 +53,9 @@ kSkulkDamageReduction = {
     --["Railgun"] = 0.9,
 }
 
-kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7    kGorgeHealthPerBioMass = 3
+kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7 kGorgeHealthPerBioMass = 3
 
-kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15    kLerkHealthPerBioMass = 3
+kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15 kLerkHealthPerBioMass = 3
 kLerkDamageReduction = {
     ["Shotgun"] = 0.9,
     ["Cannon"] = 0.8,
@@ -62,18 +65,18 @@ kLerkDamageReduction = {
     --["PulseGrenade"] = 0.75,
 }
 
-kFadeHealth = 280    kFadeArmor = 80     kFadePointValue = 20    kFadeHealthPerBioMass = 5
+kFadeHealth = 280    kFadeArmor = 80     kFadePointValue = 20 kFadeHealthPerBioMass = 5 
 kFadeDamageReduction = {
     ["MarineSentry"] = 1.1,
     ["Mine"] = 1.1,
     ["HeavyMachineGun"] = 0.92,
 }
 
-kOnosHealth = 750    kOnosArmor = 500    kOnosPointValue = 30    kOnosHealtPerBioMass = 50
+kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 25
 kOnosBoneShieldDefaultReduction = 0.2
 kOnosBoneShieldDamageReduction = {
     ["HeavyMachineGun"] = 0.28,
-    ["Minigun"] = 0.32,
+    ["Minigun"] = 0.35,
     ["Railgun"] = 0,
 }
 kOnosDamageReduction = {

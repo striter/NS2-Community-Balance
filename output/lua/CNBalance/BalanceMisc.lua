@@ -1,3 +1,4 @@
+
 -- kInitialMACs = 1
 -- kInitialDrifters = 1
 kMaxTunnelCount = {1,3,4,4,4,4,4,4,4,4}
@@ -107,7 +108,7 @@ kTechDataPersonalResOnKill = {
     [kTechId.Extractor] = 2.5, [kTechId.PoweredExtractor] = 4,
     [kTechId.RoboticsFactory] = 2.5, [kTechId.ARCRoboticsFactory] = 2.5,
     [kTechId.Armory] = 1,[kTechId.Observatory] = 2.5, [kTechId.PhaseGate] = 4,
-    [kTechId.CommandStation] = 10, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15,
+    [kTechId.CommandStation] = 10, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [ kTechId.ElectronicStation ] = 15,
     [kTechId.Mine] = 0.2, [kTechId.InfantryPortal] = 2, [kTechId.MarineSentry] = 0.8,   --PPVE
     [kTechId.MAC] = 0.2,    [kTechId.SentryBattery] = 4, [kTechId.Sentry] = 1,[kTechId.ARC] = 2.5,      --CPVE
     --[kTechId.JetpackMarine] = 5, [kTechId.Exo] = 10, [kTechId.Exosuit] = 20,
@@ -124,7 +125,7 @@ kTechDataPersonalResOnKill = {
 
 kTechDataTeamResOnKill = {
     [kTechId.ARC] = 4,
-    [kTechId.CommandStation] = 15, [kTechId.StandardStation] = 20, [kTechId.ExplosiveStation] = 20, [kTechId.ArmorStation] = 20,
+    [kTechId.CommandStation] = 15, [kTechId.StandardStation] = 20, [kTechId.ExplosiveStation] = 20, [kTechId.ArmorStation] = 20, [kTechId.ElectronicStation] = 20,
     [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20,
 }
 
