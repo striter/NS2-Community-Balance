@@ -158,7 +158,7 @@ function PlayerUI_GetGameTimeString()
     local minutes = math.floor(gameTime / 60)
     local seconds = math.floor(gameTime % 60)
     local team = PlayerUI_GetTeamType()
-    local gameTimeString = string.format("%s - %d:%.2d", Locale.ResolveString(string.format("GAME_LENGTH_TEAM%i",team)), minutes, seconds)
+    local gameTimeString = string.format("\n".. Locale.ResolveString(string.format("GAME_LENGTH_TEAM%i",team)), minutes, seconds)
     
     local respawnExtend = GetRespawnTimeExtend(team,gameTime)
 
@@ -168,7 +168,13 @@ function PlayerUI_GetGameTimeString()
         respawnExtend = respawnExtend + kAlienSpawnTime
     end
     
-    gameTimeString = gameTimeString .. string.format("\n%s - %is", Locale.ResolveString(string.format("RESPAWN_EXTEND_TEAM%i",team)),respawnExtend)
+    gameTimeString = gameTimeString .. string.format("\n".. Locale.ResolveString(string.format("RESPAWN_EXTEND_TEAM%i",team)),respawnExtend)
+    
+    local refundBase = GetTeamResourceRefundBase(team)
+    if refundBase > kTeamResourceRefundBase then
+        gameTimeString = gameTimeString .. string.format("\n".. Locale.ResolveString(string.format("TEAM_BOUNTY%i",team)),refundBase - kTeamResourceRefundBase)
+    end
+    
     return gameTimeString
 
 end

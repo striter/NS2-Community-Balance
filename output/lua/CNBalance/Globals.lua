@@ -54,3 +54,9 @@ function GetRespawnTimeExtend(team,_gameLength)
 
     return math.min(respawnTA + respawnTB , 72 ) + respawnTP
 end
+
+function GetTeamResourceRefundBase(team)
+    local info = GetTeamInfoEntity(team)
+    if not info then return 0 end
+    return info.teamRefundResourcesBase
+end

@@ -25,6 +25,7 @@ ModLoader.SetupFileHook("lua/BuildUtility.lua", "lua/CNBalance/BuildUtility.lua"
 ModLoader.SetupFileHook("lua/MarineTechMap.lua", "lua/CNBalance/MarineTechMap.lua", "post")
 ModLoader.SetupFileHook("lua/TeamInfo.lua", "lua/CNBalance/TeamInfo.lua", "replace")
 ModLoader.SetupFileHook("lua/PlayingTeam.lua", "lua/CNBalance/PlayingTeam.lua", "post")
+ModLoader.SetupFileHook("lua/ResourceTower_Server.lua", "lua/CNBalance/Structures/ResourceTower_Server.lua", "post")
 ModLoader.SetupFileHook("lua/DamageTypes.lua", "lua/CNBalance/DamageTypes.lua", "replace")
 ModLoader.SetupFileHook("lua/CommandStructure_Server.lua", "lua/CNBalance/CommandStructure_Server.lua", "post" )
 ModLoader.SetupFileHook("lua/ReadyRoomTeam.lua", "lua/CNBalance/ReadyRoomTeam.lua", "post" )

@@ -32,8 +32,8 @@ kObservatoryHealth = 1050    kObservatoryArmor = 500    kObservatoryPointValue =
 
 kRoboticsFactoryHealth = 2500    kRoboticsFactoryArmor = 400    kRoboticsFactoryPointValue = 5
 kARCRoboticsFactoryHealth = 3000    kARCRoboticsFactoryArmor = 600    kARCRoboticsFactoryPointValue = 7
-kSentryBatteryHealth = 700    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5
-kSentryHealth = 500    kSentryArmor = 100    kSentryPointValue = 4
+kSentryBatteryHealth = 800    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5
+kSentryHealth = 500    kSentryArmor = 125    kSentryPointValue = 4
 
 kARCHealth = 3100    kARCArmor = 400    kARCPointValue = 10   --2600 400
 kARCDeployedHealth = 3100    kARCDeployedArmor = 0      -- 2600 0
@@ -164,4 +164,4 @@ kMatureVeilHealth = 1500     kMatureVeilArmor = 0     kVeilPointValue = 15  -- 1
 
 --Combat
 kWeaponCacheHealth = 800    kWeaponCacheArmor = 150   kWeaponCachePointValue = 10
-kMarineSentryHealth = 500    kMarineSentryArmor = 125    kMarineSentryPointValue = 8
+kMarineSentryHealth = 500    kMarineSentryArmor = 50    kMarineSentryPointValue = 8

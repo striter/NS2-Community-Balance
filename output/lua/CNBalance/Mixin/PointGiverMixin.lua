@@ -17,7 +17,6 @@ if Server then
 
         local techID = self:GetTechId()
         local pResReward = kTechDataPersonalResOnKill[techID] or 0
-        local tResReward = kTechDataTeamResOnKill[techID] or 0
 
         if selfIsPlayer then
             local kills = self:GetKillsCurrentLife()
@@ -47,11 +46,21 @@ if Server then
 
         end
 
-        if attacker and GetAreEnemies(self, attacker) then
+        if attacker and GetAreEnemies(self, attacker) then -- pve kills count
             if selfIsPlayer and attacker:isa("Player") then
                 attacker:AddKill()
             end
-            attacker:GetTeam():AddTeamResources(tResReward,true) -- pve kills count
+            
+            local team = attacker:GetTeam()
+            local tResReward = kTechDataTeamResOnKill[techID] or 0
+            if tResReward > 0 then
+                team:AddTeamResources(tResReward,true)
+            end
+            
+            local refundPercentage = kTechDataTeamResRefundPercentageOnKill[techID]
+            if refundPercentage then
+                team:AddTeamRefund(refundPercentage)
+            end
         end
     end
 end

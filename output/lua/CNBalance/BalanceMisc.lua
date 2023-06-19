@@ -101,34 +101,6 @@ kCragSupply = 20
 kShadeSupply = 20
 kShiftSupply = 20
 
-kBountyMinKills = 4
-kPResPerBountyKills = 0.5
-kTechDataPersonalResOnKill = {
-    --Marines
-    [kTechId.Extractor] = 2.5, [kTechId.PoweredExtractor] = 4,
-    [kTechId.RoboticsFactory] = 2.5, [kTechId.ARCRoboticsFactory] = 2.5,
-    [kTechId.Armory] = 1,[kTechId.Observatory] = 2.5, [kTechId.PhaseGate] = 4,
-    [kTechId.CommandStation] = 10, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [ kTechId.ElectronicStation ] = 15,
-    [kTechId.Mine] = 0.2, [kTechId.InfantryPortal] = 2, [kTechId.MarineSentry] = 0.8,   --PPVE
-    [kTechId.MAC] = 0.2,    [kTechId.SentryBattery] = 4, [kTechId.Sentry] = 1,[kTechId.ARC] = 2.5,      --CPVE
-    --[kTechId.JetpackMarine] = 5, [kTechId.Exo] = 10, [kTechId.Exosuit] = 20,
-
-    --Aliens
-    [kTechId.Harvester] = 6,
-    [kTechId.Cyst] = 0.2,
-    [kTechId.Hive] = 20, [kTechId.ShiftHive] = 30, [kTechId.CragHive] = 30, [kTechId.ShadeHive] = 30,
-    [kTechId.Shell] = 4, [kTechId.Veil] = 4, [kTechId.Spur] = 4,
-    [kTechId.Whip] = 3, [kTechId.Shift] = 6, [kTechId.Crag] = 6, [kTechId.Shade] = 6,       --CPVE
-    [kTechId.Tunnel] = 6, [kTechId.InfestedTunnel] = 8,
-    --[kTechId.Gorge] = 1,[kTechId.Prowler] = 2,[kTechId.Lerk] = 3,[kTechId.Fade] = 5,[kTechId.Onos] = 10,
-}
-
-kTechDataTeamResOnKill = {
-    [kTechId.ARC] = 4,
-    [kTechId.CommandStation] = 15, [kTechId.StandardStation] = 20, [kTechId.ExplosiveStation] = 20, [kTechId.ArmorStation] = 20, [kTechId.ElectronicStation] = 20,
-    [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20,
-}
-
 -- Nanoarmor 
 kMarinePhaseArmorDeduct = 20
 kMarineArmorDeductRegen = 20

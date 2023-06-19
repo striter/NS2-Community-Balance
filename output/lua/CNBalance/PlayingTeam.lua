@@ -8,6 +8,7 @@ end
 local baseOnInitialized = PlayingTeam.OnInitialized
 function PlayingTeam:OnInitialized()
     self.maxSupply = kStartSupply
+    self.floatingResourceIncome = 0
     baseOnInitialized(self)
 end
 
@@ -35,8 +36,95 @@ function PlayingTeam:RemoveSupplyUsed(supplyUsed)
     self.supplyUsed = self.supplyUsed - supplyUsed
 end
 
-local oldGetIsResearchRelevant = debug.getupvaluex(PlayingTeam.OnResearchComplete, "GetIsResearchRelevant")
+function PlayingTeam:Update()
 
+    PROFILE("PlayingTeam:Update")
+
+    self:UpdateTechTree()
+
+    self:UpdateVotes()
+
+    local gameStarted = GetGamerules():GetGameStarted()
+    local warmupActive = GetWarmupActive()
+    if gameStarted or warmupActive then
+
+        if gameStarted then
+            self:UpdateResTick()
+        else
+            self:RespawnAllDeadPlayer()
+        end
+
+    end
+
+end
+
+function PlayingTeam:AddTeamResources(amount, isIncome)
+    local teamResourceDelta = amount
+    teamResourceDelta = teamResourceDelta + self.floatingResourceIncome
+    self.floatingResourceIncome = teamResourceDelta % 1
+    teamResourceDelta = teamResourceDelta - self.floatingResourceIncome
+
+    if teamResourceDelta > 0 and isIncome then
+        self.totalTeamResourcesCollected = self.totalTeamResourcesCollected + teamResourceDelta
+    end
+    self:SetTeamResources(self.teamResources + teamResourceDelta)
+end
+
+
+function PlayingTeam:UpdateResTick()
+
+    local time = Shared.GetTime()
+    if not self.lastTimeCollectResources then
+        self.lastTimeCollectResources = time
+    end
+    
+    if self.lastTimeCollectResources + kResourceTowerResourceInterval < Shared.GetTime() then
+        self.lastTimeCollectResources = time
+
+        local rtActiveCount = 0
+        local rts = GetEntitiesForTeam("ResourceTower", self:GetTeamNumber())
+        for _, rt in ipairs(rts) do
+            if rt:GetIsAlive() and rt:GetIsCollecting() then
+                rtActiveCount = rtActiveCount + 1
+            end
+        end
+
+        if rtActiveCount <= 0 then
+            self:AddTeamResources(kTeamResourceWithoutTower,true)
+            return
+        end
+        
+        local rtAboveThreshold = math.max( rtActiveCount - kMaxEfficiencyTowers,0)
+        local rtInsideThreshold = math.clamp(rtActiveCount,kMaxEfficiencyTowers)
+        local teamResourceToCollect = rtInsideThreshold * kTeamResourceEachTower + rtAboveThreshold * kTeamResourceEachTowerAboveThreshold
+        self:AddTeamResources(teamResourceToCollect,true)
+        local playerResourceToCollect = rtActiveCount * kPlayerResEachTower
+        for _, player in ipairs(GetEntitiesForTeam("Player", self:GetTeamNumber())) do
+            if not player:isa("Commander") then
+                player:AddResources(playerResourceToCollect)
+            end
+        end
+        
+    end
+    
+end
+
+function PlayingTeam:GetRefundBase()
+    local enemyTeam = GetGamerules():GetTeam(GetEnemyTeamNumber(self:GetTeamType()))
+    if enemyTeam then
+        return math.max((enemyTeam:GetTotalTeamResources() or 0) - (self:GetTotalTeamResources() or 0),0)
+    end
+    return 0
+end
+
+function PlayingTeam:AddTeamRefund(percentage)
+    local refundBase = self:GetRefundBase()
+    if refundBase > kTeamResourceRefundBase then
+        self:AddTeamResources(math.min(refundBase * percentage, kTeamResourceMaxRefund),true)
+    end
+end
+
+local oldGetIsResearchRelevant = debug.getupvaluex(PlayingTeam.OnResearchComplete, "GetIsResearchRelevant")
 local relevantResearchIds
 local function extGetIsResearchRelevant(techId)
 
