@@ -39,12 +39,13 @@ kTechDataTeamResOnKill = {
 }
 
 -- Resource refund base on teams delta
-kTeamResourceRefundBase = 50
-kTeamResourceMaxRefund = 50   --Case they cant use it
+kTeamResourceRefundBase = 100
+kTeamResourceMaxRefund = 50   --Case they reach the limit cant use it
 kTechDataTeamResRefundPercentageOnKill = {
-    [kTechId.Extractor] = 0.05, [kTechId.PoweredExtractor] = 0.05, [kTechId.Harvester] = 0.05,
-    [kTechId.CommandStation] = 0.2, [kTechId.StandardStation] = 0.25, [kTechId.ExplosiveStation] = 0.25, [kTechId.ArmorStation] = 0.25, [kTechId.ElectronicStation] = 0.25,
-    [kTechId.Hive] = 0.2, [kTechId.ShiftHive] = 0.2, [kTechId.CragHive] = 0.2, [kTechId.ShadeHive] = 0.2,
+    [kTechId.PhaseGate] = 0.1, [kTechId.Tunnel] = 0.1,[kTechId.InfestedTunnel] = 0.1,
+    [kTechId.Extractor] = 0.1, [kTechId.PoweredExtractor] = 0.1, [kTechId.Harvester] = 0.1,
+    [kTechId.CommandStation] = 0.2, [kTechId.StandardStation] = 0.3, [kTechId.ExplosiveStation] = 0.3, [kTechId.ArmorStation] = 0.3, [kTechId.ElectronicStation] = 0.3,
+    [kTechId.Hive] = 0.2, [kTechId.ShiftHive] = 0.3, [kTechId.CragHive] = 0.3, [kTechId.ShadeHive] = 0.3,
 }
 
 kMarineRespawnTime = 9

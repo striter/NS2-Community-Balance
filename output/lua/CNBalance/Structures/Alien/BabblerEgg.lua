@@ -56,12 +56,12 @@ if Server then
 
     function BabblerEgg:TryBabblerHatch()
         local owner = self:GetOwner()
-        if not owner or not owner.GetBabblerCount then
-            --self:Explode()
+        if not owner then
+            self:Explode()
             return false
         end
         
-        if self:GetIsBuilt() and owner:GetBabblerCount() < kBabblerHatchMaxAmount then
+        if self:GetIsBuilt() and owner.GetBabblerCount and owner:GetBabblerCount() < kBabblerHatchMaxAmount then
             local otherTeam = GetEnemyTeamNumber(self:GetTeamNumber())
             local allEnemies = GetEntitiesWithMixinForTeamWithinRange("Live", otherTeam, self:GetOrigin(), kBabblerEggHatchRadius)
             
