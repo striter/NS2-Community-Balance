@@ -96,9 +96,13 @@ function GorgeBuild_GetNumStructureBuilt(techId)
 end
 
 function GorgeBuild_GetMaxNumStructure(techId)
+    local player = Client.GetLocalPlayer()
+    local ability = player:GetActiveWeapon()
 
-    return LookupTechData(techId, kTechDataMaxAmount, -1)
-
+    if ability and ability:isa("DropStructureAbility") then
+        return ability:GetNumStructuresCanDrop(techId,player:GetUpgradeLevel("bioMassLevel"))
+    end
+    return -1
 end
 
 class 'GUIGorgeBuildMenu' (GUIAnimatedScript)

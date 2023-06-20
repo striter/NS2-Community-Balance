@@ -95,7 +95,7 @@ function PlayingTeam:UpdateResTick()
         end
         
         local rtAboveThreshold = math.max( rtActiveCount - kMaxEfficiencyTowers,0)
-        local rtInsideThreshold = math.clamp(rtActiveCount,kMaxEfficiencyTowers)
+        local rtInsideThreshold = math.min(rtActiveCount,kMaxEfficiencyTowers)
         local teamResourceToCollect = rtInsideThreshold * kTeamResourceEachTower + rtAboveThreshold * kTeamResourceEachTowerAboveThreshold
         self:AddTeamResources(teamResourceToCollect,true)
         local playerResourceToCollect = rtActiveCount * kPlayerResEachTower

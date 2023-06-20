@@ -87,6 +87,31 @@ function DropStructureAbility:GetSecondaryTechId()
     return kTechId.Spray
 end
 
+function DropStructureAbility:GetNumStructuresCanDrop(techId,biomassLevel)
+
+    if techId == kTechId.Clog then
+        return ClogAbility.GetMaxStructures(nil,biomassLevel)
+    end
+    
+    if techId == kTechId.Hydra then
+        return HydraStructureAbility.GetMaxStructures(nil,biomassLevel)
+    end
+    
+    if techId == kTechId.Web then
+        return WebsAbility.GetMaxStructures(nil,biomassLevel)
+    end
+
+    if techId == kTechId.BabblerEgg then
+        return BabblerEggAbility.GetMaxStructures(nil,biomassLevel)
+    end
+
+    if techId == kTechId.SporeMine then
+        return SporeMineAbility.GetMaxStructures(nil,biomassLevel)
+    end
+    -- unlimited
+    return -1
+end
+
 function DropStructureAbility:GetNumStructuresBuilt(techId)
 
     if techId == kTechId.Hydra then
@@ -250,12 +275,13 @@ function DropStructureAbility:DropStructure(player, origin, direction, structure
         local techId = structureAbility:GetDropStructureId()
 
         local maxStructures = -1
-
-        if not LookupTechData(techId, kTechDataAllowConsumeDrop, false) then
-            maxStructures = LookupTechData(techId, kTechDataMaxAmount, 0)
+        
+        local parent = self:GetParent()
+        if parent.GetUpgradeLevel then
+            maxStructures = structureAbility:GetMaxStructures(parent:GetUpgradeLevel("bioMassLevel"))
         end
-
-        valid = valid and self:GetNumStructuresBuilt(techId) ~= maxStructures -- -1 is unlimited
+        
+        --valid = valid and self:GetNumStructuresBuilt(techId) ~= maxStructures -- -1 is unlimited
 
         local cost = LookupTechData(structureAbility:GetDropStructureId(), kTechDataCostKey, 0)
         local enoughRes = player:GetResources() >= cost
@@ -287,7 +313,7 @@ function DropStructureAbility:DropStructure(player, origin, direction, structure
                     end
                 end
 
-                player:GetTeam():AddGorgeStructure(player, structure)
+                player:GetTeam():AddGorgeStructure(player, structure,maxStructures)
 
                 -- Check for space
                 if structure:SpaceClearForEntity(coords.origin) then

@@ -31,6 +31,38 @@ function AlienTeam:OnUpdateBiomass(oldBiomass, newBiomass)
     UpdateBiomassHealth(self,true,newBiomass)
 end
 
+--Biomass adapted gorger structures
+function AlienTeam:AddGorgeStructure(player, structure,maxStructure)
+
+    if player ~= nil and structure ~= nil then
+
+        local clientId = Server.GetOwner(player):GetUserId()
+        local structureId = structure:GetId()
+        local techId = structure:GetTechId()
+
+        if not self.clientOwnedStructures[clientId] then
+            table.insert(self.clientStructuresOwner, clientId)
+            self.clientOwnedStructures[clientId] = {
+                techIds = {}
+            }
+        end
+
+        local structureTypeTable = self.clientOwnedStructures[clientId]
+
+        if not structureTypeTable[techId] then
+            structureTypeTable[techId] = {}
+            table.insert(structureTypeTable.techIds, techId)
+        end
+
+        table.insertunique(structureTypeTable[techId], structureId)
+
+        if maxStructure >= 0 and #structureTypeTable[techId] > maxStructure then
+            self:RemoveGorgeStructureFromClient(techId, clientId)
+        end
+
+    end
+
+end
 
 function AlienTeam:InitTechTree()
 

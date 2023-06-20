@@ -45,8 +45,8 @@ kCelerityAddSpeed = 1.5 -- 1.5
 kFocusAttackSlowAtMax = 2
 kFocusDamageBonusAtMax = 1
 
-kSpitFocusAttackSlowAtMax = 0
-kSpitFocusDamageBonusAtMax = 0.66
+kSpitFocusAttackSlowAtMax = 0.25
+kSpitFocusDamageBonusAtMax = 0.5
 
 kVolleyFocusDamageBonusAtMax = 0.33
 kVolleyFocusAttackSlowAtMax = 0

@@ -63,3 +63,7 @@ end
 function SporeMineAbility:GetDropMapName()
     return SporeMine.kMapName
 end
+
+function SporeMineAbility:GetMaxStructures(biomass)
+    return 1 + math.floor(biomass  / 4)
+end

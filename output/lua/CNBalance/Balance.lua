@@ -460,7 +460,7 @@ kBoneWallCost = 3
 kRuptureCost = 1
 kDrifterCost = 6
 kHydraDamage = 15
-kHydraAttackDamageType = kDamageType.Structural
+kHydraAttackDamageType = kDamageType.Normal
 kHealsprayDamage = 10
 kEchoWhipCost = 2
 kEchoCragCost = 2
@@ -560,6 +560,6 @@ kBabblerEggDotInterval = 0.4
 
 --Hatch
 kBabblerExplodeAmount = 6
-kBabblerHatchMaxAmount = 12
+kBabblerHatchMaxAmount = 15
 kBabblerEggHatchInterval = 2.5
 kBabblerEggHatchRadius = 17

@@ -127,21 +127,22 @@ float4 SFXDarkVisionPS(PS_INPUT input) : COLOR0
 
     } else // world geometry
     {
-        float geometryStrength = edge * step(1.0,edge) * step( depth1.r , 100.0);
+        float edgeStrength = edge * step(1.0,edge) * step( depth1.r , 100.0);
 
         //Let there be light
         float luminance = inputPixel.r * 0.2126729 + inputPixel.g * 0.7151522 + inputPixel.b * 0.0721750;
-        float darkParameter = saturate(smoothstep(0.1,0,luminance));
+        float darkParameter = saturate(invlerp(0.1,0,luminance));
         darkParameter *= darkParameter;
-        
+
+        float4 geometryColor = lerp(geometryEdgeColor,geometryDarkEdgeColor ,darkParameter )  * edgeStrength;   //Edge
+
         float3 normal = tex2D(normalTexture, texCoord).xyz;
         float normalIntensity = saturate(pow((abs(normal.z - 0.5) + abs(normal.y - 0.5) + abs(normal.x - 0.5)) * 1.3, 8));
         
-        float surfaceIntensity = darkParameter * normalIntensity;
-        
-        float4 geometryColor = lerp(geometryEdgeColor,geometryDarkEdgeColor ,darkParameter )  * geometryStrength;
-        geometryColor += geometryDarkSurfaceColor * surfaceIntensity * saturate(invlerp(15.0,12.0,depth1.r));
+        float colorIntensity = darkParameter * max(normalIntensity,smoothstep(12.0,25.0,depth1.r));
+        geometryColor += geometryDarkSurfaceColor * colorIntensity;
         //Lights out
+
         
         return lerp(inputPixel, geometryColor, ( 0.01 * amount ));  //Animation
     }

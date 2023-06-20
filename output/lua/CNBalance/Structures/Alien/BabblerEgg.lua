@@ -57,7 +57,7 @@ if Server then
     function BabblerEgg:TryBabblerHatch()
         local owner = self:GetOwner()
         if not owner or not owner.GetBabblerCount then
-            self:Explode()
+            --self:Explode()
             return false
         end
         
