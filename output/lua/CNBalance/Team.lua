@@ -25,9 +25,10 @@ function Team:PutPlayerInRespawnQueue(player)
             extraTime = math.max(0, player.spawnBlockTime - Shared.GetTime())
         end
         
-    --////Extent the respawn time to prevent "bie bie le"
-        extraTime = extraTime + GetRespawnTimeExtend(self:GetTeamType(),Shared.GetTime() - GetGamerules():GetGameStartTime())
-    --///
+        --Extent the respawn time to prevent "bie bie le"
+        if self.GetTeamType then
+            extraTime = extraTime + GetRespawnTimeExtend(self:GetTeamType(),Shared.GetTime() - GetGamerules():GetGameStartTime())
+        end
 
         if player.spawnReductionTime then
             extraTime = extraTime * player.spawnReductionTime

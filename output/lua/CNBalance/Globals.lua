@@ -50,7 +50,7 @@ function GetRespawnTimeExtend(team,_gameLength)
     respawnTB = respawnTB * respawnTB
     respawnTB = respawnTB * 3.3
 
-    local respawnTP = GetPlayersAboveLimit(team) * kRespawnTimeExtendPerPlayer
+    local respawnTP = math.max(GetPlayersAboveLimit(team) - kRespawnPlayersMinExtend) * kRespawnTimeExtendPerPlayer
 
     return math.min(respawnTA + respawnTB , 72 ) + respawnTP
 end

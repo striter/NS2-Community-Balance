@@ -1,4 +1,3 @@
-
 kResourceTowerResourceInterval = 6
 kMaxEfficiencyTowers = 4
 kTeamResourceWithoutTower = 0.5
@@ -10,8 +9,6 @@ kPlayingTeamInitialTeamRes = 60   --60
 kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
 
-kBountyMinKills = 4
-kPResPerBountyKills = 0.5
 kTechDataPersonalResOnKill = {
     --Marines
     [kTechId.Extractor] = 2.5, [kTechId.PoweredExtractor] = 4,
@@ -40,17 +37,27 @@ kTechDataTeamResOnKill = {
 
 -- Resource refund base on teams delta
 kTeamResourceRefundBase = 100
-kTeamResourceMaxRefund = 50   --Case they reach the limit cant use it
+kTeamResourceMaxRefund = 100   --Case they reach the limit cant use it
 kTechDataTeamResRefundPercentageOnKill = {
-    [kTechId.PhaseGate] = 0.1, [kTechId.Tunnel] = 0.1,[kTechId.InfestedTunnel] = 0.1,
+    [kTechId.Exo] = 0.05,  [kTechId.JetpackMarine] = 0.03,  --[kTechId.Exosuit] = 0.05, Aint working due to its not attached with pointgivermixin
     [kTechId.Extractor] = 0.1, [kTechId.PoweredExtractor] = 0.1, [kTechId.Harvester] = 0.1,
     [kTechId.CommandStation] = 0.2, [kTechId.StandardStation] = 0.3, [kTechId.ExplosiveStation] = 0.3, [kTechId.ArmorStation] = 0.3, [kTechId.ElectronicStation] = 0.3,
+    [kTechId.Gorge] = 0.01, [kTechId.Prowler] = 0.02, [kTechId.Lerk] = 0.03, [kTechId.Fade] = 0.06, [kTechId.Onos] = 0.1,
+    [kTechId.PhaseGate] = 0.1, [kTechId.Tunnel] = 0.1,[kTechId.InfestedTunnel] = 0.1,
     [kTechId.Hive] = 0.2, [kTechId.ShiftHive] = 0.3, [kTechId.CragHive] = 0.3, [kTechId.ShadeHive] = 0.3,
 }
 
-kMarineRespawnTime = 9
+kBountyMinKills = 4
+kPResPerBountyKillsAsAlien = 1
+kPResPerBountyKillsAsMarine = 0.5
+kTeamResourceRefundPerBountyKills = 0.01
 
+kMatchMinPlayers = 10
+kRespawnPlayersMinExtend = 2
+kRespawnTimeExtendPerPlayer = 1
+kMarineRespawnTime = 9
 kAlienSpawnTime = 10
+
 kEggGenerationRate = 11  --13
 kAlienEggsPerHive = 2
 

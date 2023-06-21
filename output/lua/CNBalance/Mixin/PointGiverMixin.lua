@@ -17,13 +17,18 @@ if Server then
 
         local techID = self:GetTechId()
         local pResReward = kTechDataPersonalResOnKill[techID] or 0
+        local tResReward = kTechDataTeamResOnKill[techID] or 0
+        local tResRefundPercentage = kTechDataTeamResRefundPercentageOnKill[techID] or 0
 
         if selfIsPlayer then
-            local kills = self:GetKillsCurrentLife()
-            local bounty = math.max(kills - kBountyMinKills,0) * kPResPerBountyKills
-            pResReward = pResReward + bounty
+            local bountyKills = math.max(self:GetKillsCurrentLife() - kBountyMinKills,0)
+            if bountyKills > 0 then --Claim bounty
+                local presPerBountyKill =  (self:GetTeamNumber() == kAlienTeamType and kPResPerBountyKillsAsAlien or kPResPerBountyKillsAsMarine)
+                pResReward = pResReward + bountyKills * presPerBountyKill
+                tResRefundPercentage = tResRefundPercentage + bountyKills * kTeamResourceRefundPerBountyKills
+            end
         end
-        
+
         -- award partial res and score to players who assisted
         for _, attackerId in ipairs(self.damagePoints.attackers) do
 
@@ -41,9 +46,7 @@ if Server then
                 if selfIsPlayer and currentAttacker ~= attacker then
                     currentAttacker:AddAssistKill()
                 end
-
             end
-
         end
 
         if attacker and GetAreEnemies(self, attacker) then -- pve kills count
@@ -52,14 +55,12 @@ if Server then
             end
             
             local team = attacker:GetTeam()
-            local tResReward = kTechDataTeamResOnKill[techID] or 0
             if tResReward > 0 then
                 team:AddTeamResources(tResReward,true)
             end
             
-            local refundPercentage = kTechDataTeamResRefundPercentageOnKill[techID]
-            if refundPercentage then
-                team:AddTeamRefund(refundPercentage)
+            if tResRefundPercentage > 0 then
+                team:AddTeamRefund(tResRefundPercentage)
             end
         end
     end

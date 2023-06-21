@@ -1,6 +1,3 @@
-kMatchMinPlayers = 10
-kRespawnTimeExtendPerPlayer = 1
-
 --(*) In replaced of special condition,usually receive few damage.  |*| Stands for Focus
 -- Marine
 --A    ehp    Skulk      Lerk        Fade        Onos
