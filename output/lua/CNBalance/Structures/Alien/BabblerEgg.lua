@@ -1,4 +1,10 @@
+Script.Load("lua/PointGiverMixin.lua")
 
+local baseOnCreate = BabblerEgg.OnCreate
+function BabblerEgg:OnCreate()
+    baseOnCreate(self)
+    InitMixin(self, PointGiverMixin)
+end
 
 if Server then
     

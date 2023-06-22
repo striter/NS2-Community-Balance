@@ -22,9 +22,10 @@ kTechDataPersonalResOnKill = {
 
     --Aliens
     [kTechId.Harvester] = 6,
-    [kTechId.Cyst] = 0.2,
+    [kTechId.Cyst] = 0.2, 
     [kTechId.Hive] = 20, [kTechId.ShiftHive] = 30, [kTechId.CragHive] = 30, [kTechId.ShadeHive] = 30,
     [kTechId.Shell] = 4, [kTechId.Veil] = 4, [kTechId.Spur] = 4,
+    [kTechId.BabblerEgg] = 3,       --PPVE
     [kTechId.Whip] = 3, [kTechId.Shift] = 6, [kTechId.Crag] = 6, [kTechId.Shade] = 6,       --CPVE
     [kTechId.Tunnel] = 6, [kTechId.InfestedTunnel] = 8,
     --[kTechId.Gorge] = 1,[kTechId.Prowler] = 2,[kTechId.Lerk] = 3,[kTechId.Fade] = 5,[kTechId.Onos] = 10,
@@ -468,9 +469,12 @@ kContaminationCooldown = 10
 kBoneWallCost = 3
 kRuptureCost = 1
 kDrifterCost = 6
+
 kHydraDamage = 15
 kHydraAttackDamageType = kDamageType.Normal
 kHealsprayDamage = 10
+kBabblerCost = 3
+
 kEchoWhipCost = 2
 kEchoCragCost = 2
 kEchoShadeCost = 2
