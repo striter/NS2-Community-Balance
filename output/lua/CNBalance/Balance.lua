@@ -4,6 +4,7 @@ kTeamResourceWithoutTower = 0.5
 kTeamResourceEachTower = 1
 kTeamResourceEachTowerAboveThreshold = 0.5
 kPlayerResEachTower = 0.125
+kPlayerResEachTowerAboveThreshold = 0.05
 
 kPlayingTeamInitialTeamRes = 60   --60
 kMarineInitialIndivRes = 15
@@ -239,8 +240,8 @@ kFlamethrowerDropCost = 12
 kFlamethrowerDropCooldown = 0
 
 kFirePlayerDOTDelay = 1
-kPlayerFireDOTPerSecond = 5.0
-kDragonBreathPlayerFireDamagePerStack = { kPlayerFireDOTPerSecond / 5, kPlayerFireDOTPerSecond / 4.3, kPlayerFireDOTPerSecond / 3.6, kPlayerFireDOTPerSecond / 3}
+kPlayerFireDOTPerSecond = 6.0
+kDragonBreathPlayerFireDamagePerStack = { kPlayerFireDOTPerSecond / 4, kPlayerFireDOTPerSecond / 3.3, kPlayerFireDOTPerSecond / 2.6, kPlayerFireDOTPerSecond / 2}
 kFlameThrowerPlayerFireDamagePerStack = { kPlayerFireDOTPerSecond, kPlayerFireDOTPerSecond, kPlayerFireDOTPerSecond, kPlayerFireDOTPerSecond }
 kPlayerFireDamageMaxStack = { kPlayerFireDOTPerSecond * 2, kPlayerFireDOTPerSecond * 3,kPlayerFireDOTPerSecond * 4,kPlayerFireDOTPerSecond * 5 }
 kFireStructureDOTDelay = 0.5
@@ -272,14 +273,14 @@ kInfantryPortalBuildTime = 7
 kInfantryPortalCost = 15
 
 kRoboticsFactoryCost = 10
-kUpgradeRoboticsFactoryCost = 10
-kUpgradeRoboticsFactoryTime = 30
+kUpgradeRoboticsFactoryCost = 5
+kUpgradeRoboticsFactoryTime = 20
 kARCCost = 15
-kARCBuildTime = 20
+kARCBuildTime = 10
 kMACCost = 4
 
 kSentryDamage = 5
-kSentryCost = 5
+kSentryCost = 3
 kSentryBuildTime = 3
 kSentryBatteryCost = 10
 kSentryBatteryBuildTime = 5

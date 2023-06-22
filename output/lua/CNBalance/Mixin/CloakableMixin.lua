@@ -18,8 +18,6 @@ CloakableMixin.kUncloakRate = 4
 CloakableMixin.kTriggerCloakDuration = .6
 CloakableMixin.kTriggerUncloakDuration = 2.5
 
-local kPlayerMinCloak = 0.84
-local kPlayerMaxCloak = 0.90
 local kPlayerHideModelMin = 0
 local kPlayerHideModelMax = 0.15
 
@@ -164,9 +162,21 @@ local function UpdateDesiredCloakFraction(self, deltaTime)
     end
 
     if newDesiredCloakFraction ~= nil then
-        self.desiredCloakFraction = Clamp(newDesiredCloakFraction, 0, (self:isa("Player") or self:isa("Drifter") or self:isa("Babbler") or self:isa("Web")) and kPlayerMaxCloak or 1)
+        self.desiredCloakFraction = Clamp(newDesiredCloakFraction, 0,  self:GetMaxCloakFraction())
     end
 
+end
+
+function CloakableMixin:GetMaxCloakFraction()
+    if self:isa("Player") then
+        return 0.78 + self:GetVeilLevel() * 0.04    -- 0.82 0.86 0.90
+    end
+
+    if self:isa("Drifter") or self:isa("Babbler") or self:isa("Web") then
+        return 0.9
+    end
+    
+    return 1
 end
 
 local function UpdateCloakState(self, deltaTime)
@@ -192,7 +202,7 @@ local function UpdateCloakState(self, deltaTime)
 
     if Server then
 
-        self.fullyCloaked = self:GetCloakFraction() >= kPlayerMaxCloak
+        self.fullyCloaked = self:GetCloakFraction() >= self:GetMaxCloakFraction()
 
         if self.lastTouchedEntityId then
 

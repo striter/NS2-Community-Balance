@@ -98,7 +98,7 @@ function PlayingTeam:UpdateResTick()
         local rtInsideThreshold = math.min(rtActiveCount,kMaxEfficiencyTowers)
         local teamResourceToCollect = rtInsideThreshold * kTeamResourceEachTower + rtAboveThreshold * kTeamResourceEachTowerAboveThreshold
         self:AddTeamResources(teamResourceToCollect,true)
-        local playerResourceToCollect = rtActiveCount * kPlayerResEachTower
+        local playerResourceToCollect = rtInsideThreshold * kPlayerResEachTower + rtAboveThreshold * kPlayerResEachTowerAboveThreshold
         for _, player in ipairs(GetEntitiesForTeam("Player", self:GetTeamNumber())) do
             if not player:isa("Commander") then
                 player:AddResources(playerResourceToCollect)

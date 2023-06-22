@@ -99,7 +99,7 @@ kVokexHealth = 200   kVokexArmor = 80    kVokexPointvalue = 25   kVokexHealthPer
 kParasitePlayerPointValue = 1
 kAlienRegenerationPercentage = 0.08
 
-kSkulkBaseCarapaceUpgradeAmount = 10    kSkulkCarapaceArmorPerBiomass = 1.25
+kSkulkBaseCarapaceUpgradeAmount = 9    kSkulkCarapaceArmorPerBiomass = 1
 kGorgeBaseCarapaceUpgradeAmount = 25    kGorgeCarapaceArmorPerBiomass = 1.25
 kProwlerBaseCarapaceUpgradeAmount = 10  kProwlerCarapaceArmorPerBiomass = 1.25 --kProwlerArmorFullyUpgradedAmount = 28
 kLerkBaseCarapaceUpgradeAmount  = 25    kLerkCarapaceArmorPerBiomass  = 1.25
