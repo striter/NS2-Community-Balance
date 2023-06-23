@@ -54,7 +54,8 @@ CloakableMixin.networkVars =
     fullyCloaked = "boolean",
     -- so client knows in which direction to update the cloakFraction
     cloakingDesired = "boolean",
-    cloakRate = "integer (0 to 3)"
+    cloakRate = "integer (0 to 3)",
+    maxCloakFraction = "float (0 to 1 by 0.01)",
 }
 
 function CloakableMixin:__initmixin()
@@ -134,14 +135,21 @@ local function UpdateDesiredCloakFraction(self, deltaTime)
                 self.cloakingDesired = true
 
                 if self:isa("Player") then
-                    self.cloakRate = self:GetVeilLevel()
-                elseif self:isa("Babbler") then
+                    local veilLevel = self:GetVeilLevel()
+                    self.maxCloakFraction = 0.78 + veilLevel * 0.04     --Player sync veil level
+                    self.cloakRate = veilLevel
+                elseif self:isa("Drifter")  or self:isa("Web") then
+                    self.maxCloakFraction = 0.9
+                    self.cloakRate = 3
+                elseif self:isa("Babbler") then  --Babbler sync parent
                     local babblerParent = self:GetParent()
-                    if babblerParent and HasMixin(babblerParent, "Cloakable") then
+                    if babblerParent and HasMixin(babblerParent, "Cloakable") then 
                         self.cloakRate = babblerParent.cloakRate
+                        self.maxCloakFraction = babblerParent.maxCloakFraction
                     end
                 else
                     self.cloakRate = 3
+                    self.maxCloakFraction = 1
                 end
 
             end
@@ -162,21 +170,9 @@ local function UpdateDesiredCloakFraction(self, deltaTime)
     end
 
     if newDesiredCloakFraction ~= nil then
-        self.desiredCloakFraction = Clamp(newDesiredCloakFraction, 0,  self:GetMaxCloakFraction())
+        self.desiredCloakFraction = Clamp(newDesiredCloakFraction, 0,  self.maxCloakFraction)
     end
 
-end
-
-function CloakableMixin:GetMaxCloakFraction()
-    if self:isa("Player") then
-        return 0.78 + self:GetVeilLevel() * 0.04    -- 0.82 0.86 0.90
-    end
-
-    if self:isa("Drifter") or self:isa("Babbler") or self:isa("Web") then
-        return 0.9
-    end
-    
-    return 1
 end
 
 local function UpdateCloakState(self, deltaTime)
@@ -202,7 +198,7 @@ local function UpdateCloakState(self, deltaTime)
 
     if Server then
 
-        self.fullyCloaked = self:GetCloakFraction() >= self:GetMaxCloakFraction()
+        self.fullyCloaked = self:GetCloakFraction() >= self.maxCloakFraction
 
         if self.lastTouchedEntityId then
 
