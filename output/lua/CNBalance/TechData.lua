@@ -391,7 +391,6 @@ function BuildTechData()
         [kTechDataPointValue] = kWeaponCachePointValue,
         [kTechDataNotOnInfestation] = kPreventMarineStructuresOnInfestation,
         [kTechDataCostKey] = kWeaponCacheCost,
-        [kTechDataMaxAmount] = kWeaponCachePersonalCarries,
         [kTechDataPersonalCostKey] = kWeaponCachePersonalCost,
         [kTechDataAllowConsumeDrop] = true,
     })
@@ -436,7 +435,6 @@ function BuildTechData()
         [kTechDataObstacleRadius] = 0.25,
         [kTechDataAllowConsumeDrop] = true,
         [kTechDataCostKey] = kMarineSentryCost,
-        [kTechDataMaxAmount] = kMarineSentryPersonalCarries,
         [kTechDataPersonalCostKey] = kMarineSentryPersonalCost,
         [kTechDataAllowConsumeDrop] = true,
     })

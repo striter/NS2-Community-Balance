@@ -42,7 +42,7 @@ kHealingClampMaxHPAmount = 0.15
 
 kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5    kSkulkHealthPerBioMass = 3 kSkulkHealthPerPlayerAboveLimit = 1
 kSkulkDamageReduction = {
-    ["Shotgun"] = 0.88,
+    --["Shotgun"] = 0.88,
     ["Grenade"] = 0.8,
     ["ImpactGrenade"] = 0.8,
     ["Cannon"] = 0.9,
@@ -54,7 +54,7 @@ kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7 kGorgeHealthPerBio
 
 kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15 kLerkHealthPerBioMass = 3
 kLerkDamageReduction = {
-    ["Shotgun"] = 0.9,
+    --["Shotgun"] = 0.92,
     ["Cannon"] = 0.8,
     ["Grenade"] = 0.75,
     ["ImpactGrenade"] = 0.75,
@@ -64,7 +64,7 @@ kLerkDamageReduction = {
 
 kFadeHealth = 280    kFadeArmor = 80     kFadePointValue = 20 kFadeHealthPerBioMass = 5 
 kFadeDamageReduction = {
-    ["MarineSentry"] = 1.1,
+    --["MarineSentry"] = 1.1,
     ["Mine"] = 1.1,
     ["HeavyMachineGun"] = 0.92,
 }

@@ -38,7 +38,6 @@ function Armory:GetTechButtons(techId)
         techButtons[4] = kTechId.AdvancedArmoryUpgrade
     else
         techButtons[2] = kTechId.GrenadeLauncherUpgrade
-        techButtons[7] = kTechId.CombatBuilderTech
     end
     
     return techButtons

@@ -160,6 +160,8 @@ ModLoader.SetupFileHook("lua/Weapons/Alien/Shockwave.lua", "lua/CNBalance/Weapon
 ModLoader.SetupFileHook("lua/Weapons/Alien/Ability.lua", "lua/CNBalance/Weapons/Alien/Ability.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/Parasite.lua", "lua/CNBalance/Weapons/Alien/Parasite.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/XenocideLeap.lua", "lua/CNBalance/Weapons/Alien/XenocideLeap.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Alien/SwipeBlink.lua", "lua/CNBalance/Weapons/Alien/SwipeBlink.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Alien/Gore.lua", "lua/CNBalance/Weapons/Alien/Gore.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/Metabolize.lua", "lua/CNBalance/Weapons/Alien/Metabolize.lua", "replace")
 ModLoader.SetupFileHook("lua/Weapons/Alien/BoneShield.lua", "lua/CNBalance/Weapons/Alien/BoneShield.lua", "replace")
 

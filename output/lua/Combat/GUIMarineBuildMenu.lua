@@ -93,8 +93,14 @@ end
 
 function MarineBuild_GetMaxNumStructure(techId)
 
-    return LookupTechData(techId, kTechDataMaxAmount, -1)
+    local player = Client.GetLocalPlayer()
+    local weapon = player:GetActiveWeapon()
 
+    if weapon and weapon:isa("CombatBuilder") then
+        return weapon:GetNumStructuresCanDrop(techId,player)
+    end
+    
+    return -1
 end
 
 class 'GUIMarineBuildMenu' (GUIAnimatedScript)

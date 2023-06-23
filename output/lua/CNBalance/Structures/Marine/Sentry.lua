@@ -407,8 +407,8 @@ if Server then
             local trace = Shared.TraceRay(startPoint, endPoint, CollisionRep.Damage, PhysicsMask.Bullets, EntityFilterOne(self))
 
             if trace.fraction < 1 then
-
-                local damage = self.kDamage
+                
+                local damage = self.kDamage * NS2Gamerules_GetUpgradedDamageScalar( self:GetOwner(), kTechId.Sentry )
                 local surface = trace.surface
 
                 -- Disable friendly fire.

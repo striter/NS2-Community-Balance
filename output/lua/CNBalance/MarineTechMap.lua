@@ -17,13 +17,13 @@ kMarineTechMap =
         --L
                         { kTechId.Welder, 3, 4.5 },               { kTechId.ShotgunTech, 4, 4.5 },
                     { kTechId.GrenadeTech, 3, 5.5 },            { kTechId.Armory, 4, 5.5 },
-                        { kTechId.MinesTech, 3, 6.5 },
+                    { kTechId.CombatBuilder, 3, 6.5 },            { kTechId.MinesTech, 4, 6.5 },         
 
 
         --M
                     { kTechId.AdvancedWeaponry, 6, 4.5 },                        { kTechId.HeavyMachineGunTech, 8, 4.5 },
                                                     { kTechId.AdvancedArmory, 7, 5.5 },
-                    { kTechId.CombatBuilderTech, 6.5, 6.5 },                       { kTechId.GrenadeLauncherUpgrade, 7.5, 6.5},
+                                           { kTechId.GrenadeLauncherUpgrade, 7, 6.5},
     --R
                                             { kTechId.JetpackTech, 11, 4.5 },       --{ kTechId.JetpackFuelTech, 12, 6.5 },   
                 { kTechId.PrototypeLab, 10, 5.5 },       { kTechId.ExosuitTech, 11,5.5 },
@@ -72,12 +72,12 @@ kMarineLines =
 
     GetLinePositionForTechMap(kMarineTechMap, kTechId.Armory, kTechId.MinesTech),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.Armory, kTechId.ShotgunTech),
+    GetLinePositionForTechMap(kMarineTechMap, kTechId.MinesTech, kTechId.CombatBuilder),
 
     -- Advanced Armory
     GetLinePositionForTechMap(kMarineTechMap, kTechId.Armory, kTechId.AdvancedArmory),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.AdvancedArmory, kTechId.HeavyMachineGunTech),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.AdvancedArmory, kTechId.AdvancedWeaponry),
-    GetLinePositionForTechMap(kMarineTechMap, kTechId.AdvancedArmory, kTechId.CombatBuilderTech),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.AdvancedArmory, kTechId.GrenadeLauncherUpgrade),
 
     --Command Station

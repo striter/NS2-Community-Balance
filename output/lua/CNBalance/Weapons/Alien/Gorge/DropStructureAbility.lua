@@ -567,31 +567,31 @@ function DropStructureAbility:ProcessMoveOnWeapon(input)
         if Server then
 
             local team = player:GetTeam()
-            local numAllowedHydras = LookupTechData(kTechId.Hydra, kTechDataMaxAmount, -1)
-            local numAllowedClogs = LookupTechData(kTechId.Clog, kTechDataMaxAmount, -1)
-            local numAllowedWebs = LookupTechData(kTechId.Web, kTechDataMaxAmount, -1)
-            local numAllowedSporeMines = LookupTechData(kTechId.SporeMine, kTechDataMaxAmount, -1)
-            local numAllowedBabblers = LookupTechData(kTechId.BabblerEgg, kTechDataMaxAmount, -1)
+            --local numAllowedHydras = LookupTechData(kTechId.Hydra, kTechDataMaxAmount, -1)
+            --local numAllowedClogs = LookupTechData(kTechId.Clog, kTechDataMaxAmount, -1)
+            --local numAllowedWebs = LookupTechData(kTechId.Web, kTechDataMaxAmount, -1)
+            --local numAllowedSporeMines = LookupTechData(kTechId.SporeMine, kTechDataMaxAmount, -1)
+            --local numAllowedBabblers = LookupTechData(kTechId.BabblerEgg, kTechDataMaxAmount, -1)
 
-            if numAllowedHydras >= 0 then
+            --if numAllowedHydras >= 0 then
                 self.numHydrasLeft = team:GetNumDroppedGorgeStructures(player, kTechId.Hydra)
-            end
+            --end
 
-            if numAllowedClogs >= 0 then
+            --if numAllowedClogs >= 0 then
                 self.numClogsLeft = team:GetNumDroppedGorgeStructures(player, kTechId.Clog)
-            end
+            --end
 
-            if numAllowedWebs >= 0 then
+            --if numAllowedWebs >= 0 then
                 self.numWebsLeft = team:GetNumDroppedGorgeStructures(player, kTechId.Web)
-            end
+            --end
 
-            if numAllowedBabblers >= 0 then
+            --if numAllowedBabblers >= 0 then
                 self.numBabblersLeft = team:GetNumDroppedGorgeStructures(player, kTechId.BabblerEgg)
-            end
+            --end
 
-            if numAllowedSporeMines >= 0 then
+            --if numAllowedSporeMines >= 0 then
                 self.numSporeMinesLeft = team:GetNumDroppedGorgeStructures(player, kTechId.SporeMine)
-            end
+            --end
         end
 
     end

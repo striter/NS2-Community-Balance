@@ -80,6 +80,8 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.ExplosiveSupply,
     --kTechId.GrenadeLauncherDetectionShot,
     --kTechId.GrenadeLauncherAllyBlast,
+    
+    kTechId.ElectronicSupply,
     kTechId.GrenadeLauncherUpgrade,
     kTechId.MACEMPBlast,
     kTechId.PoweredExtractorTech,

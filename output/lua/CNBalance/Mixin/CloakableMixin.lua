@@ -70,6 +70,7 @@ function CloakableMixin:__initmixin()
     self.desiredCloakFraction = 0
     self.timeCloaked = 0
     self.timeUncloaked = 0
+    self.maxCloakFraction = 1
 
     -- when entity is created on client consider fully cloaked, so units wont show up for a short moment when going through a phasegate for example
     self.cloakFraction = self.fullyCloaked and 1 or 0
@@ -130,6 +131,7 @@ local function UpdateDesiredCloakFraction(self, deltaTime)
             if Shared.GetTime() < self.timeCloaked then
                 self.cloakingDesired = true
                 self.cloakRate = 3
+                self.maxCloakFraction = 1
             elseif self.GetIsCamouflaged and self:GetIsCamouflaged() then
 
                 self.cloakingDesired = true
@@ -199,7 +201,6 @@ local function UpdateCloakState(self, deltaTime)
     if Server then
 
         self.fullyCloaked = self:GetCloakFraction() >= self.maxCloakFraction
-
         if self.lastTouchedEntityId then
 
             local enemyEntity = Shared.GetEntity(self.lastTouchedEntityId)

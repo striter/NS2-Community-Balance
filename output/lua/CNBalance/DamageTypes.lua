@@ -62,6 +62,8 @@ end
 local upgradedDamageScalars
 function NS2Gamerules_GetUpgradedDamageScalar( attacker, weaponTechId )
 
+    if not attacker then return 1 end
+    
     -- kTechId gets loaded after this, and i don't want to load it. :T
     if not upgradedDamageScalars then
 
@@ -71,6 +73,8 @@ function NS2Gamerules_GetUpgradedDamageScalar( attacker, weaponTechId )
             [kTechId.GrenadeLauncher] = { kGrenadeLauncherWeapons1DamageScalar, kGrenadeLauncherWeapons2DamageScalar, kGrenadeLauncherWeapons3DamageScalar },
             [kTechId.Flamethrower]    = { kFlamethrowerWeapons1DamageScalar,    kFlamethrowerWeapons2DamageScalar,    kFlamethrowerWeapons3DamageScalar },
             [kTechId.PowerSurge]    =   { kEMPDamageWeapons1Scalar,    kEMPDamageWeapons2Scalar,    kEMPDamageWeapons3Scalar },
+            [kTechId.MarineSentry] =   { kMarineSentryWeapon1Scalar,    kMarineSentryWeapon2Scalar,   kMarineSentryWeapon3Scalar},
+            [kTechId.Sentry] =   { kSentryWeapon1Scalar,    kSentryWeapon2Scalar,   kSentryWeapon3Scalar},
             ["Default"]               = { kWeapons1DamageScalar,                kWeapons2DamageScalar,                kWeapons3DamageScalar },
         }
 

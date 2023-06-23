@@ -122,6 +122,20 @@ function CombatBuilder:GetNumStructuresBuilt(techId)
     return -1
 end
 
+function CombatBuilder:GetNumStructuresCanDrop(techId,player)
+
+    if techId == kTechId.MarineSentry then
+        return SentryAbility.GetMaxStructures(nil,player)
+    end
+
+    if techId == kTechId.WeaponCache then
+        return ArmoryAbility.GetMaxStructures(nil,player)
+    end
+    
+    -- unlimited
+    return -1
+end
+
 function CombatBuilder:OnPrimaryAttack(player)
 
     if Client then
@@ -261,12 +275,7 @@ local function DropStructure(self, player, origin, direction, structureAbility, 
     
         local coords, valid, onEntity = self:GetPositionForStructure(origin, direction, structureAbility, lastClickedPosition)
         local techId = structureAbility:GetDropStructureId()
-        
-        local maxStructures = -1
-        
-        if not LookupTechData(techId, kTechDataAllowConsumeDrop, false) then
-            maxStructures = LookupTechData(techId, kTechDataMaxAmount, 0) 
-        end
+        local maxStructures = structureAbility:GetMaxStructures(self:GetParent())
         
         local cost = LookupTechData(structureAbility:GetDropStructureId(), kTechDataPersonalCostKey, 0)
         local enoughRes = player:GetResources() >= cost
@@ -279,7 +288,7 @@ local function DropStructure(self, player, origin, direction, structureAbility, 
             
                 structure:SetOwner(player)
                 structure:Construct(0.01,player)
-				player:GetTeam():AddMarineStructure(player, structure)
+				player:GetTeam():AddMarineStructure(player, structure,maxStructures)
                 
                 -- Check for space
                 if structure:SpaceClearForEntity(coords.origin) then
@@ -497,18 +506,18 @@ function CombatBuilder:ProcessMoveOnWeapon(input)
 
             -- This is where you limit the number of entities that are alive
 			local team = player:GetTeam()
-            local numAllowedSentries = LookupTechData(kTechId.MarineSentry, kTechDataMaxAmount, -1) 
-            local numAllowedMiniArmories = LookupTechData(kTechId.WeaponCache, kTechDataMaxAmount, -1) 
+            --local numAllowedSentries = LookupTechData(kTechId.MarineSentry, kTechDataMaxAmount, -1) 
+            --local numAllowedMiniArmories = LookupTechData(kTechId.WeaponCache, kTechDataMaxAmount, -1) 
             -- local numAllowedPhaseGates = LookupTechData(kTechId.PhaseGate, kTechDataMaxAmount, -1) 
             -- local numAllowedObservatories = LookupTechData(kTechId.Observatory, kTechDataMaxAmount, -1) 
 
-            if numAllowedSentries >= 0 then     
+            --if numAllowedSentries >= 0 then     
                 self.numSentriesLeft = team:GetNumDroppedMarineStructures(player, kTechId.MarineSentry)           
-            end
+            --end
    
-            if numAllowedMiniArmories >= 0 then     
+            --if numAllowedMiniArmories >= 0 then     
                 self.numMiniArmoriesLeft = team:GetNumDroppedMarineStructures(player, kTechId.WeaponCache)           
-            end
+            --end
             
             -- if numAllowedPhaseGates >= 0 then     
             --     self.numPhaseGatesLeft = team:GetNumDroppedMarineStructures(player, kTechId.PhaseGate)           

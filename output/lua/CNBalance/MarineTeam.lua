@@ -76,7 +76,6 @@ function MarineTeam:InitTechTree()
     self.techTree:AddResearchNode(kTechId.PhaseTech,                    kTechId.Observatory,        kTechId.None)
     self.techTree:AddBuildNode(kTechId.PhaseGate,                    kTechId.PhaseTech,        kTechId.None, true)
 
-
     self.techTree:AddBuildNode(kTechId.Observatory,               kTechId.InfantryPortal,       kTechId.Armory)      
     self.techTree:AddActivation(kTechId.DistressBeacon,           kTechId.Observatory)
     self.techTree:AddActivation(kTechId.ReversePhaseGate,         kTechId.None)
@@ -85,18 +84,20 @@ function MarineTeam:InitTechTree()
     self.techTree:AddTargetedBuyNode(kTechId.Shotgun,            kTechId.ShotgunTech)
     self.techTree:AddTargetedActivation(kTechId.DropShotgun,     kTechId.ShotgunTech)
 
+    --self.techTree:AddResearchNode(kTechId.CombatBuilderTech,kTechId.Armory)
+    
     self.techTree:AddResearchNode(kTechId.MinesTech,            kTechId.Armory)
     self.techTree:AddTargetedBuyNode(kTechId.LayMines,          kTechId.MinesTech)
     self.techTree:AddTargetedActivation(kTechId.DropMines,      kTechId.MinesTech)
     
     self.techTree:AddResearchNode(kTechId.GrenadeTech,           kTechId.Armory)
-    self.techTree:AddTargetedBuyNode(kTechId.ClusterGrenade,          kTechId.Armory,        kTechId.None)
-    --self.techTree:AddTargetedBuyNode(kTechId.ClusterGrenade,     kTechId.Armory, kTechId.GrenadeTech)
+    self.techTree:AddTargetedBuyNode(kTechId.ClusterGrenade,          kTechId.Armory,        kTechId.None)     --self.techTree:AddTargetedBuyNode(kTechId.ClusterGrenade,     kTechId.Armory, kTechId.GrenadeTech)
     self.techTree:AddTargetedBuyNode(kTechId.GasGrenade,         kTechId.Armory, kTechId.GrenadeTech)
     self.techTree:AddTargetedBuyNode(kTechId.PulseGrenade,       kTechId.Armory, kTechId.GrenadeTech)
 
     self.techTree:AddTargetedBuyNode(kTechId.Welder,          kTechId.Armory,        kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.DropWelder,   kTechId.Armory,        kTechId.None)
+    self.techTree:AddTargetedBuyNode(kTechId.CombatBuilder, kTechId.MinesTech)
 
     -- Door actions
     -- self.techTree:AddBuildNode(kTechId.Door, kTechId.None, kTechId.None)
@@ -118,8 +119,6 @@ function MarineTeam:InitTechTree()
     self.techTree:AddTargetedBuyNode(kTechId.HeavyMachineGun ,kTechId.AdvancedArmory)
     self.techTree:AddTargetedBuyNode(kTechId.Flamethrower ,kTechId.AdvancedArmory)
 
-    self.techTree:AddResearchNode(kTechId.CombatBuilderTech,kTechId.AdvancedArmory)
-    self.techTree:AddActivation(kTechId.CombatBuilder,kTechId.CombatBuilderTech)
     --self.techTree:AddTargetedActivation(kTechId.DropCombatBuilder,kTechId.CombatBuilderTech)
     self.techTree:AddResearchNode(kTechId.GrenadeLauncherUpgrade,kTechId.AdvancedArmory)
     
@@ -325,7 +324,7 @@ local function RemoveMarineStructureFromClient(self, techId, clientId)
     
 end
 
-function MarineTeam:AddMarineStructure(player, structure)
+function MarineTeam:AddMarineStructure(player, structure,maxStructures)
 
     if player ~= nil and structure ~= nil then
     
@@ -346,9 +345,7 @@ function MarineTeam:AddMarineStructure(player, structure)
         -- Shared.Message("insert" .. tostring(structureId))
         table.insertunique(structureTypeTable[techId], structureId)
         
-        local numAllowedStructure = LookupTechData(techId, kTechDataMaxAmount, -1) --* self:GetNumHives()
-        
-        if numAllowedStructure >= 0 and table.count(structureTypeTable[techId]) > numAllowedStructure then
+        if maxStructures >= 0 and table.count(structureTypeTable[techId]) > maxStructures then
             RemoveMarineStructureFromClient(self, techId, clientId)
         end
         

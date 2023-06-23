@@ -109,3 +109,8 @@ end
 function ArmoryAbility:IsAllowed(player)
     return true
 end
+
+
+function ArmoryAbility:GetMaxStructures(player)
+    return 1
+end

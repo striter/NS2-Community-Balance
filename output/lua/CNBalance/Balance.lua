@@ -280,7 +280,7 @@ kARCCost = 15
 kARCBuildTime = 10
 kMACCost = 4
 
-kSentryDamage = 5
+kSentryDamage = 5  kSentryWeapon1Scalar = 1.1 kSentryWeapon2Scalar = 1.2 kSentryWeapon3Scalar = 1.3
 kSentryCost = 3
 kSentryBuildTime = 3
 kSentryBatteryCost = 10
@@ -523,8 +523,7 @@ kPowerSurgeCost = 3
 kPowerSurgeCooldown = 5
 kPowerSurgeDuration = 10
 kPowerSurgeTriggerEMP = true
-kPowerSurgeEMPDamage = 20
-kEMPDamageWeapons1Scalar = 1.25 kEMPDamageWeapons2Scalar = 1.5 kEMPDamageWeapons3Scalar = 1.75
+kPowerSurgeEMPDamage = 20  kEMPDamageWeapons1Scalar = 1.25 kEMPDamageWeapons2Scalar = 1.5 kEMPDamageWeapons3Scalar = 1.75
 kPowerSurgeEMPDamageRadius = 6
 kPowerSurgeEMPElectrifiedDuration = 2
 
@@ -535,20 +534,19 @@ kNanoShieldCooldown = 5
 kNanoShieldDamageReductionDamage = 0.68
 
 
-kCombatBuilderCost = 2
+kCombatBuilderCost = 5
 kCombatBuilderDropCost = 5
-kCombatBuilderPointValue = 2
+kCombatBuilderPointValue = 5
 
-kMarineSentryCost = 1
-kMarineSentryDamage = 3
+kMarineSentryCost = 2
+kMarineSentryPersonalCost = 10
+kMarineSentryDamage = 3  kMarineSentryWeapon1Scalar = 1.11  kMarineSentryWeapon2Scalar = 1.22 kMarineSentryWeapon3Scalar = 1.33
 kMarineSentryBuildTime = 3
 
-kWeaponCacheCost = 2
-kWeaponCachePersonalCost = 10
+kWeaponCacheCost = 3
+kWeaponCachePersonalCost = 15
 kWeaponCacheBuildTime = 6
 kWeaponCachePersonalCarries = 1
-
-kMarineSentryPersonalCost = 6
 kMarineSentryPersonalCarries = 2
 
 kSporeMineCost = 0

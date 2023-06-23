@@ -34,7 +34,7 @@ kAlienInnateRegenerationPercentage  = 0.02
 kAlienMinInnateRegeneration = 3
 kAlienMaxInnateRegeneration = 20
 
-kAlienRegenerationPercentage = 0.08
+kAlienRegenerationPercentage = 0.06
 kAlienMinRegeneration = 10
 kAlienMaxRegeneration = 80
 
@@ -42,14 +42,12 @@ kAlienCrushDamagePercentByLevel = 0.111 --0.007
 
 kCelerityAddSpeed = 1.5 -- 1.5
 
-kFocusAttackSlowAtMax = 2
-kFocusDamageBonusAtMax = 1
 
-kSpitFocusAttackSlowAtMax = 0.25
-kSpitFocusDamageBonusAtMax = 0.5
-
-kVolleyFocusDamageBonusAtMax = 0.33
-kVolleyFocusAttackSlowAtMax = 0
+kFocusDamageBonusAtMax = 0.6 kFocusAttackSlowAtMax = 2
+kSpitFocusDamageBonusAtMax = 0.33  kSpitFocusAttackSlowAtMax = 0
+kVolleyFocusDamageBonusAtMax = 0.33  kVolleyFocusAttackSlowAtMax = 0
+kSwipeFocusDamageBonusAtMax = 0.5
+kGoreFocusDamageBonusAtMax = 0.33  kGoreFocusAttackSlowAtMax = 0.33
 
 kAlienRegenerationCombatModifier = 0.5
 
