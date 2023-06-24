@@ -1,4 +1,6 @@
 
+local militaryProtocolTechNode
+
 function MarineTeam:InitTechTree()
 
     PlayingTeam.InitTechTree(self)
@@ -98,6 +100,7 @@ function MarineTeam:InitTechTree()
     self.techTree:AddTargetedBuyNode(kTechId.Welder,          kTechId.Armory,        kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.DropWelder,   kTechId.Armory,        kTechId.None)
     self.techTree:AddTargetedBuyNode(kTechId.CombatBuilder, kTechId.MinesTech)
+    self.techTree:AddTargetedActivation(kTechId.DropCombatBuilder,kTechId.MinesTech)
 
     -- Door actions
     -- self.techTree:AddBuildNode(kTechId.Door, kTechId.None, kTechId.None)
@@ -119,8 +122,10 @@ function MarineTeam:InitTechTree()
     self.techTree:AddTargetedBuyNode(kTechId.HeavyMachineGun ,kTechId.AdvancedArmory)
     self.techTree:AddTargetedBuyNode(kTechId.Flamethrower ,kTechId.AdvancedArmory)
 
-    --self.techTree:AddTargetedActivation(kTechId.DropCombatBuilder,kTechId.CombatBuilderTech)
     self.techTree:AddResearchNode(kTechId.GrenadeLauncherUpgrade,kTechId.AdvancedArmory)
+
+    --Dude
+    self.techTree:AddResearchNode(kTechId.MilitaryProtocol,                 kTechId.CommandStation)
     
     -- Standard
     self.techTree:AddUpgradeNode(kTechId.StandardSupply, kTechId.CommandStation)
@@ -197,6 +202,7 @@ function MarineTeam:InitTechTree()
 
     self.techTree:SetComplete()
 
+    militaryProtocolTechNode = self.techTree:GetTechNode(kTechId.MilitaryProtocol)
 end
 
 
@@ -207,6 +213,18 @@ function MarineTeam:Initialize(teamName, teamNumber)
     baseOnInitialize(self, teamName, teamNumber)
     
 	self.clientOwnedStructures = { }
+end
+
+function MarineTeam:OnKill(killEntityTechId)
+    if not militaryProtocolTechNode:GetResearched() then return end
+
+    local refund = kMilitaryProtocolRefundPerKill[killEntityTechId]
+    if not refund then return end
+    self:AddTeamResources(refund)
+end
+
+function MarineTeam:CollectPlayerResources()
+    return not militaryProtocolTechNode:GetResearched() 
 end
 
 local cancelTechNode

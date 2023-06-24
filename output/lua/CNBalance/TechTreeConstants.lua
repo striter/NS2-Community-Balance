@@ -1,5 +1,7 @@
 --Marine
 --Researches
+debug.appendtoenum(kTechId, "MilitaryProtocol")
+
 debug.appendtoenum(kTechId, "GrenadeLauncherUpgrade")
 
 debug.appendtoenum(kTechId, "StandardSupply")

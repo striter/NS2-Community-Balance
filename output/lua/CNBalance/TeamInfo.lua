@@ -51,6 +51,7 @@ AddMixinNetworkVars(TeamMixin, networkVars)
 
 TeamInfo.kRelevantTechIdsMarine =
 {
+    kTechId.MilitaryProtocol,
     kTechId.ShotgunTech,
     kTechId.MinesTech,
     kTechId.GrenadeTech,

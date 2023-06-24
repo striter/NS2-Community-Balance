@@ -55,3 +55,14 @@ function Armory:GetTechAllowed(techId, techNode, player)
     return allowed, canAfford
 
 end
+
+
+--local baseGetCanBeUsed = Armory.GetCanBeUsed
+--function Armory:GetCanBeUsed(player, useSuccessTable)
+--
+--    baseGetCanBeUsed(self,player,useSuccessTable)
+--    if GetHasTech(self,kTechId.MilitaryProtocol) then
+--        useSuccessTable.useSuccess = false
+--    end
+--    
+--end

@@ -25,7 +25,7 @@ kTechDataPersonalResOnKill = {
     [kTechId.Cyst] = 0.2, 
     [kTechId.Hive] = 20, [kTechId.ShiftHive] = 30, [kTechId.CragHive] = 30, [kTechId.ShadeHive] = 30,
     [kTechId.Shell] = 4, [kTechId.Veil] = 4, [kTechId.Spur] = 4,
-    [kTechId.BabblerEgg] = 3,       --PPVE
+    [kTechId.Hydra] = 0.2,[kTechId.BabblerEgg] = 3,       --PPVE
     [kTechId.Whip] = 3, [kTechId.Shift] = 6, [kTechId.Crag] = 6, [kTechId.Shade] = 6,       --CPVE
     [kTechId.Tunnel] = 6, [kTechId.InfestedTunnel] = 8,
     --[kTechId.Gorge] = 1,[kTechId.Prowler] = 2,[kTechId.Lerk] = 3,[kTechId.Fade] = 5,[kTechId.Onos] = 10,
@@ -54,6 +54,10 @@ kPResPerBountyKillsAsAlien = 1
 kPResPerBountyKillsAsMarine = 0.5
 kTeamResourceRefundPerBountyKills = 0.01
 
+kMilitaryProtocolResearchCost = 10
+kMilitaryProtocolResearchTime = 20
+kMilitaryProtocolRefundPerKill = { [kTechId.Skulk] = 1.5, [kTechId.Gorge] = 3,[kTechId.Prowler] = 4, [kTechId.Lerk] = 5, [kTechId.Fade] = 10, [kTechId.Onos] = 20 }
+
 kMatchMinPlayers = 10
 kRespawnPlayersMinExtend = 2
 kRespawnTimeExtendPerPlayer = 1
@@ -63,7 +67,7 @@ kAlienSpawnTime = 10
 kEggGenerationRate = 11  --13
 kAlienEggsPerHive = 2
 
-kWelderDropCost = 3
+kWelderDropCost = 2
 kWelderDropCooldown = 0
 
 kMineResearchCost  = 10
@@ -74,7 +78,7 @@ kGrenadeTechResearchTime = 45   --45
 
 kMineCost = 10
 kMineDamage = 135
-kDropMineCost = 10
+kDropMineCost = 5
 kDropMineCooldown = 0
 
 kShotgunTechResearchCost = 20
@@ -295,7 +299,7 @@ kPrototypeLabCost = 35
 kJetpackTechResearchCost = 25
 kJetpackTechResearchTime = 90
 kJetpackCost = 25
-kJetpackDropCost = 18
+kJetpackDropCost = 15
 kJetpackDropCooldown = 0
 
 kExosuitTechResearchCost = 20

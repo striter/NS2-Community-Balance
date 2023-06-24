@@ -755,7 +755,11 @@ function GUIMarineBuyMenu:SetHostStructure(hostStructure)
     self.hostStructure = hostStructure
 
     if self.hostStructure:isa("Armory") then
-        self:CreateArmoryUI()
+        if GetHasTech(hostStructure,kTechId.MilitaryProtocol) then
+            self:CreateArmoryUI_MilitaryProtocol()
+        else
+            self:CreateArmoryUI()
+        end
     elseif self.hostStructure:isa("PrototypeLab") then
         self:CreatePrototypeLabUI()
     else
@@ -815,6 +819,132 @@ end
 
 function PlayerUI_GetHasTech(techId)
     return GetHasTech(Client.GetLocalPlayer(),techId)
+end
+
+function GUIMarineBuyMenu:CreateArmoryUI_MilitaryProtocol()
+    local paddingX = 105 -- Start of content from left side of background.
+    local paddingY = 36
+    -- 449
+    local paddingXWeaponGroups = 29
+    -- 449
+    local paddingYWeaponGroups = 6
+    local paddingXWeaponGroupsToRightSide = 36 -- 724 after this till end. (not including end cap)
+
+    self.defaultTechId = kTechId.Rifle
+
+    self.background = self:CreateAnimatedGraphicItem()
+    self.background:SetTexture(self.kArmoryBackgroundTexture)
+    self.background:SetSizeFromTexture()
+    self.background:SetIsScaling(false)
+    self.background:SetAnchor(GUIItem.Middle, GUIItem.Center)
+    self.background:SetHotSpot(Vector(0.5, 0.5, 0))
+    self.background:SetScale(self.customScaleVector)
+    self.background:SetOptionFlag(GUIItem.CorrectScaling)
+    self.background:SetLayer(kGUILayerMarineBuyMenu)
+
+
+    local title = self:CreateAnimatedTextItem()
+    title:SetAnchor(GUIItem.Middle, GUIItem.Top)
+    title:SetPosition(Vector(0, -50, 0))
+    title:SetTextAlignmentX(GUIItem.Align_Center)
+    title:SetTextAlignmentY(GUIItem.Align_Min)
+    title:SetText(Locale.ResolveString("MILITARY_PROTOCOL_ENABLED"))
+    title:SetIsScaling(false)
+    title:SetColor(Color(164/255, 20/255, 20/255, 1))
+    title:SetFontName(Fonts.kAgencyFB_Large_Bold)
+    self.background:AddChild(title)
+    
+    local x2ButtonPositions = kWeaponGroupButtonPositions[self.kButtonGroupFrame_Unlabeled_x2]
+    local x4ButtonPositions = kWeaponGroupButtonPositions[self.kButtonGroupFrame_Labeled_x4]
+
+    local weaponGroupTopLeft = self:CreateAnimatedGraphicItem()
+    weaponGroupTopLeft:SetIsScaling(false)
+    weaponGroupTopLeft:SetPosition(Vector(paddingX, paddingY, 0))
+    weaponGroupTopLeft:SetTexture(self.kButtonGroupFrame_Unlabeled_x2)
+    weaponGroupTopLeft:SetSizeFromTexture()
+    weaponGroupTopLeft:SetOptionFlag(GUIItem.CorrectScaling)
+    self.background:AddChild(weaponGroupTopLeft)
+    self:_InitializeWeaponGroup(weaponGroupTopLeft, x2ButtonPositions,
+            {
+                kTechId.Pistol,
+                kTechId.Revolver,
+            })
+
+    local weaponGroupBottomLeft = self:CreateAnimatedGraphicItem()
+    weaponGroupBottomLeft:SetIsScaling(false)
+    weaponGroupBottomLeft:SetPosition(Vector(paddingX, weaponGroupTopLeft:GetPosition().y + weaponGroupTopLeft:GetSize().y + paddingYWeaponGroups, 0))
+    weaponGroupBottomLeft:SetTexture(self.kButtonGroupFrame_Labeled_x4)
+    weaponGroupBottomLeft:SetSizeFromTexture()
+    weaponGroupBottomLeft:SetOptionFlag(GUIItem.CorrectScaling)
+    self.background:AddChild(weaponGroupBottomLeft)
+    self:_InitializeWeaponGroup(weaponGroupBottomLeft, x4ButtonPositions,
+            {
+                kTechId.Rifle,
+                kTechId.SubMachineGun,
+                kTechId.LightMachineGun,
+                kTechId.CombatBuilder
+            })
+
+    local x4LabelStartX = 335
+
+    local labelItemBottomLeft = self:CreateAnimatedTextItem()
+    labelItemBottomLeft:SetIsScaling(false)
+    labelItemBottomLeft:AddAsChildTo(weaponGroupBottomLeft)
+    labelItemBottomLeft:SetPosition(Vector(x4LabelStartX, 0, 0))
+    labelItemBottomLeft:SetAnchor(GUIItem.Left, GUIItem.Top)
+    labelItemBottomLeft:SetTextAlignmentX(GUIItem.Align_Min)
+    labelItemBottomLeft:SetTextAlignmentY(GUIItem.Align_Min)
+    labelItemBottomLeft:SetFontName(Fonts.kAgencyFB_Tiny)
+    labelItemBottomLeft:SetText(Locale.ResolveString("BUYMENU_GROUPLABEL_WEAPONS"))
+    labelItemBottomLeft:SetOptionFlag(GUIItem.CorrectScaling)
+    GUIMakeFontScale(labelItemBottomLeft, "kAgencyFB", 24)
+
+    local weaponGroupTopRight = self:CreateAnimatedGraphicItem()
+    weaponGroupTopRight:SetIsScaling(false)
+    weaponGroupTopRight:AddAsChildTo(self.background)
+    weaponGroupTopRight:SetPosition(Vector(weaponGroupTopLeft:GetPosition().x + weaponGroupTopLeft:GetSize().x + paddingXWeaponGroups, paddingY, 0))
+    weaponGroupTopRight:SetTexture(self.kButtonGroupFrame_Unlabeled_x2)
+    weaponGroupTopRight:SetSizeFromTexture()
+    weaponGroupTopRight:SetOptionFlag(GUIItem.CorrectScaling)
+    local buyMelee = PlayerUI_GetHasItem(kTechId.Axe) and kTechId.Knife or kTechId.Axe
+    self:_InitializeWeaponGroup(weaponGroupTopRight, x2ButtonPositions,
+            {
+                buyMelee,
+                kTechId.Welder,
+            },2)
+
+    local weaponGroupBottomRight = self:CreateAnimatedGraphicItem()
+    weaponGroupBottomRight:SetIsScaling(false)
+    weaponGroupBottomRight:AddAsChildTo(self.background)
+    weaponGroupBottomRight:SetPosition(Vector(weaponGroupTopRight:GetPosition().x, weaponGroupTopRight:GetPosition().y + weaponGroupTopRight:GetSize().y + paddingYWeaponGroups, 0))
+    weaponGroupBottomRight:SetTexture(self.kButtonGroupFrame_Labeled_x4)
+    weaponGroupBottomRight:SetSizeFromTexture()
+    weaponGroupBottomRight:SetOptionFlag(GUIItem.CorrectScaling)
+    self:_InitializeWeaponGroup(weaponGroupBottomRight, x4ButtonPositions,
+            {
+                kTechId.GasGrenade,
+                kTechId.ClusterGrenade,
+                kTechId.PulseGrenade,
+                kTechId.LayMines
+            })
+
+    local labelItemBottomRight = self:CreateAnimatedTextItem()
+    labelItemBottomRight:SetIsScaling(false)
+    labelItemBottomRight:AddAsChildTo(weaponGroupBottomRight)
+    labelItemBottomRight:SetPosition(Vector(x4LabelStartX, 0, 0))
+    labelItemBottomRight:SetAnchor(GUIItem.Left, GUIItem.Top)
+    labelItemBottomRight:SetTextAlignmentX(GUIItem.Align_Min)
+    labelItemBottomRight:SetTextAlignmentY(GUIItem.Align_Min)
+    labelItemBottomRight:SetFontName(Fonts.kAgencyFB_Tiny)
+    labelItemBottomRight:SetText(Locale.ResolveString("BUYMENU_GROUPLABEL_UTILITY"))
+    labelItemBottomRight:SetOptionFlag(GUIItem.CorrectScaling)
+    GUIMakeFontScale(labelItemBottomRight, "kAgencyFB", 24)
+
+    
+    local rightSideStartPos = weaponGroupTopRight:GetPosition()
+    rightSideStartPos.x = rightSideStartPos.x + weaponGroupTopRight:GetSize().x
+    rightSideStartPos.x = rightSideStartPos.x + paddingXWeaponGroupsToRightSide
+    self:_CreateRightSide(rightSideStartPos)
 end
 
 function GUIMarineBuyMenu:CreateArmoryUI()

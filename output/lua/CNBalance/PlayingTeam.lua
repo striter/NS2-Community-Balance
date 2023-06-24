@@ -70,6 +70,9 @@ function PlayingTeam:AddTeamResources(amount, isIncome)
     self:SetTeamResources(self.teamResources + teamResourceDelta)
 end
 
+function PlayingTeam:CollectPlayerResources()
+    return true
+end
 
 function PlayingTeam:UpdateResTick()
 
@@ -98,6 +101,8 @@ function PlayingTeam:UpdateResTick()
         local rtInsideThreshold = math.min(rtActiveCount,kMaxEfficiencyTowers)
         local teamResourceToCollect = rtInsideThreshold * kTeamResourceEachTower + rtAboveThreshold * kTeamResourceEachTowerAboveThreshold
         self:AddTeamResources(teamResourceToCollect,true)
+        
+        if not self:CollectPlayerResources() then return end
         local playerResourceToCollect = rtInsideThreshold * kPlayerResEachTower + rtAboveThreshold * kPlayerResEachTowerAboveThreshold
         for _, player in ipairs(GetEntitiesForTeam("Player", self:GetTeamNumber())) do
             if not player:isa("Commander") then
@@ -131,13 +136,14 @@ local function extGetIsResearchRelevant(techId)
     if not relevantResearchIds then
         relevantResearchIds = {}
 
-        relevantResearchIds[kTechId.GrenadeLauncherUpgrade] = 2
+        relevantResearchIds[kTechId.MilitaryProtocol] = 1
         
         relevantResearchIds[kTechId.StandardSupply] = 1
         relevantResearchIds[kTechId.LightMachineGunUpgrade] = 2
         relevantResearchIds[kTechId.DragonBreath] = 2
         relevantResearchIds[kTechId.CannonTech] = 2
 
+        relevantResearchIds[kTechId.GrenadeLauncherUpgrade] = 2
         --relevantResearchIds[kTechId.ExplosiveSupply] = 1
         --relevantResearchIds[kTechId.GrenadeLauncherDetectionShot] = 2
         --relevantResearchIds[kTechId.GrenadeLauncherAllyBlast] = 2
@@ -154,9 +160,12 @@ local function extGetIsResearchRelevant(techId)
         relevantResearchIds[kTechId.CombatBuilderTech] = 2
 
         relevantResearchIds[kTechId.Devour] = 1
-        relevantResearchIds[kTechId.ShiftTunnel] = 1
-
         relevantResearchIds[kTechId.XenocideFuel] = 1
+        relevantResearchIds[kTechId.AcidSpray] = 1
+        
+        relevantResearchIds[kTechId.ShiftTunnel] = 1
+        relevantResearchIds[kTechId.ShadeTunnel] = 1
+        relevantResearchIds[kTechId.CragTunnel] = 1
     end
 
     local relevant = relevantResearchIds[techId]

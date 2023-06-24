@@ -9,7 +9,15 @@ local oldBuildTechData = BuildTechData
 function BuildTechData()
 
     local techData = oldBuildTechData()
-
+    table.insert(techData,{
+        [kTechDataId] = kTechId.MilitaryProtocol,
+        [kTechDataCostKey] = kMilitaryProtocolResearchCost,
+        [kTechDataResearchTimeKey] = kMilitaryProtocolResearchTime,
+        [kTechDataDisplayName] = "MILITARY_PROTOCOL",
+        [kTechDataTooltipInfo] = "MILITARY_PROTOCOL_TOOLTIP",
+        [kTechDataResearchName] = "MILITARY_PROTOCOL",
+    } )
+    
     table.insert(techData, {
         [kTechDataId] = kTechId.CombatBuilderTech,
         [kTechDataCostKey] = kCombatBuilderResearchCost,
@@ -233,7 +241,7 @@ function BuildTechData()
         [kTechDataMaxArmor] = kInfantryPortalArmor,
         [kTechDataModel] = InfantryPortal.kModelName,
         [kStructureBuildNearClass] = "CommandStation",
-        [kStructureAttachId] = {kTechId.CommandStation,kTechId.StandardStation,kTechId.ArmorStation,kTechId.ExplosiveStation,kTechId.ElectronicStation},
+        [kStructureAttachId] = {kTechId.CommandStation,kTechId.StandardStation,kTechId.ArmorStation,kTechId.ExplosiveStation,kTechId.ElectronicStation},        --For Stations
         [kStructureAttachRange] = kInfantryPortalAttachRange,
         [kTechDataEngagementDistance] = kInfantryPortalEngagementDistance,
         [kTechDataHotkey] = Move.P,

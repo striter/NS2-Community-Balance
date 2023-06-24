@@ -62,6 +62,10 @@ if Server then
             if tResRefundPercentage > 0 then
                 team:AddTeamRefund(tResRefundPercentage)
             end
+
+            if team.OnKill then
+                team:OnKill(techID)
+            end
         end
     end
 end

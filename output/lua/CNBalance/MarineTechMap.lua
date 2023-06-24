@@ -28,14 +28,12 @@ kMarineTechMap =
                                             { kTechId.JetpackTech, 11, 4.5 },       --{ kTechId.JetpackFuelTech, 12, 6.5 },   
                 { kTechId.PrototypeLab, 10, 5.5 },       { kTechId.ExosuitTech, 11,5.5 },
                                             { kTechId.CannonTech,11 ,6.5 },
-                                                    
-        
-                                                                                                                                                                    { kTechId.CommandStation, 7, 8 }, {kTechId.InfantryPortal, 9, 8 },
+
+
+                                                                                                                                                      { kTechId.MilitaryProtocol, 5, 8 },{ kTechId.CommandStation, 7, 8 }, {kTechId.InfantryPortal, 9, 8 },
                         { kTechId.DragonBreath, 2.5, 10 }, { kTechId.StandardStation, 3.5, 10 },{kTechId.CatPack, 4.5 ,10 },                       { kTechId.MinesUpgrade, 6, 10 },       { kTechId.ArmorStation, 7, 10 },  { kTechId.NanoShield, 8, 10 },                                                       { kTechId.PoweredExtractorTech,9.5,10}, { kTechId.ElectronicStation, 10.5, 10 }, { kTechId.PowerSurge, 11.5, 10 },
                                                 { kTechId.LightMachineGunUpgrade,3.5 , 11 },                                                                     { kTechId.LifeSustain, 6.5, 11 }, { kTechId.ArmorRegen, 7.5, 11 },                                                                                                                          { kTechId.MACEMPBlast, 10.5, 11 },
-
 }
-
 
 kMarineLines = 
 {
@@ -83,6 +81,7 @@ kMarineLines =
     --Command Station
     --Supplies
     GetLinePositionForTechMap(kMarineTechMap, kTechId.CommandStation, kTechId.InfantryPortal),
+    GetLinePositionForTechMap(kMarineTechMap, kTechId.CommandStation, kTechId.MilitaryProtocol),
     { 7, 8, 7, 9 },
     { 3.5, 9, 10.5, 9 },
 
