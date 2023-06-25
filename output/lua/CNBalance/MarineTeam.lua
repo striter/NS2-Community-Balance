@@ -132,7 +132,6 @@ function MarineTeam:InitTechTree()
     self.techTree:AddTargetedActivation(kTechId.CatPack, kTechId.StandardStation)
     self.techTree:AddResearchNode(kTechId.DragonBreath , kTechId.StandardStation)
     self.techTree:AddResearchNode(kTechId.LightMachineGunUpgrade , kTechId.StandardStation)
-    self.techTree:AddResearchNode(kTechId.CannonTech , kTechId.StandardStation, kTechId.AdvancedArmory)
     
     self.techTree:AddBuyNode(kTechId.LightMachineGun,               kTechId.LightMachineGunUpgrade)
     self.techTree:AddBuyNode(kTechId.Cannon,                        kTechId.CannonTech)
@@ -174,6 +173,8 @@ function MarineTeam:InitTechTree()
     self.techTree:AddBuyNode(kTechId.DualMinigunExosuit, kTechId.ExosuitTech, kTechId.None)
     self.techTree:AddBuyNode(kTechId.DualRailgunExosuit, kTechId.ExosuitTech, kTechId.None)
 
+    --Cannon?
+    self.techTree:AddResearchNode(kTechId.CannonTech , kTechId.PrototypeLab, kTechId.None)
     -- Robotics factory menus
     self.techTree:AddMenu(kTechId.RoboticsFactoryARCUpgradesMenu)
     self.techTree:AddMenu(kTechId.RoboticsFactoryMACUpgradesMenu)

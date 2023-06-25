@@ -42,7 +42,7 @@ function CommandStation:GetTechButtons()
         techButtons[1] = kTechId.LifeSustain
         techButtons[2] = kTechId.ArmorRegen
     end
-    techButtons[5] = kTechId.MilitaryProtocol
+    techButtons[4] = kTechId.MilitaryProtocol
     
     return techButtons
 end

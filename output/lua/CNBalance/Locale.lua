@@ -163,7 +163,7 @@ if kLocales then
 
     kLocales["MILITARY_PROTOCOL"] = "Military Protocol"
     kLocales["MILITARY_PROTOCOL_ENABLED"] = "Military Protocol Enabled, Unable to access offensive equipment in personal."
-    kLocales["MILITARY_PROTOCOL_TOOLTIP"] = "Caution: Think before you assign.\nYou will be the only weapon&equipment dispatcher.\n+Biomass harvest(kills) grants resource.\n-Marines can't buy offensives themself.\n-Marines cannot gain passive resources."
+    kLocales["MILITARY_PROTOCOL_TOOLTIP"] = "Caution before you assign.\nYou will be the only weapon&equipment dispatcher.\n+Biomass harvest(kills) grants team resource.\n-Marines can't buy offensives themself.\n-Marines cannot gain passive resources."
 
     kLocales["STANDARD_SUPPLY"] = "Weapon Supply"
     kLocales["STANDARD_SUPPLY_TOOLTIP"] = "Begin the standard weapon research."

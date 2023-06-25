@@ -31,7 +31,7 @@ kTechDataPersonalResOnKill = {
     --[kTechId.Gorge] = 1,[kTechId.Prowler] = 2,[kTechId.Lerk] = 3,[kTechId.Fade] = 5,[kTechId.Onos] = 10,
 }
 
-kTechDataTeamResOnKill = {
+kTechDataTeamResOnKill = {      --Common one
     [kTechId.ARC] = 4,
     [kTechId.CommandStation] = 15, [kTechId.StandardStation] = 20, [kTechId.ExplosiveStation] = 20, [kTechId.ArmorStation] = 20, [kTechId.ElectronicStation] = 20,
     [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20,
@@ -56,7 +56,11 @@ kTeamResourceRefundPerBountyKills = 0.01
 
 kMilitaryProtocolResearchCost = 10
 kMilitaryProtocolResearchTime = 20
-kMilitaryProtocolRefundPerKill = { [kTechId.Skulk] = 1.5, [kTechId.Gorge] = 3,[kTechId.Prowler] = 4, [kTechId.Lerk] = 5, [kTechId.Fade] = 10, [kTechId.Onos] = 20 }
+kMilitaryProtocolRefundPerKill = {
+    [kTechId.Harvester] = 3,[kTechId.Tunnel] = 3, [kTechId.InfestedTunnel] = 4,
+    [kTechId.Whip] = 2, [kTechId.Shift] = 3, [kTechId.Crag] = 3, [kTechId.Shade] = 3,
+    [kTechId.Skulk] = 2, [kTechId.Gorge] = 3,[kTechId.Prowler] = 4, [kTechId.Lerk] = 5, [kTechId.Fade] = 10, [kTechId.Onos] = 20 
+}
 
 kMatchMinPlayers = 10
 kRespawnPlayersMinExtend = 2
@@ -78,13 +82,13 @@ kGrenadeTechResearchTime = 45   --45
 
 kMineCost = 10
 kMineDamage = 135
-kDropMineCost = 5
+kDropMineCost = 7
 kDropMineCooldown = 0
 
 kShotgunTechResearchCost = 20
 kShotgunTechResearchTime = 60
 kShotgunCost = 20
-kShotgunDropCost = 12
+kShotgunDropCost = 15
 kShotgunDropCooldown = 0
 
 kPistolRateOfFire = 0.01
@@ -100,7 +104,7 @@ kShotgunWeapons2DamageScalar = 1.2
 kShotgunWeapons3DamageScalar = 1.3
 
 kHeavyMachineGunCost = 20
-kHeavyMachineGunDropCost = 12
+kHeavyMachineGunDropCost = 15
 kHeavyMachineGunDropCooldown = 0
 
 kHeavyMachineGunDamage = 7.5  --8
@@ -152,7 +156,7 @@ kPoweredExtractorElectrifyDuration = 5
 --kGrenadeLauncherAllyBlastResearchTime = 60
 
 kGrenadeLauncherCost = 20
-kGrenadeLauncherDropCost = 12
+kGrenadeLauncherDropCost = 15
 kGrenadeLauncherDropCooldown = 0
 
 kGrenadeLauncherGrenadeDamageType = kDamageType.GrenadeLauncher
@@ -238,10 +242,10 @@ kCannonSelfDamage = kCannonAoeDamage
 kCannonClipSize = 6
 kCannonPointValue = 15
 kCannonDamageType = kDamageType.Structural
-kCannonDropCost = 12
+kCannonDropCost = 15
 
 kFlamethrowerCost = 20
-kFlamethrowerDropCost = 12
+kFlamethrowerDropCost = 15
 kFlamethrowerDropCooldown = 0
 
 kFirePlayerDOTDelay = 1
@@ -306,7 +310,7 @@ kExosuitTechResearchCost = 20
 kExosuitTechResearchTime = 90
 kDualExosuitCost = 55
 kDualRailgunExosuitCost = 55
-kDualExosuitDropCost = 40
+kDualExosuitDropCost = 36
 
 kOnosDevourCost = 10
 kOnosDevourTime = 40
@@ -538,7 +542,7 @@ kNanoShieldCooldown = 5
 kNanoShieldDamageReductionDamage = 0.68
 
 
-kCombatBuilderCost = 5
+kCombatBuilderCost = 3
 kCombatBuilderDropCost = 5
 kCombatBuilderPointValue = 5
 
