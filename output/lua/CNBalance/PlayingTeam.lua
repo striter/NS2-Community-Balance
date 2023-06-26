@@ -79,6 +79,7 @@ end
 
 function PlayingTeam:AddPlayerResources(player,amount)      --Add player resources by aggressive playing
     player:AddResources(amount)
+    return amount
 end
 
 function PlayingTeam:CollectPlayerResources()

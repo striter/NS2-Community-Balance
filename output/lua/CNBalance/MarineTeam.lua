@@ -228,8 +228,9 @@ function MarineTeam:OnTeamKill(killEntityTechId)
 end
 
 function PlayingTeam:AddPlayerResources(player,amount)
-    local factor = militaryProtocolTechNode:GetResearched() and kMilitaryProtocolAggressivePersonalResourcesScalar or 1
-    player:AddResources(amount * factor)
+    amount = amount * militaryProtocolTechNode:GetResearched() and kMilitaryProtocolAggressivePersonalResourcesScalar or 1
+    player:AddResources(amount)
+    return amount
 end
 
 function MarineTeam:CollectPlayerResources()

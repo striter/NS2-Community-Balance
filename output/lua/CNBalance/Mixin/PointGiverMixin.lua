@@ -42,11 +42,13 @@ if Server then
                 local scoreReward = points >= 1 and math.max(1, math.round(points * damageFraction)) or 0
 
                 local resReward = pResReward * damageFraction
-                currentAttacker:AddScore(scoreReward, resReward, attacker == currentAttacker)
+
                 local team = currentAttacker:GetTeam()
                 if team then
-                    team:AddPlayerResources(currentAttacker,resReward)
+                    resReward = team:AddPlayerResources(currentAttacker,resReward)
                 end
+                
+                currentAttacker:AddScore(scoreReward, resReward, attacker == currentAttacker)
             end
         end
 
