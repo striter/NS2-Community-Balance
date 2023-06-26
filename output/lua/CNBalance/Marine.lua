@@ -305,10 +305,27 @@ function Marine:OverrideInput(input)
 	end
 	
 	return Player.OverrideInput(self, input)
-        
+end
+
+function Marine:GetArmorAmount(armorLevels)
+
+    if not armorLevels then
+        armorLevels = 0
+
+        if GetHasTech(self, kTechId.Armor3, true) then
+            armorLevels = 3
+        elseif GetHasTech(self, kTechId.Armor2, true) then
+            armorLevels = 2
+        elseif GetHasTech(self, kTechId.Armor1, true) then
+            armorLevels = 1
+        end
+    end
+
+    return Marine.kBaseArmor + armorLevels * (GetHasTech(self,kTechId.MilitaryProtocol) and kMPMarineArmorPerUpgradeLevel or Marine.kArmorPerUpgradeLevel)
 end
 
 if Client then
+    
     function Marine:UpdateGhostModel()
 
         self.currentTechId = nil
@@ -340,6 +357,44 @@ if Client then
 end
 
 if Server then
+
+    local variantToMPUniform =
+    {
+        --[kMarineVariants.green] = kMarineVariants.chroma,
+        --[kMarineVariants.special] = kMarineVariants.chroma,
+        --[kMarineVariants.deluxe] = kMarineVariants.chroma,
+        --[kMarineVariants.assault] = kMarineVariants.chroma,
+        --[kMarineVariants.eliteassault] = kMarineVariants.chroma,
+        --[kMarineVariants.kodiak] = kMarineVariants.chroma,
+        --[kMarineVariants.tundra] = kMarineVariants.chroma,
+        --[kMarineVariants.anniv] = kMarineVariants.chroma,
+        --[kMarineVariants.sandstorm] = kMarineVariants.chroma,
+        --[kMarineVariants.chroma] = kMarineVariants.chroma,
+
+        [kMarineVariants.bigmac] = kMarineVariants.chromabmac,
+        [kMarineVariants.bigmac02] = kMarineVariants.chromabmac,
+        [kMarineVariants.bigmac03] = kMarineVariants.chromabmac,
+        [kMarineVariants.bigmac04] = kMarineVariants.chromabmac,
+        [kMarineVariants.bigmac05] = kMarineVariants.chromabmac,
+        [kMarineVariants.bigmac06] = kMarineVariants.chromabmac,
+        [kMarineVariants.chromabmac] = kMarineVariants.chromabmac,
+
+        [kMarineVariants.militarymac] = kMarineVariants.chromamilbmac,
+        [kMarineVariants.militarymac02] = kMarineVariants.chromamilbmac,
+        [kMarineVariants.militarymac03] = kMarineVariants.chromamilbmac,
+        [kMarineVariants.militarymac04] = kMarineVariants.chromamilbmac,
+        [kMarineVariants.militarymac05] = kMarineVariants.chromamilbmac,
+        [kMarineVariants.militarymac06] = kMarineVariants.chromamilbmac,
+        [kMarineVariants.chromamilbmac] = kMarineVariants.chromamilbmac,
+    }
+    
+    function Marine:GetVariantOverride(variant)
+        if GetHasTech(self,kTechId.MilitaryProtocol) then
+            return variantToMPUniform[variant] or kMarineVariants.chroma
+        end
+        return variant
+    end
+    
     function Marine:GiveHeavy()
 
         local activeWeapon = self:GetActiveWeapon()

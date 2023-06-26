@@ -1,21 +1,28 @@
---(*) In replaced of special condition,usually receive few damage.  |*| Stands for Focus
--- Marine
---A    ehp    Skulk      Lerk        Fade        Onos
---0    160    3(2)|2(1)  3   |2      2|1         2   |1
---1    200    3   |2     4(3)|2      3|2         3(2)|2(1)
---2    240    4   |2     4   |2      3|2         3   |2
---3    280    4   |2     5   |3      4|2         4(3)|2
--- Jetpack Marine
---A    ehp    Skulk      Lerk        Fade        Onos
---0    210    3|2        4(3)|2      3   |2      3(2)|2(1)
---1    260    4|2        5(4)|3(2)   4(3)|2      3   |2
---2    310    5|3        5   |3      4   |2      4   |2
---3    360    5|3        6   |3      5   |3      4   |2
+--(*) In replaced of special condition,usually receive few damage.  |*| Stands for Focus    --MP Stands for military protocol(Disable all weapons, marines should be tougher i mean)
+-- Marine     Skulk      Lerk        Fade        Onos             MP     Skulk      Lerk        Fade        Onos           
+--A    ehp    75|125     60|100      80|128      90               ehp   
+--0    160    3(2)|2(1)  3   |2      2|2         2   |1           160    3(2)|2(1)   3   |2      2|2         2   |1    
+--1    200    3   |2     4(3)|2      3|2         3(2)|2(1)        210    4(3)|2      4           3           3
+--2    240    4   |2     4   |3      3|2         3   |2           260    4   |3(2)   5(4)        4(3)        3
+--3    280    4   |3     5   |3      4|3         4(3)|2           310    5(4)|3      6(5)        4           4
+-- Jetpack
+--A    ehp   
+--0    210    3|2        4(3)|2      3   |2      3(2)|2(1)        220    4(3)        4          3           3
+--1    260    4|2        5(4)|3(2)   4(3)|2      3   |2           280    4           5          4           4(3)
+--2    310    5|3        5   |3      4   |2      4   |2           340    5           6          5(4)        4
+--3    360    5|3        6   |3      5   |3      4   |2           400    6(5)        7(6)       6(5)        5(4)
+-- Exosuit    
+--A    ehp
+--0    640    9          11          8           8  
+--1    700    10         12          9           8                 
+--2    760    11         13          10          9                 
+--3    820    12         14          11          10
 
-kMarineHealth = 100    kMarineArmor = 30    kMarinePointValue = 5
-kJetpackMarineArmor = 55    kJetpackMarineArmorPerUpgradeLevel = 25
-kExosuitHealth = 100    kExosuitArmor = 320    kExosuitPointValue = 20
-kExosuitArmorPerUpgradeLevel = 30
+
+kMarineHealth = 100    kMarineArmor = 30    kArmorPerUpgradeLevel = 20                                       kMPMarineArmorPerUpgradeLevel = 25
+kJetpackHealth = 120    kJetpackArmor = 45   kJetpackArmorPerUpgradeLevel = 25   kMPJetpackMarineArmor = 50   kMPJetpackArmorPerUpgradeLevel = 30  
+kExosuitHealth = 100    kExosuitArmor = 320  kExosuitArmorPerUpgradeLevel = 30
+kMarinePointValue = 5   kJetpackPointValue = 12   kExosuitPointValue = 20
 
 kCommandStationHealth = 3000    kCommandStationArmor = 1800    kCommandStationPointValue = 20   --2000 -1800
 kUpgradedCommandStationHealth = 3200 kUpgradedCommandStationArmor = 1900 kUpgradedCommandStationPointValue = 30
@@ -118,7 +125,7 @@ kMinMatureCystHealth = 200 kMinCystScalingDistance = 48 kMaxCystScalingDistance 
 
 kClogHealth = 250  kClogArmor = 0  kClogHealthPerBioMass = 10 kClogPointValue = 0
 
-kHydraHealth = 100    kHydraArmor = 10    kHydraPointValue = 0
+kHydraHealth = 100    kHydraArmor = 10    kHydraPointValue = 1
 kMatureHydraHealth = 130   kMatureHydraArmor = 20  kHydraHealthPerBioMass = 20  kMatureHydraPointValue = 0
 
 kBoneWallHealth = 100 kBoneWallArmor = 200    kBoneWallHealthPerBioMass = 75
@@ -132,7 +139,7 @@ kInfestedTunnelEntranceHealth = 1300    kInfestedTunnelEntranceArmor = 350 --125
 kMatureInfestedTunnelEntranceHealth = 1450    kMatureInfestedTunnelEntranceArmor = 400 kMatureCragInfestedTunnelEntranceArmor = 800   --1400 250
 kTunnelEntrancePointValue = 5
 
-kBabblerEggHealth = 50    kBabblerEggArmor = 0    kBabblerEggPointValue = 0
+kBabblerEggHealth = 50    kBabblerEggArmor = 0    kBabblerEggPointValue = 3
 kMatureBabblerEggHealth = 150 kMatureBabblerEggArmor = 0
 
 kSporeMineHealth = 50 kSporeMineArmor = 0 kSporeMinepointValue=0

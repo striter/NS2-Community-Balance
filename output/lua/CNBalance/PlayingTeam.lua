@@ -58,6 +58,13 @@ function PlayingTeam:Update()
 
 end
 
+function PlayingTeam:OnTeamKill(techID)
+    local tResReward = kTechDataTeamResOnKill[techID]
+    if tResReward then
+        self:AddTeamResources(tResReward,true)      --Treat this as income
+    end
+end
+
 function PlayingTeam:AddTeamResources(amount, isIncome)
     local teamResourceDelta = amount
     teamResourceDelta = teamResourceDelta + self.floatingResourceIncome
@@ -68,6 +75,10 @@ function PlayingTeam:AddTeamResources(amount, isIncome)
         self.totalTeamResourcesCollected = self.totalTeamResourcesCollected + teamResourceDelta
     end
     self:SetTeamResources(self.teamResources + teamResourceDelta)
+end
+
+function PlayingTeam:AddPlayerResources(player,amount)      --Add player resources by aggressive playing
+    player:AddResources(amount)
 end
 
 function PlayingTeam:CollectPlayerResources()

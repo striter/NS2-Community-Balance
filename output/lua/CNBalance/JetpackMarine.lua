@@ -24,9 +24,11 @@
 --     end
     
 -- end
+JetpackMarine.kHealth = kJetpackHealth
 
 function JetpackMarine:GetArmorAmount(armorLevels)
 
+    local hasMP = GetHasTech(self,kTechId.MilitaryProtocol)
     if not armorLevels then
 
         armorLevels = 0
@@ -41,7 +43,7 @@ function JetpackMarine:GetArmorAmount(armorLevels)
 
     end
 
-    return kJetpackMarineArmor + armorLevels * kJetpackMarineArmorPerUpgradeLevel
+    return hasMP and (kMPJetpackMarineArmor + armorLevels * kMPJetpackArmorPerUpgradeLevel  ) or (kJetpackArmor + armorLevels *kJetpackArmorPerUpgradeLevel)
 
 end
 
@@ -50,6 +52,9 @@ function JetpackMarine:GetIsStunAllowed()
 end
 
 if Server then
+    function JetpackMarine:GetAutoHealPerSecond(lifeSustainResearched)
+        return lifeSustainResearched and kJetpackLifeSustainHPS or kJetpackLifeRegenHPS
+    end
     
     function JetpackMarine:GetAutoWeldArmorPerSecond(nanoArmorResearched)
         return nanoArmorResearched and kJetpackMarineNanoArmorPerSecond or kJetpackMarineArmorPerSecond

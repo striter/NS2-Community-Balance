@@ -43,10 +43,10 @@ kAlienCrushDamagePercentByLevel = 0.111 --0.007
 kCelerityAddSpeed = 1.5 -- 1.5
 
 
-kFocusDamageBonusAtMax = 0.6 kFocusAttackSlowAtMax = 2
+kFocusDamageBonusAtMax = 0.66 kFocusAttackSlowAtMax = 2
 kSpitFocusDamageBonusAtMax = 0.33  kSpitFocusAttackSlowAtMax = 0
 kVolleyFocusDamageBonusAtMax = 0.33  kVolleyFocusAttackSlowAtMax = 0
-kSwipeFocusDamageBonusAtMax = 0.5
+kSwipeFocusDamageBonusAtMax = 0.6
 kGoreFocusDamageBonusAtMax = 0.33  kGoreFocusAttackSlowAtMax = 0.33
 
 kAlienRegenerationCombatModifier = 0.5
@@ -109,10 +109,9 @@ kJetpackMarineNanoArmorPerSecond = 6
 kExoArmorPerSecond = 8
 kExoNanoArmorPerSecond = 15
 --& Lifesustain
-kLifeRegenHPS = 4
-kLifeRegenMaxCap = 0.8
-kLifeSustainHPS = 10
-kLifeSustainMaxCap = 1
+kLifeRegenMaxCap = 0.8 kLifeSustainMaxCap = 1
+kLifeRegenHPS = 4   kLifeSustainHPS = 10
+kJetpackLifeRegenHPS = 6   kJetpackLifeSustainHPS = 12
 
 kProwlerFov = 100
 

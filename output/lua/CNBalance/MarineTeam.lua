@@ -216,16 +216,66 @@ function MarineTeam:Initialize(teamName, teamNumber)
 	self.clientOwnedStructures = { }
 end
 
-function MarineTeam:OnKill(killEntityTechId)
-    if not militaryProtocolTechNode:GetResearched() then return end
+function MarineTeam:OnTeamKill(killEntityTechId)
+    if not militaryProtocolTechNode:GetResearched() then
+        PlayingTeam.OnTeamKill(killEntityTechId)
+        return
+    end
+    
+    local tResRefund = kMilitaryProtocolTeamResourcesPerKill[killEntityTechId]
+    if not tResRefund then return end
+    self:AddTeamResources(tResRefund)       --Don't treat this as income, its pRes
+end
 
-    local refund = kMilitaryProtocolRefundPerKill[killEntityTechId]
-    if not refund then return end
-    self:AddTeamResources(refund)
+function PlayingTeam:AddPlayerResources(player,amount)
+    local factor = militaryProtocolTechNode:GetResearched() and kMilitaryProtocolAggressivePersonalResourcesScalar or 1
+    player:AddResources(amount * factor)
 end
 
 function MarineTeam:CollectPlayerResources()
     return not militaryProtocolTechNode:GetResearched() 
+end
+
+
+function MarineTeam:OnResearchComplete(structure, researchId)
+    PlayingTeam.OnResearchComplete(self,structure,researchId)
+
+    if researchId ~= kTechId.MilitaryProtocol then return end      
+    
+    local gameInfo = GetGameInfoEntity()
+    local teamIdx = self:GetTeamNumber()
+    local commStructSkin = kMarineStructureVariants.Chroma
+    local commExtractorSkin = kExtractorVariants.Chroma
+    local commMacSkin = kMarineMacVariants.Chroma
+    local commArcSkin = kMarineArcVariants.Chroma
+
+    self.activeStructureSkin = commStructSkin
+    local skinnedEnts = GetEntitiesWithMixinForTeam( "MarineStructureVariant", teamIdx )
+    for i, ent in ipairs(skinnedEnts) do
+        ent.structureVariant = commStructSkin
+    end
+    gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot1, commStructSkin )
+
+    self.activeExtractorSkin = commExtractorSkin
+    local skinnedEnts = GetEntitiesWithMixinForTeam( "ExtractorVariant", teamIdx )
+    for i, ent in ipairs(skinnedEnts) do
+        ent.structureVariant = commExtractorSkin
+    end
+    gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot2, commExtractorSkin )
+
+    self.activeMacSkin = commMacSkin
+    local skinnedEnts = GetEntitiesWithMixinForTeam( "MACVariant", teamIdx )
+    for i, ent in ipairs(skinnedEnts) do
+        ent.structureVariant = commMacSkin
+    end
+    gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot3, commMacSkin )
+
+    self.activeArcSkin = commArcSkin
+    local skinnedEnts = GetEntitiesWithMixinForTeam( "ARCVariant", teamIdx )
+    for i, ent in ipairs(skinnedEnts) do
+        ent.structureVariant = commArcSkin
+    end
+    gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot4, commArcSkin )
 end
 
 local cancelTechNode

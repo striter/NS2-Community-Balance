@@ -17,7 +17,6 @@ if Server then
 
         local techID = self:GetTechId()
         local pResReward = kTechDataPersonalResOnKill[techID] or 0
-        local tResReward = kTechDataTeamResOnKill[techID] or 0
         local tResRefundPercentage = kTechDataTeamResRefundPercentageOnKill[techID] or 0
 
         if selfIsPlayer then
@@ -34,6 +33,9 @@ if Server then
 
             local currentAttacker = Shared.GetEntity(attackerId)
             if currentAttacker and HasMixin(currentAttacker, "Scoring") then
+                if selfIsPlayer and currentAttacker ~= attacker then
+                    currentAttacker:AddAssistKill()
+                end
 
                 local damageDone = self.damagePoints[attackerId]
                 local damageFraction = Clamp(damageDone / totalDamageDone, 0, 1)
@@ -41,10 +43,9 @@ if Server then
 
                 local resReward = pResReward * damageFraction
                 currentAttacker:AddScore(scoreReward, resReward, attacker == currentAttacker)
-                currentAttacker:AddResources(resReward)
-
-                if selfIsPlayer and currentAttacker ~= attacker then
-                    currentAttacker:AddAssistKill()
+                local team = currentAttacker:GetTeam()
+                if team then
+                    team:AddPlayerResources(currentAttacker,resReward)
                 end
             end
         end
@@ -55,16 +56,12 @@ if Server then
             end
             
             local team = attacker:GetTeam()
-            if tResReward > 0 then
-                team:AddTeamResources(tResReward,true)
+            if team.OnTeamKill then
+                team:OnTeamKill(techID)
             end
             
             if tResRefundPercentage > 0 then
                 team:AddTeamRefund(tResRefundPercentage)
-            end
-
-            if team.OnKill then
-                team:OnKill(techID)
             end
         end
     end

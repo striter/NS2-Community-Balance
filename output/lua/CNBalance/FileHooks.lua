@@ -15,7 +15,7 @@ ModLoader.SetupFileHook("lua/NS2Utility_Server.lua", "lua/CNBalance/NS2Utility_S
 ModLoader.SetupFileHook("lua/NS2ConsoleCommands_Server.lua", "lua/CNBalance/NS2ConsoleCommands_Server.lua", "post" )
 ModLoader.SetupFileHook("lua/NetworkMessages.lua", "lua/CNBalance/NetworkMessages.lua", "post" )
 ModLoader.SetupFileHook("lua/NetworkMessages_Server.lua", "lua/CNBalance/NetworkMessages_Server.lua", "post" )
-ModLoader.SetupFileHook("lua/MarineVariantMixin.lua","lua/CNBalance/MarineVariantMixin.lua","post")
+
 
 ModLoader.SetupFileHook("lua/TechTreeConstants.lua", "lua/CNBalance/TechTreeConstants.lua", "post")
 ModLoader.SetupFileHook("lua/TechData.lua", "lua/CNBalance/TechData.lua", "post")
@@ -72,11 +72,18 @@ ModLoader.SetupFileHook("lua/Balance.lua", "lua/CNBalance/Balance.lua", "post")
 ModLoader.SetupFileHook("lua/BalanceHealth.lua", "lua/CNBalance/BalanceHealth.lua", "post")
 ModLoader.SetupFileHook("lua/BalanceMisc.lua", "lua/CNBalance/BalanceMisc.lua", "post")
 
+--Commanders
+ModLoader.SetupFileHook("lua/Commander_Buttons.lua", "lua/CNBalance/Commander_Buttons.lua", "post" )
+ModLoader.SetupFileHook("lua/Commander_Server.lua", "lua/CNBalance/Commander_Server.lua", "post" )
+ModLoader.SetupFileHook("lua/AlienCommander.lua", "lua/CNBalance/AlienCommander.lua", "post" )
+ModLoader.SetupFileHook("lua/MarineCommander.lua", "lua/CNBalance/MarineCommander.lua", "replace")
+
 --Marines
+ModLoader.SetupFileHook("lua/Hud/GUIPlayerResource.lua", "lua/CNBalance/GUI/GUIPlayerResource.lua", "post")
+ModLoader.SetupFileHook("lua/Hud/Marine/GUIMarineHUD.lua", "lua/CNBalance/GUI/GUIMarineHUD.lua", "post" )
 ModLoader.SetupFileHook("lua/GUIMarineBuyMenu.lua", "lua/CNBalance/GUIMarineBuyMenu.lua", "replace" )
 ModLoader.SetupFileHook("lua/GUIActionIcon.lua", "lua/CNBalance/GUIActionIcon.lua", "replace")
 ModLoader.SetupFileHook("lua/GUIPickups.lua", "lua/CNBalance/GUIPickups.lua", "post")
-ModLoader.SetupFileHook("lua/Hud/GUIPlayerResource.lua", "lua/CNBalance/GUI/GUIPlayerResource.lua", "post")
 ModLoader.SetupFileHook("lua/MarineBuy_Client.lua", "lua/CNBalance/MarineBuy_Client.lua", "post" )
 ModLoader.SetupFileHook("lua/MarineTeam.lua", "lua/CNBalance/MarineTeam.lua", "post")
 ModLoader.SetupFileHook("lua/MarineTeamInfo.lua", "lua/CNBalance/MarineTeamInfo.lua", "replace")
@@ -122,6 +129,9 @@ ModLoader.SetupFileHook("lua/Weapons/Marine/HeavyMachineGun.lua", "lua/CNBalance
 
 ModLoader.SetupFileHook("lua/Weapons/Marine/GrenadeThrower.lua", "lua/CNBalance/Weapons/Marine/GrenadeThrower.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/GrenadeLauncher.lua", "lua/CNBalance/Weapons/Marine/GrenadeLauncher.lua", "post")
+
+ModLoader.SetupFileHook("lua/MarineVariantMixin.lua","lua/CNBalance/MarineVariantMixin.lua","post")
+ModLoader.SetupFileHook("lua/ExoVariantMixin.lua","lua/CNBalance/ExoVariantMixin.lua","post")
 
 ModLoader.SetupFileHook("lua/GUIInsight_PlayerHealthbars.lua", "lua/CNBalance/GUI/GUIInsight_PlayerHealthbars.lua", "post")
 --------------------
@@ -197,11 +207,6 @@ ModLoader.SetupFileHook("lua/Shade.lua", "lua/CNBalance/Structures/Alien/Shade.l
 ModLoader.SetupFileHook("lua/Whip.lua", "lua/CNBalance/Structures/Alien/Whip.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/Web.lua", "lua/CNBalance/Structures/Alien/Web.lua", "post")
 
---Commander
-ModLoader.SetupFileHook("lua/Commander_Buttons.lua", "lua/CNBalance/Commander_Buttons.lua", "post" )
-ModLoader.SetupFileHook("lua/Commander_Server.lua", "lua/CNBalance/Commander_Server.lua", "post" )
-ModLoader.SetupFileHook("lua/AlienCommander.lua", "lua/CNBalance/AlienCommander.lua", "post" )
-ModLoader.SetupFileHook("lua/MarineCommander.lua", "lua/CNBalance/MarineCommander.lua", "replace")
 
 --Bot
 ModLoader.SetupFileHook("lua/Clog.lua", "lua/CNBalance/Bots/Clog.lua", "post" )

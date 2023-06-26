@@ -4,8 +4,8 @@ HeavyMachineGun.kBaseReloadMultipier = HeavyMachineGun.kReloadAnimationLength / 
 
 
 if Client then
-function HeavyMachineGun:GetUIDisplaySettings()
-    return { xSize = 256, ySize = 160, script = "lua/CNBalance/GUI/GUIHeavyMachineGunDisplay.lua", variant = self:GetHMGVariant() }
-end
+    function HeavyMachineGun:GetUIDisplaySettings()
+        return { xSize = 256, ySize = 160, script = "lua/CNBalance/GUI/GUIHeavyMachineGunDisplay.lua", variant = self:GetHMGVariant() }
+    end
 
 end

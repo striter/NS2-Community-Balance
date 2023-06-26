@@ -39,3 +39,10 @@ if Server then
         return nanoArmorResearched and kExoNanoArmorPerSecond or kExoArmorPerSecond
     end
 end
+
+function Exo:GetExoVariantOverride(variant)
+    if GetHasTech(self,kTechId.MilitaryProtocol) then
+        return kExoVariants.chroma
+    end
+    return variant
+end

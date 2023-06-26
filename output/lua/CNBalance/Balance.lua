@@ -1,3 +1,4 @@
+--Resources system starts here
 kResourceTowerResourceInterval = 6
 kMaxEfficiencyTowers = 4
 kTeamResourceWithoutTower = 0.5
@@ -5,11 +6,11 @@ kTeamResourceEachTower = 1
 kTeamResourceEachTowerAboveThreshold = 0.5
 kPlayerResEachTower = 0.125
 kPlayerResEachTowerAboveThreshold = 0.05
-
 kPlayingTeamInitialTeamRes = 60   --60
 kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
 
+--Pres reward for aggressive playing (too many farmers?)
 kTechDataPersonalResOnKill = {
     --Marines
     [kTechId.Extractor] = 2.5, [kTechId.PoweredExtractor] = 4,
@@ -18,26 +19,32 @@ kTechDataPersonalResOnKill = {
     [kTechId.CommandStation] = 10, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [ kTechId.ElectronicStation ] = 15,
     [kTechId.Mine] = 0.2, [kTechId.InfantryPortal] = 2, [kTechId.MarineSentry] = 0.8,   --PPVE
     [kTechId.MAC] = 0.2,    [kTechId.SentryBattery] = 4, [kTechId.Sentry] = 1,[kTechId.ARC] = 2.5,      --CPVE
-    --[kTechId.JetpackMarine] = 5, [kTechId.Exo] = 10, [kTechId.Exosuit] = 20,
 
     --Aliens
     [kTechId.Harvester] = 6,
-    [kTechId.Cyst] = 0.2, 
-    [kTechId.Hive] = 20, [kTechId.ShiftHive] = 30, [kTechId.CragHive] = 30, [kTechId.ShadeHive] = 30,
-    [kTechId.Shell] = 4, [kTechId.Veil] = 4, [kTechId.Spur] = 4,
+    [kTechId.Cyst] = 0.2,
     [kTechId.Hydra] = 0.2,[kTechId.BabblerEgg] = 3,       --PPVE
+    [kTechId.Shell] = 5, [kTechId.Veil] = 5, [kTechId.Spur] = 5,
     [kTechId.Whip] = 3, [kTechId.Shift] = 6, [kTechId.Crag] = 6, [kTechId.Shade] = 6,       --CPVE
     [kTechId.Tunnel] = 6, [kTechId.InfestedTunnel] = 8,
+    [kTechId.Hive] = 20, [kTechId.ShiftHive] = 30, [kTechId.CragHive] = 30, [kTechId.ShadeHive] = 30,
+    
+    --Players (LOL)
+    --[kTechId.JetpackMarine] = 5, [kTechId.Exo] = 10, [kTechId.Exosuit] = 20,
     --[kTechId.Gorge] = 1,[kTechId.Prowler] = 2,[kTechId.Lerk] = 3,[kTechId.Fade] = 5,[kTechId.Onos] = 10,
 }
 
-kTechDataTeamResOnKill = {      --Common one
-    [kTechId.ARC] = 4,
+--TRes reward to kill certain structures, snowball rolling
+kTechDataTeamResOnKill = {
+    --Marines
+    [kTechId.ARC] = 4,      --Super aggressive one i mean
     [kTechId.CommandStation] = 15, [kTechId.StandardStation] = 20, [kTechId.ExplosiveStation] = 20, [kTechId.ArmorStation] = 20, [kTechId.ElectronicStation] = 20,
+    
+    --Aliens
     [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20,
 }
 
--- Resource refund base on teams delta
+-- Resource refund base on teams total income minus (anti snowball,could cause "miracle")
 kTeamResourceRefundBase = 100
 kTeamResourceMaxRefund = 100   --Case they reach the limit cant use it
 kTechDataTeamResRefundPercentageOnKill = {
@@ -49,17 +56,23 @@ kTechDataTeamResRefundPercentageOnKill = {
     [kTechId.Hive] = 0.2, [kTechId.ShiftHive] = 0.3, [kTechId.CragHive] = 0.3, [kTechId.ShadeHive] = 0.3,
 }
 
+--If a player kills too many players and crushing the game
 kBountyMinKills = 4
-kPResPerBountyKillsAsAlien = 1
-kPResPerBountyKillsAsMarine = 0.5
-kTeamResourceRefundPerBountyKills = 0.01
+kPResPerBountyKillsAsAlien = 1  kPResPerBountyKillsAsMarine = 0.5
+kTeamResourceRefundPerBountyKills = 0.01    --Since bounty players kills this much player...
 
+--Toy for marine commander (remove all marines passive income, harsh one)
 kMilitaryProtocolResearchCost = 10
 kMilitaryProtocolResearchTime = 20
-kMilitaryProtocolRefundPerKill = {
-    [kTechId.Harvester] = 3,[kTechId.Tunnel] = 3, [kTechId.InfestedTunnel] = 4,
-    [kTechId.Whip] = 2, [kTechId.Shift] = 3, [kTechId.Crag] = 3, [kTechId.Shade] = 3,
-    [kTechId.Skulk] = 2, [kTechId.Gorge] = 3,[kTechId.Prowler] = 4, [kTechId.Lerk] = 5, [kTechId.Fade] = 10, [kTechId.Onos] = 20 
+kMilitaryProtocolAggressivePersonalResourcesScalar = 2      --Simply double it? they don't need too much pres to buy defensive or grenades/welders (and they can shared it tbh)
+kMilitaryProtocolTeamResourcesPerKill = {          --Use this when military protocol enabled
+    [kTechId.Cyst] = 0.5,
+    [kTechId.Harvester] = 5,
+    [kTechId.Tunnel] = 5, [kTechId.InfestedTunnel] = 8,
+    [kTechId.Whip] = 3, [kTechId.Shift] = 5, [kTechId.Crag] = 5, [kTechId.Shade] = 5,
+    [kTechId.Skulk] = 2, [kTechId.Gorge] = 5,[kTechId.Prowler] = 10, [kTechId.Lerk] = 15, [kTechId.Fade] = 30, [kTechId.Onos] = 40,
+    [kTechId.Hive] = 30, [kTechId.ShiftHive] = 50, [kTechId.CragHive] = 50, [kTechId.ShadeHive] = 50,
+    [kTechId.Shell] = 8, [kTechId.Veil] = 8, [kTechId.Spur] = 8,
 }
 
 kMatchMinPlayers = 10
@@ -90,6 +103,10 @@ kShotgunTechResearchTime = 60
 kShotgunCost = 20
 kShotgunDropCost = 15
 kShotgunDropCooldown = 0
+
+kRifleDamage = 10
+kRifleDamageType = kDamageType.Normal
+kRifleClipSize = 50     kMPRifleClipSize = {54,56,58,60}
 
 kPistolRateOfFire = 0.01
 kPistolDamage = 20
