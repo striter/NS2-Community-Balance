@@ -227,8 +227,8 @@ function MarineTeam:OnTeamKill(killEntityTechId)
     self:AddTeamResources(tResRefund)       --Don't treat this as income, its pRes
 end
 
-function PlayingTeam:AddPlayerResources(player,amount)
-    amount = amount * militaryProtocolTechNode:GetResearched() and kMilitaryProtocolAggressivePersonalResourcesScalar or 1
+function MarineTeam:AddPlayerResources(player,amount)
+    amount = amount * (militaryProtocolTechNode:GetResearched() and kMilitaryProtocolAggressivePersonalResourcesScalar or 1)
     player:AddResources(amount)
     return amount
 end
@@ -237,6 +237,9 @@ function MarineTeam:CollectPlayerResources()
     return not militaryProtocolTechNode:GetResearched() 
 end
 
+function MarineTeam:GetResearchTimeFactor()
+    return militaryProtocolTechNode:GetResearched() and kMilitaryProtocolResearchDurationMultiply or 1
+end
 
 function MarineTeam:OnResearchComplete(structure, researchId)
     PlayingTeam.OnResearchComplete(self,structure,researchId)

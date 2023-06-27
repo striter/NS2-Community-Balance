@@ -1,0 +1,6 @@
+--
+--local baseInitialize = GUINotificationItem.Initialize
+--function GUINotificationItem:Initialize()       --Disable time display due to non-constant research time
+--    baseInitialize(self)
+--    self.bottomText:SetIsVisible(false)
+--end

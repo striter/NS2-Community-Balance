@@ -1,6 +1,5 @@
 ModLoader.SetupFileHook("lua/ClientUI.lua", "lua/CNBalance/ClientUI.lua", "replace")
 ModLoader.SetupFileHook("lua/Client.lua", "lua/CNBalance/Client.lua", "post" )
-ModLoader.SetupFileHook("lua/ClientLOSMixin.lua", "lua/CNBalance/ClientLOSMixin.lua", "post" )
 ModLoader.SetupFileHook("lua/Player_Client.lua", "lua/CNBalance/Player_Client.lua", "post")
 
 ModLoader.SetupFileHook("lua/Shared.lua", "lua/CNBalance/Shared.lua", "post")
@@ -31,7 +30,6 @@ ModLoader.SetupFileHook("lua/CommandStructure_Server.lua", "lua/CNBalance/Comman
 ModLoader.SetupFileHook("lua/ReadyRoomTeam.lua", "lua/CNBalance/ReadyRoomTeam.lua", "post" )
 ModLoader.SetupFileHook("lua/ReadyRoomEmbryo.lua", "lua/CNBalance/ReadyRoomEmbryo.lua", "post" )
 ModLoader.SetupFileHook("lua/Scoreboard.lua", "lua/CNBalance/Scoreboard.lua", "post" )
-ModLoader.SetupFileHook("lua/ScoringMixin.lua", "lua/CNBalance/ScoringMixin.lua", "post" )
 ModLoader.SetupFileHook("lua/ServerStats.lua", "lua/CNBalance/ServerStats.lua", "replace" )
 --GUI
 ModLoader.SetupFileHook("lua/GUIMinimapFrame.lua", "lua/CNBalance/GUIMinimapFrame.lua", "post")
@@ -49,9 +47,12 @@ ModLoader.SetupFileHook("lua/AlienStructureEffects.lua", "lua/CNBalance/Effects/
 ModLoader.SetupFileHook("lua/SoundEffect.lua", "lua/CNBalance/SoundEffect.lua", "post" )
 
 --Mixin
+ModLoader.SetupFileHook("lua/ClientLOSMixin.lua", "lua/CNBalance/Mixin/ClientLOSMixin.lua", "post" )
+ModLoader.SetupFileHook("lua/ScoringMixin.lua", "lua/CNBalance/Mixin/ScoringMixin.lua", "post" )
 ModLoader.SetupFileHook("lua/Weapons/BulletsMixin.lua", "lua/CNBalance/Mixin/BulletsMixin.lua", "post")
 ModLoader.SetupFileHook("lua/FireMixin.lua", "lua/CNBalance/Mixin/FireMixin.lua", "replace")
 ModLoader.SetupFileHook("lua/Weapons/Alien/HealSprayMixin.lua", "lua/CNBalance/Mixin/HealSprayMixin.lua", "replace")
+ModLoader.SetupFileHook("lua/ResearchMixin.lua", "lua/CNBalance/Mixin/ResearchMixin.lua", "post")
 
 ModLoader.SetupFileHook("lua/CloakableMixin.lua", "lua/CNBalance/Mixin/CloakableMixin.lua", "replace")
 ModLoader.SetupFileHook("lua/ClogFallMixin.lua", "lua/CNBalance/Mixin/ClogFallMixin.lua", "replace")
@@ -82,6 +83,10 @@ ModLoader.SetupFileHook("lua/MarineCommander.lua", "lua/CNBalance/MarineCommande
 ModLoader.SetupFileHook("lua/Hud/GUIPlayerResource.lua", "lua/CNBalance/GUI/GUIPlayerResource.lua", "post")
 ModLoader.SetupFileHook("lua/Hud/Marine/GUIMarineHUD.lua", "lua/CNBalance/GUI/GUIMarineHUD.lua", "post" )
 ModLoader.SetupFileHook("lua/GUIMarineBuyMenu.lua", "lua/CNBalance/GUIMarineBuyMenu.lua", "replace" )
+
+ModLoader.SetupFileHook("lua/Hud/GUIEvent.lua", "lua/CNBalance/GUI/GUIEvent.lua", "post")
+ModLoader.SetupFileHook("lua/Hud/GUINotificationItem.lua", "lua/CNBalance/GUI/GUINotificationItem.lua", "post")
+
 ModLoader.SetupFileHook("lua/GUIActionIcon.lua", "lua/CNBalance/GUIActionIcon.lua", "replace")
 ModLoader.SetupFileHook("lua/GUIPickups.lua", "lua/CNBalance/GUIPickups.lua", "post")
 ModLoader.SetupFileHook("lua/MarineBuy_Client.lua", "lua/CNBalance/MarineBuy_Client.lua", "post" )
