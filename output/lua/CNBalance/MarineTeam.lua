@@ -227,14 +227,28 @@ function MarineTeam:OnTeamKill(killEntityTechId)
     self:AddTeamResources(tResRefund)       --Don't treat this as income, its pRes
 end
 
-function MarineTeam:AddPlayerResources(player,amount)
+function MarineTeam:CollectAggressivePlayerResources(player,amount)
     amount = amount * (militaryProtocolTechNode:GetResearched() and kMilitaryProtocolAggressivePersonalResourcesScalar or 1)
     player:AddResources(amount)
     return amount
 end
 
-function MarineTeam:CollectPlayerResources()
-    return not militaryProtocolTechNode:GetResearched() 
+function MarineTeam:CollectTeamResources(teamRes,playerRes)
+    if militaryProtocolTechNode:GetResearched() then
+        local teamResFactor = 0
+        for techId,scalar in pairs(kMilitaryProtocolPassiveTeamResourceResearchesScalar) do
+            if self.techTree:GetHasTech(techId) then
+                teamResFactor = teamResFactor + scalar
+            end
+        end
+        playerRes = 0   --No player res now
+        if teamResFactor > 0 then
+            local playerBonus = GetPlayersAboveLimit(self:GetTeamNumber()) * kMilitaryProtocolResourcesScalarPlayerAboveLimit
+            teamResFactor = teamResFactor * (1 + playerBonus)
+            self:AddTeamResources(teamRes * teamResFactor)  --Dont treat this part as income (additional part for commander to drop equipments with limited kills)
+        end
+    end
+    PlayingTeam.CollectTeamResources(self,teamRes,playerRes)
 end
 
 function MarineTeam:GetResearchTimeFactor()

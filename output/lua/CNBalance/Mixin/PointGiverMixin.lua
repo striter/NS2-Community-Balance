@@ -44,8 +44,10 @@ if Server then
                 local resReward = pResReward * damageFraction
 
                 local team = currentAttacker:GetTeam()
-                if team then
-                    resReward = team:AddPlayerResources(currentAttacker,resReward)
+                if team and team.CollectAggressivePlayerResources then
+                    resReward = team:CollectAggressivePlayerResources(currentAttacker,resReward)
+                else
+                    currentAttacker:AddResources(resReward)
                 end
                 
                 currentAttacker:AddScore(scoreReward, resReward, attacker == currentAttacker)

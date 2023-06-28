@@ -474,4 +474,14 @@ if Server then
             end
         end
     end
+
+
+    local baseOnUpdate = Hive.OnUpdate
+    function Hive:OnUpdate(deltaTime)
+        baseOnUpdate(self,deltaTime)
+        
+        
+        
+    end
+    
 end 

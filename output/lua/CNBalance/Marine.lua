@@ -8,28 +8,14 @@ end
 
 --Weapons
 if Server then
-    
-    function Marine:InitWeapons()
-    
-        Player.InitWeapons(self)
-        
-        local primaryWeapon = GetHasTech(self,kTechId.LightMachineGunUpgrade) and LightMachineGun.kMapName or Rifle.kMapName
-        local secondaryWeapon = Pistol.kMapName
-        local meleeWeapon = Axe.kMapName
-        self:GiveItem(primaryWeapon)
-        self:GiveItem(secondaryWeapon)
-        self:GiveItem(meleeWeapon)
-        self:GiveItem(Builder.kMapName)
-        
-        self:SetQuickSwitchTarget(secondaryWeapon)
-        self:SetActiveWeapon(primaryWeapon)
-    end
-
     local baseOnKill = Marine.OnKill
     function Marine:OnKill(attacker, doer, point, direction)
         local primaryWeapon = self:GetWeaponInHUDSlot(kPrimaryWeaponSlot)
         if primaryWeapon then
-            if primaryWeapon.kMapName == SubMachineGun.kMapName then
+            if primaryWeapon.kMapName == SubMachineGun.kMapName
+            or primaryWeapon.kMapName == LightMachineGun.kMapName
+            --or primaryWeapon.kMapName == Rifle.kMapName
+            then
                 self.primaryRespawn = primaryWeapon.kMapName
             end
         end
@@ -322,7 +308,7 @@ function Marine:GetArmorAmount(armorLevels)
         end
     end
 
-    return hasMP and ( kMPMarineArmor + armorLevels * kMPMarineArmorPerUpgradeLevel) or (Marine.kBaseArmor * armorLevels * Marine.kArmorPerUpgradeLevel)
+    return hasMP and ( kMPMarineArmor + armorLevels * kMPMarineArmorPerUpgradeLevel) or (Marine.kBaseArmor + armorLevels * Marine.kArmorPerUpgradeLevel)
 end
 
 if Client then

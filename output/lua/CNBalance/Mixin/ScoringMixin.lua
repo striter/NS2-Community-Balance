@@ -24,6 +24,23 @@ function ScoringMixin:AddKill()
     self.killsCurrentLife = Clamp(self.killsCurrentLife + 1, 0, kMaxKills)
 end
 
+function ScoringMixin:AddContinuousScore(name, addAmount, amountNeededToScore, pointsGivenOnScore, resGivenOnScore )
+
+    if Server then
+
+        self.continuousScores[name] = self.continuousScores[name] or { amount = 0 }
+        self.continuousScores[name].amount = self.continuousScores[name].amount + addAmount
+        while self.continuousScores[name].amount >= amountNeededToScore do
+            resGivenOnScore = resGivenOnScore or 0
+            self:AddScore(pointsGivenOnScore, resGivenOnScore)
+            self:AddResources(resGivenOnScore)
+            self.continuousScores[name].amount = self.continuousScores[name].amount - amountNeededToScore
+
+        end
+
+    end
+
+end
 if Server then
     local baseCopyPlayerDataFrom = ScoringMixin.CopyPlayerDataFrom
     function ScoringMixin:CopyPlayerDataFrom(player)

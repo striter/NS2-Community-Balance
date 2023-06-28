@@ -7,12 +7,12 @@ function PrototypeLab:GetTechButtons(techId)
     return techTable
 end
 
-local baseGetCanBeUsed = PrototypeLab.GetCanBeUsed
-function PrototypeLab:GetCanBeUsed(player, useSuccessTable)
-
-    baseGetCanBeUsed(self,player,useSuccessTable)
-    if GetHasTech(self,kTechId.MilitaryProtocol) then
-        useSuccessTable.useSuccess = false
-    end
-
-end
+--local baseGetCanBeUsed = PrototypeLab.GetCanBeUsed
+--function PrototypeLab:GetCanBeUsed(player, useSuccessTable)
+--
+--    baseGetCanBeUsed(self,player,useSuccessTable)
+--    if GetHasTech(self,kTechId.MilitaryProtocol) then
+--        useSuccessTable.useSuccess = false
+--    end
+--
+--end

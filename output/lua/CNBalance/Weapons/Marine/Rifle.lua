@@ -14,3 +14,12 @@ if Client then
         return { xSize = 256, ySize = 417, script = "lua/CNBalance/GUI/GUIRifleDisplay.lua", variant = self:GetRifleVariant() }
     end
 end
+
+if Server then
+    function Rifle:GetVariantOverride(variant)
+        if GetHasTech(self,kTechId.MilitaryProtocol) then
+            return kRifleVariants.chroma
+        end
+        return variant
+    end
+end 

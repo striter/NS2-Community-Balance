@@ -8,7 +8,6 @@ function CommandStation:OnInitialized()
     end
 end
 
-
 kResearchToStationType =
 {
     [kTechId.StandardSupply] = kTechId.StandardStation,
@@ -42,7 +41,10 @@ function CommandStation:GetTechButtons()
         techButtons[1] = kTechId.LifeSustain
         techButtons[2] = kTechId.ArmorRegen
     end
-    techButtons[4] = kTechId.MilitaryProtocol
+
+    if Shared.GetCheatsEnabled() then
+        techButtons[4] = kTechId.MilitaryProtocol
+    end
     
     return techButtons
 end
@@ -72,3 +74,5 @@ ArmorStation.kMapName = "armor_station"
 --Shared.LinkClassToMap("ExplosiveStation",ArmorStation.kMapName , { })
 class 'ElectronicStation' (CommandStation)
 ElectronicStation.kMapName = "electronic_station"
+
+Shared.RegisterNetworkMessage("SwitchLocalize", {})

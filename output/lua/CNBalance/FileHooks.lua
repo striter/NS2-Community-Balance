@@ -137,6 +137,7 @@ ModLoader.SetupFileHook("lua/Weapons/Marine/GrenadeLauncher.lua", "lua/CNBalance
 
 ModLoader.SetupFileHook("lua/MarineVariantMixin.lua","lua/CNBalance/MarineVariantMixin.lua","post")
 ModLoader.SetupFileHook("lua/ExoVariantMixin.lua","lua/CNBalance/ExoVariantMixin.lua","post")
+ModLoader.SetupFileHook("lua/RifleVariantMixin.lua","lua/CNBalance/RifleVariantMixin.lua","post")
 
 ModLoader.SetupFileHook("lua/GUIInsight_PlayerHealthbars.lua", "lua/CNBalance/GUI/GUIInsight_PlayerHealthbars.lua", "post")
 --------------------

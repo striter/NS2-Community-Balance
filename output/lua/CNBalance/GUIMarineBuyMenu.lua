@@ -755,11 +755,11 @@ function GUIMarineBuyMenu:SetHostStructure(hostStructure)
     self.hostStructure = hostStructure
 
     if self.hostStructure:isa("Armory") then
-        if GetHasTech(hostStructure,kTechId.MilitaryProtocol) then
-            self:CreateArmoryUI_MilitaryProtocol()
-        else
+        --if GetHasTech(hostStructure,kTechId.MilitaryProtocol) then
+        --    self:CreateArmoryUI_MilitaryProtocol()
+        --else
             self:CreateArmoryUI()
-        end
+        --end
     elseif self.hostStructure:isa("PrototypeLab") then
         self:CreatePrototypeLabUI()
     else
@@ -980,10 +980,7 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     weaponGroupTopLeft:SetOptionFlag(GUIItem.CorrectScaling)
     self.background:AddChild(weaponGroupTopLeft)
 ---------------
-    local havePrimary = PlayerUI_GetHasItem(kTechId.LightMachineGun) or PlayerUI_GetHasItem(kTechId.Rifle)
-    local buyPrimary = PlayerUI_GetHasTech(kTechId.LightMachineGunUpgrade) and kTechId.LightMachineGun or kTechId.Rifle
-    
-    local primaryTech =  havePrimary and kTechId.SubMachineGun or buyPrimary
+    local primaryTech =  PlayerUI_GetHasItem(kTechId.Rifle) and kTechId.SubMachineGun or kTechId.Rifle
     local secondaryTech = PlayerUI_GetHasItem(kTechId.Pistol) and kTechId.Revolver or kTechId.Pistol
     self:_InitializeWeaponGroup(weaponGroupTopLeft, x2ButtonPositions,
     {
@@ -1002,8 +999,8 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     self:_InitializeWeaponGroup(weaponGroupBottomLeft, x4ButtonPositions,
     {
         kTechId.Shotgun,
+        kTechId.LightMachineGun,
         kTechId.HeavyMachineGun,
-        kTechId.Cannon,
         kTechId.Flamethrower,
     })
 

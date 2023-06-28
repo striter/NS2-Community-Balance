@@ -13,6 +13,7 @@ kPlayerResEachTowerAboveThreshold = 0.05
 --Pres reward for aggressive playing (too many farmers?)
 kTechDataPersonalResOnKill = {
     --Marines
+    [kTechId.Egg] = 0.2,
     [kTechId.Extractor] = 2.5, [kTechId.PoweredExtractor] = 4,
     [kTechId.RoboticsFactory] = 2.5, [kTechId.ARCRoboticsFactory] = 2.5,
     [kTechId.Armory] = 1,[kTechId.Observatory] = 2.5, [kTechId.PhaseGate] = 4,
@@ -61,15 +62,18 @@ kTeamResourceRefundPerBountyKills = 0.01    --Since bounty players kills this mu
 kMilitaryProtocolResearchCost = 10
 kMilitaryProtocolResearchTime = 20
 kMilitaryProtocolResearchDurationMultiply = 1.2     --1.33?
-kMilitaryProtocolAggressivePersonalResourcesScalar = 2      --Simply double it? they don't need too much pres to buy defensive or grenades/welders (and they can shared it tbh)
+kMilitaryProtocolAggressivePersonalResourcesScalar = 1.5      --They don't need too much pres to buy defensive or grenades/welders (and they can shared it tbh)
+kMilitaryProtocolPassiveTeamResourceResearchesScalar = {
+    [kTechId.MinesTech] = 0.1, [kTechId.ShotgunTech] = 0.2, [kTechId.AdvancedArmory] = 0.2, [kTechId.JetpackTech] = 0.2, [kTechId.ExosuitTech] = 0.3, 
+}
+kMilitaryProtocolResourcesScalarPlayerAboveLimit = 0.1  --Multiply upon one
 kMilitaryProtocolTeamResourcesPerKill = {          --Use this when military protocol enabled
-    [kTechId.Harvester] = 2,
-    [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 3,
+    [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2,
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
-    [kTechId.Skulk] = 2, [kTechId.Gorge] = 3,[kTechId.Prowler] = 7, [kTechId.Lerk] = 10, [kTechId.Fade] = 15, [kTechId.Onos] = 20,
-    --[kTechId.Cyst] = 0.5,
-    --[kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
-    --[kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20,
+    [kTechId.Skulk] = 1.5, [kTechId.Gorge] = 2,[kTechId.Prowler] = 2, [kTechId.Lerk] = 2, [kTechId.Fade] = 3, [kTechId.Onos] = 3,
+    --[kTechId.Cyst] = 0.2,
+    [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
+    [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20,
 }
 
 kMatchMinPlayers = 10
@@ -263,10 +267,10 @@ kFlamethrowerDropCost = 15
 kFlamethrowerDropCooldown = 0
 
 kFirePlayerDOTDelay = 1
-kPlayerFireDOTPerSecond = 6.0
-kDragonBreathPlayerFireDamagePerStack = { kPlayerFireDOTPerSecond / 4, kPlayerFireDOTPerSecond / 3.3, kPlayerFireDOTPerSecond / 2.6, kPlayerFireDOTPerSecond / 2}
+kPlayerFireDOTPerSecond = 5
+kDragonBreathPlayerFireDamagePerStack = { kPlayerFireDOTPerSecond / 4, kPlayerFireDOTPerSecond / 3.6, kPlayerFireDOTPerSecond / 3.3, kPlayerFireDOTPerSecond / 3}
 kFlameThrowerPlayerFireDamagePerStack = { kPlayerFireDOTPerSecond, kPlayerFireDOTPerSecond, kPlayerFireDOTPerSecond, kPlayerFireDOTPerSecond }
-kPlayerFireDamageMaxStack = { kPlayerFireDOTPerSecond * 2, kPlayerFireDOTPerSecond * 3,kPlayerFireDOTPerSecond * 4,kPlayerFireDOTPerSecond * 5 }
+kPlayerFireDamageMaxStack = { kPlayerFireDOTPerSecond * 3, kPlayerFireDOTPerSecond * 4,kPlayerFireDOTPerSecond * 5,kPlayerFireDOTPerSecond * 6 }
 kFireStructureDOTDelay = 0.5
 kStructureFireDOTPerSecond = 8.0
 kDragonBreathStructureFireDamagePerStack = { kStructureFireDOTPerSecond / 100, kStructureFireDOTPerSecond / 90,kStructureFireDOTPerSecond/ 80, kStructureFireDOTPerSecond / 70 }--kStructureFireDOTPerSecond / 20, kStructureFireDOTPerSecond / 18, kStructureFireDOTPerSecond / 16, kStructureFireDOTPerSecond / 14}
@@ -324,7 +328,7 @@ kExosuitTechResearchCost = 20
 kExosuitTechResearchTime = 90
 kDualExosuitCost = 55
 kDualRailgunExosuitCost = 55
-kDualExosuitDropCost = 35
+kDualExosuitDropCost = 36
 
 kOnosDevourCost = 10
 kOnosDevourTime = 40

@@ -18,7 +18,11 @@ if Server then
 
     -- Usually because the client connected or changed their options.
     function MarineVariantMixin:OnClientUpdated(client, isPickup)
-
+        --Creepy hack
+        if table.icontains(kSpectatorMode,"Tinyman") and self.specMode == kSpectatorMode.Tinyman then return end
+        --
+        
+        
         if not Shared.GetIsRunningPrediction() then
             Player.OnClientUpdated(self, client, isPickup)
 

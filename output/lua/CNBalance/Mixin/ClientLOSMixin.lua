@@ -4,7 +4,7 @@ if Server then
 
     kAllowedLOSWeapon[kTechId.Revolver] = true
     kAllowedLOSWeapon[kTechId.SubMachineGun] = true
-    kAllowedLOSWeapon[kTechId.MachineGun] = true
+    kAllowedLOSWeapon[kTechId.LightMachineGun] = true
     kAllowedLOSWeapon[kTechId.Cannon] = true
     kAllowedLOSWeapon[kTechId.Volley] = true
     kAllowedOtherWeapon[kTechId.AcidSpray] = true

@@ -15,10 +15,11 @@ local kHealPlayerPercent = 3
 local kRange = 6
 local kHealCylinderWidth = 3
 
-HealSprayMixin.kHealScoreAdded = 2
 -- Every kAmountHealedForPoints points of damage healed, the player gets
 -- kHealScoreAdded points to their score.
-HealSprayMixin.kAmountHealedForPoints = 400
+HealSprayMixin.kAmountHealedForPoints = 500
+HealSprayMixin.kHealScoreAdded = 2
+HealSprayMixin.kHealPResAdded = 0.1
 
 -- Whenever a maturity-using entity is healed, skip this amount of seconds of maturity gain
 -- immediately.
@@ -143,7 +144,7 @@ local function HealEntity(_, player, targetEntity)
     
     -- Do not count amount self healed.
     if targetEntity ~= player then
-        player:AddContinuousScore("HealSpray", amountHealed, HealSprayMixin.kAmountHealedForPoints, HealSprayMixin.kHealScoreAdded)
+        player:AddContinuousScore("HealSpray", amountHealed, HealSprayMixin.kAmountHealedForPoints, HealSprayMixin.kHealScoreAdded , HealSprayMixin.kHealPResAdded)
     end
     
     if targetEntity.OnHealSpray then

@@ -1,3 +1,7 @@
+Welder.kHealPResAdded = 0.1
+Welder.kHealScoreAdded = 2
+Welder.kAmountHealedForPoints = 400
+
 function Welder:GetReplacementWeaponMapName()
     return Axe.kMapName or Knife.kMapName
 end
@@ -64,7 +68,7 @@ function Welder:PerformWeld(player)
                 if success then
 
                     local addAmount = (target:GetHealth() - prevHealth) + (target:GetArmor() - prevArmor)
-                    player:AddContinuousScore("WeldHealth", addAmount, Welder.kAmountHealedForPoints, Welder.kHealScoreAdded)
+                    player:AddContinuousScore("WeldHealth", addAmount, Welder.kAmountHealedForPoints, Welder.kHealScoreAdded,Welder.kHealPResAdded)
 
                     local oldArmor = player:GetArmor()
 

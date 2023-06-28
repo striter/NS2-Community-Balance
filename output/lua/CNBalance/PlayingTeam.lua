@@ -77,15 +77,6 @@ function PlayingTeam:AddTeamResources(amount, isIncome)
     self:SetTeamResources(self.teamResources + teamResourceDelta)
 end
 
-function PlayingTeam:AddPlayerResources(player,amount)      --Add player resources by aggressive playing
-    player:AddResources(amount)
-    return amount
-end
-
-function PlayingTeam:CollectPlayerResources()
-    return true
-end
-
 function PlayingTeam:UpdateResTick()
 
     local time = Shared.GetTime()
@@ -104,26 +95,28 @@ function PlayingTeam:UpdateResTick()
             end
         end
 
-        if rtActiveCount <= 0 then
-            self:AddTeamResources(kTeamResourceWithoutTower,true)
-            return
-        end
-        
         local rtAboveThreshold = math.max( rtActiveCount - kMaxEfficiencyTowers,0)
         local rtInsideThreshold = math.min(rtActiveCount,kMaxEfficiencyTowers)
         local teamResourceToCollect = rtInsideThreshold * kTeamResourceEachTower + rtAboveThreshold * kTeamResourceEachTowerAboveThreshold
-        self:AddTeamResources(teamResourceToCollect,true)
-        
-        if not self:CollectPlayerResources() then return end
         local playerResourceToCollect = rtInsideThreshold * kPlayerResEachTower + rtAboveThreshold * kPlayerResEachTowerAboveThreshold
+        if rtActiveCount <= 0 then
+            teamResourceToCollect = kTeamResourceWithoutTower
+        end
+        self:CollectTeamResources(teamResourceToCollect,playerResourceToCollect)
+    end
+end
+
+function PlayingTeam:CollectTeamResources(teamRes,playerRes)
+    if teamRes > 0 then
+        self:AddTeamResources(teamRes,true)
+    end
+    if playerRes > 0 then
         for _, player in ipairs(GetEntitiesForTeam("Player", self:GetTeamNumber())) do
             if not player:isa("Commander") then
-                player:AddResources(playerResourceToCollect)
+                player:AddResources(playerRes)
             end
         end
-        
     end
-    
 end
 
 function PlayingTeam:GetRefundBase()

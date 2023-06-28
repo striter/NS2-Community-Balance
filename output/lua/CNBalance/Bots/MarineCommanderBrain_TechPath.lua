@@ -61,7 +61,6 @@ local kMarineCommanderTechPath =
     {
         -- Auxillary stuff
         kTechId.ShotgunTech,
-        kTechId.CombatBuilderTech,
         kTechId.Weapons2,
     },
     -- Tier 4
@@ -79,7 +78,7 @@ local kMarineCommanderTechPath =
         kTechId.StandardSupply,
         kTechId.LightMachineGunUpgrade,
         kTechId.DragonBreath,
-        kTechId.CannonTech,
+        kTechId.GrenadeLauncherUpgrade,
     },
 }
 
