@@ -151,13 +151,13 @@ end
 if kLocales then
     kLocales["GAME_LENGTH_TEAM1"] = "Cleaning:[%s:%s]"
     kLocales["RESPAWN_EXTEND_TEAM1"] = "Reinforce:[%is]"
-    kLocales["TEAM_BOUNTY1"] = "Resource Redispatch[%s]"
+    kLocales["TEAM_BOUNTY1"] = "Res-Redispatch[%s*]"
     kLocales["NEXT_SPAWN_IN_TEAM1"] = "Reinforcing:%i"
     kLocales["WAITING_SPAWN_TEAM1"] = "Teleport Awaiting..."
     
     kLocales["GAME_LENGTH_TEAM2"] = "Infesting:[%s:%s]"
     kLocales["RESPAWN_EXTEND_TEAM2"] = "Reformation:[%is]"
-    kLocales["TEAM_BOUNTY2"] = "Resource Reproduce:[%s]"
+    kLocales["TEAM_BOUNTY2"] = "Res-Reproduce:[%s*]"
     kLocales["NEXT_SPAWN_IN_TEAM2"] = "Biomass Reformation:%i"
     kLocales["WAITING_SPAWN_TEAM2"] = "Hatch Awaiting..."
 

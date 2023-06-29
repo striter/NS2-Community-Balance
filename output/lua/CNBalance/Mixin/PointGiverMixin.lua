@@ -20,10 +20,10 @@ if Server then
         local tResRefundPercentage = kTechDataTeamResRefundPercentageOnKill[techID] or 0
 
         if selfIsPlayer then
-            local bounty = self:GetBountyCurrentLife()
-            if bounty > 0 then --Claim bounty
-                local presPerBountyKill =  (self:GetTeamNumber() == kAlienTeamType and kPResPerBountyKillsAsAlien or kPResPerBountyKillsAsMarine)
-                pResReward = pResReward + bounty * presPerBountyKill
+            local bountyScore = self:GetBountyCurrentLife()  --Claim bounty
+            if bountyScore > 0 then
+                local presPerScore =  (self:GetTeamNumber() == kAlienTeamType and kPResPerBountyScoreAsAlien or kPResPerBountyScoreAsMarine)
+                pResReward = pResReward + bountyScore * presPerScore
             end
         end
 
@@ -32,9 +32,6 @@ if Server then
 
             local currentAttacker = Shared.GetEntity(attackerId)
             if currentAttacker and HasMixin(currentAttacker, "Scoring") then
-                if selfIsPlayer and currentAttacker ~= attacker then
-                    currentAttacker:AddAssistKill()
-                end
 
                 local damageDone = self.damagePoints[attackerId]
                 local damageFraction = Clamp(damageDone / totalDamageDone, 0, 1)
@@ -42,13 +39,19 @@ if Server then
 
                 local resReward = pResReward * damageFraction
 
-                local team = currentAttacker:GetTeam()
-                if team and team.CollectAggressivePlayerResources then
-                    resReward = team:CollectAggressivePlayerResources(currentAttacker,resReward)
-                else
-                    currentAttacker:AddResources(resReward)
+                if not currentAttacker:isa("Commander") then    --Don't collect pres for commander
+                    local team = currentAttacker:GetTeam()
+                    if team and team.CollectAggressivePlayerResources then
+                        resReward = team:CollectAggressivePlayerResources(currentAttacker,resReward)
+                    else
+                        currentAttacker:AddResources(resReward)
+                    end
                 end
                 
+                if damageFraction > kAssistMinimumDamageFraction and selfIsPlayer and currentAttacker ~= attacker then
+                    currentAttacker:AddAssistKill()
+                end
+
                 currentAttacker:AddScore(scoreReward, resReward, attacker == currentAttacker)
             end
         end

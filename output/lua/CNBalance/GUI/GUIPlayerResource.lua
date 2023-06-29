@@ -1,15 +1,14 @@
+
+--local baseInitialize = GUIPlayerResource.Initialize
+--function GUIPlayerResource:Initialize(style, teamNumber)
+--    baseInitialize(self,style,teamNumber)
+--
+--end
+
 --local baseUpdate = GUIPlayerResource.Update
 --function GUIPlayerResource:Update(_, parameters)
 --    baseUpdate(self,_,parameters)
 --
---
 --    local localPlayer = Client.GetLocalPlayer()
---    local presDisabled = GetHasTech(localPlayer,kTechId.MilitaryProtocol)
---    if self.presDisabled ~= presDisabled then
---        self.presDisabled = presDisabled
---        self.pResDescription:SetText(Locale.ResolveString(presDisabled and "MILITARY_PROTOCOL_ENABLED" or "RESOURCES"))
---        self.personalText:SetIsVisible(presDisabled)
---        self.personalIcon:SetIsVisible(presDisabled)
---    end
---
+--    self.pResDescription:SetText(tostring(localPlayer:GetBountyCurrentLife()))
 --end

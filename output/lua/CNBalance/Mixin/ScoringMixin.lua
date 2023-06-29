@@ -1,39 +1,55 @@
-ScoringMixin.networkVars.killsCurrentLife = "integer"
+ScoringMixin.networkVars.bountyCurrentLife = "integer"
 
 local baseInitMixin = ScoringMixin.__initmixin
 function ScoringMixin:__initmixin()
     baseInitMixin(self)
-    self.killsCurrentLife = 0
-end
-
-function ScoringMixin:GetKillsCurrentLife()
-    return self.killsCurrentLife
-end
-
-local baseOnKill = ScoringMixin.OnKill
-function ScoringMixin:OnKill()
-    baseOnKill(self)
-    self.killsCurrentLife = 0
+    self.bountyCurrentLife = 0
 end
 
 local baseAddKill = ScoringMixin.AddKill
 function ScoringMixin:AddKill()
     baseAddKill(self)
-    
     if GetWarmupActive() then return end
-    self.killsCurrentLife = Clamp(self.killsCurrentLife + 1, 0, kMaxKills)
+    self.bountyCurrentLife = Clamp(self.bountyCurrentLife + kBountyScoreEachKill, 0, kMaxBountyScore)
 end
 
+local baseAddAssistKill = ScoringMixin.AddAssistKill
+function ScoringMixin:AddAssistKill()
+    baseAddAssistKill(self)
+    if GetWarmupActive() then return end
+    self.bountyCurrentLife = Clamp(self.bountyCurrentLife + kBountyScoreEachAssist, 0, kMaxBountyScore)
+end
+
+local baseOnKill = ScoringMixin.OnKill
+function ScoringMixin:OnKill()
+    baseOnKill(self)
+    self.bountyCurrentLife  0
+end
 
 function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint)
-    local scalar = self:GetBountyCurrentLife() * kBountyTargetDamageReceiveScalarPerBountyKill
-    if scalar > 0 and damageTable.damage > 0 then
-        damageTable.damage = damageTable.damage * (1 + scalar)      --Additional Damage
+    local bountyScore = self:GetBountyCurrentLife()
+    if bountyScore > 0 and damageTable.damage > 0 then
+        local scalar = bountyScore * (math.floor(bountyScore / kBountyTargetDamageReceiveStep)+ 1) * kBountyDamageReceiveBaseEachStep
+        damageTable.damage = damageTable.damage * (1 + scalar)      --Receive Additional Damage And Die Please
+    end
+end
+
+if Server then
+    local baseCopyPlayerDataFrom = ScoringMixin.CopyPlayerDataFrom
+    function ScoringMixin:CopyPlayerDataFrom(player)
+        baseCopyPlayerDataFrom(self,player)
+        self.bountyCurrentLife = player.bountyCurrentLife
+    end
+
+    local baseResetScores = ScoringMixin.ResetScores
+    function ScoringMixin:ResetScores()
+        baseResetScores(self)
+        self.bountyCurrentLife = 0
     end
 end
 
 function ScoringMixin:GetBountyCurrentLife()
-    return math.max(self:GetKillsCurrentLife() - kBountyMinKills,0)
+    return math.max(self.bountyCurrentLife - kBountyClaimMin, 0)
 end
 
 function ScoringMixin:AddContinuousScore(name, addAmount, amountNeededToScore, pointsGivenOnScore, resGivenOnScore )
@@ -53,18 +69,3 @@ function ScoringMixin:AddContinuousScore(name, addAmount, amountNeededToScore, p
     end
 
 end
-if Server then
-    local baseCopyPlayerDataFrom = ScoringMixin.CopyPlayerDataFrom
-    function ScoringMixin:CopyPlayerDataFrom(player)
-        baseCopyPlayerDataFrom(self,player)    
-        self.killsCurrentLife = player.killsCurrentLife
-    end
-
-
-    local baseResetScores = ScoringMixin.ResetScores
-    function ScoringMixin:ResetScores()
-        baseResetScores(self)
-        self.killsCurrentLife = 0
-    end
-end 
-
