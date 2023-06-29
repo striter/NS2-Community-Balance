@@ -54,11 +54,11 @@ kTechDataTeamResRefundPercentageOnKill = {
 }
 
 --If a player kills too many players and crushing the game 
-kAssistMinimumDamageFraction = 0.2      --Avoid parasiter or babbler assists , pretty weird
+kAssistMinimumDamageFraction = 0.3      --Avoid parasiter or babbler assists ,feels pretty weird
 kBountyScoreEachAssist = 1 kBountyScoreEachKill = 2 kMaxBountyScore = 512       --You can't kill 256 players in 1 life
 kBountyClaimMin = 10
 kPResPerBountyScoreAsAlien = 0.5  kPResPerBountyScoreAsMarine = 0.25
-kBountyTargetDamageReceiveStep = 16  kBountyDamageReceiveBaseEachStep = (0.1 / kBountyTargetDamageReceiveStep)      --0-7 10% 7-14 40% 14-21 80% --'Ve killed too many player without dying, increase its damage receive please.
+kBountyTargetDamageReceiveStep = 18  kBountyDamageReceiveBaseEachStep = (0.1 / kBountyTargetDamageReceiveStep)      --0-10%,20%-40%,40%-80%, increase its damage receive by steps.
 
 --Toy for marine commander (remove all marines passive income, harsh one)
 kMilitaryProtocolResearchCost = 10
