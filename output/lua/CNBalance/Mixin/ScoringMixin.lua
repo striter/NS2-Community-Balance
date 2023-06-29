@@ -23,7 +23,7 @@ end
 local baseOnKill = ScoringMixin.OnKill
 function ScoringMixin:OnKill()
     baseOnKill(self)
-    self.bountyCurrentLife  0
+    self.bountyCurrentLife = 0
 end
 
 function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint)
