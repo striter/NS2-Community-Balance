@@ -24,6 +24,18 @@ function ScoringMixin:AddKill()
     self.killsCurrentLife = Clamp(self.killsCurrentLife + 1, 0, kMaxKills)
 end
 
+
+function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint)
+    local scalar = self:GetBountyCurrentLife() * kBountyTargetDamageReceiveScalarPerBountyKill
+    if scalar > 0 and damageTable.damage > 0 then
+        damageTable.damage = damageTable.damage * (1 + scalar)      --Additional Damage
+    end
+end
+
+function ScoringMixin:GetBountyCurrentLife()
+    return math.max(self:GetKillsCurrentLife() - kBountyMinKills,0)
+end
+
 function ScoringMixin:AddContinuousScore(name, addAmount, amountNeededToScore, pointsGivenOnScore, resGivenOnScore )
 
     if Server then

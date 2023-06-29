@@ -56,13 +56,13 @@ kTechDataTeamResRefundPercentageOnKill = {
 --If a player kills too many players and crushing the game
 kBountyMinKills = 4
 kPResPerBountyKillsAsAlien = 1  kPResPerBountyKillsAsMarine = 0.5
-kTeamResourceRefundPerBountyKills = 0.01    --Since bounty players kills this much player...
+kBountyTargetDamageReceiveScalarPerBountyKill = 0.004       --'Ve killed too many player without dying, increase its damage receive please.
 
 --Toy for marine commander (remove all marines passive income, harsh one)
 kMilitaryProtocolResearchCost = 10
 kMilitaryProtocolResearchTime = 20
 kMilitaryProtocolResearchDurationMultiply = 1.2     --1.33?
-kMilitaryProtocolAggressivePersonalResourcesScalar = 1.5      --They don't need too much pres to buy defensive or grenades/welders (and they can shared it tbh)
+kMilitaryProtocolAggressivePersonalResourcesScalar = 2      --They don't need too much pres to buy defensive or grenades/welders (and they can shared it tbh)
 kMilitaryProtocolPassiveTeamResourceResearchesScalar = {
     [kTechId.MinesTech] = 0.1, [kTechId.ShotgunTech] = 0.2, [kTechId.AdvancedArmory] = 0.2, [kTechId.JetpackTech] = 0.2, [kTechId.ExosuitTech] = 0.3, 
 }
@@ -335,7 +335,7 @@ kOnosDevourTime = 40
 
 kUmbraBulletModifier = 0.8
 
-kDevourEnergyCost = 60 --50
+kDevourEnergyCost = 55 --50
 kDevourPunchDamage = 70 --100
 
 kTunnelUpgradeCost = 15
@@ -463,7 +463,7 @@ kBoneShieldResearchTime = 40
 kStompResearchCost = 25
 kStompResearchTime = 90
 kChargeDamage = 12
-kStompEnergyCost = 25
+kStompEnergyCost = 35
 kStompDamageType = kDamageType.Structural
 kStompDamage = 45
 kStompRange = 12

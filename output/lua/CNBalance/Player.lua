@@ -3,10 +3,19 @@ if Client then
 	function PlayerUI_GetCrosshairY()
 		if mapname == Revolver.kMapName then
 			mapname = Pistol.kMapName
+		elseif mapname == LightMachineGun.kMapName then
+			mapname = Rifle.kMapName
+		elseif mapname == SubMachineGun.kMapName then
+			mapname = Shotgun.kMapName
+		elseif mapname == Knife.kMapName then
+			mapname = Axe.kMapName
+		elseif mapname == Cannon.kMapName then
+			mapname = Rifle.kMapName
 		end
 		return origGetCrosshairY(self)
 	end
 end
+
 
 
 if Server then

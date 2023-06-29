@@ -20,11 +20,10 @@ if Server then
         local tResRefundPercentage = kTechDataTeamResRefundPercentageOnKill[techID] or 0
 
         if selfIsPlayer then
-            local bountyKills = math.max(self:GetKillsCurrentLife() - kBountyMinKills,0)
-            if bountyKills > 0 then --Claim bounty
+            local bounty = self:GetBountyCurrentLife()
+            if bounty > 0 then --Claim bounty
                 local presPerBountyKill =  (self:GetTeamNumber() == kAlienTeamType and kPResPerBountyKillsAsAlien or kPResPerBountyKillsAsMarine)
-                pResReward = pResReward + bountyKills * presPerBountyKill
-                tResRefundPercentage = tResRefundPercentage + bountyKills * kTeamResourceRefundPerBountyKills
+                pResReward = pResReward + bounty * presPerBountyKill
             end
         end
 
