@@ -217,7 +217,8 @@ ModLoader.SetupFileHook("lua/Weapons/Alien/Web.lua", "lua/CNBalance/Structures/A
 
 --Bot
 ModLoader.SetupFileHook("lua/Clog.lua", "lua/CNBalance/Bots/Clog.lua", "post" )
-ModLoader.SetupFileHook("lua/bots/MarineCommanerBrain_TechPath.lua", "lua/CNBalance/Bots/MarineCommanderBrain_TechPath.lua", "replace" )
+--ModLoader.SetupFileHook("lua/bots/MarineCommanerBrain_TechPath.lua", "lua/CNBalance/Bots/MarineCommanderBrain_TechPath.lua", "replace" )
+--ModLoader.SetupFileHook("lua/bots/MarineCommanderBrain_Senses.lua", "lua/CNBalance/Bots/MarineCommanderBrain_Senses.lua", "post" )
 ModLoader.SetupFileHook("lua/bots/AlienCommanderBrain_TechPathData.lua", "lua/CNBalance/Bots/AlienCommanderBrain_TechPathData.lua", "replace" )
 ModLoader.SetupFileHook("lua/bots/MarineBrain_Data.lua", "lua/CNBalance/Bots/MarineBrain_Data.lua", "post" )
 

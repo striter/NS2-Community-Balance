@@ -43,6 +43,7 @@ function BuildTechData()
         [kTechDataDisplayName] = "STANDARD_SUPPLY",
         [kTechDataTooltipInfo] = "STANDARD_SUPPLY_TOOLTIP",
         [kTechDataResearchName] = "STANDARD_SUPPLY",
+        [kTechDataUpgradeTech] = kTechId.CommandStation,
     })
     
     table.insert(techData,{
@@ -86,6 +87,7 @@ function BuildTechData()
         [kTechDataDisplayName] = "ARMOR_SUPPLY",
         [kTechDataTooltipInfo] = "ARMOR_SUPPLY_TOOLTIP",
         [kTechDataResearchName] = "ARMOR_SUPPLY",
+        [kTechDataUpgradeTech] = kTechId.CommandStation,
     })
 
     table.insert(techData,{
@@ -138,6 +140,7 @@ function BuildTechData()
         [kTechDataDisplayName] = "EXPLOSIVE_SUPPLY",
         [kTechDataResearchName] = "EXPLOSIVE_SUPPLY",
         [kTechDataTooltipInfo] = "EXPLOSIVE_SUPPLY_TOOLTIP",
+        [kTechDataUpgradeTech] = kTechId.CommandStation,
     })
 
     table.insert(techData,{
@@ -182,6 +185,7 @@ function BuildTechData()
         [kTechDataDisplayName] = "ELECTRONIC_SUPPLY",
         [kTechDataResearchName] = "ELECTRONIC_SUPPLY",
         [kTechDataTooltipInfo] = "ELECTRONIC_SUPPLY_TOOLTIP",
+        [kTechDataUpgradeTech] = kTechId.CommandStation,
     })
 
     table.insert(techData,{
