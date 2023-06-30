@@ -49,7 +49,7 @@ kHealingClampMaxHPAmount = 0.15
 
 kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5    kSkulkHealthPerBioMass = 3 kSkulkHealthPerPlayerAboveLimit = 1
 kSkulkDamageReduction = {
-    --["Shotgun"] = 0.88,
+    ["Shotgun"] = 0.88,
     ["Grenade"] = 0.8,
     ["ImpactGrenade"] = 0.8,
     ["Cannon"] = 0.9,

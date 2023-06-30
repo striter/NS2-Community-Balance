@@ -73,6 +73,7 @@ function SporeMine:OnCreate()
     
     if Server then
         self.silenced = false
+        self.timeLastSpore = Shared.GetTime()
     end
 
     self:SetRelevancyDistance(kMaxRelevancyDistance)
@@ -176,24 +177,47 @@ function SporeMine:OnAdjustModelCoords(modelCoords)
     return modelCoords
 end
 
+function SporeMine:GetIsFlameAble()
+    return true
+end
+
 if Server then
 
     function SporeMine:GetSendDeathMessageOverride()
         return not self.consumed
     end
     
-    function SporeMine:OnTakeDamage(_, attacker, doer)
-        if self:GetIsBuilt() then
-            local owner = self:GetOwner()
-            local doerClassName = doer and doer:GetClassName()
-
-            if owner and doer and attacker == owner and doerClassName == "Spit" then
-                self:Explode(attacker:GetOrigin())
+    --function SporeMine:OnTakeDamage(_, attacker, doer)
+    --    if self:GetIsBuilt() then
+    --        local owner = self:GetOwner()
+    --        local doerClassName = doer and doer:GetClassName()
+    --
+    --        if owner and doer and attacker == owner and doerClassName == "Spit" then
+    --            self:Explode(attacker:GetOrigin())
+    --        end
+    --    end
+    --end
+    
+    function SporeMine:CastSpore(_destination)
+        local coords = self:GetCoords()
+        local upward = coords.yAxis
+        local origin = self:GetOrigin()
+        if not _destination then    --Trace upward and try find the destination
+            local trace = Shared.TraceRay(self:GetOrigin() + coords.yAxis * 0.1, self:GetOrigin() + coords.yAxis * kSporeMineCloudCastRadius,  CollisionRep.Default,  PhysicsMask.Bullets, EntityFilterAll())
+            if trace.fraction ~= 1 then
+                _destination = trace.endPoint - upward * 2
+            else
+                _destination =  self:GetOrigin() + upward * 2      --Nothing traced? leave a dust cloud
             end
         end
+        
+        local spores = CreateEntity( SporeCloud.kMapName, origin - upward * 1 , self:GetTeamNumber())
+        local sporeDirection = _destination - origin
+        spores:SetTravelDestination( origin + GetNormalizedVector(sporeDirection) * math.min(sporeDirection:GetLength(), kSporeMineCloudCastRadius) ,true)
+        spores:SetOwner(self:GetOwner())
     end
 
-    function SporeMine:Explode(_destination)
+    function SporeMine:Explode()
 
         local owner = self:GetOwner()
         
@@ -208,21 +232,13 @@ if Server then
         dotMarker:SetTargetEffectName("bilebomb_onstructure")
         dotMarker:SetDeathIconIndex(kDeathMessageIcon.SporeMine)
         dotMarker:SetOwner(owner)
-
+        
         local function NoFalloff()
             return 0
         end
         dotMarker:SetFallOffFunc(NoFalloff)
-
         dotMarker:TriggerEffects("bilebomb_hit")
 
-        if GetIsTechUnlocked(self,kTechId.Spores) and _destination then
-            local position = self:GetOrigin()
-            local spores = CreateEntity( SporeCloud.kMapName,position , self:GetTeamNumber())
-            local direction = _destination - position
-            spores:SetTravelDestination( position + GetNormalizedVector(direction) * math.min(direction:GetLength(), kSporeMineDamageRadius) )
-        end
-        
         DestroyEntity(self)
     end
 
@@ -234,8 +250,11 @@ if Server then
 
     function SporeMine:DetectThreat()
         if self:GetIsBuilt() then
+            local castSpore = GetIsTechUnlocked(self,kTechId.Spores)
+            
+            local targetPoint
             local otherTeam = GetEnemyTeamNumber(self:GetTeamNumber())
-            local allEnemies = GetEntitiesForTeamWithinRange("Player", otherTeam, self:GetOrigin(), kSporeMineDamageRadius)
+            local allEnemies = GetEntitiesForTeamWithinRange("Player", otherTeam, self:GetOrigin(), castSpore and kSporeMineCloudCastRadius or kSporeMineDamageRadius)
             local enemies = {}
 
             for _, ent in ipairs(allEnemies) do
@@ -261,15 +280,27 @@ if Server then
                 end
 
                 if visibleTarget and trace.fraction < 1 then
-                    self:Explode(startPoint)
+                    targetPoint = startPoint
                     break
+                end
+            end
+
+            if castSpore then
+                local time = Shared.GetTime()
+                if  time - self.timeLastSpore > kSporeMineCloudCastInterval then
+                    self.timeLastSpore = time 
+                    self:CastSpore(targetPoint)
+                end
+            else
+                if targetPoint then
+                    self:Explode()
                 end
             end
         end
 
         return self:GetIsAlive()
     end
-
+    
     function SporeMine:Arm()
         if self:DetectThreat() ~= false then
             self:AddTimedCallback(SporeMine.DetectThreat, 0.60)
@@ -285,8 +316,11 @@ if Server then
     end
 
     function SporeMine:OnKill(attacker, doer, point, direction)
-        self:Explode(attacker and attacker:GetOrigin() or nil)
+        self:Explode()
         self:TriggerEffects("death")
+        if GetIsTechUnlocked(self,kTechId.Spores) then
+            self:CastSpore(attacker and attacker:GetOrigin() or nil)
+        end
     end
     
     function SporeMine:SetOwner(owner)

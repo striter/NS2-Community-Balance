@@ -1,4 +1,4 @@
-local function UpdateBiomassHealth(self, biomassChanged,biomassLevel)
+local function UpdateBiomassChanged(self, biomassChanged, biomassLevel)
 
     local teamPlayers = GetPlayersAboveLimit(self:GetTeamType())
     local ents = GetEntitiesWithMixin("BiomassHealth")
@@ -13,13 +13,13 @@ end
 
 function AlienTeam:AddPlayer(player)
     local available = Team.AddPlayer(self,player)
-    UpdateBiomassHealth(self,false,self.bioMassLevel)
+    UpdateBiomassChanged(self,false,self.bioMassLevel)
     return available
 end
 
 function AlienTeam:RemovePlayer(player)
     Team.RemovePlayer(self,player)
-    UpdateBiomassHealth(self,false,self.bioMassLevel)
+    UpdateBiomassChanged(self,false,self.bioMassLevel)
 end
 
 
@@ -28,7 +28,7 @@ function AlienTeam:OnUpdateBiomass(oldBiomass, newBiomass)
     if self.techtree then
         self.techTree:SetTechChanged()
     end
-    UpdateBiomassHealth(self,true,newBiomass)
+    UpdateBiomassChanged(self,true,newBiomass)
 end
 
 --Biomass adapted gorger structures

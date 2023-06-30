@@ -50,8 +50,7 @@ if Server then
         if healthPerBiomass == 0 and healthPerPlayerExceed == 0 then return end
         
         local level = math.max(0, bioMassLevel - 1)
-        local playerExceed = playersAboveLimit
-        local newBiomassHealth = level * healthPerBiomass + playerExceed * healthPerPlayerExceed
+        local newBiomassHealth = level * healthPerBiomass + playersAboveLimit * healthPerPlayerExceed
 
         if newBiomassHealth ~= self.biomMassHealth  then
             -- maxHealth is a integer

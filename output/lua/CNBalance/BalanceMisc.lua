@@ -2,6 +2,8 @@
 -- kInitialMACs = 1
 -- kInitialDrifters = 1
 kMaxTunnelCount = {1,3,4,4,4,4,4,4,4,4}
+kHiveInfestationRadius = 20
+kInfestationRadius = 7.5    kInfestationPerBiomass = 0.4
 
 kPistolWeight = 0.0
 kRifleWeight = 0.13

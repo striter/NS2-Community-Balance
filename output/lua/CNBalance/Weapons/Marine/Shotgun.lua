@@ -1,4 +1,12 @@
 Shotgun.kDamageFalloffReductionFactor = 1 -- 50% reduction
+Shotgun.kShotgunRings =
+{
+    { pelletCount = 1, distance = 0.0000, pelletSize = 0.03, pelletDamage = 10, thetaOffset = 0},
+    { pelletCount = 3, distance = 0.3500, pelletSize = 0.024, pelletDamage = 10, thetaOffset = math.pi},
+    { pelletCount = 5, distance = 0.6364, pelletSize = 0.02, pelletDamage = 10, thetaOffset = math.pi},
+    { pelletCount = 8, distance = 1.0000, pelletSize = 0.016, pelletDamage = 10, thetaOffset = math.pi},
+}
+Shotgun._RecalculateSpreadVectors()
 
 local kShotgunFireSpeedMult = 1.08
 local kShotgunFireAnimationLength = 0.8474577069282532 / kShotgunFireSpeedMult -- defined by art asset.     --0.8474577069282532
@@ -16,7 +24,6 @@ end
 function Shotgun:GetMaxClips()
     return kShotGunClipNum
 end
-
 
 --local kSecondaryTracerName = PrecacheAsset("cinematics/marine/railgun/tracer_small.cinematic")
 --local kSecondaryTracerResidueName = PrecacheAsset("cinematics/marine/railgun/tracer_residue_small.cinematic")

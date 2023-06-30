@@ -1,3 +1,30 @@
+local baseOnInitialized = Cyst.OnInitialized
+function Cyst:OnInitialized()
+
+    local biomassLevel = 1
+    if Server then
+        local team = self:GetTeam()
+        if team.GetBioMassLevel then
+            biomassLevel =  team:GetBioMassLevel()
+        end
+    else
+        local teamInfo = GetTeamInfoEntity(self:GetTeamNumber())
+        if teamInfo and teamInfo.bioMassLevel then
+            biomassLevel = teamInfo.bioMassLevel
+        end
+    end
+    self.cystInfestationRadius = kInfestationRadius + math.max(biomassLevel - 1,0) * kInfestationPerBiomass
+    baseOnInitialized(self)
+end
+
+function Cyst:GetInfestationRadius()
+    return self.cystInfestationRadius
+end
+
+function Cyst:GetInfestationMaxRadius()
+    return self.cystInfestationRadius
+end
+
 local kParentSearchRange = 400
 local function CreateBetween(trackStart, startNormal, trackEnd, endNormal, startOffset, endOffset)
 

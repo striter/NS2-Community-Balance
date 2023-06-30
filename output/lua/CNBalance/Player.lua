@@ -1,22 +1,43 @@
 if Client then
-	local origGetCrosshairY = PlayerUI_GetCrosshairY
+	
 	function PlayerUI_GetCrosshairY()
-		if mapname == Revolver.kMapName then
-			mapname = Pistol.kMapName
-		elseif mapname == LightMachineGun.kMapName then
-			mapname = Rifle.kMapName
-		elseif mapname == SubMachineGun.kMapName then
-			mapname = Shotgun.kMapName
-		elseif mapname == Knife.kMapName then
-			mapname = Axe.kMapName
-		elseif mapname == Cannon.kMapName then
-			mapname = Rifle.kMapName
+		local player = Client.GetLocalPlayer()
+
+		if(player and not player:GetIsThirdPerson()) then
+
+			local weapon = player:GetActiveWeapon()
+			if(weapon ~= nil) then
+
+				-- Get class name and use to return index
+				local index
+				local mapname = weapon:GetMapName()
+
+				if mapname == Rifle.kMapName or mapname == HeavyMachineGun.kMapName or mapname == LightMachineGun.kMapName  then
+					index = 0
+				elseif mapname == Pistol.kMapName or mapname == Revolver.kMapName or mapname == Cannon.kMapName then
+					index = 1
+				elseif mapname == Shotgun.kMapName or mapname == SubMachineGun.kMapName then
+					index = 3
+				elseif mapname == Minigun.kMapName then
+					index = 4
+				elseif mapname == Flamethrower.kMapName or mapname == GrenadeLauncher.kMapName then
+					index = 5
+					-- All alien crosshairs are the same for now
+				elseif mapname == LerkBite.kMapName or mapname == Spores.kMapName or mapname == LerkUmbra.kMapName or mapname == Parasite.kMapName or mapname == BileBomb.kMapName or mapname == VolleyRappel.kMapName then
+					index = 6
+				elseif mapname == SpitSpray.kMapName or mapname == BabblerAbility.kMapName then
+					index = 7
+					-- Blanks (with default damage indicator)
+				else
+					index = 8
+				end
+
+				return index * 64
+
+			end
 		end
-		return origGetCrosshairY(self)
 	end
 end
-
-
 
 if Server then
 

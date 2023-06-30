@@ -15,8 +15,10 @@ Script.Load("lua/CNBalance/Weapons/Alien/Gorge/SporeMineAbility.lua")
 
 class 'DropStructureAbility' (Ability)
 
-local kMaxStructuresPerType = 20
+local kMaxStructuresPerType = 32
 local kDropCooldown = 1
+local kEnergyReductionPerBiomass = 0.06
+local kDropCooldownReductionPerBiomass = 0.05
 
 DropStructureAbility.kMapName = "drop_structure_ability"
 
@@ -80,7 +82,17 @@ function DropStructureAbility:SetActiveStructure(structureNum)
 end
 
 function DropStructureAbility:GetHasDropCooldown()
-    return self.timeLastDrop ~= nil and self.timeLastDrop + kDropCooldown > Shared.GetTime()
+    return self.timeLastDrop ~= nil and self.timeLastDrop + self:GetDropCoolDown() > Shared.GetTime()
+end
+
+function DropStructureAbility:GetDropCoolDown()
+    local cooldown = kDropCooldown
+    local parent = self:GetParent()
+    if parent.GetUpgradeLevel then
+        local biomassLevel = math.max(parent:GetUpgradeLevel("bioMassLevel") - 1,0)
+        cooldown = cooldown - biomassLevel * kDropCooldownReductionPerBiomass
+    end
+    return cooldown
 end
 
 function DropStructureAbility:GetSecondaryTechId()
@@ -276,16 +288,18 @@ function DropStructureAbility:DropStructure(player, origin, direction, structure
 
         local maxStructures = -1
         
+        local biomassLevel = 1
         local parent = self:GetParent()
         if parent.GetUpgradeLevel then
-            maxStructures = structureAbility:GetMaxStructures(parent:GetUpgradeLevel("bioMassLevel"))
+            biomassLevel = parent:GetUpgradeLevel("bioMassLevel")
+            maxStructures = structureAbility:GetMaxStructures(biomassLevel)
         end
         
         --valid = valid and self:GetNumStructuresBuilt(techId) ~= maxStructures -- -1 is unlimited
 
         local cost = LookupTechData(structureAbility:GetDropStructureId(), kTechDataCostKey, 0)
         local enoughRes = player:GetResources() >= cost
-        local energyCost = structureAbility:GetEnergyCost()
+        local energyCost = structureAbility:GetEnergyCost()  * (1 - (biomassLevel - 1) * kEnergyReductionPerBiomass)
         local enoughEnergy = player:GetEnergy() >= energyCost
 
         if valid and enoughRes and structureAbility:IsAllowed(player) and enoughEnergy and not self:GetHasDropCooldown() then

@@ -586,6 +586,10 @@ kSporeMineDamageDuration = 3
 kSporeMineDamageRadius = 5
 kSporeMineDotInterval = 0.4
 
+kSporeMineCloudCastRadius = 20
+kSporeMineCloudCastInterval = 3
+kSporeMineCloudTravelSpeed = 5
+
 --Babbler Egg
 
 --Explode

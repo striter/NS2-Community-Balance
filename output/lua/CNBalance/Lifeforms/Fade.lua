@@ -55,7 +55,7 @@ end
 local baseHandleButtons = Fade.HandleButtons
 function Fade:HandleButtons(input)
     
-    if self.ethereal and Shared.GetTime() - self.etherealStartTime > 0.12 then
+    if self.ethereal and Shared.GetTime() - self.etherealStartTime > 0.18 then
         input.commands = bit.bor(input.commands, Move.Crouch)
     end
     baseHandleButtons(self,input)
