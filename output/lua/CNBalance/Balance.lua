@@ -13,7 +13,6 @@ kPlayerResEachTowerAboveThreshold = 0.05
 --Pres reward for aggressive playing (too many farmers?)
 kTechDataPersonalResOnKill = {
     --Marines
-    [kTechId.Egg] = 0.2,
     [kTechId.Extractor] = 2.5, [kTechId.PoweredExtractor] = 4,
     [kTechId.RoboticsFactory] = 2.5, [kTechId.ARCRoboticsFactory] = 2.5,
     [kTechId.Armory] = 1,[kTechId.Observatory] = 2.5, [kTechId.PhaseGate] = 4,
@@ -22,12 +21,11 @@ kTechDataPersonalResOnKill = {
     [kTechId.MAC] = 0.2,    [kTechId.SentryBattery] = 4, [kTechId.Sentry] = 1,[kTechId.ARC] = 2.5,      --CPVE
 
     --Aliens
-    [kTechId.Harvester] = 5,
-    [kTechId.Cyst] = 0.2,
+    [kTechId.Egg] = 0.2,[kTechId.Cyst] = 0.2,
     [kTechId.Hydra] = 0.2,[kTechId.BabblerEgg] = 2,       --PPVE
     [kTechId.Shell] = 5, [kTechId.Veil] = 5, [kTechId.Spur] = 5,
     [kTechId.Whip] = 2.5, [kTechId.Shift] = 5, [kTechId.Crag] = 5, [kTechId.Shade] = 5,       --CPVE
-    [kTechId.Tunnel] = 5, [kTechId.InfestedTunnel] = 7.5,
+    [kTechId.Harvester] = 5, [kTechId.Tunnel] = 5, [kTechId.InfestedTunnel] = 7.5,
     [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20,
 }
 
