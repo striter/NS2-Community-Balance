@@ -42,6 +42,7 @@ kTechDataTeamResOnKill = {
 -- Resource refund base on teams total income minus (anti snowball,could cause "miracle")
 kTeamResourceRefundBase = 100
 kTeamResourceMaxRefund = 100   --Case they reach the limit cant use it
+kPlayerResourceEachRefund = 0.05 --Don't give too many to them.
 kTechDataTeamResRefundPercentageOnKill = {
     [kTechId.Exo] = 0.05,  [kTechId.JetpackMarine] = 0.03,  --[kTechId.Exosuit] = 0.05, Aint working due to its not attached with pointgivermixin
     [kTechId.Extractor] = 0.1, [kTechId.PoweredExtractor] = 0.1, [kTechId.Harvester] = 0.1,
@@ -55,7 +56,7 @@ kTechDataTeamResRefundPercentageOnKill = {
 kAssistMinimumDamageFraction = 0.3      --Avoid parasiter or babbler assists ,feels pretty weird
 kBountyScoreEachAssist = 1 kBountyScoreEachKill = 2 kMaxBountyScore = 512       --You can't kill 256 players in 1 life
 kBountyClaimMin = 10
-kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25
+kPResPerBountyClaimAsMarine = 0.4  kPResPerBountyClaimAsAlien = 0.25
 kBountyTargetDamageReceiveStep = 18  kBountyDamageReceiveBaseEachStep = (0.1 / kBountyTargetDamageReceiveStep)      --0-10%,20%-40%,40%-80%, increase its damage receive by steps.
 
 --Toy for marine commander (remove all marines passive income, harsh one)
@@ -322,14 +323,14 @@ kPrototypeLabCost = 35
 kJetpackTechResearchCost = 25
 kJetpackTechResearchTime = 90
 kJetpackCost = 25
-kJetpackDropCost = 15
+kJetpackDropCost = 18
 kJetpackDropCooldown = 0
 
 kExosuitTechResearchCost = 20
 kExosuitTechResearchTime = 90
 kDualExosuitCost = 55
 kDualRailgunExosuitCost = 55
-kDualExosuitDropCost = 36
+kDualExosuitDropCost = 40
 
 kOnosDevourCost = 10
 kOnosDevourTime = 40

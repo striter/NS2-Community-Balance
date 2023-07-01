@@ -69,7 +69,7 @@ function PlayingTeam:OnTeamKill(techID,bountyScore)
     if refundBase > kTeamResourceRefundBase then
         local percentage = kTechDataTeamResRefundPercentageOnKill[techID] or 0
         local refund = math.min(math.floor(refundBase * percentage), kTeamResourceMaxRefund)
-        self:CollectTeamResources(refund,refund * kPlayerResEachTower)  --Refund
+        self:CollectTeamResources(refund,refund * kPlayerResourceEachRefund)  --Refund
     end
 
     if bountyScore > 0 then
