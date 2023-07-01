@@ -41,8 +41,8 @@ kTechDataTeamResOnKill = {
 
 -- Resource refund base on teams total income minus (anti snowball,could cause "miracle")
 kTeamResourceRefundBase = 100
-kTeamResourceMaxRefund = 100   --Case they reach the limit cant use it
-kPlayerResourceEachRefund = 0.05 --Don't give too many to them.
+kTeamResourceMaxRefund = 48   --Case they reach the limit cant use it
+kPlayerResourceEachRefund = 0.125   --Alt option
 kTechDataTeamResRefundPercentageOnKill = {
     [kTechId.Exo] = 0.05,  [kTechId.JetpackMarine] = 0.03,  --[kTechId.Exosuit] = 0.05, Aint working due to its not attached with pointgivermixin
     [kTechId.Extractor] = 0.1, [kTechId.PoweredExtractor] = 0.1, [kTechId.Harvester] = 0.1,
