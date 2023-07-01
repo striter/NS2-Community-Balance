@@ -308,7 +308,7 @@ kARCCost = 15
 kARCBuildTime = 10
 kMACCost = 4
 
-kSentryDamage = 5  kSentryWeapon1Scalar = 1.1 kSentryWeapon2Scalar = 1.2 kSentryWeapon3Scalar = 1.3
+kSentryDamage = 4  kSentryWeapon1Scalar = 1.125 kSentryWeapon2Scalar = 1.25 kSentryWeapon3Scalar = 1.375
 kSentryCost = 3
 kSentryBuildTime = 3
 kSentryBatteryCost = 10

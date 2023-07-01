@@ -44,6 +44,15 @@ kARCDeployedHealth = 3100    kARCDeployedArmor = 0      -- 2600 0
 
 kPhaseGateHealth = 1950    kPhaseGateArmor = 800    kPhaseGatePointValue = 10 -- 1500  800  10
 
+kExplosiveSelfDamage =
+{
+    ["Grenade"] = 40,
+    ["ClusterGrenade"] = 20,
+    ["ClusterFragment"] = 5,
+    ["ImpactGrenade"] = 40,
+    ["PulseGrenade"] = 40,
+}
+
 --Alien
 kHealingClampMaxHPAmount = 0.15
 

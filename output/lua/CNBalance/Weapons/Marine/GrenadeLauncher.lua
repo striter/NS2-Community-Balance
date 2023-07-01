@@ -80,9 +80,13 @@ function DamageMixin:DoDamage(damage, target, point, direction, surface, altMode
         --if GetHasTech(self,kTechId.GrenadeLauncherUpgrade) then
         --    target:DeductHealth(kGrenadeLauncherAllyBlastDamage,attacker,self)
         --else
-            target:DeductHealth(kGrenadeLauncherSelfDamage,attacker,self)
+        
+        local healthConstant = kExplosiveSelfDamage[self:GetClassName()]
+        if healthConstant then
+            target:DeductHealth(healthConstant,attacker,self)
+            return
+        end
         --end
-        return
     end
     return baseDoDamage(self, damage, target, point, direction, surface, altMode, showtracer)
 end
