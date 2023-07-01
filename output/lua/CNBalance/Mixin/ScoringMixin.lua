@@ -20,10 +20,10 @@ function ScoringMixin:AddAssistKill()
     self.bountyCurrentLife = Clamp(self.bountyCurrentLife + kBountyScoreEachAssist, 0, kMaxBountyScore)
 end
 
-local baseOnKill = ScoringMixin.OnKill
-function ScoringMixin:OnKill()
-    baseOnKill(self)
+function ScoringMixin:ClaimBounty()
+    local bounty = self:GetBountyCurrentLife()
     self.bountyCurrentLife = 0
+    return bounty
 end
 
 function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint)

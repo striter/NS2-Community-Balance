@@ -58,11 +58,24 @@ function PlayingTeam:Update()
 
 end
 
-function PlayingTeam:OnTeamKill(techID)
+function PlayingTeam:OnTeamKill(techID,bountyScore)
     local tResReward = kTechDataTeamResOnKill[techID]
     if tResReward then
         self:AddTeamResources(tResReward,true)      --Treat this as income
     end
+
+    local refundBase = self:GetRefundBase() 
+    if refundBase > kTeamResourceRefundBase then
+        local percentage = kTechDataTeamResRefundPercentageOnKill[techID] or 0
+        self:AddTeamResources(math.min(refundBase * percentage, kTeamResourceMaxRefund),true)
+    end
+
+    local pResReward = 0
+    if bountyScore > 0 then
+        local pResClaimPerBounty = (self:GetTeamType() == kAlienTeamType and kPResPerBountyClaimAsAlien or kPResPerBountyClaimAsMarine)
+        pResReward = bountyScore * pResClaimPerBounty
+    end
+    return pResReward
 end
 
 function PlayingTeam:AddTeamResources(amount, isIncome)
@@ -125,13 +138,6 @@ function PlayingTeam:GetRefundBase()
         return math.max((enemyTeam:GetTotalTeamResources() or 0) - (self:GetTotalTeamResources() or 0),0)
     end
     return 0
-end
-
-function PlayingTeam:AddTeamRefund(percentage)
-    local refundBase = self:GetRefundBase()
-    if refundBase > kTeamResourceRefundBase then
-        self:AddTeamResources(math.min(refundBase * percentage, kTeamResourceMaxRefund),true)
-    end
 end
 
 local oldGetIsResearchRelevant = debug.getupvaluex(PlayingTeam.OnResearchComplete, "GetIsResearchRelevant")

@@ -113,7 +113,7 @@ kFadeBaseCarapaceUpgradeAmount  = 30    kFadeCarapaceArmorPerBiomass  = 2.5
 kOnosBaseCarapaceUpgradeAmount  = 150   kOnosCarapaceArmorPerBiomass  = 10
 kVokexBaseCarapaceUpgradeAmount = 50    kVokexCarapaceArmorPerBiomass = 0
 
-kHiveHealth = 5200    kHiveArmor = 750   --4000 750
+kHiveHealth = 5200    kHiveArmor = 750  --4000 750
 kMatureHiveHealth = 7800 kMatureHiveArmor = 1400    -- 6000 1400
 kHarvesterHealth = 2000 kHarvesterArmor = 200 kHarvesterPointValue = 15
 kMatureHarvesterHealth = 2500 kMatureHarvesterArmor = 500  --2300 320

@@ -22,13 +22,13 @@ kTechDataPersonalResOnKill = {
     [kTechId.MAC] = 0.2,    [kTechId.SentryBattery] = 4, [kTechId.Sentry] = 1,[kTechId.ARC] = 2.5,      --CPVE
 
     --Aliens
-    [kTechId.Harvester] = 6,
+    [kTechId.Harvester] = 5,
     [kTechId.Cyst] = 0.2,
-    [kTechId.Hydra] = 0.2,[kTechId.BabblerEgg] = 3,       --PPVE
+    [kTechId.Hydra] = 0.2,[kTechId.BabblerEgg] = 2,       --PPVE
     [kTechId.Shell] = 5, [kTechId.Veil] = 5, [kTechId.Spur] = 5,
-    [kTechId.Whip] = 3, [kTechId.Shift] = 6, [kTechId.Crag] = 6, [kTechId.Shade] = 6,       --CPVE
-    [kTechId.Tunnel] = 6, [kTechId.InfestedTunnel] = 8,
-    [kTechId.Hive] = 20, [kTechId.ShiftHive] = 30, [kTechId.CragHive] = 30, [kTechId.ShadeHive] = 30,
+    [kTechId.Whip] = 2.5, [kTechId.Shift] = 5, [kTechId.Crag] = 5, [kTechId.Shade] = 5,       --CPVE
+    [kTechId.Tunnel] = 5, [kTechId.InfestedTunnel] = 7.5,
+    [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20,
 }
 
 --TRes reward to kill certain structures, snowball rolling
@@ -57,7 +57,7 @@ kTechDataTeamResRefundPercentageOnKill = {
 kAssistMinimumDamageFraction = 0.3      --Avoid parasiter or babbler assists ,feels pretty weird
 kBountyScoreEachAssist = 1 kBountyScoreEachKill = 2 kMaxBountyScore = 512       --You can't kill 256 players in 1 life
 kBountyClaimMin = 10
-kPResPerBountyScoreAsAlien = 0.5  kPResPerBountyScoreAsMarine = 0.25
+kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25
 kBountyTargetDamageReceiveStep = 18  kBountyDamageReceiveBaseEachStep = (0.1 / kBountyTargetDamageReceiveStep)      --0-10%,20%-40%,40%-80%, increase its damage receive by steps.
 
 --Toy for marine commander (remove all marines passive income, harsh one)
@@ -65,18 +65,19 @@ kMilitaryProtocolResearchCost = 10
 kMilitaryProtocolResearchTime = 20
 kMilitaryProtocolResearchDurationMultiply = 1.2     --1.33?
 kMilitaryProtocolAggressivePersonalResourcesScalar = 2      --They don't need too much pres to buy defensive or grenades/welders (and they can shared it tbh)
-kMilitaryProtocolPassiveTeamResourceResearchesScalar = {
-    [kTechId.MinesTech] = 0.1, [kTechId.ShotgunTech] = 0.2, [kTechId.AdvancedArmory] = 0.2, [kTechId.JetpackTech] = 0.2, [kTechId.ExosuitTech] = 0.3, 
-}
-kMilitaryProtocolResourcesScalarPlayerAboveLimit = 0.1  --Multiply upon one
+kMilitaryProtocolTResPerBountyClaim = 0.5   --Bounty score, don't give them pres, its doomed
 kMilitaryProtocolTeamResourcesPerKill = {          --Use this when military protocol enabled
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2,
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
     [kTechId.Skulk] = 1.5, [kTechId.Gorge] = 2,[kTechId.Prowler] = 2, [kTechId.Lerk] = 2, [kTechId.Fade] = 3, [kTechId.Onos] = 3,
-    --[kTechId.Cyst] = 0.2,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
     [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20,
 }
+kMilitaryProtocolPassiveTeamResourceResearchesScalar = {
+    [kTechId.MinesTech] = 0.1, [kTechId.ShotgunTech] = 0.2, 
+    [kTechId.AdvancedArmory] = 0.2, [kTechId.JetpackTech] = 0.2, [kTechId.ExosuitTech] = 0.3,
+}
+kMilitaryProtocolResourcesScalarPlayerAboveLimit = 0.1  --Multiply upon one
 
 kMatchMinPlayers = 10
 kRespawnPlayersMinExtend = 2
@@ -154,8 +155,8 @@ kCannonTechResearchTime = 90
 --Explosive Supply
 kMinesUpgradeResearchCost = 10
 kMinesUpgradeResearchTime = 60
-kGrenadeLauncherUpgradeResearchCost = 30
-kGrenadeLauncherUpgradeResearchTime = 90
+kGrenadeLauncherUpgradeResearchCost = 20
+kGrenadeLauncherUpgradeResearchTime = 75
 kMACEMPBlastResearchCost = 15
 kMACEMPBlastResearchTime = 60
 kMACEmpBlastDetectInterval = 0.5
@@ -187,8 +188,8 @@ kGrenadeLauncherDetectionShotRadius = 3
 kGrenadeLauncherClipSize = 4
 
 kGrenadeLauncherImpactGrenadeDamage = 100
-kGrenadeLauncherSelfDamageReduction = 0.7
-kGrenadeLauncherAllyBlastReduction = 0.4
+kGrenadeLauncherSelfDamage = 40
+--kGrenadeLauncherAllyBlastDamage = 25
 
 kGrenadeLauncherWeapons1DamageScalar = 1.1
 kGrenadeLauncherWeapons2DamageScalar = 1.2

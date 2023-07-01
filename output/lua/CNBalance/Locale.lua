@@ -35,7 +35,7 @@ if kTranslateMessage then
     kTranslateMessage["LIFE_SUSTAIN_TOOLTIP"]="*陆战队员脱战后逐渐回复生命值."
 
     kTranslateMessage["GRENADE_LAUNCHER_UPGRADE"] = "榴弹枪架构升级"
-    kTranslateMessage["GRENADE_LAUNCHER_UPGRADE_TOOLTIP"] = "+改进装弹加速榴弹枪换弹.\n+降低爆燃对使用者的伤害.\n+撞击榴弹内置智能引信."
+    kTranslateMessage["GRENADE_LAUNCHER_UPGRADE_TOOLTIP"] = "+改进装弹加速榴弹枪换弹.\n+撞击榴弹内置智能引信."
     
     kTranslateMessage["EXPLOSIVE_SUPPLY"] = "可燃物研发站"
     kTranslateMessage["EXPLOSIVE_SUPPLY_TOOLTIP"] = "升级为可燃物研发基地.\n>同时解锁地雷遮光图层.\n+降低地雷对异形的可见性"
@@ -194,7 +194,7 @@ if kLocales then
     --kLocales["GRENADE_LAUNCHER_ALLY_BLAST"] = "Directed Blast"
     --kLocales["GRENADE_LAUNCHER_ALLY_BLAST_TOOLTIP"] = "*Lower the damage dealt to the user."
     kLocales["GRENADE_LAUNCHER_UPGRADE"] = "GL capability"
-    kLocales["GRENADE_LAUNCHER_UPGRADE_TOOLTIP"] = "*Increase reload speed using GL.\n*Lower the damage dealt to the user.\n*Impact shot will self detonate when enemies nearby."
+    kLocales["GRENADE_LAUNCHER_UPGRADE_TOOLTIP"] = "*Increase reload speed using GL.\n*Impact shot will self detonate when enemies nearby."
 
     kLocales["ELECTRONIC_SUPPLY"] = "Electronic Branch"
     kLocales["ELECTRONIC_SUPPLY_TOOLTIP"] = "Begin the electronic research.\n>Unlock extractor upgrades.\n+Damage melee attacker."

@@ -216,15 +216,28 @@ function MarineTeam:Initialize(teamName, teamNumber)
 	self.clientOwnedStructures = { }
 end
 
-function MarineTeam:OnTeamKill(killEntityTechId)
+function MarineTeam:OnTeamKill(techId, bountyScore)
     if not militaryProtocolTechNode:GetResearched() then
-        PlayingTeam.OnTeamKill(killEntityTechId)
-        return
+        return PlayingTeam.OnTeamKill(self,techId, bountyScore)
     end
     
-    local tResRefund = kMilitaryProtocolTeamResourcesPerKill[killEntityTechId]
-    if not tResRefund then return end
-    self:AddTeamResources(tResRefund)       --Don't treat this as income, its pRes
+    local teamResource = 0
+    local tResReward = kMilitaryProtocolTeamResourcesPerKill[techId]
+    if tResReward then
+        teamResource = teamResource + tResReward
+    end
+    if bountyScore > 0 then
+        teamResource = teamResource + bountyScore * kMilitaryProtocolTResPerBountyClaim
+    end
+    self:AddTeamResources(teamResource)
+    return 0                --No pres No refund , Only True TRes
+end
+
+function MarineTeam:GetRefundBase()
+    if not militaryProtocolTechNode or not militaryProtocolTechNode:GetResearched() then
+        return PlayingTeam.GetRefundBase(self)
+    end
+    return 0
 end
 
 function MarineTeam:CollectAggressivePlayerResources(player,amount)
