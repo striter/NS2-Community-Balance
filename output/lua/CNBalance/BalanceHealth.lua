@@ -51,6 +51,7 @@ kExplosiveSelfDamage =
     ["ClusterFragment"] = 5,
     ["ImpactGrenade"] = 40,
     ["PulseGrenade"] = 40,
+    ["Mine"] = 60,
 }
 
 --Alien

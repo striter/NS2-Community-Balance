@@ -187,8 +187,6 @@ kGrenadeLauncherDetectionShotRadius = 3
 kGrenadeLauncherClipSize = 4
 
 kGrenadeLauncherImpactGrenadeDamage = 100
-kGrenadeLauncherSelfDamage = 40
---kGrenadeLauncherAllyBlastDamage = 25
 
 kGrenadeLauncherWeapons1DamageScalar = 1.1
 kGrenadeLauncherWeapons2DamageScalar = 1.2
@@ -331,6 +329,7 @@ kExosuitTechResearchTime = 90
 kDualExosuitCost = 55
 kDualRailgunExosuitCost = 55
 kDualExosuitDropCost = 40
+kExosuitCost = kDualExosuitCost   --Used in some ways... (newcomer protection from )
 
 kOnosDevourCost = 10
 kOnosDevourTime = 40

@@ -26,6 +26,7 @@ function MarineTeam:InitTechTree()
 
     self.techTree:AddPassive(kTechId.Welding)
     self.techTree:AddPassive(kTechId.SpawnMarine)
+
     self.techTree:AddPassive(kTechId.CollectResources, kTechId.Extractor)
     self.techTree:AddPassive(kTechId.Detector)
 

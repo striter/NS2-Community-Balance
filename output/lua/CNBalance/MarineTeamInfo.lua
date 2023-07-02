@@ -48,7 +48,7 @@ local kTrackedMarineGadgets =
     LightMachineGun.kMapName,
     Cannon.kMapName,
     CombatBuilder.kMapName,
----------
+---
 }
 
 local kTrackedExoLayouts = IterableDict()

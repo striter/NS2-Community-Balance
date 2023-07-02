@@ -1,3 +1,58 @@
+GUIMarineHUD.kMinimapPowerPos = Vector(25, 46 + 32, 0)
+GUIMarineHUD.kLocationTextOffset = Vector(75, 46 + 32, 0)
+GUIMarineHUD.kMinimapPos = Vector(30, 80 + 32, 0)
+
+GUIMarineHUD.kTeamIconSize =  GUIScale( Vector( 48, 24, 0 ) )
+GUIMarineHUD.kCountNoUsed = Color(0x01 / 0xFF, 0x8F / 0xFF, 0xFF / 0xFF, 0.5)
+GUIMarineHUD.kCountHaveUser = Color(0x01 / 0xFF, 0x8F / 0xFF, 0xFF / 0xFF, 1)
+
+local function ResetTeamCountIcon(element)
+    element.count = 0
+    element:SetColor(GUIMarineHUD.kCountNoUsed)
+    element.text:SetIsVisible(false)
+end
+
+local function CreateTeamCountElement(techID)
+    local teamCountIcon = GetGUIManager():CreateGraphicItem()
+    teamCountIcon:SetSize(GUIMarineHUD.kTeamIconSize)
+    teamCountIcon:SetTexture(kInventoryIconsTexture)
+    teamCountIcon:SetTexturePixelCoordinates(GetTexCoordsForTechId(techID))
+    teamCountIcon:SetAnchor(GUIItem.Left, GUIItem.Top)
+    teamCountIcon:SetColor(GUIMarineHUD.kBackgroundColor)
+
+    local countText = GUIManager:CreateTextItem()
+    countText:SetPosition(Vector( -9 , -12, 0 ) )
+    countText:SetAnchor( GUIItem.Right, GUIItem.Bottom )
+    countText:SetFontName( Fonts.kAgencyFB_Large_Bold )
+    countText:SetColor( GUIMarineHUD.kBackgroundColor )
+    countText:SetScale(  GUIScale( Vector(1,1,0) * 0.4725 ))  --Scaled???
+    countText:SetLayer( kGUILayerPlayerHUDForeground2 )
+    teamCountIcon:AddChild(countText)
+
+    teamCountIcon.text = countText
+    teamCountIcon.techId = techID
+    
+    ResetTeamCountIcon(teamCountIcon)
+    return teamCountIcon
+end
+
+
+local function UpdateTeamCount(self,teamInfo,element)
+    local techMapName = GUIMarineBuyMenu._GetMapNameForNetvar(nil,element.techId)       --???
+    assert(techMapName)
+    if  techMapName then
+        local netVarName = TeamInfo_GetUserTrackerNetvarName(techMapName)
+        local numUsers = teamInfo[netVarName]
+        if element.count ~= numUsers then
+            element.count = numUsers
+            element.text:SetText(string.format("x%i",element.count))
+            
+            element:SetColor(numUsers ~= 0 and self.kCountHaveUser or self.kCountNoUsed)
+            element.text:SetIsVisible(numUsers > 1)
+        end
+    end
+end
+
 local baseInitialize = GUIMarineHUD.Initialize
 function GUIMarineHUD:Initialize()
     self.militaryProtocol = GetGUIManager():CreateGraphicItem()
@@ -7,9 +62,24 @@ function GUIMarineHUD:Initialize()
     self.militaryProtocol:SetTexturePixelCoordinates(GUIUnpackCoords(GetTextureCoordinatesForIcon(kTechId.MilitaryProtocol)))
     self.militaryProtocol:SetColor(kIconColors[kMarineTeamType])
     self.lastMilitaryProtocol = false
+    self.teamCountElements = {}
+    table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.Shotgun))
+    table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.HeavyMachineGun))
+    table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.GrenadeLauncher))
+    table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.Flamethrower))
+    table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.Jetpack))
+    table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.DualRailgunExosuit))
+    table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.DualMinigunExosuit))
     baseInitialize(self)
 
     self.background:AddChild(self.militaryProtocol)
+
+    --........ or i should totally rewrite initialize
+    for index,element in ipairs(self.teamCountElements) do
+        --Vector(25, 46, 0)
+        element:SetPosition(Vector(25 + (index-1) * 50,46,0))
+        self.background:AddChild(element)
+    end
 end
 
 
@@ -28,14 +98,26 @@ function GUIMarineHUD:Reset()
         end
     end
 
+    for _,element in ipairs(self.teamCountElements) do
+        ResetTeamCountIcon(element)
+    end
 end
 
 local baseUpdate = GUIMarineHUD.Update
 function GUIMarineHUD:Update(deltaTime)
     baseUpdate(self,deltaTime)
-    local hasMilitaryProtocol = GetHasTech(Client.GetLocalPlayer(),kTechId.MilitaryProtocol)
+    local player = Client.GetLocalPlayer()
+    local hasMilitaryProtocol = GetHasTech(player,kTechId.MilitaryProtocol)
     if hasMilitaryProtocol ~= self.lastMilitaryProtocol then
         self.lastMilitaryProtocol = hasMilitaryProtocol
         self.militaryProtocol:SetIsVisible(self.lastMilitaryProtocol)
     end
+    
+    local teamInfo = GetTeamInfoEntity(player:GetTeamNumber())
+    if teamInfo then
+        for _,element in ipairs(self.teamCountElements) do
+            UpdateTeamCount(self,teamInfo,element)
+        end
+    end
+
 end

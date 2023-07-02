@@ -75,10 +75,12 @@ local kMarineCommanderTechPath =
         kTechId.ExosuitTech,
         kTechId.Weapons3,
         kTechId.Armor3,
-        kTechId.StandardSupply,
-        kTechId.LightMachineGunUpgrade,
-        kTechId.DragonBreath,
-        kTechId.GrenadeLauncherUpgrade,
+        
+        -- Till comm could really research standard supply?
+        --kTechId.StandardSupply,
+        --kTechId.LightMachineGunUpgrade,
+        --kTechId.DragonBreath,
+        --kTechId.GrenadeLauncherUpgrade,
     },
 }
 
