@@ -44,6 +44,9 @@ GUIHiveStatus.kUpdateRate = 0.0125 --32Hz  --0.04 --25Hz UI update-throttle
 GUIHiveStatus.kMaxStatusSlots = 5
 GUIHiveStatus.kLowEggCountThreshold = 3 --XXX could make proportional to team-size
 
+GUIHiveStatus.kTeamCountIconColor =  Color( 0.5, 0.5, 0.5, 1 )
+GUIHiveStatus.kTeamCountZeroedIconColor =  Color( 0.2, 0.2, 0.2, 1 )
+
 --GUIHiveStatus.kEggsCountFontColor = Color(1,1,1,1) --kAlienFontColor
 GUIHiveStatus.kEggsCountFontColor = Color( 0.99, 0.82, 0.61, 1 ) --kAlienFontColor
 GUIHiveStatus.kLocationTextColor = kAlienFontColor
@@ -152,7 +155,7 @@ function GUIHiveStatus:InitializeLifeformCount(position, iconIndex)
     lifeformIcon:SetLayer( kGUILayerPlayerHUD )
     lifeformIcon:SetTexture(kCommanderIcons)
     lifeformIcon:SetTexturePixelCoordinates(( iconIndex - 1)* 72 ,0 ,iconIndex * 72 ,68 )
-    lifeformIcon:SetColor( Color( 0.5, 0.5, 0.5, 1 ) )
+    lifeformIcon:SetColor( GUIHiveStatus.kTeamCountZeroedIconColor )
 
     local lifeformCount = GUIManager:CreateTextItem()
     lifeformCount:SetPosition( position +  self.kLifeformCountTextPosition )
@@ -165,6 +168,15 @@ function GUIHiveStatus:InitializeLifeformCount(position, iconIndex)
     self.background:AddChild(lifeformIcon)
     self.background:AddChild(lifeformCount)
     return { icon = lifeformIcon, text = lifeformCount }
+end
+
+function GUIHiveStatus:UpdateLifeformCount(table,count)
+    local valid = count > 0
+    table.icon:SetColor(valid  and GUIHiveStatus.kTeamCountIconColor or GUIHiveStatus.kTeamCountZeroedIconColor)
+    table.text:SetIsVisible(valid)
+    if valid then
+        table.text:SetText(string.format("%i",count))
+    end
 end
 
 function GUIHiveStatus:SetIsVisible(state)
@@ -655,12 +667,12 @@ function GUIHiveStatus:Update( deltaTime )
         return
     end
 
-    self.teamSkulkTable.text:SetText(tostring(self.teamInfoEnt.teamSkulkCount))
-    self.teamGorgeTable.text:SetText(tostring(self.teamInfoEnt.teamGorgeCount))
-    self.teamLerkTable.text:SetText(tostring(self.teamInfoEnt.teamLerkCount))
-    self.teamFadeTable.text:SetText(tostring(self.teamInfoEnt.teamFadeCount))
-    self.teamOnosTable.text:SetText(tostring(self.teamInfoEnt.teamOnosCount))
-    self.teamProwlerTable.text:SetText(tostring(self.teamInfoEnt.teamProwlerCount))
+    self:UpdateLifeformCount(self.teamSkulkTable,self.teamInfoEnt.teamSkulkCount)
+    self:UpdateLifeformCount(self.teamGorgeTable,self.teamInfoEnt.teamGorgeCount)
+    self:UpdateLifeformCount(self.teamGorgeTable,self.teamInfoEnt.teamLerkCount)
+    self:UpdateLifeformCount(self.teamFadeTable,self.teamInfoEnt.teamFadeCount)
+    self:UpdateLifeformCount(self.teamOnosTable,self.teamInfoEnt.teamOnosCount)
+    self:UpdateLifeformCount(self.teamProwlerTable,self.teamInfoEnt.teamProwlerCount)
 
     if self.cachedHudDetail ~= newHudDetail then
 

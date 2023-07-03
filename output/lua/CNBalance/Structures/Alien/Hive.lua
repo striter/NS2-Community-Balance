@@ -31,6 +31,7 @@ local networkVars =
 {
     extendAmount = "float (0 to 1 by 0.01)",
     bioMassLevel = "integer (0 to 6)",
+    bioMassPreserve = "integer (0 to 6)",
     evochamberid = "entityid"
 }
 
@@ -123,6 +124,7 @@ function Hive:OnCreate()
 
         -- when constructed first level is added automatically
         self.bioMassLevel = 0
+        self.bioMassPreserve = 0
 
         -- init this to -1, otherwise it defaults to 0 between OnCreate() and OnInitialized()
         self.evochamberid = -1
@@ -287,9 +289,9 @@ function Hive:GetTechAllowed(techId, techNode, player)
 
     local allowed, canAfford = CommandStructure.GetTechAllowed(self, techId, techNode, player)
 
-    if techId == kTechId.ResearchBioMassTwo then
+    if techId == kTechId.ResearchBioMassTwo or techId == kTechId.RecoverBiomassTwo then
         allowed = allowed and self.bioMassLevel == 2
-    elseif techId == kTechId.ResearchBioMassThree then
+    elseif techId == kTechId.ResearchBioMassThree or techId == kTechId.RecoverBiomassThree then
         allowed = allowed and self.bioMassLevel == 3
     end
 
@@ -332,14 +334,6 @@ function Hive:GetTechButtons()
     elseif techId == kTechId.ShadeHive then
         techButtons[5] = kTechId.DrifterCamouflage
         techButtons[6] = kTechId.CystCamouflage
-    end
-
-    if self.bioMassLevel <= 1 then
-        techButtons[2] = kTechId.ResearchBioMassOne
-    elseif self.bioMassLevel <= 2 then
-        techButtons[2] = kTechId.ResearchBioMassTwo
-    elseif self.bioMassLevel <= 3 then
-        techButtons[2] = kTechId.ResearchBioMassThree
     end
 
     return techButtons
@@ -449,16 +443,25 @@ function Hive:GetTechButtons()
         techButtons[6] = kTechId.CystCamouflage
         techButtons[3] = kTechId.ShadeTunnel
     end
-    
-    if self.bioMassLevel <= 1 then
-        techButtons[2] = kTechId.ResearchBioMassOne
-    elseif self.bioMassLevel <= 2 then
-        techButtons[2] = kTechId.ResearchBioMassTwo
-    elseif self.bioMassLevel <= 3 then
-        techButtons[2] = kTechId.ResearchBioMassThree
+
+    if self.bioMassLevel < self.bioMassPreserve then
+        if self.bioMassLevel <= 1 then
+            techButtons[2] = kTechId.RecoverBiomassOne
+        elseif self.bioMassLevel <= 2 then
+            techButtons[2] = kTechId.RecoverBiomassTwo
+        elseif self.bioMassLevel <= 3 then
+            techButtons[2] = kTechId.RecoverBiomassThree
+        end
+    else
+        if self.bioMassLevel <= 1 then
+            techButtons[2] = kTechId.ResearchBioMassOne
+        elseif self.bioMassLevel <= 2 then
+            techButtons[2] = kTechId.ResearchBioMassTwo
+        elseif self.bioMassLevel <= 3 then
+            techButtons[2] = kTechId.ResearchBioMassThree
+        end
     end
-
-
+    
     return techButtons
     
 end
@@ -479,9 +482,91 @@ if Server then
     local baseOnUpdate = Hive.OnUpdate
     function Hive:OnUpdate(deltaTime)
         baseOnUpdate(self,deltaTime)
-        
-        
-        
     end
-    
+
+    function Hive:OnResearchComplete(researchId)
+
+        local success = false
+        local hiveTypeChosen = false
+        self.biomassResearchFraction = 0
+
+        local hiveTechId = self:GetTechId()
+
+        local team = self:GetTeam()
+        if researchId == kTechId.ResearchBioMassOne 
+                or researchId == kTechId.ResearchBioMassTwo 
+                or researchId == kTechId.ResearchBioMassThree 
+                or researchId == kTechId.ResearchBioMassFour 
+                or researchId == kTechId.RecoverBiomassOne
+                or researchId == kTechId.RecoverBiomassTwo
+                or researchId == kTechId.RecoverBiomassThree
+        then
+
+            self.bioMassLevel = math.min(6, self.bioMassLevel + 1)
+            team:GetTechTree():SetTechChanged()
+            team:SetBioMassPreserve(hiveTechId,self.bioMassLevel)
+            success = true
+
+        elseif researchId == kTechId.UpgradeToCragHive then
+
+            success = self:UpgradeToTechId(kTechId.CragHive)
+            hiveTechId = kTechId.CragHive
+            hiveTypeChosen = true
+
+        elseif researchId == kTechId.UpgradeToShadeHive then
+
+            success = self:UpgradeToTechId(kTechId.ShadeHive)
+            hiveTechId = kTechId.ShadeHive
+            hiveTypeChosen = true
+
+        elseif researchId == kTechId.UpgradeToShiftHive then
+
+            success = self:UpgradeToTechId(kTechId.ShiftHive)
+            hiveTechId = kTechId.ShiftHive
+            hiveTypeChosen = true
+
+        end
+        
+        if success and hiveTypeChosen  then
+            -- Let gamerules know for stat tracking.
+            GetGamerules():SetHiveTechIdChosen(self, hiveTechId)
+            team:SetBioMassPreserve(hiveTechId,self.bioMassLevel)    --Update it once by max
+            self.bioMassPreserve = team:GetBioMassPreserve(hiveTechId)       --Collect biomass preserve after upgrade
+        end
+
+    end
+
+    local kResearchTypeToHiveType =
+    {
+        [kTechId.UpgradeToCragHive] = kTechId.CragHive,
+        [kTechId.UpgradeToShadeHive] = kTechId.ShadeHive,
+        [kTechId.UpgradeToShiftHive] = kTechId.ShiftHive,
+    }
+
+    function Hive:UpdateResearch()
+
+        local researchId = self:GetResearchingId()
+
+        if kResearchTypeToHiveType[researchId] then
+
+            local hiveTypeTechId = kResearchTypeToHiveType[researchId]
+            local techTree = self:GetTeam():GetTechTree()
+            local researchNode = techTree:GetTechNode(hiveTypeTechId)
+            researchNode:SetResearchProgress(self.researchProgress)
+            techTree:SetTechNodeChanged(researchNode, string.format("researchProgress = %.2f", self.researchProgress))
+
+        end
+
+        if researchId == kTechId.ResearchBioMassOne 
+                or researchId == kTechId.ResearchBioMassTwo
+                or researchId == kTechId.ResearchBioMassThree
+                or researchId == kTechId.RecoverBiomassOne
+                or researchId == kTechId.RecoverBiomassTwo
+                or researchId == kTechId.RecoverBiomassThree
+        then
+            self.biomassResearchFraction = self:GetResearchProgress()
+        end
+
+    end
+
 end 

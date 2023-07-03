@@ -767,6 +767,50 @@ function BuildTechData()
     })
 
     table.insert(techData, {
+        [kTechDataId] = kTechId.ShiftHiveBiomassPreserve,
+        [kTechDataDisplayName] = "BIOMASS_PRESERVATION",
+        [kTechDataTooltipInfo] = "BIOMASS_PRESERVATION_TOOLTIP",
+        [kTechIDShowEnables] = false,
+    })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.ShadeHiveBiomassPreserve,
+        [kTechDataDisplayName] = "BIOMASS_PRESERVATION",
+        [kTechDataTooltipInfo] = "BIOMASS_PRESERVATION_TOOLTIP",
+        [kTechIDShowEnables] = false,
+    })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.CragHiveBiomassPreserve,
+        [kTechDataDisplayName] = "BIOMASS_PRESERVATION",
+        [kTechDataTooltipInfo] = "BIOMASS_PRESERVATION_TOOLTIP",
+        [kTechIDShowEnables] = false,
+    })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.RecoverBiomassOne,
+        [kTechDataCostKey] = kRecoverBioMassOneCost,
+        [kTechDataResearchTimeKey] = kRecoverBioMassOneTime,
+        [kTechDataDisplayName] = "BIOMASS_RECOVER",
+        [kTechDataTooltipInfo] = "BIOMASS_RECOVER_TOOLTIP",
+    })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.RecoverBiomassTwo,
+        [kTechDataCostKey] = kRecoverBioMassTwoCost,
+        [kTechDataResearchTimeKey] = kRecoverBioMassTwoTime,
+        [kTechDataDisplayName] = "BIOMASS_RECOVER",
+        [kTechDataTooltipInfo] = "BIOMASS_RECOVER_TOOLTIP",
+    })
+    table.insert(techData, {
+        [kTechDataId] = kTechId.RecoverBiomassThree,
+        [kTechDataCostKey] = kRecoverBioMassThreeCost,
+        [kTechDataResearchTimeKey] = kRecoverBioMassThreeTime,
+        [kTechDataDisplayName] = "BIOMASS_RECOVER",
+        [kTechDataTooltipInfo] = "BIOMASS_RECOVER_TOOLTIP",
+    })
+    
+    table.insert(techData, {
         [kTechDataId] = kTechId.BuildTunnelEntryOne,
         [kTechDataMaxExtents] = Vector(0.6,0.6,0.6),
         [kTechDataTooltipInfo] = "TUNNEL_TOOLTIP",

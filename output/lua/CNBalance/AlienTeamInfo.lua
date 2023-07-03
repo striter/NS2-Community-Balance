@@ -33,6 +33,10 @@ local networkVars =
     spurLevel = "integer (0 to 3)",
     shellLevel = "integer (0 to 3)",
     
+    shiftHiveBiomassPreserve = "integer (0 to 4)",
+    shadeHiveBiomassPreserve = "integer (0 to 4)",
+    cragHiveBiomassPreserve = "integer (0 to 4)",
+    
     location1Id = "entityid",
     location2Id = "entityid",
     location3Id = "entityid",
@@ -130,9 +134,14 @@ function AlienTeamInfo:OnCreate()
     self.bioMassLevel = 0
     self.bioMassAlertLevel = 0
     self.maxBioMassLevel = 0
+    self.shiftHiveBiomassPreserve = 0
+    self.shadeHiveBiomassPreserve = 0
+    self.cragHiveBiomassPreserve = 0
+    
     self.veilLevel = 0
     self.spurLevel = 0
     self.shellLevel = 0
+
     
     self.location1Id = Entity.invalidId
     self.location2Id = Entity.invalidId
@@ -310,6 +319,10 @@ if Server then
         self.veilLevel = 0
         self.spurLevel = 0
         self.shellLevel = 0
+
+        self.shiftHiveBiomassPreserve = 0
+        self.shadeHiveBiomassPreserve = 0
+        self.cragHiveBiomassPreserve = 0
         
         self.location1Id = Entity.invalidId
         self.location2Id = Entity.invalidId
@@ -352,14 +365,19 @@ if Server then
                 self.veilLevel = 3
                 self.spurLevel = 3
                 self.shellLevel = 3
+                self.shiftHiveBiomassPreserve = 4
+                self.shadeHiveBiomassPreserve = 4
+                self.cragHiveBiomassPreserve = 4
             else
                 self.bioMassLevel = Clamp(team:GetBioMassLevel(), 0, 12)
                 self.bioMassAlertLevel = Clamp(team:GetBioMassAlertLevel(), 0 , 12)
+                self.shiftHiveBiomassPreserve = team:GetBioMassPreserve(kTechId.ShiftHive)
+                self.shadeHiveBiomassPreserve = team:GetBioMassPreserve(kTechId.ShadeHive)
+                self.cragHiveBiomassPreserve = team:GetBioMassPreserve(kTechId.CragHive)
                 self.veilLevel = Clamp(GetBuiltStructureCount("Veil", team:GetTeamNumber()), 0, 3)
                 self.spurLevel = Clamp(GetBuiltStructureCount("Spur", team:GetTeamNumber()), 0, 3)
                 self.shellLevel = Clamp(GetBuiltStructureCount("Shell", team:GetTeamNumber()), 0, 3)
             end
-
         end
         
         self:ResetAllLocationSlotsData()

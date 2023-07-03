@@ -159,7 +159,7 @@ ModLoader.SetupFileHook( "lua/AlienHallucination.lua", "lua/CNBalance/AlienHallu
 ModLoader.SetupFileHook( "lua/Hallucination.lua", "lua/CNBalance/Hallucination.lua", "replace" )
 
 ModLoader.SetupFileHook("lua/AlienBuy_Client.lua", "lua/CNBalance/AlienBuy_Client.lua", "post" )
-ModLoader.SetupFileHook("lua/AlienTeam.lua", "lua/CNBalance/AlienTeam.lua", "post")
+ModLoader.SetupFileHook("lua/AlienTeam.lua", "lua/CNBalance/AlienTeam.lua", "replace")
 ModLoader.SetupFileHook("lua/AlienTeamInfo.lua", "lua/CNBalance/AlienTeamInfo.lua", "replace")
 ModLoader.SetupFileHook("lua/AlienTechMap.lua", "lua/CNBalance/AlienTechMap.lua", "post")
 

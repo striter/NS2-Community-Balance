@@ -355,14 +355,21 @@ kOnosEggCost = 100
 kTunnelEntranceCost = 7
 kTunnelRelocateCost = 5
 
+--Research with skill activation
 kResearchBioMassOneCost = 30
 kBioMassOneTime = 45
 kResearchBioMassTwoCost = 45
 kBioMassTwoTime = 60
 kResearchBioMassThreeCost = 60
 kBioMassThreeTime = 90
-kResearchBioMassFourCost = 100      --?
-kBioMassFourTime = 80
+
+--Recover
+kRecoverBioMassOneCost = 10
+kRecoverBioMassOneTime = 25
+kRecoverBioMassTwoCost = 15
+kRecoverBioMassTwoTime = 35
+kRecoverBioMassThreeCost = 20
+kRecoverBioMassThreeTime = 45
 
 --Skulk
 kParasiteEnergyCost = 30

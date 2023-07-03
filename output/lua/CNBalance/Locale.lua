@@ -146,6 +146,11 @@ if kTranslateMessage then
     kTranslateMessage["CRAG_TUNNEL_TOOLTIP"] = "*虫洞护甲将获得大量提升.\n*出虫洞时将获得一层粘膜."
     kTranslateMessage["SHADE_TUNNEL"] = "拟态虫洞"
     kTranslateMessage["SHADE_TUNNEL_TOOLTIP"] = "*虫洞入口脱战后将对敌方单位不可见."
+    
+    kTranslateMessage["BIOMASS_PRESERVATION"] = "生物质贮存"
+    kTranslateMessage["BIOMASS_PRESERVATION_TOOLTIP"] = "卡拉异形已吸收此生物质.\n*在生物质因故剥离后.\n*可以更快演化至该级生物质."
+    kTranslateMessage["BIOMASS_RECOVER"] = "生物量演化"
+    kTranslateMessage["BIOMASS_RECOVER_TOOLTIP"] = "以更低的成本升级母巢.\n*并增加生物量等级."
 end
 
 if kLocales then
@@ -291,4 +296,9 @@ if kLocales then
     kLocales["CRAG_TUNNEL_TOOLTIP"] = "*Makes tunnel tougher.\n*Tunnel user receives mucous shield"
     kLocales["SHADE_TUNNEL"] = "Tunnel Camouflage"
     kLocales["SHADE_TUNNEL_TOOLTIP"] = "*Entrance gets camouflage when out of combat."
+
+    kLocales["BIOMASS_PRESERVATION"] = "Biomass Preservation"
+    kLocales["BIOMASS_PRESERVATION_TOOLTIP"] = "Kharaa has adapted this biomass.\n*Can evolve faster while biomass lost."
+    kLocales["BIOMASS_RECOVER"] = "Biomass Recover"
+    kLocales["BIOMASS_RECOVER_TOOLTIP"] = "Upgrade biomass level with lowerer cost."
 end

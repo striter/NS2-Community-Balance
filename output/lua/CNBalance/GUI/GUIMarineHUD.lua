@@ -1,9 +1,10 @@
-GUIMarineHUD.kMinimapPowerPos = Vector(25, 46 + 32, 0)
-GUIMarineHUD.kLocationTextOffset = Vector(75, 46 + 32, 0)
-GUIMarineHUD.kMinimapPos = Vector(30, 80 + 32, 0)
+GUIMarineHUD.kTeamCountIconStart = Vector(25, 30, 0)
+GUIMarineHUD.kMinimapPowerPos = Vector(25, 30 + 32, 0)
+GUIMarineHUD.kLocationTextOffset = Vector(75, 30 + 32, 0)
+GUIMarineHUD.kMinimapPos = Vector(30, 64 + 32, 0)
 
 GUIMarineHUD.kTeamIconSize =  GUIScale( Vector( 48, 24, 0 ) )
-GUIMarineHUD.kCountNoUsed = Color(0x01 / 0xFF, 0x8F / 0xFF, 0xFF / 0xFF, 0.5)
+GUIMarineHUD.kCountNoUsed = Color(0.3 , 0.3 , 0.3 , 1)
 GUIMarineHUD.kCountHaveUser = Color(0x01 / 0xFF, 0x8F / 0xFF, 0xFF / 0xFF, 1)
 
 local function ResetTeamCountIcon(element)
@@ -77,7 +78,8 @@ function GUIMarineHUD:Initialize()
     --........ or i should totally rewrite initialize
     for index,element in ipairs(self.teamCountElements) do
         --Vector(25, 46, 0)
-        element:SetPosition(Vector(25 + (index-1) * 50,46,0))
+        local offset = index - 1
+        element:SetPosition(GUIMarineHUD.kTeamCountIconStart + Vector(offset * 50, offset * 2,0))
         self.background:AddChild(element)
     end
 end

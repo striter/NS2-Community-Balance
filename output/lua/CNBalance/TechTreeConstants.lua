@@ -62,6 +62,12 @@ debug.appendtoenum(kTechId, "ShadeTunnel")
 --debug.appendtoenum(kTechId, "CragWhip")
 --debug.appendtoenum(kTechId, "ShadeWhip")
 
+debug.appendtoenum(kTechId, "ShiftHiveBiomassPreserve")
+debug.appendtoenum(kTechId, "ShadeHiveBiomassPreserve")
+debug.appendtoenum(kTechId, "CragHiveBiomassPreserve")
+debug.appendtoenum(kTechId, "RecoverBiomassOne")
+debug.appendtoenum(kTechId, "RecoverBiomassTwo")
+debug.appendtoenum(kTechId, "RecoverBiomassThree")
 debug.appendtoenum(kTechId, "XenocideFuel")
 
 

@@ -62,6 +62,13 @@ kTechIdToMaterialOffset[kTechId.ShiftTunnel] = 203
 kTechIdToMaterialOffset[kTechId.CragTunnel] = 202
 kTechIdToMaterialOffset[kTechId.ShadeTunnel] = 201
 
+kTechIdToMaterialOffset[kTechId.RecoverBiomassOne] = 216
+kTechIdToMaterialOffset[kTechId.RecoverBiomassTwo] = 217
+kTechIdToMaterialOffset[kTechId.RecoverBiomassThree] = 218
+kTechIdToMaterialOffset[kTechId.ShiftHiveBiomassPreserve] = 2
+kTechIdToMaterialOffset[kTechId.ShadeHiveBiomassPreserve] = 2
+kTechIdToMaterialOffset[kTechId.CragHiveBiomassPreserve] = 2
+
 kTechIdToMaterialOffset[kTechId.Devour] = 109 
 
 kTechIdToMaterialOffset[kTechId.WeaponCache] = 1
