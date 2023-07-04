@@ -42,7 +42,6 @@ kTechDataTeamResOnKill = {
 -- Resource refund base on teams total income minus (anti snowball,could cause "miracle")
 kTeamResourceRefundBase = 100
 kTeamResourceMaxRefund = 48   --Case they reach the limit cant use it
-kPlayerResourceEachRefund = 0.125   --Alt option
 kTechDataTeamResRefundPercentageOnKill = {
     [kTechId.Exo] = 0.05,  [kTechId.JetpackMarine] = 0.03,  --[kTechId.Exosuit] = 0.05, Aint working due to its not attached with pointgivermixin
     [kTechId.Extractor] = 0.1, [kTechId.PoweredExtractor] = 0.1, [kTechId.Harvester] = 0.1,
@@ -410,13 +409,13 @@ kVolleyRappelDamageType = kDamageType.Normal
 kVolleyEnergyCost = 7.0 --7.0
 kRappelDamage = 10
 kRappelParasiteTime = 5
-kRappelWebTime = 2.5
+kRappelWebTime = 2
 
 kRappelResearchCost = 10
 kRappelResearchTime = 20
-kRappelEnergyCost = 10
-kRappelReelEnergyCost = 15
-kRappelRange = 35
+kRappelEnergyCost = 15
+kRappelReelEnergyCost = 12
+kRappelRange = 25
 
 kAcidSprayResearchCost = 10
 kAcidSprayResearchTime = 60

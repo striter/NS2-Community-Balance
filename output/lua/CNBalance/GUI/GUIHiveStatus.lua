@@ -669,7 +669,7 @@ function GUIHiveStatus:Update( deltaTime )
 
     self:UpdateLifeformCount(self.teamSkulkTable,self.teamInfoEnt.teamSkulkCount)
     self:UpdateLifeformCount(self.teamGorgeTable,self.teamInfoEnt.teamGorgeCount)
-    self:UpdateLifeformCount(self.teamGorgeTable,self.teamInfoEnt.teamLerkCount)
+    self:UpdateLifeformCount(self.teamLerkTable,self.teamInfoEnt.teamLerkCount)
     self:UpdateLifeformCount(self.teamFadeTable,self.teamInfoEnt.teamFadeCount)
     self:UpdateLifeformCount(self.teamOnosTable,self.teamInfoEnt.teamOnosCount)
     self:UpdateLifeformCount(self.teamProwlerTable,self.teamInfoEnt.teamProwlerCount)

@@ -625,31 +625,31 @@ function GetCommandStationIsBuilt(techId, origin, normal, commander)
 
     local spaceFree = GetHasRoomForCapsule(Vector(Player.kXZExtents, Player.kYExtents, Player.kXZExtents), origin + Vector(0, 0.1 + Player.kYExtents, 0), CollisionRep.Default, PhysicsMask.AllButPCsAndRagdolls)
     
-    if spaceFree then
+    --if spaceFree then
+    --
+    --    local cs = GetEntitiesForTeamWithinRange("CommandStation", commander:GetTeamNumber(), origin, 15)
+    --    if cs and #cs > 0 then
+    --
+    --        local ccs = cs[1] -- Hmm...
+    --        local ips = GetEntitiesForTeamWithinRange("InfantryPortal", commander:GetTeamNumber(), ccs:GetOrigin(), 15)
+    --        if ips then
+    --
+    --            local ipCountValid = #ips < kMaxInfantryPortalsPerCommandStation
+    --            local built = ccs:GetIsBuilt()
+    --
+    --            if ipCountValid and built then
+    --                return true
+    --            elseif not ipCountValid then
+    --                return false, "INFANTRY_PORTAL_TOOMANYIPS"
+    --            end
+    --        end
+    --
+    --    end
+    --
+    --end
     
-        local cs = GetEntitiesForTeamWithinRange("CommandStation", commander:GetTeamNumber(), origin, 15)
-        if cs and #cs > 0 then
 
-            local ccs = cs[1] -- Hmm...
-            local ips = GetEntitiesForTeamWithinRange("InfantryPortal", commander:GetTeamNumber(), ccs:GetOrigin(), 15)
-            if ips then
-
-                local ipCountValid = #ips < kMaxInfantryPortalsPerCommandStation
-                local built = ccs:GetIsBuilt()
-
-                if ipCountValid and built then
-                    return true
-                elseif not ipCountValid then
-                    return false, "INFANTRY_PORTAL_TOOMANYIPS"
-                end
-            end
-
-        end
-    
-    end
-    
-
-    return false
+    return spaceFree
 
 end
 

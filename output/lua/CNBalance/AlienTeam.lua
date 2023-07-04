@@ -1287,15 +1287,6 @@ function AlienTeam:GetTotalInRespawnQueue()
 end
 
 
-
-local function UpdateBiomassChanged(self, biomassChanged, biomassLevel)
-
-    local teamPlayers = GetPlayersAboveLimit(self:GetTeamType())
-    local ents = GetEntitiesWithMixin("BiomassHealth")
-    for i = 1, #ents do
-        local ent = ents[i]
-        if biomassChanged or (ent.GetHealthPerTeamExceed)  then
-            ent:UpdateHealthAmount(biomassLevel,teamPlayers)
-        end
-    end
+function AlienTeam:GetResourcesPerRefund()
+    return 0.125       -- 6 when max refund
 end

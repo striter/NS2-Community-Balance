@@ -14,7 +14,7 @@ kGrenadeLauncherWeight = 0.15
 kFlamethrowerWeight = 0.14
 kShotgunWeight = 0.14
 
-kMaxInfantryPortalsPerCommandStation = 5
+kMaxInfantryPortalsPerCommandStation = 99
 kNumMines = 2
 kGrenadeLauncherPlayersAlert = 5
 kFlameThrowerPlayersAlert = 3

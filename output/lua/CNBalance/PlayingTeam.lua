@@ -64,19 +64,25 @@ function PlayingTeam:OnTeamKill(techID,bountyScore)
         self:AddTeamResources(tResReward,true)      --Treat this as income
     end
 
-    local pResReward = 0
     local refundBase = self:GetRefundBase() 
     if refundBase > kTeamResourceRefundBase then
         local percentage = kTechDataTeamResRefundPercentageOnKill[techID] or 0
+        
         local refund = math.min(math.floor(refundBase * percentage), kTeamResourceMaxRefund)
-        self:CollectTeamResources(refund,refund * kPlayerResourceEachRefund)  --Refund
+        local pResPerRefund = self:GetResourcesPerRefund()
+        self:CollectTeamResources(refund ,refund * pResPerRefund)  --Refund
     end
 
+    local pResReward = 0
     if bountyScore > 0 then
         local pResClaimPerBounty = (self:GetTeamType() == kAlienTeamType and kPResPerBountyClaimAsAlien or kPResPerBountyClaimAsMarine)
         pResReward = bountyScore * pResClaimPerBounty
     end
     return pResReward
+end
+
+function PlayingTeam:GetResourcesPerRefund()
+    assert(true,"Override this please")
 end
 
 function PlayingTeam:AddTeamResources(amount, isIncome)

@@ -241,6 +241,10 @@ function MarineTeam:GetRefundBase()
     return 0
 end
 
+function MarineTeam:GetResourcesPerRefund()
+    return 0.0625   --Comm do drop gears
+end
+
 function MarineTeam:CollectAggressivePlayerResources(player,amount)
     amount = amount * (militaryProtocolTechNode:GetResearched() and kMilitaryProtocolAggressivePersonalResourcesScalar or 1)
     player:AddResources(amount)
