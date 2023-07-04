@@ -377,17 +377,14 @@ kAdrenalineParasiteEnergyCost = 18
 kXenocideResearchCost = 20
 kXenocideResearchTime = 60
 
-kXenocideDamage = 120   --200
-kXenocideDamageType = kDamageType.Structural
-kXenocideRange = 9  -- 14
-kXenocideEnergyCost = 30
-kXenocideSpawnReduction = 0.8
-
 kXenocideFuelCost = 35
 kXenocideFuelTime = 120
-kXenocideFuelDamage = 160
-kXenocideFuelRange = 12
-kXenocideFuelSpawnReduction = 0.6
+
+kXenocideEnergyCost = 30
+kXenocideDamageType = kDamageType.Structural
+kXenocideDamage = 120  kXenocideFuelDamage = 160 --200
+kXenocideRange = 9 kXenocideFuelRange = 12 -- 14
+kXenocideSpawnReduction = 0.75 kXenocideFuelSpawnReduction = 0.5
 
 kBileBombResearchCost = 10
 kBileBombResearchTime = 40

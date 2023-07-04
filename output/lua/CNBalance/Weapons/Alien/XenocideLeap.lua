@@ -36,12 +36,12 @@ function XenocideLeap:OnProcessMove(input)
 
                 player:TriggerEffects("xenocide", {effecthostcoords = Coords.GetTranslation(player:GetOrigin())})
 
-                local hitEntities = GetEntitiesWithMixinWithinRange("Live", xenoOrigin, kXenocideRange)
-                table.removevalue(hitEntities, player)
-
                 local xenocideFuel = GetIsTechUnlocked(self,kTechId.XenocideFuel)
                 local damage = xenocideFuel and kXenocideFuelDamage or kXenocideDamage
                 local range = xenocideFuel and kXenocideFuelRange or kXenocideRange
+                local hitEntities = GetEntitiesWithMixinWithinRange("Live", xenoOrigin, range)
+                table.removevalue(hitEntities, player)
+
                 RadiusDamage(hitEntities, xenoOrigin, range, damage, self)
 
                 player.spawnReductionTime = xenocideFuel and kXenocideFuelSpawnReduction or kXenocideSpawnReduction
