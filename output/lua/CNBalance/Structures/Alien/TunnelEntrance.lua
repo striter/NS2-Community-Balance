@@ -37,6 +37,8 @@ Script.Load("lua/CommanderGlowMixin.lua")
 Script.Load("lua/ObstacleMixin.lua")
 Script.Load("lua/InfestationMixin.lua")
 Script.Load("lua/AlienTunnelVariantMixin.lua")
+Script.Load("lua/BiomassHealthMixin.lua")
+
 
 Script.Load("lua/Tunnel.lua")
 
@@ -121,6 +123,7 @@ function TunnelEntrance:OnCreate()
     InitMixin(self, MaturityMixin)
     InitMixin(self, CombatMixin)
     InitMixin(self, InfestationMixin)
+    InitMixin(self, BiomassHealthMixin)
 
     if Server then
 
@@ -945,12 +948,13 @@ end
 
 --Armor 
 function TunnelEntrance:GetMatureMaxArmor()
-    local hasCragUpgrade = GetHasTech(self,kTechId.CragTunnel)       --Calls before update
-    if self:GetIsInfested() then
-        return hasCragUpgrade and kMatureCragInfestedTunnelEntranceArmor or kMatureInfestedTunnelEntranceArmor
+    local armor = self:GetIsInfested() and kMatureInfestedTunnelEntranceArmor or kMatureTunnelEntranceArmor
+    
+    if GetHasTech(self,kTechId.CragTunnel) then
+        armor = armor + kCragTunnelArmorAdditive
     end
 
-    return hasCragUpgrade and kMatureCragTunnelEntranceArmor or kMatureTunnelEntranceArmor
+    return armor
 end
 
 
@@ -970,6 +974,10 @@ if Server then
 
     function TunnelEntrance:GetIsActuallyConnected()
         return true
+    end
+    
+    function TunnelEntrance:GetHealthPerTeamExceed()
+        return kTunnelEntranceHealthPerPlayerAdd
     end
 end
 ---

@@ -19,6 +19,10 @@ Script.Load("lua/IdleMixin.lua")
 Script.Load("lua/DetectableMixin.lua")
 Script.Load("lua/Weapons/DotMarker.lua")
 Script.Load("lua/CloakableMixin.lua")
+Script.Load("lua/MapBlipMixin.lua")
+Script.Load("lua/LOSMixin.lua")
+Script.Load("lua/PointGiverMixin.lua")
+Script.Load("lua/BiomassHealthMixin.lua")
 
 class 'SporeMine' (ScriptActor)
 
@@ -26,7 +30,7 @@ local kStartScale = 0.5
 local kFinalScale = 1.2
 local kCollisionRadius = 0.37
 SporeMine.kMapName = "sporemine"
-SporeMine.kDropRange = 3
+SporeMine.kDropRange = 6.5
 
 SporeMine.kModelName = PrecacheAsset("models/alien/sporemine/sporemine.model")
 local kAnimationGraph = PrecacheAsset("models/alien/sporemine/sporemine.animation_graph")
@@ -49,6 +53,7 @@ AddMixinNetworkVars(FireMixin, networkVars)
 AddMixinNetworkVars(IdleMixin, networkVars)
 AddMixinNetworkVars(DetectableMixin, networkVars)
 AddMixinNetworkVars(CloakableMixin, networkVars)
+AddMixinNetworkVars(LOSMixin, networkVars)
 
 function SporeMine:OnCreate()
 
@@ -69,7 +74,10 @@ function SporeMine:OnCreate()
     InitMixin(self, UmbraMixin)
     InitMixin(self, FireMixin)
     InitMixin(self, DetectableMixin)
+    InitMixin(self, LOSMixin)
     InitMixin(self, CloakableMixin)
+    InitMixin(self, PointGiverMixin)
+    InitMixin(self, BiomassHealthMixin)
     
     if Server then
         self.silenced = false
@@ -100,6 +108,10 @@ function SporeMine:OnInitialized()
         
         self:SetExcludeRelevancyMask(mask)
 
+        if not HasMixin(self, "MapBlip") then
+            InitMixin(self, MapBlipMixin)
+        end
+
     elseif Client then
 
         InitMixin(self, UnitStatusMixin)
@@ -109,7 +121,6 @@ function SporeMine:OnInitialized()
 
     end
 
-    
     self:MarkPhysicsDirty()
 
     self.physicsBody = Shared.CreatePhysicsSphereBody(false, kCollisionRadius, 0,  self:GetCoords() )
@@ -167,6 +178,14 @@ end
 
 function SporeMine:GetUseMaxRange()
     return SporeMine.kDropRange
+end
+
+function SporeMine:GetHealthPerBioMass()
+    return kSporeMineHealthPerBioMass
+end
+
+function SporeMine:GetReceivesStructuralDamage()
+    return true
 end
 
 function SporeMine:OnAdjustModelCoords(modelCoords)

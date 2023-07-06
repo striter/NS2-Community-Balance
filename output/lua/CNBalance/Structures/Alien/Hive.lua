@@ -24,6 +24,7 @@ Script.Load("lua/HiveVisionMixin.lua")
 Script.Load("lua/BiomassMixin.lua")
 Script.Load("lua/IdleMixin.lua")
 Script.Load("lua/AlienStructureVariantMixin.lua")
+Script.Load("lua/BiomassHealthMixin.lua")
 
 class 'Hive' (CommandStructure)
 
@@ -109,6 +110,7 @@ function Hive:OnCreate()
     InitMixin(self, TeleportMixin)
     InitMixin(self, DetectableMixin)
     InitMixin(self, BiomassMixin)
+    InitMixin(self, BiomassHealthMixin)
 
     self.extendAmount = 0
 
@@ -569,4 +571,8 @@ if Server then
 
     end
 
-end 
+end
+
+function Hive:GetHealthPerTeamExceed()
+    return kHiveHealthPerPlayerAdd
+end

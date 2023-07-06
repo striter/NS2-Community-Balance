@@ -36,6 +36,28 @@ function PlayingTeam:RemoveSupplyUsed(supplyUsed)
     self.supplyUsed = self.supplyUsed - supplyUsed
 end
 
+local function UpdatePlayerChanges(self)
+    local teamPlayers = GetPlayersAboveLimit(self:GetTeamType())
+    local ents = GetEntitiesWithMixin("BiomassHealth")
+    for i = 1, #ents do
+        local ent = ents[i]
+        if (ent.GetHealthPerTeamExceed)  then
+            ent:UpdateHealthAmount(teamPlayers,0)
+        end
+    end
+end
+
+function PlayingTeam:AddPlayer(player)
+    local available = Team.AddPlayer(self,player)
+    UpdatePlayerChanges(self)
+    return available
+end
+
+function PlayingTeam:RemovePlayer(player)
+    Team.RemovePlayer(self,player)
+    UpdatePlayerChanges(self)
+end
+
 function PlayingTeam:Update()
 
     PROFILE("PlayingTeam:Update")

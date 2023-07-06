@@ -1,3 +1,16 @@
+Script.Load("lua/BiomassHealthMixin.lua")
+
+local baseOnCreate = Observatory.OnCreate
+function Observatory:OnCreate()
+    baseOnCreate(self)
+    InitMixin(self, BiomassHealthMixin)
+end
+
+function Observatory:GetHealthPerTeamExceed()
+    return kObservatoryHealthPerPlayerAdd
+end
+
+
 function Observatory:GetTechButtons(techId)
 
     if techId == kTechId.RootMenu then

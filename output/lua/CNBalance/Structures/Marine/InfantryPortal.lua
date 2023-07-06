@@ -39,6 +39,7 @@ Script.Load("lua/SupplyUserMixin.lua")
 Script.Load("lua/IdleMixin.lua")
 Script.Load("lua/ParasiteMixin.lua")
 Script.Load("lua/FilteredCinematicMixin.lua")
+Script.Load("lua/BiomassHealthMixin.lua")
 
 if Client then
     Script.Load("lua/GraphDrivenModel.lua")
@@ -207,6 +208,7 @@ function InfantryPortal:OnCreate()
     InitMixin(self, GhostStructureMixin)
     InitMixin(self, PowerConsumerMixin)
     InitMixin(self, ParasiteMixin)
+    InitMixin(self, BiomassHealthMixin)
     
     if Client then
         InitMixin(self, CommanderGlowMixin)
@@ -223,7 +225,6 @@ function InfantryPortal:OnCreate()
     self:SetLagCompensated(true)
     self:SetPhysicsType(PhysicsType.Kinematic)
     self:SetPhysicsGroup(PhysicsGroup.MediumStructuresGroup)
-    
 end
 
 local function StopSpinning(self)
@@ -686,6 +687,10 @@ if Client then
         
     end
 
+end
+
+function InfantryPortal:GetHealthPerTeamExceed()
+    return kInfantryPortalHealthPerPlayerAdd
 end
 
 function InfantryPortal:GetTechButtons()

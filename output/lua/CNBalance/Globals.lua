@@ -28,6 +28,8 @@ debug.appendtoenum(kMinimapBlipType, "Prowler")
 debug.appendtoenum(kMinimapBlipType, "Vokex")
 debug.appendtoenum(kMinimapBlipType, "WeaponCache")
 debug.appendtoenum(kMinimapBlipType, "MarineSentry")
+debug.appendtoenum(kMinimapBlipType, "BabblerEgg")
+debug.appendtoenum(kMinimapBlipType, "SporeMine")
 
 -- Fuck bie bie le
 --zoneA:  min(max(0,x-900)/420 * 5 , 5)

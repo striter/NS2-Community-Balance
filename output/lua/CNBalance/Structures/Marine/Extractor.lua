@@ -29,6 +29,8 @@ Script.Load("lua/IdleMixin.lua")
 Script.Load("lua/ExtractorVariantMixin.lua")
 Script.Load("lua/DamageMixin.lua")
 
+Script.Load("lua/BiomassHealthMixin.lua")
+
 
 class 'Extractor' (ResourceTower)
 
@@ -70,6 +72,7 @@ function Extractor:OnCreate()
     InitMixin(self, HiveVisionMixin)
     InitMixin(self, UpgradableMixin)
     InitMixin(self, DamageMixin)
+    InitMixin(self, BiomassHealthMixin)
 
     if Client then
         InitMixin(self, CommanderGlowMixin)
@@ -196,6 +199,9 @@ function Extractor:GetDeathIconIndex()
     return kDeathMessageIcon.EMPBlast
 end
 
+function Extractor:GetHealthPerTeamExceed()
+    return kExtractorHealthPerPlayerAdd
+end
 if Server then
     function Extractor:OnTakeDamage(_, attacker, doer)
 

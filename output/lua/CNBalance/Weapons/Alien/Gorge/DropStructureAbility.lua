@@ -18,7 +18,7 @@ class 'DropStructureAbility' (Ability)
 local kMaxStructuresPerType = 32
 local kDropCooldown = 1
 local kEnergyReductionPerBiomass = 0.06
-local kDropCooldownReductionPerBiomass = 0.05
+local kDropCooldownReductionPerBiomass = 0.06
 
 DropStructureAbility.kMapName = "drop_structure_ability"
 

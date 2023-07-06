@@ -2,7 +2,6 @@
 kTechDataPlayersRestrictionKey = "playersrestrictionkey"
 kTechDataPersonalCostKey = "costpersonalkey"
 kTechDataLayoutKey     = "layoutKey"
-kTechDataPersonalResOnKillKey = "pResOnKillKey"
 kTechDataTeamResOnKillKey = "tResOnKillKey"
 
 local oldBuildTechData = BuildTechData
@@ -537,7 +536,7 @@ function BuildTechData()
         [kTechDataModel] = SporeMine.kModelName,
         [kTechDataMaxHealth] = kSporeMineHealth,
         [kTechDataMaxArmor] = kSporeMineArmor,
-        [kTechDataPointValue] = kSporeMinepointValue,
+        [kTechDataPointValue] = kSporeMinePointValue,
         [kTechDataDisplayName] = "SPOREMINE",
         [kTechDataTooltipInfo] = "SPOREMINE_TOOLTIP",
     })

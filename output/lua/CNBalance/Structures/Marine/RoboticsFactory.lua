@@ -23,6 +23,7 @@ if Server then
     
     function RoboticsFactory:OnUpdate()
 
+        if self:GetTechId() == kTechId.ARCRoboticsFactory then return end       --Don't give arc factory free macs then
         local time = Shared.GetTime()
         if self.freeMACCheck and time - self.freeMACCheck < 1 then return end
         self.freeMACCheck = time

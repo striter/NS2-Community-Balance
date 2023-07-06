@@ -318,14 +318,14 @@ function AlienTeam:GetInProgressBiomassLevel()
 end
 
 
-local function UpdateBiomassChanged(self, biomassChanged, biomassLevel)
+local function UpdateBiomassChanges(self, biomassChanged, biomassLevel)
 
     local teamPlayers = GetPlayersAboveLimit(self:GetTeamType())
     local ents = GetEntitiesWithMixin("BiomassHealth")
     for i = 1, #ents do
         local ent = ents[i]
         if biomassChanged or (ent.GetHealthPerTeamExceed)  then
-            ent:UpdateHealthAmount(biomassLevel,teamPlayers)
+            ent:UpdateHealthAmount(teamPlayers,biomassLevel)
         end
     end
 end
@@ -335,20 +335,19 @@ function AlienTeam:OnUpdateBiomass(oldBiomass, newBiomass)
         self.techTree:SetTechChanged()
     end
 
-    UpdateBiomassChanged(self,true,newBiomass)
+    UpdateBiomassChanges(self,true,newBiomass)
 end
 
 function AlienTeam:AddPlayer(player)
     local available = Team.AddPlayer(self,player)
-    UpdateBiomassChanged(self,false,self.bioMassLevel)
+    UpdateBiomassChanges(self,false,self.bioMassLevel)
     return available
 end
 
 function AlienTeam:RemovePlayer(player)
     Team.RemovePlayer(self,player)
-    UpdateBiomassChanged(self,false,self.bioMassLevel)
+    UpdateBiomassChanges(self,false,self.bioMassLevel)
 end
-
 
 function AlienTeam:SetBiomassLevel(newBiomass)
     newBiomass = math.min(12, newBiomass)
@@ -1113,14 +1112,14 @@ function AlienTeam:InitTechTree()
     -- onos researches
     self.techTree:AddPassive(kTechId.Charge)
     self.techTree:AddTargetedActivation(kTechId.Devour,            kTechId.BioMassTwo, kTechId.None,kTechId.AllAliens)
-    self.techTree:AddTargetedActivation(kTechId.BoneShield,        kTechId.BioMassSix, kTechId.None,kTechId.AllAliens)
+    self.techTree:AddTargetedActivation(kTechId.BoneShield,        kTechId.BioMassFive, kTechId.None,kTechId.AllAliens)
     self.techTree:AddTargetedActivation(kTechId.Stomp,             kTechId.BioMassEight, kTechId.None,kTechId.AllAliens)
 
     -- prowler researches
     self.techTree:AddPassive(kTechId.Volley)
     self.techTree:AddPassive(kTechId.Rappel)
     -- self.techTree:AddResearchNode(kTechId.Rappel,              kTechId.BioMassThree,  kTechId.None, kTechId.AllAliens)
-    self.techTree:AddTargetedActivation(kTechId.AcidSpray,           kTechId.BioMassFive,  kTechId.None,kTechId.AllAliens)
+    self.techTree:AddTargetedActivation(kTechId.AcidSpray,           kTechId.BioMassSix,  kTechId.None,kTechId.AllAliens)
     -- vokex researches
     self.techTree:AddPassive(kTechId.ShadowStep,           kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.AcidRocket,           kTechId.BioMassFive,  kTechId.None,kTechId.AllAliens)

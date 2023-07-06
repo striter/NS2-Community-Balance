@@ -1,3 +1,14 @@
+Script.Load("lua/BiomassHealthMixin.lua")
+
+local baseOnCreate = CommandStation.OnCreate
+function CommandStation:OnCreate()
+    baseOnCreate(self)
+    InitMixin(self, BiomassHealthMixin)
+end
+
+function CommandStation:GetHealthPerTeamExceed()
+    return kCommandStationHealthPerPlayerAdd
+end
 
 Script.Load("lua/CNBalance/Mixin/SupplyProviderMixin.lua")
 local baseOnInitialized = CommandStation.OnInitialized
@@ -60,6 +71,7 @@ function CommandStation:OnResearchComplete(researchId)
         self:UpgradeToTechId(kTechId.ElectronicStation)
     end
 end
+
 
 class 'StandardStation' (CommandStation)
 StandardStation.kMapName = "standard_station"

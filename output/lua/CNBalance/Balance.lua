@@ -22,7 +22,7 @@ kTechDataPersonalResOnKill = {
 
     --Aliens
     [kTechId.Egg] = 0.2,[kTechId.Cyst] = 0.2,
-    [kTechId.Hydra] = 0.2,[kTechId.BabblerEgg] = 2,       --PPVE
+    [kTechId.Hydra] = 0.2,[kTechId.SporeMine] = 0.2,[kTechId.BabblerEgg] = 2,       --PPVE
     [kTechId.Shell] = 5, [kTechId.Veil] = 5, [kTechId.Spur] = 5,
     [kTechId.Whip] = 2.5, [kTechId.Shift] = 5, [kTechId.Crag] = 5, [kTechId.Shade] = 5,       --CPVE
     [kTechId.Harvester] = 5, [kTechId.Tunnel] = 5, [kTechId.InfestedTunnel] = 7.5,
@@ -54,7 +54,7 @@ kTechDataTeamResRefundPercentageOnKill = {
 --If a player kills too many players and crushing the game 
 kAssistMinimumDamageFraction = 0.3      --Avoid parasiter or babbler assists ,feels pretty weird
 kBountyScoreEachAssist = 1 kBountyScoreEachKill = 2 kMaxBountyScore = 512       --You can't kill 256 players in 1 life
-kBountyClaimMin = 10
+kBountyClaimMinMarine = 7 kBountyClaimMinAlien = 10
 kPResPerBountyClaimAsMarine = 0.4  kPResPerBountyClaimAsAlien = 0.25
 kBountyTargetDamageReceiveStep = 18  kBountyDamageReceiveBaseEachStep = (0.1 / kBountyTargetDamageReceiveStep)      --0-10%,20%-40%,40%-80%, increase its damage receive by steps.
 
@@ -166,8 +166,8 @@ kPoweredExtractorResearchTime = 60
 kPoweredExtractorUpgradeCost = 20
 kPoweredExtractorUpgradeTime = 45
 kPoweredExtractorChargingInterval = 2.5
-kPoweredExtractorDamageDistance = 5
-kPoweredExtractorDamage = 50
+kPoweredExtractorDamageDistance = 3
+kPoweredExtractorDamage = 40
 kPoweredExtractorElectrifyDuration = 5
 --kGrenadeLauncherDetectionShotResearchCost = 15
 --kGrenadeLauncherDetectionShotResearchTime = 60
@@ -266,10 +266,10 @@ kFlamethrowerDropCost = 15
 kFlamethrowerDropCooldown = 0
 
 kFirePlayerDOTDelay = 1
-kPlayerFireDOTPerSecond = 5
-kDragonBreathPlayerFireDamagePerStack = { kPlayerFireDOTPerSecond / 4, kPlayerFireDOTPerSecond / 3.6, kPlayerFireDOTPerSecond / 3.3, kPlayerFireDOTPerSecond / 3}
-kFlameThrowerPlayerFireDamagePerStack = { kPlayerFireDOTPerSecond, kPlayerFireDOTPerSecond, kPlayerFireDOTPerSecond, kPlayerFireDOTPerSecond }
-kPlayerFireDamageMaxStack = { kPlayerFireDOTPerSecond * 3, kPlayerFireDOTPerSecond * 4,kPlayerFireDOTPerSecond * 5,kPlayerFireDOTPerSecond * 6 }
+kPlayerFireDOTPerSecond = 3
+kDragonBreathPlayerFireDamagePerStack = { 1 , 1.1 , 1.2 , 1.3 }
+kFlameThrowerPlayerFireDamagePerStack = { 6 , 6 , 6 , 6 }
+kPlayerFireDamageMaxStack = { 12, 18, 24, 30 }
 kFireStructureDOTDelay = 0.5
 kStructureFireDOTPerSecond = 8.0
 kDragonBreathStructureFireDamagePerStack = { kStructureFireDOTPerSecond / 100, kStructureFireDOTPerSecond / 90,kStructureFireDOTPerSecond/ 80, kStructureFireDOTPerSecond / 70 }--kStructureFireDOTPerSecond / 20, kStructureFireDOTPerSecond / 18, kStructureFireDOTPerSecond / 16, kStructureFireDOTPerSecond / 14}
@@ -412,7 +412,7 @@ kRappelResearchCost = 10
 kRappelResearchTime = 20
 kRappelEnergyCost = 15
 kRappelReelEnergyCost = 12
-kRappelRange = 25
+kRappelRange = 35
 
 kAcidSprayResearchCost = 10
 kAcidSprayResearchTime = 60

@@ -40,11 +40,11 @@ if Server then
             biomassLevel = team.GetBioMassLevel and team:GetBioMassLevel() or 0
             playerAboveLimit = team.GetTeamType and GetPlayersAboveLimit(team:GetTeamType()) or 0
         end
-        self:UpdateHealthAmount(biomassLevel,playerAboveLimit)
+        self:UpdateHealthAmount(playerAboveLimit,biomassLevel)
     end
 
-    function BiomassHealthMixin:UpdateHealthAmount(bioMassLevel,playersAboveLimit)
-        local healthPerBiomass = self:GetHealthPerBioMass()
+    function BiomassHealthMixin:UpdateHealthAmount(playersAboveLimit,bioMassLevel)
+        local healthPerBiomass = self.GetHealthPerBioMass and self:GetHealthPerBioMass() or 0
         local healthPerPlayerExceed = self.GetHealthPerTeamExceed and self:GetHealthPerTeamExceed() or 0
         
         if healthPerBiomass == 0 and healthPerPlayerExceed == 0 then return end
@@ -60,4 +60,7 @@ if Server then
         end
     end
 
+    function BiomassHealthMixin:GetAdditionalHealth()
+        return self.biomassHealth
+    end
 end

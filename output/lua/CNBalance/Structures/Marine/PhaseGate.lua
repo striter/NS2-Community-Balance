@@ -1,3 +1,16 @@
+Script.Load("lua/BiomassHealthMixin.lua")
+
+local baseOnCreate = PhaseGate.OnCreate
+function PhaseGate:OnCreate()
+    baseOnCreate(self)
+    InitMixin(self, BiomassHealthMixin)
+end
+
+function PhaseGate:GetHealthPerTeamExceed()
+    return kPhaseGateHealthPerPlayerAdd
+end
+
+
 local function TransformPlayerCoordsForPhaseGate(player, srcCoords, dstCoords)
 
     local viewCoords = player:GetViewCoords()

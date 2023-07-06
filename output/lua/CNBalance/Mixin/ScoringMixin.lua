@@ -49,7 +49,15 @@ if Server then
 end
 
 function ScoringMixin:GetBountyCurrentLife()
-    return math.max(self.bountyCurrentLife - kBountyClaimMin, 0)
+    local team = self:GetTeamNumber()
+    local minClaim = 0
+    if team == kMarineTeamType then
+        minClaim = kBountyClaimMinMarine
+    elseif team == kAlienTeamType then
+        minClaim = kPResPerBountyClaimAsAlien
+    end
+    
+    return math.max(self.bountyCurrentLife - minClaim, 0)
 end
 
 function ScoringMixin:AddContinuousScore(name, addAmount, amountNeededToScore, pointsGivenOnScore, resGivenOnScore )

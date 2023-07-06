@@ -24,25 +24,46 @@ kJetpackHealth = 120    kJetpackArmor = 45   kJetpackArmorPerUpgradeLevel = 25  
 kExosuitHealth = 100    kExosuitArmor = 320  kExosuitArmorPerUpgradeLevel = 30
 kMarinePointValue = 5   kJetpackPointValue = 12   kExosuitPointValue = 20
 
-kCommandStationHealth = 3000    kCommandStationArmor = 1800    kCommandStationPointValue = 20   --2000 -1800
-kUpgradedCommandStationHealth = 3200 kUpgradedCommandStationArmor = 1900 kUpgradedCommandStationPointValue = 30
-kPowerPointHealth = 2200    kPowerPointArmor = 1250    kPowerPointPointValue = 10 -- 2000 1000  10
-kExtractorHealth = 2400 kExtractorArmor = 1350 kExtractorPointValue = 15 --2400 1050
-kPoweredExtractorHealth = 3000 kPoweredExtractorArmor = 1600 kPoweredExtractorPointValue = 30
-
 kMineHealth = 30    kMineArmor = 9    kMinePointValue = 5
 
-kObservatoryHealth = 1050    kObservatoryArmor = 500    kObservatoryPointValue = 15     -- 750 500
+--2000 -1800
+kCommandStationHealth = 2000    kCommandStationArmor = 2000    kCommandStationPointValue = 20
+kUpgradedCommandStationHealth = 2200 kUpgradedCommandStationArmor = 2200 kUpgradedCommandStationPointValue = 30
+kCommandStationHealthPerPlayerAdd = 100
+
+--2000   1000
+kPowerPointHealth = 2000  kPowerPointArmor = 1200  kPowerPointPointValue = 10
+kPowerPointHealthPerPlayerAdd = 75
+
+--2400 1050
+kExtractorHealth = 2400 kExtractorArmor = 1200 kExtractorPointValue = 15
+kPoweredExtractorHealth = 3000 kPoweredExtractorArmor = 1600 kPoweredExtractorPointValue = 30
+kExtractorHealthPerPlayerAdd = 80
+
+--1525 500
+kInfantryPortalHealth = 1500  kInfantryPortalArmor = 600  kInfantryPortalPointValue = 10
+kInfantryPortalHealthPerPlayerAdd = 50
+
+-- 1500  800  10
+kPhaseGateHealth = 1800  kPhaseGateArmor = 800    kPhaseGatePointValue = 10 
+kPhaseGateHealthPerPlayerAdd = 60
+
+--700 500
+kObservatoryHealth = 850    kObservatoryArmor = 500    kObservatoryPointValue = 15     -- 750 500
+kObservatoryHealthPerPlayerAdd = 50
+
+--1650 500
+kArmsLabHealth = 1800    kArmsLabArmor = 500    kArmsLabPointValue = 15
+kArmsLabHealthPerPlayerAdd = 50
+
+--2600 400   -- 2600 0
+kARCHealth = 3000    kARCArmor = 400    kARCPointValue = 10 
+kARCDeployedHealth = 3000    kARCDeployedArmor = 0
 
 kRoboticsFactoryHealth = 2500    kRoboticsFactoryArmor = 400    kRoboticsFactoryPointValue = 5
 kARCRoboticsFactoryHealth = 3000    kARCRoboticsFactoryArmor = 600    kARCRoboticsFactoryPointValue = 7
 kSentryBatteryHealth = 800    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5
 kSentryHealth = 500    kSentryArmor = 125    kSentryPointValue = 4
-
-kARCHealth = 3100    kARCArmor = 400    kARCPointValue = 10   --2600 400
-kARCDeployedHealth = 3100    kARCDeployedArmor = 0      -- 2600 0
-
-kPhaseGateHealth = 1950    kPhaseGateArmor = 800    kPhaseGatePointValue = 10 -- 1500  800  10
 
 kExplosiveSelfDamage =
 {
@@ -57,7 +78,7 @@ kExplosiveSelfDamage =
 --Alien
 kHealingClampMaxHPAmount = 0.15
 
-kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5    kSkulkHealthPerBioMass = 3 kSkulkHealthPerPlayerAboveLimit = 1
+kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5  kSkulkHealthPerBioMass = 3 kSkulkHealthPerPlayerAboveLimit = 1
 kSkulkDamageReduction = {
     ["Shotgun"] = 0.88,
     ["Grenade"] = 0.8,
@@ -89,8 +110,8 @@ kFadeDamageReduction = {
 kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 25
 kOnosBoneShieldDefaultReduction = 0.2
 kOnosBoneShieldDamageReduction = {
-    ["HeavyMachineGun"] = 0.28,
-    ["Minigun"] = 0.35,
+    ["HeavyMachineGun"] = 0.25,
+    ["Minigun"] = 0.3,
     ["Railgun"] = 0,
 }
 kOnosDamageReduction = {
@@ -98,7 +119,7 @@ kOnosDamageReduction = {
     ["SubMachineGun"] = 0.92,
     ["LightMachineGun"] = 0.92,
     ["Shotgun"] = 0.88,
-    ["HeavyMachineGun"] = 1.08,
+    --["HeavyMachineGun"] = 1.08,
 }
 
 kProwlerHealth = 120 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 7
@@ -123,10 +144,21 @@ kFadeBaseCarapaceUpgradeAmount  = 30    kFadeCarapaceArmorPerBiomass  = 2.5
 kOnosBaseCarapaceUpgradeAmount  = 150   kOnosCarapaceArmorPerBiomass  = 10
 kVokexBaseCarapaceUpgradeAmount = 50    kVokexCarapaceArmorPerBiomass = 0
 
-kHiveHealth = 5200    kHiveArmor = 750  --4000 750
-kMatureHiveHealth = 7800 kMatureHiveArmor = 1400    -- 6000 1400
-kHarvesterHealth = 2000 kHarvesterArmor = 200 kHarvesterPointValue = 15
-kMatureHarvesterHealth = 2500 kMatureHarvesterArmor = 500  --2300 320
+--4000 750 6000 1400
+kHiveHealth = 4000    kHiveArmor = 1000 kMatureHiveHealth = 5000 kMatureHiveArmor = 2500
+kHiveHealthPerPlayerAdd = 200
+
+--2000 200 2300 320 
+kHarvesterHealth = 2000 kHarvesterArmor = 320 kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 500  kHarvesterPointValue = 15
+kHarvesterHealthPerPlayerAdd = 75
+
+--1000 ---100    --1250 -200
+kTunnelEntranceHealth = 1000  kTunnelEntranceArmor = 200 kMatureTunnelEntranceHealth = 1250 kMatureTunnelEntranceArmor = 400
+kTunnelEntranceHealthPerPlayerAdd = 50 kCragTunnelArmorAdditive = 400 kTunnelEntrancePointValue = 5
+
+--These stuff is required but , won't called due to its matured when infested
+kMatureInfestedTunnelEntranceHealth = kMatureTunnelEntranceHealth    kMatureInfestedTunnelEntranceArmor = kMatureTunnelEntranceArmor
+kInfestedTunnelEntranceHealth = kTunnelEntranceHealth    kInfestedTunnelEntranceArmor = kTunnelEntranceArmor    
 
 kCystHealth = 50    kCystArmor = 1
 kMatureCystHealth = 400    kMatureCystArmor = 1    kCystPointValue = 1
@@ -134,25 +166,18 @@ kMinMatureCystHealth = 200 kMinCystScalingDistance = 48 kMaxCystScalingDistance 
 
 kClogHealth = 250  kClogArmor = 0  kClogHealthPerBioMass = 10 kClogPointValue = 0
 
-kHydraHealth = 100    kHydraArmor = 10    kHydraPointValue = 1
-kMatureHydraHealth = 130   kMatureHydraArmor = 20  kHydraHealthPerBioMass = 20  kMatureHydraPointValue = 0
+kHydraHealth = 100    kHydraArmor = 10  kHydraHealthPerBioMass = 20   kHydraPointValue = 1
+kMatureHydraHealth = 130   kMatureHydraArmor = 20  kMatureHydraPointValue = 0
+
+kSporeMineHealth = 50 kSporeMineArmor = 0 kSporeMineHealthPerBioMass = 12 kSporeMinePointValue = 1
+kMatureSporeMineHealth = 120 kMatureSporeMineArmor = 0
+
+kBabblerEggHealth = 100  kBabblerEggArmor = 0 kBabblerEggHealthPerBiomass = 15  kBabblerEggPointValue = 3
+kMatureBabblerEggHealth = 200 kMatureBabblerEggArmor = 0
 
 kBoneWallHealth = 100 kBoneWallArmor = 200    kBoneWallHealthPerBioMass = 75
 kContaminationHealth = 1000 kContaminationArmor = 0    kContaminationPointValue = 2
 
-kTunnelEntranceHealth = 1050   kTunnelEntranceArmor = 250  --1000 ---100  
-kMatureTunnelEntranceHealth = 1300    kMatureTunnelEntranceArmor = 350  kMatureCragTunnelEntranceArmor = 750  --1250 -200
-kInfantryPortalHealth = 1825    kInfantryPortalArmor = 500    kInfantryPortalPointValue = 10
-
-kInfestedTunnelEntranceHealth = 1300    kInfestedTunnelEntranceArmor = 350 --1250 200
-kMatureInfestedTunnelEntranceHealth = 1450    kMatureInfestedTunnelEntranceArmor = 400 kMatureCragInfestedTunnelEntranceArmor = 800   --1400 250
-kTunnelEntrancePointValue = 5
-
-kBabblerEggHealth = 50    kBabblerEggArmor = 0    kBabblerEggPointValue = 3
-kMatureBabblerEggHealth = 150 kMatureBabblerEggArmor = 0
-
-kSporeMineHealth = 50 kSporeMineArmor = 0 kSporeMinepointValue=0
-kMatureSporeMineHealth = 100 kMatureSporeMineArmor = 0
 
 kWhipHealth = 650    kWhipArmor = 175    kWhipPointValue = 6
 kMatureWhipHealth = 720    kMatureWhipArmor = 240  kWhipHealthPerBioMass = 120  kMatureWhipPointValue = 6
