@@ -1,3 +1,5 @@
+Exo.kReceiveBountyDamage = true
+
 if Server then
 
     local kDeploy2DSound = PrecacheAsset("sound/NS2.fev/marine/heavy/deploy_2D")

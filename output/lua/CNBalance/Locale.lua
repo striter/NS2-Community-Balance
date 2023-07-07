@@ -124,7 +124,7 @@ if kTranslateMessage then
 
     kTranslateMessage["PROWLER"] = "Prowler"
     kTranslateMessage["PROWLER_EGG"] = "蛹(Prowler)"
-    kTranslateMessage["PROWLER_TOOLTIP"] = "地面远程骚然单位.\n*齐射钉刺远程输出\n*(进化)通过绳网快速移动\n*(进化)酸液投掷范围攻击."
+    kTranslateMessage["PROWLER_TOOLTIP"] = "地面远程骚然单位.\n同时也是滞空单位的噩梦.\n*齐射钉刺远程输出\n*(进化)通过绳网快速移动\n*(进化)酸液投掷范围攻击."
     kTranslateMessage["VOLLEY"] = "齐射"
     kTranslateMessage["VOLLEY_TOOLTIP"] = "齐射一轮远程钉刺.\n*直线瞬发弹道."
     kTranslateMessage["RAPPEL"] = "网绳"

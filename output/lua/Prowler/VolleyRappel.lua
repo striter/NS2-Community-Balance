@@ -249,6 +249,12 @@ function VolleyRappel:OnTag(tagName)
                     local hitPoint = hitPoints[i]
 
                     self:ApplyBulletGameplayEffects(player, target, hitPoint - hitOffset, direction, damage, "rock", showTracer and i == numTargets)
+
+                    if HasMixin(target, "Webable") then
+                        if target.GetIsOnGround and not target:GetIsOnGround() then
+                            target:SetWebbed(kVolleyWebTime, true)
+                        end
+                    end
                     
                     local client = Server and player:GetClient() or Client
                     if not Shared.GetIsRunningPrediction() and client and client.hitRegEnabled then

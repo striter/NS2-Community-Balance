@@ -7,10 +7,10 @@
 --3    280    4   |3     5   |3      4|3         4(3)|2           310    5(4)|3      6(5)        4           4
 -- Jetpack
 --A    ehp   
---0    210    3|2        4(3)|2      3   |2      3(2)|2(1)        220    4(3)        4          3           3
---1    260    4|2        5(4)|3(2)   4(3)|2      3   |2           280    4           5          4           4(3)
---2    310    5|3        5   |3      4   |2      4   |2           340    5           6          5(4)        4
---3    360    5|3        6   |3      5   |3      4   |2           400    6(5)        7(6)       6(5)        5(4)
+--0    200    3|2        4(3)|2      3   |2      3(2)|2(1)        210    4(3)        4          3           3
+--1    240    4|2        5(4)|3(2)   3   |2      3   |2           260    4           5          4           4(3)
+--2    280    4|3        5   |3      4   |3      4   |2           310    5           6          5(4)        4
+--3    320    5|3        6   |3      5   |3      4   |2           360    6(5)        7(6)       6(5)        5(4)
 -- Exosuit    
 --A    ehp
 --0    640    9          11          8           8  
@@ -20,7 +20,7 @@
 
 
 kMarineHealth = 100    kMarineArmor = 30    kArmorPerUpgradeLevel = 20     kMPMarineArmor = 35    kMPMarineArmorPerUpgradeLevel = 20
-kJetpackHealth = 120    kJetpackArmor = 45   kJetpackArmorPerUpgradeLevel = 25   kMPJetpackMarineArmor = 45   kMPJetpackArmorPerUpgradeLevel = 25  
+kJetpackHealth = 120    kJetpackArmor = 40   kJetpackArmorPerUpgradeLevel = 20   kMPJetpackMarineArmor = 45   kMPJetpackArmorPerUpgradeLevel = 25  
 kExosuitHealth = 100    kExosuitArmor = 320  kExosuitArmorPerUpgradeLevel = 30
 kMarinePointValue = 5   kJetpackPointValue = 12   kExosuitPointValue = 20
 
@@ -107,11 +107,12 @@ kFadeDamageReduction = {
     ["HeavyMachineGun"] = 0.92,
 }
 
-kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 25
+--700 450 50
+kOnosHealth = 700    kOnosArmor = 500    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 50
 kOnosBoneShieldDefaultReduction = 0.2
 kOnosBoneShieldDamageReduction = {
     ["HeavyMachineGun"] = 0.25,
-    ["Minigun"] = 0.3,
+    ["Minigun"] = 0.25,
     ["Railgun"] = 0,
 }
 kOnosDamageReduction = {
@@ -126,10 +127,10 @@ kProwlerHealth = 120 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthP
 kProwlerDamageReduction = {
     --["Shotgun"] = 0.9,
     ["Grenade"] = 0.75,
+    ["ImpactGrenade"] = 0.75,
     ["Railgun"] = 0.9,
     ["Cannon"] = 0.9,
     ["PulseGrenade"] = 0.75,
-    ["ImpactGrenade"] = 0.75,
 }
 
 kVokexHealth = 200   kVokexArmor = 80    kVokexPointvalue = 25   kVokexHealthPerBioMass = 4

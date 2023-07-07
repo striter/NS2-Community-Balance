@@ -27,6 +27,8 @@ function ScoringMixin:ClaimBounty()
 end
 
 function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint)
+    if not self.kReceiveBountyDamage then return end
+    
     local bountyScore = self:GetBountyCurrentLife()
     if bountyScore > 0 and damageTable.damage > 0 then
         local scalar = bountyScore * (math.floor(bountyScore / kBountyTargetDamageReceiveStep)+ 1) * kBountyDamageReceiveBaseEachStep

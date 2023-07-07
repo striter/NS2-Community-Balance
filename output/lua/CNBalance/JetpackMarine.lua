@@ -1,3 +1,4 @@
+JetpackMarine.kReceiveBountyDamage = true
 
 -- function JetpackMarine:GetFuel()
 

@@ -1,3 +1,5 @@
+Fade.kReceiveBountyDamage = true
+
 local kMetabolizeEnergyRegain = 20
 local kMetabolizeHealthRegain = 20
 
@@ -11,6 +13,7 @@ local kAdrenalineBlinkSpeed = 13.5
 local kAdrenalineBlinkAcceleration = 30
 local kAdrenalineBlinkAddAcceleration = 0.5
 local kAdrenalineBlinkSpeedCap = 20
+
 
 function Fade:ModifyVelocity(input, velocity, deltaTime)
     if self:GetIsBlinking() then
