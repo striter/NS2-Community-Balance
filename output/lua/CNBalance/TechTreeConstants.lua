@@ -94,5 +94,3 @@ debug.appendtoenum(kTechId, "HallucinateVokex")
 debug.appendtoenum(kTechId, "SwipeShadowStep")
 debug.appendtoenum(kTechId, "MetabolizeShadowStep")
 debug.appendtoenum(kTechId, "AcidRocket")
-
-

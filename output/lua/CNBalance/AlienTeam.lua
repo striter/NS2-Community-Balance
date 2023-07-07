@@ -1079,15 +1079,15 @@ function AlienTeam:InitTechTree()
     -- abilities unlocked by bio mass:
 
     -- skulk researches
-    self.techTree:AddTargetedActivation(kTechId.Leap,              kTechId.BioMassFour, kTechId.None,kTechId.AllAliens)
-    self.techTree:AddTargetedActivation(kTechId.Xenocide,          kTechId.BioMassSeven, kTechId.None,kTechId.AllAliens)
-    self.techTree:AddTargetedActivation(kTechId.XenocideFuel,          kTechId.BioMassTen, kTechId.Xenocide,kTechId.AllAliens)
+    self.techTree:AddUnlockActivation(kTechId.Leap,              kTechId.BioMassFour, kTechId.None,kTechId.AllAliens)
+    self.techTree:AddActivation(kTechId.Xenocide,          kTechId.BioMassSeven, kTechId.None,kTechId.AllAliens)
+    self.techTree:AddActivation(kTechId.XenocideFuel,          kTechId.BioMassTen, kTechId.Xenocide,kTechId.AllAliens)
 
     -- gorge researches
     self.techTree:AddBuyNode(kTechId.BabblerAbility,        kTechId.None)
     self.techTree:AddPassive(kTechId.BuildAbility,                   kTechId.None)
     self.techTree:AddPassive(kTechId.BellySlide,                   kTechId.None)
-    self.techTree:AddTargetedActivation(kTechId.BileBomb,         kTechId.BioMassThree, kTechId.None,kTechId.AllAliens)
+    self.techTree:AddUnlockActivation(kTechId.BileBomb,         kTechId.BioMassThree, kTechId.None,kTechId.AllAliens)
     --self.techTree:AddPassive(kTechId.WebTech,            kTechId.None) --, kTechId.None, kTechId.AllAliens
     -- gorge structures
     self.techTree:AddBuildNode(kTechId.Hydra)
@@ -1098,32 +1098,33 @@ function AlienTeam:InitTechTree()
     self.techTree:AddBuyNode(kTechId.BabblerEgg,            kTechId.BioMassTwo, kTechId.None,kTechId.AllAliens)
 
     -- lerk researches
-    self.techTree:AddTargetedActivation(kTechId.Spores,              kTechId.BioMassFour, kTechId.None,kTechId.AllAliens)
-    self.techTree:AddTargetedActivation(kTechId.Umbra,               kTechId.BioMassSix, kTechId.None,kTechId.AllAliens)
+    self.techTree:AddActivation(kTechId.Spores,              kTechId.BioMassFour, kTechId.None,kTechId.AllAliens)
+    self.techTree:AddUnlockActivation(kTechId.Umbra,               kTechId.BioMassSix, kTechId.None,kTechId.AllAliens)
 
     -- fade researches
-    self.techTree:AddTargetedActivation(kTechId.MetabolizeEnergy,        kTechId.BioMassThree, kTechId.None,kTechId.AllAliens)
-    self.techTree:AddTargetedActivation(kTechId.MetabolizeHealth,        kTechId.BioMassFive, kTechId.None,kTechId.AllAliens)
-    self.techTree:AddTargetedActivation(kTechId.Stab,              kTechId.BioMassSeven, kTechId.None,kTechId.AllAliens)
+    self.techTree:AddUnlockActivation(kTechId.MetabolizeEnergy,        kTechId.BioMassTwo, kTechId.None,kTechId.AllAliens)
+    self.techTree:AddActivation(kTechId.MetabolizeHealth,        kTechId.BioMassFive, kTechId.None,kTechId.AllAliens)
+    self.techTree:AddActivation(kTechId.Stab,              kTechId.BioMassSeven, kTechId.None,kTechId.AllAliens)
 
     self.techTree:AddResearchNode(kTechId.ShiftTunnel , kTechId.ShiftHive)
     self.techTree:AddResearchNode(kTechId.CragTunnel , kTechId.CragHive)
     self.techTree:AddResearchNode(kTechId.ShadeTunnel , kTechId.ShadeHive)
     -- onos researches
     self.techTree:AddPassive(kTechId.Charge)
-    self.techTree:AddTargetedActivation(kTechId.Devour,            kTechId.BioMassTwo, kTechId.None,kTechId.AllAliens)
-    self.techTree:AddTargetedActivation(kTechId.BoneShield,        kTechId.BioMassFive, kTechId.None,kTechId.AllAliens)
-    self.techTree:AddTargetedActivation(kTechId.Stomp,             kTechId.BioMassEight, kTechId.None,kTechId.AllAliens)
+    self.techTree:AddActivation(kTechId.Devour,            kTechId.BioMassThree, kTechId.None,kTechId.AllAliens)
+    self.techTree:AddUnlockActivation(kTechId.BoneShield,        kTechId.BioMassFive, kTechId.None,kTechId.AllAliens)
+    self.techTree:AddActivation(kTechId.Stomp,             kTechId.BioMassEight, kTechId.None,kTechId.AllAliens)
 
     -- prowler researches
     self.techTree:AddPassive(kTechId.Volley)
     self.techTree:AddPassive(kTechId.Rappel)
     -- self.techTree:AddResearchNode(kTechId.Rappel,              kTechId.BioMassThree,  kTechId.None, kTechId.AllAliens)
-    self.techTree:AddTargetedActivation(kTechId.AcidSpray,           kTechId.BioMassSix,  kTechId.None,kTechId.AllAliens)
+    self.techTree:AddActivation(kTechId.AcidSpray,           kTechId.BioMassSix,  kTechId.None,kTechId.AllAliens)
+    
     -- vokex researches
     self.techTree:AddPassive(kTechId.ShadowStep,           kTechId.None)
-    self.techTree:AddTargetedActivation(kTechId.AcidRocket,           kTechId.BioMassFive,  kTechId.None,kTechId.AllAliens)
-    self.techTree:AddTargetedActivation(kTechId.MetabolizeShadowStep,        kTechId.BioMassThree, kTechId.None)
+    self.techTree:AddActivation(kTechId.AcidRocket,           kTechId.BioMassFive,  kTechId.None,kTechId.AllAliens)
+    self.techTree:AddActivation(kTechId.MetabolizeShadowStep,        kTechId.BioMassThree, kTechId.None)
 
 
     self.techTree:SetComplete()

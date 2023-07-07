@@ -364,11 +364,11 @@ kBioMassThreeTime = 90
 
 --Recover
 kRecoverBioMassOneCost = 10
-kRecoverBioMassOneTime = 25
+kRecoverBioMassOneTime = 20
 kRecoverBioMassTwoCost = 15
-kRecoverBioMassTwoTime = 35
+kRecoverBioMassTwoTime = 3
 kRecoverBioMassThreeCost = 20
-kRecoverBioMassThreeTime = 45
+kRecoverBioMassThreeTime = 40
 
 --Skulk
 kParasiteEnergyCost = 30
