@@ -20,7 +20,7 @@
 
 
 kMarineHealth = 100    kMarineArmor = 30    kArmorPerUpgradeLevel = 20     kMPMarineArmor = 35    kMPMarineArmorPerUpgradeLevel = 20
-kJetpackHealth = 120    kJetpackArmor = 40   kJetpackArmorPerUpgradeLevel = 20   kMPJetpackMarineArmor = 45   kMPJetpackArmorPerUpgradeLevel = 25  
+kJetpackHealth = 120    kJetpackArmor = 45   kJetpackArmorPerUpgradeLevel = 25   kMPJetpackMarineArmor = 45   kMPJetpackArmorPerUpgradeLevel = 25  
 kExosuitHealth = 100    kExosuitArmor = 320  kExosuitArmorPerUpgradeLevel = 30
 kMarinePointValue = 5   kJetpackPointValue = 12   kExosuitPointValue = 20
 
@@ -108,7 +108,7 @@ kFadeDamageReduction = {
 }
 
 --700 450 50
-kOnosHealth = 700    kOnosArmor = 500    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 50
+kOnosHealth = 700    kOnosArmor = 500    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 25
 kOnosBoneShieldDefaultReduction = 0.2
 kOnosBoneShieldDamageReduction = {
     ["HeavyMachineGun"] = 0.25,

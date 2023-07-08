@@ -1,3 +1,4 @@
+Marine.kBountyThreshold = kBountyClaimMinMarine
 
 Script.Load("lua/AutoWeldMixin.lua")
 local baseOnCreate = Marine.OnCreate

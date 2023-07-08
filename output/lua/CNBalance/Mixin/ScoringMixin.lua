@@ -27,8 +27,6 @@ function ScoringMixin:ClaimBounty()
 end
 
 function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint)
-    if not self.kReceiveBountyDamage then return end
-    
     local bountyScore = self:GetBountyCurrentLife()
     if bountyScore > 0 and damageTable.damage > 0 then
         local scalar = bountyScore * (math.floor(bountyScore / kBountyTargetDamageReceiveStep)+ 1) * kBountyDamageReceiveBaseEachStep
@@ -51,15 +49,9 @@ if Server then
 end
 
 function ScoringMixin:GetBountyCurrentLife()
-    local team = self:GetTeamNumber()
-    local minClaim = 0
-    if team == kMarineTeamType then
-        minClaim = kBountyClaimMinMarine
-    elseif team == kAlienTeamType then
-        minClaim = kPResPerBountyClaimAsAlien
-    end
-    
-    return math.max(self.bountyCurrentLife - minClaim, 0)
+    assert(self.kBountyThreshold)
+    Shared.Message(tostring(self.kBountyThreshold))
+    return math.max(self.bountyCurrentLife - self.kBountyThreshold, 0)
 end
 
 function ScoringMixin:AddContinuousScore(name, addAmount, amountNeededToScore, pointsGivenOnScore, resGivenOnScore )

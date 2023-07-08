@@ -1,3 +1,5 @@
+Onos.kBountyThreshold = kBountyClaimMinOnos
+
 Onos.kBlockDoers =
 set {
     "Minigun",

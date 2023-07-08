@@ -1,3 +1,5 @@
+Alien.kBountyThreshold = kBountyClaimMinAlien
+
 function Alien:GetPlayerStatusDesc()
 
     local status = kPlayerStatus.Void

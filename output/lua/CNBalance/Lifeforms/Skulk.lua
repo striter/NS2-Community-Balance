@@ -1,3 +1,4 @@
+Skulk.kBountyThreshold = kBountyClaimMinSkulk
 Skulk.kAdrenalineEnergyRecuperationRate = 30
 function Skulk:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
     local reduction = kSkulkDamageReduction[doer:GetClassName()]

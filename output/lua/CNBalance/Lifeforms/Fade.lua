@@ -1,8 +1,3 @@
-Fade.kReceiveBountyDamage = true
-
-local kMetabolizeEnergyRegain = 20
-local kMetabolizeHealthRegain = 20
-
 local kBlinkSpeed = 14    --14 Blink desire speed
 local kBlinkAcceleration = 40   --40 Speed up per second
 local kBlinkAddAcceleration = 1  --1 Speed after holding
