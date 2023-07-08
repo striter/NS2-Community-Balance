@@ -22,8 +22,9 @@ end
 
 function ScoringMixin:ClaimBounty()
     local bounty = self:GetBountyCurrentLife()
-    self.bountyCurrentLife = 0
-    return bounty
+    local claim = math.min(bounty, kBountyMaxClaim)
+    self.bountyCurrentLife = self.bountyCurrentLife - claim
+    return claim
 end
 
 function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint)
@@ -50,7 +51,6 @@ end
 
 function ScoringMixin:GetBountyCurrentLife()
     assert(self.kBountyThreshold)
-    Shared.Message(tostring(self.kBountyThreshold))
     return math.max(self.bountyCurrentLife - self.kBountyThreshold, 0)
 end
 

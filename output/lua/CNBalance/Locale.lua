@@ -11,6 +11,8 @@ if kTranslateMessage then
     kTranslateMessage["TEAM_BOUNTY2"] = "资源块增殖 [%s*]"
     kTranslateMessage["NEXT_SPAWN_IN_TEAM2"] = "生物质重构:%i"
     kTranslateMessage["WAITING_SPAWN_TEAM2"] = "等待孵化中..."
+
+    kTranslateMessage["BOUNTY"] = "站点悬赏"
     
     kTranslateMessage["MILITARY_PROTOCOL"] = "军用统筹协防"
     kTranslateMessage["MILITARY_PROTOCOL_ENABLED"] = "军用统筹协防协议已启用 无法以个人名义采购杀伤性装备"
@@ -166,6 +168,8 @@ if kLocales then
     kLocales["NEXT_SPAWN_IN_TEAM2"] = "Biomass Reformation:%i"
     kLocales["WAITING_SPAWN_TEAM2"] = "Hatch Awaiting..."
 
+    kLocales["BOUNTY"] = "悬赏"
+    
     kLocales["MILITARY_PROTOCOL"] = "Military Protocol"
     kLocales["MILITARY_PROTOCOL_ENABLED"] = "Military Protocol Enabled, Unable to access offensive equipment in personal."
     kLocales["MILITARY_PROTOCOL_TOOLTIP"] = "Caution before you assign.\nYou will be the only weapon&equipment dispatcher.\n*Marines now wears uniforms.\n+Marines gets better standard equipments.\n+Biomass harvest(kills) grants team resource.\n+Marines' positive resources gain increased.\n-Researches duration increased.\n-Marines' passive resources stopped.\n-Marines can't buy offensives themself."
