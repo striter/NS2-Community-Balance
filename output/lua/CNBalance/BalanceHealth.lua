@@ -81,10 +81,10 @@ kHealingClampMaxHPAmount = 0.15
 kSkulkHealth = 75    kSkulkArmor = 10    kSkulkPointValue = 5  kSkulkHealthPerBioMass = 3 kSkulkHealthPerPlayerAboveLimit = 1
 kSkulkDamageReduction = {
     ["Shotgun"] = 0.88,
-    ["Grenade"] = 0.8,
-    ["ImpactGrenade"] = 0.8,
+    ["Grenade"] = 0.7,
+    ["ImpactGrenade"] = 0.7,
+    ["PulseGrenade"] = 0.7,
     ["Cannon"] = 0.9,
-    ["PulseGrenade"] = 0.8,
     --["Railgun"] = 0.9,
 }
 
@@ -94,8 +94,8 @@ kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15 kLerkHealthPerBioM
 kLerkDamageReduction = {
     --["Shotgun"] = 0.92,
     ["Cannon"] = 0.8,
-    ["Grenade"] = 0.75,
-    ["ImpactGrenade"] = 0.75,
+    ["Grenade"] = 0.7,
+    ["ImpactGrenade"] = 0.7,
     --["Railgun"] = 0.8,
     --["PulseGrenade"] = 0.75,
 }
@@ -126,11 +126,11 @@ kOnosDamageReduction = {
 kProwlerHealth = 120 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 7
 kProwlerDamageReduction = {
     --["Shotgun"] = 0.9,
-    ["Grenade"] = 0.75,
-    ["ImpactGrenade"] = 0.75,
+    ["Grenade"] = 0.7,
+    ["ImpactGrenade"] = 0.7,
     ["Railgun"] = 0.9,
     ["Cannon"] = 0.9,
-    ["PulseGrenade"] = 0.75,
+    ["PulseGrenade"] = 0.7,
 }
 
 kVokexHealth = 200   kVokexArmor = 80    kVokexPointvalue = 25   kVokexHealthPerBioMass = 4
