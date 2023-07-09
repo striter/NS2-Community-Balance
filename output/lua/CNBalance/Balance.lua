@@ -19,6 +19,7 @@ kTechDataPersonalResOnKill = {
     [kTechId.CommandStation] = 10, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [ kTechId.ElectronicStation ] = 15,
     [kTechId.Mine] = 0.2, [kTechId.InfantryPortal] = 2, [kTechId.MarineSentry] = 0.8,   --PPVE
     [kTechId.MAC] = 0.2,    [kTechId.SentryBattery] = 4, [kTechId.Sentry] = 1,[kTechId.ARC] = 2.5,      --CPVE
+    [kTechId.Shotgun] = 1, [kTechId.HeavyMachineGun] = 1, [kTechId.GrenadeLauncher] = 1, [kTechId.Flamethrower] = 1,     --Special one for gorgie
 
     --Aliens
     [kTechId.Egg] = 0.2,[kTechId.Cyst] = 0.2,
@@ -417,8 +418,8 @@ kRappelRange = 35
 
 kAcidSprayResearchCost = 10
 kAcidSprayResearchTime = 60
-kAcidSprayEnergyCost = 19
-kAcidSprayDamage = 22.5  -- 3 missiles
+kAcidSprayEnergyCost = 22
+kAcidSprayDamage = 20  -- 3 missiles
 kAcidSprayDamageType = kDamageType.Structural
 
 -- Fade

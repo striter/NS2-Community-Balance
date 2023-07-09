@@ -234,12 +234,12 @@ function MarineTeam:OnTeamKill(techId, bountyScore)
     return 0                --No pres No refund , Only True TRes
 end
 
-function MarineTeam:GetRefundBase()
-    if not militaryProtocolTechNode or not militaryProtocolTechNode:GetResearched() then
-        return PlayingTeam.GetRefundBase(self)
-    end
-    return 0
-end
+--function MarineTeam:GetRefundBase()
+--    if not militaryProtocolTechNode or not militaryProtocolTechNode:GetResearched() then
+--        return PlayingTeam.GetRefundBase(self)
+--    end
+--    return 0
+--end
 
 function MarineTeam:GetResourcesPerRefund()
     return 0 --0.0625   --Comm do drop gears
