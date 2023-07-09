@@ -1,30 +1,13 @@
 ScoringMixin.networkVars.bountyCurrentLife = "integer"
 
+local kBountyCooldownTick = 2
 local baseInitMixin = ScoringMixin.__initmixin
 function ScoringMixin:__initmixin()
     baseInitMixin(self)
     self.bountyCurrentLife = 0
-end
-
-local baseAddKill = ScoringMixin.AddKill
-function ScoringMixin:AddKill()
-    baseAddKill(self)
-    if GetWarmupActive() then return end
-    self.bountyCurrentLife = Clamp(self.bountyCurrentLife + kBountyScoreEachKill, 0, kMaxBountyScore)
-end
-
-local baseAddAssistKill = ScoringMixin.AddAssistKill
-function ScoringMixin:AddAssistKill()
-    baseAddAssistKill(self)
-    if GetWarmupActive() then return end
-    self.bountyCurrentLife = Clamp(self.bountyCurrentLife + kBountyScoreEachAssist, 0, kMaxBountyScore)
-end
-
-function ScoringMixin:ClaimBounty()
-    local bounty = self:GetBountyCurrentLife()
-    local claim = math.min(bounty, kBountyMaxClaim)
-    self.bountyCurrentLife = self.bountyCurrentLife - claim
-    return claim
+    if Server then
+        self:AddTimedCallback( self.CheckBountyCooldown, kBountyCooldownTick )
+    end
 end
 
 function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint)
@@ -36,16 +19,56 @@ function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType,
 end
 
 if Server then
-    local baseCopyPlayerDataFrom = ScoringMixin.CopyPlayerDataFrom
-    function ScoringMixin:CopyPlayerDataFrom(player)
-        baseCopyPlayerDataFrom(self,player)
-        self.bountyCurrentLife = player.bountyCurrentLife
-    end
-
     local baseResetScores = ScoringMixin.ResetScores
     function ScoringMixin:ResetScores()
         baseResetScores(self)
         self.bountyCurrentLife = 0
+        self.bountyCooldown = 0
+    end
+
+    local baseCopyPlayerDataFrom = ScoringMixin.CopyPlayerDataFrom
+    function ScoringMixin:CopyPlayerDataFrom(player)
+        baseCopyPlayerDataFrom(self,player)
+        self.bountyCurrentLife = player.bountyCurrentLife
+        self.bountyCooldown = 0
+    end
+
+    local baseAddKill = ScoringMixin.AddKill
+    function ScoringMixin:AddKill()
+        baseAddKill(self)
+        if GetWarmupActive() then return end
+        self.bountyCurrentLife = Clamp(self.bountyCurrentLife + kBountyScoreEachKill, 0, kMaxBountyScore)
+        self.bountyCooldown = 0
+    end
+
+    local baseAddAssistKill = ScoringMixin.AddAssistKill
+    function ScoringMixin:AddAssistKill()
+        baseAddAssistKill(self)
+        if GetWarmupActive() then return end
+        self.bountyCurrentLife = Clamp(self.bountyCurrentLife + kBountyScoreEachAssist, 0, kMaxBountyScore)
+        self.bountyCooldown = 0
+    end
+    
+    function ScoringMixin:ClaimBounty()
+        local bounty = self:GetBountyCurrentLife()
+        local claim = math.min(bounty, math.floor(self.kBountyThreshold * kBountyClaimMultiplier))
+        self.bountyCurrentLife = self.bountyCurrentLife - claim
+        self.bountyCooldown = 0
+        return claim
+    end
+    
+    function ScoringMixin:CheckBountyCooldown()
+        if self.bountyCurrentLife <= 0 then 
+            return true
+        end
+        
+        self.bountyCooldown = self.bountyCooldown + kBountyCooldownTick
+        if self.bountyCooldown > kBountyCooldown then
+            self.bountyCooldown = self.bountyCooldown - kBountyCooldownTick
+            self.bountyCurrentLife = math.max(self.bountyCurrentLife - 1,0)
+        end
+        
+        return true
     end
 end
 

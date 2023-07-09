@@ -56,7 +56,7 @@ kAssistMinimumDamageFraction = 0.3      --Avoid parasiter or babbler assists ,fe
 kBountyScoreEachAssist = 1 kBountyScoreEachKill = 2 kMaxBountyScore = 512       --You can't kill 256 players in 1 life
 kBountyClaimMinMarine = 7 kBountyClaimMinJetpack = 9 kBountyClaimMinExo = 12 
 kBountyClaimMinSkulk = 7 kBountyClaimMinAlien = 10  kBountyClaimMinOnos = 14
-kPResPerBountyClaimAsMarine = 0.4  kPResPerBountyClaimAsAlien = 0.25  kBountyMaxClaim = 20 --Is it too many?
+kPResPerBountyClaimAsMarine = 0.4  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 30
 kBountyTargetDamageReceiveStep = 18  kBountyDamageReceiveBaseEachStep = (0.1 / kBountyTargetDamageReceiveStep)      --0-10%,20%-40%,40%-80%, increase its damage receive by steps.
 
 --Toy for marine commander (remove all marines passive income, harsh one)
