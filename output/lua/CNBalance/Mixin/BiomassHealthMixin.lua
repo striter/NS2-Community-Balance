@@ -44,6 +44,7 @@ if Server then
     end
 
     function BiomassHealthMixin:UpdateHealthAmount(playersAboveLimit,bioMassLevel)
+        
         local healthPerBiomass = self.GetHealthPerBioMass and self:GetHealthPerBioMass() or 0
         local healthPerPlayerExceed = self.GetHealthPerTeamExceed and self:GetHealthPerTeamExceed() or 0
         
@@ -51,6 +52,7 @@ if Server then
         
         local level = math.max(0, bioMassLevel - 1)
         local newBiomassHealth = level * healthPerBiomass + playersAboveLimit * healthPerPlayerExceed
+        newBiomassHealth = math.min(newBiomassHealth,3000)  --Clamp it due to hive max health greater than expected limit (?)
 
         if newBiomassHealth ~= self.biomMassHealth  then
             -- maxHealth is a integer

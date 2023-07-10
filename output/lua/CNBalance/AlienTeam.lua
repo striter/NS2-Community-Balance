@@ -320,8 +320,8 @@ end
 
 local function UpdateBiomassChanges(self, biomassChanged, biomassLevel)
 
-    local teamPlayers = GetPlayersAboveLimit(self:GetTeamType())
-    local ents = GetEntitiesWithMixin("BiomassHealth")
+    local teamPlayers = math.max(0,self:GetNumPlayers() - kMatchMinPlayers)
+    local ents = GetEntitiesWithMixinForTeam("BiomassHealth",self:GetTeamType())
     for i = 1, #ents do
         local ent = ents[i]
         if biomassChanged or (ent.GetHealthPerTeamExceed)  then

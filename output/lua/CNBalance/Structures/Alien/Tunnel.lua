@@ -11,6 +11,7 @@ if Server then
         end
     end
     
+    local baseMovePlayerToTunnel = Tunnel.MovePlayerToTunnel
     function Tunnel:MovePlayerToTunnel(player, entrance)
     
         assert(player)
@@ -19,42 +20,21 @@ if Server then
         local entranceId = entrance:GetId()
         if entrance.hasShiftUpgrade then
             if entranceId == self.exitAId then
-                self.timeExitAUsed = Shared.GetTime()   
-                self:UseExit(player, self:GetExitB(), kTunnelExitSide.B)
+                local exitB = self:GetExitB()
+                if exitB then
+                    self.timeExitAUsed = Shared.GetTime()
+                    self:UseExit(player, exitB, kTunnelExitSide.B)
+                    return
+                end
             elseif entranceId == self.exitBId then
-                self.timeExitBUsed = Shared.GetTime()
-                self:UseExit(player, self:GetExitA(), kTunnelExitSide.A)
+                local exitA = self:GetExitA()
+                if exitA then
+                    self.timeExitBUsed = Shared.GetTime()
+                    self:UseExit(player, exitA, kTunnelExitSide.A)
+                    return
+                end 
             end
-
-            return
         end
-        
-        local newAngles = player:GetViewAngles()
-        newAngles.pitch = 0
-        newAngles.roll = 0
-
-        --Two sound effects required here for inside and outside a tunnel
-        --Required to call effects manager due to sound-parenting behaviors
-        if entranceId == self.exitAId then
-        
-            player:SetOrigin(self:GetEntranceAPosition())
-            newAngles.yaw = GetYawFromVector(self:GetCoords().zAxis)
-            player:SetOffsetAngles(newAngles)
-            self:TriggerEffects("tunnel_enter_3D", { effecthostcoords = player:GetCoords() })
-            self:TriggerEffects("tunnel_enter_3D", { effecthostcoords = entrance:GetCoords() })
-            self.timeExitAUsed = Shared.GetTime()   
-            
-        elseif entranceId == self.exitBId then
-        
-            player:SetOrigin(self:GetEntranceBPosition())
-            newAngles.yaw = GetYawFromVector(-self:GetCoords().zAxis)
-            player:SetOffsetAngles(newAngles)
-            self:TriggerEffects("tunnel_enter_3D", { effecthostcoords = player:GetCoords() })
-            self:TriggerEffects("tunnel_enter_3D", { effecthostcoords = entrance:GetCoords() })
-            self.timeExitBUsed = Shared.GetTime()
-            
-        end
-
-        
+        baseMovePlayerToTunnel(self,player,entrance)
     end
 end

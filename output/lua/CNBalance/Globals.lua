@@ -31,15 +31,15 @@ debug.appendtoenum(kMinimapBlipType, "MarineSentry")
 debug.appendtoenum(kMinimapBlipType, "BabblerEgg")
 debug.appendtoenum(kMinimapBlipType, "SporeMine")
 
--- Fuck bie bie le
---zoneA:  min(max(0,x-900)/420 * 5 , 5)
---zoneB:  pow(max(0,(x-1320) / 400),2) * 3.3
-
 function GetPlayersAboveLimit(team)
     local info = GetTeamInfoEntity(team)
     if not info then return 0 end
     return math.max(0,info.playerCount - kMatchMinPlayers)
 end
+
+-- Fuck bie bie le
+--zoneA:  min(max(0,x-900)/420 * 5 , 5)
+--zoneB:  pow(max(0,(x-1320) / 400),2) * 3.3
 
 function GetRespawnTimeExtend(team,_gameLength)
     --_gameLength = _gameLength * 30

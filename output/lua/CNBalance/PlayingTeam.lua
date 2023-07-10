@@ -37,14 +37,21 @@ function PlayingTeam:RemoveSupplyUsed(supplyUsed)
 end
 
 local function UpdatePlayerChanges(self)
-    local teamPlayers = GetPlayersAboveLimit(self:GetTeamType())
-    local ents = GetEntitiesWithMixin("BiomassHealth")
+    local teamPlayers = math.max(0,self:GetNumPlayers() - kMatchMinPlayers)
+    local ents = GetEntitiesWithMixinForTeam("BiomassHealth",self:GetTeamType())
     for i = 1, #ents do
         local ent = ents[i]
         if (ent.GetHealthPerTeamExceed)  then
             ent:UpdateHealthAmount(teamPlayers,0)
         end
     end
+end
+
+local baseResetTeam = PlayingTeam.ResetTeam
+function PlayingTeam:ResetTeam()
+    local _ = baseResetTeam(self)
+    UpdatePlayerChanges(self)
+    return _
 end
 
 function PlayingTeam:AddPlayer(player)
@@ -118,6 +125,7 @@ function PlayingTeam:AddTeamResources(amount, isIncome)
     end
     self:SetTeamResources(self.teamResources + teamResourceDelta)
 end
+
 
 function PlayingTeam:UpdateResTick()
 
