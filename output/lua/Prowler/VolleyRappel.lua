@@ -110,7 +110,7 @@ function VolleyRappel:GetBulletsPerShot()
         local teamInfo = GetTeamInfoEntity(player:GetTeamNumber())
         local biomassLevel = (teamInfo and teamInfo.GetBioMassLevel) and teamInfo:GetBioMassLevel() or 0
         
-        return 5 + biomassLevel / 3
+        return 5 + biomassLevel / 5
     end
     
     return 6

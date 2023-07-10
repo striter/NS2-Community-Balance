@@ -33,23 +33,29 @@ if Server then
         self.bountyCooldown = 0
     end
 
+    local function AddBounty(self,value)
+        if GetWarmupActive() then return end
+        if GetTeamResourceRefundBase(self:GetTeamNumber()) > kTeamResourceRefundBase then return end    --Don't increase bounty while in inferior position(?)
+
+        self.bountyCurrentLife = Clamp(self.bountyCurrentLife + value, 0, kMaxBountyScore)
+        self.bountyCooldown = 0
+    end
+    
     local baseAddKill = ScoringMixin.AddKill
     function ScoringMixin:AddKill()
         baseAddKill(self)
-        if GetWarmupActive() then return end
-        self.bountyCurrentLife = Clamp(self.bountyCurrentLife + kBountyScoreEachKill, 0, kMaxBountyScore)
-        self.bountyCooldown = 0
+        AddBounty(self,kBountyScoreEachKill)
     end
 
     local baseAddAssistKill = ScoringMixin.AddAssistKill
     function ScoringMixin:AddAssistKill()
         baseAddAssistKill(self)
-        if GetWarmupActive() then return end
-        self.bountyCurrentLife = Clamp(self.bountyCurrentLife + kBountyScoreEachAssist, 0, kMaxBountyScore)
-        self.bountyCooldown = 0
+        AddBounty(self,kBountyScoreEachAssist)
     end
     
     function ScoringMixin:ClaimBounty()
+        if self.bountyCurrentLife <= 0 then return 0 end
+        
         local claim = math.min(self.bountyCurrentLife, math.floor(self.kBountyThreshold * kBountyClaimMultiplier))
         self.bountyCurrentLife = self.bountyCurrentLife - claim
         self.bountyCooldown = 0

@@ -1288,5 +1288,5 @@ end
 
 
 function AlienTeam:GetResourcesPerRefund()
-    return 0.125       -- 6 when max refund
+    return 0.5,0.2
 end

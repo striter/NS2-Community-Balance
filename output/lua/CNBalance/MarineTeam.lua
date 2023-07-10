@@ -242,7 +242,7 @@ end
 --end
 
 function MarineTeam:GetResourcesPerRefund()
-    return 0 --0.0625   --Comm do drop gears
+    return 1.25,0.05
 end
 
 function MarineTeam:CollectAggressivePlayerResources(player,amount)

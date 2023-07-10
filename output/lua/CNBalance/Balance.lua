@@ -42,14 +42,11 @@ kTechDataTeamResOnKill = {
 
 -- Resource refund base on teams total income minus (anti snowball,could cause "miracle")
 kTeamResourceRefundBase = 100
-kTeamResourceMaxRefund = 48   --Case they reach the limit cant use it
-kTechDataTeamResRefundPercentageOnKill = {
-    [kTechId.Exo] = 0.05,  [kTechId.JetpackMarine] = 0.03,  --[kTechId.Exosuit] = 0.05, Aint working due to its not attached with pointgivermixin
-    [kTechId.Extractor] = 0.1, [kTechId.PoweredExtractor] = 0.1, [kTechId.Harvester] = 0.1,
-    [kTechId.CommandStation] = 0.2, [kTechId.StandardStation] = 0.3, [kTechId.ExplosiveStation] = 0.3, [kTechId.ArmorStation] = 0.3, [kTechId.ElectronicStation] = 0.3,
-    [kTechId.Gorge] = 0.01, [kTechId.Prowler] = 0.02, [kTechId.Lerk] = 0.03, [kTechId.Fade] = 0.06, [kTechId.Onos] = 0.1,
-    [kTechId.PhaseGate] = 0.1, [kTechId.Tunnel] = 0.1,[kTechId.InfestedTunnel] = 0.1,
-    [kTechId.Hive] = 0.2, [kTechId.ShiftHive] = 0.3, [kTechId.CragHive] = 0.3, [kTechId.ShadeHive] = 0.3,
+kTechDataTeamResRefundOnKill = {
+    [kTechId.Exo] = 10,  [kTechId.JetpackMarine] = 5,  --[kTechId.Exosuit] = 0.05, Aint working due to its not attached with pointgivermixin
+    [kTechId.Gorge] = 3, [kTechId.Prowler] = 5, [kTechId.Lerk] = 8, [kTechId.Fade] = 10, [kTechId.Onos] = 15,
+    [kTechId.Extractor] = 10, [kTechId.PoweredExtractor] = 10, [kTechId.Harvester] = 10,
+    [kTechId.PhaseGate] = 10, [kTechId.Tunnel] = 10,[kTechId.InfestedTunnel] = 10,
 }
 
 --If a player kills too many players and crushing the game 
@@ -57,7 +54,7 @@ kAssistMinimumDamageFraction = 0.3      --Avoid parasiter or babbler assists ,fe
 kBountyScoreEachAssist = 1 kBountyScoreEachKill = 2 kMaxBountyScore = 512       --You can't kill 256 players in 1 life
 kBountyClaimMinMarine = 7 kBountyClaimMinJetpack = 9 kBountyClaimMinExo = 12 
 kBountyClaimMinSkulk = 7 kBountyClaimMinAlien = 10  kBountyClaimMinOnos = 14
-kPResPerBountyClaimAsMarine = 0.4  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 30
+kPResPerBountyClaimAsMarine = 0.4  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 24
 kBountyTargetDamageReceiveStep = 18  kBountyDamageReceiveBaseEachStep = (0.1 / kBountyTargetDamageReceiveStep)      --0-10%,20%-40%,40%-80%, increase its damage receive by steps.
 
 --Toy for marine commander (remove all marines passive income, harsh one)

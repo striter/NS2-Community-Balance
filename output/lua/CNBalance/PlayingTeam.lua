@@ -95,11 +95,17 @@ function PlayingTeam:OnTeamKill(techID,bountyScore)
 
     local refundBase = self:GetRefundBase() 
     if refundBase > kTeamResourceRefundBase then
-        local percentage = kTechDataTeamResRefundPercentageOnKill[techID] or 0
+        local maxRefund = kTechDataTeamResRefundOnKill[techID]
         
-        local refund = math.min(math.floor(refundBase * percentage), kTeamResourceMaxRefund)
-        local pResPerRefund = self:GetResourcesPerRefund()
-        self:CollectTeamResources(refund ,refund * pResPerRefund)  --Refund
+        if maxRefund then
+            maxRefund = maxRefund * math.floor(refundBase/kTeamResourceRefundBase)
+
+            local refund = math.min(refundBase, maxRefund)
+            local tResPerRefund, pResPerRefund = self:GetResourcesPerRefund()
+            
+            self:CollectTeamResources(refund ,refund * pResPerRefund)  --Refund
+            self:AddTeamResources(refund * tResPerRefund - refund)
+        end
     end
 
     local pResReward = 0
