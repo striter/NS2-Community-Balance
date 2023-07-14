@@ -153,6 +153,9 @@ if kTranslateMessage then
     kTranslateMessage["BIOMASS_PRESERVATION_TOOLTIP"] = "卡拉异形已吸收此生物质.\n*在生物质因故剥离后.\n*可以更快演化至该级生物质."
     kTranslateMessage["BIOMASS_RECOVER"] = "生物量演化"
     kTranslateMessage["BIOMASS_RECOVER_TOOLTIP"] = "以更低的成本升级母巢.\n*并增加生物量等级."
+
+    kTranslateMessage["MARK_THREAT"] = "到此集合"
+    kTranslateMessage["PHEROMONE_THREAT_TOOLTIP"] = "通知全队:集合至该点.\n*范围玩家持续获得资源."
 end
 
 if kLocales then
@@ -168,7 +171,7 @@ if kLocales then
     kLocales["NEXT_SPAWN_IN_TEAM2"] = "Biomass Reformation:%i"
     kLocales["WAITING_SPAWN_TEAM2"] = "Hatch Awaiting..."
 
-    kLocales["BOUNTY"] = "悬赏"
+    kLocales["BOUNTY"] = "BOUNTY"
     
     kLocales["MILITARY_PROTOCOL"] = "Military Protocol"
     kLocales["MILITARY_PROTOCOL_ENABLED"] = "Military Protocol Enabled, Unable to access offensive equipment in personal."
@@ -305,4 +308,7 @@ if kLocales then
     kLocales["BIOMASS_PRESERVATION_TOOLTIP"] = "Kharaa has adapted this biomass.\n*Can evolve faster while biomass lost."
     kLocales["BIOMASS_RECOVER"] = "Biomass Recover"
     kLocales["BIOMASS_RECOVER_TOOLTIP"] = "Upgrade biomass level with lowerer cost."
+
+    kLocales["MARK_THREAT"] = "Rally Point"
+    kLocales["PHEROMONE_THREAT_TOOLTIP"] = "Setup the rally point.\n*Players within range gain pres reward continuously"
 end

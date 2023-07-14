@@ -1,5 +1,6 @@
 -- 
--- if Server then
+ if Server then
+
 --     function NS2Gamerules:RandomTechPoint(techPoints, teamNumber)
 --         local chosenIndex = math.random(1,#techPoints)
 --         local chosenTechPoint = techPoints[chosenIndex]
@@ -378,4 +379,4 @@
 --     --     return canHear
 --         
 --     -- end
--- end
+ end

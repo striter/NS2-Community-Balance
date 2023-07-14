@@ -239,7 +239,7 @@ if Server then
     function Marine:GetAutoWeldArmorPerSecond(nanoArmorResearched)
         return nanoArmorResearched and kMarineNanoArmorPerSecond or 0
     end
-    
+
 end
 
 

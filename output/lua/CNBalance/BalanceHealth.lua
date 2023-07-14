@@ -103,12 +103,12 @@ kLerkDamageReduction = {
 kFadeHealth = 280    kFadeArmor = 80     kFadePointValue = 20 kFadeHealthPerBioMass = 5 
 kFadeDamageReduction = {
     --["MarineSentry"] = 1.1,
-    ["Mine"] = 1.1,
+    --["Mine"] = 1.1,
     ["HeavyMachineGun"] = 0.92,
 }
 
 --700 450 50
-kOnosHealth = 700    kOnosArmor = 500    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 25
+kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 25
 kOnosBoneShieldDefaultReduction = 0.2
 kOnosBoneShieldDamageReduction = {
     ["HeavyMachineGun"] = 0.33,
@@ -120,6 +120,7 @@ kOnosDamageReduction = {
     ["SubMachineGun"] = 0.92,
     ["LightMachineGun"] = 0.92,
     ["Shotgun"] = 0.88,
+    ["Mine"] = 2,
     --["HeavyMachineGun"] = 1.08,
 }
 
@@ -177,8 +178,7 @@ kBabblerEggHealth = 100  kBabblerEggArmor = 0 kBabblerEggHealthPerBiomass = 15  
 kMatureBabblerEggHealth = 200 kMatureBabblerEggArmor = 0
 
 kBoneWallHealth = 100 kBoneWallArmor = 200    kBoneWallHealthPerBioMass = 75
-kContaminationHealth = 1000 kContaminationArmor = 0    kContaminationPointValue = 2
-
+kContaminationHealth = 1450 kContaminationArmor = 0    kContaminationPointValue = 2
 
 kWhipHealth = 650    kWhipArmor = 175    kWhipPointValue = 6
 kMatureWhipHealth = 720    kMatureWhipArmor = 240  kWhipHealthPerBioMass = 120  kMatureWhipPointValue = 6

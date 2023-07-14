@@ -28,7 +28,7 @@ Script.Load("lua/RagdollMixin.lua")
 Script.Load("lua/NanoShieldMixin.lua")
 Script.Load("lua/ObstacleMixin.lua")
 Script.Load("lua/WeldableMixin.lua")
-Script.Load("lua/OrdersMixin.lua")
+--Script.Load("lua/OrdersMixin.lua")
 Script.Load("lua/UnitStatusMixin.lua")
 Script.Load("lua/DissolveMixin.lua")
 Script.Load("lua/PowerConsumerMixin.lua")
@@ -97,7 +97,7 @@ AddMixinNetworkVars(RecycleMixin, networkVars)
 AddMixinNetworkVars(CombatMixin, networkVars)
 AddMixinNetworkVars(NanoShieldMixin, networkVars)
 AddMixinNetworkVars(ObstacleMixin, networkVars)
-AddMixinNetworkVars(OrdersMixin, networkVars)
+--AddMixinNetworkVars(OrdersMixin, networkVars)
 AddMixinNetworkVars(DissolveMixin, networkVars)
 AddMixinNetworkVars(PowerConsumerMixin, networkVars)
 AddMixinNetworkVars(GhostStructureMixin, networkVars)
@@ -203,7 +203,7 @@ function InfantryPortal:OnCreate()
     InitMixin(self, CombatMixin)
     InitMixin(self, RagdollMixin)
     InitMixin(self, ObstacleMixin)
-    InitMixin(self, OrdersMixin, { kMoveOrderCompleteDistance = kAIMoveOrderCompleteDistance })
+    --InitMixin(self, OrdersMixin, { kMoveOrderCompleteDistance = kAIMoveOrderCompleteDistance })
     InitMixin(self, DissolveMixin)
     InitMixin(self, GhostStructureMixin)
     InitMixin(self, PowerConsumerMixin)
@@ -445,7 +445,7 @@ local function SpawnPlayer(self)
             self.queuedPlayerId = Entity.invalidId
             self.queuedPlayerStartTime = nil
             
-            player:ProcessRallyOrder(self)
+            --player:ProcessRallyOrder(self)
 
             self:TriggerEffects("infantry_portal_spawn")
 
@@ -696,7 +696,7 @@ end
 function InfantryPortal:GetTechButtons()
 
     return {
-        kTechId.SetRally, kTechId.SpawnMarine, kTechId.None, kTechId.None, 
+        kTechId.SpawnMarine, kTechId.None, kTechId.None, kTechId.None, 
         kTechId.None, kTechId.None, kTechId.None, kTechId.None,     
     }
     

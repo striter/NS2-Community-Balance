@@ -1,10 +1,11 @@
 debug.appendtoenum(kPlayerStatus, "Devoured")
-debug.appendtoenum(kPlayerStatus, "Prowler")
-debug.appendtoenum(kPlayerStatus, "ProwlerEgg")
 debug.appendtoenum(kPlayerStatus, "Revolver")
 debug.appendtoenum(kPlayerStatus, "SubMachineGun")
 debug.appendtoenum(kPlayerStatus, "LightMachineGun")
 debug.appendtoenum(kPlayerStatus, "Cannon")
+
+debug.appendtoenum(kPlayerStatus, "Prowler")
+debug.appendtoenum(kPlayerStatus, "ProwlerEgg")
 
 debug.appendtoenum(kPlayerStatus, "Vokex")
 debug.appendtoenum(kPlayerStatus, "VokexEgg")
@@ -30,6 +31,9 @@ debug.appendtoenum(kMinimapBlipType, "WeaponCache")
 debug.appendtoenum(kMinimapBlipType, "MarineSentry")
 debug.appendtoenum(kMinimapBlipType, "BabblerEgg")
 debug.appendtoenum(kMinimapBlipType, "SporeMine")
+debug.appendtoenum(kMinimapBlipType, "Pheromone_Defend")
+debug.appendtoenum(kMinimapBlipType, "Pheromone_Threat")
+debug.appendtoenum(kMinimapBlipType, "Pheromone_Expand")
 
 function GetPlayersAboveLimit(team)
     local info = GetTeamInfoEntity(team)

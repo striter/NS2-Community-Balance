@@ -3,6 +3,8 @@ GUIMarineHUD.kMinimapPowerPos = Vector(25, 30 + 32, 0)
 GUIMarineHUD.kLocationTextOffset = Vector(75, 30 + 32, 0)
 GUIMarineHUD.kMinimapPos = Vector(30, 64 + 32, 0)
 
+GUIMarineHUD.kUpgradeSize = Vector(80, 80, 0)
+
 GUIMarineHUD.kTeamIconSize =  GUIScale( Vector( 48, 24, 0 ) )
 GUIMarineHUD.kCountNoUsed = Color(0.3 , 0.3 , 0.3 , 1)
 GUIMarineHUD.kCountHaveUser = Color(0x01 / 0xFF, 0x8F / 0xFF, 0xFF / 0xFF, 1)
@@ -54,15 +56,38 @@ local function UpdateTeamCount(self,teamInfo,element)
     end
 end
 
+local function CreateTechIcon( techId)
+    local techIcon = GetGUIManager():CreateGraphicItem()
+    techIcon:SetTexture(GUIMarineHUD.kUpgradesTexture)
+    techIcon:SetAnchor(GUIItem.Right, GUIItem.Center)
+    techIcon:SetIsVisible(false)
+    techIcon:SetTexturePixelCoordinates(GUIUnpackCoords(GetTextureCoordinatesForIcon(techId)))
+    techIcon:SetColor(kIconColors[kMarineTeamType])
+    return techIcon
+end
+
+local function CreateRequestIcon(techId, position)
+    local techIcon = GetGUIManager():CreateGraphicItem()
+    techIcon:SetTexture(GUIMarineHUD.kUpgradesTexture)
+    techIcon:SetAnchor(GUIItem.Right, GUIItem.Bottom)
+    techIcon:SetSize(GUIMarineHUD.kUpgradeSize/2)
+    techIcon:SetIsVisible(false)
+    techIcon:SetPosition(position)
+    techIcon:SetTexturePixelCoordinates(GUIUnpackCoords(GetTextureCoordinatesForIcon(techId)))
+    techIcon:SetColor(kIconColors[kMarineTeamType])
+    return techIcon
+end
+
 local baseInitialize = GUIMarineHUD.Initialize
 function GUIMarineHUD:Initialize()
-    self.militaryProtocol = GetGUIManager():CreateGraphicItem()
-    self.militaryProtocol:SetTexture(GUIMarineHUD.kUpgradesTexture)
-    self.militaryProtocol:SetAnchor(GUIItem.Right, GUIItem.Center)
-    self.militaryProtocol:SetIsVisible(false)
-    self.militaryProtocol:SetTexturePixelCoordinates(GUIUnpackCoords(GetTextureCoordinatesForIcon(kTechId.MilitaryProtocol)))
-    self.militaryProtocol:SetColor(kIconColors[kMarineTeamType])
-    self.lastMilitaryProtocol = false
+    
+    self.militaryProtocol = CreateTechIcon(kTechId.MilitaryProtocol)
+    local midCenter = GUIPlayerResource.kBackgroundPos + Vector(GUIPlayerResource.kBackgroundSize.x/2,0,0)
+    self.autoMedPack = CreateRequestIcon(kTechId.MedPack,midCenter + Vector(-52 - 32, -36, 0))
+    self.autoAmmoPack = CreateRequestIcon(kTechId.AmmoPack,midCenter + Vector(52 - 32, -36, 0))
+
+    self.lastMilitaryProtocol = nil
+    
     self.teamCountElements = {}
     table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.Shotgun))
     table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.HeavyMachineGun))
@@ -74,7 +99,8 @@ function GUIMarineHUD:Initialize()
     baseInitialize(self)
 
     self.background:AddChild(self.militaryProtocol)
-
+    self.background:AddChild(self.autoMedPack)
+    self.background:AddChild(self.autoAmmoPack)
     --........ or i should totally rewrite initialize
     for index,element in ipairs(self.teamCountElements) do
         --Vector(25, 46, 0)
@@ -83,7 +109,6 @@ function GUIMarineHUD:Initialize()
         self.background:AddChild(element)
     end
 end
-
 
 local baseReset = GUIMarineHUD.Reset
 function GUIMarineHUD:Reset()
@@ -114,6 +139,25 @@ function GUIMarineHUD:Update(deltaTime)
         self.lastMilitaryProtocol = hasMilitaryProtocol
         self.militaryProtocol:SetIsVisible(self.lastMilitaryProtocol)
     end
+
+    local autoMed = not hasMilitaryProtocol 
+    if autoMed then
+        local time = Shared.GetTime()
+        local color = kIconColors[kMarineTeamType]
+        local percentage = math.Clamp((time - player.timeLastAutoMedPack)/kAutoMedCooldown,0,1)
+        local medColor = color * (percentage * percentage)
+        medColor.a = percentage >= 1 and 1 or 0.5
+        self.autoMedPack:SetColor(medColor)
+
+        percentage = math.Clamp((time - player.timeLastAutoAmmoPack)/kAutoAmmoCooldown,0,1)
+        local ammoColor = color * (percentage * percentage)
+        ammoColor.a = percentage >= 1 and 1 or 0.5
+        percentage = percentage * percentage
+        self.autoAmmoPack:SetColor(ammoColor)
+    end
+
+    self.autoAmmoPack:SetIsVisible(autoMed)
+    self.autoMedPack:SetIsVisible(autoMed)
     
     local teamInfo = GetTeamInfoEntity(player:GetTeamNumber())
     if teamInfo then

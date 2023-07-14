@@ -570,6 +570,63 @@ if Server then
         end
 
     end
+    
+    local function CreateDrifterEgg(self, comm)
+
+        local mapName = LookupTechData(kTechId.DrifterEgg, kTechDataMapName)
+        local direction = Vector(self:GetAngles():GetCoords().zAxis)
+        local origin = self:GetOrigin() - direction * 3.2 - self:GetAngles():GetCoords().yAxis * 2.3
+        --local extents = GetExtents(kTechId.DrifterEgg)
+        --local origin = GetRandomSpawnForCapsule(extents.y, extents.x,self:GetOrigin() - direction * 3.2,0.01,0.5,EntityFilterAll())
+        
+        local builtEntity = CreateEntity(mapName, origin, self:GetTeamNumber())
+
+        if builtEntity ~= nil then
+            builtEntity:SetOwner(comm)
+            builtEntity.hatchCallBack = function(drifter)
+                self.spawnedDrifterID = drifter:GetId()
+            end 
+        end
+        
+        return builtEntity
+    end
+
+    local baseOnCreate = Hive.OnCreate
+    function Hive:OnCreate()
+        baseOnCreate(self)
+        self.spawnedDrifterID = Entity.invalidId
+    end
+    
+    local baseOnUpdate = Hive.OnUpdate
+    function Hive:OnUpdate(deltaTime)
+        
+        baseOnUpdate(self,deltaTime)
+
+        if not GetGamerules():GetGameStarted() then return end
+        
+        local comm = self:GetCommander()
+        if not comm then return end
+
+        local time = Shared.GetTime()
+        if self.freeDrifterCheck and time - self.freeDrifterCheck < 1 then return end
+        self.freeDrifterCheck = time
+
+        if not GetIsUnitActive(self) then return end
+
+        if self.spawnedDrifterID ~= Entity.invalidId then
+            local drifter = Shared.GetEntity(self.spawnedDrifterID)
+                if drifter == nil
+                    or (not drifter:isa("Drifter") and not drifter:isa("DrifterEgg") )
+                    or not drifter:GetIsAlive() then
+                self.spawnedDrifterID = Entity.invalidId
+            end
+        end
+        
+        
+        if self.spawnedDrifterID == Entity.invalidId then
+            self.spawnedDrifterID = CreateDrifterEgg(self):GetId()
+        end
+    end
 
 end
 

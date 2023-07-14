@@ -93,7 +93,7 @@ if Server then
             local healthToRegen = self:GetMaxHealth() * healthCap - self:GetHealth()
             if healthToRegen > 0 then
                 local regenPerSecond = self:GetAutoHealPerSecond(lifeSustainResearched)
-                self:AddRegeneration( math.min(AutoWeldMixin.kRegenInterval * regenPerSecond,healthToRegen))
+                self:Heal( math.min(AutoWeldMixin.kRegenInterval * regenPerSecond,healthToRegen))
             end
         end
 
@@ -123,4 +123,7 @@ if Server then
         self:TakeDamage(amount, self, nil, engagePoint, nil, amount, 0, kDamageType.ArmorOnly, nil)
 
     end
+
+
+
 end

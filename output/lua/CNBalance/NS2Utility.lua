@@ -13,6 +13,10 @@ function BuildClassToGrid()
 
     ClassToGrid["SporeMine"] = { 5, 8 }
     ClassToGrid["BabblerEgg"] = { 5, 8 }
+    
+    ClassToGrid["Pheromone_Expand"] = { 3 , 9 }
+    ClassToGrid["Pheromone_Threat"] = { 2 , 9 }
+    ClassToGrid["Pheromone_Defend"] = { 3 , 9 }
     return ClassToGrid
     
 end

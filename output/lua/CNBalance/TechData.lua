@@ -256,6 +256,19 @@ function BuildTechData()
     })
     
     table.insert(techData, {
+        [kTechDataId] = kTechId.Scan,
+        [kTechDataAllowStacking] = true,
+        [kTechDataCollideWithWorldOnly] = true,
+        [kTechDataIgnorePathingMesh] = true,
+        [kTechDataMapName] = Scan.kMapName,
+        [kTechDataDisplayName] = "SCAN",
+        [kTechDataHotkey] = Move.S,
+        [kVisualRange] = kScanRadius,
+        [kTechDataCostKey] = kObservatoryScanCost,
+        [kTechDataCooldown] = kScanCooldown,
+        [kTechDataTooltipInfo] = "SCAN_TOOLTIP",
+    })
+    table.insert(techData, {
         [kTechDataId] = kTechId.Knife,
         [kTechDataMapName] = Knife.kMapName,
         [kTechDataDisplayName] = "KNIFE",
@@ -643,7 +656,6 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "HALLUCINATE_PROWLER_TOOLTIP",
     })
     --Vokex
-
     table.insert(techData, {
         [kTechDataId] = kTechId.VokexMenu,
         [kTechDataDisplayName] = "UPGRADE_VOKEX",
@@ -825,7 +837,6 @@ function BuildTechData()
         [kTechDataPointValue] = kTunnelEntrancePointValue,
     })
 
-
     table.insert(techData, {
         [kTechDataId] = kTechId.BuildTunnelExitOne,
         [kTechDataMaxExtents] = Vector(0.6,0.6,0.6),
@@ -999,6 +1010,26 @@ function BuildTechData()
         [kTechDataMaxArmor] = kPoweredExtractorArmor,
         [kTechDataPointValue] = kPoweredExtractorPointValue,
         [kTechDataCostKey] = kPoweredExtractorCost,
+    })
+
+    --Marker
+    table.insert(techData,{
+        [kTechDataId] = kTechId.ExpandingMarker,
+        [kTechDataImplemented] = true,
+        [kTechDataDisplayName] = "EXPANDING_HERE",
+        [kTechDataTooltipInfo] = "PHEROMONE_EXPANDING_TOOLTIP",
+        [kTechDataCostKey] = kMarkerCost,
+        [kTechDataCooldown] = kMarkerCooldown,
+    })
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.ThreatMarker,
+        [kTechDataImplemented] = true,
+        [kTechDataDisplayName] = "MARK_THREAT",
+        [kTechDataTooltipInfo] = "PHEROMONE_THREAT_TOOLTIP",
+        [kVisualRange] = kRallyRadius,
+        [kTechDataCostKey] = kRallyCost,
+        [kTechDataCooldown] = kRallyCooldown,
     })
 
     return techData

@@ -73,3 +73,6 @@ kTechIdToMaterialOffset[kTechId.Devour] = 109
 
 kTechIdToMaterialOffset[kTechId.WeaponCache] = 1
 kTechIdToMaterialOffset[kTechId.MarineSentry] = 5
+
+kTechIdToMaterialOffset[kTechId.ExpandingMarker] = 134
+kTechIdToMaterialOffset[kTechId.ThreatMarker] = 118

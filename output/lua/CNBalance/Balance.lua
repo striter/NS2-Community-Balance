@@ -15,14 +15,16 @@ kTechDataPersonalResOnKill = {
     --Marines
     [kTechId.Extractor] = 2.5, [kTechId.PoweredExtractor] = 4,
     [kTechId.RoboticsFactory] = 2.5, [kTechId.ARCRoboticsFactory] = 2.5,
+    [kTechId.PowerPoint] = 1,
     [kTechId.Armory] = 1,[kTechId.Observatory] = 2.5, [kTechId.PhaseGate] = 4,
     [kTechId.CommandStation] = 10, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [ kTechId.ElectronicStation ] = 15,
     [kTechId.Mine] = 0.2, [kTechId.InfantryPortal] = 2, [kTechId.MarineSentry] = 0.8,   --PPVE
     [kTechId.MAC] = 0.2,    [kTechId.SentryBattery] = 4, [kTechId.Sentry] = 1,[kTechId.ARC] = 2.5,      --CPVE
     [kTechId.Shotgun] = 1, [kTechId.HeavyMachineGun] = 1, [kTechId.GrenadeLauncher] = 1, [kTechId.Flamethrower] = 1,     --Special one for gorgie
-
+    
     --Aliens
     [kTechId.Egg] = 0.2,[kTechId.Cyst] = 0.2,
+    [kTechId.Drifter] = 0.5,    --[kTechId.DrifterEgg] = 0.5,
     [kTechId.Hydra] = 0.2,[kTechId.SporeMine] = 0.2,[kTechId.BabblerEgg] = 2,       --PPVE
     [kTechId.Shell] = 5, [kTechId.Veil] = 5, [kTechId.Spur] = 5,
     [kTechId.Whip] = 2.5, [kTechId.Shift] = 5, [kTechId.Crag] = 5, [kTechId.Shade] = 5,       --CPVE
@@ -43,10 +45,10 @@ kTechDataTeamResOnKill = {
 -- Resource refund base on teams total income minus (anti snowball,could cause "miracle")
 kTeamResourceRefundBase = 100
 kTechDataTeamResRefundOnKill = {
-    [kTechId.Exo] = 10,  [kTechId.JetpackMarine] = 5,  --[kTechId.Exosuit] = 0.05, Aint working due to its not attached with pointgivermixin
-    [kTechId.Gorge] = 3, [kTechId.Prowler] = 5, [kTechId.Lerk] = 8, [kTechId.Fade] = 10, [kTechId.Onos] = 15,
-    [kTechId.Extractor] = 10, [kTechId.PoweredExtractor] = 10, [kTechId.Harvester] = 10,
-    [kTechId.PhaseGate] = 10, [kTechId.Tunnel] = 10,[kTechId.InfestedTunnel] = 10,
+    [kTechId.Exo] = 5,  [kTechId.JetpackMarine] = 3,  --[kTechId.Exosuit] = 0.05, Aint working due to its not attached with pointgivermixin
+    [kTechId.Gorge] = 2, [kTechId.Prowler] = 2, [kTechId.Lerk] = 3, [kTechId.Fade] = 4, [kTechId.Onos] = 5,
+    [kTechId.Extractor] = 5, [kTechId.PoweredExtractor] = 5, [kTechId.Harvester] = 5,
+    [kTechId.PhaseGate] = 5, [kTechId.Tunnel] = 5,[kTechId.InfestedTunnel] = 5,
 }
 
 --If a player kills too many players and crushing the game 
@@ -63,18 +65,23 @@ kMilitaryProtocolResearchTime = 20
 kMilitaryProtocolResearchDurationMultiply = 1.2     --1.33?
 kMilitaryProtocolAggressivePersonalResourcesScalar = 2      --They don't need too much pres to buy defensive or grenades/welders (and they can shared it tbh)
 kMilitaryProtocolTResPerBountyClaim = 0.5   --Bounty score, don't give them pres, its doomed
-kMilitaryProtocolTeamResourcesPerKill = {          --Use this when military protocol enabled
+kMilitaryProtocolTeamResourcesPerKill = {          --Replaced refund system
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2,
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
-    [kTechId.Skulk] = 1.5, [kTechId.Gorge] = 2,[kTechId.Prowler] = 2, [kTechId.Lerk] = 2, [kTechId.Fade] = 3, [kTechId.Onos] = 3,
+    [kTechId.Skulk] = 1, [kTechId.Gorge] = 2,[kTechId.Prowler] = 2, [kTechId.Lerk] = 2, [kTechId.Fade] = 3, [kTechId.Onos] = 3,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
-    [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20,
+    [kTechId.Hive] = 10, [kTechId.ShiftHive] = 15, [kTechId.CragHive] = 15, [kTechId.ShadeHive] = 15,
 }
+
+kMilitaryProtocolBaseRefundAdditive = 1
 kMilitaryProtocolPassiveTeamResourceResearchesScalar = {
-    [kTechId.MinesTech] = 0.1, [kTechId.ShotgunTech] = 0.2, 
-    [kTechId.AdvancedArmory] = 0.2, [kTechId.JetpackTech] = 0.2, [kTechId.ExosuitTech] = 0.3,
+    [kTechId.MinesTech] = 0.1, 
+    [kTechId.ShotgunTech] = 0.1, 
+    [kTechId.AdvancedArmory] = 0.2,
+    [kTechId.JetpackTech] = 0.1, 
+    [kTechId.ExosuitTech] = 0.2,
 }
-kMilitaryProtocolResourcesScalarPlayerAboveLimit = 0.1  --Multiply upon one
+kMilitaryProtocolResourcesScalarPlayerAboveLimit = 0.05  --Multiply upon one
 
 kMatchMinPlayers = 10
 kRespawnPlayersMinExtend = 2
@@ -354,9 +361,9 @@ kTunnelEntranceCost = 7
 kTunnelRelocateCost = 5
 
 --Research with skill activation
-kResearchBioMassOneCost = 30
+kResearchBioMassOneCost = 35
 kBioMassOneTime = 45
-kResearchBioMassTwoCost = 45
+kResearchBioMassTwoCost = 50
 kBioMassTwoTime = 60
 kResearchBioMassThreeCost = 60
 kBioMassThreeTime = 90
@@ -381,7 +388,7 @@ kXenocideFuelTime = 120
 
 kXenocideEnergyCost = 30
 kXenocideDamageType = kDamageType.Structural
-kXenocideDamage = 120  kXenocideFuelDamage = 160 --200
+kXenocideDamage = 120  kXenocideFuelDamage = 200 --200
 kXenocideRange = 9 kXenocideFuelRange = 12 -- 14
 kXenocideSpawnReduction = 0.75 kXenocideFuelSpawnReduction = 0.5
 
@@ -472,7 +479,7 @@ kStompDamage = 45
 kStompRange = 12
 
 kDisruptMarineTime = 1
-kDisruptMarineTimeout = 2
+kDisruptMarineTimeout = 3
 
 kBabblerShieldPercent = 0.1
 kSkulkBabblerShieldPercent = 0.23
@@ -508,13 +515,17 @@ kEchoWhipCost = 2
 kEchoCragCost = 2
 kEchoShadeCost = 2
 kEchoShiftCost = 2
-kEchoVeilCost = 4
-kEchoSpurCost = 4
-kEchoShellCost = 4
+kEchoVeilCost = 2
+kEchoSpurCost = 2
+kEchoShellCost = 2
 kEchoEggCost = 1
 
+kWhipSlapDamage = 50
+kWhipBombardDamage = 45
+kWhipBombardDamageType = kDamageType.Structural
+
 kObservatoryScanCost = 3
-kScanCooldown = 0
+kScanCooldown = 3
 kObservatoryDistressBeaconCost = 10
 
 kArmsLabCost = 15
@@ -523,9 +534,9 @@ kWeapons1ResearchTime = 75
 kWeapons2ResearchTime = 105
 kWeapons3ResearchTime = 135
 
-kWeapons1ResearchCost = 20
-kWeapons2ResearchCost = 30
-kWeapons3ResearchCost = 40
+kWeapons1ResearchCost = 25
+kWeapons2ResearchCost = 35
+kWeapons3ResearchCost = 45
 
 kArmor1ResearchTime = 75
 kArmor2ResearchTime = 90
@@ -607,3 +618,12 @@ kBabblerExplodeAmount = 6
 kBabblerHatchMaxAmount = 15
 kBabblerEggHatchInterval = 2.5
 kBabblerEggHatchRadius = 17
+
+kDrifterHatchTime = 12
+--
+kMarkerCooldown = 5 kMarkerCost = 2
+kRallyCost = 10 kRallyCooldown = 30
+kRallyRadius = 4
+kRallyResultDuration = 5
+kRallyScoreEachDuration = 2
+kRallyPResEachDuration = 0.2

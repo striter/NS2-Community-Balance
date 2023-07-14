@@ -95,7 +95,7 @@ kInfantryPortalSupply = 0
 kPhaseGateSupply = 10
 kSentriesPerBattery = 3
 
-kDrifterSupply = 5
+kDrifterSupply = 0
 kWhipSupply = 5
 kCragSupply = 20
 kShadeSupply = 20
@@ -114,6 +114,8 @@ kExoNanoArmorPerSecond = 15
 kLifeRegenMaxCap = 0.8 kLifeSustainMaxCap = 1
 kLifeRegenHPS = 4   kLifeSustainHPS = 10
 kJetpackLifeRegenHPS = 6   kJetpackLifeSustainHPS = 12
+kAutoMedCooldown = 5    kAutoMedPRes = 0.5
+kAutoAmmoCooldown = 45  kAutoAmmoPRes = 0.8
 
 kProwlerFov = 100
 
