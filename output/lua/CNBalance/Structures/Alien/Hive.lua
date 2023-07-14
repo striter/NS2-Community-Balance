@@ -595,6 +595,7 @@ if Server then
     function Hive:OnCreate()
         baseOnCreate(self)
         self.spawnedDrifterID = Entity.invalidId
+        self.freeDrifterCheck = Shared.GetTime()
     end
     
     local baseOnUpdate = Hive.OnUpdate
@@ -604,7 +605,7 @@ if Server then
 
         if not GetGamerules():GetGameStarted() then return end
         
-        local comm = self:GetCommander()
+        local comm = self:GetTeam():GetCommander()
         if not comm then return end
 
         local time = Shared.GetTime()
@@ -612,7 +613,7 @@ if Server then
         self.freeDrifterCheck = time
 
         if not GetIsUnitActive(self) then return end
-
+        
         if self.spawnedDrifterID ~= Entity.invalidId then
             local drifter = Shared.GetEntity(self.spawnedDrifterID)
                 if drifter == nil
@@ -621,7 +622,6 @@ if Server then
                 self.spawnedDrifterID = Entity.invalidId
             end
         end
-        
         
         if self.spawnedDrifterID == Entity.invalidId then
             self.spawnedDrifterID = CreateDrifterEgg(self):GetId()

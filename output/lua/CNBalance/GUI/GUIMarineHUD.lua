@@ -140,7 +140,7 @@ function GUIMarineHUD:Update(deltaTime)
         self.militaryProtocol:SetIsVisible(self.lastMilitaryProtocol)
     end
 
-    local autoMed = not hasMilitaryProtocol 
+    local autoMed = player.timeLastAutoMedPack and not hasMilitaryProtocol or false
     if autoMed then
         local time = Shared.GetTime()
         local color = kIconColors[kMarineTeamType]
