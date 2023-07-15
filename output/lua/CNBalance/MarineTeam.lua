@@ -272,17 +272,8 @@ function MarineTeam:GetResearchTimeFactor()
     return militaryProtocolTechNode:GetResearched() and kMilitaryProtocolResearchDurationMultiply or 1
 end
 
-function MarineTeam:TriggerAlert(techId, entity, force)
-
-    if not GetGamerules():GetGameStarted() then return false end
-
-    if not militaryProtocolTechNode:GetResearched() then        --He can handle it himself
-        if entity.HandleAlert and entity:HandleAlert(techId) then
-            return
-        end
-    end
-
-    return PlayingTeam:TriggerAlert(self,techId,entity,force)
+function MarineTeam:HandleManualAlert()            --He can handle it himself
+    return not militaryProtocolTechNode:GetResearched()
 end
 
 function MarineTeam:OnResearchComplete(structure, researchId)

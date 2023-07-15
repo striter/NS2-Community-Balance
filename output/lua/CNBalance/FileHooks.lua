@@ -86,8 +86,8 @@ ModLoader.SetupFileHook("lua/AlienCommander.lua", "lua/CNBalance/AlienCommander.
 ModLoader.SetupFileHook("lua/MarineCommander.lua", "lua/CNBalance/MarineCommander.lua", "replace")
 
 --Marines
-ModLoader.SetupFileHook("lua/Hud/GUIPlayerResource.lua", "lua/CNBalance/GUI/GUIPlayerResource.lua", "post")
 ModLoader.SetupFileHook("lua/Hud/Marine/GUIMarineHUD.lua", "lua/CNBalance/GUI/GUIMarineHUD.lua", "post" )
+ModLoader.SetupFileHook("lua/Hud/GUIPlayerResource.lua", "lua/CNBalance/GUI/GUIPlayerResource.lua", "post")
 ModLoader.SetupFileHook("lua/GUIMarineBuyMenu.lua", "lua/CNBalance/GUIMarineBuyMenu.lua", "replace" )
 
 ModLoader.SetupFileHook("lua/Hud/GUIEvent.lua", "lua/CNBalance/GUI/GUIEvent.lua", "post")
@@ -158,6 +158,7 @@ ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/Cannon.
 ModLoader.SetupFileHook("lua/Weapons/Marine/Welder.lua", "lua/Combat/CombatBuilder.lua", "post")
 
 -- Aliens
+ModLoader.SetupFileHook("lua/GUIAlienHUD.lua", "lua/CNBalance/GUI/GUIAlienHUD.lua", "post" )
 ModLoader.SetupFileHook("lua/GUIHiveStatus.lua", "lua/CNBalance/GUI/GUIHiveStatus.lua", "replace")
 
 ModLoader.SetupFileHook( "lua/CommAbilities/Alien/HallucinationCloud.lua", "lua/CNBalance/HallucinationCloud.lua", "post" )
@@ -174,6 +175,7 @@ ModLoader.SetupFileHook("lua/Alien_Server.lua", "lua/CNBalance/Alien_Server.lua"
 ModLoader.SetupFileHook("lua/Skulk.lua", "lua/CNBalance/Lifeforms/Skulk.lua", "post")
 ModLoader.SetupFileHook("lua/Skulk.lua", "lua/Prowler/Prowler.lua", "post")     --Hack
 ModLoader.SetupFileHook("lua/Fade.lua", "lua/CNBalance/Lifeforms/Vokex.lua", "post")     --Hack
+ModLoader.SetupFileHook("lua/Embryo.lua", "lua/CNBalance/Lifeforms/Embryo.lua", "post")
 
 ModLoader.SetupFileHook("lua/Lerk.lua", "lua/CNBalance/Lifeforms/Lerk.lua", "post")
 ModLoader.SetupFileHook("lua/Fade.lua", "lua/CNBalance/Lifeforms/Fade.lua", "post")

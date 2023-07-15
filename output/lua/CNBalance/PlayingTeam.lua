@@ -132,6 +132,23 @@ function PlayingTeam:AddTeamResources(amount, isIncome)
     self:SetTeamResources(self.teamResources + teamResourceDelta)
 end
 
+local baseTriggerAlert = PlayingTeam.TriggerAlert
+function PlayingTeam:TriggerAlert(techId, entity, force)
+
+    if not GetGamerules():GetGameStarted() then return false end
+
+    if self:ShouldHandleManualAlert() then 
+        if entity.HandleManualAlert and entity:HandleManualAlert(techId) then
+            return
+        end
+    end
+
+    return baseTriggerAlert(self,techId,entity,force)
+end
+
+function PlayingTeam:ShouldHandleManualAlert()
+    return true
+end
 
 function PlayingTeam:UpdateResTick()
 

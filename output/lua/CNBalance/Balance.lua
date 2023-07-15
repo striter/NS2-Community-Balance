@@ -270,7 +270,7 @@ kCannonDropCost = 15
 kFlamethrowerCost = 20
 kFlamethrowerDropCost = 15
 kFlamethrowerDropCooldown = 0
-kOnFireHealingScalar = 0.5
+kOnFireHealingScalar = 1
 
 kFirePlayerDOTDelay = 3
 kPlayerFireDOTPerSecond = 40
@@ -320,18 +320,19 @@ kSentryBatteryBuildTime = 5
 
 kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 90
-kRoboticsFactoryBuildTime = 8
-
 kPrototypeLabCost = 35
-
 kJetpackTechResearchCost = 25
 kJetpackTechResearchTime = 90
+kExosuitTechResearchCost = 20
+kExosuitTechResearchTime = 90
+
+kRoboticsFactoryBuildTime = 8
+
+
 kJetpackCost = 25
 kJetpackDropCost = 18
 kJetpackDropCooldown = 0
 
-kExosuitTechResearchCost = 20
-kExosuitTechResearchTime = 90
 kDualExosuitCost = 55
 kDualRailgunExosuitCost = 55
 kDualExosuitDropCost = 40
@@ -535,9 +536,9 @@ kWeapons1ResearchTime = 75
 kWeapons2ResearchTime = 105
 kWeapons3ResearchTime = 135
 
-kWeapons1ResearchCost = 25
-kWeapons2ResearchCost = 35
-kWeapons3ResearchCost = 45
+kWeapons1ResearchCost = 20
+kWeapons2ResearchCost = 30
+kWeapons3ResearchCost = 40
 
 kArmor1ResearchTime = 75
 kArmor2ResearchTime = 90

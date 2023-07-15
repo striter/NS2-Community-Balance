@@ -1,10 +1,70 @@
 Marine.kBountyThreshold = kBountyClaimMinMarine
 
+Script.Load("lua/CNBalance/Mixin/RequestHandleMixin.lua")
 Script.Load("lua/AutoWeldMixin.lua")
+
+local networkVars =     --?
+{
+    flashlightOn = "boolean",
+
+    timeOfLastDrop = "private time",
+    timeOfLastPickUpWeapon = "private time",
+
+    flashlightLastFrame = "private boolean",
+
+    timeLastSpitHit = "private time",
+    lastSpitDirection = "private vector",
+
+    ruptured = "boolean",
+    interruptAim = "private boolean",
+    poisoned = "boolean",
+    weaponUpgradeLevel = "integer (0 to 3)",
+
+    unitStatusPercentage = "private integer (0 to 100)",
+
+    strafeJumped = "private compensated boolean",
+
+    timeLastBeacon = "private time",
+
+    weaponBeforeUseId = "private compensated entityid"
+}
+
+AddMixinNetworkVars(OrdersMixin, networkVars)
+AddMixinNetworkVars(BaseMoveMixin, networkVars)
+AddMixinNetworkVars(GroundMoveMixin, networkVars)
+AddMixinNetworkVars(JumpMoveMixin, networkVars)
+AddMixinNetworkVars(CrouchMoveMixin, networkVars)
+AddMixinNetworkVars(LadderMoveMixin, networkVars)
+AddMixinNetworkVars(CameraHolderMixin, networkVars)
+AddMixinNetworkVars(SelectableMixin, networkVars)
+AddMixinNetworkVars(StunMixin, networkVars)
+AddMixinNetworkVars(NanoShieldMixin, networkVars)
+AddMixinNetworkVars(FireMixin, networkVars)
+AddMixinNetworkVars(CatPackMixin, networkVars)
+AddMixinNetworkVars(SprintMixin, networkVars)
+AddMixinNetworkVars(OrderSelfMixin, networkVars)
+AddMixinNetworkVars(DissolveMixin, networkVars)
+AddMixinNetworkVars(LOSMixin, networkVars)
+AddMixinNetworkVars(CombatMixin, networkVars)
+AddMixinNetworkVars(ParasiteMixin, networkVars)
+AddMixinNetworkVars(WebableMixin, networkVars)
+AddMixinNetworkVars(CorrodeMixin, networkVars)
+AddMixinNetworkVars(TunnelUserMixin, networkVars)
+AddMixinNetworkVars(PhaseGateUserMixin, networkVars)
+AddMixinNetworkVars(MarineVariantMixin, networkVars)
+AddMixinNetworkVars(ScoringMixin, networkVars)
+AddMixinNetworkVars(RegenerationMixin, networkVars)
+AddMixinNetworkVars(GUINotificationMixin, networkVars)
+AddMixinNetworkVars(PlayerStatusMixin, networkVars)
+AddMixinNetworkVars(RequestHandleMixin,networkVars)
+
+Shared.LinkClassToMap("Marine", Marine.kMapName, networkVars, true)
+
 local baseOnCreate = Marine.OnCreate
 function Marine:OnCreate()
     baseOnCreate(self)
     InitMixin(self,AutoWeldMixin)
+    InitMixin(self,RequestHandleMixin)
 end
 
 --Weapons

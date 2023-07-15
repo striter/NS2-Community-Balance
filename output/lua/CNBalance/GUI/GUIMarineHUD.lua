@@ -1,3 +1,5 @@
+Script.Load("lua/CNBalance/GUI/GUIUtility.lua")
+
 GUIMarineHUD.kTeamCountIconStart = Vector(25, 30, 0)
 GUIMarineHUD.kMinimapPowerPos = Vector(25, 30 + 32, 0)
 GUIMarineHUD.kLocationTextOffset = Vector(75, 30 + 32, 0)
@@ -66,28 +68,15 @@ local function CreateTechIcon( techId)
     return techIcon
 end
 
-local function CreateRequestIcon(techId, position)
-    local techIcon = GetGUIManager():CreateGraphicItem()
-    techIcon:SetTexture(GUIMarineHUD.kUpgradesTexture)
-    techIcon:SetAnchor(GUIItem.Right, GUIItem.Bottom)
-    techIcon:SetSize(GUIMarineHUD.kUpgradeSize/2)
-    techIcon:SetIsVisible(false)
-    techIcon:SetPosition(position)
-    techIcon:SetTexturePixelCoordinates(GUIUnpackCoords(GetTextureCoordinatesForIcon(techId)))
-    techIcon:SetColor(kIconColors[kMarineTeamType])
-    return techIcon
-end
-
 local baseInitialize = GUIMarineHUD.Initialize
 function GUIMarineHUD:Initialize()
     
     self.militaryProtocol = CreateTechIcon(kTechId.MilitaryProtocol)
-    local midCenter = GUIPlayerResource.kBackgroundPos + Vector(GUIPlayerResource.kBackgroundSize.x/2,0,0)
-    self.autoMedPack = CreateRequestIcon(kTechId.MedPack,midCenter + Vector(-52 - 32, -36, 0))
-    self.autoAmmoPack = CreateRequestIcon(kTechId.AmmoPack,midCenter + Vector(52 - 32, -36, 0))
 
     self.lastMilitaryProtocol = nil
-    
+
+    self.autoMedPack = GUIUtility_CreateRequestIcon(kTechId.MedPack, Vector(-52 - 32, -36, 0),kMarineTeamType)
+    self.autoAmmoPack = GUIUtility_CreateRequestIcon(kTechId.AmmoPack, Vector(52 - 32, -36, 0),kMarineTeamType)
     self.teamCountElements = {}
     table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.Shotgun))
     table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.HeavyMachineGun))
@@ -98,9 +87,9 @@ function GUIMarineHUD:Initialize()
     table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.DualMinigunExosuit))
     baseInitialize(self)
 
+    self.resourceDisplay.background:AddChild(self.autoMedPack)
+    self.resourceDisplay.background:AddChild(self.autoAmmoPack)
     self.background:AddChild(self.militaryProtocol)
-    self.background:AddChild(self.autoMedPack)
-    self.background:AddChild(self.autoAmmoPack)
     --........ or i should totally rewrite initialize
     for index,element in ipairs(self.teamCountElements) do
         --Vector(25, 46, 0)

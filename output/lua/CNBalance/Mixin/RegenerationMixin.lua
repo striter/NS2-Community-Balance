@@ -20,17 +20,11 @@ RegenerationMixin.networkVars = {
 	regenerating = "boolean",
 
 	regenerationHealth = string.format("float (0 to %f by 0.0625)", LiveMixin.kMaxHealth),
-
-	timeLastAutoAmmoPack = "private time",
-	timeLastAutoMedPack = "private time",
 }
 
 function RegenerationMixin:__initmixin()
     
     PROFILE("RegenerationMixin:__initmixin")
-	timeLastAutoAmmoPack = -kAutoAmmoCooldown
-	timeLastAutoMedPack = -kAutoMedCooldown
-	
 	if Server then
 		self.regenerating = false
 		self.regenerationHealth = 0
@@ -61,59 +55,6 @@ if Server then
 			self.regenerating = false
 			self.regenerationHealth = 0
 		end
-	end
-	
-	RegenerationMixin.kPickupDelay = 0.5
-	local kAlertHandleDelay = 0.75
-	function RegenerationMixin:MedSelf()
-		local time = Shared.GetTime()
-		if time - self.timeLastAutoMedPack < kAutoMedCooldown then return end
-		
-		if not MedPack.GetIsValidRecipient(self,self) then return end
-		if self:GetResources() < kAutoMedPRes then return end
-		
-		self.timeLastAutoMedPack = time
-		self:AddResources(-kAutoMedPRes)
-
-		self:AddHealth(MedPack.kHealth, false, true)
-		self:AddRegeneration(MedPack.kRegen)
-		self:TriggerEffects("medpack_pickup", { effecthostcoords = self:GetCoords() })
-	end
-
-	function RegenerationMixin:AmmoSelf()
-		local time = Shared.GetTime()
-		if time - self.timeLastAutoAmmoPack < kAutoAmmoCooldown then return end
-
-		if not AmmoPack.GetIsValidRecipient(self,self) then return end
-		if self:GetResources() < kAutoAmmoPRes then return end
-		self:AddResources(-kAutoAmmoPRes)
-		self.timeLastAutoAmmoPack = time
-
-		for i = 0, self:GetNumChildren() - 1 do
-			local child = self:GetChildAtIndex(i)
-			if child:isa("ClipWeapon") then
-				if child:GiveAmmo(AmmoPack.kNumClips, false) then
-					consumedPack = true
-				end
-			end
-		end
-
-		self:TriggerEffects("ammopack_pickup", { effecthostcoords = self:GetCoords()})
-	end
-
-	function RegenerationMixin:HandleAlert(techId)
-
-		if techId == kTechId.MarineAlertNeedMedpack then
-			self:AddTimedCallback(self.MedSelf,kAlertHandleDelay)
-			return true
-		end
-
-		if techId == kTechId.MarineAlertNeedAmmo then
-			self:AddTimedCallback(self.AmmoSelf,kAlertHandleDelay)
-			return true
-		end
-
-		return false
 	end
 end
 
