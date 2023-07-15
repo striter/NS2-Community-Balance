@@ -67,12 +67,12 @@ kSentryHealth = 500    kSentryArmor = 125    kSentryPointValue = 4
 
 kExplosiveSelfDamage =
 {
-    ["Grenade"] = 40,
+    ["Grenade"] = 60,
+    ["ImpactGrenade"] = 50,
     ["ClusterGrenade"] = 20,
     ["ClusterFragment"] = 5,
-    ["ImpactGrenade"] = 40,
     ["PulseGrenade"] = 40,
-    ["Mine"] = 60,
+    ["Mine"] = 80,
 }
 
 --Alien
@@ -92,7 +92,7 @@ kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7 kGorgeHealthPerBio
 
 kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15 kLerkHealthPerBioMass = 3
 kLerkDamageReduction = {
-    --["Shotgun"] = 0.92,
+    ["Shotgun"] = 0.88,
     ["Cannon"] = 0.8,
     ["Grenade"] = 0.7,
     ["ImpactGrenade"] = 0.7,
@@ -100,7 +100,7 @@ kLerkDamageReduction = {
     --["PulseGrenade"] = 0.75,
 }
 
-kFadeHealth = 280    kFadeArmor = 80     kFadePointValue = 20 kFadeHealthPerBioMass = 5 
+kFadeHealth = 280    kFadeArmor = 80     kFadePointValue = 20 kFadeHealthPerBioMass = 10 
 kFadeDamageReduction = {
     --["MarineSentry"] = 1.1,
     --["Mine"] = 1.1,
@@ -108,7 +108,7 @@ kFadeDamageReduction = {
 }
 
 --700 450 50
-kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 25
+kOnosHealth = 700    kOnosArmor = 500    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 25
 kOnosBoneShieldDefaultReduction = 0.2
 kOnosBoneShieldDamageReduction = {
     ["HeavyMachineGun"] = 0.33,
@@ -126,7 +126,7 @@ kOnosDamageReduction = {
 
 kProwlerHealth = 120 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 7
 kProwlerDamageReduction = {
-    --["Shotgun"] = 0.9,
+    ["Shotgun"] = 0.8,
     ["Grenade"] = 0.7,
     ["ImpactGrenade"] = 0.7,
     ["Railgun"] = 0.9,

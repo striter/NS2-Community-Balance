@@ -270,12 +270,13 @@ kCannonDropCost = 15
 kFlamethrowerCost = 20
 kFlamethrowerDropCost = 15
 kFlamethrowerDropCooldown = 0
+kOnFireHealingScalar = 0.5
 
-kFirePlayerDOTDelay = 1
-kPlayerFireDOTPerSecond = 3
-kDragonBreathPlayerFireDamagePerStack = { 1 , 1.1 , 1.2 , 1.3 }
-kFlameThrowerPlayerFireDamagePerStack = { 6 , 6 , 6 , 6 }
-kPlayerFireDamageMaxStack = { 12, 18, 24, 30 }
+kFirePlayerDOTDelay = 3
+kPlayerFireDOTPerSecond = 40
+kDragonBreathPlayerFireDamagePerStack = { 0.7 , 0.8 , 0.9 , 1 }  kFlameThrowerPlayerFireDamagePerStack = { 5 , 5 , 5 , 5 }
+kPlayerFireDamageMaxStack = { 12, 16, 20, 24 }
+
 kFireStructureDOTDelay = 0.5
 kStructureFireDOTPerSecond = 8.0
 kDragonBreathStructureFireDamagePerStack = { kStructureFireDOTPerSecond / 100, kStructureFireDOTPerSecond / 90,kStructureFireDOTPerSecond/ 80, kStructureFireDOTPerSecond / 70 }--kStructureFireDOTPerSecond / 20, kStructureFireDOTPerSecond / 18, kStructureFireDOTPerSecond / 16, kStructureFireDOTPerSecond / 14}

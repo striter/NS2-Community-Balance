@@ -5,7 +5,7 @@ local gAlienMenuButtons =
                             kTechId.ExpandingMarker, kTechId.ThreatMarker, kTechId.None, kTechId.BuildTunnelMenu },
                                                  --ThreatMarker   --kTechId.NeedHealingMarker
     [kTechId.AdvancedMenu] = { kTechId.Crag, kTechId.Shade, kTechId.Shift, kTechId.Whip,
-                               kTechId.Shell, kTechId.Veil, kTechId.Spur, kTechId.BabblerEgg },
+                               kTechId.Shell, kTechId.Veil, kTechId.Spur, kTechId.None },
 
     [kTechId.AssistMenu] = { kTechId.HealWave, kTechId.ShadeInk, kTechId.SelectShift, kTechId.SelectDrifter,
                              kTechId.NutrientMist, kTechId.Rupture, kTechId.BoneWall, kTechId.Contamination }

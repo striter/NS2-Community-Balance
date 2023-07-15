@@ -114,8 +114,8 @@ kExoNanoArmorPerSecond = 15
 kLifeRegenMaxCap = 0.8 kLifeSustainMaxCap = 1
 kLifeRegenHPS = 4   kLifeSustainHPS = 10
 kJetpackLifeRegenHPS = 6   kJetpackLifeSustainHPS = 12
-kAutoMedCooldown = 5    kAutoMedPRes = 0.5
-kAutoAmmoCooldown = 45  kAutoAmmoPRes = 0.8
+kAutoMedCooldown = 10    kAutoMedPRes = 1
+kAutoAmmoCooldown = 45  kAutoAmmoPRes = 1.5
 
 kProwlerFov = 100
 
