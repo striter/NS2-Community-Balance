@@ -471,7 +471,7 @@ local function MultiplyForMachineGun(target, _, _, damage, armorFractionUsed, he
     return ConditionalValue(target:isa("Player") or target:isa("Exosuit"), damage * kMachineGunPlayerDamageScalar, damage), armorFractionUsed, healthPerArmor
 end
 
-local kGLStructuralDamageScalar = 2.4
+local kGLStructuralDamageScalar = 3
 local function GrenadeLauncherForStructure(target, _, _, damage, armorFractionUsed, healthPerArmor, damageType)
 
     if target.GetReceivesStructuralDamage and target:GetReceivesStructuralDamage(damageType) then

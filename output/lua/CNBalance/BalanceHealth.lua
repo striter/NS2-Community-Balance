@@ -28,8 +28,8 @@ kMineHealth = 30    kMineArmor = 9    kMinePointValue = 5
 
 --2000 -1800
 kCommandStationHealth = 2000    kCommandStationArmor = 2000    kCommandStationPointValue = 20
-kUpgradedCommandStationHealth = 2200 kUpgradedCommandStationArmor = 2200 kUpgradedCommandStationPointValue = 30
-kCommandStationHealthPerPlayerAdd = 100
+kUpgradedCommandStationHealth = 2400 kUpgradedCommandStationArmor = 2300 kUpgradedCommandStationPointValue = 30
+kCommandStationHealthPerPlayerAdd = 200
 
 --2000   1000
 kPowerPointHealth = 2000  kPowerPointArmor = 1200  kPowerPointPointValue = 10
@@ -108,7 +108,7 @@ kFadeDamageReduction = {
 }
 
 --700 450 50
-kOnosHealth = 700    kOnosArmor = 500    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 25
+kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 25
 kOnosBoneShieldDefaultReduction = 0.2
 kOnosBoneShieldDamageReduction = {
     ["HeavyMachineGun"] = 0.33,
@@ -143,7 +143,7 @@ kGorgeBaseCarapaceUpgradeAmount = 25    kGorgeCarapaceArmorPerBiomass = 1.25
 kProwlerBaseCarapaceUpgradeAmount = 10  kProwlerCarapaceArmorPerBiomass = 1.25 --kProwlerArmorFullyUpgradedAmount = 28
 kLerkBaseCarapaceUpgradeAmount  = 25    kLerkCarapaceArmorPerBiomass  = 1.25
 kFadeBaseCarapaceUpgradeAmount  = 30    kFadeCarapaceArmorPerBiomass  = 2.5
-kOnosBaseCarapaceUpgradeAmount  = 150   kOnosCarapaceArmorPerBiomass  = 10
+kOnosBaseCarapaceUpgradeAmount  = 130   kOnosCarapaceArmorPerBiomass  = 10
 kVokexBaseCarapaceUpgradeAmount = 50    kVokexCarapaceArmorPerBiomass = 0
 
 --4000 750 6000 1400

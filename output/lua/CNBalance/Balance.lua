@@ -46,7 +46,7 @@ kTechDataTeamResOnKill = {
 kTeamResourceRefundBase = 100
 kTechDataTeamResRefundOnKill = {
     [kTechId.Exo] = 5,  [kTechId.JetpackMarine] = 3,  --[kTechId.Exosuit] = 0.05, Aint working due to its not attached with pointgivermixin
-    [kTechId.Gorge] = 2, [kTechId.Prowler] = 2, [kTechId.Lerk] = 3, [kTechId.Fade] = 4, [kTechId.Onos] = 5,
+    [kTechId.Gorge] = 2, [kTechId.Prowler] = 3, [kTechId.Lerk] = 4, [kTechId.Fade] = 6, [kTechId.Onos] = 8,
     [kTechId.Extractor] = 5, [kTechId.PoweredExtractor] = 5, [kTechId.Harvester] = 5,
     [kTechId.PhaseGate] = 5, [kTechId.Tunnel] = 5,[kTechId.InfestedTunnel] = 5,
 }
@@ -359,8 +359,8 @@ kFadeEggCost = 70
 kOnosCost = 62
 kOnosEggCost = 100
 
-kTunnelEntranceCost = 7
-kTunnelRelocateCost = 5
+kTunnelEntranceCost = 8
+kTunnelRelocateCost = 6
 
 --Research with skill activation
 kResearchBioMassOneCost = 35
@@ -493,10 +493,10 @@ kProwlerBabblerShieldPercent = 0.18
 kBabblerShieldMaxAmount = 120
 kWebZeroVisDistance = 3.0
 kWebFullVisDistance = 2.0
-kWhipCost = 8
-kShadeCost = 10
-kShiftCost = 10
-kCragCost = 10
+kWhipCost = 10
+kShadeCost = 12
+kShiftCost = 12
+kCragCost = 12
 
 kSpurCost = 15
 kShellCost = 15
@@ -575,13 +575,12 @@ kNanoShieldCost = 3
 kNanoShieldCooldown = 5
 kNanoShieldDamageReductionDamage = 0.68
 
-
 kCombatBuilderCost = 3
 kCombatBuilderDropCost = 5
 kCombatBuilderPointValue = 5
 
 kMarineSentryCost = 2
-kMarineSentryPersonalCost = 10
+kMarineSentryPersonalCost = 8
 kMarineSentryDamage = 3  kMarineSentryWeapon1Scalar = 1.11  kMarineSentryWeapon2Scalar = 1.22 kMarineSentryWeapon3Scalar = 1.33
 kMarineSentryBuildTime = 3
 
