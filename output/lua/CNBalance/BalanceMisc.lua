@@ -71,9 +71,9 @@ kBiteLeapVampirismScalar = 0.05   --0.0466
 
 kParasiteVampirismScalar = 0.02    --0
 kSpitVampirismScalar = 0.05   --0.026
-kVolleyRappelVampirismScalar = 0.02 --0.02
+kVolleyRappelVampirismScalar = 0.01 --0.02
 kHealSprayVampirismScalar = 0.02   --0
-kLerkBiteVampirismScalar = 0.037   --0.0267
+kLerkBiteVampirismScalar = 0.0267   --0.0267
 kSpikesVampirismScalar = 0.01      --0
 kSwipeVampirismScalar = 0.03
 kStabVampirismScalar = 0.07

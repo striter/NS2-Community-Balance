@@ -24,7 +24,7 @@ set {
 }
 
 local kEnergyClamp = 15
-local kEnergyReductionOnHit = 0.5
+local kEnergyReductionOnHit = 1
 function Onos:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
 
     local classname = doer:GetClassName()

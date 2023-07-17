@@ -192,11 +192,11 @@ function PlayingTeam:CollectTeamResources(teamRes,playerRes)
     end
 end
 
-function PlayingTeam:GetRefundBase()
-    local enemyTeam = GetGamerules():GetTeam(GetEnemyTeamNumber(self:GetTeamType()))
-    if enemyTeam then
-        return math.max((enemyTeam:GetTotalTeamResources() or 0) - (self:GetTotalTeamResources() or 0),0)
-    end
+function PlayingTeam:GetRefundBase()        --Deny this one
+    --local enemyTeam = GetGamerules():GetTeam(GetEnemyTeamNumber(self:GetTeamType()))
+    --if enemyTeam then
+    --    return math.max((enemyTeam:GetTotalTeamResources() or 0) - (self:GetTotalTeamResources() or 0),0)
+    --end
     return 0
 end
 
