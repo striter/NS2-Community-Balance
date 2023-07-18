@@ -61,4 +61,16 @@ if Server then
 		return player
 	end
 
+	local baseCopyPlayerDataFrom = Player.CopyPlayerDataFrom
+	function Player:CopyPlayerDataFrom(player)
+		baseCopyPlayerDataFrom(self,player)
+		local playerInRR = player:GetTeamNumber() == kNeutralTeamType
+
+		if not playerInRR and GetGamerules():GetGameStarted() then
+			self.primaryRespawn = player.primaryRespawn
+			self.secondaryRespawn = player.secondaryRespawn
+			self.meleeRespawn = player.meleeRespawn
+		end
+
+	end
 end 

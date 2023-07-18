@@ -47,7 +47,7 @@ function CommandStation:GetTechButtons()
         techButtons[1] = kTechId.MACEMPBlast
     elseif techId == kTechId.StandardStation then
         techButtons[1] = kTechId.DragonBreath
-        techButtons[2] = kTechId.LightMachineGunUpgrade
+        --techButtons[2] = kTechId.LightMachineGunUpgrade
     elseif techId == kTechId.ArmorStation then
         techButtons[1] = kTechId.LifeSustain
         techButtons[2] = kTechId.ArmorRegen

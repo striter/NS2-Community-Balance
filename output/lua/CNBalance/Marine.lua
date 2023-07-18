@@ -1,4 +1,5 @@
 Marine.kBountyThreshold = kBountyClaimMinMarine
+Marine.kPickupDelay = kMedpackPickupDelay
 
 Script.Load("lua/CNBalance/Mixin/RequestHandleMixin.lua")
 Script.Load("lua/AutoWeldMixin.lua")
@@ -98,18 +99,6 @@ if Server then
         return result
     end
     
-    local onCopyPlayerDataFrom = Marine.CopyPlayerDataFrom
-    function Marine:CopyPlayerDataFrom(player)
-        onCopyPlayerDataFrom(self,player)
-        local playerInRR = player:GetTeamNumber() == kNeutralTeamType
-
-        if not playerInRR and GetGamerules():GetGameStarted() then
-            self.primaryRespawn = player.primaryRespawn
-            self.secondaryRespawn = player.secondaryRespawn
-            self.meleeRespawn = player.meleeRespawn
-        end
-
-    end
 end
 
 if Server then
