@@ -31,8 +31,8 @@ kMarineTechMap =
 
 
                                                                                                                                                       { kTechId.MilitaryProtocol, 5, 8 },{ kTechId.CommandStation, 7, 8 }, {kTechId.InfantryPortal, 9, 8 },
-                        { kTechId.DragonBreath, 2.5, 10 }, { kTechId.StandardStation, 3.5, 10 },{kTechId.CatPack, 4.5 ,10 },                       { kTechId.MinesUpgrade, 6, 10 },       { kTechId.ArmorStation, 7, 10 },  { kTechId.NanoShield, 8, 10 },                                                       { kTechId.PoweredExtractorTech,9.5,10}, { kTechId.ElectronicStation, 10.5, 10 }, { kTechId.PowerSurge, 11.5, 10 },
-                                                { kTechId.LightMachineGunUpgrade,3.5 , 11 },                                                                     { kTechId.LifeSustain, 6.5, 11 }, { kTechId.ArmorRegen, 7.5, 11 },                                                                                                                          { kTechId.MACEMPBlast, 10.5, 11 },
+                        { kTechId.LightMachineGunUpgrade, 2.5, 10 }, { kTechId.StandardStation, 3.5, 10 },{kTechId.CatPack, 4.5 ,10 },                       { kTechId.MinesUpgrade, 6, 10 },       { kTechId.ArmorStation, 7, 10 },  { kTechId.NanoShield, 8, 10 },                                                       { kTechId.PoweredExtractorTech,9.5,10}, { kTechId.ElectronicStation, 10.5, 10 }, { kTechId.PowerSurge, 11.5, 10 },
+                                                { kTechId.DragonBreath,3.5 , 11 },                                                                     { kTechId.LifeSustain, 6.5, 11 }, { kTechId.ArmorRegen, 7.5, 11 },                                                                                                                          { kTechId.MACEMPBlast, 10.5, 11 },
 }
 
 kMarineLines = 

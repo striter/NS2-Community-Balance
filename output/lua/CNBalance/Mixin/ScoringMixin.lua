@@ -66,6 +66,11 @@ if Server then
         if self.bountyCurrentLife <= 0 then 
             return true
         end
+
+        if self.GetIsInCombat and self:GetIsInCombat() then     --Reset it during combat
+            self.bountyCooldown = 0
+            return true
+        end
         
         self.bountyCooldown = self.bountyCooldown + kBountyCooldownTick
         if self.bountyCooldown > kBountyCooldown then

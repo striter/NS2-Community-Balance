@@ -72,7 +72,7 @@ if kTranslateMessage then
     kTranslateMessage["SUBMACHINEGUN_BUYDESCRIPTION"]="制式冲锋枪.\n+相对步枪更高的伤害,*轻量化配置.\n*更有效的近战方式,对拌网生效.\n-较少的弹夹容量,远程精准度较差."
     kTranslateMessage["LIGHTMACHINEGUN"]="轻机枪"
     kTranslateMessage["STATUS_LIGHTMACHINEGUN"]="轻机枪"
-    kTranslateMessage["LIGHTMACHINEGUN_BUYDESCRIPTION"]="制式轻机枪.\n*相对步枪更高的伤害.\n*相对步枪更高的精准度.\n*更有效的近战方式,对拌网生效."
+    kTranslateMessage["LIGHTMACHINEGUN_BUYDESCRIPTION"]="将你的制式步枪升级为制式轻机枪.\n*相对步枪更高的伤害.\n*相对步枪更高的精准度.\n*更有效的近战方式,对拌网生效."
     kTranslateMessage["CANNON"]="高斯枪"
     kTranslateMessage["CANNON_DROP"]="发放高斯枪"
     kTranslateMessage["STATUS_CANNON"]="高斯枪"

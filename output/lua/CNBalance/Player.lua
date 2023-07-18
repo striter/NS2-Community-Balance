@@ -45,6 +45,7 @@ if Server then
 	function Player:Replace(mapName, newTeamNumber, preserveWeapons, atOrigin, extraValues, isPickup)
 		local player = onReplace(self,mapName, newTeamNumber, preserveWeapons, atOrigin, extraValues, isPickup)
 		if player:isa("Marine") and not self:GetIsAlive() then
+
 			if player.primaryRespawn then
 				player:GiveItem(player.primaryRespawn,true)
 			end

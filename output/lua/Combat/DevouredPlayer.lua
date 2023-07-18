@@ -13,6 +13,7 @@ class 'DevouredPlayer' (Marine)
 
 DevouredPlayer.kMapName = "DevouredPlayer"
 DevouredPlayer.kMaterialDelay = 0.1
+DevouredPlayer.kIgnoreRequest = true
 Shared.PrecacheSurfaceShader("cinematics/vfx_materials/devour_goop.surface_shader")
 
 local networkVars =

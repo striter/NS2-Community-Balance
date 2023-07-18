@@ -44,7 +44,7 @@ WeaponCache.kAttachPoint = "Root"
 --WeaponCache.kBuyMenuTexture = "ui/marine_buymenu.dds"
 --WeaponCache.kBuyMenuUpgradesTexture = "ui/marine_buymenu_upgrades.dds"
 local kLoginAndResupplyTime = 0.3
-WeaponCache.kHealAmount = 12.5
+WeaponCache.kHealAmount = 20
 WeaponCache.kRefillAmount = 0.5
 WeaponCache.kResupplyInterval = .8
 -- Players can use menu and be supplied by armor inside this range

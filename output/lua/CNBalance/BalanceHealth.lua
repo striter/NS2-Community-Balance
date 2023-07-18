@@ -100,7 +100,7 @@ kLerkDamageReduction = {
     --["PulseGrenade"] = 0.75,
 }
 
-kFadeHealth = 280    kFadeArmor = 80     kFadePointValue = 20 kFadeHealthPerBioMass = 10 
+kFadeHealth = 250    kFadeArmor = 80     kFadePointValue = 20 kFadeHealthPerBioMass = 10 
 kFadeDamageReduction = {
     --["MarineSentry"] = 1.1,
     --["Mine"] = 1.1,
@@ -127,8 +127,8 @@ kOnosDamageReduction = {
 kProwlerHealth = 120 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 7
 kProwlerDamageReduction = {
     ["Shotgun"] = 0.8,
-    ["Grenade"] = 0.7,
-    ["ImpactGrenade"] = 0.7,
+    ["Grenade"] = 0.75,
+    ["ImpactGrenade"] = 0.75,
     ["Railgun"] = 0.9,
     ["Cannon"] = 0.9,
     ["PulseGrenade"] = 0.7,

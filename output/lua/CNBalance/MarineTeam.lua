@@ -54,8 +54,8 @@ function MarineTeam:InitTechTree()
     self.techTree:AddOrder(kTechId.FollowAndWeld)
 
     -- Commander abilities
-    self.techTree:AddTargetedActivation(kTechId.MedPack,          kTechId.MilitaryProtocol)
-    self.techTree:AddTargetedActivation(kTechId.AmmoPack,         kTechId.MilitaryProtocol)
+    self.techTree:AddTargetedActivation(kTechId.MedPack)--,          kTechId.MilitaryProtocol)
+    self.techTree:AddTargetedActivation(kTechId.AmmoPack)--,         kTechId.MilitaryProtocol)
 
     self.techTree:AddTargetedActivation(kTechId.Scan,             kTechId.Observatory)
 
@@ -132,9 +132,9 @@ function MarineTeam:InitTechTree()
     self.techTree:AddUpgradeNode(kTechId.StandardSupply, kTechId.CommandStation)
     self.techTree:AddTargetedActivation(kTechId.CatPack, kTechId.StandardStation)
     self.techTree:AddResearchNode(kTechId.DragonBreath , kTechId.StandardStation)
-    self.techTree:AddResearchNode(kTechId.LightMachineGunUpgrade , kTechId.StandardStation)
+    self.techTree:AddTargetedActivation(kTechId.LightMachineGunUpgrade , kTechId.StandardStation)
 
-    self.techTree:AddBuyNode(kTechId.LightMachineGun,               kTechId.LightMachineGunUpgrade)
+    self.techTree:AddBuyNode(kTechId.LightMachineGun,               kTechId.StandardStation)
     self.techTree:AddBuyNode(kTechId.Cannon,                        kTechId.CannonTech)
     self.techTree:AddTargetedActivation(kTechId.DropCannon, kTechId.CannonTech)
 

@@ -118,6 +118,13 @@ function FireMixin:SetOnFire(attacker, doer , dragonBreath)
             dotDelay = kFireStructureDOTDelay
         end
 
+        if not burnDamage then      --Testing
+            Shared.Message("ERROR: Testing Burn Damage")
+            burnDOT = 2
+            burnDamage = 10
+            burnMaxStack = 20
+        end
+        
         if burnDamage == 0 then return end
 
         self.timeLastFireDamageUpdate = Shared.GetTime() + dotDelay

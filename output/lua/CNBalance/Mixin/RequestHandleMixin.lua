@@ -75,6 +75,8 @@ if Server then
 
     function RequestHandleMixin:HandleManualAlert(techId)
 
+        if self.kIgnoreRequest then return false end
+        
         if techId == kTechId.MarineAlertNeedMedpack then
             self:AddTimedCallback(self.MedSelf,kAlertHandleDelay)
             return true

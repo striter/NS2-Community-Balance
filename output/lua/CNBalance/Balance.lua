@@ -149,16 +149,16 @@ kExtractorCost = 10
 kPoweredExtractorCost = 30
 
 -- Standard Supply
-kDragonBreathResearchCost = 15
+kDragonBreathResearchCost = 25
 kDragonBreathResearchTime = 60
-kLightMachineGunUpgradeCost = 20
-kLightMachineGunUpgradeTime = 90
+kLightMachineGunUpgradeCost = nil --20
+kLightMachineGunUpgradeTime = nil --90
 kCannonTechResearchCost = 30
 kCannonTechResearchTime = 90
 
 --Explosive Supply
-kMinesUpgradeResearchCost = 10
-kMinesUpgradeResearchTime = 60
+kMinesUpgradeResearchCost = nil--10
+kMinesUpgradeResearchTime = nil--60
 kGrenadeLauncherUpgradeResearchCost = 20
 kGrenadeLauncherUpgradeResearchTime = 75
 kMACEMPBlastResearchCost = 15
@@ -167,8 +167,8 @@ kMACEmpBlastDetectInterval = 0.5
 kMACEmpBlastDetectRadius = kPowerSurgeEMPDamageRadius
 kMACEmpBlastTriggerInterval = 5
 
-kPoweredExtractorResearchCost = 10
-kPoweredExtractorResearchTime = 60
+kPoweredExtractorResearchCost = nil--10
+kPoweredExtractorResearchTime = nil--60
 kPoweredExtractorUpgradeCost = 20
 kPoweredExtractorUpgradeTime = 45
 kPoweredExtractorChargingInterval = 2.5
@@ -242,12 +242,12 @@ kAxeDamage = 25
 kAxeDamageType = kDamageType.Structural
 
 --Light Machine Gun
-kLightMachineGunClipSize = 50
+kLightMachineGunClipSize = 55
 kLightMachineGunClipNum = 4
 kLightMachineGunWeight = 0.11
 kLightMachineGunDamage = 10.5
 kLightMachineGunDamageType = kDamageType.Normal
-kLightMachineGunCost = 0
+kLightMachineGunCost = 20
 kLightMachineGunPointValue = 0
 
 --Heavy Marine
@@ -270,10 +270,12 @@ kCannonDropCost = 15
 kFlamethrowerCost = 20
 kFlamethrowerDropCost = 15
 kFlamethrowerDropCooldown = 0
-kOnFireHealingScalar = 1
 
-kFirePlayerDOTDelay = 3
-kPlayerFireDOTPerSecond = 40
+kOnFireHealingScalar = 1
+kOnFireEnergyRecuperationScalar = 0.66
+
+kFirePlayerDOTDelay = 1
+kPlayerFireDOTPerSecond = 3
 kDragonBreathPlayerFireDamagePerStack = { 0.7 , 0.8 , 0.9 , 1 }  kFlameThrowerPlayerFireDamagePerStack = { 5 , 5 , 5 , 5 }
 kPlayerFireDamageMaxStack = { 12, 16, 20, 24 }
 

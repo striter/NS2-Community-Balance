@@ -69,33 +69,33 @@ end
 
 --Weapons
 if Server then
-    local baseOnKill = Marine.OnKill
-    function Marine:OnKill(attacker, doer, point, direction)
-        local primaryWeapon = self:GetWeaponInHUDSlot(kPrimaryWeaponSlot)
-        if primaryWeapon then
-            if primaryWeapon.kMapName == SubMachineGun.kMapName
-            or primaryWeapon.kMapName == LightMachineGun.kMapName
-            --or primaryWeapon.kMapName == Rifle.kMapName
-            then
-                self.primaryRespawn = primaryWeapon.kMapName
+    local baseAttemptToBuy = Marine.AttemptToBuy
+    function Marine:AttemptToBuy(techIds)
+        local result = baseAttemptToBuy(self,techIds)
+        if result then
+            local techId = techIds[1]
+            if techId == kTechId.Rifle then
+                self.primaryRespawn = Rifle.kMapName
+            elseif techId == kTechId.SubMachineGun then
+                self.primaryRespawn = SubMachineGun.kMapName
+            elseif techId == kTechId.LightMachineGun then
+                self.primaryRespawn = LightMachineGun.kMapName
             end
-        end
 
-        local secondaryWeapon = self:GetWeaponInHUDSlot(kSecondaryWeaponSlot)
-        if secondaryWeapon then
-            if secondaryWeapon.kMapName == Revolver.kMapName then
-                self.secondaryRespawn = secondaryWeapon.kMapName
+            if techId == kTechId.Pistol then
+                self.secondaryRespawn = Pistol.kMapName
+            elseif techId == kTechId.Revolver then
+                self.secondaryRespawn = Revolver.kMapName
             end
-        end
 
-        local meleeWeapon = self:GetWeaponInHUDSlot(kTertiaryWeaponSlot)
-        if meleeWeapon then
-            if meleeWeapon.kMapName == Knife.kMapName then
-                self.meleeRespawn = meleeWeapon.kMapName
+            if techId == kTechId.Axe then
+                self.meleeRespawn = Axe.kMapName
+            elseif techId == kTechId.Knife then
+                self.meleeRespawn = Knife.kMapName
             end
         end
         
-        baseOnKill(self,attacker,doer,point,direction)
+        return result
     end
     
     local onCopyPlayerDataFrom = Marine.CopyPlayerDataFrom
