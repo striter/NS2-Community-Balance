@@ -61,6 +61,18 @@ function GetRespawnTimeExtend(team,_gameLength)
     return math.min(respawnTA + respawnTB , 72 ) + respawnTP
 end
 
+function GetPassiveResourceEfficiency(_gameLength)
+    local x = _gameLength
+    
+    local kStart = 1800
+    local kEnd = 900
+    
+    local param =  math.Clamp(math.max(0,x - kStart) / kEnd,0,1)
+    param = param* param
+    local value = Lerp(1,0.25,param)
+    return value
+end
+
 function GetTeamResourceRefundBase(team)
     local info = GetTeamInfoEntity(team)
     if not info then return 0 end

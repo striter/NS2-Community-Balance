@@ -186,8 +186,12 @@ function PlayerUI_GetGameTimeString()
         gameTimeString = gameTimeString .. string.format(appender.. Locale.ResolveString(string.format("TEAM_BOUNTY%i",team)),refundBase - kTeamResourceRefundBase)
     end
     
+    local efficiency = GetPassiveResourceEfficiency(gameTime)
+    if efficiency < 0.99 then
+        gameTimeString = gameTimeString .. string.format(appender.. Locale.ResolveString(string.format("TEAM_RESOURCES_EFFICIENCY%i",team)),efficiency*100)
+    end
+    
     return gameTimeString
-
 end
 
 function MarineMeleeBoxDamage(self,player,coords,range,damage)
