@@ -1,5 +1,5 @@
-Drifter.kMoveSpeed = 9
-Drifter.kCelerityMoveSpeed = 11
+Drifter.kMoveSpeed = 7
+Drifter.kCelerityMoveSpeed = 9
 Drifter.kTurnSpeed = 4 * math.pi
 
 function Drifter:GetTechButtons(techId)
@@ -21,4 +21,4 @@ function Drifter:GetTechButtons(techId)
     --]]
     return techButtons
 
-end
+end 
