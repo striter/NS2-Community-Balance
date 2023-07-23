@@ -45,10 +45,13 @@ kTechDataTeamResOnKill = {
 -- Resource refund base on teams total income minus (anti snowball,could cause "miracle")
 kTeamResourceRefundBase = 100
 kTechDataTeamResRefundOnKill = {
-    [kTechId.Exo] = 5,  [kTechId.JetpackMarine] = 3,  --[kTechId.Exosuit] = 0.05, Aint working due to its not attached with pointgivermixin
-    [kTechId.Gorge] = 2, [kTechId.Prowler] = 3, [kTechId.Lerk] = 4, [kTechId.Fade] = 6, [kTechId.Onos] = 8,
+    --[kTechId.Exo] = 5,  [kTechId.JetpackMarine] = 3,  --[kTechId.Exosuit] = 0.05, Aint working due to its not attached with pointgivermixin
+    --[kTechId.Gorge] = 2, [kTechId.Prowler] = 3, [kTechId.Lerk] = 4, [kTechId.Fade] = 6, [kTechId.Onos] = 8,
     [kTechId.Extractor] = 5, [kTechId.PoweredExtractor] = 5, [kTechId.Harvester] = 5,
     [kTechId.PhaseGate] = 5, [kTechId.Tunnel] = 5,[kTechId.InfestedTunnel] = 5,
+    --?
+    [kTechId.CommandStation] = 8, [kTechId.StandardStation] = 10, [kTechId.ExplosiveStation] = 10, [kTechId.ArmorStation] = 10, [kTechId.ElectronicStation] = 10,
+    [kTechId.Hive] = 8, [kTechId.ShiftHive] = 10, [kTechId.CragHive] = 10, [kTechId.ShadeHive] = 10,
 }
 
 --If a player kills too many players and crushing the game 
@@ -84,8 +87,6 @@ kMilitaryProtocolPassiveTeamResourceResearchesScalar = {
 kMilitaryProtocolResourcesScalarPlayerAboveLimit = 0.05  --Multiply upon one
 
 kMatchMinPlayers = 10
-kRespawnPlayersMinExtend = 2
-kRespawnTimeExtendPerPlayer = 1
 kMarineRespawnTime = 9
 kAlienSpawnTime = 10
 
@@ -245,7 +246,7 @@ kAxeDamageType = kDamageType.Structural
 kLightMachineGunClipSize = 55
 kLightMachineGunClipNum = 4
 kLightMachineGunWeight = 0.11
-kLightMachineGunDamage = 10.5
+kLightMachineGunDamage = 10
 kLightMachineGunDamageType = kDamageType.Normal
 kLightMachineGunCost = 30
 kLightMachineGunPointValue = 0
@@ -416,7 +417,7 @@ kVolleyRappelDamageType = kDamageType.Normal
 kVolleyEnergyCost = 7.0 --7.0
 kRappelDamage = 10
 kRappelParasiteTime = 5
-kRappelWebTime = 2 kVolleyWebTime = 1
+kRappelWebTime = 3 kVolleyWebTime = 1.5
 
 kRappelResearchCost = 10
 kRappelResearchTime = 20

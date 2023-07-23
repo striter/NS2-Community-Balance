@@ -41,36 +41,28 @@ function GetPlayersAboveLimit(team)
     return math.max(0,info.playerCount - kMatchMinPlayers)
 end
 
--- Fuck bie bie le
---zoneA:  min(max(0,x-900)/420 * 5 , 5)
---zoneB:  pow(max(0,(x-1320) / 400),2) * 3.3
+local kEndGameBegin = 1500
+local kEndGameTolerance = 1200
 
+-- Fuck bie bie le
 function GetRespawnTimeExtend(team,_gameLength)
     --_gameLength = _gameLength * 30
     local x = _gameLength
 
-    local respawnTA = math.max(0,x-900)/420
-    respawnTA = math.min(respawnTA * 5 , 5)
+    local respawnParam =  math.Clamp(math.max(0,x - kEndGameBegin) / kEndGameTolerance,0,1)
+    respawnParam = respawnParam * respawnParam
+    local respawnExtension = Lerp(0,72,respawnParam)
 
-    local respawnTB = math.max(0,x-1320)/ 400
-    respawnTB = respawnTB * respawnTB
-    respawnTB = respawnTB * 3.3
-
-    local respawnTP = math.max(GetPlayersAboveLimit(team) - kRespawnPlayersMinExtend) * kRespawnTimeExtendPerPlayer
-
-    return math.min(respawnTA + respawnTB , 72 ) + respawnTP
+    local teamExtension = math.max(GetPlayersAboveLimit(team) - 2,0) * 1
+    return respawnExtension + teamExtension
 end
 
 function GetPassiveResourceEfficiency(_gameLength)
     local x = _gameLength
     
-    local kStart = 1800
-    local kEnd = 900
-    
-    local param =  math.Clamp(math.max(0,x - kStart) / kEnd,0,1)
+    local param =  math.Clamp(math.max(0,x - kEndGameBegin) / kEndGameTolerance,0,1)
     param = param* param
-    local value = Lerp(1,0.25,param)
-    return value
+    return Lerp(1,0.25,param)
 end
 
 function GetTeamResourceRefundBase(team)
