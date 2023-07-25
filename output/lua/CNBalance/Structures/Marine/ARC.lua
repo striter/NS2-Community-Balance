@@ -1,4 +1,15 @@
 
+Script.Load("lua/BiomassHealthMixin.lua")
+local baseOnCreate = ARC.OnCreate
+function ARC:OnCreate()
+    baseOnCreate(self)
+    InitMixin(self, BiomassHealthMixin)
+end
+
+function ARC:GetHealthPerTeamExceed()
+    return kARCHealthPerPlayerAdd
+end
+
 function ARC:GetCanFireAtTargetActual(target, targetPoint, manuallyTargeted)
 
     if not target.GetReceivesStructuralDamage or not target:GetReceivesStructuralDamage() then
