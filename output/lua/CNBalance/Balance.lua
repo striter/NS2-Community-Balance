@@ -553,9 +553,9 @@ kArmor3ResearchCost = 40
 kAdvancedMarineSupportResearchCost = 20
 kAdvancedMarineSupportResearchTime = 90
 kAmmoPackCost = 1
-kAmmoPackCooldown = 0.5
+kAmmoPackCooldown = 0
 kMedPackCost = 1
-kMedPackCooldown = 0.5
+kMedPackCooldown = 0
 
 kCatPackCost = 1
 kCatPackCooldown = 0
