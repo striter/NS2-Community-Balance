@@ -41,7 +41,7 @@ function GetPlayersAboveLimit(team)
     return math.max(0,info.playerCount - kMatchMinPlayers)
 end
 
-local kEndGameBegin = 1500
+local kEndGameBegin = 1200
 local kEndGameTolerance = 1200
 
 -- Fuck bie bie le

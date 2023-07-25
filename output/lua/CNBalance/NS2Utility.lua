@@ -169,7 +169,7 @@ function PlayerUI_GetGameTimeString()
     local seconds = math.floor(gameTime % 60)
     local team = PlayerUI_GetTeamType()
     local appender = team == kTeam1Index and " " or "\n"
-    local gameTimeString = string.format(Locale.ResolveString(string.format("GAME_LENGTH_TEAM%i",team)), minutes, seconds)
+    local gameTimeString = ""-- string.format(Locale.ResolveString(string.format("GAME_LENGTH_TEAM%i",team)), minutes, seconds)
     
     local respawnExtend = GetRespawnTimeExtend(team,gameTime)
 

@@ -3,14 +3,14 @@ if kTranslateMessage then
     kTranslateMessage["GAME_LENGTH_TEAM1"] = "站点清理 [%s:%s]"
     kTranslateMessage["RESPAWN_EXTEND_TEAM1"] = "增援耗时 [%i秒]"
     kTranslateMessage["TEAM_RESOURCES_EFFICIENCY1"] = "资源效率 [%i%%]"
-    kTranslateMessage["TEAM_BOUNTY1"] = "资源储备 [%si]"
+    kTranslateMessage["TEAM_BOUNTY1"] = "资源储备 [%i*]"
     kTranslateMessage["NEXT_SPAWN_IN_TEAM1"] = "等待增援:%i"
     kTranslateMessage["WAITING_SPAWN_TEAM1"] = "等待传送中..."
     
     kTranslateMessage["GAME_LENGTH_TEAM2"] = "区域侵入中 [%s:%s]"
     kTranslateMessage["RESPAWN_EXTEND_TEAM2"] = "生物质重构 [%i秒]"
     kTranslateMessage["TEAM_RESOURCES_EFFICIENCY2"] = "资源收集率 [%i%%]"
-    kTranslateMessage["TEAM_BOUNTY2"] = "资源块增殖 [%s*]"
+    kTranslateMessage["TEAM_BOUNTY2"] = "资源块增殖 [%i*]"
     kTranslateMessage["NEXT_SPAWN_IN_TEAM2"] = "生物质重构:%i"
     kTranslateMessage["WAITING_SPAWN_TEAM2"] = "等待孵化中..."
 
