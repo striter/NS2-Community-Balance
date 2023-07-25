@@ -41,8 +41,8 @@ function GetPlayersAboveLimit(team)
     return math.max(0,info.playerCount - kMatchMinPlayers)
 end
 
-local kEndGameBegin = 1200
-local kEndGameTolerance = 1200
+local kEndGameBegin = 1500
+local kEndGameTolerance = 900
 
 -- Fuck bie bie le
 function GetRespawnTimeExtend(team,_gameLength)

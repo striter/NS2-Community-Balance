@@ -370,7 +370,7 @@ kResearchBioMassOneCost = 35
 kBioMassOneTime = 45
 kResearchBioMassTwoCost = 50
 kBioMassTwoTime = 60
-kResearchBioMassThreeCost = 60
+kResearchBioMassThreeCost = 65
 kBioMassThreeTime = 90
 
 --Recover
@@ -539,23 +539,23 @@ kWeapons1ResearchTime = 75
 kWeapons2ResearchTime = 105
 kWeapons3ResearchTime = 135
 
-kWeapons1ResearchCost = 20
+kWeapons1ResearchCost = 25
 kWeapons2ResearchCost = 30
 kWeapons3ResearchCost = 40
 
 kArmor1ResearchTime = 75
 kArmor2ResearchTime = 90
 kArmor3ResearchTime = 120
-kArmor1ResearchCost = 20
+kArmor1ResearchCost = 25
 kArmor2ResearchCost = 30
 kArmor3ResearchCost = 40
 
 kAdvancedMarineSupportResearchCost = 20
 kAdvancedMarineSupportResearchTime = 90
 kAmmoPackCost = 1
-kAmmoPackCooldown = 0
+kAmmoPackCooldown = 0.5
 kMedPackCost = 1
-kMedPackCooldown = 0
+kMedPackCooldown = 0.5
 
 kCatPackCost = 1
 kCatPackCooldown = 0
