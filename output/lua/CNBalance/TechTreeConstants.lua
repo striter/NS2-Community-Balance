@@ -37,6 +37,7 @@ debug.appendtoenum(kTechId, "Knife")
 debug.appendtoenum(kTechId, "SubMachineGun")
 debug.appendtoenum(kTechId, "Revolver")
 debug.appendtoenum(kTechId, "LightMachineGun")
+debug.appendtoenum(kTechId, "LightMachineGunAcquire")
 --Cannon
 debug.appendtoenum(kTechId, "Cannon")
 debug.appendtoenum(kTechId, "CannonTech")

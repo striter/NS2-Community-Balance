@@ -248,7 +248,8 @@ kLightMachineGunClipNum = 4
 kLightMachineGunWeight = 0.11
 kLightMachineGunDamage = 10
 kLightMachineGunDamageType = kDamageType.Normal
-kLightMachineGunCost = 30
+kLightMachineGunCost = 0
+kLightMachineGunAcquireCost = 30
 kLightMachineGunPointValue = 0
 
 --Heavy Marine

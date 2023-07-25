@@ -133,8 +133,10 @@ function MarineTeam:InitTechTree()
     self.techTree:AddTargetedActivation(kTechId.CatPack, kTechId.StandardStation)
     self.techTree:AddResearchNode(kTechId.DragonBreath , kTechId.StandardStation)
     self.techTree:AddTargetedActivation(kTechId.LightMachineGunUpgrade , kTechId.StandardStation)
-
+    
     self.techTree:AddBuyNode(kTechId.LightMachineGun,               kTechId.StandardStation)
+    self.techTree:AddBuyNode(kTechId.LightMachineGunAcquire,       kTechId.StandardStation)
+    
     self.techTree:AddBuyNode(kTechId.Cannon,                        kTechId.CannonTech)
     self.techTree:AddTargetedActivation(kTechId.DropCannon, kTechId.CannonTech)
 

@@ -79,7 +79,7 @@ if Server then
                 self.primaryRespawn = Rifle.kMapName
             elseif techId == kTechId.SubMachineGun then
                 self.primaryRespawn = SubMachineGun.kMapName
-            elseif techId == kTechId.LightMachineGun then
+            elseif techId == kTechId.LightMachineGunAcquire then
                 self.primaryRespawn = LightMachineGun.kMapName
             end
 

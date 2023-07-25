@@ -2,6 +2,7 @@ debug.appendtoenum(kPlayerStatus, "Devoured")
 debug.appendtoenum(kPlayerStatus, "Revolver")
 debug.appendtoenum(kPlayerStatus, "SubMachineGun")
 debug.appendtoenum(kPlayerStatus, "LightMachineGun")
+
 debug.appendtoenum(kPlayerStatus, "Cannon")
 
 debug.appendtoenum(kPlayerStatus, "Prowler")

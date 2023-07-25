@@ -225,7 +225,7 @@ local kTechIdStats =
         Range = 0.7,
     },
 
-    [kTechId.LightMachineGun] =
+    [kTechId.LightMachineGunAcquire] =
     {
         LifeFormDamage = 0.85,
         StructureDamage = 0.85,
@@ -361,12 +361,12 @@ local kTechIdInfo =
         Stats = GetStatsForTechId(kTechId.Revolver)
     },
 
-    [kTechId.LightMachineGun] =
+    [kTechId.LightMachineGunAcquire] =
     {
         ButtonTextureIndex = 18,
         BigPictureIndex = 16,
         Description = "LIGHTMACHINEGUN_BUYDESCRIPTION",    
-        Stats = GetStatsForTechId(kTechId.LightMachineGun)
+        Stats = GetStatsForTechId(kTechId.LightMachineGunAcquire)
     },
 
     [kTechId.SubMachineGun] =
@@ -881,7 +881,7 @@ function GUIMarineBuyMenu:CreateArmoryUI_MilitaryProtocol()
             {
                 kTechId.Rifle,
                 kTechId.SubMachineGun,
-                kTechId.LightMachineGun,
+                kTechId.LightMachineGunAcquire,
                 kTechId.CombatBuilder
             })
 
@@ -999,7 +999,7 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     self:_InitializeWeaponGroup(weaponGroupBottomLeft, x4ButtonPositions,
     {
         kTechId.Shotgun,
-        kTechId.LightMachineGun,
+        kTechId.LightMachineGunAcquire,
         kTechId.HeavyMachineGun,
         kTechId.Flamethrower,
     })
@@ -1616,7 +1616,6 @@ function GUIMarineBuyMenu:Update(deltaTime)
         elseif techCost > currentMoney then
             buttonState = kButtonShowState.InsufficientFunds
         end
-
 
         self:_UpdateBuyButtonAvailability(buttonTable, changed, useHoverTexture, buttonState)
         self:_UpdateRealTimeElements(buttonTable, techId, techAvailable, currentMoney, techCost)

@@ -303,7 +303,6 @@ function BuildTechData()
     })
 
     table.insert(techData,{
-
         [kTechDataId] = kTechId.LightMachineGun,
         [kTechDataMaxHealth] = kMarineWeaponHealth,
         [kTechDataPointValue] = kLightMachineGunPointValue,
@@ -315,6 +314,22 @@ function BuildTechData()
         [kTechDataCostKey] = kLightMachineGunCost,
     })
 
+    table.insert(techData,{
+        [kTechDataId] = kTechId.LightMachineGunAcquire,
+        [kTechDataTooltipInfo] = "LIGHTMACHINEGUN_TOOLTIP",
+        [kTechDataDisplayName] = "LIGHTMACHINEGUN",
+        [kTechDataMapName] = LightMachineGun.kMapName,
+        [kTechDataCostKey] = kLightMachineGunAcquireCost,
+    })
+    
+    table.insert(techData,{
+        [kTechDataId] = kTechId.LightMachineGunUpgrade,
+        [kTechDataMapName] = LightMachineGun.kMapName,
+        [kTechDataTooltipInfo] = "LIGHTMACHINEGUN_TOOLTIP",
+        [kTechDataDisplayName] = "LIGHTMACHINEGUN",
+        [kTechDataCostKey] = kLightMachineGunUpgradeCost,
+    })
+    
     table.insert(techData,{
         [kTechDataId] = kTechId.GrenadeLauncher,
         [kTechDataMaxHealth] = kMarineWeaponHealth,

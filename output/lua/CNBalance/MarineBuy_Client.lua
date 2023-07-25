@@ -65,3 +65,20 @@ function MarineBuy_GetEquipment()
     return inventory
     
 end
+
+
+function MarineBuy_GetHas( techId )
+
+    _playerInventoryCache = MarineBuy_GetEquipment()
+
+    if techId == kTechId.LightMachineGunAcquire then
+        techId = kTechId.LightMachineGun
+    end
+    
+    if _playerInventoryCache[techId] ~= nil then
+        return _playerInventoryCache[techId]
+    end
+
+    return { Has = false, Occupied = false }
+
+end

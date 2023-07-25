@@ -295,23 +295,22 @@ end
 function Devour:DevourPlayer(targetPlayer)
 
 	-- Look up and remember old values
-    local oldHealth = targetPlayer:GetHealth()
-    local oldArmor = targetPlayer:GetArmor()
     targetPlayer:DropAllWeapons()
 
-    local devourCoords = targetPlayer:GetCoords()
-    local vHeightOffset = Vector(0, Onos.YExtents, 0)
-    devourCoords.origin = devourCoords.origin + vHeightOffset
     local devouredPlayer = targetPlayer:Replace(DevouredPlayer.kMapName , targetPlayer:GetTeamNumber(), false, Vector(targetPlayer:GetOrigin()))
-    devouredPlayer:SetHealth(oldHealth)
-    devouredPlayer:SetArmor(oldArmor)
+    devouredPlayer:SetMaxHealth(targetPlayer:GetMaxHealth())
+    devouredPlayer:SetHealth(targetPlayer:GetHealth())
+    devouredPlayer:SetArmor(targetPlayer:GetArmor())
     devouredPlayer.previousMapName = targetPlayer:GetMapName()
 	local onos = self:GetParent()
 	local onosId = onos:GetId()
 	devouredPlayer:SetDevouringOnosId(onosId)
 	
-	self.eatingPlayerId = devouredPlayer:GetId() 
+	self.eatingPlayerId = devouredPlayer:GetId()
 
+    local devourCoords = targetPlayer:GetCoords()
+    local vHeightOffset = Vector(0, Onos.YExtents, 0)
+    devourCoords.origin = devourCoords.origin + vHeightOffset
 	onos:TriggerEffects("combat_devour_eat", {effecthostcoords = devourCoords})
 	
 	-- Switch to the Gore weapon if successful.
