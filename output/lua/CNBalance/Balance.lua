@@ -187,6 +187,7 @@ kGrenadeLauncherDropCooldown = 0
 kGrenadeLauncherGrenadeDamageType = kDamageType.GrenadeLauncher
 kGrenadeLauncherGrenadeDamage = 100
 kGrenadeLauncherGrenadeDamageRadius = 4.8
+
 kGrenadeLauncherDetectionShotRadius = 3
 
 kGrenadeLauncherClipSize = 4

@@ -87,7 +87,7 @@ if Server then
     function ImpactGrenade:Detonate(targetHit)
     
         -- Do damage to nearby targets.
-        local hitEntities = GetEntitiesWithMixinWithinRange("Live", self:GetOrigin(), kGrenadeLauncherGrenadeDamageRadius)
+        local hitEntities = GetEntitiesWithMixinWithinRange("Live", self:GetOrigin(), kGrenadeLauncherDetectionShotRadius)
         
         -- Remove grenade and add firing player.
         table.removevalue(hitEntities, self)
@@ -98,7 +98,7 @@ if Server then
             self:DoDamage(kGrenadeLauncherImpactGrenadeDamage, targetHit, self:GetOrigin(), GetNormalizedVector(targetHit:GetOrigin() - self:GetOrigin()), "none")
         end
 
-        RadiusDamage(hitEntities, self:GetOrigin(), kGrenadeLauncherGrenadeDamageRadius, kGrenadeLauncherImpactGrenadeDamage, self)
+        RadiusDamage(hitEntities, self:GetOrigin(), kGrenadeLauncherDetectionShotRadius, kGrenadeLauncherImpactGrenadeDamage, self)
         
         -- TODO: use what is defined in the material file
         local surface = GetSurfaceFromEntity(targetHit)
@@ -107,7 +107,7 @@ if Server then
         params[kEffectHostCoords] = Coords.GetLookIn( self:GetOrigin(), self:GetCoords().zAxis)
         
         if GetDebugGrenadeDamage() then
-            DebugWireSphere( self:GetOrigin(), kGrenadeLauncherGrenadeDamageRadius, 0.65, 1, 0, 0, 1 )
+            DebugWireSphere( self:GetOrigin(), kGrenadeLauncherDetectionShotRadius, 0.65, 1, 0, 0, 1 )
         end
 
         self:TriggerEffects("grenade_explode", params)

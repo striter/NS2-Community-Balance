@@ -43,14 +43,15 @@ if Server then
 
 	local onReplace = Player.Replace
 	function Player:Replace(mapName, newTeamNumber, preserveWeapons, atOrigin, extraValues, isPickup)
-
 		local player = onReplace(self,mapName, newTeamNumber, preserveWeapons, atOrigin, extraValues, isPickup)
+
+		if newTeamNumber and newTeamNumber ~= kTeam1Index then
+			player.primaryRespawn = nil
+			player.secondaryRespawn = nil
+			player.meleeRespawn = nil
+		end
+		
 		if player:isa("Marine") and not self:GetIsAlive() then
-			if newTeamNumber ~= kTeam1Index then
-				player.primaryRespawn = nil
-				player.secondaryRespawn = nil
-				player.meleeRespawn = nil
-			end
 
 			if player.primaryRespawn then
 				player:GiveItem(player.primaryRespawn,true)
@@ -64,12 +65,14 @@ if Server then
 				player:GiveItem(player.meleeRespawn,false)
 			end
 		end
+		
 		return player
 	end
 
 	local baseCopyPlayerDataFrom = Player.CopyPlayerDataFrom
 	function Player:CopyPlayerDataFrom(player)
 		baseCopyPlayerDataFrom(self,player)
+		
 		self.primaryRespawn = player.primaryRespawn
 		self.secondaryRespawn = player.secondaryRespawn
 		self.meleeRespawn = player.meleeRespawn

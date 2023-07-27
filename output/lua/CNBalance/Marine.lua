@@ -98,7 +98,6 @@ if Server then
         
         return result
     end
-    
 end
 
 if Server then
