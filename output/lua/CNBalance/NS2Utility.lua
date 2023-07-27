@@ -213,6 +213,23 @@ function MarineMeleeBoxDamage(self,player,coords,range,damage)
     end
 end
 
+function ApplyPushback(target, disableDuration, velocity)
+    target.stampedeVars = {
+        disableDur = disableDuration,
+        velocity = velocity
+    }
+
+    target:AddTimedCallback(function(self)
+        if not self.stampedeVars then return end
+
+        if self.stampedeVars.disableDur > 0 then
+            self:DisableGroundMove(self.stampedeVars.disableDur)
+        end
+        self:SetVelocity(self.stampedeVars.velocity)
+        self.stampedeVars = nil
+    end, 0 )
+end
+
 function GetMaxSupplyForTeam(teamNumber)
 
     local maxSupply = 0

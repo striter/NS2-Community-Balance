@@ -23,19 +23,18 @@ kTechDataPersonalResOnKill = {
     [kTechId.Shotgun] = 1, [kTechId.HeavyMachineGun] = 1, [kTechId.GrenadeLauncher] = 1, [kTechId.Flamethrower] = 1,     --Special one for gorgie
     
     --Aliens
-    [kTechId.Egg] = 0.2,[kTechId.Cyst] = 0.2,
-    [kTechId.Drifter] = 0.5,    --[kTechId.DrifterEgg] = 0.5,
-    [kTechId.Hydra] = 0.2,[kTechId.SporeMine] = 0.2,[kTechId.BabblerEgg] = 2,       --PPVE
-    [kTechId.Shell] = 5, [kTechId.Veil] = 5, [kTechId.Spur] = 5,
-    [kTechId.Whip] = 2.5, [kTechId.Shift] = 5, [kTechId.Crag] = 5, [kTechId.Shade] = 5,       --CPVE
-    [kTechId.Harvester] = 5, [kTechId.Tunnel] = 5, [kTechId.InfestedTunnel] = 7.5,
-    [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20,
+    [kTechId.Egg] = 0.2,[kTechId.Cyst] = 0.2, [kTechId.Drifter] = 0.5,    --[kTechId.DrifterEgg] = 0.5,
+    [kTechId.Hydra] = 0.1,[kTechId.SporeMine] = 0.1,[kTechId.BabblerEgg] = 1,       --PPVE
+    [kTechId.Shell] = 2.5, [kTechId.Veil] = 2.5, [kTechId.Spur] = 2.5,
+    [kTechId.Whip] = 1.5, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,       --CPVE
+    [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 4,
+    [kTechId.Hive] = 10, [kTechId.ShiftHive] = 15, [kTechId.CragHive] = 15, [kTechId.ShadeHive] = 15,
 }
 
 --TRes reward to kill certain structures, snowball rolling
 kTechDataTeamResOnKill = {
     --Marines
-    [kTechId.ARC] = 4,      --Super aggressive one i mean
+    --[kTechId.ARC] = 4,      --Super aggressive one i mean
     [kTechId.CommandStation] = 15, [kTechId.StandardStation] = 20, [kTechId.ExplosiveStation] = 20, [kTechId.ArmorStation] = 20, [kTechId.ElectronicStation] = 20,
     
     --Aliens
@@ -348,7 +347,7 @@ kOnosDevourTime = 40
 kUmbraBulletModifier = 0.8
 
 kDevourEnergyCost = 55 --50
-kDevourPunchDamage = 70 --100
+kDevourPunchDamage = 65 --100
 
 kTunnelUpgradeCost = 15
 kTunnelUpgradeTime = 60
@@ -478,14 +477,16 @@ kBoneShieldResearchCost = 20
 kBoneShieldResearchTime = 40
 kStompResearchCost = 25
 kStompResearchTime = 90
+kChargeEnergyCost = 24
 kChargeDamage = 12
 kStompEnergyCost = 35
-kStompDamageType = kDamageType.Structural
-kStompDamage = 45
-kStompRange = 12
+kStompDamageType = kDamageType.Normal
+kStompDamage = 90 kStompDisruptTime = 2
+kStompSecondDamage = 45 kStompSecondDisruptTime = 1
+kStompElseDamage = 10
+kStompRange = 12 
 
-kDisruptMarineTime = 1
-kDisruptMarineTimeout = 3
+kDisruptMarineTimeout = 4
 
 kBabblerShieldPercent = 0.1
 kSkulkBabblerShieldPercent = 0.23

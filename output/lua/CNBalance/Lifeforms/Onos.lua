@@ -79,3 +79,35 @@ function Onos:CanBeStampeded(ent)
     
     return true
 end
+
+function Onos:GetMaxSpeed(possible)
+
+    if possible then
+        return Onos.kMaxSpeed
+    end
+
+    local chargeSpeed = Onos.kChargeSpeed
+    local normalSpeed = Onos.kMaxSpeed
+
+    if GetHasCarapaceUpgrade(self) then
+        local shellLevel = self:GetShellLevel()
+        chargeSpeed = chargeSpeed - shellLevel * 0.5
+        normalSpeed = normalSpeed - shellLevel * 0.2
+    end
+    
+    local boneShieldSlowdown = self:GetIsBoneShieldActive() and kBoneShieldMoveFraction or 1
+    local chargeExtra = self:GetChargeFraction() * (chargeSpeed - normalSpeed)
+    
+    return ( normalSpeed + chargeExtra ) * boneShieldSlowdown
+
+end
+
+function Onos:ModifyCelerityBonus( celerityBonus )
+
+    if self:GetIsBoneShieldActive() then
+        return 0
+    end
+
+    return celerityBonus * kOnosCeleritySpeedMultiply
+
+end

@@ -18,7 +18,7 @@ kRappelTracerEffectName = PrecacheAsset("cinematics/prowler/rappeltracer.cinemat
 local kRange = kRappelRange
 local kRappelCooldown = 0.4 --0.49
 local kRappelDuration = 1.99
-local kRappelProjectileSize = 0.1
+local kRappelProjectileSize = 0.05
 
 RappelMixin.networkVars =
 {
@@ -101,29 +101,14 @@ function RappelMixin:PerformSecondaryAttack(player)
                 
                 if hitTarget:isa("Player") then -- or hitTarget:isa("Exo") then
                     local mass = hitTarget.GetMass and hitTarget:GetMass() or Player.kMass
-                    reel = mass < 100
-                    if reel then
+                    if mass < 100 then
                         local reelDirection =  player:GetOrigin() - hitTarget:GetOrigin()
                         reelDirection:Normalize()
-    
-                        local disableDur = 0.2
                         --local reelUpForce = 1.5
                         local reelForce = 11
-    
-                        local slapVel =  reelDirection * reelForce --+ Vector(0, reelUpForce * (1 - mass/1000), 0)
-                        --Shared.Message(tostring(slapVel))
-                        hitTarget.stampedeVars = {
-                            disableDur = disableDur,
-                            velocity = slapVel
-                        }
-    
-                        hitTarget:AddTimedCallback(function(self)
-                            if not self.stampedeVars then return end
-    
-                            self:DisableGroundMove(self.stampedeVars.disableDur)
-                            self:SetVelocity(self.stampedeVars.velocity)
-                            self.stampedeVars = nil
-                        end, 0 )
+
+                        local slapVel =  reelDirection * reelForce + Vector(0, 1, 0)
+                        ApplyPushback(hitTarget,0.2,slapVel)
                     end
                 end
             else

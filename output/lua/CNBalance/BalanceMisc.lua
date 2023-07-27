@@ -42,7 +42,6 @@ kAlienMaxRegeneration = 80
 
 kAlienCrushDamagePercentByLevel = 0.111 --0.007
 
-kCelerityAddSpeed = 1.5 -- 1.5
 
 
 kFocusDamageBonusAtMax = 0.66 kFocusAttackSlowAtMax = 2
@@ -59,12 +58,15 @@ kNumWebsPerGorge = 3
 
 kMACSpeedAmount = 1
 
+kCelerityAddSpeed = 1.5 -- 1.5
+kOnosCeleritySpeedMultiply = 0.66
+
 kCarapaceSpeedReduction = 0.0
 kSkulkCarapaceSpeedReduction = 0 --0.08
 kGorgeCarapaceSpeedReduction = 0 --0.08
 kLerkCarapaceSpeedReduction = 0 --0.15
 kFadeCarapaceSpeedReduction = 0 --0.15
-kOnosCarapaceSpeedReduction = 0 --0.12
+kOnosCarapaceSpeedReduction = 0.12 --0.12
 kFadeAdrenalineSpeedReduction = 0
 
 kBiteLeapVampirismScalar = 0.05   --0.0466

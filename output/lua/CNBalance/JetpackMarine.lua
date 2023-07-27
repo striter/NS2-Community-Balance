@@ -47,9 +47,9 @@ function JetpackMarine:GetArmorAmount(armorLevels)
 
 end
 
-function JetpackMarine:GetIsStunAllowed()
-    return false
-end
+--function JetpackMarine:GetIsStunAllowed()
+--    return false
+--end
 
 if Server then
     function JetpackMarine:GetAutoHealPerSecond(lifeSustainResearched)

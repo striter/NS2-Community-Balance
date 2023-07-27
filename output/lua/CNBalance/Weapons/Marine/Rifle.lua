@@ -22,4 +22,21 @@ if Server then
         end
         return variant
     end
-end 
+end
+
+local kButtRange = 1.5
+function Rifle:PerformMeleeAttack(player)
+
+    player:TriggerEffects("rifle_alt_attack")
+
+    local didHit, lastTarget,_,_ = AttackMeleeCapsule(self, player, kRifleMeleeDamage, kButtRange, nil, true)
+
+    if didHit then
+        if lastTarget:isa("Player") then
+            local mass = lastTarget.GetMass and lastTarget:GetMass() or Player.kMass
+            if mass < 100 then
+                ApplyPushback(lastTarget,0.2,player:GetViewCoords().zAxis * 6)
+            end
+        end 
+    end
+end
