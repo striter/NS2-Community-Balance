@@ -23,7 +23,7 @@ kTechDataPersonalResOnKill = {
     [kTechId.Shotgun] = 1, [kTechId.HeavyMachineGun] = 1, [kTechId.GrenadeLauncher] = 1, [kTechId.Flamethrower] = 1,     --Special one for gorgie
     
     --Aliens
-    [kTechId.Egg] = 0.2,[kTechId.Cyst] = 0.2, [kTechId.Drifter] = 0.5,    --[kTechId.DrifterEgg] = 0.5,
+    [kTechId.Egg] = 0.2,[kTechId.Cyst] = 0.2, [kTechId.Drifter] = 0.3,    --[kTechId.DrifterEgg] = 0.5,
     [kTechId.Hydra] = 0.1,[kTechId.SporeMine] = 0.1,[kTechId.BabblerEgg] = 1,       --PPVE
     [kTechId.Shell] = 2.5, [kTechId.Veil] = 2.5, [kTechId.Spur] = 2.5,
     [kTechId.Whip] = 1.5, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,       --CPVE
@@ -385,6 +385,7 @@ kRecoverBioMassThreeTime = 40
 --Skulk
 kParasiteEnergyCost = 30
 kAdrenalineParasiteEnergyCost = 18
+kParasiteDamageType = kDamageType.Structural
 
 kXenocideResearchCost = 20
 kXenocideResearchTime = 60
@@ -478,7 +479,7 @@ kBoneShieldResearchCost = 20
 kBoneShieldResearchTime = 40
 kStompResearchCost = 25
 kStompResearchTime = 90
-kChargeEnergyCost = 24
+kChargeEnergyCost = 22
 kChargeDamage = 12
 kStompEnergyCost = 35
 kStompDamageType = kDamageType.Normal

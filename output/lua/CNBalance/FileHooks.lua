@@ -71,6 +71,7 @@ ModLoader.SetupFileHook("lua/RegenerationMixin.lua", "lua/CNBalance/Mixin/Regene
 ModLoader.SetupFileHook("lua/BiomassHealthMixin.lua", "lua/CNBalance/Mixin/BiomassHealthMixin.lua", "replace")
 ModLoader.SetupFileHook("lua/RecycleMixin.lua", "lua/CNBalance/Mixin/RecycleMixin.lua", "post")
 ModLoader.SetupFileHook("lua/GhostStructureMixin.lua", "lua/CNBalance/Mixin/GhostStructureMixin.lua", "post")
+ModLoader.SetupFileHook("lua/PhaseGateUserMixin.lua", "lua/CNBalance/Mixin/PhaseGateUserMixin.lua", "replace")
 
 ModLoader.SetupFileHook("lua/Player.lua", "lua/CNBalance/Player.lua", "post" )
 ModLoader.SetupFileHook("lua/HitSounds.lua", "lua/CNBalance/HitSounds.lua", "post" )

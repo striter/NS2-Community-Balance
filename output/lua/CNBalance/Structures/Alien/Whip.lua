@@ -33,11 +33,20 @@ if Server then
     local baseSlapTarget = Whip.SlapTarget
     function Whip:SlapTarget(target)
         baseSlapTarget(self,target)
+        local targetIsPlayer = target:isa("Player")
+
+        if targetIsPlayer then
+            local direction = target:GetOrigin() - self:GetOrigin()
+            direction.y = 0
+            direction:Normalize()
+            ApplyPushback(target,0.2,direction * 4.5)
+        end
+        
         local infested = self:GetGameEffectMask(kGameEffect.OnInfestation)
         if not infested then
             local attacker 
             local selfDamage = kUnrootDefaultSelfDamage
-            if target:isa("Player") then
+            if targetIsPlayer then
                 selfDamage = kUnrootPlayerSelfDamage
                 attacker = target
             end

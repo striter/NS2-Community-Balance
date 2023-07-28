@@ -73,3 +73,121 @@ function PhaseGate:Phase(user)
     return false
 
 end
+
+if Server then
+    local function GetDestinationGate(self)
+
+        -- Find next phase gate to teleport to
+        local phaseGates = {}
+        for index, phaseGate in ipairs( GetEntitiesForTeam("PhaseGate", self:GetTeamNumber()) ) do
+            if GetIsUnitActive(phaseGate) then
+                table.insert(phaseGates, phaseGate)
+            end
+        end
+
+        if table.icount(phaseGates) < 2 then
+            return nil
+        end
+
+        -- Find our index and add 1
+        local index = table.find(phaseGates, self)
+        if (index ~= nil) then
+            local nextIndex
+            if directionBackwards then
+                nextIndex = ConditionalValue(index == 1, table.icount(phaseGates), index - 1)
+            else
+                nextIndex = ConditionalValue(index == table.icount(phaseGates), 1, index + 1)
+            end
+
+            ASSERT(nextIndex >= 1)
+            ASSERT(nextIndex <= table.icount(phaseGates))
+            return phaseGates[nextIndex],#phaseGates
+
+        end
+
+        return nil
+
+    end
+    
+    local function ComputeDestinationLocationId(self, destGate)
+
+        local destLocationId = Entity.invalidId
+        if destGate then
+
+            local location = GetLocationForPoint(destGate:GetOrigin())
+            if location then
+                destLocationId = location:GetId()
+            end
+
+        end
+
+        return destLocationId
+
+    end
+    
+    local function DestroyRelevancyPortal(self)
+        if self.relevancyPortalIndex ~= -1 then
+            Server.DestroyRelevancyPortal(self.relevancyPortalIndex)
+            self.relevancyPortalIndex = -1
+        end
+    end
+
+    
+    function PhaseGate:Update()
+
+        local destinationPhaseGate,gateCount = GetDestinationGate(self)
+
+        if self.performedPhaseLastUpdate then
+            self:TriggerEffects("phase_gate_player_teleport", { effecthostcoords = self:GetCoords() })
+
+            if destinationPhaseGate ~= nil then
+                --Force destination gate to trigger effect so the teleporting FX is not visible to enemy with sight on self
+                local destinationCoords = Angles(0, self.targetYaw, 0):GetCoords()
+                destinationCoords.origin = self.destinationEndpoint
+                destinationPhaseGate:TriggerEffects("phase_gate_player_teleport", { effecthostcoords = destinationCoords })
+            end
+
+            self.performedPhaseLastUpdate = false
+        end
+
+        gateCount = gateCount or 2
+        local phaseTime = (gateCount - 1) * 0.4
+        
+        self.phase = (self.timeOfLastPhase ~= nil) and (Shared.GetTime() < (self.timeOfLastPhase + phaseTime))
+
+        if destinationPhaseGate ~= nil and GetIsUnitActive(self) and self.deployed and destinationPhaseGate.deployed then
+
+            self.destinationEndpoint = destinationPhaseGate:GetOrigin()
+            self.linked = true
+            self.targetYaw = destinationPhaseGate:GetAngles().yaw
+            self.destLocationId = ComputeDestinationLocationId(self, destinationPhaseGate)
+
+            if self.relevancyPortalIndex == -1 then
+                -- Create a relevancy portal to the destination to smooth out entity propagation.
+                local mask = 0
+                local teamNumber = self:GetTeamNumber()
+                if teamNumber == 1 then
+                    mask = kRelevantToTeam1Unit
+                elseif teamNumber == 2 then
+                    mask = kRelevantToTeam2Unit
+                end
+
+                if mask ~= 0 then
+                    self.relevancyPortalIndex = Server.CreateRelevancyPortal(self:GetOrigin(), self.destinationEndpoint, mask, self.kRelevancyPortalRadius)
+                end
+            end
+
+        else
+            self.linked = false
+            self.targetYaw = 0
+            self.destLocationId = Entity.invalidId
+
+            DestroyRelevancyPortal(self)
+
+        end
+
+        return true
+
+    end
+
+end
