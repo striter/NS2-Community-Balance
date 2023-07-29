@@ -31,7 +31,7 @@ function Rifle:PerformMeleeAttack(player)
 
     local didHit, lastTarget,_,_ = AttackMeleeCapsule(self, player, kRifleMeleeDamage, kButtRange, nil, true)
 
-    if didHit then
+    if didHit and lastTarget then
         if lastTarget:isa("Player") then
             local mass = lastTarget.GetMass and lastTarget:GetMass() or Player.kMass
             if mass < 100 then

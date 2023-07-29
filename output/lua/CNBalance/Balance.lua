@@ -544,7 +544,7 @@ kWhipBombardDamage = 45
 kWhipBombardDamageType = kDamageType.Structural
 
 kObservatoryScanCost = 3
-kScanCooldown = 3
+kScanCooldown = 0
 kObservatoryDistressBeaconCost = 10
 
 kArmsLabCost = 15

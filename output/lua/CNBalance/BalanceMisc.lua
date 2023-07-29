@@ -98,7 +98,7 @@ kPhaseGateSupply = 10
 kSentriesPerBattery = 3
 
 kDrifterSupply = 0
-kWhipSupply = 5
+kWhipSupply = 8
 kCragSupply = 20
 kShadeSupply = 20
 kShiftSupply = 20
