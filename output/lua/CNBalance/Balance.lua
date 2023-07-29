@@ -58,7 +58,7 @@ kAssistMinimumDamageFraction = 0.3      --Avoid parasiter or babbler assists ,fe
 kBountyScoreEachAssist = 1 kBountyScoreEachKill = 2 kMaxBountyScore = 512       --You can't kill 256 players in 1 life
 kBountyClaimMinMarine = 7 kBountyClaimMinJetpack = 9 kBountyClaimMinExo = 12 
 kBountyClaimMinSkulk = 7 kBountyClaimMinAlien = 10  kBountyClaimMinOnos = 14
-kPResPerBountyClaimAsMarine = 0.4  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 24
+kPResPerBountyClaimAsMarine = 0.4  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 20
 kBountyTargetDamageReceiveStep = 18  kBountyDamageReceiveBaseEachStep = (0.1 / kBountyTargetDamageReceiveStep)      --0-10%,20%-40%,40%-80%, increase its damage receive by steps.
 
 --Toy for marine commander (remove all marines passive income, harsh one)
@@ -477,16 +477,26 @@ kAcidRocketBombDuration = 1
 -- Onos
 kBoneShieldResearchCost = 20
 kBoneShieldResearchTime = 40
+
 kStompResearchCost = 25
 kStompResearchTime = 90
+
 kChargeEnergyCost = 22
 kChargeDamage = 12
+
+kBoneShieldCooldown = 16
+kBoneShieldMinimumEnergyNeeded = 0
+kBoneShieldMinimumFuel = 0.15
+kBoneShieldMaxDuration = 8
+
 kStompEnergyCost = 35
 kStompDamageType = kDamageType.Normal
 kStompDamage = 90 kStompDisruptTime = 2
 kStompSecondDamage = 45 kStompSecondDisruptTime = 1
 kStompElseDamage = 10
 kStompRange = 12 
+
+
 
 kDisruptMarineTimeout = 4
 

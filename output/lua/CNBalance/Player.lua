@@ -1,3 +1,5 @@
+
+
 if Client then
 	
 	function PlayerUI_GetCrosshairY()
@@ -76,5 +78,24 @@ if Server then
 		self.primaryRespawn = player.primaryRespawn
 		self.secondaryRespawn = player.secondaryRespawn
 		self.meleeRespawn = player.meleeRespawn
+	end
+
+	
+	function Player:AddResources(amount)
+
+		local resReward = 0
+
+		if Shared.GetCheatsEnabled() or ( amount <= 0 or not self.blockPersonalResources ) then
+
+			local efficiency = GetPassiveResourceEfficiency(Shared.GetTime() - GetGamerules():GetGameStartTime())
+			amount = amount * efficiency
+			
+			resReward = math.min(amount, kMaxPersonalResources - self:GetResources())
+			self:SetResources(self:GetResources() + resReward)
+
+		end
+
+		return resReward
+
 	end
 end 

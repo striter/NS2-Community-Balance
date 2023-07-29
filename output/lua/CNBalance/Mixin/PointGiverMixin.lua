@@ -48,7 +48,7 @@ if Server then
                 if team and team.CollectAggressivePlayerResources then
                     resReward = team:CollectAggressivePlayerResources(currentAttacker,resReward)
                 else
-                    currentAttacker:AddResources(resReward)
+                    resReward = currentAttacker:AddResources(resReward)
                 end
                 
                 if damageFraction > kAssistMinimumDamageFraction and selfIsPlayer and currentAttacker ~= attacker then

@@ -59,6 +59,7 @@ function GetRespawnTimeExtend(team,_gameLength)
 end
 
 function GetPassiveResourceEfficiency(_gameLength)
+    --_gameLength = _gameLength * 60
     local x = _gameLength
     
     local param =  math.Clamp(math.max(0,x - kEndGameBegin) / kEndGameTolerance,0,1)

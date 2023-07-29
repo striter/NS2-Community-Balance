@@ -1,5 +1,3 @@
-
-
 local kBlipColorType = debug.getupvaluex(GUIMinimap.Initialize ,"kBlipColorType")
 local kBlipSizeType = debug.getupvaluex(GUIMinimap.Initialize ,"kBlipSizeType")
 local kClassToGrid = debug.getupvaluex(GUIMinimap.Initialize,"kClassToGrid")
@@ -34,9 +32,10 @@ function GUIMinimap:Initialize()
             local texCoords = table.pack(GUIGetSprite(iconCol, iconRow, kIconWidth, kIconHeight))
             self.blipInfoTable[blipType] = { texCoords, blipInfo[1], blipInfo[2], blipInfo[3] }
         end
-        for blipTeam = 1, #kMinimapBlipTeam do
-            self.blipColorTable[blipTeam][kBlipColorType.Waypoint] = Color(252.0/255.0, 243/255.0, 207/255.0, 1)
-            self.blipColorTable[blipTeam][kBlipColorType.Drifter] = Color(229.0/255.0, 152/255.0, 102/255.0, 1)
-        end
+        
+        --for blipTeam = 1, #kMinimapBlipTeam do
+        --    self.blipColorTable[blipTeam][kBlipColorType.Waypoint] = Color(252.0/255.0, 243/255.0, 207/255.0, 1)
+        --    self.blipColorTable[blipTeam][kBlipColorType.Drifter] = Color(229.0/255.0, 152/255.0, 102/255.0, 1)
+        --end
     end
 end

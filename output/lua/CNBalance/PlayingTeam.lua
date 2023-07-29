@@ -176,7 +176,6 @@ function PlayingTeam:UpdateResTick()
             teamResourceToCollect = kTeamResourceWithoutTower
         end
 
-        playerResourceToCollect = playerResourceToCollect * GetPassiveResourceEfficiency(Shared.GetTime() - GetGamerules():GetGameStartTime())
         self:CollectTeamResources(teamResourceToCollect,playerResourceToCollect)
     end
 end
