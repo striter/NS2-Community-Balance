@@ -7,6 +7,7 @@ ModLoader.SetupFileHook("lua/NS2Gamerules.lua", "lua/CNBalance/NS2Gamerules.lua"
 ModLoader.SetupFileHook("lua/Globals.lua", "lua/CNBalance/Globals.lua", "post" )
 ModLoader.SetupFileHook("lua/Team.lua", "lua/CNBalance/Team.lua", "post")
 
+ModLoader.SetupFileHook("lua/Entity.lua", "lua/CNBalance/Entity.lua", "post")
 ModLoader.SetupFileHook("lua/ScriptActor.lua", "lua/CNBalance/ScriptActor.lua", "post" )
 ModLoader.SetupFileHook("lua/Utility.lua", "lua/CNBalance/Utility.lua", "post" )
 ModLoader.SetupFileHook("lua/NS2Utility.lua", "lua/CNBalance/NS2Utility.lua", "post" )

@@ -71,6 +71,14 @@ if Server then
 		return player
 	end
 
+	local baseOnInitialSpawn = Player.OnInitialSpawn
+	function Player:OnInitialSpawn(techPointOrigin)
+		baseOnInitialSpawn(self,techPointOrigin)
+		self.primaryRespawn = nil
+		self.secondaryRespawn = nil
+		self.meleeRespawn = nil
+	end
+	
 	local baseCopyPlayerDataFrom = Player.CopyPlayerDataFrom
 	function Player:CopyPlayerDataFrom(player)
 		baseCopyPlayerDataFrom(self,player)

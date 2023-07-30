@@ -188,11 +188,11 @@ kGrenadeLauncherGrenadeDamageType = kDamageType.GrenadeLauncher
 kGrenadeLauncherGrenadeDamage = 100
 kGrenadeLauncherGrenadeDamageRadius = 4.8
 
-kGrenadeLauncherDetectionShotRadius = 3
+kGrenadeLauncherImpactGrenadeDamage = 80
+kGrenadeLauncherDetectionShotRadius = 3.5
 
 kGrenadeLauncherClipSize = 4
 
-kGrenadeLauncherImpactGrenadeDamage = 100
 
 kGrenadeLauncherWeapons1DamageScalar = 1.1
 kGrenadeLauncherWeapons2DamageScalar = 1.2
