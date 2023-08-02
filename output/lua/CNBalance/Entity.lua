@@ -43,17 +43,17 @@ function RadiusDamageWithUpEnd(entities, centerOrigin, radius, fullDamage, doer,
     local function DistanceCompare(a, b) return a.distance < b.distance end
     table.sort(inRangeEntities,DistanceCompare)
 
-    local index = 0
+    local playerIndex = 0
     for _,targetTable in pairs(inRangeEntities) do
-        index = index + 1
         target = targetTable.entity
         -- Damage falloff
         local damage = fullDamage
 
-        if target:isa("Player") then    
-            if index <= 1 then
+        if target:isa("Player") then
+            playerIndex = playerIndex + 1
+            if playerIndex <= 1 then
                 --damage = fullDamage
-            elseif index <= 2 then
+            elseif playerIndex <= 2 then
                 damage = fullDamage * 0.7
             else
                 damage = fullDamage * 0.2

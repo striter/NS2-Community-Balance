@@ -151,7 +151,7 @@ if Server then
         end
 
         gateCount = gateCount or 2
-        local phaseTime = (gateCount - 1) * 0.4
+        local phaseTime = (gateCount - 1) * 1
         
         self.phase = (self.timeOfLastPhase ~= nil) and (Shared.GetTime() < (self.timeOfLastPhase + phaseTime))
 
