@@ -539,6 +539,9 @@ kEchoSpurCost = 2
 kEchoShellCost = 2
 kEchoEggCost = 1
 
+kShadeInkCooldown = 16.5
+kShadeInkDuration = 6.3
+
 kWhipSlapDamage = 50
 kWhipBombardDamage = 45
 kWhipBombardDamageType = kDamageType.Structural
