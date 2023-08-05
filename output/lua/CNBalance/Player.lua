@@ -95,9 +95,11 @@ if Server then
 
 		if Shared.GetCheatsEnabled() or ( amount <= 0 or not self.blockPersonalResources ) then
 
-			local efficiency = GetPassiveResourceEfficiency(Shared.GetTime() - GetGamerules():GetGameStartTime())
-			amount = amount * efficiency
-			
+			if amount > 0 then
+				local efficiency = GetPassiveResourceEfficiency(Shared.GetTime() - GetGamerules():GetGameStartTime())
+				amount = amount * efficiency
+			end
+				
 			resReward = math.min(amount, kMaxPersonalResources - self:GetResources())
 			self:SetResources(self:GetResources() + resReward)
 
