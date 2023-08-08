@@ -11,6 +11,15 @@ function GUIAlienHUD:Update(deltaTime)
     baseUpdate(self,deltaTime)
 
     local player = Client.GetLocalPlayer()
-    local nutrientMist = player.canNutrientMist~=nil and player.canNutrientMist or false
+    local nutrientMist = player.timeLastPrimaryRequestHandle ~= nil
+    if nutrientMist then
+        local color = kIconColors[kAlienTeamType]
+        percentage = math.Clamp(1 - (player.timeLastPrimaryRequestHandle - Shared.GetTime())/kAutoMistCooldown,0,1)
+        local mist = color * (percentage * percentage)
+        mist.a = percentage >= 1 and 1 or 0.5
+        percentage = percentage * percentage
+        self.nutrientMist:SetColor(mist)
+    end
+    
     self.nutrientMist:SetIsVisible(nutrientMist)
 end 

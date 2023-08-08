@@ -56,10 +56,12 @@ kTechDataTeamResRefundOnKill = {
 --If a player kills too many players and crushing the game 
 kAssistMinimumDamageFraction = 0.3      --Avoid parasiter or babbler assists ,feels pretty weird
 kBountyScoreEachAssist = 1 kBountyScoreEachKill = 2 kMaxBountyScore = 512       --You can't kill 256 players in 1 life
-kBountyClaimMinMarine = 7 kBountyClaimMinJetpack = 9 kBountyClaimMinExo = 12 
+kBountyClaimMinMarine = 6 kBountyClaimMinJetpack = 9 kBountyClaimMinExo = 12 
 kBountyClaimMinSkulk = 7 kBountyClaimMinAlien = 10  kBountyClaimMinOnos = 14
 kPResPerBountyClaimAsMarine = 0.4  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 20
-kBountyTargetDamageReceiveStep = 18  kBountyDamageReceiveBaseEachStep = (0.1 / kBountyTargetDamageReceiveStep)      --0-10%,20%-40%,40%-80%, increase its damage receive by steps.
+--0-10%,20%-40%,40%-80%, increase/deccrease its damage receive by steps.
+kBountyTargetDamageReceiveStep = 18  kBountyDamageReceiveBaseEachScore = (0.1 / kBountyTargetDamageReceiveStep)
+kBountyTargetDamageDealtStep = 10 kBountyDamageDealtBaseEachScore = (0.1 / kBountyTargetDamageDealtStep)        --Usually for marines&jetpacks, should be lower
 
 --Toy for marine commander (remove all marines passive income, harsh one)
 kMilitaryProtocolResearchCost = 10
@@ -331,7 +333,6 @@ kExosuitTechResearchCost = 20
 kExosuitTechResearchTime = 90
 
 kRoboticsFactoryBuildTime = 8
-
 
 kJetpackCost = 25
 kJetpackDropCost = 18

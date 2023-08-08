@@ -129,24 +129,24 @@ function GUIMarineHUD:Update(deltaTime)
         self.militaryProtocol:SetIsVisible(self.lastMilitaryProtocol)
     end
 
-    local autoMed = player.timeLastAutoMedPack and not hasMilitaryProtocol or false
-    if autoMed then
+    local requestHandle = player.timeLastPrimaryRequestHandle and not hasMilitaryProtocol or false
+    if requestHandle then
         local time = Shared.GetTime()
         local color = kIconColors[kMarineTeamType]
-        local percentage = math.Clamp((time - player.timeLastAutoMedPack)/kAutoMedCooldown,0,1)
+        local percentage = math.Clamp(1 - (player.timeLastPrimaryRequestHandle - time)/kAutoMedCooldown,0,1)
         local medColor = color * (percentage * percentage)
         medColor.a = percentage >= 1 and 1 or 0.5
         self.autoMedPack:SetColor(medColor)
 
-        percentage = math.Clamp((time - player.timeLastAutoAmmoPack)/kAutoAmmoCooldown,0,1)
+        percentage = math.Clamp(1 - (player.timeLastAutoAmmoPack - time)/kAutoAmmoCooldown,0,1)
         local ammoColor = color * (percentage * percentage)
         ammoColor.a = percentage >= 1 and 1 or 0.5
         percentage = percentage * percentage
         self.autoAmmoPack:SetColor(ammoColor)
     end
 
-    self.autoAmmoPack:SetIsVisible(autoMed)
-    self.autoMedPack:SetIsVisible(autoMed)
+    self.autoAmmoPack:SetIsVisible(requestHandle)
+    self.autoMedPack:SetIsVisible(requestHandle)
     
     local teamInfo = GetTeamInfoEntity(player:GetTeamNumber())
     if teamInfo then

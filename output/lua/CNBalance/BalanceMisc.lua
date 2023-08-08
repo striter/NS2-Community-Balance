@@ -120,7 +120,7 @@ kJetpackLifeRegenHPS = 6   kJetpackLifeSustainHPS = 12
 kAutoMedCooldown = 6    kAutoMedPRes = 0.8
 kAutoAmmoCooldown = 40  kAutoAmmoPRes = 1.5
 
-kAutoMistPRes = 1.5
+kAutoMistPRes = 1.5 kAutoMistCooldown = 30
 
 kProwlerFov = 100
 

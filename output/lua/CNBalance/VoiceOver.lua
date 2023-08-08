@@ -9,9 +9,7 @@ local kAlienTauntSounds =
     [kTechId.ReadyRoomEmbryo] = "sound/NS2.fev/alien/common/swarm",
     [kTechId.Prowler] = "sound/NS2.fev/alien/drifter/ordered",
     [kTechId.Vokex] = "sound/NS2.fev/alien/fade/taunt",
-    
 }
-
 
 for _, tauntSound in pairs(kAlienTauntSounds) do
     PrecacheAsset(tauntSound)
@@ -50,5 +48,12 @@ local kAlienMenu =
     [RIGHT_MENU] = { kVoiceId.AlienTaunt, kVoiceId.AlienChuckle }    
 }
 
+local kGorgeMenu = 
+{
+    [LEFT_MENU] = { kVoiceId.AlienRequestMist, kVoiceId.AlienRequestMist, kVoiceId.AlienRequestMist, kVoiceId.Ping },
+    [RIGHT_MENU] = { kVoiceId.AlienTaunt, kVoiceId.AlienChuckle }
+}
+
 kRequestMenus["Prowler"] = kAlienMenu
 kRequestMenus["Vokex"] = kAlienMenu
+kRequestMenus["Gorge"] = kGorgeMenu

@@ -11,16 +11,14 @@ RequestHandleMixin.type = "Request"
 
 RequestHandleMixin.networkVars = {
     timeLastAutoAmmoPack = "private time",
-    timeLastAutoMedPack = "private time",
-    canNutrientMist = "boolean",
+    timeLastPrimaryRequestHandle = "private time",
 }
 
 function RequestHandleMixin:__initmixin()
     PROFILE("RequestHandleMixin:__initmixin")
     local now = Shared.GetTime()
     self.timeLastAutoAmmoPack = now
-    self.timeLastAutoMedPack = now
-    self.canNutrientMist = true
+    self.timeLastPrimaryRequestHandle = now
 end
 
 if Server then
@@ -28,12 +26,12 @@ if Server then
     local kAlertHandleDelay = 0.75
     function RequestHandleMixin:MedSelf()
         local time = Shared.GetTime()
-        if time - self.timeLastAutoMedPack < kAutoMedCooldown then return end
+        if time < self.timeLastPrimaryRequestHandle then return end
 
         if not MedPack.GetIsValidRecipient(self,self) then return end
         if self:GetResources() < kAutoMedPRes then return end
 
-        self.timeLastAutoMedPack = time
+        self.timeLastPrimaryRequestHandle = time + kAutoMedCooldown
         self:AddResources(-kAutoMedPRes)
 
         self:AddHealth(MedPack.kHealth, false, true)
@@ -43,12 +41,12 @@ if Server then
 
     function RequestHandleMixin:AmmoSelf()
         local time = Shared.GetTime()
-        if time - self.timeLastAutoAmmoPack < kAutoAmmoCooldown then return end
+        if time < self.timeLastAutoAmmoPack then return end
 
         if not AmmoPack.GetIsValidRecipient(self,self) then return end
         if self:GetResources() < kAutoAmmoPRes then return end
         self:AddResources(-kAutoAmmoPRes)
-        self.timeLastAutoAmmoPack = time
+        self.timeLastAutoAmmoPack = time + kAutoAmmoCooldown
 
         for i = 0, self:GetNumChildren() - 1 do
             local child = self:GetChildAtIndex(i)
@@ -64,11 +62,13 @@ if Server then
     
     function RequestHandleMixin:MistSelf()
 
-        if not self.canNutrientMist then return end
+        local time = Shared.GetTime()
+        if time < self.timeLastPrimaryRequestHandle  then return end
 
         if self:GetResources() < kAutoMistPRes then return end
-        self:AddResources(-kAutoAmmoPRes)
-        self.canNutrientMist = false
+        Shared.Message("?")
+        self:AddResources(-kAutoMistPRes)
+        self.timeLastPrimaryRequestHandle = time + kAutoMistCooldown
         
         CreateEntity(NutrientMist.kMapName,self:GetOrigin(),self:GetTeamNumber())
     end

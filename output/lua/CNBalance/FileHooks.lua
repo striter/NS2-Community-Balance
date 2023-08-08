@@ -1,6 +1,7 @@
 ModLoader.SetupFileHook("lua/ClientUI.lua", "lua/CNBalance/ClientUI.lua", "replace")
 ModLoader.SetupFileHook("lua/Client.lua", "lua/CNBalance/Client.lua", "post" )
 ModLoader.SetupFileHook("lua/Player_Client.lua", "lua/CNBalance/Player_Client.lua", "post")
+ModLoader.SetupFileHook("lua/VoiceOver.lua", "lua/CNBalance/VoiceOver.lua", "post")
 
 ModLoader.SetupFileHook("lua/Shared.lua", "lua/CNBalance/Shared.lua", "post")
 ModLoader.SetupFileHook("lua/NS2Gamerules.lua", "lua/CNBalance/NS2Gamerules.lua", "post")

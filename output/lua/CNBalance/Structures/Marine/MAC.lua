@@ -81,6 +81,7 @@ MAC.kRepairHealthPerSecond = 50
 MAC.kHealth = kMACHealth
 MAC.kArmor = kMACArmor
 MAC.kMoveSpeed = 6
+MAC.kCombatMoveSpeed = 2
 MAC.kHoverHeight = 0.5
 MAC.kStartDistance = 3
 MAC.kWeldDistance = 2
@@ -533,10 +534,12 @@ end
 
 function MAC:GetMoveSpeed()
 
-    local maxSpeedTable = { maxSpeed = MAC.kMoveSpeed }
+    local moveSpeed = self:GetIsInCombat() and MAC.kCombatMoveSpeed or MAC.kMoveSpeed
+    local maxSpeedTable = { maxSpeed = moveSpeed }
     if self.rolloutSourceFactory then
         maxSpeedTable.maxSpeed = MAC.kRolloutSpeed
     end
+    
     self:ModifyMaxSpeed(maxSpeedTable)
 
     return maxSpeedTable.maxSpeed
@@ -967,6 +970,7 @@ local function UpdateOrders(self, deltaTime)
         local orderTarget = Shared.GetEntity(currentOrder:GetParam())
         local orderLocation = currentOrder:GetLocation()
 
+        
         if currentOrder:GetType() == kTechId.FollowAndWeld then
             orderStatus = self:ProcessFollowAndWeldOrder(deltaTime, orderTarget, orderLocation)
         elseif currentOrder:GetType() == kTechId.Move then

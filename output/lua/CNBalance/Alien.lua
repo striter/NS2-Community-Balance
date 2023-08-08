@@ -1,4 +1,5 @@
 Alien.kBountyThreshold = kBountyClaimMinAlien
+Alien.kBountyDamageReceive = true
 
 function Alien:GetPlayerStatusDesc()
 

@@ -31,8 +31,8 @@ kUpgradedCommandStationHealth = 2000 kUpgradedCommandStationArmor = 2000 kUpgrad
 kCommandStationHealthPerPlayerAdd = 100
 
 --2000   1000
-kPowerPointHealth = 2000  kPowerPointArmor = 1000  kPowerPointPointValue = 10
-kPowerPointHealthPerPlayerAdd = 75
+kPowerPointHealth = 1750  kPowerPointArmor = 1000  kPowerPointPointValue = 10
+kPowerPointHealthPerPlayerAdd = 75  kPowerPointHealthAddOnTechPoint = 750
 
 --2400 1050
 kExtractorHealth = 2400 kExtractorArmor = 1050 kExtractorPointValue = 15

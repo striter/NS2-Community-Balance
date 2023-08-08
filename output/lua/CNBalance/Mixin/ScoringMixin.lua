@@ -11,10 +11,23 @@ function ScoringMixin:__initmixin()
 end
 
 function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint)
-    local bountyScore = self:GetBountyCurrentLife()
-    if bountyScore > 0 and damageTable.damage > 0 then
-        local scalar = bountyScore * (math.floor(bountyScore / kBountyTargetDamageReceiveStep)+ 1) * kBountyDamageReceiveBaseEachStep
-        damageTable.damage = damageTable.damage * (1 + scalar)      --Receive Additional Damage And Die Please
+
+    if(damageTable.damage <= 0) then return end
+    
+    if self.kBountyDamageReceive then
+        local bountyScore = self:GetBountyCurrentLife()
+        if bountyScore > 0 then
+            local scalar = bountyScore * (math.floor(bountyScore / kBountyTargetDamageReceiveStep)+ 1) * kBountyDamageReceiveBaseEachScore
+            damageTable.damage = damageTable.damage * (1 + scalar)      --Receive Additional Damage And Die Please
+        end
+    end
+
+    if attacker.kBountyDamageDecrease then
+        local attackerBounty = attacker:GetBountyCurrentLife()
+        if attackerBounty > 0 then
+            local scalar = attackerBounty * (math.floor(attackerBounty / kBountyTargetDamageDealtStep)+ 1) * kBountyDamageDealtBaseEachScore
+            damageTable.damage = damageTable.damage * math.max(1 - scalar,0)      --Receive Additional Damage And Die Please
+        end
     end
 end
 
