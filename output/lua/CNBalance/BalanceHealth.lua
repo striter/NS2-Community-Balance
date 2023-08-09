@@ -23,6 +23,11 @@ kJetpackHealth = 120    kJetpackArmor = 45   kJetpackArmorPerUpgradeLevel = 25  
 kExosuitHealth = 100    kExosuitArmor = 320  kExosuitArmorPerUpgradeLevel = 30
 kMarinePointValue = 5   kJetpackPointValue = 12   kExosuitPointValue = 20
 
+kMedpackHeal = 25   kMedpackRegen = 25
+kMedpackHealWhenRegening = 25 kMedpackRegenWhenRegening = 0
+kMedpackPickupDelay = 0.45
+kMarineRegenerationHeal = 25 --Amount of hp per second
+
 kMineHealth = 30    kMineArmor = 9    kMinePointValue = 5
 
 --2000 -1800
@@ -75,6 +80,20 @@ kExplosiveSelfDamage =
     ["ClusterFragment"] = 5,
     ["PulseGrenade"] = 40,
     ["Mine"] = 80,
+}
+
+kJetpackDamageReduction = {
+    ["VolleyRappel"] = 1.5,
+    ["Spike"] = 1.25,
+    ["Spit"] = 2,
+    ["LerkBite"] = 1.25,
+}
+
+kExoDamageReduction = {
+    ["VolleyRappel"] = 0.8,
+    --["Spike"] = 0.7,
+    ["BiteLeap"] = 0.8, 
+    --["Spit"] = 1,
 }
 
 --Alien

@@ -1,14 +1,21 @@
 
 
-MedPack.kRegen = kMarineRegenerationHeal
+MedPack.kRegen = kMedpackRegen
+MedPack.kMedpackRegenWhenHealing = kMedpackRegenWhenHealing
 
 function MedPack:OnTouch(recipient)
 
     if not recipient.timeLastMedpack or recipient.timeLastMedpack + self.kPickupDelay <= Shared.GetTime() then
 
         local oldHealth = recipient:GetHealth()
-        recipient:AddHealth(MedPack.kHealth, false, true)
-        recipient:AddRegeneration(MedPack.kRegen)
+        if recipient:GetRegeneratingHealth() <= 0 then
+            recipient:AddHealth(MedPack.kHealth, false, true)
+            recipient:AddRegeneration(MedPack.kRegen)
+        else
+            recipient:AddHealth(kMedpackHealWhenRegening, false, true)
+            recipient:AddRegeneration(kMedpackRegenWhenRegening)
+        end
+
         recipient.timeLastMedpack = Shared.GetTime()
 
         self:TriggerEffects("medpack_pickup", { effecthostcoords = self:GetCoords() })

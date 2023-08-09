@@ -151,7 +151,7 @@ kExtractorCost = 10
 kPoweredExtractorCost = 30
 
 -- Standard Supply
-kDragonBreathResearchCost = 25
+kDragonBreathResearchCost = 30
 kDragonBreathResearchTime = 60
 kLightMachineGunUpgradeCost = nil --20
 kLightMachineGunUpgradeTime = nil --90
@@ -161,7 +161,7 @@ kCannonTechResearchTime = 90
 --Explosive Supply
 kMinesUpgradeResearchCost = nil--10
 kMinesUpgradeResearchTime = nil--60
-kGrenadeLauncherUpgradeResearchCost = 20
+kGrenadeLauncherUpgradeResearchCost = 25
 kGrenadeLauncherUpgradeResearchTime = 75
 kMACEMPBlastResearchCost = 15
 kMACEMPBlastResearchTime = 60
@@ -338,8 +338,8 @@ kJetpackCost = 25
 kJetpackDropCost = 18
 kJetpackDropCooldown = 0
 
-kDualExosuitCost = 55
-kDualRailgunExosuitCost = 55
+kDualExosuitCost = 60
+kDualRailgunExosuitCost = 60
 kDualExosuitDropCost = 40
 kExosuitCost = kDualExosuitCost   --Used in some ways... (newcomer protection from )
 

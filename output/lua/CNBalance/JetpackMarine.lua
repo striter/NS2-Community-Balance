@@ -61,6 +61,13 @@ if Server then
     end
 end
 
+function JetpackMarine:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
+    local reduction = kJetpackDamageReduction[doer:GetClassName()]
+    if reduction then
+        damageTable.damage = damageTable.damage * reduction
+        return
+    end
+end
 --function JetpackMarine:OnWebbed()   --突然离世
 --    if not self:GetIsOnGround() then
 --        self:SetStun(kDisruptMarineTime)

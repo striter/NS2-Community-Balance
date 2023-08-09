@@ -49,3 +49,11 @@ function Exo:GetExoVariantOverride(variant)
     end
     return variant
 end
+
+function Exo:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
+    local reduction = kExoDamageReduction[doer:GetClassName()]
+    if reduction then
+        damageTable.damage = damageTable.damage * reduction
+        return
+    end
+end
