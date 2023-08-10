@@ -61,7 +61,7 @@ kBountyClaimMinSkulk = 7 kBountyClaimMinAlien = 10  kBountyClaimMinOnos = 14
 kPResPerBountyClaimAsMarine = 0.4  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 20
 --0-10%,20%-40%,40%-80%, increase/deccrease its damage receive by steps.
 kBountyTargetDamageReceiveStep = 18  kBountyDamageReceiveBaseEachScore = (0.1 / kBountyTargetDamageReceiveStep)
-kBountyTargetDamageDealtStep = 10 kBountyDamageDealtBaseEachScore = (0.1 / kBountyTargetDamageDealtStep)        --Usually for marines&jetpacks, should be lower
+kBountyTargetDamageDealtStep = 8 kBountyDamageDealtBaseEachScore = (0.1 / kBountyTargetDamageDealtStep)        --Usually for marines&jetpacks, should be lower
 
 --Toy for marine commander (remove all marines passive income, harsh one)
 kMilitaryProtocolResearchCost = 10
@@ -338,8 +338,8 @@ kJetpackCost = 25
 kJetpackDropCost = 18
 kJetpackDropCooldown = 0
 
-kDualExosuitCost = 60
-kDualRailgunExosuitCost = 60
+kDualExosuitCost = 55
+kDualRailgunExosuitCost = 55
 kDualExosuitDropCost = 40
 kExosuitCost = kDualExosuitCost   --Used in some ways... (newcomer protection from )
 

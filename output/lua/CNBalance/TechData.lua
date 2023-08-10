@@ -609,6 +609,21 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "XENOCIDE_FUEL_TOOLTIP",
         [kTechDataResearchName] = "XENOCIDE_FUEL",
     })
+    
+    --Lerk
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.Spores,
+        [kTechDataCategory] = kTechId.Lerk,
+        [kTechDataDisplayName] = "SPORES",
+        [kTechDataMapName] = Spores.kMapName,
+        [kTechDataCostKey] = kSporesResearchCost,
+        [kTechDataResearchTimeKey] = kSporesResearchTime,
+        [kTechDataMaxHealth] = kSporeCloudHealth,
+        [kTechDataTooltipInfo] = "SPORES_TOOLTIP",
+        [kTechDataResearchName] = "SPORES",
+    })
+    
     --Prowler
 
     table.insert(techData, {

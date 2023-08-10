@@ -20,22 +20,22 @@ function Welder:PerformWeld(player)
     local viewAngles = player:GetViewAngles()
     local viewCoords = viewAngles:GetCoords()
     local startPoint = player:GetEyePos()
-    local endPoint = startPoint + viewCoords.zAxis * self:GetRange()
+    endPoint = startPoint + viewCoords.zAxis * self:GetRange()
+    local timeSinceLastWeld = self.welding and Shared.GetTime() - self.timeLastWeld or 0
 
     -- Filter ourself out of the trace so that we don't hit ourselves.
     -- Filter also clogs out for the ray check because they ray "detection" box is somehow way bigger than the visual model
-    local filter = EntityFilterTwo(player, self)
-    local trace = Shared.TraceRay(startPoint, endPoint, CollisionRep.Default, PhysicsMask.AllButPCsAndRagdolls, filter)
 
     if Server then
         local spores = GetEntitiesWithinRange("SporeCloud", endPoint, kSporesDustCloudRadius)
-
         for i = 1, #spores do
             local spore = spores[i]
-            self:TriggerEffects("burn_spore", { effecthostcoords = Coords.GetTranslation(spore:GetOrigin()) } )
-            DestroyEntity(spore)
+            self:DoDamage(kWelderSporeDamagePerSecond * timeSinceLastWeld, spore, endPoint, attackDirection)
         end
     end
+
+    local filter = EntityFilterTwo(player, self)
+    local trace = Shared.TraceRay( startPoint + viewCoords.zAxis * 1.2, endPoint, CollisionRep.Default, PhysicsMask.AllButPCsAndRagdolls, filter)
     
     -- Perform a Ray trace first, otherwise fallback to a regular melee capsule
     if (trace.entity) then
@@ -49,8 +49,6 @@ function Welder:PerformWeld(player)
     end
 
     if didHit and target and HasMixin(target, "Live") then
-
-        local timeSinceLastWeld = self.welding and Shared.GetTime() - self.timeLastWeld or 0
 
         if GetAreEnemies(player, target) then
             self:DoDamage(kWelderDamagePerSecond * timeSinceLastWeld, target, endPoint, attackDirection)

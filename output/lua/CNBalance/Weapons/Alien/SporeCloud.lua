@@ -16,6 +16,8 @@ Script.Load("lua/DamageMixin.lua")
 Script.Load("lua/EffectsMixin.lua")
 Script.Load("lua/EntityChangeMixin.lua")
 Script.Load("lua/LOSMixin.lua")
+Script.Load("lua/BiomassHealthMixin.lua")
+
 
 class 'SporeCloud' (Entity)
 
@@ -52,6 +54,7 @@ local networkVars =
     sporeMineDust = "boolean",
 }
 
+AddMixinNetworkVars(LiveMixin, networkVars)
 AddMixinNetworkVars(TeamMixin, networkVars)
 
 function SporeCloud:OnCreate()
@@ -61,9 +64,11 @@ function SporeCloud:OnCreate()
     InitMixin(self, TeamMixin)
     InitMixin(self, DamageMixin)
     InitMixin(self, EffectsMixin)
+    InitMixin(self, LiveMixin)
     InitMixin(self, EntityChangeMixin)
     InitMixin(self, LOSMixin)
-
+    InitMixin(self, BiomassHealthMixin)
+    
     if Server then
 
         InitMixin(self, OwnerMixin)
@@ -289,6 +294,25 @@ function SporeCloud:OnUpdate(deltaTime)
 
     end
 
+end
+
+function SporeCloud:GetHealthPerBioMass()
+    return kSporeCloudHealthPerBiomass
+end
+
+if Server then
+
+    function SporeCloud:OnKill()
+        self:TriggerEffects("burn_spore", { effecthostcoords = Coords.GetTranslation(self:GetOrigin()) } )
+    end
+
+    function SporeCloud:GetDestroyOnKill()
+        return true
+    end
+
+    function SporeCloud:GetSendDeathMessageOverride()
+        return false
+    end
 end
 
 if Client then

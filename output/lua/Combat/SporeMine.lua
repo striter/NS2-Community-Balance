@@ -271,7 +271,6 @@ if Server then
         if self:GetIsBuilt() then
             local castSpore = GetIsTechUnlocked(self,kTechId.Spores)
             
-            local targetPoint
             local otherTeam = GetEnemyTeamNumber(self:GetTeamNumber())
             local allEnemies = GetEntitiesForTeamWithinRange("Player", otherTeam, self:GetOrigin(), castSpore and kSporeMineCloudCastRadius or kSporeMineDamageRadius)
             local enemies = {}
@@ -282,35 +281,39 @@ if Server then
                 end
             end
 
-            Shared.SortEntitiesByDistance(self:GetOrigin(), enemies)
-            for _, ent in ipairs(enemies) do
-                local startPoint = ent:GetEngagementPoint()
-                local endPoint = self:GetOrigin() + self:GetCoords().yAxis * (kCollisionRadius - 0.1)
-                local filter = self:DetectThreatFilter()
 
-                local trace = Shared.TraceRay(startPoint, endPoint, CollisionRep.Move, PhysicsMask.Bullets, filter)
-                local visibleTarget = trace.entity == self
-
-                -- If a clog is blocking our LOS, check from our origin instead of our model top
-                if not visibleTarget and GetIsPointInsideClogs(endPoint) then
-                    -- Log("%s is inside clog, doing origin traceray", self)
-                    endPoint = self:GetOrigin()
-                    trace = Shared.TraceRay(startPoint, endPoint, CollisionRep.Move, PhysicsMask.Bullets, filter)
-                end
-
-                if visibleTarget and trace.fraction < 1 then
-                    targetPoint = startPoint
-                    break
-                end
-            end
 
             if castSpore then
                 local time = Shared.GetTime()
                 if  time - self.timeLastSpore > kSporeMineCloudCastInterval then
                     self.timeLastSpore = time 
-                    self:CastSpore(targetPoint)
+                    self:CastSpore(nil)
                 end
             else
+
+                local targetPoint
+                Shared.SortEntitiesByDistance(self:GetOrigin(), enemies)
+                for _, ent in ipairs(enemies) do
+                    local startPoint = ent:GetEngagementPoint()
+                    local endPoint = self:GetOrigin() + self:GetCoords().yAxis * (kCollisionRadius - 0.1)
+                    local filter = self:DetectThreatFilter()
+
+                    local trace = Shared.TraceRay(startPoint, endPoint, CollisionRep.Move, PhysicsMask.Bullets, filter)
+                    local visibleTarget = trace.entity == self
+
+                    -- If a clog is blocking our LOS, check from our origin instead of our model top
+                    if not visibleTarget and GetIsPointInsideClogs(endPoint) then
+                        -- Log("%s is inside clog, doing origin traceray", self)
+                        endPoint = self:GetOrigin()
+                        trace = Shared.TraceRay(startPoint, endPoint, CollisionRep.Move, PhysicsMask.Bullets, filter)
+                    end
+
+                    if visibleTarget and trace.fraction < 1 then
+                        targetPoint = startPoint
+                        break
+                    end
+                end
+                
                 if targetPoint then
                     self:Explode()
                 end
