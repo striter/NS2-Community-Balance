@@ -50,7 +50,7 @@ local kAlienMenu =
 
 local kGorgeMenu = 
 {
-    [LEFT_MENU] = { kVoiceId.AlienRequestMist, kVoiceId.AlienRequestMist, kVoiceId.AlienRequestMist, kVoiceId.Ping },
+    [LEFT_MENU] = { kVoiceId.AlienRequestMist,  kVoiceId.AlienRequestDrifter, kVoiceId.AlienRequestStructure, kVoiceId.Ping },
     [RIGHT_MENU] = { kVoiceId.AlienTaunt, kVoiceId.AlienChuckle }
 }
 

@@ -142,6 +142,10 @@ function SporeCloud:GetDamageType()
     return kDamageType.Gas
 end
 
+function SporeCloud:GetModelOrigin()
+    return self:GetOrigin()
+end
+
 function SporeCloud:GetDeathIconIndex()
     return kDeathMessageIcon.SporeCloud
 end
