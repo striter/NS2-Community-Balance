@@ -1,0 +1,5 @@
+shader = "shaders/ViewModel_emissive.surface_shader"
+albedoMap = "materials/dev/black.dds"
+normalMap = "materials/dev/dev_normal.dds"
+emissiveMap = "*ammo_displayLightMachineGun"
+specularMap= "materials/dev/black.dds"

@@ -66,7 +66,6 @@ if Server then
         if time < self.timeLastPrimaryRequestHandle  then return end
 
         if self:GetResources() < kAutoMistPRes then return end
-        Shared.Message("?")
         self:AddResources(-kAutoMistPRes)
         self.timeLastPrimaryRequestHandle = time + kAutoMistCooldown
         

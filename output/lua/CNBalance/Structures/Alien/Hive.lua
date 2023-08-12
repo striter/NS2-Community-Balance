@@ -584,6 +584,7 @@ if Server then
         if builtEntity ~= nil then
             builtEntity:SetOwner(comm)
             builtEntity.hatchCallBack = function(drifter)
+                if self:GetIsDestroyed() then return end
                 self.spawnedDrifterID = drifter:GetId()
             end 
         end
@@ -603,16 +604,17 @@ if Server then
         
         baseOnUpdate(self,deltaTime)
 
-        if not GetGamerules():GetGameStarted() then return end
-        
-        local comm = self:GetTeam():GetCommander()
-        if not comm then return end
-
         local time = Shared.GetTime()
         if self.freeDrifterCheck and time - self.freeDrifterCheck < 1 then return end
         self.freeDrifterCheck = time
 
+        if not GetGamerules():GetGameStarted() then return end
+
+        local comm = self:GetTeam():GetCommander()
+        if not comm then return end
+
         if not GetIsUnitActive(self) then return end
+        if self:GetHealthScalar() < 0.8 then return end
         
         if self.spawnedDrifterID ~= Entity.invalidId then
             local drifter = Shared.GetEntity(self.spawnedDrifterID)

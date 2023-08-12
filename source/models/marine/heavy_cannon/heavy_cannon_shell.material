@@ -1,0 +1,4 @@
+shader = "shaders/Model.surface_shader"
+albedoMap = "models/marine/heavy_cannon/heavy_cannon_shell.dds"
+//normalMap = "models/marine/heavy_cannon/heavy_cannon_shell.dds"
+//specularMap = "models/marine/heavy_cannon/heavy_cannon_shell.dds"
