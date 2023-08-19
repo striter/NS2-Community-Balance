@@ -92,6 +92,7 @@ kJetpackDamageReduction = {
 kExoDamageReduction = {
     ["VolleyRappel"] = 0.75,
     ["Spike"] = 0.75,
+    ["Swipe"] = 0.9375,     --To 75
     --["BiteLeap"] = 0.8, 
     --["Spit"] = 1,
 }

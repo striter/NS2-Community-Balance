@@ -25,7 +25,7 @@ function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType,
     if attacker.kBountyDamageDecrease then
         local attackerBounty = attacker:GetBountyCurrentLife()
         if attackerBounty > 0 then
-            local scalar = attackerBounty * (math.floor(attackerBounty / kBountyTargetDamageDealtStep)+ 1) * kBountyDamageDealtBaseEachScore
+            local scalar = attackerBounty * kBountyDamageDealtBaseEachScore
             damageTable.damage = damageTable.damage * math.max(1 - scalar,0)      --Receive Additional Damage And Die Please
         end
     end

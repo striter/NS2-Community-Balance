@@ -1,4 +1,5 @@
 Marine.kBountyThreshold = kBountyClaimMinMarine
+Marine.kBountyDamageReceive = true
 Marine.kBountyDamageDecrease = true
 Marine.kPickupDelay = kMedpackPickupDelay
 
