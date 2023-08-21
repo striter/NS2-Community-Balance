@@ -240,7 +240,7 @@ end
 
 function MarineTeam:CollectAggressivePlayerResources(player,amount)
     amount = amount * (militaryProtocolTechNode:GetResearched() and kMilitaryProtocolAggressivePersonalResourcesScalar or 1)
-    player:AddResources(amount)
+    player:AddResources(amount,true)
     return amount
 end
 

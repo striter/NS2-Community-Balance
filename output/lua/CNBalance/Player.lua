@@ -89,7 +89,7 @@ if Server then
 	end
 
 	
-	function Player:AddResources(amount)
+	function Player:AddResources(amount,isAggressivePlay)
 
 		local resReward = 0
 
@@ -97,7 +97,11 @@ if Server then
 
 			if amount > 0 then
 				local efficiency = GetPassiveResourceEfficiency(Shared.GetTime() - GetGamerules():GetGameStartTime())
-				amount = amount * efficiency
+				if isAggressivePlay then
+					amount = efficiency * (2-efficiency)
+				else
+					amount = amount * efficiency
+				end
 			end
 				
 			resReward = math.min(amount, kMaxPersonalResources - self:GetResources())
