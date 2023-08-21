@@ -27,7 +27,13 @@ function Team:PutPlayerInRespawnQueue(player)
         
         --Extent the respawn time to prevent "bie bie le"
         if self.GetTeamType then
-            extraTime = extraTime + GetRespawnTimeExtend(self:GetTeamType(),Shared.GetTime() - GetGamerules():GetGameStartTime())
+            local gameLength = Shared.GetTime() - GetGamerules():GetGameStartTime()
+            local costResources = GetDeathPlayerResources(gameLength)
+            if player:GetResources() >= costResources then
+                player:AddResources(-costResources)
+            else
+                extraTime = extraTime + GetRespawnTimeExtend(self:GetTeamType(),gameLength)
+            end
         end
 
         if player.spawnReductionTime then

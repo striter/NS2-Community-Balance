@@ -1,14 +1,15 @@
 
 if kTranslateMessage then
     kTranslateMessage["GAME_LENGTH_TEAM1"] = "站点清理 [%s:%s]"
-    kTranslateMessage["RESPAWN_EXTEND_TEAM1"] = "增援耗时 [%i秒]"
+    kTranslateMessage["RESPAWN_EXTEND_TEAM1"] = "增援消耗 [%.1f*/%i秒]"
+    
     kTranslateMessage["TEAM_RESOURCES_EFFICIENCY1"] = "资源效率 [%i%%]"
     kTranslateMessage["TEAM_BOUNTY1"] = "资源储备 [%i*]"
     kTranslateMessage["NEXT_SPAWN_IN_TEAM1"] = "等待增援:%i"
     kTranslateMessage["WAITING_SPAWN_TEAM1"] = "等待传送中..."
     
     kTranslateMessage["GAME_LENGTH_TEAM2"] = "区域侵入中 [%s:%s]"
-    kTranslateMessage["RESPAWN_EXTEND_TEAM2"] = "生物质重构 [%i秒]"
+    kTranslateMessage["RESPAWN_EXTEND_TEAM2"] = "生物质重构[%.1f*/%i秒]"
     kTranslateMessage["TEAM_RESOURCES_EFFICIENCY2"] = "资源收集率 [%i%%]"
     kTranslateMessage["TEAM_BOUNTY2"] = "资源块增殖 [%i*]"
     kTranslateMessage["NEXT_SPAWN_IN_TEAM2"] = "生物质重构:%i"
@@ -162,14 +163,14 @@ end
 
 if kLocales then
     kLocales["GAME_LENGTH_TEAM1"] = "Cleaning:[%s:%s]"
-    kLocales["RESPAWN_EXTEND_TEAM1"] = "Reinforce:[%is]"
+    kLocales["RESPAWN_EXTEND_TEAM1"] = "Reinforce:[%.1f/%is]"
     kLocales["TEAM_RESOURCES_EFFICIENCY1"] = "Res-Efficiency [%i%%]"
     kLocales["TEAM_BOUNTY1"] = "Res-Redispatch[%s*]"
     kLocales["NEXT_SPAWN_IN_TEAM1"] = "Reinforcing:%i"
     kLocales["WAITING_SPAWN_TEAM1"] = "Teleport Awaiting..."
     
     kLocales["GAME_LENGTH_TEAM2"] = "Infesting:[%s:%s]"
-    kLocales["RESPAWN_EXTEND_TEAM2"] = "Reformation:[%is]"
+    kLocales["RESPAWN_EXTEND_TEAM2"] = "Reformation:[%.1f/%is]"
     kLocales["TEAM_RESOURCES_EFFICIENCY2"] = "Res-Efficiency [%i%%]"
     kLocales["TEAM_BOUNTY2"] = "Res-Reproduce:[%s*]"
     kLocales["NEXT_SPAWN_IN_TEAM2"] = "Biomass Reformation:%i"
