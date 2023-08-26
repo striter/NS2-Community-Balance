@@ -32,7 +32,8 @@ AddMixinNetworkVars(StompMixin, networkVars)
 local function UpdateDevour(self)
 
     local onos = self:GetParent()    
-    if onos and not onos:GetIsAlive() then
+    
+    if onos and (not onos:isa("Onos") or not onos:GetIsAlive()) then
     
         self:ClearPlayer(true)
         return false

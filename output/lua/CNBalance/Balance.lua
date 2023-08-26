@@ -15,7 +15,7 @@ kTechDataPersonalResOnKill = {
     --Marines
     [kTechId.Extractor] = 2.5, [kTechId.PoweredExtractor] = 4,
     [kTechId.RoboticsFactory] = 2.5, [kTechId.ARCRoboticsFactory] = 2.5,
-    [kTechId.PowerPoint] = 1,
+    [kTechId.PowerPoint] = 0.5,
     [kTechId.Armory] = 1,[kTechId.Observatory] = 2.5, [kTechId.PhaseGate] = 4,
     [kTechId.CommandStation] = 10, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [ kTechId.ElectronicStation ] = 15,
     [kTechId.Mine] = 0.2, [kTechId.InfantryPortal] = 2, [kTechId.MarineSentry] = 0.8,   --PPVE

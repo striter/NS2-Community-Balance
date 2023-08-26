@@ -85,14 +85,15 @@ kExplosiveSelfDamage =
 kJetpackDamageReduction = {
     ["VolleyRappel"] = 1.5,
     ["Spike"] = 1.25,
-    ["Spit"] = 2,
+    ["Spit"] = 1.5,
     ["LerkBite"] = 1.25,
+    ["Parasite"] = 2,
 }
 
 kExoDamageReduction = {
     ["VolleyRappel"] = 0.75,
     ["Spike"] = 0.75,
-    ["Swipe"] = 0.9375,     --To 75
+    ["SwipeBlink"] = 0.9375,     --To 75
     --["BiteLeap"] = 0.8, 
     --["Spit"] = 1,
 }
@@ -133,8 +134,8 @@ kFadeDamageReduction = {
 kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 25
 kOnosBoneShieldDefaultReduction = 0.2
 kOnosBoneShieldDamageReduction = {
-    ["HeavyMachineGun"] = 0.33,
-    ["Minigun"] = 0.33,
+    ["HeavyMachineGun"] = 0.25,
+    ["Minigun"] = 0.3,
     ["Railgun"] = 0,
 }
 

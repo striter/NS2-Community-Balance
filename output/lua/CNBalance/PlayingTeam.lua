@@ -194,11 +194,12 @@ function PlayingTeam:CollectTeamResources(teamRes,playerRes)
 end
 
 function PlayingTeam:GetRefundBase()
-    local enemyTeam = GetGamerules():GetTeam(GetEnemyTeamNumber(self:GetTeamType()))
-    if enemyTeam then
-        return math.max((enemyTeam:GetTotalTeamResources() or 0) - (self:GetTotalTeamResources() or 0),0)
-    end
     return 0
+    --local enemyTeam = GetGamerules():GetTeam(GetEnemyTeamNumber(self:GetTeamType()))
+    --if enemyTeam then
+    --    return math.max((enemyTeam:GetTotalTeamResources() or 0) - (self:GetTotalTeamResources() or 0),0)
+    --end
+    --return 0
 end
 
 local oldGetIsResearchRelevant = debug.getupvaluex(PlayingTeam.OnResearchComplete, "GetIsResearchRelevant")

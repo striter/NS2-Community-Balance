@@ -1,6 +1,6 @@
 Marine.kBountyThreshold = kBountyClaimMinMarine
 Marine.kBountyDamageReceive = true
-Marine.kBountyDamageDecrease = true
+--Marine.kBountyDamageDecrease = true
 Marine.kPickupDelay = kMedpackPickupDelay
 
 Script.Load("lua/CNBalance/Mixin/RequestHandleMixin.lua")

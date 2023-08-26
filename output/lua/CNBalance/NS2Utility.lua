@@ -168,34 +168,34 @@ function PlayerUI_GetGameTimeString()
     local minutes = math.floor(gameTime / 60)
     local seconds = math.floor(gameTime % 60)
     local team = PlayerUI_GetTeamType()
-    local appender = team == kTeam1Index and " " or "\n"
-    local gameTimeString = "" --string.format(Locale.ResolveString(string.format("GAME_LENGTH_TEAM%i",team)), minutes, seconds)
+    --local appender = team == kTeam1Index and " " or "\n"
+    local gameTimeString = string.format(Locale.ResolveString(string.format("GAME_LENGTH_TEAM%i",team)), minutes, seconds)
     
-    local respawnDuration = 0
+    --local respawnDuration = 0
 
-    if team == kMarineTeamType then
-        respawnDuration = respawnDuration + kMarineRespawnTime
-    elseif team == kAlienTeamType then
-        respawnDuration = respawnDuration + kAlienSpawnTime
-    end
+    --if team == kMarineTeamType then
+    --    respawnDuration = respawnDuration + kMarineRespawnTime
+    --elseif team == kAlienTeamType then
+    --    respawnDuration = respawnDuration + kAlienSpawnTime
+    --end
     
-    local respawnExtend = GetRespawnTimeExtend(team,gameTime)
-    respawnDuration = respawnDuration + respawnExtend
+    --local respawnExtend = GetRespawnTimeExtend(team,gameTime)
+    --respawnDuration = respawnDuration + respawnExtend
     
     --local respawnCost = GetDeathPlayerResources(gameTime)
-    --if respawnCost > 0.1 and respawnDuration > 1 then
+    --if respawnDuration > 1 and respawnCost > 0.1 then
     --    gameTimeString = gameTimeString .. string.format(appender.. Locale.ResolveString(string.format("RESPAWN_EXTEND_TEAM%i",team)), respawnCost,respawnDuration)
     --end
     
-    local refundBase = GetTeamResourceRefundBase(team)
-    if refundBase > kTeamResourceRefundBase then
-        gameTimeString = gameTimeString .. string.format(appender.. Locale.ResolveString(string.format("TEAM_BOUNTY%i",team)),refundBase - kTeamResourceRefundBase)
-    end
-    
-    local efficiency = GetPassiveResourceEfficiency(gameTime)
-    if efficiency < 0.99 then
-        gameTimeString = gameTimeString .. string.format(appender.. Locale.ResolveString(string.format("TEAM_RESOURCES_EFFICIENCY%i",team)),efficiency*100)
-    end
+    --local refundBase = GetTeamResourceRefundBase(team)
+    --if refundBase > kTeamResourceRefundBase then
+    --    gameTimeString = gameTimeString .. string.format(appender.. Locale.ResolveString(string.format("TEAM_BOUNTY%i",team)),refundBase - kTeamResourceRefundBase)
+    --end
+    --
+    --local efficiency = GetPassiveResourceEfficiency(gameTime)
+    --if efficiency < 0.99 then
+    --    gameTimeString = gameTimeString .. string.format(appender.. Locale.ResolveString(string.format("TEAM_RESOURCES_EFFICIENCY%i",team)),efficiency*100)
+    --end
     
     return gameTimeString
 end
