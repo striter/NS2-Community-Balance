@@ -17,6 +17,7 @@ if Server then
 
         local techID = self:GetTechId()
         local pResReward = kTechDataPersonalResOnKill[techID] or 0
+        --Shared.Message(tostring(pResReward))
 
         if attacker and GetAreEnemies(self, attacker) then -- pve kills count
             if selfIsPlayer and attacker:isa("Player") then
@@ -28,7 +29,7 @@ if Server then
                 pResReward = pResReward + team:OnTeamKill(techID,selfIsPlayer and self:ClaimBounty() or 0,true)
             end
         end
-        
+
         -- award partial res and score to players who assisted
         for _, attackerId in ipairs(self.damagePoints.attackers) do
 

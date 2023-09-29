@@ -221,17 +221,12 @@ end
 
 function MarineTeam:OnTeamKill(techId, bountyScore)
     if militaryProtocolTechNode:GetResearched() then
-        local militaryRefundPool = self.militaryProtocolResources
-        if militaryRefundPool > 0 then
-            local baseRefund = kMilitaryProtocolTeamResourcesPerKill[techId] or 0
-            baseRefund = baseRefund * math.floor(militaryRefundPool / 100 + 1)
-            baseRefund = baseRefund + bountyScore
+        local baseRefund = kMilitaryProtocolTeamResourcesPerKill[techId] or 0
+        baseRefund = baseRefund + bountyScore * kMilitaryProtocolTResPerBountyClaim
 
-            if baseRefund > 0 then
-                local refund = math.min(militaryRefundPool, baseRefund)
-                self:AddTeamResources(refund )
-                self.militaryProtocolResources = self.militaryProtocolResources - refund
-            end
+        if baseRefund > 0 then
+            self:AddTeamResources(baseRefund )
+            self.militaryProtocolResources = self.militaryProtocolResources - baseRefund
         end
     end
 
@@ -245,26 +240,12 @@ function MarineTeam:CollectAggressivePlayerResources(player,amount)
 end
 
 function MarineTeam:GetResourcesPerRefund()
-    if militaryProtocolTechNode:GetResearched() then
-        return 1 + (GetPlayersAboveLimit(self:GetTeamNumber()) * 0.1), 0       --well then
-    end
-    
     return 1.25,0.05
 end
-
 
 function MarineTeam:CollectTeamResources(teamRes,playerRes)
     if militaryProtocolTechNode:GetResearched() then
         playerRes = 0   --No player res now
-
-        local teamResFactor = kMilitaryProtocolBaseRefundAdditive
-        for techId,scalar in pairs(kMilitaryProtocolPassiveTeamResourceResearchesScalar) do
-            if self.techTree:GetHasTech(techId) then
-                teamResFactor = teamResFactor + scalar
-            end
-        end
-        teamResFactor = teamResFactor + GetPlayersAboveLimit(self:GetTeamNumber()) * kMilitaryProtocolResourcesScalarPlayerAboveLimit
-        self.militaryProtocolResources = math.min(self.militaryProtocolResources + teamRes * teamResFactor,512)
     end
 
     PlayingTeam.CollectTeamResources(self,teamRes,playerRes)
@@ -274,7 +255,7 @@ function MarineTeam:GetResearchTimeFactor()
     return militaryProtocolTechNode:GetResearched() and kMilitaryProtocolResearchDurationMultiply or 1
 end
 
-function MarineTeam:HandleManualAlert()            --He can handle it himself
+function MarineTeam:ShouldHandleManualAlert()            --He can handle it himself
     return not militaryProtocolTechNode:GetResearched()
 end
 

@@ -64,28 +64,18 @@ kBountyTargetDamageReceiveStep = 18  kBountyDamageReceiveBaseEachScore = (0.1 / 
 kBountyDamageDealtBaseEachScore = 0.1 / 6 --Usually for marines&jetpacks, should be lower?
 
 --Toy for marine commander (remove all marines passive income, harsh one)
-kMilitaryProtocolResearchCost = 10
-kMilitaryProtocolResearchTime = 20
+kMilitaryProtocolResearchCost = 5
+kMilitaryProtocolResearchTime = 15
 kMilitaryProtocolResearchDurationMultiply = 1.2     --1.33?
 kMilitaryProtocolAggressivePersonalResourcesScalar = 2      --They don't need too much pres to buy defensive or grenades/welders (and they can shared it tbh)
 kMilitaryProtocolTResPerBountyClaim = 0.5   --Bounty score, don't give them pres, its doomed
 kMilitaryProtocolTeamResourcesPerKill = {          --Replaced refund system
-    [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2,
+    [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.Drifter] = 1,
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
-    [kTechId.Skulk] = 1, [kTechId.Gorge] = 2,[kTechId.Prowler] = 2, [kTechId.Lerk] = 2, [kTechId.Fade] = 3, [kTechId.Onos] = 3,
+    [kTechId.Skulk] = 2, [kTechId.Gorge] = 3,[kTechId.Prowler] = 3, [kTechId.Lerk] = 3, [kTechId.Fade] = 5, [kTechId.Onos] = 8,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
     [kTechId.Hive] = 10, [kTechId.ShiftHive] = 15, [kTechId.CragHive] = 15, [kTechId.ShadeHive] = 15,
 }
-
-kMilitaryProtocolBaseRefundAdditive = 1
-kMilitaryProtocolPassiveTeamResourceResearchesScalar = {
-    [kTechId.MinesTech] = 0.1, 
-    [kTechId.ShotgunTech] = 0.1, 
-    [kTechId.AdvancedArmory] = 0.2,
-    [kTechId.JetpackTech] = 0.1, 
-    [kTechId.ExosuitTech] = 0.2,
-}
-kMilitaryProtocolResourcesScalarPlayerAboveLimit = 0.05  --Multiply upon one
 
 kMatchMinPlayers = 10
 kMarineRespawnTime = 9

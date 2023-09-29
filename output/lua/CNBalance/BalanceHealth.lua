@@ -1,16 +1,16 @@
 --(*) In replaced of special condition,usually receive few damage.  |*| Stands for Focus    --MP Stands for military protocol(Disable all weapons, marines should be tougher i mean)
 -- Marine     Skulk      Lerk        Fade        Onos             MP     Skulk      Lerk        Fade        Onos           
 --A    ehp    75|125     60|100      80|128      90               ehp   
---0    160    3(2)|2(1)  3   |2      2|2         2   |1           160    3(2)|2(1)   3   |2      2|2         2   |1    
---1    200    3   |2     4(3)|2      3|2         3(2)|2(1)        210    4(3)|2      4           3           3
---2    240    4   |2     4   |3      3|2         3   |2           260    4   |3(2)   5(4)        4(3)        3
---3    280    4   |3     5   |3      4|3         4(3)|2           310    5(4)|3      6(5)        4           4
+--0    160    3(2)|2(1)  3   |2      2|2         2   |1           170    3(2)|2(1)   3   |2      2|2         2   |1    
+--1    200    3   |2     4(3)|2      3|2         3(2)|2(1)        220    4(3)|2      4           3           3
+--2    240    4   |2     4   |3      3|2         3   |2           250    4   |3(2)   5(4)        4(3)        3
+--3    280    4   |3     5   |3      4|3         4(3)|2           290    5(4)|3      6(5)        4           4
 -- Jetpack
 --A    ehp   
---0    200    3|2        4(3)|2      3   |2      3(2)|2(1)        210    4(3)        4          3           3
---1    240    4|2        5(4)|3(2)   3   |2      3   |2           260    4           5          4           4(3)
---2    280    4|3        5   |3      4   |3      4   |2           310    5           6          5(4)        4
---3    320    5|3        6   |3      5   |3      4   |2           360    6(5)        7(6)       6(5)        5(4)
+--0    210    3|2        4(3)|2      3   |2      3(2)|2(1)        210    4(3)        4          3           3
+--1    260    4|2        5(4)|3(2)   3   |2      3   |2           260    4           5          4           4(3)
+--2    310    4|3        5   |3      4   |3      4   |2           310    5           6          5(4)        4
+--3    360    5|3        6   |3      5   |3      4   |2           360    6(5)        7(6)       6(5)        5(4)
 -- Exosuit    
 --A    ehp
 --0    640    9          11          8           8  
@@ -18,9 +18,9 @@
 --2    760    11         13          10          9                 
 --3    820    12         14          11          10
 
-kMarineHealth = 100    kMarineArmor = 30    kArmorPerUpgradeLevel = 20     kMPMarineArmor = 35    kMPMarineArmorPerUpgradeLevel = 20
-kJetpackHealth = 120    kJetpackArmor = 45   kJetpackArmorPerUpgradeLevel = 25   kMPJetpackMarineArmor = 45   kMPJetpackArmorPerUpgradeLevel = 25  
-kExosuitHealth = 100    kExosuitArmor = 320  kExosuitArmorPerUpgradeLevel = 30
+kMarineHealth = 100    kMarineArmor = 30    kArmorPerUpgradeLevel = 20          kMPMarineArmor = 35    kMPMarineArmorPerUpgradeLevel = 20
+kJetpackHealth = 120    kJetpackArmor = 45   kJetpackArmorPerUpgradeLevel = 25  kMPJetpackMarineArmor = 45   kMPJetpackArmorPerUpgradeLevel = 25  
+kExosuitHealth = 100    kExosuitArmor = 320  kExosuitArmorPerUpgradeLevel = 30  kExosuitMPArmor = 330 kExosuitMPArmorPerUpgradeLevel = 40
 kMarinePointValue = 5   kJetpackPointValue = 12   kExosuitPointValue = 20
 
 kMedpackHeal = 25   kMedpackRegen = 25
@@ -83,9 +83,10 @@ kExplosiveSelfDamage =
 }
 
 kJetpackDamageReduction = {
-    ["VolleyRappel"] = 1.5,
-    ["Spike"] = 1.25,
-    ["Spit"] = 1.5,
+    ["VolleyRappel"] = 2,
+    ["Spike"] = 1.5,
+    ["Spit"] = 2,
+    ["Hydra"] = 2,
     ["LerkBite"] = 1.25,
     ["Parasite"] = 2,
 }

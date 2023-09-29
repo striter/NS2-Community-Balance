@@ -168,24 +168,24 @@ function PlayerUI_GetGameTimeString()
     local minutes = math.floor(gameTime / 60)
     local seconds = math.floor(gameTime % 60)
     local team = PlayerUI_GetTeamType()
-    --local appender = team == kTeam1Index and " " or "\n"
+    local appender = team == kTeam1Index and " " or "\n"
     local gameTimeString = string.format(Locale.ResolveString(string.format("GAME_LENGTH_TEAM%i",team)), minutes, seconds)
     
-    --local respawnDuration = 0
+    local respawnDuration = 0
 
-    --if team == kMarineTeamType then
-    --    respawnDuration = respawnDuration + kMarineRespawnTime
-    --elseif team == kAlienTeamType then
-    --    respawnDuration = respawnDuration + kAlienSpawnTime
-    --end
+    if team == kMarineTeamType then
+        respawnDuration = respawnDuration + kMarineRespawnTime
+    elseif team == kAlienTeamType then
+        respawnDuration = respawnDuration + kAlienSpawnTime
+    end
     
-    --local respawnExtend = GetRespawnTimeExtend(team,gameTime)
-    --respawnDuration = respawnDuration + respawnExtend
+    local respawnExtend = GetRespawnTimeExtend(team,gameTime)
+    respawnDuration = respawnDuration + respawnExtend
     
     --local respawnCost = GetDeathPlayerResources(gameTime)
-    --if respawnDuration > 1 and respawnCost > 0.1 then
-    --    gameTimeString = gameTimeString .. string.format(appender.. Locale.ResolveString(string.format("RESPAWN_EXTEND_TEAM%i",team)), respawnCost,respawnDuration)
-    --end
+    if respawnDuration > 1 then --and respawnCost > 0.1 then
+        gameTimeString = gameTimeString .. string.format(appender.. Locale.ResolveString(string.format("RESPAWN_EXTEND_TEAM%i",team)),respawnDuration)
+    end
     
     --local refundBase = GetTeamResourceRefundBase(team)
     --if refundBase > kTeamResourceRefundBase then

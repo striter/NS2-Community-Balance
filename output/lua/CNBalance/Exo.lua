@@ -50,6 +50,30 @@ function Exo:GetExoVariantOverride(variant)
     return variant
 end
 
+
+function Exo:GetArmorAmount(armorLevels)
+
+    if not armorLevels then
+
+        armorLevels = 0
+
+        if GetHasTech(self, kTechId.Armor3, true) then
+            armorLevels = 3
+        elseif GetHasTech(self, kTechId.Armor2, true) then
+            armorLevels = 2
+        elseif GetHasTech(self, kTechId.Armor1, true) then
+            armorLevels = 1
+        end
+
+    end
+
+    local hasMP = GetHasTech(self,kTechId.MilitaryProtocol)
+    return hasMP and (kExosuitMPArmor + armorLevels * kExosuitMPArmorPerUpgradeLevel  ) 
+                 or (kExosuitArmor + armorLevels *kExosuitArmorPerUpgradeLevel)
+
+end
+
+
 function Exo:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
     local reduction = kExoDamageReduction[doer:GetClassName()]
     if reduction then

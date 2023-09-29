@@ -52,10 +52,7 @@ function CommandStation:GetTechButtons()
         techButtons[1] = kTechId.LifeSustain
         techButtons[2] = kTechId.ArmorRegen
     end
-
-    if Shared.GetCheatsEnabled() then
-        techButtons[4] = kTechId.MilitaryProtocol
-    end
+    techButtons[4] = kTechId.MilitaryProtocol
     
     return techButtons
 end
