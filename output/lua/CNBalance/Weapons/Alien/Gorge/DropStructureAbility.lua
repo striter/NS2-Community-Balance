@@ -16,9 +16,6 @@ Script.Load("lua/CNBalance/Weapons/Alien/Gorge/SporeMineAbility.lua")
 class 'DropStructureAbility' (Ability)
 
 local kMaxStructuresPerType = 32
-local kDropCooldown = 1
-local kEnergyReductionPerBiomass = 0.06
-local kDropCooldownReductionPerBiomass = 0.06
 
 DropStructureAbility.kMapName = "drop_structure_ability"
 
@@ -86,11 +83,11 @@ function DropStructureAbility:GetHasDropCooldown()
 end
 
 function DropStructureAbility:GetDropCoolDown()
-    local cooldown = kDropCooldown
+    local cooldown = kGorgeDropCooldown
     local parent = self:GetParent()
     if parent.GetUpgradeLevel then
         local biomassLevel = math.max(parent:GetUpgradeLevel("bioMassLevel") - 1,0)
-        cooldown = cooldown - biomassLevel * kDropCooldownReductionPerBiomass
+        cooldown = math.max( cooldown - biomassLevel * kGorgeDropCooldownReductionPerBiomass, kGorgeReductionMin)
     end
     return cooldown
 end
@@ -299,7 +296,8 @@ function DropStructureAbility:DropStructure(player, origin, direction, structure
 
         local cost = LookupTechData(structureAbility:GetDropStructureId(), kTechDataCostKey, 0)
         local enoughRes = player:GetResources() >= cost
-        local energyCost = structureAbility:GetEnergyCost()  * (1 - (biomassLevel - 1) * kEnergyReductionPerBiomass)
+        local energyReduction = math.max((1 - (biomassLevel - 1) * kGorgeDropEnergyReductionPerBiomass), kGorgeReductionMin);
+        local energyCost = structureAbility:GetEnergyCost()  * energyReduction
         local enoughEnergy = player:GetEnergy() >= energyCost
 
         if valid and enoughRes and structureAbility:IsAllowed(player) and enoughEnergy and not self:GetHasDropCooldown() then

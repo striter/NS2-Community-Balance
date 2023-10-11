@@ -13,15 +13,14 @@ kPlayerResEachTowerAboveThreshold = 0.05
 --Pres reward for aggressive playing (too many farmers?)
 kTechDataPersonalResOnKill = {
     --Marines
-    [kTechId.Extractor] = 2.5, [kTechId.PoweredExtractor] = 4,
-    [kTechId.RoboticsFactory] = 2.5, [kTechId.ARCRoboticsFactory] = 2.5,
-    [kTechId.PowerPoint] = 0.5,
-    [kTechId.Armory] = 1,[kTechId.Observatory] = 2.5, [kTechId.PhaseGate] = 4,
-    [kTechId.CommandStation] = 10, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [ kTechId.ElectronicStation ] = 15,
-    [kTechId.Mine] = 0.2, [kTechId.InfantryPortal] = 2, [kTechId.MarineSentry] = 0.8,   --PPVE
-    [kTechId.MAC] = 0.2,    [kTechId.SentryBattery] = 4, [kTechId.Sentry] = 1,
-    [kTechId.ARC] = 1,      --CPVE
-    [kTechId.Shotgun] = 1, [kTechId.HeavyMachineGun] = 1, [kTechId.GrenadeLauncher] = 1, [kTechId.Flamethrower] = 1,     --Special one for gorgie
+    [kTechId.PowerPoint] = 0.8,
+    [kTechId.MAC] = 0.3,    [kTechId.SentryBattery] = 4, [kTechId.Sentry] = 1, [kTechId.ARC] = 2.5,      --CPVE
+    [kTechId.Extractor] = 3, [kTechId.PoweredExtractor] = 5,
+    [kTechId.RoboticsFactory] = 3, [kTechId.ARCRoboticsFactory] = 5,
+    [kTechId.Armory] = 3,[kTechId.Observatory] = 3, [kTechId.PhaseGate] = 5,
+    [kTechId.CommandStation] = 12, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [ kTechId.ElectronicStation ] = 15,
+    [kTechId.Mine] = 0.3, [kTechId.InfantryPortal] = 2, [kTechId.MarineSentry] = 1,   --PPVE
+    [kTechId.Shotgun] = 1.5, [kTechId.HeavyMachineGun] = 1.5, [kTechId.GrenadeLauncher] = 1.5, [kTechId.Flamethrower] = 1.5,     --Special one for gorgie
     
     --Aliens
     [kTechId.Egg] = 0.2,[kTechId.Cyst] = 0.2, [kTechId.Drifter] = 0.3,    --[kTechId.DrifterEgg] = 0.5,
@@ -29,7 +28,7 @@ kTechDataPersonalResOnKill = {
     [kTechId.Shell] = 2.5, [kTechId.Veil] = 2.5, [kTechId.Spur] = 2.5,
     [kTechId.Whip] = 1.5, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,       --CPVE
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 4,
-    [kTechId.Hive] = 10, [kTechId.ShiftHive] = 15, [kTechId.CragHive] = 15, [kTechId.ShadeHive] = 15,
+    [kTechId.Hive] = 12  , [kTechId.ShiftHive] = 15, [kTechId.CragHive] = 15, [kTechId.ShadeHive] = 15,
 }
 
 --TRes reward to kill certain structures, snowball rolling
@@ -622,13 +621,18 @@ kBabblerEggDotInterval = 0.4
 kBabblerExplodeAmount = 6
 kBabblerHatchMaxAmount = 15
 kBabblerEggHatchInterval = 2.5
-kBabblerEggHatchRadius = 17
+kBabblerEggHatchRadius = 22
 
 kDrifterHatchTime = 12
 --
-kMarkerCooldown = 5 kMarkerCost = 2
-kRallyCost = 10 kRallyCooldown = 30
+kMarkerCost = 0 kMarkerCooldown = 5 
+kRallyCost = 0 kRallyCooldown = 30
 kRallyRadius = 4
 kRallyResultDuration = 5
 kRallyScoreEachDuration = 2
 kRallyPResEachDuration = 0.2
+
+kGorgeDropCooldown = 1
+kGorgeDropEnergyReductionPerBiomass = 0.09
+kGorgeDropCooldownReductionPerBiomass = 0.09
+kGorgeReductionMin = 0.1
