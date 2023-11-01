@@ -585,6 +585,7 @@ if Server then
             builtEntity:SetOwner(comm)
             builtEntity.hatchCallBack = function(drifter)
                 if self:GetIsDestroyed() then return end
+                drifter.hostHiveID = self:GetId()
                 self.spawnedDrifterID = drifter:GetId()
             end 
         end
@@ -610,8 +611,8 @@ if Server then
 
         if not GetGamerules():GetGameStarted() then return end
 
-        local comm = self:GetTeam():GetCommander()
-        if not comm then return end
+        --local comm = self:GetTeam():GetCommander()
+        --if not comm then return end
 
         if not GetIsUnitActive(self) then return end
         if self:GetHealthScalar() < 0.8 then return end

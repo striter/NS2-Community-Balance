@@ -16,6 +16,18 @@ Client.PrecacheLocalSound(kMouseOverSound)
 Client.PrecacheLocalSound(kSelectSound)
 Client.PrecacheLocalSound(kCloseSound)
 
+local function GetDropStructureAbility()
+
+    local player = Client.GetLocalPlayer()
+    local ability = player:GetActiveWeapon()
+    if ability:isa("DropStructureAbility")
+            or ability:isa("DropTeamStructureAbility") 
+    then
+        return ability
+    end
+    return nil
+end
+
 function GorgeBuild_OnClose()
     StartSoundEffect(kCloseSound)
 end
@@ -30,8 +42,7 @@ end
 
 function GorgeBuild_Close()
 
-    local player = Client.GetLocalPlayer()
-    local dropStructureAbility = player:GetWeapon(DropStructureAbility.kMapName)
+    local dropStructureAbility = GetDropStructureAbility()
 
     if dropStructureAbility then
         dropStructureAbility:DestroyBuildMenu()
@@ -39,24 +50,13 @@ function GorgeBuild_Close()
 
 end
 
-function GorgeBuild_SendSelect(index)
-
-    local player = Client.GetLocalPlayer()
-
-    if player then
-    
-        local dropStructureAbility = player:GetWeapon(DropStructureAbility.kMapName)
-        if dropStructureAbility then
-            dropStructureAbility:SetActiveStructure(index)
-        end
-        
-    end
-    
+function GorgeBuild_SendSelect(ability,index)
+    ability:SetActiveStructure(index)
 end
 
-function GorgeBuild_GetIsAbilityAvailable(index)
+function GorgeBuild_GetIsAbilityAvailable(ability,index)
 
-    return DropStructureAbility.kSupportedStructures[index] and DropStructureAbility.kSupportedStructures[index]:IsAllowed(Client.GetLocalPlayer())
+    return ability.kSupportedStructures[index] and ability.kSupportedStructures[index]:IsAllowed(Client.GetLocalPlayer())
 
 end
 
@@ -183,8 +183,10 @@ function GUIGorgeBuildMenu:Initialize()
     
     self.buttons = {}
     
-    self:Reset()
-
+    self.ability = GetDropStructureAbility()
+    if self.ability ~= nil then
+        self:Reset(self.ability)
+    end
 end
 
 function GUIGorgeBuildMenu:Uninitialize()
@@ -210,7 +212,7 @@ function GUIGorgeBuildMenu:_HandleMouseOver(onItem)
     
 end
 
-local function UpdateButton(button, index)
+local function UpdateButton(ability, button, index)
 
     local col = 1
     local color = GUIGorgeBuildMenu.kAvailableColor
@@ -220,7 +222,7 @@ local function UpdateButton(button, index)
         color = GUIGorgeBuildMenu.kTooExpensiveColor
     end
     
-    if not GorgeBuild_GetIsAbilityAvailable(index) then
+    if not GorgeBuild_GetIsAbilityAvailable(ability,index) then
         col = 3
         color = GUIGorgeBuildMenu.kUnavailableColor
     end
@@ -277,19 +279,23 @@ function GUIGorgeBuildMenu:Update(deltaTime)
     
     GUIAnimatedScript.Update(self, deltaTime)
     
+    if self.ability ~= GetDropStructureAbility() then
+        self:Uninitialize()
+        self:Initialize()
+    end
+
+    if not self.ability then return end
     for index, button in ipairs(self.buttons) do
-        
-        UpdateButton(button, index)
-       
+        UpdateButton(self.ability, button, index)
     end
 
 end
 
-function GUIGorgeBuildMenu:Reset()
+function GUIGorgeBuildMenu:Reset(ability)
     
     self.background:SetUniformScale(self.scale)
-
-    for index, structureAbility in ipairs(DropStructureAbility.kSupportedStructures) do
+    
+    for index, structureAbility in ipairs(ability.kSupportedStructures) do
     
         -- TODO: pass keybind from options instead of index
         table.insert( self.buttons, self:CreateButton(structureAbility.GetDropStructureId(), self.scale, self.background, GorgeBuild_GetKeybindForIndex(index), index - 1) )
@@ -420,6 +426,8 @@ end
 
 function GUIGorgeBuildMenu:OverrideInput(input)
 
+    if not self.ability then return input,false end
+    
     -- Assume the user wants to switch the top-level weapons
     if HasMoveCommand( input.commands, Move.SelectNextWeapon )
     or HasMoveCommand( input.commands, Move.SelectPrevWeapon ) then
@@ -438,9 +446,9 @@ function GUIGorgeBuildMenu:OverrideInput(input)
     
         if HasMoveCommand( input.commands, weaponSwitchCommand ) then
 
-            if GorgeBuild_GetIsAbilityAvailable(index) and GorgeBuild_GetCanAffordAbility(self.buttons[index].techId)  then
+            if GorgeBuild_GetIsAbilityAvailable(self.ability, index) and GorgeBuild_GetCanAffordAbility(self.buttons[index].techId)  then
 
-                GorgeBuild_SendSelect(index)
+                GorgeBuild_SendSelect(self.ability,index)
                 input.commands = RemoveMoveCommand( input.commands, weaponSwitchCommand )
 
             end

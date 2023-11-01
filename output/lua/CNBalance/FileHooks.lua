@@ -61,6 +61,7 @@ ModLoader.SetupFileHook("lua/MaturityMixin.lua", "lua/CNBalance/Mixin/MaturityMi
 ModLoader.SetupFileHook("lua/LiveMixin.lua", "lua/CNBalance/Mixin/LiveMixin.lua", "post")
 
 ModLoader.SetupFileHook("lua/CloakableMixin.lua", "lua/CNBalance/Mixin/CloakableMixin.lua", "replace")
+ModLoader.SetupFileHook("lua/DetectableMixin.lua", "lua/CNBalance/Mixin/DetectableMixin.lua", "replace")
 ModLoader.SetupFileHook("lua/ClogFallMixin.lua", "lua/CNBalance/Mixin/ClogFallMixin.lua", "replace")
 ModLoader.SetupFileHook("lua/ShieldableMixin.lua", "lua/CNBalance/Mixin/ShieldableMixin.lua", "post" )
 ModLoader.SetupFileHook("lua/PlayerHallucinationMixin.lua", "lua/CNBalance/Mixin/PlayerHallucinationMixin.lua", "post" )
@@ -88,6 +89,7 @@ ModLoader.SetupFileHook("lua/Commander_Server.lua", "lua/CNBalance/Commander_Ser
 ModLoader.SetupFileHook("lua/AlienCommander.lua", "lua/CNBalance/AlienCommander.lua", "post" )
 ModLoader.SetupFileHook("lua/MarineCommander.lua", "lua/CNBalance/MarineCommander.lua", "replace")
 
+ModLoader.SetupFileHook("lua/CommAbilities/Marine/Scan.lua", "lua/CNBalance/CommAbilities/Scan.lua", "post")
 --Marines
 ModLoader.SetupFileHook("lua/Hud/Marine/GUIMarineHUD.lua", "lua/CNBalance/GUI/GUIMarineHUD.lua", "post" )
 ModLoader.SetupFileHook("lua/Hud/GUIPlayerResource.lua", "lua/CNBalance/GUI/GUIPlayerResource.lua", "post")
@@ -215,6 +217,7 @@ ModLoader.SetupFileHook("lua/AlienTunnelManager.lua", "lua/CNBalance/AlienTunnel
 --Structures
 ModLoader.SetupFileHook("lua/Hive.lua", "lua/CNBalance/Structures/Alien/Hive.lua", "replace")
 ModLoader.SetupFileHook("lua/DrifterEgg.lua", "lua/CNBalance/Structures/Alien/DrifterEgg.lua", "post")
+ModLoader.SetupFileHook("lua/Drifter.lua", "lua/CNBalance/Structures/Alien/Drifter.lua", "post")
 ModLoader.SetupFileHook("lua/Pheromone.lua", "lua/CNBalance/Structures/Alien/Pheromone.lua", "replace")
 ModLoader.SetupFileHook("lua/TunnelEntrance.lua", "lua/CNBalance/Structures/Alien/TunnelEntrance.lua", "replace")
 ModLoader.SetupFileHook("lua/Tunnel.lua", "lua/CNBalance/Structures/Alien/Tunnel.lua", "post")

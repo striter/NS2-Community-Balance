@@ -915,6 +915,7 @@ function AlienTeam:InitTechTree()
     self.techTree:AddTargetedActivation(kTechId.EnzymeCloud,      kTechId.ShiftHive,      kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.Hallucinate,      kTechId.ShadeHive,      kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.MucousMembrane,   kTechId.CragHive,      kTechId.None)
+    self.techTree:AddTargetedActivation(kTechId.Storm, kTechId.BioMassEleven)
     --self.techTree:AddTargetedActivation(kTechId.Storm,            kTechId.ShiftHive,       kTechId.None)
     self.techTree:AddActivation(kTechId.DestroyHallucination)
 
@@ -1040,6 +1041,7 @@ function AlienTeam:InitTechTree()
     self.techTree:AddPassive(kTechId.ShadeDisorient)
     self.techTree:AddPassive(kTechId.ShadeCloak)
     self.techTree:AddActivation(kTechId.ShadeInk,                 kTechId.ShadeHive,         kTechId.None)
+    --self.techTree:AddTargetedActivation(kTechId.ShadeInk,                 kTechId.ShadeHive,         kTechId.None)
 
     self.techTree:AddSpecial(kTechId.TwoHives)
     self.techTree:AddSpecial(kTechId.ThreeHives)
@@ -1096,7 +1098,8 @@ function AlienTeam:InitTechTree()
     self.techTree:AddBuildNode(kTechId.Web)
     --self.techTree:AddBuyNode(kTechId.Web,                   kTechId.BioMassTwo)
     self.techTree:AddBuyNode(kTechId.BabblerEgg,            kTechId.BioMassTwo, kTechId.None,kTechId.AllAliens)
-
+    self.techTree:AddActivation(kTechId.DropTeamStructureAbility,              kTechId.BioMassFour, kTechId.None,kTechId.AllAliens)
+    
     -- lerk researches
     self.techTree:AddActivation(kTechId.Spores,              kTechId.BioMassFour, kTechId.None,kTechId.AllAliens)
     self.techTree:AddUnlockActivation(kTechId.Umbra,               kTechId.BioMassSix, kTechId.None,kTechId.AllAliens)
@@ -1109,6 +1112,7 @@ function AlienTeam:InitTechTree()
     self.techTree:AddResearchNode(kTechId.ShiftTunnel , kTechId.ShiftHive)
     self.techTree:AddResearchNode(kTechId.CragTunnel , kTechId.CragHive)
     self.techTree:AddResearchNode(kTechId.ShadeTunnel , kTechId.ShadeHive)
+    
     -- onos researches
     self.techTree:AddPassive(kTechId.Charge)
     self.techTree:AddActivation(kTechId.Devour,            kTechId.BioMassThree, kTechId.None,kTechId.AllAliens)

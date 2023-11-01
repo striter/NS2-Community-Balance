@@ -31,4 +31,18 @@ function Gorge:OnCreate()
     InitMixin(self,RequestHandleMixin)
 end
 
+if Server then
+    
+    function Gorge:InitWeapons()
+        Alien.InitWeapons(self)
+
+        self:GiveItem(SpitSpray.kMapName)
+        self:GiveItem(DropStructureAbility.kMapName)
+        --self:GiveItem(DropTeamStructureAbility.kMapName)
+
+        self:SetActiveWeapon(SpitSpray.kMapName)
+    end
+    
+end
+
 Shared.LinkClassToMap("Gorge", Gorge.kMapName, networkVars, true)

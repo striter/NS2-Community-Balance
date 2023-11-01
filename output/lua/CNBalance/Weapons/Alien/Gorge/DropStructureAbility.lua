@@ -42,7 +42,7 @@ function DropStructureAbility:GetActiveStructure()
     if self.activeStructure == nil then
         return nil
     else
-        return DropStructureAbility.kSupportedStructures[self.activeStructure]
+        return self.kSupportedStructures[self.activeStructure]
     end
 
 end
@@ -412,7 +412,7 @@ function DropStructureAbility:OnDropStructure(origin, direction, structureIndex,
 
     if player then
 
-        local structureAbility = DropStructureAbility.kSupportedStructures[structureIndex]
+        local structureAbility = self.kSupportedStructures[structureIndex]
         if structureAbility then
             self:DropStructure(player, origin, direction, structureAbility, lastClickedPosition, lastClickedPositionNormal)
         end
@@ -774,3 +774,5 @@ if Client then
 end
 
 Shared.LinkClassToMap("DropStructureAbility", DropStructureAbility.kMapName, networkVars)
+
+Script.Load("lua/CNBalance/Weapons/Alien/Gorge/TeamStructure/DropTeamStructureAbility.lua")

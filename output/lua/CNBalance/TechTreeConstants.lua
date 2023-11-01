@@ -27,7 +27,6 @@ debug.appendtoenum(kTechId, "MinesUpgrade")
 debug.appendtoenum(kTechId, "LifeSustain")
 debug.appendtoenum(kTechId, "ArmorRegen")
 
-
 debug.appendtoenum(kTechId, "ProtosMenu")
 debug.appendtoenum(kTechId, "DropDualMinigunExosuit")
 debug.appendtoenum(kTechId, "DropDualRailgunExosuit")
@@ -71,9 +70,9 @@ debug.appendtoenum(kTechId, "RecoverBiomassTwo")
 debug.appendtoenum(kTechId, "RecoverBiomassThree")
 debug.appendtoenum(kTechId, "XenocideFuel")
 
-
 --Gorger
 debug.appendtoenum(kTechId, "SporeMine")
+debug.appendtoenum(kTechId, "DropTeamStructureAbility")
 
 --Onos
 debug.appendtoenum(kTechId, "Devour")

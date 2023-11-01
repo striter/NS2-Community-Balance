@@ -1018,8 +1018,9 @@ function MAC:OnUpdate(deltaTime)
             UpdateOrders(self, deltaTime)
         end
 
-        self.constructing = Shared.GetTime() - self.timeOfLastConstruct < 0.5
-        self.welding = Shared.GetTime() - self.timeOfLastWeld < 0.5
+        local now = Shared.GetTime()
+        self.constructing = now - self.timeOfLastConstruct < 0.5
+        self.welding = now - self.timeOfLastWeld < 0.5
 
         if self.moving and not self.jetsSound:GetIsPlaying() then
             self.jetsSound:Start()
@@ -1028,11 +1029,15 @@ function MAC:OnUpdate(deltaTime)
         end
 
         --EMP Blast during update
-        if  Shared.GetTime() - self.empDetectionTime > kMACEmpBlastDetectInterval then
-            self.empDetectionTime = Shared.GetTime()
+        if  now - self.empDetectionTime > kMACEmpBlastDetectInterval then
+            self.empDetectionTime = now
+
+            if self:GetIsCorroded() then     --Reset trigger
+                self.empTriggeredTime =  now
+            end
             
-            local empBlastResearched = GetHasTech(self,kTechId.MACEMPBlast)
-            self.empBlast = empBlastResearched and Shared.GetTime() - self.empTriggeredTime > kMACEmpBlastTriggerInterval
+            self.empBlast = GetHasTech(self,kTechId.MACEMPBlast)
+                and now - self.empTriggeredTime > kMACEmpBlastTriggerInterval
 
             if self.empBlast then
                 local ents = GetEntitiesWithMixinForTeamWithinRange("Live", GetEnemyTeamNumber(self:GetTeamNumber()), self:GetOrigin(), kMACEmpBlastDetectRadius)

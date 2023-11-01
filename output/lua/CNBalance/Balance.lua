@@ -71,7 +71,7 @@ kMilitaryProtocolTResPerBountyClaim = 0.5   --Bounty score, don't give them pres
 kMilitaryProtocolTeamResourcesPerKill = {          --Replaced refund system
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.Drifter] = 1,
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
-    [kTechId.Skulk] = 2, [kTechId.Gorge] = 3,[kTechId.Prowler] = 3, [kTechId.Lerk] = 3, [kTechId.Fade] = 5, [kTechId.Onos] = 8,
+    [kTechId.Skulk] = 2, [kTechId.Gorge] = 3,[kTechId.Prowler] = 4, [kTechId.Lerk] = 8, [kTechId.Fade] = 12, [kTechId.Onos] = 20,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
     [kTechId.Hive] = 10, [kTechId.ShiftHive] = 15, [kTechId.CragHive] = 15, [kTechId.ShadeHive] = 15,
 }
@@ -529,7 +529,7 @@ kEchoSpurCost = 2
 kEchoShellCost = 2
 kEchoEggCost = 1
 
-kShadeInkCooldown = 16.5
+kShadeInkCooldown = 16.3
 kShadeInkDuration = 6.3
 
 kWhipSlapDamage = 50

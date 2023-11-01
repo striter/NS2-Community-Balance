@@ -258,3 +258,19 @@ function GetMaxSupplyForTeam(teamNumber)
 
     return maxSupply 
 end
+
+function AlienDetectionParry(teamNumber, origin, radius)
+    local successful = false
+    local shades = GetEntitiesForTeamWithinRange("Shade", teamNumber,origin,radius)
+    for _,shade in ipairs(shades) do
+        local triggered = shade:TriggerInk()
+        successful = successful or triggered
+    end
+    
+    if successful then
+        for _,shade in ipairs(shades) do
+            shade:ResetInk() 
+        end
+    end
+    return successful
+end

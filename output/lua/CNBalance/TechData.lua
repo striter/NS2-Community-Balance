@@ -777,7 +777,15 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "ONOS_DEVOUR_TOOLTIP",
         [kTechDataResearchName] = "ONOS_DEVOUR",
     })
-
+    
+    table.insert(techData, {
+        [kTechDataId] = kTechId.DropTeamStructureAbility,
+        [kTechDataCategory] = kTechId.Gorge,
+        [kTechDataMapName] = DropTeamStructureAbility.kMapName,
+        [kTechDataDisplayName] = "DROP_TEAM_STRUCTURE",
+        [kTechDataTooltipInfo] = "DROP_TEAM_STRUCTURE_TOOLTIP",
+        [kTechDataResearchName] = "DROP_TEAM_STRUCTURE",
+    })
 
     --Tunnels
     table.insert(techData, {
@@ -1042,6 +1050,23 @@ function BuildTechData()
         [kTechDataCostKey] = kPoweredExtractorCost,
     })
 
+    --Drifer abilities
+    --table.insert(techData,{
+    --    [kTechDataId] = kTechId.ShadeInk,
+    --    [kTechDataCooldown] = kShadeInkCooldown,
+    --    [kTechDataDisplayName] = "INK",
+    --    [kTechDataHotkey] = Move.C,
+    --    [kTechDataCostKey] = kShadeInkCost,
+    --    [kTechDataTooltipInfo] = "SHADE_INK_TOOLTIP",
+    --    --[kTechDataOneAtATime] = true,
+    --    [kVisualRange] = ShadeInk.kShadeInkDisorientRadius,
+    --    [kTechDataGhostModelClass] = "AlienGhostModel",
+    --    [kTechDataIgnorePathingMesh] = true,
+    --    [kTechDataAllowStacking] = true,
+    --    [kTechDataModel] = BoneWall.kModelName,
+    --    [kTechDataMapName] = ShadeInk.kMapName,
+    --})
+    
     --Marker
     table.insert(techData,{
         [kTechDataId] = kTechId.ExpandingMarker,

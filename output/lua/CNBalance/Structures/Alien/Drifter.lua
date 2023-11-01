@@ -79,7 +79,6 @@ Drifter.kTouchRange = 1.5 -- Model max extents for "touch" uncloaking
 
 Drifter.kEnzymeRange = 22
 
-local kDrifterSelfOrderRange = 12
 
 Drifter.kFov = 360
 
@@ -345,7 +344,7 @@ end
 local function FindTask(self)
 
     -- find ungrown structures
-    for _, structure in ipairs(GetEntitiesWithMixinForTeamWithinRange("Construct", self:GetTeamNumber(), self:GetOrigin(), kDrifterSelfOrderRange)) do
+    for _, structure in ipairs(GetEntitiesWithMixinForTeam("Construct", self:GetTeamNumber(), self:GetOrigin())) do
 
         if not structure:GetIsBuilt() and not IsBeingGrown(self, structure) and (not structure.GetCanAutoBuild or structure:GetCanAutoBuild()) then
 
@@ -356,6 +355,19 @@ local function FindTask(self)
 
     end
 
+    if not self:GetIsSighted() then return end
+    
+    if not self.hostHiveID then return end
+    local hostHive = Shared.GetEntity(self.hostHiveID)
+    if not hostHive or not GetIsUnitActive(hostHive) then
+        self.hostHiveID = nil
+        return
+    end
+
+    local dist = (self:GetOrigin() - hostHive:GetOrigin()):GetLengthXZ()
+    if dist < 20 then return end
+    self:GetTeam():SetCommanderPing(self:GetOrigin())
+    self:GiveOrder(kTechId.Move,hostHive:GetId(),hostHive:GetOrigin(),nil,false,false)
 end
 
 function Drifter:OnConsumeTriggered()
@@ -608,7 +620,7 @@ local function UpdateTasks(self, deltaTime)
             self:ProcessMoveOrder(drifterMoveSpeed, deltaTime)
         elseif currentOrder:GetType() == kTechId.Follow then
             self:ProcessFollowOrder(drifterMoveSpeed, deltaTime)
-        elseif currentOrder:GetType() == kTechId.EnzymeCloud or currentOrder:GetType() == kTechId.Hallucinate or currentOrder:GetType() == kTechId.MucousMembrane or currentOrder:GetType() == kTechId.Storm then
+        elseif currentOrder:GetType() == kTechId.EnzymeCloud or currentOrder:GetType() == kTechId.ShadeInk or currentOrder:GetType() == kTechId.Hallucinate or currentOrder:GetType() == kTechId.MucousMembrane or currentOrder:GetType() == kTechId.Storm then
             self:ProcessEnzymeOrder(drifterMoveSpeed, deltaTime)
         elseif currentOrder:GetType() == kTechId.Grow then
             self:ProcessGrowOrder(drifterMoveSpeed, deltaTime)
@@ -920,7 +932,7 @@ function Drifter:PerformActivation(techId, position, normal, commander)
     local success = false
     local keepProcessing = true
 
-    if techId == kTechId.EnzymeCloud or techId == kTechId.Hallucinate or techId == kTechId.MucousMembrane or techId == kTechId.Storm then
+    if techId == kTechId.EnzymeCloud or techId == kTechId.MucousMembrane or techId == kTechId.Storm or techId == kTechId.ShadeInk then
 
         local team = self:GetTeam()
         local cost = GetCostForTech(techId)
