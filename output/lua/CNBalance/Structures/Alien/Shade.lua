@@ -30,7 +30,8 @@ function Shade:GetTechButtons(techId)
 end
 
 function Shade:TriggerInk()
-
+    if not GetIsUnitActive(self) then return false end
+    
     local now = Shared.GetTime()
     if (now - self.timeLastInked) < kShadeInkCooldown then
         return false
@@ -46,7 +47,7 @@ function Shade:TriggerInk()
 end
 
 function Shade:ResetInk()
-    self.timeLastInked = now
+    self.timeLastInked = Shared.GetTime()
 end
 
 function Shade:OnTeleportEnd()

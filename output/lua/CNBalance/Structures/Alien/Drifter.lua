@@ -341,8 +341,7 @@ local function IsBeingGrown(self, target)
 
 end
 
-local function FindTask(self)
-
+local function FindConstructions(self)
     -- find ungrown structures
     for _, structure in ipairs(GetEntitiesWithMixinForTeam("Construct", self:GetTeamNumber(), self:GetOrigin())) do
 
@@ -354,18 +353,28 @@ local function FindTask(self)
         end
 
     end
+end
 
-    if not self:GetIsSighted() then return end
+local function FindTask(self)
+    if not self.hostHiveID then
+        FindConstructions(self)
+        return 
+    end
     
-    if not self.hostHiveID then return end
     local hostHive = Shared.GetEntity(self.hostHiveID)
     if not hostHive or not GetIsUnitActive(hostHive) then
+        FindConstructions(self)
         self.hostHiveID = nil
         return
     end
 
     local dist = (self:GetOrigin() - hostHive:GetOrigin()):GetLengthXZ()
-    if dist < 20 then return end
+    if dist < 20 then       --Idle around hive?
+        FindConstructions(self)
+        return 
+    end
+    
+    if not self:GetIsSighted() then return end      --Stay Idle
     self:GetTeam():SetCommanderPing(self:GetOrigin())
     self:GiveOrder(kTechId.Move,hostHive:GetId(),hostHive:GetOrigin(),nil,false,false)
 end
