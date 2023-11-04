@@ -17,6 +17,11 @@ end
 local baseOnKill = Skulk.OnKill
 function Skulk:OnKill(attacker,doer,point, direction)
     baseOnKill(self,attacker,doer,point, direction)
+
+    local xenocide = GetIsTechUnlocked(self,kTechId.Xenocide)
+    if xenocide then
+        CreateEntity(EnzymeCloud.kMapName, self:GetOrigin(), self:GetTeamNumber())
+    end
     
     if not attacker or not attacker:isa("Player") then return end
     if not HasMixin(attacker, "ParasiteAble") then return end

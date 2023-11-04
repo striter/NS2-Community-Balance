@@ -111,14 +111,6 @@ function CloakableMixin:TriggerCloak()
 end
 
 function CloakableMixin:TriggerUncloak()
-    if Server then
-        if self:isa("Player") or self.GetReceivesStructuralDamage then
-            if Shared.GetTime() > self.timeUncloaked then
-                AlienDetectionParry(self:GetTeamNumber(),self:GetOrigin(),ShadeInk.kShadeInkDisorientRadius)
-            end
-        end
-    end
-    
     self.timeUncloaked = Shared.GetTime() + CloakableMixin.kTriggerUncloakDuration
 
 end
@@ -401,6 +393,14 @@ function CloakableMixin:OnTakeDamage(damage, attacker, doer, point)
     if damage > 0 then
 
         self:TriggerUncloak()
+
+        if Server then
+            if self:isa("Player") or self.GetReceivesStructuralDamage then
+                if Shared.GetTime() > self.timeUncloaked then
+                    AlienDetectionParry(self:GetTeamNumber(),self:GetOrigin(),ShadeInk.kShadeInkDisorientRadius)
+                end
+            end
+        end
 
     end
 

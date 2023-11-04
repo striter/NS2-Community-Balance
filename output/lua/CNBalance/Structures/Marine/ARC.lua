@@ -10,6 +10,15 @@ function ARC:GetHealthPerTeamExceed()
     return kARCHealthPerPlayerAdd
 end
 
+local baseValidateTargetPosition = ARC.ValidateTargetPosition
+function ARC:ValidateTargetPosition(position)
+    local successful = baseValidateTargetPosition(self,position)
+    if successful then
+        successful = not AlienDetectionParry(GetEnemyTeamNumber(self:GetTeamNumber()),self:GetOrigin(),ShadeInk.kShadeInkDisorientRadius)
+    end
+    return successful
+end
+
 function ARC:GetCanFireAtTargetActual(target, targetPoint, manuallyTargeted)
 
     if not target.GetReceivesStructuralDamage or not target:GetReceivesStructuralDamage() then
@@ -34,7 +43,7 @@ function ARC:GetCanFireAtTargetActual(target, targetPoint, manuallyTargeted)
     if (distToTarget > ARC.kFireRange) or (distToTarget < ARC.kMinFireRange) then
         return false
     end
-
+    
     return true
 
 end

@@ -34,7 +34,6 @@ function Alien:GetPlayerStatusDesc()
     return status
 end
 
-
 -- if Server then
 --     -- ThirdPerson Codes
 --     local function ThirdPerson(self)

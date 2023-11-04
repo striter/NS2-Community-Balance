@@ -103,5 +103,5 @@ if Client then
 end
 
 function Web:GetIsCamouflaged()
-    return GetIsTechUnlocked(self,kTechId.Veil)
+    return true -- GetIsTechUnlocked(self,kTechId.Veil)
 end

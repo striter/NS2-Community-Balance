@@ -65,8 +65,8 @@ Drifter.kOrdered3DSoundName = PrecacheAsset("sound/NS2.fev/alien/drifter/ordered
 local kDrifterConstructSound = PrecacheAsset("sound/NS2.fev/alien/drifter/drift")
 local kDrifterMorphing = PrecacheAsset("sound/NS2.fev/alien/commander/drop_structure")
 
-Drifter.kMoveSpeed = 7      --11
-Drifter.kCelerityMoveSpeed = 9  --13
+Drifter.kMoveSpeed = 8      --11
+Drifter.kCelerityMoveSpeed = 10  --13
 
 Drifter.kHealth = kDrifterHealth
 Drifter.kArmor = kDrifterArmor
@@ -341,10 +341,26 @@ local function IsBeingGrown(self, target)
 
 end
 
-local function FindConstructions(self)
-    -- find ungrown structures
-    for _, structure in ipairs(GetEntitiesWithMixinForTeam("Construct", self:GetTeamNumber(), self:GetOrigin())) do
+--local function FindConstructions(self)
+--    -- find ungrown structures
+--    for _, structure in ipairs(GetEntitiesWithMixinForTeam("Construct", self:GetTeamNumber(), self:GetOrigin())) do
+--
+--        if not structure:GetIsBuilt() and not IsBeingGrown(self, structure) and (not structure.GetCanAutoBuild or structure:GetCanAutoBuild()) then
+--
+--            self:GiveOrder(kTechId.Grow, structure:GetId(), structure:GetOrigin(), nil, false, false)
+--            return
+--
+--        end
+--
+--    end
+--end
 
+local kDrifterSelfOrderRange = 12
+local function FindTask(self)
+
+    -- find ungrown structures nearby
+    for _, structure in ipairs(GetEntitiesWithMixinForTeamWithinRange("Construct", self:GetTeamNumber(), self:GetOrigin(), kDrifterSelfOrderRange)) do
+        
         if not structure:GetIsBuilt() and not IsBeingGrown(self, structure) and (not structure.GetCanAutoBuild or structure:GetCanAutoBuild()) then
 
             self:GiveOrder(kTechId.Grow, structure:GetId(), structure:GetOrigin(), nil, false, false)
@@ -353,30 +369,28 @@ local function FindConstructions(self)
         end
 
     end
-end
-
-local function FindTask(self)
-    if not self.hostHiveID then
-        FindConstructions(self)
-        return 
-    end
     
-    local hostHive = Shared.GetEntity(self.hostHiveID)
-    if not hostHive or not GetIsUnitActive(hostHive) then
-        FindConstructions(self)
-        self.hostHiveID = nil
-        return
-    end
-
-    local dist = (self:GetOrigin() - hostHive:GetOrigin()):GetLengthXZ()
-    if dist < 20 then       --Idle around hive?
-        FindConstructions(self)
-        return 
-    end
-    
-    if not self:GetIsSighted() then return end      --Stay Idle
-    self:GetTeam():SetCommanderPing(self:GetOrigin())
-    self:GiveOrder(kTechId.Move,hostHive:GetId(),hostHive:GetOrigin(),nil,false,false)
+    --if not self.hostHiveID then
+    --    FindConstructions(self)
+    --    return 
+    --end
+    --
+    --local hostHive = Shared.GetEntity(self.hostHiveID)
+    --if not hostHive or not GetIsUnitActive(hostHive) then
+    --    FindConstructions(self)
+    --    self.hostHiveID = nil
+    --    return
+    --end
+    --
+    --local dist = (self:GetOrigin() - hostHive:GetOrigin()):GetLengthXZ()
+    --if dist < 20 then       --Idle around hive?
+    --    FindConstructions(self)
+    --    return 
+    --end
+    --
+    --if not self:GetIsInCombat() then return end      --Stay Idle
+    --self:GetTeam():SetCommanderPing(self:GetOrigin())
+    --self:GiveOrder(kTechId.Move,hostHive:GetId(),hostHive:GetOrigin(),nil,false,false)
 end
 
 function Drifter:OnConsumeTriggered()
@@ -941,7 +955,7 @@ function Drifter:PerformActivation(techId, position, normal, commander)
     local success = false
     local keepProcessing = true
 
-    if techId == kTechId.EnzymeCloud or techId == kTechId.MucousMembrane or techId == kTechId.Storm or techId == kTechId.ShadeInk then
+    if techId == kTechId.EnzymeCloud or techId == kTechId.MucousMembrane or techId == kTechId.Storm or techId == kTechId.ShadeInk or techId == kTechId.Hallucinate then
 
         local team = self:GetTeam()
         local cost = GetCostForTech(techId)
