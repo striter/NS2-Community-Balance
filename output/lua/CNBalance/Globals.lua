@@ -56,7 +56,7 @@ local kEndGameTolerance = 900
 --end
 
 function GetRespawnTimeExtend(team,_gameLength)
-    _gameLength = _gameLength * 60
+    --_gameLength = _gameLength * 60
     local x = _gameLength
     --
     local respawnParam =  math.Clamp(math.max(0,x - kEndGameBegin) / kEndGameTolerance,0,1)

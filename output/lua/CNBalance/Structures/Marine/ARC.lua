@@ -14,7 +14,7 @@ local baseValidateTargetPosition = ARC.ValidateTargetPosition
 function ARC:ValidateTargetPosition(position)
     local successful = baseValidateTargetPosition(self,position)
     if successful then
-        successful = not AlienDetectionParry(GetEnemyTeamNumber(self:GetTeamNumber()),self:GetOrigin(),ShadeInk.kShadeInkDisorientRadius)
+        successful = not AlienDetectionParry(GetEnemyTeamNumber(self:GetTeamNumber()),position,ShadeInk.kShadeInkDisorientRadius)
     end
     return successful
 end

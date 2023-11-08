@@ -1,17 +1,18 @@
 kMarineTechMap =
 {
-                                { kTechId.Extractor, 7, -1 },{ kTechId.PoweredExtractor, 9, -1 },
+        { kTechId.PoweredExtractor, 5, -1 }, { kTechId.Extractor, 7, -1 },
         
-                                        { kTechId.ARCRoboticsFactory, 10, 0},{ kTechId.ARC, 11, 0 },
-        { kTechId.RoboticsFactory, 9, 1 },{ kTechId.MAC, 10, 1 },
-                                          { kTechId.SentryBattery, 10, 2 },{ kTechId.Sentry, 11, 2 },
+                                        { kTechId.ARCRoboticsFactory, 10, -0.5},{ kTechId.ARC, 11, -0.5 },
+        { kTechId.RoboticsFactory, 9, 0.5 },{ kTechId.MAC, 10, 0.5 },
+                                          { kTechId.SentryBattery, 10, 1.5 },{ kTechId.Sentry, 11, 1.5 },
                                    
                                    { kTechId.Armor1, 4, 1.5 },  { kTechId.Armor2, 3, 1.5 },{ kTechId.Armor3, 2, 1.5 },
         { kTechId.ArmsLab, 5, 2 }, 
                                    { kTechId.Weapons1, 4, 2.5 },{ kTechId.Weapons2, 3, 2.5},{ kTechId.Weapons3, 2, 2.5 },
-                                          
 
-        { kTechId.Observatory, 9, 3.5 },{ kTechId.PhaseTech, 10, 3.5 },{ kTechId.PhaseGate, 11, 3.5 },
+                                        { kTechId.MotionTrack, 10, 2.5 },
+        { kTechId.Observatory, 9, 3 },
+                                        { kTechId.PhaseTech, 10, 3.5 },{ kTechId.PhaseGate, 11, 3.5 },
                  
 
         --L
@@ -51,7 +52,7 @@ kMarineLines =
     GetLinePositionForTechMap(kMarineTechMap, kTechId.Armor2, kTechId.Armor3),
     
     --Factory 
-    { 7, 1, 9, 1 },
+    { 7, 0.5, 9, 0.5 },
     GetLinePositionForTechMap(kMarineTechMap, kTechId.RoboticsFactory, kTechId.ARCRoboticsFactory),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.ARCRoboticsFactory, kTechId.ARC),
 
@@ -60,7 +61,8 @@ kMarineLines =
     GetLinePositionForTechMap(kMarineTechMap, kTechId.SentryBattery, kTechId.Sentry),
 
     -- observatory:
-    { 7, 3.5, 9, 3.5 },
+    { 7, 3, 9, 3 },
+    GetLinePositionForTechMap(kMarineTechMap, kTechId.Observatory, kTechId.MotionTrack),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.Observatory, kTechId.PhaseTech),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.PhaseTech, kTechId.PhaseGate),
     

@@ -21,6 +21,9 @@ if kTranslateMessage then
     kTranslateMessage["MILITARY_PROTOCOL_ENABLED"] = "军用统筹协防协议已启用 无法以个人名义采购杀伤性装备"
     kTranslateMessage["MILITARY_PROTOCOL_TOOLTIP"] = "注意:请[谨慎签署]该协议.\n*协议无法取消,留意不可抗力.\n*指挥官将作为军需统筹者.\n+所有陆战队将统一着装.\n+陆战队获得军用级制式装备.\n+协防生物质将被转化为资源.\n+被动团队收入随研发增加.\n+个人资源主动收入增加.\n-科技研发所需时间增长.\n-个人资源被动收入停止."
 
+    kTranslateMessage["MOTION_TRACK"] = "动态侦测"
+    kTranslateMessage["MOTION_TRACK_TOOLTIP"] = "每隔一段时间.\n揭露站点内的高速活跃生物."
+
     kTranslateMessage["STANDARD_SUPPLY"] = "制式武器研发站"
     kTranslateMessage["STANDARD_SUPPLY_TOOLTIP"] = "升级为制式武器研发基地."
     kTranslateMessage["STANDARD_STATION"] = "指挥站 (制式装备研发)"
@@ -182,6 +185,9 @@ if kLocales then
     kLocales["MILITARY_PROTOCOL_ENABLED"] = "Military Protocol Enabled, Unable to access offensive equipment in personal."
     kLocales["MILITARY_PROTOCOL_TOOLTIP"] = "Caution before you assign.\nYou will be the only weapon&equipment dispatcher.\n*Marines now wears uniforms.\n+Marines gets better standard equipments.\n+Biomass harvest(kills) grants team resource.\n+Marines' positive resources gain increased.\n-Researches duration increased.\n-Marines' passive resources stopped.\n-Marines can't buy offensives themself."
 
+    kLocales["MOTION_TRACK"] = "Motion Track"
+    kLocales["MOTION_TRACK_TOOLTIP"] = "Track Active Kharra Each Time Interval."
+    
     kLocales["STANDARD_SUPPLY"] = "Weapon Supply"
     kLocales["STANDARD_SUPPLY_TOOLTIP"] = "Begin the standard weapon research."
     kLocales["STANDARD_STATION"] = "Command Station (Weapons Lab)"

@@ -593,6 +593,11 @@ kWeaponCacheBuildTime = 6
 kWeaponCachePersonalCarries = 1
 kMarineSentryPersonalCarries = 2
 
+kMotionTrackInterval = 6
+kMotionTrackMinSpeed = 5
+kMotionTrackResearchCost = 40
+kMotionTrackResearchTime = 120
+
 kSporeMineCost = 0
 kSporeMineBuildTime = 4
 kNumSporeMinesPerGorge = 1

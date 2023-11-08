@@ -17,6 +17,15 @@ function BuildTechData()
         [kTechDataResearchName] = "MILITARY_PROTOCOL",
     } )
     
+    table.insert(techData,{
+        [kTechDataId] = kTechId.MotionTrack,
+        [kTechDataCostKey] = kMotionTrackResearchCost,
+        [kTechDataResearchTimeKey] = kMotionTrackResearchTime,
+        [kTechDataDisplayName] = "MOTION_TRACK",
+        [kTechDataTooltipInfo] = "MOTION_TRACK_TOOLTIP",
+        [kTechDataResearchName] = "MOTION_TRACK",
+    } )
+    
     table.insert(techData, {
         [kTechDataId] = kTechId.CombatBuilderTech,
         [kTechDataCostKey] = kCombatBuilderResearchCost,

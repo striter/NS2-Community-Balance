@@ -2,6 +2,7 @@
 local kTechIdToMaterialOffset = debug.getupvaluex(GetMaterialXYOffset, "kTechIdToMaterialOffset")
 
 kTechIdToMaterialOffset[kTechId.MilitaryProtocol] = 190
+kTechIdToMaterialOffset[kTechId.MotionTrack] = 219
 
 kTechIdToMaterialOffset[kTechId.AdvancedArmory] = 99
 kTechIdToMaterialOffset[kTechId.GrenadeLauncherUpgrade] = 196

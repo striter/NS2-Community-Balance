@@ -1,5 +1,6 @@
 
 local militaryProtocolTechNode
+local motionTrackTechNode
 
 function MarineTeam:InitTechTree()
 
@@ -77,6 +78,7 @@ function MarineTeam:InitTechTree()
     -- Marine tier 2
     self.techTree:AddBuildNode(kTechId.AdvancedArmory,               kTechId.Armory,        kTechId.None)
     self.techTree:AddResearchNode(kTechId.PhaseTech,                    kTechId.Observatory,        kTechId.None)
+    self.techTree:AddResearchNode(kTechId.MotionTrack,                    kTechId.Observatory,        kTechId.None)
     self.techTree:AddBuildNode(kTechId.PhaseGate,                    kTechId.PhaseTech,        kTechId.None, true)
 
     self.techTree:AddBuildNode(kTechId.Observatory,               kTechId.InfantryPortal,       kTechId.Armory)
@@ -207,17 +209,44 @@ function MarineTeam:InitTechTree()
     self.techTree:SetComplete()
 
     militaryProtocolTechNode = self.techTree:GetTechNode(kTechId.MilitaryProtocol)
+    motionTrackTechNode = self.techTree:GetTechNode(kTechId.MotionTrack)
 end
 
 
 local baseOnInitialize = MarineTeam.Initialize
-
 function MarineTeam:Initialize(teamName, teamNumber)
     self.clientOwnedStructures = { }
-    self.militaryProtocolResources = 0
-
+    self.timeLastMotionTrack = 0
     baseOnInitialize(self, teamName, teamNumber)
 end
+
+
+local function TickMotionTrack(self)
+
+    if not motionTrackTechNode:GetResearched() then return end
+    
+    local now = Shared.GetTime()
+    if now - self.timeLastMotionTrack < kMotionTrackInterval then return end
+    self.timeLastMotionTrack = now
+    
+    for _, alien in ipairs(GetEntitiesForTeam("Alien", GetEnemyTeamNumber(self:GetTeamNumber()))) do
+        if alien.SetDetected 
+            and alien:GetVelocity():GetLength() > kMotionTrackMinSpeed     --Only track active ones
+            and not GetHasCamouflageUpgrade(alien)      --Won't track camouflaged aliens
+        then
+            alien:SetDetected(true)
+        end
+    end
+    
+end
+
+local baseUpdate = MarineTeam.Update
+function MarineTeam:Update(timePassed)
+    baseUpdate(self,timePassed)
+    TickMotionTrack(self)
+end
+
+
 
 function MarineTeam:OnTeamKill(techId, bountyScore)
     if militaryProtocolTechNode:GetResearched() then
@@ -226,7 +255,6 @@ function MarineTeam:OnTeamKill(techId, bountyScore)
 
         if baseRefund > 0 then
             self:AddTeamResources(baseRefund )
-            self.militaryProtocolResources = self.militaryProtocolResources - baseRefund
         end
     end
 
