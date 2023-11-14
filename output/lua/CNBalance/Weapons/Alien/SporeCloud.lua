@@ -146,6 +146,10 @@ function SporeCloud:GetModelOrigin()
     return self:GetOrigin()
 end
 
+function SporeCloud:GetEngagementPoint()
+    return self:GetOrigin() + Vector(0, 0.5, 0)
+end
+
 function SporeCloud:GetDeathIconIndex()
     return kDeathMessageIcon.SporeCloud
 end

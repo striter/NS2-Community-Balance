@@ -10,6 +10,19 @@
      end
 
 
+     local baseSetGameState = NS2Gamerules.SetGameState
+     function NS2Gamerules:SetGameState(_state)
+         baseSetGameState(self,_state)
+         if Shine then
+             if _state == kGameState.Countdown then
+                 if self.gameInfo and self.gameInfo:GetRookieMode() then
+                     Shine:NotifyDualColour( nil, 88, 214, 141, "[新兴站点]",
+                             234, 250, 241, "悬赏系统已启用,被持续监测站点内高价值目标,击杀目标将获得资源激励.")
+                 end
+             end
+         end
+     end
+     
      function NS2Gamerules:ResetGame()
 
          StatsUI_ResetStats()

@@ -167,7 +167,7 @@ function XenocideLeap:OnProcessMove(input)
                 table.removevalue(hitEntities, player)
 
                 local healthScalar = player:GetHealthScalar()
-                damage = damage * (0.3 + 0.7*healthScalar )
+                damage = damage * (kXenocideDamageScalarEmptyHealth + kXenocideDamageHealthScalar *healthScalar )
                 
                 RadiusDamage(hitEntities, xenoOrigin, range, damage, self)
 

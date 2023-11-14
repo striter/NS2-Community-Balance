@@ -71,7 +71,7 @@ kMilitaryProtocolTResPerBountyClaim = 0.5   --Bounty score, don't give them pres
 kMilitaryProtocolTeamResourcesPerKill = {          --Replaced refund system
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.Drifter] = 1,
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
-    [kTechId.Skulk] = 2, [kTechId.Gorge] = 3,[kTechId.Prowler] = 4, [kTechId.Lerk] = 8, [kTechId.Fade] = 12, [kTechId.Onos] = 20,
+    [kTechId.Skulk] = 2, [kTechId.Gorge] = 3,[kTechId.Prowler] = 4, [kTechId.Lerk] = 6, [kTechId.Fade] = 10, [kTechId.Onos] = 15,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
     [kTechId.Hive] = 10, [kTechId.ShiftHive] = 15, [kTechId.CragHive] = 15, [kTechId.ShadeHive] = 15,
 }
@@ -136,9 +136,6 @@ kCommandStationUpgradeCost = 10
 kCommandStationUpgradeTime = 60
 kUpgradedCommandStationCost = kCommandStationCost + kCommandStationUpgradeCost
 
-kExtractorCost = 10
-kPoweredExtractorCost = 30
-
 -- Standard Supply
 kDragonBreathResearchCost = 30
 kDragonBreathResearchTime = 60
@@ -150,13 +147,16 @@ kCannonTechResearchTime = 90
 --Explosive Supply
 kMinesUpgradeResearchCost = nil--10
 kMinesUpgradeResearchTime = nil--60
-kGrenadeLauncherUpgradeResearchCost = 25
-kGrenadeLauncherUpgradeResearchTime = 75
+kGrenadeLauncherUpgradeResearchCost = 20
+kGrenadeLauncherUpgradeResearchTime = 60
 kMACEMPBlastResearchCost = 15
 kMACEMPBlastResearchTime = 60
 kMACEmpBlastDetectInterval = 0.5
 kMACEmpBlastDetectRadius = kPowerSurgeEMPDamageRadius
 kMACEmpBlastTriggerInterval = 5
+
+kExtractorCost = 10
+kPoweredExtractorCost = 30
 
 kPoweredExtractorResearchCost = nil--10
 kPoweredExtractorResearchTime = nil--60
@@ -357,7 +357,7 @@ kTunnelEntranceCost = 8
 kTunnelRelocateCost = 6
 
 --Research with skill activation
-kResearchBioMassOneCost = 35
+kResearchBioMassOneCost = 30
 kBioMassOneTime = 45
 kResearchBioMassTwoCost = 50
 kBioMassTwoTime = 60
@@ -366,15 +366,15 @@ kBioMassThreeTime = 90
 
 --Recover
 kRecoverBioMassOneCost = 10
-kRecoverBioMassOneTime = 20
+kRecoverBioMassOneTime = 15
 kRecoverBioMassTwoCost = 15
-kRecoverBioMassTwoTime = 3
+kRecoverBioMassTwoTime = 20
 kRecoverBioMassThreeCost = 20
-kRecoverBioMassThreeTime = 40
+kRecoverBioMassThreeTime = 25
 
 --Skulk
 kParasiteEnergyCost = 30
-kAdrenalineParasiteEnergyCost = 18
+kAdrenalineParasiteEnergyCost = 17.5
 kParasiteDamageType = kDamageType.Structural
 
 kXenocideResearchCost = 20
@@ -385,8 +385,9 @@ kXenocideFuelTime = 120
 
 kXenocideEnergyCost = 30
 kXenocideDamageType = kDamageType.Structural
-kXenocideDamage = 120  kXenocideFuelDamage = 200 --200
+kXenocideDamage = 150  kXenocideFuelDamage = 225 --200
 kXenocideRange = 9 kXenocideFuelRange = 12 -- 14
+kXenocideDamageScalarEmptyHealth = 0.3 kXenocideDamageHealthScalar = 1 - kXenocideDamageScalarEmptyHealth
 kXenocideSpawnReduction = 0.75 kXenocideFuelSpawnReduction = 0.5
 
 kBileBombResearchCost = 10
@@ -595,8 +596,8 @@ kMarineSentryPersonalCarries = 2
 
 kMotionTrackInterval = 6
 kMotionTrackMinSpeed = 5
-kMotionTrackResearchCost = 40
-kMotionTrackResearchTime = 120
+kMotionTrackResearchCost = 35
+kMotionTrackResearchTime = 90
 
 kSporeMineCost = 0
 kSporeMineBuildTime = 4

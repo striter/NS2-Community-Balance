@@ -245,4 +245,4 @@ if AddHintModPanel then
 end
 
 
-Shared.Message("[CN] Natural Selection 2.0 Mounted 2023.6.12")
+Shared.Message("[CN] Natural Selection 2.0 Mounted 2023.11.14")

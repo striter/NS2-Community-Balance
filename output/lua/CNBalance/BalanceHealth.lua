@@ -83,10 +83,10 @@ kExplosiveSelfDamage =
 }
 
 kJetpackDamageReduction = {
-    ["VolleyRappel"] = 2,
+    ["VolleyRappel"] = 1.66,
     ["Spike"] = 1.5,
-    ["Spit"] = 2,
-    ["Hydra"] = 2,
+    ["Spit"] = 1.66,
+    ["Hydra"] = 1.66,
     ["LerkBite"] = 1.25,
     ["Parasite"] = 2,
 }
@@ -222,7 +222,7 @@ kMatureShiftHealth = 880    kMatureShiftArmor = 120  kShiftHealthPerBioMass = 10
 
 kShellHealth = 600     kShellArmor = 150     kShellPointValue = 12
 kMatureShellHealth = 1000     kMatureShellArmor = 300 -- 700 200
-   
+
 kSpurHealth = 800     kSpurArmor = 50     kSpurPointValue = 12
 kMatureSpurHealth = 900  kMatureSpurArmor = 300  kMatureSpurPointValue = 15  --900 100
 

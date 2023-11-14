@@ -610,12 +610,7 @@ if Server then
         self.freeDrifterCheck = time
 
         if not GetGamerules():GetGameStarted() then return end
-
-        --local comm = self:GetTeam():GetCommander()
-        --if not comm then return end
-
         if not GetIsUnitActive(self) then return end
-        if self:GetHealthScalar() < 0.8 then return end
         
         if self.spawnedDrifterID ~= Entity.invalidId then
             local drifter = Shared.GetEntity(self.spawnedDrifterID)
