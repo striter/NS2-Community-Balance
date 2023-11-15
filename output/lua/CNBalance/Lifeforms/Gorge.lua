@@ -1,4 +1,5 @@
 Gorge.kAdrenalineEnergyRecuperationRate = 15.0  -- 17 -> 15
+Gorge.kContinuousDeathMaxDamageReduction = 0.3
 
 Script.Load("lua/CNBalance/Mixin/RequestHandleMixin.lua")
 local networkVars =

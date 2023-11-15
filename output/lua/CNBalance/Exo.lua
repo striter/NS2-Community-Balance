@@ -1,4 +1,5 @@
 Exo.kBountyThreshold = kBountyClaimMinExo
+Exo.kMaxProtectionDamageReduction = 0
 Exo.kBountyDamageReceive = true
 
 if Server then

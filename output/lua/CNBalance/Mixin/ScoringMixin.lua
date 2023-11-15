@@ -11,14 +11,25 @@ function ScoringMixin:__initmixin()
 end
 
 function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint)
-
-    if(damageTable.damage <= 0) then return end
+    if self.isHallucination then return end
     
+    local gamerule =  GetGamerules()
+    if not gamerule or not gamerule.gameInfo or not gamerule.gameInfo:GetRookieMode() then return end  --Don't open without rookie mode
+    if(damageTable.damage <= 0) then return end
+
     if self.kBountyDamageReceive then
         local bountyScore = self:GetBountyCurrentLife()
         if bountyScore > 0 then
             local scalar = bountyScore * (math.floor(bountyScore / kBountyTargetDamageReceiveStep)+ 1) * kBountyDamageReceiveBaseEachScore
             damageTable.damage = damageTable.damage * (1 + scalar)      --Receive Additional Damage And Die Please
+        end
+    end
+
+    if self.kContinuousDeathMaxDamageReduction then
+        local protectionScore = self:GetProtectionCurrentLife()
+        if protectionScore > 0 then
+            local scalar = math.min(protectionScore * kContinuousDeathProtectionEachValue,self.kContinuousDeathMaxDamageReduction)
+            damageTable.damage = damageTable.damage * (1 - scalar)      --Receive Additional Damage And Die Please
         end
     end
 
@@ -95,11 +106,21 @@ if Server then
         
         return true
     end
+
 end
 
 function ScoringMixin:GetBountyCurrentLife()
     assert(self.kBountyThreshold)
     return math.max(self.bountyCurrentLife - self.kBountyThreshold, 0)
+end
+
+function ScoringMixin:GetProtectionCurrentLife()
+    if self:GetBountyCurrentLife() > 0 then return 0 end
+    
+    return math.max(self.deaths 
+            - self.kills * kContinuousDeathClaimOnAddKill 
+            - self.assistkills * kContinuousDeathClaimOnAddAssist
+            - kContinuousDeathProtectionStep,0)
 end
 
 function ScoringMixin:AddContinuousScore(name, addAmount, amountNeededToScore, pointsGivenOnScore, resGivenOnScore )

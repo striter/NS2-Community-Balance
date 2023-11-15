@@ -1,5 +1,7 @@
 
 if kTranslateMessage then
+    kTranslateMessage["NEWCOMER_ENABLED"] = "正在浏览新兵采购页,升级军衔以解锁更多内容."
+    
     kTranslateMessage["GAME_LENGTH_TEAM1"] = "站点清理 [%s:%s]"
     kTranslateMessage["RESPAWN_EXTEND_TEAM1"] = "增援消耗 [%i秒]"
     
@@ -18,7 +20,6 @@ if kTranslateMessage then
     kTranslateMessage["BOUNTY"] = "站点悬赏"
     
     kTranslateMessage["MILITARY_PROTOCOL"] = "军用统筹协防"
-    kTranslateMessage["MILITARY_PROTOCOL_ENABLED"] = "军用统筹协防协议已启用 无法以个人名义采购杀伤性装备"
     kTranslateMessage["MILITARY_PROTOCOL_TOOLTIP"] = "注意:请[谨慎签署]该协议.\n*协议无法取消,留意不可抗力.\n*指挥官将作为军需统筹者.\n+所有陆战队将统一着装.\n+陆战队获得军用级制式装备.\n+协防生物质将被转化为资源.\n+被动团队收入随研发增加.\n+个人资源主动收入增加.\n-科技研发所需时间增长.\n-个人资源被动收入停止."
 
     kTranslateMessage["MOTION_TRACK"] = "动态侦测"
@@ -165,6 +166,8 @@ if kTranslateMessage then
 end
 
 if kLocales then
+    kLocales["NEWCOMER_ENABLED"] = "NewComer requisitions,More available with higher rank."
+    
     kLocales["GAME_LENGTH_TEAM1"] = "Cleaning:[%s:%s]"
     kLocales["RESPAWN_EXTEND_TEAM1"] = "Reinforce:[%is]"
     kLocales["TEAM_RESOURCES_EFFICIENCY1"] = "Res-Efficiency [%i%%]"
@@ -180,7 +183,7 @@ if kLocales then
     kLocales["WAITING_SPAWN_TEAM2"] = "Hatch Awaiting..."
 
     kLocales["BOUNTY"] = "BOUNTY"
-    
+
     kLocales["MILITARY_PROTOCOL"] = "Military Protocol"
     kLocales["MILITARY_PROTOCOL_ENABLED"] = "Military Protocol Enabled, Unable to access offensive equipment in personal."
     kLocales["MILITARY_PROTOCOL_TOOLTIP"] = "Caution before you assign.\nYou will be the only weapon&equipment dispatcher.\n*Marines now wears uniforms.\n+Marines gets better standard equipments.\n+Biomass harvest(kills) grants team resource.\n+Marines' positive resources gain increased.\n-Researches duration increased.\n-Marines' passive resources stopped.\n-Marines can't buy offensives themself."

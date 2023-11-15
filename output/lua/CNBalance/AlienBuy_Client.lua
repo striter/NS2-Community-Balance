@@ -40,3 +40,21 @@ function AlienBuy_OnSelectAlien(type)
     end
     oldAlienBuy_OnSelectAlien(type)
 end
+
+
+
+function AlienBuy_IsAlienVisible(alienType)
+    local scoreRestriction = kAlienNewComerRestriction[IndexToAlienTechId(alienType)]
+    if scoreRestriction then
+        local skill = Client.GetLocalPlayer():GetPlayerSkill() - Client.GetLocalPlayer():GetPlayerSkillOffset()
+        if skill < scoreRestriction then
+            return false
+        end
+    end
+    return true
+end
+
+function AlienBuy_IsAlienResearched(alienType)
+    local techNode = GetAlienTechNode(alienType, true)
+    return (techNode ~= nil) and techNode:GetAvailable()
+end

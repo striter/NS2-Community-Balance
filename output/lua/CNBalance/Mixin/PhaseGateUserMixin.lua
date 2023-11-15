@@ -93,6 +93,7 @@ if Client then
         -- TODO: Is there a better way to do this?
         local phaseGate = Shared.GetEntity(message.phaseGateId)
         local phasedEnt = Shared.GetEntity(message.phasedEntityId)
+        if not phaseGate then return end
 
         -- Need to keep this var updated so that client side effects work correctly
         phasedEnt.timeOfLastPhaseClient = Shared.GetTime()

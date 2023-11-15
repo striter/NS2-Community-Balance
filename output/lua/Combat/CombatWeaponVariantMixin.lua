@@ -26,7 +26,7 @@ end
 
 if Client then
 
-    kHandMaterialViewIndexes = --Zero-based indices (shared view model for all bmacs)
+    CombatWeaponVariant.kHandMaterialViewIndexes = --Zero-based indices (shared view model for all bmacs)
     {
         ["Knife"] = 0,
         ["LightMachineGun"] = 0,
@@ -34,7 +34,7 @@ if Client then
         ["Revolver"] = 0,
         ["Cannon"] = 0,
     }
-    kMarineHandMaterials = 
+    CombatWeaponVariant.kMarineHandMaterials = 
     {
         [kMarineVariants.green] = PrecacheAsset("models/marine/hands/hands.material"),
         [kMarineVariants.special] = PrecacheAsset("models/marine/hands/hands_black.material"),
@@ -64,9 +64,9 @@ if Client then
                 if viewModelEnt then
                     local viewModel = viewModelEnt:GetRenderModel()
                     if viewModel and viewModel:GetReadyForOverrideMaterials() then
-                        local viewMatIndex = kHandMaterialViewIndexes[self:GetClassName()]
+                        local viewMatIndex = CombatWeaponVariant.kHandMaterialViewIndexes[self:GetClassName()]
                         assert(viewMatIndex)
-                        local viewMat = kMarineHandMaterials[player.clientVariant]
+                        local viewMat = CombatWeaponVariant.kMarineHandMaterials[player.clientVariant]
                         if viewMat then
                             viewModel:SetOverrideMaterial( viewMatIndex, viewMat )
                         end

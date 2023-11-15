@@ -755,11 +755,12 @@ function GUIMarineBuyMenu:SetHostStructure(hostStructure)
     self.hostStructure = hostStructure
 
     if self.hostStructure:isa("Armory") then
-        --if GetHasTech(hostStructure,kTechId.MilitaryProtocol) then
-        --    self:CreateArmoryUI_MilitaryProtocol()
-        --else
+        local skill = Client.GetLocalPlayer():GetPlayerSkill() - Client.GetLocalPlayer():GetPlayerSkillOffset()
+        if skill >= kMarineNewComerRank then
             self:CreateArmoryUI()
-        --end
+        else
+            self:CreateArmoryUI_NewComer()
+        end
     elseif self.hostStructure:isa("PrototypeLab") then
         self:CreatePrototypeLabUI()
     else
@@ -821,7 +822,7 @@ function PlayerUI_GetHasTech(techId)
     return GetHasTech(Client.GetLocalPlayer(),techId)
 end
 
-function GUIMarineBuyMenu:CreateArmoryUI_MilitaryProtocol()
+function GUIMarineBuyMenu:CreateArmoryUI_NewComer()
     local paddingX = 105 -- Start of content from left side of background.
     local paddingY = 36
     -- 449
@@ -848,9 +849,9 @@ function GUIMarineBuyMenu:CreateArmoryUI_MilitaryProtocol()
     title:SetPosition(Vector(0, -50, 0))
     title:SetTextAlignmentX(GUIItem.Align_Center)
     title:SetTextAlignmentY(GUIItem.Align_Min)
-    title:SetText(Locale.ResolveString("MILITARY_PROTOCOL_ENABLED"))
+    title:SetText(Locale.ResolveString("NEWCOMER_ENABLED"))
     title:SetIsScaling(false)
-    title:SetColor(Color(164/255, 20/255, 20/255, 1))
+    title:SetColor(Color(125/255, 206/255, 160/255, 1))
     title:SetFontName(Fonts.kAgencyFB_Large_Bold)
     self.background:AddChild(title)
     
@@ -866,8 +867,8 @@ function GUIMarineBuyMenu:CreateArmoryUI_MilitaryProtocol()
     self.background:AddChild(weaponGroupTopLeft)
     self:_InitializeWeaponGroup(weaponGroupTopLeft, x2ButtonPositions,
             {
+                kTechId.Rifle,
                 kTechId.Pistol,
-                kTechId.Revolver,
             })
 
     local weaponGroupBottomLeft = self:CreateAnimatedGraphicItem()
@@ -879,10 +880,10 @@ function GUIMarineBuyMenu:CreateArmoryUI_MilitaryProtocol()
     self.background:AddChild(weaponGroupBottomLeft)
     self:_InitializeWeaponGroup(weaponGroupBottomLeft, x4ButtonPositions,
             {
-                kTechId.Rifle,
-                kTechId.SubMachineGun,
+                kTechId.Shotgun,
                 kTechId.LightMachineGunAcquire,
-                kTechId.CombatBuilder
+                kTechId.HeavyMachineGun,
+                kTechId.Flamethrower,
             })
 
     local x4LabelStartX = 335
@@ -906,10 +907,9 @@ function GUIMarineBuyMenu:CreateArmoryUI_MilitaryProtocol()
     weaponGroupTopRight:SetTexture(self.kButtonGroupFrame_Unlabeled_x2)
     weaponGroupTopRight:SetSizeFromTexture()
     weaponGroupTopRight:SetOptionFlag(GUIItem.CorrectScaling)
-    local buyMelee = PlayerUI_GetHasItem(kTechId.Axe) and kTechId.Knife or kTechId.Axe
     self:_InitializeWeaponGroup(weaponGroupTopRight, x2ButtonPositions,
             {
-                buyMelee,
+                kTechId.Axe,
                 kTechId.Welder,
             },2)
 
@@ -922,10 +922,10 @@ function GUIMarineBuyMenu:CreateArmoryUI_MilitaryProtocol()
     weaponGroupBottomRight:SetOptionFlag(GUIItem.CorrectScaling)
     self:_InitializeWeaponGroup(weaponGroupBottomRight, x4ButtonPositions,
             {
-                kTechId.GasGrenade,
+                kTechId.LayMines,
                 kTechId.ClusterGrenade,
                 kTechId.PulseGrenade,
-                kTechId.LayMines
+                kTechId.GrenadeLauncher,
             })
 
     local labelItemBottomRight = self:CreateAnimatedTextItem()

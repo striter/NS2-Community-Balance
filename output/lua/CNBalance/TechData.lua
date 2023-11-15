@@ -623,7 +623,7 @@ function BuildTechData()
 
     table.insert(techData, {
         [kTechDataId] = kTechId.Spores,
-        [kTechDataCategory] = kTechId.Lerk,
+        --[kTechDataCategory] = kTechId.Lerk,
         [kTechDataDisplayName] = "SPORES",
         [kTechDataMapName] = Spores.kMapName,
         [kTechDataCostKey] = kSporesResearchCost,
@@ -787,14 +787,14 @@ function BuildTechData()
         [kTechDataResearchName] = "ONOS_DEVOUR",
     })
     
-    table.insert(techData, {
-        [kTechDataId] = kTechId.DropTeamStructureAbility,
-        [kTechDataCategory] = kTechId.Gorge,
-        [kTechDataMapName] = DropTeamStructureAbility.kMapName,
-        [kTechDataDisplayName] = "DROP_TEAM_STRUCTURE",
-        [kTechDataTooltipInfo] = "DROP_TEAM_STRUCTURE_TOOLTIP",
-        [kTechDataResearchName] = "DROP_TEAM_STRUCTURE",
-    })
+    --table.insert(techData, {
+    --    [kTechDataId] = kTechId.DropTeamStructureAbility,
+    --    [kTechDataCategory] = kTechId.Gorge,
+    --    [kTechDataMapName] = DropTeamStructureAbility.kMapName,
+    --    [kTechDataDisplayName] = "DROP_TEAM_STRUCTURE",
+    --    [kTechDataTooltipInfo] = "DROP_TEAM_STRUCTURE_TOOLTIP",
+    --    [kTechDataResearchName] = "DROP_TEAM_STRUCTURE",
+    --})
 
     --Tunnels
     table.insert(techData, {

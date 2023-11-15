@@ -62,6 +62,10 @@ kPResPerBountyClaimAsMarine = 0.4  kPResPerBountyClaimAsAlien = 0.25  kBountyCla
 kBountyTargetDamageReceiveStep = 18  kBountyDamageReceiveBaseEachScore = (0.1 / kBountyTargetDamageReceiveStep) --0-10%,20%-40%,40%-80%, increase/deccrease its damage receive by steps.
 kBountyDamageDealtBaseEachScore = 0.1 / 6 --Usually for marines&jetpacks, should be lower?
 
+--Trying to protect a players KD
+kContinuousDeathEachDeath = 1 kContinuousDeathClaimOnAddKill = 1 kContinuousDeathClaimOnAddAssist = 0.25
+kContinuousDeathProtectionStep = 3 kContinuousDeathProtectionEachValue = 0.05
+
 --Toy for marine commander (remove all marines passive income, harsh one)
 kMilitaryProtocolResearchCost = 5
 kMilitaryProtocolResearchTime = 15

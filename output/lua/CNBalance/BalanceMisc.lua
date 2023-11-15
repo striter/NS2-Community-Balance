@@ -1,3 +1,8 @@
+kMarineNewComerRank = 500
+kAlienNewComerRestriction = {
+    [kTechId.Lerk] = 300,
+    [kTechId.Prowler] = 500,
+}
 
 -- kInitialMACs = 1
 -- kInitialDrifters = 1
