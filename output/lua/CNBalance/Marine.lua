@@ -1,7 +1,6 @@
 Marine.kBountyThreshold = kBountyClaimMinMarine
 Marine.kBountyDamageReceive = true
-Marine.kContinuousDeathMaxDamageReduction = 0.33
---Marine.kBountyDamageDecrease = true
+Marine.kKDRatioMaxDamageReduction = 0.33
 Marine.kPickupDelay = kMedpackPickupDelay
 
 Script.Load("lua/CNBalance/Mixin/RequestHandleMixin.lua")
@@ -432,6 +431,16 @@ if Server then
             return variantToMPUniform[variant] or kMarineVariants.chroma
         end
         return variant
+    end
+    
+    local baseOnKill = Marine.OnKill
+    function Marine:OnKill(killer, doer, point, direction)
+        baseOnKill(self,killer, doer, point, direction)
+
+        local hasMP = GetHasTech(self,kTechId.MilitaryProtocol)
+        if hasMP then
+            self:AddResources(kMilitaryProtocolPResRefundOnDeath)
+        end
     end
     
     function Marine:GiveHeavy()

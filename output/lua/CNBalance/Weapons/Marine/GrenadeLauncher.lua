@@ -23,14 +23,14 @@ function GrenadeLauncher:OnPrimaryAttack(player)
     baseOnPrimaryAttack(self,player)
 end
 
-function GrenadeLauncher:GetHasSecondary(player)
-    return true
-end
-
-function GrenadeLauncher:OnSecondaryAttack(player)
-    player.firePrimary = false
-    baseOnPrimaryAttack(self,player)
-end
+--function GrenadeLauncher:GetHasSecondary(player)
+--    return true
+--end
+--
+--function GrenadeLauncher:OnSecondaryAttack(player)
+--    player.firePrimary = false
+--    baseOnPrimaryAttack(self,player)
+--end
 
 function GrenadeLauncher:ShootGrenade(player)
 
@@ -54,10 +54,10 @@ function GrenadeLauncher:ShootGrenade(player)
         local round="Grenade"
         local speed = GrenadeLauncher.kGrenadeSpeed
         local friction = GrenadeLauncher.kImpactGrenadeFriction
-        if not player.firePrimary then
-            round="ImpactGrenade"
-            speed= GrenadeLauncher.kImpactGrenadeSpeed
-        end
+        --if not player.firePrimary then
+        --    round="ImpactGrenade"
+        --    speed= GrenadeLauncher.kImpactGrenadeSpeed
+        --end
 
         player:CreatePredictedProjectile(round, startPoint, direction * speed,
                                          GrenadeLauncher.kGrenadeBounce, friction,

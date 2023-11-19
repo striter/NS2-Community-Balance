@@ -62,9 +62,10 @@ kPResPerBountyClaimAsMarine = 0.4  kPResPerBountyClaimAsAlien = 0.25  kBountyCla
 kBountyTargetDamageReceiveStep = 18  kBountyDamageReceiveBaseEachScore = (0.1 / kBountyTargetDamageReceiveStep) --0-10%,20%-40%,40%-80%, increase/deccrease its damage receive by steps.
 kBountyDamageDealtBaseEachScore = 0.1 / 6 --Usually for marines&jetpacks, should be lower?
 
---Trying to protect a players KD
-kContinuousDeathEachDeath = 1 kContinuousDeathClaimOnAddKill = 1 kContinuousDeathClaimOnAddAssist = 0.25
-kContinuousDeathProtectionStep = 3 kContinuousDeathProtectionEachValue = 0.05
+--Mediumize players KD Ratio by reduce taken damage with low KD, increase taken damage with high KD , combined with upper value lel
+kKDRatioEachDeath = 1 kKDRatioClaimOnAddKill = 1 kKDRatioClaimOnAddAssist = 0.25
+kKDRatioProtectionStep = 2 kKDRatioProtectionEachValue = 0.05
+kKDRatioBoostStep = 5 kKDRatioDamageIncreaseEachValue = 0.025
 
 --Toy for marine commander (remove all marines passive income, harsh one)
 kMilitaryProtocolResearchCost = 5
@@ -79,6 +80,7 @@ kMilitaryProtocolTeamResourcesPerKill = {          --Replaced refund system
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
     [kTechId.Hive] = 10, [kTechId.ShiftHive] = 15, [kTechId.CragHive] = 15, [kTechId.ShadeHive] = 15,
 }
+kMilitaryProtocolPResRefundOnDeath = 0.5
 
 kMatchMinPlayers = 10
 kMarineRespawnTime = 9
@@ -390,7 +392,7 @@ kXenocideFuelTime = 120
 kXenocideEnergyCost = 30
 kXenocideDamageType = kDamageType.Structural
 kXenocideDamage = 150  kXenocideFuelDamage = 225 --200
-kXenocideRange = 9 kXenocideFuelRange = 12 -- 14
+kXenocideRange = 8 kXenocideFuelRange = 12 -- 14
 kXenocideDamageScalarEmptyHealth = 0.3 kXenocideDamageHealthScalar = 1 - kXenocideDamageScalarEmptyHealth
 kXenocideSpawnReduction = 0.75 kXenocideFuelSpawnReduction = 0.5
 

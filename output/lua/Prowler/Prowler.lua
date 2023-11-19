@@ -38,7 +38,6 @@ Prowler.GlideAirSpeed = 8.0
 Prowler.MaxAirSpeed = 12.15
 Prowler.RappelCelerityBonusSpeed = 2
 Prowler.kWalljumpForce = 8
-Prowler.kContinuousDeathMaxDamageReduction = 0.33
 
 Prowler.kHealth = kProwlerHealth
 Prowler.kArmor  = kProwlerArmor

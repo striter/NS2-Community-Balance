@@ -1,5 +1,5 @@
 Skulk.kBountyThreshold = kBountyClaimMinSkulk
-Skulk.kContinuousDeathMaxDamageReduction = 0.66
+Skulk.kKDRatioMaxDamageReduction = 0.66
 
 Skulk.kAdrenalineEnergyRecuperationRate = 30
 

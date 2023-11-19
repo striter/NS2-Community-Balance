@@ -1,5 +1,5 @@
 JetpackMarine.kBountyThreshold = kBountyClaimMinJetpack
-JetpackMarine.kContinuousDeathMaxDamageReduction = 0.2
+JetpackMarine.kKDRatioMaxDamageReduction = 0.2
 -- function JetpackMarine:GetFuel()
 
 --     local dt = Shared.GetTime() - self.timeJetpackingChanged
