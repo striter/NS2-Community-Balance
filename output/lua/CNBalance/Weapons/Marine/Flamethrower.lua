@@ -24,7 +24,6 @@ function Flamethrower:BurnSporesAndUmbra(startPoint, endPoint)
         local spores = GetEntitiesWithinRange("SporeCloud", checkAtPoint, kSporesDustCloudRadius)
         for i = 1, #spores do
             local spore = spores[i]
-            Shared.Message(timeLastBurn)
             self:DoDamage(kFlamethrowerSporeDamagePerSecond * timeLastBurn, spore, endPoint, nil)
             burnSpent = true
         end

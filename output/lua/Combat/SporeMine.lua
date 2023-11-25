@@ -270,27 +270,28 @@ if Server then
     function SporeMine:DetectThreat()
         if self:GetIsBuilt() then
             local castSpore = GetIsTechUnlocked(self,kTechId.Spores)
-            
             local otherTeam = GetEnemyTeamNumber(self:GetTeamNumber())
-            local allEnemies = GetEntitiesForTeamWithinRange("Player", otherTeam, self:GetOrigin(), castSpore and kSporeMineCloudCastRadius or kSporeMineDamageRadius)
-            local enemies = {}
-
-            for _, ent in ipairs(allEnemies) do
-                if ent:GetIsAlive() then
-                    table.insert(enemies, ent)
-                end
-            end
-
-
-
             if castSpore then
+                
                 local time = Shared.GetTime()
-                if  time - self.timeLastSpore > kSporeMineCloudCastInterval then
-                    self.timeLastSpore = time 
-                    self:CastSpore(nil)
+                if time - self.timeLastSpore > kSporeMineCloudCastInterval then
+                    local allEnemies = GetEntitiesForTeamWithinRange("Player", otherTeam, self:GetOrigin(),  kSporeMineCloudCastRadius)
+                    if #allEnemies > 0 then
+                        self.timeLastSpore = time
+                        self:CastSpore(nil)
+                    end
                 end
+                
             else
+                local allEnemies = GetEntitiesForTeamWithinRange("Player", otherTeam, self:GetOrigin(),  kSporeMineDamageRadius)
+                local enemies = {}
 
+                for _, ent in ipairs(allEnemies) do
+                    if ent:GetIsAlive() then
+                        table.insert(enemies, ent)
+                    end
+                end
+                
                 local targetPoint
                 Shared.SortEntitiesByDistance(self:GetOrigin(), enemies)
                 for _, ent in ipairs(enemies) do

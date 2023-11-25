@@ -42,13 +42,13 @@ function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType,
                 end
             end
         end
-    else    --High KD Player, increase its damage receive
-        if not self.kIgnoreKDDamageReceive then
-            local damageIncreaseParam = -kdRatioUnforeseen - kKDRatioBoostStep
-            if damageIncreaseParam > 0 then
-                damageScalar = damageScalar + damageIncreaseParam * kKDRatioDamageIncreaseEachValue
-            end
-        end
+    else    
+        --if not self.kIgnoreKDDamageReceive then --High KD Player, increase its damage receive
+        --    local damageIncreaseParam = -kdRatioUnforeseen - kKDRatioBoostStep
+        --    if damageIncreaseParam > 0 then
+        --        damageScalar = damageScalar + damageIncreaseParam * kKDRatioDamageIncreaseEachValue
+        --    end
+        --end
     end
 
     damageScalar = math.Clamp(damageScalar,0.1,3.0)        --Seems enough

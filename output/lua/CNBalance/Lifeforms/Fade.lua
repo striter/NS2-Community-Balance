@@ -1,3 +1,4 @@
+
 local kBlinkSpeed = 14    --14 Blink desire speed
 local kBlinkAcceleration = 40   --40 Speed up per second
 local kBlinkAddAcceleration = 1  --1 Speed after holding
