@@ -10,52 +10,61 @@ function ScoringMixin:__initmixin()
     end
 end
 
-function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint)
+if Server then
     
-    if  self.isHallucination
-        --or self:GetIsVirtual()
-    then return end
+    function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint)
+        
+        if  self.isHallucination
+            or self:GetIsVirtual()
+        then return end
     
-    local gamerule =  GetGamerules()
-    if not gamerule or not gamerule.gameInfo or not gamerule.gameInfo:GetRookieMode() then return end  --Don't open without rookie mode
-    if(damageTable.damage <= 0) then return end
-
-    local damageScalar = 1
+        local gamerule =  GetGamerules()
+        local nonRookieMode =  not gamerule or not gamerule.gameInfo or not gamerule.gameInfo:GetRookieMode()
+        local rookieMode = not nonRookieMode
+        --if rookieMode then return end  --Don't open without rookie mode
+        
+        if(damageTable.damage <= 0) then return end
     
-    local bountyScore = self:GetBountyCurrentLife()
+        local damageScalar = 1
+        
+        local bountyScore = self:GetBountyCurrentLife()
+        
+        --Bounty Adjustment
+        if  bountyScore > 0 then
+            local scalar = bountyScore  * (0.1 / self.kBountyThreshold)
+            if rookieMode then  --0-10%,20%-40%,40%-80%, increase/deccrease its damage receive by steps.
+                scalar = scalar * (math.floor(bountyScore / self.kBountyThreshold)+ 1)
+            end
+            damageScalar = damageScalar + scalar      --Receive Additional Damage And Die Please
+        end
     
-    --Bounty Adjustment
-    if self.kBountyDamageReceive and bountyScore > 0 then
-        local scalar = bountyScore * (math.floor(bountyScore / kBountyTargetDamageReceiveStep)+ 1) * kBountyDamageReceiveBaseEachScore
-        damageScalar = damageScalar + scalar      --Receive Additional Damage And Die Please
-    end
-
-    --KDRatio adjustment
-    local kdRatioUnforeseen = math.floor( self.deaths - self.kills * kKDRatioClaimOnAddKill - self.assistkills * kKDRatioClaimOnAddAssist)
-    if kdRatioUnforeseen > 0 then       --Low KD Player, reduce its damage taken
-        if self.kKDRatioMaxDamageReduction then
-            if bountyScore <= 0 then
+        if rookieMode 
+                and self.kKDRatioMaxDamageReduction
+                and self:GetPlayerSkill() < kNoneRookieSkill 
+                and bountyScore <= 0
+        then
+            --KDRatio adjustment
+            local kdRatioUnforeseen = math.floor( self.deaths - self.kills * kKDRatioClaimOnAddKill - self.assistkills * kKDRatioClaimOnAddAssist)
+            if kdRatioUnforeseen > 0 then       --Low KD Player, reduce its damage taken
                 local damageDecreaseParam = kdRatioUnforeseen - kKDRatioProtectionStep
                 if damageDecreaseParam > 0 then
                     local scalar = math.min(damageDecreaseParam * kKDRatioProtectionEachValue,self.kKDRatioMaxDamageReduction)
                     damageScalar = damageScalar - scalar
                 end
+            else
+                --if not self.kIgnoreKDDamageReceive then --High KD Player, increase its damage receive
+                --    local damageIncreaseParam = -kdRatioUnforeseen - kKDRatioBoostStep
+                --    if damageIncreaseParam > 0 then
+                --        damageScalar = damageScalar + damageIncreaseParam * kKDRatioDamageIncreaseEachValue
+                --    end
+                --end
             end
         end
-    else    
-        --if not self.kIgnoreKDDamageReceive then --High KD Player, increase its damage receive
-        --    local damageIncreaseParam = -kdRatioUnforeseen - kKDRatioBoostStep
-        --    if damageIncreaseParam > 0 then
-        --        damageScalar = damageScalar + damageIncreaseParam * kKDRatioDamageIncreaseEachValue
-        --    end
-        --end
+            
+        damageScalar = math.Clamp(damageScalar,0.1,3.0)        --Seems enough
+        damageTable.damage = damageTable.damage * damageScalar
     end
 
-    damageScalar = math.Clamp(damageScalar,0.1,3.0)        --Seems enough
-    damageTable.damage = damageTable.damage * damageScalar
-end
-
-if Server then
     local baseResetScores = ScoringMixin.ResetScores
     function ScoringMixin:ResetScores()
         baseResetScores(self)
@@ -73,7 +82,6 @@ if Server then
     local function AddBounty(self,value)
         --if GetWarmupActive() then return end
         local gamerule =  GetGamerules()
-        if not gamerule or not gamerule.gameInfo or not gamerule.gameInfo:GetRookieMode() then return end  --Don't open without rookie mode
         if GetTeamResourceRefundBase(self:GetTeamNumber()) > kTeamResourceRefundBase then return end    --Don't increase bounty while in inferior position(?)
 
         self.bountyCurrentLife = Clamp(self.bountyCurrentLife + value, 0, kMaxBountyScore)

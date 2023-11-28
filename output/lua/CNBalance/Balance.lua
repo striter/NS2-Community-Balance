@@ -57,15 +57,11 @@ kTechDataTeamResRefundOnKill = {
 kAssistMinimumDamageFraction = 0.35      --Avoid parasiter or babbler assists ,feels pretty weird
 kBountyScoreEachAssist = 1 kBountyScoreEachKill = 2 kMaxBountyScore = 512       --You can't kill 256 players in a row?
 kBountyClaimMinMarine = 7 kBountyClaimMinJetpack = 10 kBountyClaimMinExo = 14 
-kBountyClaimMinSkulk = 7 kBountyClaimMinAlien = 10  kBountyClaimMinOnos = 14
+kBountyClaimMinSkulk = 7 kBountyClaimMinAlien = 14  kBountyClaimMinOnos = 18
 kPResPerBountyClaimAsMarine = 0.4  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 20
-kBountyTargetDamageReceiveStep = 18  kBountyDamageReceiveBaseEachScore = (0.1 / kBountyTargetDamageReceiveStep) --0-10%,20%-40%,40%-80%, increase/deccrease its damage receive by steps.
+kBountyTargetDamageReceiveStep = 14  kBountyDamageReceiveBaseEachScore = (0.1 / kBountyTargetDamageReceiveStep)
 kBountyDamageDealtBaseEachScore = 0.1 / 6 --Usually for marines&jetpacks, should be lower?
 
---Mediumize players KD Ratio by reduce taken damage with low KD, increase taken damage with high KD , combined with upper value lel
-kKDRatioEachDeath = 1 kKDRatioClaimOnAddKill = 1 kKDRatioClaimOnAddAssist = 0.25
-kKDRatioProtectionStep = 2 kKDRatioProtectionEachValue = 0.05
---kKDRatioBoostStep = 5 kKDRatioDamageIncreaseEachValue = 0.025
 
 --Toy for marine commander (remove all marines passive income, harsh one)
 kMilitaryProtocolResearchCost = 5

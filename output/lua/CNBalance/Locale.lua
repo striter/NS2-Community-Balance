@@ -1,5 +1,8 @@
 
 if kTranslateMessage then
+    kTranslateMessage["RESOURCES_ALIEN"] = "进化因子"
+    kTranslateMessage["RESOURCES_MARINE"] = "军需补给点"
+
     kTranslateMessage["NEWCOMER_ENABLED"] = "正在浏览新兵采购页,升级军衔以解锁更多内容."
     
     kTranslateMessage["GAME_LENGTH_TEAM1"] = "站点清理 [%s:%s]"
@@ -166,6 +169,8 @@ if kTranslateMessage then
 end
 
 if kLocales then
+    kLocales["RESOURCES_ALIEN"] = "Evolve Matter"
+    kLocales["RESOURCES_MARINE"] = "Supply Point"
     kLocales["NEWCOMER_ENABLED"] = "NewComer requisitions,More available with higher rank."
     
     kLocales["GAME_LENGTH_TEAM1"] = "Cleaning:[%s:%s]"

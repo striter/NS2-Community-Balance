@@ -3,14 +3,17 @@ GUIPlayerResource.kBountyIconPos = Vector(30,-4 + kBountyOffset,0)
 GUIPlayerResource.kBountyTextPos = Vector(100,4 + kBountyOffset,0)
 GUIPlayerResource.kBountyDescriptionPos = Vector(110,4 + kBountyOffset,0)
 
-local kBountyIcons = { alien = PrecacheAsset("ui/alien_HUD_bounty.dds"), marine = PrecacheAsset("ui/marine_HUD_bounty.dds") }
+GUIPlayerResource.kBountyIcons = { alien = PrecacheAsset("ui/alien_HUD_bounty.dds"), marine = PrecacheAsset("ui/marine_HUD_bounty.dds") }
+GUIPlayerResource.kPResDescription = {alien = "RESOURCES_ALIEN",marine = "RESOURCES_MARINE"}
 
 local baseInitialize = GUIPlayerResource.Initialize
 function GUIPlayerResource:Initialize(style, teamNumber)
     baseInitialize(self,style,teamNumber)
+    self.pResDescription:SetText(Locale.ResolveString(GUIPlayerResource.kPResDescription[style.textureSet]))
+    
     self.bountyIcon = self.script:CreateAnimatedGraphicItem()
     self.bountyIcon:SetAnchor(GUIItem.Left, GUIItem.Top)
-    self.bountyIcon:SetTexture(kBountyIcons[style.textureSet])
+    self.bountyIcon:SetTexture(GUIPlayerResource.kBountyIcons[style.textureSet])
     self.background:AddChild(self.bountyIcon)
 
     self.bountyText = self.script:CreateAnimatedTextItem()
