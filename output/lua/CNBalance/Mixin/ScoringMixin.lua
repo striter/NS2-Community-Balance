@@ -15,7 +15,7 @@ if Server then
     function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint)
         
         if  self.isHallucination
-            or self:GetIsVirtual()
+            --or self:GetIsVirtual()
         then return end
     
         local gamerule =  GetGamerules()
@@ -28,22 +28,22 @@ if Server then
         local damageScalar = 1
         
         local bountyScore = self:GetBountyCurrentLife()
-        
-        --Bounty Adjustment
-        if  bountyScore > 0 then
+
+        --Self Bounty Damage Taken Increase
+        if bountyScore > 0 then   
             local scalar = bountyScore  * (0.1 / self.kBountyThreshold)
-            if rookieMode then  --0-10%,20%-40%,40%-80%, increase/deccrease its damage receive by steps.
+            if rookieMode then  --0-10%,20%-40%,60%-90% ...
                 scalar = scalar * (math.floor(bountyScore / self.kBountyThreshold)+ 1)
             end
             damageScalar = damageScalar + scalar      --Receive Additional Damage And Die Please
         end
-    
-        if rookieMode 
-                and self.kKDRatioMaxDamageReduction
-                and self:GetPlayerSkill() < kNoneRookieSkill 
+
+        --KDRatio adjustment
+        if rookieMode
                 and bountyScore <= 0
+                and self.kKDRatioMaxDamageReduction
+                and self:GetPlayerSkill() < kNoneRookieSkill
         then
-            --KDRatio adjustment
             local kdRatioUnforeseen = math.floor( self.deaths - self.kills * kKDRatioClaimOnAddKill - self.assistkills * kKDRatioClaimOnAddAssist)
             if kdRatioUnforeseen > 0 then       --Low KD Player, reduce its damage taken
                 local damageDecreaseParam = kdRatioUnforeseen - kKDRatioProtectionStep
@@ -60,8 +60,21 @@ if Server then
                 --end
             end
         end
-            
-        damageScalar = math.Clamp(damageScalar,0.1,3.0)        --Seems enough
+
+        --Bounty Damage Dealt Decrease
+        if rookieMode
+                and bountyScore <= 0
+                and attacker.kBountyDamageDecrease 
+        then
+            local attackerBountyScore = attacker:GetBountyCurrentLife()
+            if attackerBountyScore > 0 then   --0-5%,10%-20%,30%-45%,60%-80% ...
+                local scalar = attackerBountyScore * (0.05 / attacker.kBountyThreshold)
+                scalar = scalar * (math.floor(attackerBountyScore / attacker.kBountyThreshold)+ 1)
+                damageScalar = damageScalar - scalar
+            end
+        end
+
+        damageScalar = math.Clamp(damageScalar,0.2,5.0)        --Seems enough
         damageTable.damage = damageTable.damage * damageScalar
     end
 
