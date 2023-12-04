@@ -248,4 +248,9 @@ local function extGetIsResearchRelevant(techId)
 
     return oldGetIsResearchRelevant(techId)
 end
+
+function PlayingTeam:OnGameStateChanged(_state)
+    
+end
+
 debug.setupvaluex(PlayingTeam.OnResearchComplete, "GetIsResearchRelevant", extGetIsResearchRelevant)

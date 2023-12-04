@@ -1,11 +1,3 @@
--- ======= Copyright (c) 2003-2011, Unknown Worlds Entertainment, Inc. All rights reserved. =======
---
--- lua\Weapons\Alien\BabblerEggAbility.lua
---
---    Created by:   Andreas Urwalek (a_urwa@sbox.tugraz.at)
---
--- ========= For more information, visit us at http://www.unknownworlds.com =====================
-
 Script.Load("lua/Weapons/Alien/StructureAbility.lua")
 
 class 'SporeMineAbility' (StructureAbility)
@@ -34,7 +26,7 @@ function SporeMineAbility:GetIsPositionValid(position, player, normal, lastClick
     local valid = true
     if valid then
         local extents = GetExtents(kTechId.SporeMine) / 2.25
-        local traceStart = position + normal * 0.15 -- A bit above to allow hydras to be placed on uneven ground easily
+        local traceStart = position + normal * 0.15 -- A bit above
         local traceEnd = position + normal * extents.y
         trace = Shared.TraceBox(extents, traceStart, traceEnd, CollisionRep.Damage, PhysicsMask.Bullets, SporeMineEntityFilter(player))
 

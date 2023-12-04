@@ -238,15 +238,17 @@ function AlienTeam:UpdateBioMassLevel()
     self.inProgressBiomassLevel = 0
     local progress = 0
 
+    local isOriginForm = self:IsOriginForm()
     local ents = GetEntitiesForTeam("Hive", self:GetTeamNumber())
 
     for _, entity in ipairs(ents) do
 
         if entity:GetIsAlive() then
 
-            local currentBioMass = entity:GetBioMassLevel()
-
-            local techId = entity:GetTechId()
+            entity:UpdateBiomassLevel(self)
+            
+            local currentBioMass = entity:GetBioMassLevel(isOriginForm)
+            --local techId = entity:GetTechId()
             newBiomass = newBiomass + currentBioMass
 
             self.inProgressBiomassLevel = self.inProgressBiomassLevel + currentBioMass
@@ -331,7 +333,7 @@ local function UpdateBiomassChanges(self, biomassChanged, biomassLevel)
 end
 
 function AlienTeam:OnUpdateBiomass(oldBiomass, newBiomass)
-    if self.techtree then
+    if self.techTree then
         self.techTree:SetTechChanged()
     end
 
@@ -566,26 +568,12 @@ local function CreateCysts(hive, harvester, teamNumber)
 
 end
 
-function AlienTeam:SpawnInitialStructures(techPoint)
-
-    local tower, hive = PlayingTeam.SpawnInitialStructures(self, techPoint)
-
-    hive:SetFirstLogin()
-    hive:SetInfestationFullyGrown()
-
-    -- It is possible there was not an available tower if the map is not designed properly.
-    if tower then
-        CreateCysts(hive, tower, self:GetTeamNumber())
-    end
-
-    return tower, hive
-
-end
 
 function AlienTeam:GetHasAbilityToRespawn()
 
     local hives = GetEntitiesForTeam("Hive", self:GetTeamNumber())
-    return table.icount(hives) > 0
+    local eggs = GetEntitiesForTeam("Egg", self:GetTeamNumber())
+    return table.icount(hives) > 0 or table.icount(eggs) > 0
 
 end
 
@@ -745,7 +733,10 @@ function AlienTeam:Update(timePassed)
 
     PlayingTeam.Update(self, timePassed)
 
-    self:UpdateTeamAutoHeal(timePassed)
+    if not self:IsOriginForm() then
+        self:UpdateTeamAutoHeal(timePassed)
+    end
+
     self:UpdateEggGeneration()
     self:UpdateEggCount()
     self:UpdateAlienSpectators()
@@ -962,7 +953,7 @@ function AlienTeam:InitTechTree()
     self.techTree:AddBuildNode(kTechId.Drifter, kTechId.None, kTechId.None, true)
 
     -- Whips
-    self.techTree:AddBuildNode(kTechId.Whip,                      kTechId.None,                kTechId.None)
+    self.techTree:AddBuildNode(kTechId.Whip,                      kTechId.Hive,                kTechId.None)
     self.techTree:AddUpgradeNode(kTechId.EvolveBombard,             kTechId.None,                kTechId.None)
 
     self.techTree:AddPassive(kTechId.WhipBombard)
@@ -989,7 +980,7 @@ function AlienTeam:InitTechTree()
     self.techTree:AddBuildNode(kTechId.Crag,                      kTechId.Hive,          kTechId.None)
     self.techTree:AddBuildNode(kTechId.Shift,                     kTechId.Hive,          kTechId.None)
     self.techTree:AddBuildNode(kTechId.Shade,                     kTechId.Hive,          kTechId.None)
-
+    
     -- Alien upgrade structure
     self.techTree:AddBuildNode(kTechId.Shell, kTechId.CragHive)
     self.techTree:AddSpecial(kTechId.TwoShells, kTechId.Shell)
@@ -1052,6 +1043,7 @@ function AlienTeam:InitTechTree()
     self.techTree:AddSpecial(kTechId.TwoCrags)
 
     -- Tunnel
+    self.techTree:AddBuildNode(kTechId.Tunnel)
     self.techTree:AddBuildNode(kTechId.TunnelExit)
     self.techTree:AddBuildNode(kTechId.TunnelRelocate)
     self.techTree:AddActivation(kTechId.TunnelCollapse)
@@ -1130,15 +1122,61 @@ function AlienTeam:InitTechTree()
     self.techTree:AddActivation(kTechId.AcidRocket,           kTechId.BioMassFive,  kTechId.None,kTechId.AllAliens)
     self.techTree:AddActivation(kTechId.MetabolizeShadowStep,        kTechId.BioMassThree, kTechId.None)
 
-
+    self.techTree:AddResearchNode(kTechId.Origin)
+    
     self.techTree:SetComplete()
+
+    self.originTechNode = self.techTree:GetTechNode(kTechId.Origin)
+end
+
+function AlienTeam:OnGameStateChanged(_state)
+    if _state == kGameState.Countdown then
+        if not self:GetHasCommander() then
+            self.originTechNode:SetResearched(true)
+            self:AddTeamResources(20)
+            local ents = GetEntitiesForTeam("Hive",self:GetTeamNumber())
+            for _, hive in ipairs(ents) do
+                DestroyEntity(hive)
+            end
+        end
+    end
+end
+
+
+function AlienTeam:GetHasTeamLost()
+
+    if self:IsOriginForm() then
+        local activePlayers = self:GetHasActivePlayers()
+        local abilityToRespawn = self:GetHasAbilityToRespawn()
+        if (not activePlayers and not abilityToRespawn)
+            or (self:GetNumPlayers() == 0)
+              or  self:GetHasConceded() then
+            return true
+        end
+        return false
+    end
+    
+    return PlayingTeam.GetHasTeamLost(self)
+
+end
+
+function AlienTeam:SpawnInitialStructures(techPoint)
+
+    local tower, hive = PlayingTeam.SpawnInitialStructures(self, techPoint)
+
+    hive:SetFirstLogin()
+    hive:SetInfestationFullyGrown()
+    -- It is possible there was not an available tower if the map is not designed properly.
+    if tower then
+        CreateCysts(hive, tower, self:GetTeamNumber())
+    end
+
+    return tower, hive
 end
 
 function AlienTeam:GetNumHives()
-
     local teamInfoEntity = Shared.GetEntity(self.teamInfoEntityId)
     return teamInfoEntity:GetNumCapturedTechPoints()
-
 end
 
 function AlienTeam:GetActiveHiveCount()
@@ -1290,7 +1328,25 @@ function AlienTeam:GetTotalInRespawnQueue()
 
 end
 
-
 function AlienTeam:GetResourcesPerRefund()
     return 0.5,0.2
+end
+
+function AlienTeam:CollectTeamResources(teamRes,playerRes)
+    if self:IsOriginForm() then
+        teamRes = 0   --No team res now
+    end
+
+    PlayingTeam.CollectTeamResources(self,teamRes,playerRes)
+end
+
+function AlienTeam:CollectKillReward(_techId)
+    if self:IsOriginForm() then
+        return kOriginPersonalResourcesPerKill[_techId] or 0
+    end
+    return 0
+end
+
+function AlienTeam:IsOriginForm()
+    return self.originTechNode and self.originTechNode:GetResearched()
 end

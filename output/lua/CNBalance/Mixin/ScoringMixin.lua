@@ -15,7 +15,7 @@ if Server then
     function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint)
         
         if  self.isHallucination
-            --or self:GetIsVirtual()
+            or self:GetIsVirtual()
         then return end
     
         local gamerule =  GetGamerules()

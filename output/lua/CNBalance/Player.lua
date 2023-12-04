@@ -89,21 +89,17 @@ if Server then
 	end
 
 	
-	--function Player:AddResources(amount,isAggressivePlay)
+	--local baseSetResources = Player.SetResources
+	--function Player:SetResources(amount)
+	--	Shared.Message(amount)
+	--	baseSetResources(self,amount)
+	--end
+	--
+	--function Player:AddResources(amount)
 	--
 	--	local resReward = 0
 	--
 	--	if Shared.GetCheatsEnabled() or ( amount <= 0 or not self.blockPersonalResources ) then
-	--
-	--		if amount > 0 then
-	--			local efficiency = GetPassiveResourceEfficiency(Shared.GetTime() - GetGamerules():GetGameStartTime())
-	--			if isAggressivePlay then
-	--				amount = amount * (2-efficiency)
-	--			else
-	--				amount = amount * efficiency
-	--			end
-	--		end
-	--			
 	--		resReward = math.min(amount, kMaxPersonalResources - self:GetResources())
 	--		self:SetResources(self:GetResources() + resReward)
 	--

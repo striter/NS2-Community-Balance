@@ -15,8 +15,8 @@ if Server then
 
         local selfIsPlayer = self:isa("Player")
 
-        local techID = self:GetTechId()
-        local pResReward = kTechDataPersonalResOnKill[techID] or 0
+        local _techID = self:GetTechId()
+        local pResReward = kTechDataPersonalResOnKill[_techID] or 0
         --Shared.Message(tostring(pResReward))
 
         if attacker and GetAreEnemies(self, attacker) then -- pve kills count
@@ -26,7 +26,7 @@ if Server then
 
             local attackerTeam = attacker:GetTeam()
             if attackerTeam then
-                pResReward = pResReward + attackerTeam:OnTeamKill(techID,selfIsPlayer and self:ClaimBounty() or 0,true)
+                pResReward = pResReward + attackerTeam:OnTeamKill(_techID,selfIsPlayer and self:ClaimBounty() or 0,true)
             end
         end
 
@@ -44,8 +44,15 @@ if Server then
                 if currentAttacker:isa("Commander") then    --Don't collect pres for commander
                     resReward = 0
                 end
-                
+
                 local team = currentAttacker:GetTeam()
+                local isKiller = attacker == currentAttacker
+                if isKiller 
+                    and team and team.CollectKillReward
+                then
+                    resReward = resReward + team:CollectKillReward(_techID)
+                end
+                
                 if team and team.CollectAggressivePlayerResources then
                     resReward = team:CollectAggressivePlayerResources(currentAttacker,resReward)
                 else
@@ -56,7 +63,7 @@ if Server then
                     currentAttacker:AddAssistKill()
                 end
 
-                currentAttacker:AddScore(scoreReward, resReward, attacker == currentAttacker)
+                currentAttacker:AddScore(scoreReward, resReward, isKiller)
             end
         end
     end

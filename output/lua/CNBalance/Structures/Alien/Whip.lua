@@ -33,6 +33,10 @@ if Server then
     local baseSlapTarget = Whip.SlapTarget
     function Whip:SlapTarget(target)
         baseSlapTarget(self,target)
+        
+        local team = self:GetTeam()
+        if team and team.IsOriginForm and team:IsOriginForm() then return end
+        
         local targetIsPlayer = target:isa("Player")
 
         if targetIsPlayer then

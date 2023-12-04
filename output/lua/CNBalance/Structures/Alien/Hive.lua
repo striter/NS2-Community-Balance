@@ -301,6 +301,51 @@ function Hive:GetTechAllowed(techId, techNode, player)
 
 end
 
+local function CouldUseACommander(self)
+
+    if GetGameInfoEntity():GetGameStarted() then
+        local teamInfoEntity = GetTeamInfoEntity(self:GetTeamNumber())
+        if teamInfoEntity and teamInfoEntity.isOriginForm then
+            return false
+        end
+    end
+    return true
+end
+
+if Server then
+    local kMaximizeBiomassResearchId = {
+        [kTechId.ShiftHive] = kTechId.ShiftTunnel,
+        [kTechId.CragHive] = kTechId.CragTunnel,
+        [kTechId.ShadeHive] = kTechId.ShadeTunnel,
+    }
+
+    local kHiveBiomassSource = {
+        [kTechId.ShiftHive] = "Shift",
+        [kTechId.CragHive] = "Crag",
+        [kTechId.ShadeHive] = "Shade",
+    }
+
+    function Hive:UpdateBiomassLevel(team)
+        if not team:IsOriginForm() then return end
+        local techId = self:GetTechId()
+        local biomassSourceName = kHiveBiomassSource[techId]
+        if not biomassSourceName then return end
+        local newBiomassLevel = (self:GetIsBuilt() and 1 or 0) + math.min(#GetEntitiesForTeam(biomassSourceName,self:GetTeamNumber()),3)
+
+        if self.bioMassLevel == newBiomassLevel then return end
+        self.bioMassLevel = newBiomassLevel
+        team:SetBioMassPreserve(techId,self.bioMassLevel)
+        if self.bioMassLevel == 4 then
+            local techId = kMaximizeBiomassResearchId[techId]
+            local techTree = team:GetTechTree()
+            local researchNode = techTree:GetTechNode(techId)                
+            researchNode:SetResearched(true)
+            techTree:QueueOnResearchComplete(techId, self)
+        end
+    end
+    
+end
+
 function Hive:GetBioMassLevel()
     return self.bioMassLevel * kHiveBiomass
 end
@@ -610,6 +655,7 @@ if Server then
         self.freeDrifterCheck = time
 
         if not GetGamerules():GetGameStarted() then return end
+        if not CouldUseACommander(self) then return end
         if not GetIsUnitActive(self) then return end
         
         if self.spawnedDrifterID ~= Entity.invalidId then
@@ -631,3 +677,21 @@ end
 function Hive:GetHealthPerTeamExceed()
     return kHiveHealthPerPlayerAdd
 end
+
+
+
+local baseGetCanBeUsedConstructed = Hive.GetCanBeUsedConstructed
+function Hive:GetCanBeUsedConstructed(byPlayer)
+    if not CouldUseACommander(self) then return end
+
+    return baseGetCanBeUsedConstructed(self,byPlayer)
+end
+
+if Client then
+    function Hive:OnUpdateRender()
+        if not CouldUseACommander(self) then return end
+        
+        CommandStructure.OnUpdateRender(self)
+    end
+    
+end 

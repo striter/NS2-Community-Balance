@@ -1,7 +1,4 @@
 
-local militaryProtocolTechNode
-local motionTrackTechNode
-
 function MarineTeam:InitTechTree()
 
     PlayingTeam.InitTechTree(self)
@@ -208,8 +205,8 @@ function MarineTeam:InitTechTree()
 
     self.techTree:SetComplete()
 
-    militaryProtocolTechNode = self.techTree:GetTechNode(kTechId.MilitaryProtocol)
-    motionTrackTechNode = self.techTree:GetTechNode(kTechId.MotionTrack)
+    self.militaryProtocolTechNode = self.techTree:GetTechNode(kTechId.MilitaryProtocol)
+    self.motionTrackTechNode = self.techTree:GetTechNode(kTechId.MotionTrack)
 end
 
 
@@ -223,7 +220,7 @@ end
 
 local function TickMotionTrack(self)
 
-    if not motionTrackTechNode:GetResearched() then return end
+    if not self.motionTrackTechNode:GetResearched() then return end
     
     local now = Shared.GetTime()
     if now - self.timeLastMotionTrack < kMotionTrackInterval then return end
@@ -249,7 +246,7 @@ end
 
 
 function MarineTeam:OnTeamKill(techId, bountyScore)
-    if militaryProtocolTechNode:GetResearched() then
+    if self.militaryProtocolTechNode:GetResearched() then
         local baseRefund = kMilitaryProtocolTeamResourcesPerKill[techId] or 0
         baseRefund = baseRefund + bountyScore * kMilitaryProtocolTResPerBountyClaim
 
@@ -262,7 +259,7 @@ function MarineTeam:OnTeamKill(techId, bountyScore)
 end
 
 function MarineTeam:CollectAggressivePlayerResources(player,amount)
-    amount = amount * (militaryProtocolTechNode:GetResearched() and kMilitaryProtocolAggressivePersonalResourcesScalar or 1)
+    amount = amount * (self.militaryProtocolTechNode:GetResearched() and kMilitaryProtocolAggressivePersonalResourcesScalar or 1)
     player:AddResources(amount,true)
     return amount
 end
@@ -272,7 +269,7 @@ function MarineTeam:GetResourcesPerRefund()
 end
 
 function MarineTeam:CollectTeamResources(teamRes,playerRes)
-    if militaryProtocolTechNode:GetResearched() then
+    if self.militaryProtocolTechNode:GetResearched() then
         playerRes = 0   --No player res now
     end
 
@@ -280,11 +277,11 @@ function MarineTeam:CollectTeamResources(teamRes,playerRes)
 end
 
 function MarineTeam:GetResearchTimeFactor()
-    return militaryProtocolTechNode:GetResearched() and kMilitaryProtocolResearchDurationMultiply or 1
+    return self.militaryProtocolTechNode:GetResearched() and kMilitaryProtocolResearchDurationMultiply or 1
 end
 
 function MarineTeam:ShouldHandleManualAlert()            --He can handle it himself
-    return not militaryProtocolTechNode:GetResearched()
+    return not self.militaryProtocolTechNode:GetResearched()
 end
 
 function MarineTeam:OnResearchComplete(structure, researchId)

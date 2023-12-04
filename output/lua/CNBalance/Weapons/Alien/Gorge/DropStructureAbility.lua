@@ -7,11 +7,6 @@
 -- ========= For more information, visit us at http://www.unknownworlds.com =====================
 
 Script.Load("lua/Weapons/Alien/Ability.lua")
-Script.Load("lua/Weapons/Alien/HydraAbility.lua")
-Script.Load("lua/Weapons/Alien/ClogAbility.lua")
-Script.Load("lua/Weapons/Alien/WebsAbility.lua")
-Script.Load("lua/Weapons/Alien/BabblerEggAbility.lua")
-Script.Load("lua/CNBalance/Weapons/Alien/Gorge/SporeMineAbility.lua")
 
 class 'DropStructureAbility' (Ability)
 
@@ -22,7 +17,18 @@ DropStructureAbility.kMapName = "drop_structure_ability"
 PrecacheAsset("sound/NS2.fev/alien/gorge/create_fail")
 local kAnimationGraph = PrecacheAsset("models/alien/gorge/gorge_view.animation_graph")
 
-DropStructureAbility.kSupportedStructures = { HydraStructureAbility, ClogAbility, WebsAbility,SporeMineAbility, BabblerEggAbility }
+Script.Load("lua/Weapons/Alien/HydraAbility.lua")
+Script.Load("lua/Weapons/Alien/ClogAbility.lua")
+Script.Load("lua/Weapons/Alien/WebsAbility.lua")
+Script.Load("lua/Weapons/Alien/BabblerEggAbility.lua")
+Script.Load("lua/CNBalance/Weapons/Alien/Gorge/SporeMineAbility.lua")
+DropStructureAbility.kSupportedStructures = {
+    [kTechId.Hydra] = HydraStructureAbility,
+    [kTechId.Clog] = ClogAbility,
+    [kTechId.Web] = WebsAbility,
+    [kTechId.BabblerEgg] = BabblerEggAbility,
+    [kTechId.SporeMine] = SporeMineAbility,
+}
 
 local networkVars =
 {
@@ -32,6 +38,10 @@ local networkVars =
     numSporeMinesLeft = string.format("private integer (0 to %d)", kMaxStructuresPerType),
     numBabblersLeft = string.format("private integer (0 to %d)", kMaxStructuresPerType),
 }
+
+function DropStructureAbility:GetAvailableStructureTechIds()
+    return { kTechId.Hydra,kTechId.Clog,kTechId.Web,kTechId.SporeMine,kTechId.BabblerEgg }
+end
 
 function DropStructureAbility:GetAnimationGraphName()
     return kAnimationGraph
@@ -44,7 +54,6 @@ function DropStructureAbility:GetActiveStructure()
     else
         return self.kSupportedStructures[self.activeStructure]
     end
-
 end
 
 function DropStructureAbility:OnCreate()
@@ -70,12 +79,12 @@ function DropStructureAbility:GetDeathIconIndex()
     return kDeathMessageIcon.Consumed
 end
 
-function DropStructureAbility:SetActiveStructure(structureNum)
+function DropStructureAbility:SetActiveStructure(structureTechId)
 
-    self.activeStructure = structureNum
+    self.activeStructure = structureTechId
     self.lastClickedPosition = nil
     self.lastClickedPositionNormal = nil
-
+    return true
 end
 
 function DropStructureAbility:GetHasDropCooldown()
@@ -246,7 +255,7 @@ function DropStructureAbility:PerformPrimaryAttack(player)
         if valid then
 
             -- Ensure they have enough resources.
-            local cost = GetCostForTech(self:GetActiveStructure().GetDropStructureId())
+            local cost =  kGorgeAbilitiesCost[self:GetActiveStructure().GetDropStructureId()] or 0
             if player:GetResources() >= cost and not self:GetHasDropCooldown() then
 
                 local message = BuildGorgeDropStructureMessage(player:GetEyePos(), player:GetViewCoords().zAxis, self.activeStructure, self.lastClickedPosition, self.lastClickedPositionNormal)
@@ -282,19 +291,18 @@ function DropStructureAbility:DropStructure(player, origin, direction, structure
 
         local coords, valid, onEntity = self:GetPositionForStructure(origin, direction, structureAbility, lastClickedPosition, lastClickedPositionNormal)
         local techId = structureAbility:GetDropStructureId()
-
         local maxStructures = -1
         
         local biomassLevel = 1
         local parent = self:GetParent()
-        if parent.GetUpgradeLevel then
+        if parent.GetUpgradeLevel and structureAbility.GetMaxStructures then
             biomassLevel = parent:GetUpgradeLevel("bioMassLevel")
             maxStructures = structureAbility:GetMaxStructures(biomassLevel)
         end
         
         --valid = valid and self:GetNumStructuresBuilt(techId) ~= maxStructures -- -1 is unlimited
 
-        local cost = LookupTechData(structureAbility:GetDropStructureId(), kTechDataCostKey, 0)
+        local cost = kGorgeAbilitiesCost[techId] or 0
         local enoughRes = player:GetResources() >= cost
         local energyReduction = math.max((1 - (biomassLevel - 1) * kGorgeDropEnergyReductionPerBiomass), kGorgeReductionMin);
         local energyCost = structureAbility:GetEnergyCost()  * energyReduction
@@ -325,7 +333,9 @@ function DropStructureAbility:DropStructure(player, origin, direction, structure
                     end
                 end
 
-                player:GetTeam():AddGorgeStructure(player, structure,maxStructures)
+                if maxStructures > 0 then
+                    player:GetTeam():AddGorgeStructure(player, structure,maxStructures)
+                end
 
                 -- Check for space
                 if structure:SpaceClearForEntity(coords.origin) then
@@ -406,13 +416,13 @@ function DropStructureAbility:DropStructure(player, origin, direction, structure
 
 end
 
-function DropStructureAbility:OnDropStructure(origin, direction, structureIndex, lastClickedPosition, lastClickedPositionNormal)
+function DropStructureAbility:OnDropStructure(origin, direction, structureTechId, lastClickedPosition, lastClickedPositionNormal)
 
     local player = self:GetParent()
 
     if player then
 
-        local structureAbility = self.kSupportedStructures[structureIndex]
+        local structureAbility = self.kSupportedStructures[structureTechId]
         if structureAbility then
             self:DropStructure(player, origin, direction, structureAbility, lastClickedPosition, lastClickedPositionNormal)
         end
@@ -483,33 +493,46 @@ function DropStructureAbility:GetPositionForStructure(startPosition, direction, 
         displayOrigin = trace.endPoint
     end
 
-    -- Can only be built on infestation
-    local requiresInfestation = LookupTechData(structureAbility.GetDropStructureId(), kTechDataRequiresInfestation)
-    if requiresInfestation and not GetIsPointOnInfestation(displayOrigin) then
+    if structureAbility.kAttachToPoints then
 
-        if self:GetActiveStructure().OverrideInfestationCheck then
-            validPosition = self:GetActiveStructure():OverrideInfestationCheck(trace)
-        else
+        validPosition = structureAbility:GetIsPositionValid(displayOrigin, player, trace.normal, lastClickedPosition, lastClickedPositionNormal, trace.entity)
+   
+    else
+
+        -- Can only be built on infestation
+        local requiresInfestation = LookupTechData(structureAbility.GetDropStructureId(), kTechDataRequiresInfestation)
+        if requiresInfestation and not GetIsPointOnInfestation(displayOrigin) then
+
+            if structureAbility.OverrideInfestationCheck then
+                validPosition = structureAbility:OverrideInfestationCheck(trace)
+            else
+                validPosition = false
+            end
+
+        end
+
+        if not structureAbility.AllowBackfacing() and trace.normal:DotProduct(GetNormalizedVector(startPosition - trace.endPoint)) < 0 then
             validPosition = false
         end
 
-    end
+        -- Don't allow dropped structures to go too close to techpoints and resource nozzles
+        if GetPointBlocksAttachEntities(displayOrigin) then
+            validPosition = false
+        end
 
-    if not structureAbility.AllowBackfacing() and trace.normal:DotProduct(GetNormalizedVector(startPosition - trace.endPoint)) < 0 then
-        validPosition = false
-    end
+        if not structureAbility:GetIsPositionValid(displayOrigin, player, trace.normal, lastClickedPosition, lastClickedPositionNormal, trace.entity) then
+            validPosition = false
+        end
 
-    -- Don't allow dropped structures to go too close to techpoints and resource nozzles
-    if GetPointBlocksAttachEntities(displayOrigin) then
-        validPosition = false
-    end
+        if trace.surface == "nocling" then
+            validPosition = false
+        end
 
-    if not structureAbility:GetIsPositionValid(displayOrigin, player, trace.normal, lastClickedPosition, lastClickedPositionNormal, trace.entity) then
-        validPosition = false
-    end
+        -- perform a final check to ensure the gorge isn't trying to build from inside a clog.
+        if GetIsPointInsideClogs(player:GetEyePos()) then
+            validPosition = false
+        end
 
-    if trace.surface == "nocling" then
-        validPosition = false
     end
 
     -- Don't allow placing above or below us and don't draw either
@@ -524,17 +547,12 @@ function DropStructureAbility:GetPositionForStructure(startPosition, direction, 
     -- the correct y-axis.
     local perp = Math.CrossProduct( trace.normal, structureFacing )
     structureFacing = Math.CrossProduct( perp, trace.normal )
-
+    
     local coords = Coords.GetLookIn( displayOrigin, structureFacing, trace.normal )
-
     if structureAbility.ModifyCoords then
         structureAbility:ModifyCoords(coords, lastClickedPosition, trace.normal, player)
     end
 
-    -- perform a final check to ensure the gorge isn't trying to build from inside a clog.
-    if GetIsPointInsideClogs(player:GetEyePos()) then
-        validPosition = false
-    end
 
     return coords, validPosition, trace.entity, trace.normal
 
@@ -544,7 +562,13 @@ function DropStructureAbility:OnDraw(player, previousWeaponMapName)
 
     Ability.OnDraw(self, player, previousWeaponMapName)
 
-    self.previousWeaponMapName = previousWeaponMapName
+    if previousWeaponMapName == DropStructureAbility.kMapName or previousWeaponMapName == DropTeamStructureAbility.kMapName then
+        self.previousWeaponMapName = player:GetWeapon(previousWeaponMapName).previousWeaponMapName
+    else
+        self.previousWeaponMapName = previousWeaponMapName
+    end
+    
+    
     self.dropping = false
     self.activeStructure = nil
 
@@ -636,7 +660,12 @@ function DropStructureAbility:GetGhostModelTechId()
     if self.activeStructure == nil then
         return nil
     else
-        return self:GetActiveStructure():GetDropStructureId()
+        local activeStructure = self:GetActiveStructure()
+        if activeStructure and activeStructure.GetGhostModelTechId then
+            return activeStructure:GetGhostModelTechId()
+        end
+        
+        return activeStructure:GetDropStructureId()
     end
 
 end
@@ -662,7 +691,7 @@ if Client then
 
             self.ghostCoords, self.placementValid = self:GetPositionForStructure(player:GetEyePos(), viewDirection, self:GetActiveStructure(), self.lastClickedPosition, self.lastClickedPositionNormal)
 
-            if player:GetResources() < LookupTechData(self:GetActiveStructure():GetDropStructureId(), kTechDataCostKey) then
+            if player:GetResources() < (kGorgeAbilitiesCost[self:GetActiveStructure():GetDropStructureId()] or 0) then
                 self.placementValid = false
             end
 
@@ -775,4 +804,4 @@ end
 
 Shared.LinkClassToMap("DropStructureAbility", DropStructureAbility.kMapName, networkVars)
 
-Script.Load("lua/CNBalance/Weapons/Alien/Gorge/TeamStructure/DropTeamStructureAbility.lua")
+Script.Load("lua/CNBalance/Weapons/Alien/Gorge/DropTeamStructureAbility.lua")

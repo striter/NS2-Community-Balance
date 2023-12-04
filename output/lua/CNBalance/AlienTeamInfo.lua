@@ -24,6 +24,8 @@ AlienTeamInfo.kLifeformEntityTypes = {"Skulk","Prowler","Fade","Onos","Gorge","L
 
 local networkVars =
 {
+    isOriginForm = "boolean",
+    
     numHives = "integer (0 to 10)",
     eggCount = "integer (0 to 120)",
     bioMassLevel = "integer (0 to 12)",
@@ -211,6 +213,7 @@ function AlienTeamInfo:OnCreate()
     self.location5HiveInCombat = false
 
     self.tunnelManagerId = Entity.invalidId
+    self.originForm = false
 end
 
 function AlienTeamInfo:OnInitialized()
@@ -355,6 +358,7 @@ if Server then
         local team = self:GetTeam()
         if team then    --???? How would there never be a team?
         
+            self.isOriginForm = team:IsOriginForm()
             self.numHives = team:GetNumHives()
             self.eggCount = team:GetActiveEggCount()
             self.maxBioMassLevel = Clamp(team:GetMaxBioMassLevel(), 0 , 12)

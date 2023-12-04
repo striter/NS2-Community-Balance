@@ -17,3 +17,22 @@ function OnCommandMarineBuildStructure(client, message)
     
 end
 Server.HookNetworkMessage("MarineBuildStructure", OnCommandMarineBuildStructure)
+
+
+function OnCommandGorgeBuildStructure(client, message)
+
+    local player = client:GetControllingPlayer()
+    local origin, direction, structureTechId, lastClickedPosition, lastClickedPositionNormal = ParseGorgeBuildMessage(message)
+
+    local activeAbility = player:GetActiveWeapon()
+    if not activeAbility then
+        return 
+    end
+    
+    local mapName = activeAbility:GetMapName()
+    if mapName == DropStructureAbility.kMapName or mapName == DropTeamStructureAbility.kMapName then
+        activeAbility:OnDropStructure(origin, direction, structureTechId, lastClickedPosition, lastClickedPositionNormal)
+    end
+
+end
+Server.HookNetworkMessage("GorgeBuildStructure", OnCommandGorgeBuildStructure)

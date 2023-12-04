@@ -88,3 +88,14 @@ local kScoreUpdate =
     wasKill = "boolean"
 }
 Shared.RegisterNetworkMessage("ScoreUpdate", kScoreUpdate)
+
+local kGorgeBuildStructureMessage =
+{
+    origin = "vector",
+    direction = "vector",
+    structureIndex = string.format("integer (1 to %d)",#kTechId),
+    lastClickedPosition = "vector",
+    lastClickedPositionNormal = "vector"
+}
+
+Shared.RegisterNetworkMessage("GorgeBuildStructure", kGorgeBuildStructureMessage)

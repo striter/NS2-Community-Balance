@@ -641,3 +641,22 @@ kGorgeDropCooldown = 1
 kGorgeDropEnergyReductionPerBiomass = 0.09
 kGorgeDropCooldownReductionPerBiomass = 0.09
 kGorgeReductionMin = 0.1
+
+kHydraCost = 0
+kClogCost = 0
+kGorgeTunnelCost = 4
+kGorgeTunnelBuildTime = 18.5
+
+kGorgeAbilitiesCost = {
+    [kTechId.Hydra] = 0, [kTechId.Clog] = 0, [kTechId.Web] = 0,[kTechId.SporeMine] = 0, [kTechId.BabblerEgg] = 3,
+    [kTechId.Egg] = 2, [kTechId.Tunnel] = 5, [kTechId.TunnelExit] = 3,
+    [kTechId.Whip] = 10, [kTechId.Shift] = 15, [kTechId.Shade] = 15, [kTechId.Crag] = 15,
+                         [kTechId.Spur] = 15, [kTechId.Shell] = 15, [kTechId.Veil] = 15,
+    [kTechId.Harvester] = 8, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
+}
+
+kOriginPersonalResourcesPerKill = {
+    [kTechId.Marine] = 2, [kTechId.JetpackMarine] = 4, [kTechId.Exo] = 6,
+}
+
+kGorgeHiveBuildTime = 90

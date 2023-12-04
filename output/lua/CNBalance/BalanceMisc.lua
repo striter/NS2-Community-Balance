@@ -11,6 +11,8 @@ kKDRatioEachDeath = 1 kKDRatioClaimOnAddKill = 1 kKDRatioClaimOnAddAssist = 0.25
 kKDRatioProtectionStep = 2 kKDRatioProtectionEachValue = 0.05
 --kKDRatioBoostStep = 5 kKDRatioDamageIncreaseEachValue = 0.025
 
+--Gorge Ability
+kDropStructureEnergyCost = 15
 
 -- kInitialMACs = 1
 -- kInitialDrifters = 1

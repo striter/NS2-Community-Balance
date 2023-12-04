@@ -13,14 +13,8 @@
      local baseSetGameState = NS2Gamerules.SetGameState
      function NS2Gamerules:SetGameState(_state)
          baseSetGameState(self,_state)
-         if Shine then
-             if _state == kGameState.Countdown then
-                 if self.gameInfo and self.gameInfo:GetRookieMode() then
-                     Shine:NotifyDualColour( nil, 88, 214, 141, "[新兴站点]",
-                             234, 250, 241, "悬赏系统已启用,被持续监测站点内高价值目标,击杀目标将获得资源激励.")
-                 end
-             end
-         end
+         self.team1:OnGameStateChanged(_state)
+         self.team2:OnGameStateChanged(_state)
      end
      
      function NS2Gamerules:ResetGame()
@@ -228,7 +222,7 @@
 
          LoginCommander(commandStructure1, team1CommanderClient)
          LoginCommander(commandStructure2, team2CommanderClient)
-
+         
          -- Create living map entities fresh
          CreateLiveMapEntities()
 
@@ -251,5 +245,59 @@
          self.team2:OnResetComplete()
 
          StatsUI_InitializeTeamStatsAndTechPoints(self)
+     end
+
+     function NS2Gamerules:OnUpdate(timePassed)
+
+         PROFILE("NS2Gamerules:OnUpdate")
+
+         if Server then
+
+             if self.justCreated then
+                 if not self.gameStarted then
+                     self:ResetGame()
+                 end
+                 self.justCreated = false
+             end
+
+             if self:GetMapLoaded() then
+
+                 self:CheckGameStart()
+                 self:CheckGameEnd()
+
+                 self:UpdateWarmUp()
+
+                 self:UpdatePregame(timePassed)
+                 self:UpdateToReadyRoom()
+                 self:UpdateMapCycle()
+                 self:ServerAgeCheck()
+                 self:UpdateAutoTeamBalance(timePassed)
+
+                 self.timeSinceGameStateChanged = self.timeSinceGameStateChanged + timePassed
+
+                 self.worldTeam:Update(timePassed)
+                 self.team1:Update(timePassed)
+                 self.team2:Update(timePassed)
+                 self.spectatorTeam:Update(timePassed)
+
+                 self:UpdatePings()
+                 self:UpdateHealth()
+                 self:UpdateTechPoints()
+
+                 self:CheckForNoCommander(self.team1, "MarineCommander")
+                 --self:CheckForNoCommander(self.team2, "AlienCommander")
+                 self:KillEnemiesNearCommandStructureInPreGame(timePassed)
+
+                 self:UpdatePlayerSkill()
+                 self:UpdateNumPlayersForScoreboard()
+
+                 if Shared.GetThunderdomeEnabled() then
+                     GetThunderdomeRules():CheckForAutoConcede(self)
+                 end
+
+             end
+
+         end
+
      end
  end

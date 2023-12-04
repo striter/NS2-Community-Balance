@@ -50,13 +50,9 @@ function GorgeBuild_Close()
 
 end
 
-function GorgeBuild_SendSelect(ability,index)
-    ability:SetActiveStructure(index)
-end
-
-function GorgeBuild_GetIsAbilityAvailable(ability,index)
-
-    return ability.kSupportedStructures[index] and ability.kSupportedStructures[index]:IsAllowed(Client.GetLocalPlayer())
+function GorgeBuild_GetIsAbilityAvailable(ability, techId)
+    assert(ability.kSupportedStructures[techId],EnumToString(kTechId,techId))
+    return ability.kSupportedStructures[techId]:IsAllowed(Client.GetLocalPlayer())
 
 end
 
@@ -67,15 +63,21 @@ end
 function GorgeBuild_GetCanAffordAbility(techId)
 
     local player = Client.GetLocalPlayer()
-    local abilityCost = LookupTechData(techId, kTechDataCostKey, 0)
-    local exceededLimit = not GorgeBuild_AllowConsumeDrop(techId) and GorgeBuild_GetNumStructureBuilt(techId) >= GorgeBuild_GetMaxNumStructure(techId)
+    local abilityCost = kGorgeAbilitiesCost[techId] or 0
 
-    return player:GetResources() >= abilityCost and not exceededLimit
+    local available = player:GetResources() >= abilityCost
+    local maxStructures = GorgeBuild_GetMaxNumStructure(techId)
+    if available and maxStructures > -1 then
+        local exceededLimit = not GorgeBuild_AllowConsumeDrop(techId) and GorgeBuild_GetNumStructureBuilt(techId) >= maxStructures
+        available = available and not exceededLimit
+    end
 
+    return available
 end
 
+
 function GorgeBuild_GetStructureCost(techId)
-    return LookupTechData(techId, kTechDataCostKey, 0)
+    return kGorgeAbilitiesCost[techId] or 0
 end
 
 local function GorgeBuild_GetKeybindForIndex(index)
@@ -163,7 +165,30 @@ local function GetRowForTechId(techId)
         rowTable[kTechId.GorgeTunnel] = 4
         rowTable[kTechId.Web] = 5
         rowTable[kTechId.SporeMine] = 6
-    
+
+        rowTable[kTechId.CragHive] = 9
+        rowTable[kTechId.ShiftHive] = 10
+        rowTable[kTechId.ShadeHive] = 8
+        rowTable[kTechId.Harvester] = 11
+        rowTable[kTechId.Spur] = 13
+        rowTable[kTechId.Veil] = 12
+        rowTable[kTechId.Shell] = 14
+        
+        rowTable[kTechId.Cyst] = 15
+
+        rowTable[kTechId.Whip] = 19
+        rowTable[kTechId.Crag] = 16
+        rowTable[kTechId.Shift] = 17
+        rowTable[kTechId.Shade] = 18
+
+        rowTable[kTechId.Egg] = 22
+        rowTable[kTechId.Tunnel] = 21
+        rowTable[kTechId.TunnelExit] = 20
+        
+        rowTable[kTechId.BuildMenu] = 23
+        rowTable[kTechId.AdvancedMenu] = 24
+        
+
     end
     
     return rowTable[techId]
@@ -185,8 +210,19 @@ function GUIGorgeBuildMenu:Initialize()
     
     self.ability = GetDropStructureAbility()
     if self.ability ~= nil then
-        self:Reset(self.ability)
+        self.background:SetUniformScale(self.scale)
+
+        for _, techId in ipairs(self.ability:GetAvailableStructureTechIds()) do
+
+            -- TODO: pass keybind from options instead of index
+            table.insert( self.buttons, self:CreateButton(techId, self.scale, self.background, GorgeBuild_GetKeybindForIndex(_), _ - 1) )
+
+        end
+
+        local backgroundXOffset = (#self.buttons * GUIGorgeBuildMenu.kButtonWidth) * -.5
+        self.background:SetPosition(Vector(backgroundXOffset, GUIGorgeBuildMenu.kBackgroundYOffset, 0))
     end
+    self:UpdateButtons()
 end
 
 function GUIGorgeBuildMenu:Uninitialize()
@@ -222,7 +258,7 @@ local function UpdateButton(ability, button, index)
         color = GUIGorgeBuildMenu.kTooExpensiveColor
     end
     
-    if not GorgeBuild_GetIsAbilityAvailable(ability,index) then
+    if not GorgeBuild_GetIsAbilityAvailable(ability,button.techId) then
         col = 3
         color = GUIGorgeBuildMenu.kUnavailableColor
     end
@@ -279,33 +315,24 @@ function GUIGorgeBuildMenu:Update(deltaTime)
     
     GUIAnimatedScript.Update(self, deltaTime)
     
-    if self.ability ~= GetDropStructureAbility() then
-        self:Uninitialize()
-        self:Initialize()
-    end
+    self:UpdateAbilityButtons()
+    self:UpdateButtons()
+end
 
+function GUIGorgeBuildMenu:UpdateAbilityButtons()
+    local curAbility = GetDropStructureAbility()
+    if self.ability == curAbility then return end
+    self:Uninitialize()
+    self:Initialize()
+end
+
+function GUIGorgeBuildMenu:UpdateButtons()
     if not self.ability then return end
     for index, button in ipairs(self.buttons) do
         UpdateButton(self.ability, button, index)
     end
-
 end
 
-function GUIGorgeBuildMenu:Reset(ability)
-    
-    self.background:SetUniformScale(self.scale)
-    
-    for index, structureAbility in ipairs(ability.kSupportedStructures) do
-    
-        -- TODO: pass keybind from options instead of index
-        table.insert( self.buttons, self:CreateButton(structureAbility.GetDropStructureId(), self.scale, self.background, GorgeBuild_GetKeybindForIndex(index), index - 1) )
-    
-    end
-    
-    local backgroundXOffset = (#self.buttons * GUIGorgeBuildMenu.kButtonWidth) * -.5
-    self.background:SetPosition(Vector(backgroundXOffset, GUIGorgeBuildMenu.kBackgroundYOffset, 0))
-    
-end
 
 function GUIGorgeBuildMenu:OnResolutionChanged(oldX, oldY, newX, newY)
 
@@ -444,16 +471,20 @@ function GUIGorgeBuildMenu:OverrideInput(input)
 
     for index, weaponSwitchCommand in ipairs(weaponSwitchCommands) do
     
-        if HasMoveCommand( input.commands, weaponSwitchCommand ) then
+        if HasMoveCommand( input.commands, weaponSwitchCommand ) and self.buttons[index] then
 
-            if GorgeBuild_GetIsAbilityAvailable(self.ability, index) and GorgeBuild_GetCanAffordAbility(self.buttons[index].techId)  then
+            selectPressed = true
+            local techId = self.buttons[index].techId
+            if GorgeBuild_GetIsAbilityAvailable(self.ability, techId) and GorgeBuild_GetCanAffordAbility(techId)  then
 
-                GorgeBuild_SendSelect(self.ability,index)
+                selectPressed = self.ability:SetActiveStructure(techId)
+                if not selectPressed then
+                    self:OnResolutionChanged()
+                end
                 input.commands = RemoveMoveCommand( input.commands, weaponSwitchCommand )
 
             end
             
-            selectPressed = true
             break
             
         end

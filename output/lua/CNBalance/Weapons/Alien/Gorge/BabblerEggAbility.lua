@@ -6,11 +6,9 @@ end
 
 local kExtents = Vector(0.3, 0.3, 0.3)
 local function IsPathable(position)
-
     local noBuild = Pathing.GetIsFlagSet(position, kExtents, Pathing.PolyFlag_NoBuild)
     local walk = Pathing.GetIsFlagSet(position, kExtents, Pathing.PolyFlag_Walk)
     return not noBuild and walk
-
 end
 
 function BabblerEggAbility:GetIsPositionValid(position, player, surfaceNormal)

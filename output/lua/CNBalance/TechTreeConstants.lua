@@ -56,6 +56,9 @@ debug.appendtoenum(kTechId, "Heavy")
 debug.appendtoenum(kTechId, "HeavyMarine")
 
 --Alien
+debug.appendtoenum(kTechId, "Origin")
+debug.appendtoenum(kTechId, "GorgeShiftGhostModelOverride")
+
 debug.appendtoenum(kTechId, "ShiftTunnel")
 debug.appendtoenum(kTechId, "CragTunnel")
 debug.appendtoenum(kTechId, "ShadeTunnel")

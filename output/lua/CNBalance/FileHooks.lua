@@ -220,6 +220,7 @@ ModLoader.SetupFileHook("lua/DrifterEgg.lua", "lua/CNBalance/Structures/Alien/Dr
 ModLoader.SetupFileHook("lua/Drifter.lua", "lua/CNBalance/Structures/Alien/Drifter.lua", "post")
 ModLoader.SetupFileHook("lua/Pheromone.lua", "lua/CNBalance/Structures/Alien/Pheromone.lua", "replace")
 ModLoader.SetupFileHook("lua/TunnelEntrance.lua", "lua/CNBalance/Structures/Alien/TunnelEntrance.lua", "replace")
+ModLoader.SetupFileHook( "lua/TunnelEntrance.lua", 		"lua/CNBalance/Structures/Alien/GorgeTunnel.lua", "post" )
 ModLoader.SetupFileHook("lua/Tunnel.lua", "lua/CNBalance/Structures/Alien/Tunnel.lua", "post")
 ModLoader.SetupFileHook("lua/Hydra.lua", "lua/CNBalance/Structures/Alien/Hydra.lua", "post")
 ModLoader.SetupFileHook("lua/Cyst_Server.lua", "lua/CNBalance/Structures/Alien/Cyst_Server.lua", "post")

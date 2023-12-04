@@ -30,6 +30,12 @@ local baseOnCreate = Gorge.OnCreate
 function Gorge:OnCreate()
     baseOnCreate(self)
     InitMixin(self,RequestHandleMixin)
+
+end
+
+local baseOnInitialized = Gorge.OnInitialized
+function Gorge:OnInitialized()
+    baseOnInitialized(self)
 end
 
 if Server then
@@ -39,11 +45,35 @@ if Server then
 
         self:GiveItem(SpitSpray.kMapName)
         self:GiveItem(DropStructureAbility.kMapName)
-        --self:GiveItem(DropTeamStructureAbility.kMapName)
+
+        local team = self:GetTeam()
+        if team.IsOriginForm and team:IsOriginForm() then
+            self:GiveItem(DropTeamStructureAbility.kMapName)
+        end
 
         self:SetActiveWeapon(SpitSpray.kMapName)
     end
-    
+
+end
+
+
+if Client then
+
+    function Gorge:OverrideInput(input)
+
+        -- Always let the DropStructureAbility override input, since it handles client-side-only build menu
+
+        local ability = self:GetActiveWeapon()
+        if ability then
+            local mapName = ability:GetMapName()
+            if mapName == DropStructureAbility.kMapName or mapName == DropTeamStructureAbility.kMapName then
+                input = ability:OverrideInput(input)
+            end
+        end
+
+        return Player.OverrideInput(self, input)
+
+    end
 end
 
 Shared.LinkClassToMap("Gorge", Gorge.kMapName, networkVars, true)

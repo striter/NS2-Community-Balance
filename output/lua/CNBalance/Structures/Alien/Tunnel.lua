@@ -1,6 +1,14 @@
 
 if Server then
 
+    function Tunnel:GetOwnerClientId()
+        return self.ownerClientId
+    end
+
+    function Tunnel:SetOwnerClientId(clientId)
+        self.ownerClientId = clientId
+    end
+    
     local baseUseExit =Tunnel.UseExit
     function Tunnel:UseExit(entity, exit, exitSide)
         baseUseExit(self,entity,exit,exitSide)
