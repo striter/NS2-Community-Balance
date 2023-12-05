@@ -12,3 +12,7 @@ end
 function EggAbility:ModifyCoords(coords)
     coords.origin = coords.origin + coords.yAxis * 0.1
 end
+
+function EggAbility:CouldPlaceNonUpward()
+    return false --true
+end

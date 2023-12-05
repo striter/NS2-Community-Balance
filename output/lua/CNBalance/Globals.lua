@@ -22,6 +22,7 @@ debug.appendtoenum(kDeathMessageIcon, "LightMachineGun")
 debug.appendtoenum(kDeathMessageIcon, "Knife")
 debug.appendtoenum(kDeathMessageIcon, "CombatBuilder")
 debug.appendtoenum(kDeathMessageIcon, "SporeMine")
+debug.appendtoenum(kDeathMessageIcon, "TeamBuildAbility")
 debug.appendtoenum(kDeathMessageIcon, "AcidRocket")
 
 debug.appendtoenum(kMinimapBlipType, "HeavyMarine")

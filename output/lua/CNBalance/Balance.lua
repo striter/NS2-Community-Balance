@@ -57,7 +57,7 @@ kTechDataTeamResRefundOnKill = {
 kAssistMinimumDamageFraction = 0.35      --Avoid parasiter or babbler assists ,feels pretty weird
 kBountyScoreEachAssist = 1 kBountyScoreEachKill = 2 kMaxBountyScore = 512       --You can't kill 256 players in a row?
 kBountyClaimMinMarine = 5 kBountyClaimMinJetpack = 10 kBountyClaimMinExo = 16 
-kBountyClaimMinSkulk = 5 kBountyClaimMinAlien = 12  kBountyClaimMinOnos = 16
+kBountyClaimMinSkulk = 5 kBountyClaimMinAlien = 10  kBountyClaimMinOnos = 15
 kPResPerBountyClaimAsMarine = 0.4  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 20
 
 --Toy for marine commander (remove all marines passive income, harsh one)
@@ -647,16 +647,19 @@ kClogCost = 0
 kGorgeTunnelCost = 4
 kGorgeTunnelBuildTime = 18.5
 
+kOriginFormResearchCost = 5
+kOriginFormResearchTime = 20
+
 kGorgeAbilitiesCost = {
     [kTechId.Hydra] = 0, [kTechId.Clog] = 0, [kTechId.Web] = 0,[kTechId.SporeMine] = 0, [kTechId.BabblerEgg] = 3,
     [kTechId.Egg] = 2, [kTechId.Tunnel] = 5, [kTechId.TunnelExit] = 3,
-    [kTechId.Whip] = 10, [kTechId.Shift] = 15, [kTechId.Shade] = 15, [kTechId.Crag] = 15,
-                         [kTechId.Spur] = 15, [kTechId.Shell] = 15, [kTechId.Veil] = 15,
-    [kTechId.Harvester] = 8, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
+    [kTechId.Whip] = 8, [kTechId.Shift] = 15, [kTechId.Shade] = 15, [kTechId.Crag] = 15,
+                         [kTechId.Spur] = 12, [kTechId.Shell] = 12, [kTechId.Veil] = 12,
+    [kTechId.Harvester] = 10, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
 }
 
 kOriginPersonalResourcesPerKill = {
     [kTechId.Marine] = 2, [kTechId.JetpackMarine] = 4, [kTechId.Exo] = 6,
 }
 
-kGorgeHiveBuildTime = 90
+kGorgeHiveBuildTime = 120

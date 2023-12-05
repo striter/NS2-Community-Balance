@@ -1122,11 +1122,11 @@ function AlienTeam:InitTechTree()
     self.techTree:AddActivation(kTechId.AcidRocket,           kTechId.BioMassFive,  kTechId.None,kTechId.AllAliens)
     self.techTree:AddActivation(kTechId.MetabolizeShadowStep,        kTechId.BioMassThree, kTechId.None)
 
-    self.techTree:AddResearchNode(kTechId.Origin)
+    self.techTree:AddResearchNode(kTechId.OriginForm)
     
     self.techTree:SetComplete()
 
-    self.originTechNode = self.techTree:GetTechNode(kTechId.Origin)
+    self.originTechNode = self.techTree:GetTechNode(kTechId.OriginForm)
 end
 
 function AlienTeam:OnGameStateChanged(_state)

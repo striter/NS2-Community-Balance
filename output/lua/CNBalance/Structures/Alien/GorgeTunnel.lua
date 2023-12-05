@@ -45,21 +45,13 @@ function GorgeTunnel:OnDestroy()
     --end
 end
 
-function GorgeTunnel:GetOwnerClientId()
-    return self.ownerClientId
-end
-
-function GorgeTunnel:SetOwnerClientId(clientId)
-    self.ownerClientId = clientId
-end
-
 if Server then
 
     function GorgeTunnel:UpdateConnectedTunnel()
 
         local hasValidTunnel = self.tunnelId ~= nil and Shared.GetEntity(self.tunnelId) ~= nil
 
-        if hasValidTunnel or self:GetOwnerClientId() == nil or not self:GetIsBuilt() then
+        if hasValidTunnel or self.ownerId == Entity.invalidId or not self:GetIsBuilt() then
             return
         end
 
@@ -67,7 +59,7 @@ if Server then
 
         -- register if a tunnel entity already exists or a free tunnel has been found
         for _, tunnel in ientitylist( Shared.GetEntitiesWithClassname("Tunnel") ) do
-            if tunnel:GetOwnerClientId() == self:GetOwnerClientId() then
+            if tunnel:GetOwnerClientId() == self.ownerId then
                 foundTunnel = tunnel
                 break
             end
@@ -80,7 +72,7 @@ if Server then
         end
 
         -- check if there is another tunnel entrance to connect with
-        foundTunnel:SetOwnerClientId(self:GetOwnerClientId())
+        foundTunnel:SetOwnerClientId(self.ownerId)
 
         local selfId = self:GetId()
 
@@ -95,7 +87,7 @@ if Server then
         -- register if a tunnel entity already exists or a free tunnel has been found
         for _, tunnelEntrance in ientitylist( Shared.GetEntitiesWithClassname("TunnelEntrance") ) do
             -- check the other entrance has been built and isn't killed
-            if tunnelEntrance:GetOwnerClientId() == self:GetOwnerClientId() and tunnelEntrance ~= self and tunnelEntrance:GetIsAlive() and tunnelEntrance:GetIsBuilt() then
+            if tunnelEntrance:GetOwnerClientId() == self.ownerId and tunnelEntrance ~= self and tunnelEntrance:GetIsAlive() and tunnelEntrance:GetIsBuilt() then
                 foundTunnelEntrance = tunnelEntrance
                 --Print("found old entrance %s", foundTunnelEntrance:GetId())
                 break
@@ -126,7 +118,7 @@ if Server then
         -- animation from playing when the tunnel comes into view.
         self.skipOpenAnimation = false
         
-        if self:GetGorgeOwner() then
+        if self.owner ~= Entityid.invalidId then
             self:UpdateConnectedTunnel()
             --self:UpgradeToTechId(kTechId.InfestedTunnel)
             self:SetDesiredInfestationRadius(self:GetInfestationMaxRadius())
@@ -169,28 +161,17 @@ else
     
 end
 
-function GorgeTunnel:GetOwnerClientId()
-    return self.ownerClientId
-end
-
-function GorgeTunnel:GetGorgeOwner()
-    return self.ownerId and self.ownerId ~= Entity.invalidId
-end
-
 function GorgeTunnel:GetDigestDuration()
     return kDigestDuration
 end
 
-function GorgeTunnel:GetCanDigest(player)
-    return player == self:GetOwner() and player:isa("Gorge") and (not HasMixin(self, "Live") or self:GetIsAlive()) --and self:GetIsBuilt()
-end
+--function GorgeTunnel:GetCanDigest(player)
+--    return player == self:GetOwner() and player:isa("Gorge") and (not HasMixin(self, "Live") or self:GetIsAlive()) --and self:GetIsBuilt()
+--end
 
 function GorgeTunnel:SetOwner(owner)
     
-    if owner and not self.ownerClientId then
-        
-        local client = Server.GetOwner(owner)
-        self.ownerClientId = client:GetUserId()
+    if owner then
         
         --[[if Server then
             self:UpdateConnectedTunnel()
@@ -199,26 +180,12 @@ function GorgeTunnel:SetOwner(owner)
         if self.tunnelId and self.tunnelId ~= Entity.invalidId then
             
             local tunnelEnt = Shared.GetEntity(self.tunnelId)
-            tunnelEnt:SetOwnerClientId(self.ownerClientId)
+            tunnelEnt:SetOwnerClientId(self.ownerId)
         
         end
     
     end
 
-end
-
-
-
-function GorgeTunnel:GetCanBuildOtherEnd()
-    return not self:GetGorgeOwner() and not self:GetHasOtherEntrance() and not self:GetIsCollapsing() and self:GetIsAlive()
-end
-
-function GorgeTunnel:GetCanTriggerCollapse()
-    return not self:GetGorgeOwner() and self:GetIsBuilt() and not self:GetIsCollapsing() and not self:GetIsResearching() and self:GetIsAlive()
-end
-
-function GorgeTunnel:GetCanRelocate()
-    return not self:GetGorgeOwner() and self:GetHasOtherEntrance() and self:GetIsBuilt() and not self:GetIsCollapsing()
 end
 
 function GorgeTunnel:GetCanBeUsedConstructed()

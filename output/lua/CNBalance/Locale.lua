@@ -120,6 +120,12 @@ if kTranslateMessage then
     kTranslateMessage["BUILD_ABILITY"]="建造者"
     kTranslateMessage["BUILD_ABILITY_TOOLTIP"]="放置建筑,构建前线阵地.\n*刺花(造成远程伤害)\n*泥团(构建基础阵地)\n*酸液地雷(爆炸造成护甲伤害)\n*拌网(减缓敌方单位速度)"
 
+    kTranslateMessage["ORIGIN_FORM"]="原始族群"
+    kTranslateMessage["ORIGIN_FORM_TOOLTIP"]="虫群不再拥有母巢意志.\n*Gorge替代指挥放置建筑.\n*死亡的敌方单位将提供资源."
+
+    kTranslateMessage["DROP_TEAM_STRUCTURE"]="工蜂"
+    kTranslateMessage["DROP_TEAM_STRUCTURE_TOOLTIP"]="*仅在原始族群状态可用.\n*巢(提供范围强化/攻击)\n*资源塔(提供被动资源收入)\n*母巢(提供生物质)\n*属性塔(提供演化强化).\n*蛹(提供复活点).\n*虫洞(双端建成以提供迅捷通道)."
+    
     kTranslateMessage["BELLY_SLIDE"]="滑行"
     kTranslateMessage["BELLY_SLIDE_TOOLTIP"]="使用光滑的肚皮在地面滑行.\n*通过高低差获得加速度."
 
@@ -283,6 +289,12 @@ if kLocales then
 
     kLocales["BUILD_ABILITY"]="Builder"
     kLocales["BUILD_ABILITY_TOOLTIP"]="Place frontline structures.\n*Hydra(Range damage dealer)\n*Clog(Damage receiver)\n*Babbler Egg(Attack nearby enemies)\n*Web(Slow target)"
+
+    kLocales["ORIGIN_FORM"]="Origin Form"
+    kLocales["ORIGIN_FORM_TOOLTIP"]="No more commanding form hive.\n*Gorge build team structures now.\n*Enemies provide personal resource on death."
+
+    kLocales["DROP_TEAM_STRUCTURE"]="Worker"
+    kLocales["DROP_TEAM_STRUCTURE_TOOLTIP"]="*Available with Origin Form.\n*You will build every team-thing now."
 
     kLocales["BELLY_SLIDE"]="Slide"
     kLocales["BELLY_SLIDE_TOOLTIP"]="Slide using ur belly.\n*Increased speed through steep."

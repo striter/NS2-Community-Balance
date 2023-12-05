@@ -15,11 +15,13 @@ function AdvancedStructureAbility:GetIsPositionValid(position, player, normal, l
         trace = Shared.TraceBox(extents, traceStart, traceEnd, CollisionRep.Damage, PhysicsMask.Bullets, EntityFilterAll)
 
         --DebugTraceBox(extents, traceStart, traceEnd, 0.1, 45, 45, 45, 1)
+        local upwardFraction = normal:DotProduct(kUpVector)
         if trace.fraction ~= 1
-            or (not self:CouldPlaceNonUpward() and normal:DotProduct(kUpVector) < 0.9)
+            or (not self:CouldPlaceNonUpward() and upwardFraction < 0.9)
         then
             valid = false
         end
+        
     end
 
     return valid

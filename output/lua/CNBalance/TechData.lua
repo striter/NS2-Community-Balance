@@ -567,24 +567,24 @@ function BuildTechData()
         [kStructureAttachRequiresPower] = true,
     })
 
-    table.insert(techData,  {
-        [kTechDataId] = kTechId.Heavy,
-        [kTechDataMapName] = Heavy.kMapName,
-        [kTechDataDisplayName] = "HEAVY",
-        [kTechDataModel] = Heavy.kModelName,
-        [kTechDataCostKey] = kHeavyCost,
-        [kTechDataSpawnHeightOffset] = kCommanderEquipmentDropSpawnHeight,
-    })
-
-    table.insert(techData,  {
-        [kTechDataId] = kTechId.HeavyMarine,
-        [kTechDataDisplayName] = "HEAVYMARINE",
-        [kTechDataMapName] = HeavyMarine.kMapName,
-        [kTechDataModel] = MarineVariantMixin.kModelNames["male"]["green"],
-        [kTechDataMaxHealth] = HeavyMarine.kHealth,
-        [kTechDataEngagementDistance] = kPlayerEngagementDistance,
-        [kTechDataPointValue] = kHeavyMarinePointValue,
-    })
+    --table.insert(techData,  {
+    --    [kTechDataId] = kTechId.Heavy,
+    --    [kTechDataMapName] = Heavy.kMapName,
+    --    [kTechDataDisplayName] = "HEAVY",
+    --    [kTechDataModel] = Heavy.kModelName,
+    --    [kTechDataCostKey] = kHeavyCost,
+    --    [kTechDataSpawnHeightOffset] = kCommanderEquipmentDropSpawnHeight,
+    --})
+    --
+    --table.insert(techData,  {
+    --    [kTechDataId] = kTechId.HeavyMarine,
+    --    [kTechDataDisplayName] = "HEAVYMARINE",
+    --    [kTechDataMapName] = HeavyMarine.kMapName,
+    --    [kTechDataModel] = MarineVariantMixin.kModelNames["male"]["green"],
+    --    [kTechDataMaxHealth] = HeavyMarine.kHealth,
+    --    [kTechDataEngagementDistance] = kPlayerEngagementDistance,
+    --    [kTechDataPointValue] = kHeavyMarinePointValue,
+    --})
 
     ----- Aliens
 
@@ -603,6 +603,15 @@ function BuildTechData()
         [kTechDataCategory] = kTechId.Gorge,
         [kTechDataDisplayName] = "BUILD_ABILITY",
         [kTechDataTooltipInfo] = "BUILD_ABILITY_TOOLTIP",
+    })
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.DropTeamStructureAbility,
+        [kTechDataMapName] = DropTeamStructureAbility.kMapName,
+        [kTechDataCategory] = kTechId.Gorge,
+        [kTechDataDisplayName] = "DROP_TEAM_STRUCTURE",
+        [kTechDataTooltipInfo] = "DROP_TEAM_STRUCTURE_TOOLTIP",
+        [kTechDataResearchName] = "DROP_TEAM_STRUCTURE",
     })
 
     table.insert(techData,{
@@ -911,7 +920,6 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "HALLUCINATE_VOKEX_TOOLTIP",
     })
 
-
     -- Devour
     table.insert(techData, {
         [kTechDataId] = kTechId.Devour,
@@ -923,16 +931,16 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "ONOS_DEVOUR_TOOLTIP",
         [kTechDataResearchName] = "ONOS_DEVOUR",
     })
-    
-    --table.insert(techData, {
-    --    [kTechDataId] = kTechId.DropTeamStructureAbility,
-    --    [kTechDataCategory] = kTechId.Gorge,
-    --    [kTechDataMapName] = DropTeamStructureAbility.kMapName,
-    --    [kTechDataDisplayName] = "DROP_TEAM_STRUCTURE",
-    --    [kTechDataTooltipInfo] = "DROP_TEAM_STRUCTURE_TOOLTIP",
-    --    [kTechDataResearchName] = "DROP_TEAM_STRUCTURE",
-    --})
 
+    table.insert(techData, {
+        [kTechDataId] = kTechId.OriginForm,
+        [kTechDataCostKey] = kOriginFormResearchCost,
+        [kTechDataResearchTimeKey] = kOriginFormResearchTime,
+        [kTechDataDisplayName] = "ORIGIN_FORM",
+        [kTechDataTooltipInfo] = "ORIGIN_FORM_TOOLTIP",
+        [kTechDataResearchName] = "ORIGIN_FORM",
+    })
+    
     --Tunnels
     table.insert(techData, {
         [kTechDataId] = kTechId.ShiftTunnel,

@@ -56,7 +56,12 @@ if Client then
         local techTree = GetTechTree(entityTeamNumber)
         if techTree then
             local techNode = techTree:GetTechNode(_techId)
-            return techNode and (techNode:GetResearched()  or techNode:GetResearchProgress() > 0)
+            local progress = techNode:GetResearchProgress()
+            if progress ~= 0 and progress ~= 1 then
+                progressing = true
+                return true
+            end
+            return techNode:GetHasTech()
         end
         return false
     end
