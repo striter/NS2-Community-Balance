@@ -21,13 +21,7 @@ function Embryo:Replace(mapName, newTeamNumber, preserveWeapons, atOrigin, extra
 
     if Server then
         local team = self:GetTeam()
-        if team.IsOriginForm and team:IsOriginForm() then
-            local teamRes = math.min(team:GetTeamResources(),60)
-            if teamRes > 0 and self.gestationClass == Gorge.kMapName then
-                local res = self:AddResources(teamRes)
-                team:AddTeamResources(-res)
-            end
-        end
+        team:OnLifeFormGestation(self,mapName)
     end
     
     return Player.Replace(self,mapName, newTeamNumber, preserveWeapons, atOrigin, extraValues, isPickup)

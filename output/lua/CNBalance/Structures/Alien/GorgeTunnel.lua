@@ -87,7 +87,7 @@ if Server then
         -- register if a tunnel entity already exists or a free tunnel has been found
         for _, tunnelEntrance in ientitylist( Shared.GetEntitiesWithClassname("TunnelEntrance") ) do
             -- check the other entrance has been built and isn't killed
-            if tunnelEntrance:GetOwnerClientId() == self.ownerId and tunnelEntrance ~= self and tunnelEntrance:GetIsAlive() and tunnelEntrance:GetIsBuilt() then
+            if tunnelEntrance.ownerId == self.ownerId and tunnelEntrance ~= self and tunnelEntrance:GetIsAlive() and tunnelEntrance:GetIsBuilt() then
                 foundTunnelEntrance = tunnelEntrance
                 --Print("found old entrance %s", foundTunnelEntrance:GetId())
                 break
@@ -118,7 +118,7 @@ if Server then
         -- animation from playing when the tunnel comes into view.
         self.skipOpenAnimation = false
         
-        if self.owner ~= Entityid.invalidId then
+        if self.owner ~= Entity.invalidId then
             self:UpdateConnectedTunnel()
             --self:UpgradeToTechId(kTechId.InfestedTunnel)
             self:SetDesiredInfestationRadius(self:GetInfestationMaxRadius())

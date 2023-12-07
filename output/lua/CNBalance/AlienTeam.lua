@@ -171,12 +171,22 @@ function AlienTeam:OnResetComplete()
 
     else
 
-        gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot1, kDefaultAlienStructureVariant )
-        gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot2, kDefaultHarvesterVariant )
-        gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot3, kDefaultAlienTunnelVariant )
-        gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot4, kDefaultEggVariant )
-        gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot5, kDefaultAlienCystVariant )
-        gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot6, kDefaultAlienDrifterVariant )
+        if self:IsOriginForm() then
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot1, kAlienStructureVariants.Auric )
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot2, kAuricHarvesterItemId )
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot3, kAuricTunnelItemId )
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot4, kAuricEggItemId )
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot5, kAuricCystItemId )
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot6, kAuricDrifterItemId )
+        else
+
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot1, kDefaultAlienStructureVariant )
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot2, kDefaultHarvesterVariant )
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot3, kDefaultAlienTunnelVariant )
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot4, kDefaultEggVariant )
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot5, kDefaultAlienCystVariant )
+            gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot6, kDefaultAlienDrifterVariant )
+        end
 
     end
 
@@ -1127,13 +1137,15 @@ function AlienTeam:InitTechTree()
     self.techTree:SetComplete()
 
     self.originTechNode = self.techTree:GetTechNode(kTechId.OriginForm)
+    self.timeGorgeGestated = 0
 end
 
 function AlienTeam:OnGameStateChanged(_state)
     if _state == kGameState.Countdown then
         if not self:GetHasCommander() then
             self.originTechNode:SetResearched(true)
-            self:AddTeamResources(20)
+            self:AddTeamResources(-kPlayingTeamInitialTeamRes)
+
             local ents = GetEntitiesForTeam("Hive",self:GetTeamNumber())
             for _, hive in ipairs(ents) do
                 DestroyEntity(hive)
@@ -1349,4 +1361,18 @@ end
 
 function AlienTeam:IsOriginForm()
     return self.originTechNode and self.originTechNode:GetResearched()
+end
+
+function AlienTeam:OnLifeFormGestation(player,class)
+    if not self:IsOriginForm() 
+        or not class == Gorge.kMapName
+    then
+        return
+    end
+    
+    self.timeGorgeGestated = self.timeGorgeGestated + 1
+    local pRes = kOriginFormGorgeGestationPResGain[self.timeGorgeGestated]
+    if not pRes then return end
+    
+    player:AddResources(pRes)
 end

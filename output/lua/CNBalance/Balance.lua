@@ -652,14 +652,16 @@ kOriginFormResearchTime = 20
 
 kGorgeAbilitiesCost = {
     [kTechId.Hydra] = 0, [kTechId.Clog] = 0, [kTechId.Web] = 0,[kTechId.SporeMine] = 0, [kTechId.BabblerEgg] = 3,
-    [kTechId.Egg] = 2, [kTechId.Tunnel] = 5, [kTechId.TunnelExit] = 3,
+    [kTechId.Egg] = 2, [kTechId.Tunnel] = 4, [kTechId.TunnelExit] = 3,
     [kTechId.Whip] = 8, [kTechId.Shift] = 15, [kTechId.Shade] = 15, [kTechId.Crag] = 15,
                          [kTechId.Spur] = 12, [kTechId.Shell] = 12, [kTechId.Veil] = 12,
-    [kTechId.Harvester] = 10, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
+    [kTechId.Harvester] = 8, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
 }
+
+kOriginFormGorgeGestationPResGain = {60 , 20 ,10}   --First one needs to drop a hive so...
 
 kOriginPersonalResourcesPerKill = {
     [kTechId.Marine] = 2, [kTechId.JetpackMarine] = 4, [kTechId.Exo] = 6,
 }
 
-kGorgeHiveBuildTime = 120
+kGorgeHiveBuildTime = kHiveBuildTime
