@@ -325,31 +325,12 @@ if Server then
         [kTechId.ShadeHive] = "Shade",
     }
 
-    local function GetOriginFormBiomassLevel(self, count)
-        if not self:GetIsBuilt() then 
-            return 0 
-        end
-        
-        if count >= 4 then
-            return 4
-        end
-
-        if count >=2 then
-            return 3
-        end
-        
-        if count >= 1 then
-            return 2
-        end
-        return 1
-    end
-    
     function Hive:UpdateBiomassLevel(team)
         if not team:IsOriginForm() then return end
         local techId = self:GetTechId()
         local biomassSourceName = kHiveBiomassSource[techId]
         if not biomassSourceName then return end
-        local newBiomassLevel = GetOriginFormBiomassLevel(self,#GetEntitiesForTeam(biomassSourceName,self:GetTeamNumber()))
+        local newBiomassLevel = self:GetIsBuilt() and GetOriginFormBiomassLevel(#GetEntitiesAliveForTeam(biomassSourceName,self:GetTeamNumber())) or 0
 
         if self.bioMassLevel == newBiomassLevel then return end
         self.bioMassLevel = newBiomassLevel
@@ -368,10 +349,10 @@ end
 function Hive:ConstructionTimeBonus()
     local teamInfoEntity = GetTeamInfoEntity(self:GetTeamNumber())
     if teamInfoEntity and teamInfoEntity.isOriginForm then
-        return teamInfoEntity.bioMassLevel == 0 and 3 or 1
+        return teamInfoEntity.bioMassLevel == 0 and 5 or 1
     end
     
-    return 3
+    return 1
 end
 
 function Hive:GetBioMassLevel()

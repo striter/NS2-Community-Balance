@@ -963,7 +963,7 @@ function AlienTeam:InitTechTree()
     self.techTree:AddBuildNode(kTechId.Drifter, kTechId.None, kTechId.None, true)
 
     -- Whips
-    self.techTree:AddBuildNode(kTechId.Whip,                      kTechId.Hive,                kTechId.None)
+    self.techTree:AddBuildNode(kTechId.Whip,                      kTechId.None,                kTechId.None)
     self.techTree:AddUpgradeNode(kTechId.EvolveBombard,             kTechId.None,                kTechId.None)
 
     self.techTree:AddPassive(kTechId.WhipBombard)
@@ -987,9 +987,9 @@ function AlienTeam:InitTechTree()
     self.techTree:AddUpgradeNode(kTechId.OnosEgg, kTechId.BioMassNine)
 
     -- Special alien structures. These tech nodes are modified at run-time, depending when they are built, so don't modify prereqs.
-    self.techTree:AddBuildNode(kTechId.Crag,                      kTechId.Hive,          kTechId.None)
-    self.techTree:AddBuildNode(kTechId.Shift,                     kTechId.Hive,          kTechId.None)
-    self.techTree:AddBuildNode(kTechId.Shade,                     kTechId.Hive,          kTechId.None)
+    self.techTree:AddBuildNode(kTechId.Crag,                      kTechId.None,          kTechId.None)
+    self.techTree:AddBuildNode(kTechId.Shift,                     kTechId.None,          kTechId.None)
+    self.techTree:AddBuildNode(kTechId.Shade,                     kTechId.None,          kTechId.None)
     
     -- Alien upgrade structure
     self.techTree:AddBuildNode(kTechId.Shell, kTechId.CragHive)
@@ -1144,12 +1144,16 @@ function AlienTeam:OnGameStateChanged(_state)
     if _state == kGameState.Countdown then
         if not self:GetHasCommander() then
             self.originTechNode:SetResearched(true)
-            self:AddTeamResources(-kPlayingTeamInitialTeamRes)
+            self:AddTeamResources(kOriginFormAdditionalTRes)
 
             local ents = GetEntitiesForTeam("Hive",self:GetTeamNumber())
             for _, hive in ipairs(ents) do
                 DestroyEntity(hive)
             end
+        end
+    elseif _state == kGameState.Started then
+        if self:IsOriginForm() then
+            CreateEntity(NutrientMist.kMapName,self:GetInitialTechPoint():GetOrigin(),self:GetTeamNumber())
         end
     end
 end
@@ -1346,7 +1350,10 @@ end
 
 function AlienTeam:CollectTeamResources(teamRes,playerRes)
     if self:IsOriginForm() then
-        teamRes = 0   --No team res now
+        local activeHiveCount = self:GetActiveHiveCount()
+        if activeHiveCount > 0 then
+            teamRes = 0   --No team res now
+        end
     end
 
     PlayingTeam.CollectTeamResources(self,teamRes,playerRes)
@@ -1365,14 +1372,18 @@ end
 
 function AlienTeam:OnLifeFormGestation(player,class)
     if not self:IsOriginForm() 
-        or not class == Gorge.kMapName
+        or not (class == Gorge.kMapName)
     then
         return
     end
-    
+
     self.timeGorgeGestated = self.timeGorgeGestated + 1
-    local pRes = kOriginFormGorgeGestationPResGain[self.timeGorgeGestated]
-    if not pRes then return end
     
-    player:AddResources(pRes)
+    local desirePRes =  self.timeGorgeGestated == 1 and kOriginFormInitialGorgePRes or kOriginFormExtraGorgePRes
+    local teamResource = self:GetTeamResources()
+    local finalPRes = math.min(teamResource,desirePRes)
+
+    if finalPRes < 1 then return end
+    local presAdded = player:AddResources(desirePRes)
+    self:AddTeamResources(-presAdded)
 end

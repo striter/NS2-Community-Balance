@@ -658,10 +658,24 @@ kGorgeAbilitiesCost = {
     [kTechId.Harvester] = 8, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
 }
 
-kOriginFormGorgeGestationPResGain = {60 , 20 ,10}   --First one needs to drop a hive so...
 
 kOriginPersonalResourcesPerKill = {
     [kTechId.Marine] = 2, [kTechId.JetpackMarine] = 4, [kTechId.Exo] = 6,
 }
 
 kGorgeHiveBuildTime = kHiveBuildTime
+
+kOriginFormAdditionalTRes = 30
+kOriginFormInitialGorgePRes = 60
+kOriginFormExtraGorgePRes = 20
+
+kBiomassPerTower = {0,1,2,4}
+function GetOriginFormBiomassLevel(count)
+    local level = 0
+    for _,v in ipairs(kBiomassPerTower) do
+        if count >= v then
+            level = level + 1
+        end
+    end
+    return level
+end

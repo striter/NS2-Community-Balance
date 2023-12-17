@@ -7,24 +7,29 @@ function AdvancedStructureAbility:GetIsPositionValid(position, player, normal, l
 
     PROFILE("AdvancedStructureAbility:GetIsPositionValid")
 
-    local valid = true
-    if valid then
-        local extents = GetExtents(self:GetDropStructureId())
-        local traceStart = position + normal * extents.y/2 
-        local traceEnd = position + normal * extents.y
-        trace = Shared.TraceBox(extents, traceStart, traceEnd, CollisionRep.Damage, PhysicsMask.Bullets, EntityFilterAll)
-
-        --DebugTraceBox(extents, traceStart, traceEnd, 0.1, 45, 45, 45, 1)
-        local upwardFraction = normal:DotProduct(kUpVector)
-        if trace.fraction ~= 1
-            or (not self:CouldPlaceNonUpward() and upwardFraction < 0.9)
-        then
-            valid = false
-        end
-        
+    if entity then
+        return false
     end
+    
+    local extents = GetExtents(self:GetDropStructureId())
+    if math.abs(normal.y) < 0.95 then
+        local maxExtent = math.max(extents.x,extents.y,extents.z)
+        extents = Vector(maxExtent, maxExtent, maxExtent)
+    end
+        
+    local traceStart = position + normal * extents.y/2 
+    local traceEnd = position + normal * extents.y
+    trace = Shared.TraceBox(extents, traceStart, traceEnd, CollisionRep.Damage, PhysicsMask.Bullets)
 
-    return valid
+    --DebugTraceBox(extents, traceStart, traceEnd, 0.1, 45, 45, 45, 1)
+    local upwardFraction = normal:DotProduct(kUpVector)
+    if trace.fraction ~= 1
+        or (not self:CouldPlaceNonUpward() and upwardFraction < 0.9)
+    then
+        return false
+    end
+    
+    return true
 
 end
 
@@ -59,3 +64,14 @@ end
 function AdvancedStructureAbility:GetMaxStructures(biomass)
     return -1
 end
+
+if Client then
+    
+    function AdvancedStructureAbility:GetHasTech(techId)
+
+        local techTree = GetTechTree()
+        return techTree ~= nil and techTree:GetHasTech(techId)
+
+    end
+    
+end 

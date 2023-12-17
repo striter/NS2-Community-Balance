@@ -232,7 +232,7 @@ ModLoader.SetupFileHook("lua/Shade.lua", "lua/CNBalance/Structures/Alien/Shade.l
 ModLoader.SetupFileHook("lua/Whip.lua", "lua/CNBalance/Structures/Alien/Whip.lua", "post")
 ModLoader.SetupFileHook("lua/Harvester.lua", "lua/CNBalance/Structures/Alien/Harvester.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/Web.lua", "lua/CNBalance/Structures/Alien/Web.lua", "post")
-
+ModLoader.SetupFileHook("lua/Egg.lua", "lua/CNBalance/Structures/Alien/Egg.lua", "post")
 
 --Bot
 ModLoader.SetupFileHook("lua/Clog.lua", "lua/CNBalance/Bots/Clog.lua", "post" )

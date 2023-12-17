@@ -35,6 +35,9 @@ local networkVars =
     spurLevel = "integer (0 to 3)",
     shellLevel = "integer (0 to 3)",
     
+    shiftCount = "integer(0 to 32)",
+    shadeCount = "integer(0 to 32)",
+    cragCount = "integer(0 to 32)",
     shiftHiveBiomassPreserve = "integer (0 to 4)",
     shadeHiveBiomassPreserve = "integer (0 to 4)",
     cragHiveBiomassPreserve = "integer (0 to 4)",
@@ -143,7 +146,9 @@ function AlienTeamInfo:OnCreate()
     self.veilLevel = 0
     self.spurLevel = 0
     self.shellLevel = 0
-
+    self.shiftCount = 0
+    self.shadeCount = 0
+    self.cragCount = 0
     
     self.location1Id = Entity.invalidId
     self.location2Id = Entity.invalidId
@@ -381,6 +386,9 @@ if Server then
                 self.veilLevel = Clamp(GetBuiltStructureCount("Veil", team:GetTeamNumber()), 0, 3)
                 self.spurLevel = Clamp(GetBuiltStructureCount("Spur", team:GetTeamNumber()), 0, 3)
                 self.shellLevel = Clamp(GetBuiltStructureCount("Shell", team:GetTeamNumber()), 0, 3)
+                self.shiftCount = GetBuiltStructureCount("Shift", team:GetTeamNumber())
+                self.shadeCount = GetBuiltStructureCount("Shade", team:GetTeamNumber())
+                self.cragCount = GetBuiltStructureCount("Crag", team:GetTeamNumber())
             end
         end
         

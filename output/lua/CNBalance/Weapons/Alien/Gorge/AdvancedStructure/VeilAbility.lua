@@ -8,3 +8,19 @@ end
 function VeilAbility:CouldPlaceNonUpward()
     return true
 end
+
+if Client then
+
+    function VeilAbility:GetGUITechAndDescription()
+        if self:GetHasTech(kTechId.ThreeVeils) then
+            return kTechId.ThreeVeils , "x3"
+        elseif self:GetHasTech(kTechId.TwoVeils) then
+            return kTechId.TwoVeils , "x2"
+        elseif self:GetHasTech(kTechId.Veil) then
+            return kTechId.Veil , "x1"
+        end
+
+        return kTechId.Veil , "x0"
+    end
+
+end 

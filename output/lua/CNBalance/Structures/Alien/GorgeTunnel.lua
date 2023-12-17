@@ -23,10 +23,6 @@ function GorgeTunnel:OnCreate()
     
 end
 
-function GorgeTunnel:GetCanBeUsed(player, useSuccessTable)
-    useSuccessTable.useSuccess = useSuccessTable.useSuccess and self:GetCanDigest(player)
-end
-
 function GorgeTunnel:OnDestroy()
     
     TunnelEntrance.OnDestroy(self)

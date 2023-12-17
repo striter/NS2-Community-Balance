@@ -14,5 +14,5 @@ function EggAbility:ModifyCoords(coords)
 end
 
 function EggAbility:CouldPlaceNonUpward()
-    return false --true
+    return true
 end

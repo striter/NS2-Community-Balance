@@ -56,6 +56,16 @@ function GorgeBuild_GetIsAbilityAvailable(ability, techId)
 
 end
 
+function GorgeBuild_GetAbilityIconAndDescription(ability,techId)
+    local structureAbility = ability.kSupportedStructures[techId]
+    assert(structureAbility,EnumToString(kTechId,techId))
+    if structureAbility.GetGUITechAndDescription then
+        return structureAbility:GetGUITechAndDescription()
+    end
+    
+    return kTechId.None,nil 
+end
+
 function GorgeBuild_AllowConsumeDrop(techId)
     return LookupTechData(techId, kTechDataAllowConsumeDrop, false)
 end
@@ -109,6 +119,7 @@ end
 
 class 'GUIGorgeBuildMenu' (GUIAnimatedScript)
 
+GUIGorgeBuildMenu.kUpgradesTexture = "ui/buildmenu.dds"
 GUIGorgeBuildMenu.kBaseYResolution = 1200
 
 GUIGorgeBuildMenu.kButtonWidth = 180
@@ -166,8 +177,8 @@ local function GetRowForTechId(techId)
         rowTable[kTechId.Web] = 5
         rowTable[kTechId.SporeMine] = 6
 
-        rowTable[kTechId.CragHive] = 9
-        rowTable[kTechId.ShiftHive] = 10
+        rowTable[kTechId.CragHive] = 10
+        rowTable[kTechId.ShiftHive] = 9
         rowTable[kTechId.ShadeHive] = 8
         rowTable[kTechId.Harvester] = 11
         rowTable[kTechId.Spur] = 13
@@ -271,6 +282,21 @@ local function UpdateButton(ability, button, index)
     button.costIcon:SetColor(color)
     button.costText:SetColor(color)
 
+    local techId,techText = GorgeBuild_GetAbilityIconAndDescription(ability,button.techId)
+    local visible = techId ~= kTechId.None
+    
+    button.techIcon:SetIsVisible(visible)
+    if visible then
+        button.techIcon:SetColor(color)
+        button.techIcon:SetTexturePixelCoordinates(GUIUnpackCoords(GetTextureCoordinatesForIcon(techId)))
+        local techVisible = techText ~= nil
+        button.techDescription:SetIsVisible(techVisible)
+        if techVisible then
+            button.techDescription:SetText(techText)
+            button.techDescription:SetColor(color)
+        end
+    end
+    
     local numLeft = GorgeBuild_GetNumStructureBuilt(button.techId)
     if numLeft == -1 then
         button.structuresLeft:SetIsVisible(false)
@@ -355,6 +381,8 @@ function GUIGorgeBuildMenu:CreateButton(techId, scale, frame, keybind, position)
         structuresLeft = self:CreateAnimatedTextItem(),
         costIcon = self:CreateAnimatedGraphicItem(),
         costText = self:CreateAnimatedTextItem(),
+        techIcon = self:CreateAnimatedGraphicItem(),
+        techDescription = self:CreateAnimatedTextItem(),
     }
 
     local minimal = Client.GetHudDetail() == kHUDMode.Minimal
@@ -439,6 +467,28 @@ function GUIGorgeBuildMenu:CreateButton(techId, scale, frame, keybind, position)
     button.costText:SetColor(GUIGorgeBuildMenu.kAvailableColor)
     button.costIcon:AddChild(button.costText)
 
+    
+    --TechIcon
+    button.techIcon:SetSize(Vector(GUIGorgeBuildMenu.kPersonalResourceIcon.Width, GUIGorgeBuildMenu.kPersonalResourceIcon.Height, 0))
+    button.techIcon:SetAnchor(GUIItem.Middle, GUIItem.Bottom)
+    button.techIcon:SetTexture(GUIGorgeBuildMenu.kUpgradesTexture)
+    button.techIcon:SetPosition(Vector(0, -GUIGorgeBuildMenu.kPersonalResourceIcon.Height * .5, 0))
+    button.techIcon:SetUniformScale(scale)
+    GUISetTextureCoordinatesTable(button.techIcon, GUIGorgeBuildMenu.kPersonalResourceIcon.Coords)
+    
+    button.techDescription:SetUniformScale(scale)
+    button.techDescription:SetAnchor(GUIItem.Right, GUIItem.Center)
+    button.techDescription:SetTextAlignmentX(GUIItem.Align_Min)
+    button.techDescription:SetTextAlignmentY(GUIItem.Align_Center)
+    button.techDescription:SetPosition(Vector(GUIGorgeBuildMenu.kIconTextXOffset, 0, 0))
+    button.techDescription:SetColor(Color(1, 1, 1, 1))
+    button.techDescription:SetFontIsBold(true)
+    button.techDescription:SetScale(GetScaledVector())
+    button.techDescription:SetFontName(kFontName)
+    GUIMakeFontScale(button.techDescription)
+    button.techDescription:SetColor(GUIGorgeBuildMenu.kAvailableColor)
+    button.techIcon:AddChild(button.techDescription)
+    
     button.smokeyBackground = smokeyBackground
     button.background:AddChild(smokeyBackground)
     button.background:AddChild(button.graphicItem)    
@@ -446,6 +496,7 @@ function GUIGorgeBuildMenu:CreateButton(techId, scale, frame, keybind, position)
     button.graphicItem:AddChild(button.structuresLeft)
     button.graphicItem:AddChild(button.keyIcon)   
     button.graphicItem:AddChild(button.costIcon)
+    button.graphicItem:AddChild(button.techIcon)
 
     return button
 
