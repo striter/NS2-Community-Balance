@@ -122,10 +122,12 @@ end
 
 function PlayingTeam:AddTeamResources(amount, isIncome)
     local teamResourceDelta = amount
-    teamResourceDelta = teamResourceDelta + self.floatingResourceIncome
-    self.floatingResourceIncome = teamResourceDelta % 1
-    teamResourceDelta = teamResourceDelta - self.floatingResourceIncome
-
+    if amount > 0 then
+        teamResourceDelta = teamResourceDelta + self.floatingResourceIncome
+        self.floatingResourceIncome = teamResourceDelta % 1
+        teamResourceDelta = teamResourceDelta - self.floatingResourceIncome
+    end
+        
     if teamResourceDelta > 0 and isIncome then
         self.totalTeamResourcesCollected = self.totalTeamResourcesCollected + teamResourceDelta
     end

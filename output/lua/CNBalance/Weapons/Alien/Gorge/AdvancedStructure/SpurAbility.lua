@@ -13,11 +13,11 @@ if Client then
 
     function SpurAbility:GetGUITechAndDescription()
         if self:GetHasTech(kTechId.ThreeSpurs) then
-            return kTechId.ThreeVeils , "x3"
+            return kTechId.ThreeSpurs , "x3"
         elseif self:GetHasTech(kTechId.TwoSpurs) then
-            return kTechId.TwoVeils , "x2"
+            return kTechId.TwoSpurs , "x2"
         elseif self:GetHasTech(kTechId.Spur) then
-            return kTechId.Veil , "x1"
+            return kTechId.Spur , "x1"
         end
 
         return kTechId.Spur , "x0"

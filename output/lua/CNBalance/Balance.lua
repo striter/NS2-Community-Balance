@@ -18,7 +18,7 @@ kTechDataPersonalResOnKill = {
     [kTechId.Extractor] = 3, [kTechId.PoweredExtractor] = 5,
     [kTechId.RoboticsFactory] = 3, [kTechId.ARCRoboticsFactory] = 5,
     [kTechId.Armory] = 3,[kTechId.Observatory] = 3, [kTechId.PhaseGate] = 5,
-    [kTechId.CommandStation] = 12, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [ kTechId.ElectronicStation ] = 15,
+    [kTechId.CommandStation] = 8, [kTechId.StandardStation] = 10, [kTechId.ExplosiveStation] = 10, [kTechId.ArmorStation] = 10, [ kTechId.ElectronicStation ] = 10,
     [kTechId.Mine] = 0.3, [kTechId.InfantryPortal] = 2, [kTechId.MarineSentry] = 1,   --PPVE
     [kTechId.Shotgun] = 1.5, [kTechId.HeavyMachineGun] = 1.5, [kTechId.GrenadeLauncher] = 1.5, [kTechId.Flamethrower] = 1.5,     --Special one for gorgie
     
@@ -28,17 +28,17 @@ kTechDataPersonalResOnKill = {
     [kTechId.Shell] = 2.5, [kTechId.Veil] = 2.5, [kTechId.Spur] = 2.5,
     [kTechId.Whip] = 1.5, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,       --CPVE
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 4,
-    [kTechId.Hive] = 12  , [kTechId.ShiftHive] = 15, [kTechId.CragHive] = 15, [kTechId.ShadeHive] = 15,
+    [kTechId.Hive] = 8  , [kTechId.ShiftHive] = 10, [kTechId.CragHive] = 10, [kTechId.ShadeHive] = 10,
 }
 
 --TRes reward to kill certain structures, snowball rolling
 kTechDataTeamResOnKill = {
     --Marines
     --[kTechId.ARC] = 4,      --Super aggressive one i mean
-    [kTechId.CommandStation] = 15, [kTechId.StandardStation] = 20, [kTechId.ExplosiveStation] = 20, [kTechId.ArmorStation] = 20, [kTechId.ElectronicStation] = 20,
+    [kTechId.CommandStation] = 12, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [kTechId.ElectronicStation] = 15,
     
     --Aliens
-    [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20,
+    [kTechId.Hive] = 12, [kTechId.ShiftHive] = 15, [kTechId.CragHive] = 15, [kTechId.ShadeHive] = 15,
 }
 
 -- Resource refund base on teams total income minus (anti snowball,could cause "miracle")
@@ -46,32 +46,32 @@ kTeamResourceRefundBase = 100
 kTechDataTeamResRefundOnKill = {
     --[kTechId.Exo] = 5,  [kTechId.JetpackMarine] = 3,  --[kTechId.Exosuit] = 0.05, Aint working due to its not attached with pointgivermixin
     --[kTechId.Gorge] = 2, [kTechId.Prowler] = 3, [kTechId.Lerk] = 4, [kTechId.Fade] = 6, [kTechId.Onos] = 8,
-    [kTechId.Extractor] = 5, [kTechId.PoweredExtractor] = 5, [kTechId.Harvester] = 5,
-    [kTechId.PhaseGate] = 5, [kTechId.Tunnel] = 5,[kTechId.InfestedTunnel] = 5,
+    --[kTechId.Extractor] = 5, [kTechId.PoweredExtractor] = 5, [kTechId.Harvester] = 5,
+    --[kTechId.PhaseGate] = 5, [kTechId.Tunnel] = 5,[kTechId.InfestedTunnel] = 5,
     --?
-    [kTechId.CommandStation] = 8, [kTechId.StandardStation] = 10, [kTechId.ExplosiveStation] = 10, [kTechId.ArmorStation] = 10, [kTechId.ElectronicStation] = 10,
-    [kTechId.Hive] = 8, [kTechId.ShiftHive] = 10, [kTechId.CragHive] = 10, [kTechId.ShadeHive] = 10,
+    --[kTechId.CommandStation] = 8, [kTechId.StandardStation] = 10, [kTechId.ExplosiveStation] = 10, [kTechId.ArmorStation] = 10, [kTechId.ElectronicStation] = 10,
+    --[kTechId.Hive] = 8, [kTechId.ShiftHive] = 10, [kTechId.CragHive] = 10, [kTechId.ShadeHive] = 10,
 }
 
 --If a player kills too many players and crushing the game 
 kAssistMinimumDamageFraction = 0.35      --Avoid parasiter or babbler assists ,feels pretty weird
 kBountyScoreEachAssist = 1 kBountyScoreEachKill = 2 kMaxBountyScore = 512       --You can't kill 256 players in a row?
-kBountyClaimMinMarine = 5 kBountyClaimMinJetpack = 10 kBountyClaimMinExo = 16 
-kBountyClaimMinSkulk = 5 kBountyClaimMinAlien = 10  kBountyClaimMinOnos = 15
-kPResPerBountyClaimAsMarine = 0.4  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 20
+kBountyClaimMinMarine = 5 kBountyClaimMinJetpack = 8 kBountyClaimMinExo = 12
+kBountyClaimMinSkulk = 5 kBountyClaimMinAlien = 8  kBountyClaimMinOnos = 12
+kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 20
 
 --Toy for marine commander (remove all marines passive income, harsh one)
 kMilitaryProtocolResearchCost = 5
-kMilitaryProtocolResearchTime = 15
+kMilitaryProtocolResearchTime = 10
 kMilitaryProtocolResearchDurationMultiply = 1.2     --1.33?
-kMilitaryProtocolAggressivePersonalResourcesScalar = 2      --They don't need too much pres to buy defensive or grenades/welders (and they can shared it tbh)
+kMilitaryProtocolAggressivePersonalResourcesScalar = 1.5      --They don't need too much pres to buy defensive or grenades/welders (and they can shared it tbh)
 kMilitaryProtocolTResPerBountyClaim = 0.5   --Bounty score, don't give them pres, its doomed
-kMilitaryProtocolTeamResourcesPerKill = {          --Replaced refund system
+kMilitaryProtocolTeamResourcesPerKill = {          --Replaced refund system , append kTechDataTeamResOnKill above
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.Drifter] = 1,
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
     [kTechId.Skulk] = 2, [kTechId.Gorge] = 3,[kTechId.Prowler] = 4, [kTechId.Lerk] = 6, [kTechId.Fade] = 10, [kTechId.Onos] = 15,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
-    [kTechId.Hive] = 10, [kTechId.ShiftHive] = 15, [kTechId.CragHive] = 15, [kTechId.ShadeHive] = 15,
+    --[kTechId.Hive] = 3, [kTechId.ShiftHive] = 5, [kTechId.CragHive] = 5, [kTechId.ShadeHive] = 5,
 }
 kMilitaryProtocolPResRefundOnDeath = 0.5
 
@@ -665,7 +665,7 @@ kOriginPersonalResourcesPerKill = {
 
 kGorgeHiveBuildTime = kHiveBuildTime
 
-kOriginFormAdditionalTRes = 30
+kOriginFormAdditionalTRes = 40
 kOriginFormInitialGorgePRes = 60
 kOriginFormExtraGorgePRes = 20
 

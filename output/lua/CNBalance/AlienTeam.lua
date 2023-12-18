@@ -1380,10 +1380,10 @@ function AlienTeam:OnLifeFormGestation(player,class)
     self.timeGorgeGestated = self.timeGorgeGestated + 1
     
     local desirePRes =  self.timeGorgeGestated == 1 and kOriginFormInitialGorgePRes or kOriginFormExtraGorgePRes
-    local teamResource = self:GetTeamResources()
+    local teamResource = math.floor(self:GetTeamResources())
     local finalPRes = math.min(teamResource,desirePRes)
 
-    if finalPRes < 1 then return end
-    local presAdded = player:AddResources(desirePRes)
-    self:AddTeamResources(-presAdded)
+    if finalPRes < 10 then return end
+    player:AddResources(finalPRes)
+    self:AddTeamResources(-finalPRes)
 end
