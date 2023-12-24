@@ -77,6 +77,7 @@ debug.appendtoenum(kTechId, "XenocideFuel")
 debug.appendtoenum(kTechId, "SporeMine")
 debug.appendtoenum(kTechId, "DropTeamStructureAbility")
 debug.appendtoenum(kTechId, "GorgeShiftGhostModelOverride")
+debug.appendtoenum(kTechId, "GorgeCystGhostModelOverride")
 
 --Onos
 debug.appendtoenum(kTechId, "Devour")

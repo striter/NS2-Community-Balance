@@ -9,6 +9,6 @@ end
 function WhipAbility:OverrideInfestationCheck(_trace)
     return true
 end
-function WhipAbility:CouldPlaceNonUpward()
-    return true
+function WhipAbility:GetStructurePlaceSide()
+    return AdvancedStructureAbility.kStructurePlaceSide.All
 end

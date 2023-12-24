@@ -21,7 +21,6 @@ function Egg:SpawnPlayer(player)
         -- Spawn player on top of egg
         local spawnOrigin = Vector(self:GetOrigin())
         -- Move down to the ground.
-        Shared.Message("?")
         local _, normal = GetSurfaceAndNormalUnderEntity(self)
         local extents = self:GetExtents().y
         spawnOrigin.y = spawnOrigin.y - (extents / 2)

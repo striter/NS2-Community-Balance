@@ -384,9 +384,9 @@ kXenocideFuelTime = 120
 
 kXenocideEnergyCost = 30
 kXenocideDamageType = kDamageType.Structural
-kXenocideDamage = 150  kXenocideFuelDamage = 225 --200
+kXenocideDamage = 150  kXenocideFuelDamage = 210 --200
 kXenocideRange = 8 kXenocideFuelRange = 12 -- 14
-kXenocideDamageScalarEmptyHealth = 0.3 kXenocideDamageHealthScalar = 1 - kXenocideDamageScalarEmptyHealth
+kXenocideDamageScalarEmptyHealth = 0.2 kXenocideDamageHealthScalar = 1 - kXenocideDamageScalarEmptyHealth
 kXenocideSpawnReduction = 0.75 kXenocideFuelSpawnReduction = 0.5
 
 kBileBombResearchCost = 10
@@ -652,12 +652,20 @@ kOriginFormResearchTime = 20
 
 kGorgeAbilitiesCost = {
     [kTechId.Hydra] = 0, [kTechId.Clog] = 0, [kTechId.Web] = 0,[kTechId.SporeMine] = 0, [kTechId.BabblerEgg] = 3,
-    [kTechId.Egg] = 2, [kTechId.Tunnel] = 4, [kTechId.TunnelExit] = 3,
-    [kTechId.Whip] = 8, [kTechId.Shift] = 15, [kTechId.Shade] = 15, [kTechId.Crag] = 15,
-                         [kTechId.Spur] = 12, [kTechId.Shell] = 12, [kTechId.Veil] = 12,
+    [kTechId.Cyst] = 0.5,    [kTechId.Egg] = 1.5, [kTechId.Tunnel] = 4, [kTechId.TunnelExit] = 3,
+    [kTechId.Whip] = 8, [kTechId.Shift] = 12, [kTechId.Shade] = 12, [kTechId.Crag] = 12,
     [kTechId.Harvester] = 8, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
+                         [kTechId.Spur] = 12, [kTechId.Shell] = 12, [kTechId.Veil] = 12,
 }
+kGorgeStructureScorePerRes = 1
 
+kOriginFormRequiresInfestation = {
+    [kTechId.Harvester] = true, 
+    [kTechId.Spur] = true,
+    [kTechId.Egg] = true,
+    [kTechId.Shell] = true ,
+    [kTechId.Veil] = true,
+}
 
 kOriginPersonalResourcesPerKill = {
     [kTechId.Marine] = 2, [kTechId.JetpackMarine] = 4, [kTechId.Exo] = 6,
@@ -669,7 +677,7 @@ kOriginFormAdditionalTRes = 40
 kOriginFormInitialGorgePRes = 60
 kOriginFormExtraGorgePRes = 20
 
-kBiomassPerTower = {0,1,2,4}
+kBiomassPerTower = {0,1,3,7}
 function GetOriginFormBiomassLevel(count)
     local level = 0
     for _,v in ipairs(kBiomassPerTower) do

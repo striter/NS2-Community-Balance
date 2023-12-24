@@ -33,9 +33,11 @@ ModLoader.SetupFileHook("lua/ReadyRoomEmbryo.lua", "lua/CNBalance/ReadyRoomEmbry
 ModLoader.SetupFileHook("lua/Scoreboard.lua", "lua/CNBalance/Scoreboard.lua", "post" )
 ModLoader.SetupFileHook("lua/ServerStats.lua", "lua/CNBalance/ServerStats.lua", "replace" )
 --GUI
-ModLoader.SetupFileHook("lua/GUIMinimapFrame.lua", "lua/CNBalance/GUIMinimapFrame.lua", "post")
+ModLoader.SetupFileHook("lua/GUIMinimapFrame.lua", "lua/CNBalance/GUI/GUIMinimapFrame.lua", "post")
 ModLoader.SetupFileHook("lua/Hud2/topBar/GUIHudTopBarObjectClasses.lua", "lua/CNBalance/GUI/GUIHudTopBarObjectClasses.lua", "replace")
 ModLoader.SetupFileHook("lua/GUIMinimap.lua", "lua/CNBalance/GUI/GUIMinimap.lua", "post" )
+ModLoader.SetupFileHook("lua/GUIWorldText.lua", "lua/CNBalance/GUI/GUIWorldText.lua", "post" )
+ModLoader.SetupFileHook("lua/GUIUnitStatus.lua", "lua/CNBalance/GUI/GUIUnitStatus.lua", "replace" )
 
 
 --Effects
@@ -94,13 +96,13 @@ ModLoader.SetupFileHook("lua/CommAbilities/Marine/Scan.lua", "lua/CNBalance/Comm
 --Marines
 ModLoader.SetupFileHook("lua/Hud/Marine/GUIMarineHUD.lua", "lua/CNBalance/GUI/GUIMarineHUD.lua", "post" )
 ModLoader.SetupFileHook("lua/Hud/GUIPlayerResource.lua", "lua/CNBalance/GUI/GUIPlayerResource.lua", "post")
-ModLoader.SetupFileHook("lua/GUIMarineBuyMenu.lua", "lua/CNBalance/GUIMarineBuyMenu.lua", "replace" )
+ModLoader.SetupFileHook("lua/GUIMarineBuyMenu.lua", "lua/CNBalance/GUI/GUIMarineBuyMenu.lua", "replace" )
 
 ModLoader.SetupFileHook("lua/Hud/GUIEvent.lua", "lua/CNBalance/GUI/GUIEvent.lua", "post")
 ModLoader.SetupFileHook("lua/Hud/GUINotificationItem.lua", "lua/CNBalance/GUI/GUINotificationItem.lua", "post")
 
-ModLoader.SetupFileHook("lua/GUIActionIcon.lua", "lua/CNBalance/GUIActionIcon.lua", "replace")
-ModLoader.SetupFileHook("lua/GUIPickups.lua", "lua/CNBalance/GUIPickups.lua", "post")
+ModLoader.SetupFileHook("lua/GUIActionIcon.lua", "lua/CNBalance/GUI/GUIActionIcon.lua", "replace")
+ModLoader.SetupFileHook("lua/GUIPickups.lua", "lua/CNBalance/GUI/GUIPickups.lua", "post")
 ModLoader.SetupFileHook("lua/MarineBuy_Client.lua", "lua/CNBalance/MarineBuy_Client.lua", "post" )
 ModLoader.SetupFileHook("lua/MarineTeam.lua", "lua/CNBalance/MarineTeam.lua", "post")
 ModLoader.SetupFileHook("lua/MarineTeamInfo.lua", "lua/CNBalance/MarineTeamInfo.lua", "replace")
@@ -210,8 +212,8 @@ ModLoader.SetupFileHook("lua/Weapons/Alien/DropStructureAbility.lua", "lua/CNBal
 ModLoader.SetupFileHook("lua/GUIGorgeBuildMenu.lua", "lua/CNBalance/Weapons/Alien/Gorge/GUIGorgeBuildMenu.lua", "replace")
 
 
-ModLoader.SetupFileHook("lua/GUIEggDisplay.lua", "lua/CNBalance/GUIEggDisplay.lua", "post" )
-ModLoader.SetupFileHook("lua/GUIAlienBuyMenu.lua", "lua/CNBalance/GUIAlienBuyMenu.lua", "post" )
+ModLoader.SetupFileHook("lua/GUIEggDisplay.lua", "lua/CNBalance/GUI/GUIEggDisplay.lua", "post" )
+ModLoader.SetupFileHook("lua/GUIAlienBuyMenu.lua", "lua/CNBalance/GUI/GUIAlienBuyMenu.lua", "post" )
 ModLoader.SetupFileHook("lua/EvolutionChamber.lua", "lua/CNBalance/EvolutionChamber.lua", "post")
 ModLoader.SetupFileHook("lua/AlienTunnelManager.lua", "lua/CNBalance/AlienTunnelManager.lua", "post")
 

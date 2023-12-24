@@ -5,8 +5,8 @@ class 'VeilAbility' (AdvancedStructureAbility)
 function VeilAbility:GetDropStructureId()
     return kTechId.Veil
 end
-function VeilAbility:CouldPlaceNonUpward()
-    return true
+function VeilAbility:GetStructurePlaceSide()
+    return AdvancedStructureAbility.kStructurePlaceSide.All
 end
 
 if Client then

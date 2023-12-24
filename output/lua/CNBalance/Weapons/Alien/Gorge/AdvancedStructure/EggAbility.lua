@@ -9,10 +9,12 @@ end
 function EggAbility:OverrideInfestationCheck(_trace)
     return true
 end
+
 function EggAbility:ModifyCoords(coords)
     coords.origin = coords.origin + coords.yAxis * 0.1
 end
 
-function EggAbility:CouldPlaceNonUpward()
-    return true
-end
+function EggAbility:GetStructurePlaceSide()
+    return AdvancedStructureAbility.kStructurePlaceSide.All
+    
+end 

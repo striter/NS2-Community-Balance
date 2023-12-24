@@ -1201,6 +1201,30 @@ function BuildTechData()
     })
 
     table.insert(techData,{
+        [kTechDataId] = kTechId.Cyst,
+        [kTechDataSpawnBlock] = true,
+        [kTechDataBuildMethodFailedMessage] = "COMMANDERERROR_NO_CYST_PARENT_FOUND",
+        [kTechDataOverrideCoordsMethod] = AlignCyst,
+        [kTechDataHint] = "CYST_HINT",
+        [kTechDataCooldown] = kCystCooldown,
+        [kTechDataGhostModelClass] = "CystGhostModel",
+        [kTechDataMapName] = Cyst.kMapName,
+        [kTechDataDisplayName] = "CYST",
+        [kTechDataTooltipInfo] = "CYST_TOOLTIP",
+        [kTechDataCostKey] = kCystCost,
+        [kTechDataBuildTime] = kCystBuildTime,
+        [kTechDataMaxHealth] = kCystHealth,
+        [kTechDataMaxArmor] = kCystArmor,
+        [kTechDataModel] = Cyst.kModelName,
+        [kVisualRange] = kInfestationRadius,
+        [kTechDataRequiresInfestation] = false,
+        [kTechDataPointValue] = kCystPointValue,
+        [kTechDataGrows] = false,
+        [kTechDataBuildRequiresMethod] = GetCystParentAvailable,
+        [kTechDataAllowStacking] = true,
+    })
+    
+    table.insert(techData,{
         [kTechDataId] = kTechId.Egg,
         [kTechDataHint] = "EGG_HINT",
         [kTechDataMapName] = Egg.kMapName,
@@ -1211,7 +1235,7 @@ function BuildTechData()
         [kTechDataModel] = Egg.kModelName,
         [kTechDataPointValue] = kEggPointValue,
         [kTechDataBuildTime] = 1,
-        [kTechDataMaxExtents] = Vector(1.75/2, .664/2, 1.275/2),
+        [kTechDataMaxExtents] = Vector(1.75/2, 1/2, 1.75/2),
         [kTechDataRequiresInfestation] = true,
         [kTechDataAllowConsumeDrop] = true,
     })
@@ -1248,7 +1272,13 @@ function BuildTechData()
         [kTechDataMapName] = Shift.kMapName,
         [kTechDataModel] = Shift.kModelName,
     })
-    
+    table.insert(techData,{
+        [kTechDataId] = kTechId.GorgeCystGhostModelOverride,
+        [kTechDataGhostModelClass] = "AlienGhostModel",
+        [kTechDataMapName] = Cyst.kMapName,
+        [kTechDataModel] = Cyst.kModelName,
+    })
+
     table.insert(techData,{
         [kTechDataId] = kTechId.Shift,
         [kTechDataBioMass] = kShiftBiomass,

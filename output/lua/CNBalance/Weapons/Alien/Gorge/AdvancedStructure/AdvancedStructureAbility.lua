@@ -2,6 +2,7 @@
 
 class 'AdvancedStructureAbility' (StructureAbility)
 
+AdvancedStructureAbility.kStructurePlaceSide = enum( {'All','Upward','UpwardAndDownward'} )
 local kUpVector = Vector(0, 1, 0)
 function AdvancedStructureAbility:GetIsPositionValid(position, player, normal, lastClickedPosition, _, entity)
 
@@ -21,16 +22,27 @@ function AdvancedStructureAbility:GetIsPositionValid(position, player, normal, l
     local traceEnd = position + normal * extents.y
     trace = Shared.TraceBox(extents, traceStart, traceEnd, CollisionRep.Damage, PhysicsMask.Bullets)
 
-    --DebugTraceBox(extents, traceStart, traceEnd, 0.1, 45, 45, 45, 1)
-    local upwardFraction = normal:DotProduct(kUpVector)
-    if trace.fraction ~= 1
-        or (not self:CouldPlaceNonUpward() and upwardFraction < 0.9)
-    then
+    if trace.fraction ~= 1 then
         return false
     end
     
+    --DebugTraceBox(extents, traceStart, traceEnd, 0.1, 45, 45, 45, 1)
+    local upwardFraction = normal:DotProduct(kUpVector)
+    local side = self:GetStructurePlaceSide()
+    if side == AdvancedStructureAbility.kStructurePlaceSide.All then
+        return true
+    elseif side == AdvancedStructureAbility.kStructurePlaceSide.Upward then
+        return upwardFraction > 0.9
+    elseif side == AdvancedStructureAbility.kStructurePlaceSide.UpwardAndDownward then
+        return math.abs(upwardFraction) > .9
+    end
+    assert(false)
     return true
 
+end
+
+function AdvancedStructureAbility:GetStructurePlaceSide()
+    return AdvancedStructureAbility.kStructurePlaceSide.All
 end
 
 function AdvancedStructureAbility:CouldPlaceNonUpward()

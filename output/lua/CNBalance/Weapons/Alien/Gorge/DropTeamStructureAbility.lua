@@ -8,6 +8,7 @@ Script.Load("lua/CNBalance/Weapons/Alien/Gorge/AdvancedStructure/VeilAbility.lua
 Script.Load("lua/CNBalance/Weapons/Alien/Gorge/AdvancedStructure/ShellAbility.lua")
 Script.Load("lua/CNBalance/Weapons/Alien/Gorge/AdvancedStructure/TunnelEntranceAbility.lua")
 Script.Load("lua/CNBalance/Weapons/Alien/Gorge/AdvancedStructure/TunnelExitAbility.lua")
+Script.Load("lua/CNBalance/Weapons/Alien/Gorge/AdvancedStructure/CystAbility.lua")
 
 Script.Load("lua/CNBalance/Weapons/Alien/Gorge/AttachStructure/AttachStructureAbility.lua")
 Script.Load("lua/CNBalance/Weapons/Alien/Gorge/AttachStructure/ShadeHiveAbility.lua")
@@ -20,6 +21,7 @@ DropStructureAbility.kSupportedStructures[kTechId.Harvester] = HarvesterAbility
 DropStructureAbility.kSupportedStructures[kTechId.ShiftHive] = ShiftHiveAbility
 DropStructureAbility.kSupportedStructures[kTechId.ShadeHive] = ShadeHiveAbility
 DropStructureAbility.kSupportedStructures[kTechId.CragHive] = CragHiveAbility
+DropStructureAbility.kSupportedStructures[kTechId.Cyst] = CystAbility
 
 DropStructureAbility.kSupportedStructures[kTechId.BuildMenu] = AttachStructureAbility
 DropStructureAbility.kSupportedStructures[kTechId.AdvancedMenu] = AttachStructureAbility
@@ -68,30 +70,28 @@ if Client then
     
     function DropTeamStructureAbility:GetAvailableStructureTechIds()
         if not self.menu then
-            return { kTechId.Whip,kTechId.Shift,kTechId.Shade,kTechId.Crag,kTechId.BuildMenu }
+            return { kTechId.Cyst ,kTechId.Egg,kTechId.Tunnel,kTechId.TunnelExit,kTechId.BuildMenu }
         elseif self.menu == kTechId.BuildMenu then
+            return { kTechId.Whip ,kTechId.Shift,kTechId.Shade,kTechId.Crag, kTechId.AdvancedMenu }
+        else
             local localPlayer = Client.GetLocalPlayer()
-            local advancedTable ={ kTechId.Harvester,kTechId.ShiftHive, kTechId.ShadeHive, kTechId.CragHive, kTechId.AdvancedMenu }
+            local advancedTable ={ kTechId.Harvester ,kTechId.ShiftHive, kTechId.ShadeHive, kTechId.CragHive }
             if localPlayer then
-
                 if GetTechChosen(localPlayer, kTechId.ShiftHive) then
                     advancedTable[2] = kTechId.Spur
                 end
-
+                
                 if GetTechChosen(localPlayer, kTechId.ShadeHive) then
                     advancedTable[3] = kTechId.Veil
                 end
-
+                
                 if GetTechChosen(localPlayer, kTechId.CragHive)  then
                     advancedTable[4] = kTechId.Shell
                 end
             end
 
             return advancedTable
-        else
-            return { kTechId.Egg,kTechId.Tunnel,kTechId.TunnelExit}
         end
-        
     end
 end
 

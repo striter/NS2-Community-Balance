@@ -5,8 +5,8 @@ class 'ShellAbility' (AdvancedStructureAbility)
 function ShellAbility:GetDropStructureId()
     return kTechId.Shell
 end
-function ShellAbility:CouldPlaceNonUpward()
-    return true
+function ShellAbility:GetStructurePlaceSide()
+    return AdvancedStructureAbility.kStructurePlaceSide.All
 end
 
 if Client then

@@ -220,3 +220,48 @@ function GetSortedListOfPotentialParents(origin, teamNumber, maxCystParentDistan
     return parents
     
 end
+
+
+local baseCanBeBuilt = Cyst.CanBeBuilt
+function Cyst:CanBeBuilt()
+
+    local teamInfoEntity = GetTeamInfoEntity(self:GetTeamNumber())
+    if teamInfoEntity and teamInfoEntity.isOriginForm then
+        return true
+    end
+    
+    return baseCanBeBuilt(self)
+end
+
+if Server then
+    function Cyst:GetIsActuallyConnected()
+
+        -- Always in dev mode, for making movies and testing
+        if Shared.GetDevMode() then
+            return true
+        end
+
+        local teamInfoEntity = GetTeamInfoEntity(self:GetTeamNumber())
+        if teamInfoEntity and teamInfoEntity.isOriginForm then
+            return true
+        end
+
+        local parent = self:GetCystParent()
+        if parent then
+
+            if parent:isa("Hive") then
+                return true
+            end
+
+            if parent:isa("TunnelEntrance") then
+                return true
+            end
+
+            return parent:GetIsActuallyConnected()
+
+        end
+
+        return false
+
+    end
+end

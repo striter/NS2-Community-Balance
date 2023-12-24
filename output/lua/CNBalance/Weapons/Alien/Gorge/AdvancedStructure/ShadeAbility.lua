@@ -6,11 +6,8 @@ function ShadeAbility:GetDropStructureId()
     return kTechId.Shade
 end
 
-function ShadeAbility:OverrideInfestationCheck(_trace)
-    return true
-end
-function ShadeAbility:CouldPlaceNonUpward()
-    return true
+function ShadeAbility:GetStructurePlaceSide()
+    return AdvancedStructureAbility.kStructurePlaceSide.All
 end
 
 if Client then

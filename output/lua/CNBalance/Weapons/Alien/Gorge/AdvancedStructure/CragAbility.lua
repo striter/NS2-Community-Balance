@@ -6,11 +6,8 @@ function CragAbility:GetDropStructureId()
     return kTechId.Crag
 end
 
-function CragAbility:OverrideInfestationCheck(_trace)
-    return true
-end
-function CragAbility:CouldPlaceNonUpward()
-    return true
+function CragAbility:GetStructurePlaceSide()
+    return AdvancedStructureAbility.kStructurePlaceSide.All
 end
 
 if Client then

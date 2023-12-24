@@ -5,8 +5,8 @@ class 'SpurAbility' (AdvancedStructureAbility)
 function SpurAbility:GetDropStructureId()
     return kTechId.Spur
 end
-function SpurAbility:CouldPlaceNonUpward()
-    return true
+function SpurAbility:GetStructurePlaceSide()
+    return AdvancedStructureAbility.kStructurePlaceSide.All
 end
 
 if Client then

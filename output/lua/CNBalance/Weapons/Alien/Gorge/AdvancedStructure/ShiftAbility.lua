@@ -10,11 +10,8 @@ function ShiftAbility:GetGhostModelTechId()
     return kTechId.GorgeShiftGhostModelOverride
 end
 
-function ShiftAbility:OverrideInfestationCheck(_trace)
-    return true
-end
-function ShiftAbility:CouldPlaceNonUpward()
-    return true
+function ShiftAbility:GetStructurePlaceSide()
+    return AdvancedStructureAbility.kStructurePlaceSide.All
 end
 
 if Client then

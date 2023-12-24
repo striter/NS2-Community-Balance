@@ -743,9 +743,7 @@ function AlienTeam:Update(timePassed)
 
     PlayingTeam.Update(self, timePassed)
 
-    if not self:IsOriginForm() then
-        self:UpdateTeamAutoHeal(timePassed)
-    end
+    self:UpdateTeamAutoHeal(timePassed)
 
     self:UpdateEggGeneration()
     self:UpdateEggCount()
@@ -769,6 +767,19 @@ function AlienTeam:OnTechTreeUpdated()
 
     end
 
+end
+
+local function RequiresInfestation(self,entity)
+    if self:IsOriginForm() then
+        return kOriginFormRequiresInfestation[entity:GetTechId()] or false
+    end
+    
+    local requiresInfestation = false
+    requiresInfestation = LookupTechData(entity:GetTechId(), kTechDataRequiresInfestation)
+    if entity:isa("Whip") or entity:isa("TunnelEntrance") then
+        requiresInfestation = false
+    end
+    return requiresInfestation
 end
 
 -- update every tick but only a small amount of structures
@@ -798,10 +809,7 @@ function AlienTeam:UpdateTeamAutoHeal()
                 -- we add whips and tunnel entrances as an exception here. construction should
                 -- still be restricted to onInfestation, we only don't want whips to take damage
                 -- off infestation
-                local requiresInfestation = LookupTechData(entity:GetTechId(), kTechDataRequiresInfestation)
-                if entity:isa("Whip") or entity:isa("TunnelEntrance") then
-                    requiresInfestation = false
-                end
+                local requiresInfestation = RequiresInfestation(self,entity)
                 local isOnInfestation       = entity:GetGameEffectMask(kGameEffect.OnInfestation)
                 local deltaTime             = 0
 

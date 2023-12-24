@@ -49,12 +49,12 @@ kShowOnTeam[kTeamReadyRoom] =
 
 kShowOnTeam[kTeam1Index] =
 {
-    ["CNBalance/GUITeamSpectatorHUD"] = true, --GUIAlienSpectatorHUD = true,
+    ["CNBalance/GUI/GUITeamSpectatorHUD"] = true, --GUIAlienSpectatorHUD = true,
 }
 
 kShowOnTeam[kTeam2Index] =
 {
-    ["CNBalance/GUITeamSpectatorHUD"] = true, --GUITeamSpectatorHUD = true,
+    ["CNBalance/GUI/GUITeamSpectatorHUD"] = true, --GUITeamSpectatorHUD = true,
 }
 
 kShowOnTeam[kSpectatorIndex] =

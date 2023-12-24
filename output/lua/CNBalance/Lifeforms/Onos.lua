@@ -111,3 +111,24 @@ function Onos:ModifyCelerityBonus( celerityBonus )
     return celerityBonus * kOnosCeleritySpeedMultiply
 
 end
+
+function Onos:UpdateRumbleSound()
+
+    if Client then
+
+        local rumbleSound = Shared.GetEntity(self.rumbleSoundId)
+        local speed = self:GetCrouching() and 0 or self:GetSpeedScalar()
+        Shared.Message(tostring(speed))
+        if rumbleSound then
+            rumbleSound:SetParameter("speed",speed , 1)
+        end
+    end
+end
+
+function Onos:GetPlayFootsteps()
+    return self:GetVelocityLength() > .75 
+            and self:GetIsOnGround() 
+            and self:GetIsAlive()
+            and not self:GetCrouching()
+end
+
