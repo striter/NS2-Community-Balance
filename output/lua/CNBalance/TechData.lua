@@ -1235,7 +1235,7 @@ function BuildTechData()
         [kTechDataModel] = Egg.kModelName,
         [kTechDataPointValue] = kEggPointValue,
         [kTechDataBuildTime] = 1,
-        [kTechDataMaxExtents] = Vector(1.75/2, 1/2, 1.75/2),
+        [kTechDataMaxExtents] = Vector(1.75/2, 1, 1.75/2),
         [kTechDataRequiresInfestation] = true,
         [kTechDataAllowConsumeDrop] = true,
     })

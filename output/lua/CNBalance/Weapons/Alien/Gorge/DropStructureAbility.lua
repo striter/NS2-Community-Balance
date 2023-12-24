@@ -377,7 +377,11 @@ function DropStructureAbility:DropStructure(player, origin, direction, structure
                     end
 
                     player:AddResources(-cost)
-
+                    local score = math.floor(cost * kGorgeStructureScorePerRes)
+                    if score > 0 then
+                        player:AddScore(score)
+                    end
+                    
                     player:DeductAbilityEnergy(energyCost)
                     player:TriggerEffects("spit_structure", {effecthostcoords = Coords.GetLookIn(origin, direction)} )
 
@@ -496,7 +500,12 @@ function DropStructureAbility:GetPositionForStructure(startPosition, direction, 
     if structureAbility.kAttachToPoints then
 
         validPosition = structureAbility:GetIsPositionValid(displayOrigin, player, trace.normal, lastClickedPosition, lastClickedPositionNormal, trace.entity)
-   
+
+        local requiresInfestation = LookupTechData(structureAbility.GetDropStructureId(), kTechDataRequiresInfestation)
+        if requiresInfestation and not GetIsPointOnInfestation(displayOrigin) then
+            validPosition = false
+        end
+        
     else
 
         -- Can only be built on infestation

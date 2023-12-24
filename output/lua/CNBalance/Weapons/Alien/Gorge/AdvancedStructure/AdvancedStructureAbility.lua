@@ -21,12 +21,12 @@ function AdvancedStructureAbility:GetIsPositionValid(position, player, normal, l
     local traceStart = position + normal * extents.y/2 
     local traceEnd = position + normal * extents.y
     trace = Shared.TraceBox(extents, traceStart, traceEnd, CollisionRep.Damage, PhysicsMask.Bullets)
-
+    --DebugTraceBox(extents, traceStart, traceEnd, 0.1, 45, 45, 45, 1)
+    
     if trace.fraction ~= 1 then
         return false
     end
     
-    --DebugTraceBox(extents, traceStart, traceEnd, 0.1, 45, 45, 45, 1)
     local upwardFraction = normal:DotProduct(kUpVector)
     local side = self:GetStructurePlaceSide()
     if side == AdvancedStructureAbility.kStructurePlaceSide.All then

@@ -21,10 +21,13 @@ function Egg:SpawnPlayer(player)
         -- Spawn player on top of egg
         local spawnOrigin = Vector(self:GetOrigin())
         -- Move down to the ground.
-        local _, normal = GetSurfaceAndNormalUnderEntity(self)
-        local extents = self:GetExtents().y
-        spawnOrigin.y = spawnOrigin.y - (extents / 2)
-        if normal.y < 1 then
+        --local _, normal = GetSurfaceAndNormalUnderEntity(self)
+        
+        local normal = self:GetCoords().yAxis
+        --DebugLine(spawnOrigin,spawnOrigin + normal * 2,5,1,0,0,1)
+        if normal.y == 1 then
+            spawnOrigin = spawnOrigin - normal* (.664 / 4)
+        else
             spawnOrigin = spawnOrigin + normal * 1
         end
 

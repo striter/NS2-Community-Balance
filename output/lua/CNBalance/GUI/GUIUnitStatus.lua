@@ -632,7 +632,7 @@ function GUIUnitStatus:UpdateUnitStatusBlip(blipIndex, localPlayerIsCommander, b
 
     -- Armor Bar
     local displayABar = alpha > 0 and armorFraction ~= 0 -- only diplay when armor > 0 and unitstatus visible
-    displayABar = displayABar and (localPlayerIsCommander or (not hideBars and (not blipData.IsPlayer or not isEnemy))) -- don't display armor bar for enemies
+    --displayABar = displayABar and (localPlayerIsCommander or (not hideBars and (not blipData.IsPlayer or not isEnemy))) -- don't display armor bar for enemies
     if displayABar then
         updateBlip.ArmorBarBg:SetIsVisible(self.visible)
         if blipData.IsPlayer and isEnemy and not blipData.EvolvePercentage then

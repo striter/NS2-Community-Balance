@@ -770,6 +770,10 @@ function AlienTeam:OnTechTreeUpdated()
 end
 
 local function RequiresInfestation(self,entity)
+    if self:IsOriginForm() then
+        return false
+    end
+    
     local requiresInfestation = false
     requiresInfestation = LookupTechData(entity:GetTechId(), kTechDataRequiresInfestation)
     if entity:isa("Whip") or entity:isa("TunnelEntrance") then
