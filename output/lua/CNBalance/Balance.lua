@@ -659,14 +659,6 @@ kGorgeAbilitiesCost = {
 }
 kGorgeStructureScorePerRes = 1
 
-kOriginFormRequiresInfestation = {
-    [kTechId.Harvester] = true, 
-    [kTechId.Spur] = true,
-    [kTechId.Egg] = true,
-    [kTechId.Shell] = true ,
-    [kTechId.Veil] = true,
-}
-
 kOriginPersonalResourcesPerKill = {
     [kTechId.Marine] = 2, [kTechId.JetpackMarine] = 4, [kTechId.Exo] = 6,
 }

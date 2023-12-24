@@ -118,7 +118,6 @@ function Onos:UpdateRumbleSound()
 
         local rumbleSound = Shared.GetEntity(self.rumbleSoundId)
         local speed = self:GetCrouching() and 0 or self:GetSpeedScalar()
-        Shared.Message(tostring(speed))
         if rumbleSound then
             rumbleSound:SetParameter("speed",speed , 1)
         end
