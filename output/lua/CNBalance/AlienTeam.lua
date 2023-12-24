@@ -770,10 +770,6 @@ function AlienTeam:OnTechTreeUpdated()
 end
 
 local function RequiresInfestation(self,entity)
-    if self:IsOriginForm() then
-        return false
-    end
-    
     local requiresInfestation = false
     requiresInfestation = LookupTechData(entity:GetTechId(), kTechDataRequiresInfestation)
     if entity:isa("Whip") or entity:isa("TunnelEntrance") then
@@ -820,25 +816,40 @@ function AlienTeam:UpdateTeamAutoHeal()
                     entity.timeLastAutoHeal = Shared.GetTime()
                 end
 
-                if requiresInfestation and not isOnInfestation then
+                if requiresInfestation then
+                    if self:IsOriginForm() then
+                        if isOnInfestation then
+                            if not entity.GetIsInCombat or not entity:GetIsInCombat() then
+                                local healPerSecond = entity:GetMaxHealth() * kOriginFormOnInfestationHealPercentPerSecond
+                                healPerSecond = math.max(healPerSecond, kOriginFormOnInfestationMinHealPerSecond)
+                                local heal = healPerSecond * deltaTime
+                                entity:AddHealth(heal, false, false, false, nil, true)
+                            end
+                            
+                        end
+                    else
+                        if  not isOnInfestation then
 
-                    -- Take damage!
-                    local damagePerSecondPercentage = kBalanceOffInfestationHurtPercentPerSecond
-                    if entity.GetOffInfestationHurtPercentPerSecond then
-                        damagePerSecondPercentage = entity:GetOffInfestationHurtPercentPerSecond()
-                    end
+                            -- Take damage!
+                            local damagePerSecondPercentage = kBalanceOffInfestationHurtPercentPerSecond
+                            if entity.GetOffInfestationHurtPercentPerSecond then
+                                damagePerSecondPercentage = entity:GetOffInfestationHurtPercentPerSecond()
+                            end
 
-                    local damagePerSecond = entity:GetMaxHealth() * damagePerSecondPercentage
-                    damagePerSecond = math.max(damagePerSecond, kMinOffInfestationHurtPerSecond)
-                    local damage = damagePerSecond * deltaTime
+                            local damagePerSecond = entity:GetMaxHealth() * damagePerSecondPercentage
+                            damagePerSecond = math.max(damagePerSecond, kMinOffInfestationHurtPerSecond)
+                            local damage = damagePerSecond * deltaTime
 
-                    local attacker
-                    if entity.lastAttackerDidDamageTime and Shared.GetTime() < entity.lastAttackerDidDamageTime + 60 then
-                        attacker = entity:GetLastAttacker()
-                    end
+                            local attacker
+                            if entity.lastAttackerDidDamageTime and Shared.GetTime() < entity.lastAttackerDidDamageTime + 60 then
+                                attacker = entity:GetLastAttacker()
+                            end
 
-                    entity:DeductHealth(damage, attacker)
+                            entity:DeductHealth(damage, attacker)
+                        end
 
+
+                    end 
                 end
 
             end

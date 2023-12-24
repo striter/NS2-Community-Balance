@@ -647,8 +647,14 @@ kClogCost = 0
 kGorgeTunnelCost = 4
 kGorgeTunnelBuildTime = 18.5
 
+kBalanceOffInfestationHurtPercentPerSecond = 0.02
+kMinOffInfestationHurtPerSecond = 20
+
 kOriginFormResearchCost = 5
 kOriginFormResearchTime = 20
+
+kOriginFormOnInfestationHealPercentPerSecond = 0.01
+kOriginFormOnInfestationMinHealPerSecond = 10
 
 kGorgeAbilitiesCost = {
     [kTechId.Hydra] = 0, [kTechId.Clog] = 0, [kTechId.Web] = 0,[kTechId.SporeMine] = 0, [kTechId.BabblerEgg] = 3,
@@ -658,10 +664,8 @@ kGorgeAbilitiesCost = {
                          [kTechId.Spur] = 12, [kTechId.Shell] = 12, [kTechId.Veil] = 12,
 }
 kGorgeStructureScorePerRes = 0.5
-kOriginForm
-
 kOriginPersonalResourcesPerKill = {
-    [kTechId.Marine] = 2, [kTechId.JetpackMarine] = 4, [kTechId.Exo] = 6,
+    [kTechId.Marine] = 2, [kTechId.JetpackMarine] = 5, [kTechId.Exo] = 10,
 }
 
 kGorgeHiveBuildTime = kHiveBuildTime
