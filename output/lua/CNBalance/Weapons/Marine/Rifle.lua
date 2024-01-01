@@ -6,7 +6,7 @@ function Rifle:OnInitialized()
 end
 
 function Rifle:GetClipSize()
-    return GetHasTech(self,kTechId.MilitaryProtocol) and kMPRifleClipSize[NS2Gamerules_GetPlayerWeaponUpgradeIndex(self)] or kRifleClipSize
+    return kRifleClipSize
 end
 
 if Client then

@@ -346,7 +346,7 @@ end
 
 function Marine:GetArmorAmount(armorLevels)
 
-    local hasMP = GetHasTech(self,kTechId.MilitaryProtocol)
+    local hasNanoArmor = GetHasTech(self,kTechId.ArmorRegen)
     if not armorLevels then
         armorLevels = 0
 
@@ -359,7 +359,7 @@ function Marine:GetArmorAmount(armorLevels)
         end
     end
 
-    return hasMP and ( kMPMarineArmor + armorLevels * kMPMarineArmorPerUpgradeLevel) or (Marine.kBaseArmor + armorLevels * Marine.kArmorPerUpgradeLevel)
+    return hasNanoArmor and ( kNanoMarineArmor + armorLevels * kNanoArmorPerUpgradeLevel) or (Marine.kBaseArmor + armorLevels * Marine.kArmorPerUpgradeLevel)
 end
 
 if Client then

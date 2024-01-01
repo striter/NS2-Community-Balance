@@ -32,8 +32,8 @@ kMarineTechMap =
 
 
                                                                                                                                                       { kTechId.MilitaryProtocol, 5, 8 },{ kTechId.CommandStation, 7, 8 }, {kTechId.InfantryPortal, 9, 8 },
-                        { kTechId.LightMachineGunUpgrade, 2.5, 10 }, { kTechId.StandardStation, 3.5, 10 },{kTechId.CatPack, 4.5 ,10 },                       { kTechId.MinesUpgrade, 6, 10 },       { kTechId.ArmorStation, 7, 10 },  { kTechId.NanoShield, 8, 10 },                                                       { kTechId.PoweredExtractorTech,9.5,10}, { kTechId.ElectronicStation, 10.5, 10 }, { kTechId.PowerSurge, 11.5, 10 },
-                                                { kTechId.DragonBreath,3.5 , 11 },                                                                     { kTechId.LifeSustain, 6.5, 11 }, { kTechId.ArmorRegen, 7.5, 11 },                                                                                                                          { kTechId.MACEMPBlast, 10.5, 11 },
+                        { kTechId.LightMachineGunUpgrade, 2.5, 10 }, { kTechId.StandardStation, 3.5, 10 },{kTechId.CatPack, 4.5 ,10 },                       { kTechId.LifeSustain, 6, 10 },       { kTechId.ArmorStation, 7, 10 },  { kTechId.NanoShield, 8, 10 },                                                       { kTechId.PoweredExtractorTech,9.5,10}, { kTechId.ElectronicStation, 10.5, 10 }, { kTechId.PowerSurge, 11.5, 10 },
+                                                { kTechId.DragonBreath,3.5 , 11 },                                                                                                               { kTechId.ArmorRegen, 7, 11 },                                                                                                                          { kTechId.MACEMPBlast, 10.5, 11 },
 }
 
 kMarineLines = 
@@ -98,7 +98,7 @@ kMarineLines =
     GetLinePositionForTechMap(kMarineTechMap, kTechId.ArmorStation, kTechId.LifeSustain),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.ArmorStation, kTechId.ArmorRegen),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.ArmorStation, kTechId.NanoShield),
-    GetLinePositionForTechMap(kMarineTechMap, kTechId.ArmorStation, kTechId.MinesUpgrade),
+    --GetLinePositionForTechMap(kMarineTechMap, kTechId.ArmorStation, kTechId.MinesUpgrade),
     
     --Electronic Supply
     { 10.5, 9, 10.5, 10 },

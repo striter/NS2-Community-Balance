@@ -29,7 +29,7 @@ if kTranslateMessage then
     kTranslateMessage["MOTION_TRACK_TOOLTIP"] = "每隔一段时间.\n揭露站点内的高速活跃生物."
 
     kTranslateMessage["STANDARD_SUPPLY"] = "制式武器研发站"
-    kTranslateMessage["STANDARD_SUPPLY_TOOLTIP"] = "升级为制式武器研发基地."
+    kTranslateMessage["STANDARD_SUPPLY_TOOLTIP"] = "升级为制式武器研发基地.\n>解锁轻机枪购买."
     kTranslateMessage["STANDARD_STATION"] = "指挥站 (制式装备研发)"
     kTranslateMessage["STANDARD_STATION_HINT"] = "陆战队基地"
     kTranslateMessage["LIGHTMACHINEGUN_UPGRADE"]="制式步枪升级"
@@ -38,11 +38,11 @@ if kTranslateMessage then
     kTranslateMessage["DRAGON_BREATH_TOOLTIP"] = "*子弹将点燃敌方单位."
     
     kTranslateMessage["ARMOR_SUPPLY"] = "制式装备研发站"
-    kTranslateMessage["ARMOR_SUPPLY_TOOLTIP"] = "升级为制式装备研发基地.\n>同时解锁地雷遮光图层.\n+降低地雷对异形的可见性"
+    kTranslateMessage["ARMOR_SUPPLY_TOOLTIP"] = "升级为制式装备研发基地.\n>同时解锁生命维持装置.\n+脱战后迅速回复生命值."
     kTranslateMessage["ARMOR_STATION"] = "指挥站 (制式装备研发)"
     kTranslateMessage["ARMOR_STATION_HINT"] = "陆战队基地"
     kTranslateMessage["NANO_ARMOR"]="纳米护甲"
-    kTranslateMessage["NANO_ARMOR_TOOLTIP"]="*陆战队员脱战后缓慢回复护甲.\n*强化喷漆背包与机甲的脱战维修数值."
+    kTranslateMessage["NANO_ARMOR_TOOLTIP"]="*队员战后缓慢回复护甲.\n*略微增加基础护甲值.\n+强化原型科技的护甲恢复"
     kTranslateMessage["LIFE_SUSTAIN"]="生命维持装置"
     kTranslateMessage["LIFE_SUSTAIN_TOOLTIP"]="*陆战队员脱战后逐渐回复生命值."
 
@@ -61,7 +61,7 @@ if kTranslateMessage then
     --kTranslateMessage["GRENADE_LAUNCHER_ALLY_BLAST_TOOLTIP"] = "*降低对使用者的伤害."
 
     kTranslateMessage["ELECTRONIC_SUPPLY"] = "站点机械化研发"
-    kTranslateMessage["ELECTRONIC_SUPPLY_TOOLTIP"] = "升级为站点机械化发基地.\n>解锁采集器电极升级.\n+可对采集器进行感电防御升级."
+    kTranslateMessage["ELECTRONIC_SUPPLY_TOOLTIP"] = "升级为站点机械化研发基地.\n>解锁采集器电极升级.\n+可对采集器进行感电防御升级."
     kTranslateMessage["ELECTRONIC_STATION"] = "指挥站 (站点机械化)"
     kTranslateMessage["ELECTRONIC_STATION_HINT"] = "陆战队基地"
     kTranslateMessage["MAC_EMP_BLAST"] = "电磁芯片"
@@ -123,6 +123,8 @@ if kTranslateMessage then
     kTranslateMessage["ORIGIN_FORM"]="原始族群"
     kTranslateMessage["ORIGIN_FORM_TOOLTIP"]="虫群不再拥有母巢意志.\n*Gorge替代指挥放置建筑.\n*死亡的敌方单位将提供资源."
 
+    kTranslateMessage["TUNNEL_EXIT_HINT"]="未链接的虫洞出口."
+    
     kTranslateMessage["DROP_TEAM_STRUCTURE"]="工蜂"
     kTranslateMessage["DROP_TEAM_STRUCTURE_TOOLTIP"]="*仅在原始族群状态可用.\n*巢(提供范围强化/攻击)\n*资源塔(提供被动资源收入)\n*母巢(提供生物质)\n*属性塔(提供演化强化).\n*蛹(提供复活点).\n*虫洞(双端建成以提供迅捷通道)."
     
@@ -218,7 +220,7 @@ if kLocales then
     kLocales["ARMOR_STATION"] = "Command Station (Equipments Lab)"
     kLocales["ARMOR_STATION_HINT"] = "Marine Base"
     kLocales["NANO_ARMOR"]="Nano Armor"
-    kLocales["NANO_ARMOR_TOOLTIP"]="*Regen armor after combat.\n*Strengthen autoweld of jetpack & exo"
+    kLocales["NANO_ARMOR_TOOLTIP"]="*Regen armor after combat.\n*Increase Armor Amount\n*Strengthen autoweld of jetpack & exo"
     kLocales["LIFE_SUSTAIN"]="Life Sustain System"
     kLocales["LIFE_SUSTAIN_TOOLTIP"]="*Regen health after combat."
     
@@ -293,6 +295,9 @@ if kLocales then
     kLocales["ORIGIN_FORM"]="Origin Form"
     kLocales["ORIGIN_FORM_TOOLTIP"]="No more commanding form hive.\n*Gorge build team structures now.\n*Enemies provide personal resource on death."
 
+    kLocales["TUNNEL_EXIT_HINT"]="Unconnected Tunnel Exit"
+    
+    
     kLocales["DROP_TEAM_STRUCTURE"]="Worker"
     kLocales["DROP_TEAM_STRUCTURE_TOOLTIP"]="*Available with Origin Form.\n*You will build every team-thing now."
 

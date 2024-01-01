@@ -18,7 +18,7 @@ kTechDataPersonalResOnKill = {
     [kTechId.Extractor] = 3, [kTechId.PoweredExtractor] = 5,
     [kTechId.RoboticsFactory] = 3, [kTechId.ARCRoboticsFactory] = 5,
     [kTechId.Armory] = 3,[kTechId.Observatory] = 3, [kTechId.PhaseGate] = 5,
-    [kTechId.CommandStation] = 8, [kTechId.StandardStation] = 10, [kTechId.ExplosiveStation] = 10, [kTechId.ArmorStation] = 10, [ kTechId.ElectronicStation ] = 10,
+    [kTechId.CommandStation] = 12, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [ kTechId.ElectronicStation ] = 15,
     [kTechId.Mine] = 0.3, [kTechId.InfantryPortal] = 2, [kTechId.MarineSentry] = 1,   --PPVE
     [kTechId.Shotgun] = 1.5, [kTechId.HeavyMachineGun] = 1.5, [kTechId.GrenadeLauncher] = 1.5, [kTechId.Flamethrower] = 1.5,     --Special one for gorgie
     
@@ -28,7 +28,7 @@ kTechDataPersonalResOnKill = {
     [kTechId.Shell] = 2.5, [kTechId.Veil] = 2.5, [kTechId.Spur] = 2.5,
     [kTechId.Whip] = 1.5, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,       --CPVE
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 4,
-    [kTechId.Hive] = 8  , [kTechId.ShiftHive] = 10, [kTechId.CragHive] = 10, [kTechId.ShadeHive] = 10,
+    [kTechId.Hive] = 12, [kTechId.ShiftHive] = 15, [kTechId.CragHive] = 15, [kTechId.ShadeHive] = 15,
 }
 
 --TRes reward to kill certain structures, snowball rolling
@@ -38,7 +38,7 @@ kTechDataTeamResOnKill = {
     [kTechId.CommandStation] = 12, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [kTechId.ElectronicStation] = 15,
     
     --Aliens
-    [kTechId.Hive] = 12, [kTechId.ShiftHive] = 15, [kTechId.CragHive] = 15, [kTechId.ShadeHive] = 15,
+    [kTechId.Hive] = 10, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20,
 }
 
 -- Resource refund base on teams total income minus (anti snowball,could cause "miracle")
@@ -71,7 +71,7 @@ kMilitaryProtocolTeamResourcesPerKill = {          --Replaced refund system , ap
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
     [kTechId.Skulk] = 2, [kTechId.Gorge] = 3,[kTechId.Prowler] = 4, [kTechId.Lerk] = 6, [kTechId.Fade] = 10, [kTechId.Onos] = 15,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
-    --[kTechId.Hive] = 3, [kTechId.ShiftHive] = 5, [kTechId.CragHive] = 5, [kTechId.ShadeHive] = 5,
+    [kTechId.Hive] = 10, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20
 }
 kMilitaryProtocolPResRefundOnDeath = 0.5
 
@@ -104,7 +104,7 @@ kShotgunDropCooldown = 0
 
 kRifleDamage = 10
 kRifleDamageType = kDamageType.Normal
-kRifleClipSize = 50  kMPRifleClipSize = {52,53,54,55}
+kRifleClipSize = 50
 
 kPistolRateOfFire = 0.01
 kPistolDamage = 20
@@ -194,7 +194,7 @@ kCombatBuilderResearchTime = 60
 --Armor Supply
 kLifeSustainResearchCost = 15
 kLifeSustainResearchTime = 60
-kNanoArmorResearchCost = 25
+kNanoArmorResearchCost = 30
 kNanoArmorResearchTime = 90
 
 --Revolver
@@ -658,8 +658,8 @@ kOriginFormOnInfestationMinHealPerSecond = 10
 
 kGorgeAbilitiesCost = {
     [kTechId.Hydra] = 0, [kTechId.Clog] = 0, [kTechId.Web] = 0,[kTechId.SporeMine] = 0, [kTechId.BabblerEgg] = 3,
-    [kTechId.Cyst] = 0.5,    [kTechId.Egg] = 1.5, [kTechId.Tunnel] = 4, [kTechId.TunnelExit] = 3,
-    [kTechId.Whip] = 8, [kTechId.Shift] = 15, [kTechId.Shade] = 15, [kTechId.Crag] = 15,
+    [kTechId.Cyst] = 0.5,    [kTechId.Egg] = 1.5, [kTechId.Tunnel] = 5, [kTechId.TunnelExit] = 1,
+    [kTechId.Whip] = 8, [kTechId.Shift] = 12, [kTechId.Shade] = 12, [kTechId.Crag] = 12,
     [kTechId.Harvester] = 8, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
                          [kTechId.Spur] = 12, [kTechId.Shell] = 12, [kTechId.Veil] = 12,
 }
@@ -674,7 +674,7 @@ kOriginFormAdditionalTRes = 40
 kOriginFormInitialGorgePRes = 60
 kOriginFormExtraGorgePRes = 20
 
-kBiomassPerTower = {0,1,2,5}
+kBiomassPerTower = {0,1,3,6}
 function GetOriginFormBiomassLevel(count)
     local level = 0
     for _,v in ipairs(kBiomassPerTower) do

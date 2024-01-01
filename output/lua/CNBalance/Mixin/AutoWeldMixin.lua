@@ -86,7 +86,7 @@ if Server then
         if self.GetAutoHealPerSecond and now > self.timeNextSustain then
             self.timeNextSustain = now + AutoWeldMixin.kRegenInterval
 
-            local lifeSustainResearched = GetHasTech(self, kTechId.LifeSustain)
+            local lifeSustainResearched = GetHasTech(self, kTechId.ArmorStation)
 
             local healthCap = lifeSustainResearched and kLifeSustainMaxCap or kLifeRegenMaxCap
 

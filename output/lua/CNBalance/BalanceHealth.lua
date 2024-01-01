@@ -18,7 +18,7 @@
 --2    760    11         13          10          9                 
 --3    820    12         14          11          10
 
-kMarineHealth = 100    kMarineArmor = 30    kArmorPerUpgradeLevel = 20          kMPMarineArmor = 35    kMPMarineArmorPerUpgradeLevel = 20
+kMarineHealth = 100    kMarineArmor = 30    kArmorPerUpgradeLevel = 20          kNanoMarineArmor = 35    kNanoArmorPerUpgradeLevel = 20
 kJetpackHealth = 120    kJetpackArmor = 45   kJetpackArmorPerUpgradeLevel = 25  kMPJetpackMarineArmor = 45   kMPJetpackArmorPerUpgradeLevel = 25  
 kExosuitHealth = 100    kExosuitArmor = 320  kExosuitArmorPerUpgradeLevel = 30  kExosuitMPArmor = 330 kExosuitMPArmorPerUpgradeLevel = 40
 kMarinePointValue = 5   kJetpackPointValue = 12   kExosuitPointValue = 20
@@ -70,7 +70,7 @@ kRoboticsFactoryHealth = 1800    kRoboticsFactoryArmor = 360    kRoboticsFactory
 kARCRoboticsFactoryHealth = 2500    kARCRoboticsFactoryArmor = 400    kARCRoboticsFactoryPointValue = 7
 
 kSentryBatteryHealth = 800    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5     --600 200
-kSentryHealth = 500    kSentryArmor = 125    kSentryPointValue = 4      --500 125
+kSentryHealth = 500    kSentryArmor = 125    kSentryPointValue = 3      --500 125
 
 kExplosiveSelfDamage =
 {
@@ -114,7 +114,7 @@ kSkulkDamageReduction = {
 
 kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7 kGorgeHealthPerBioMass = 3
 
-kLerkHealth = 180    kLerkArmor = 30     kLerkPointValue = 15 kLerkHealthPerBioMass = 3
+kLerkHealth = 180    kLerkArmor = 30  kLerkPointValue = 15 kLerkHealthPerBioMass = 3
 kLerkDamageReduction = {
     ["Grenade"] = 0.7,
     ["ImpactGrenade"] = 0.7,
@@ -124,7 +124,7 @@ kLerkDamageReduction = {
     --["PulseGrenade"] = 0.75,
 }
 
-kFadeHealth = 280    kFadeArmor = 80     kFadePointValue = 20 kFadeHealthPerBioMass = 5
+kFadeHealth = 280  kFadeArmor = 80  kFadePointValue = 20 kFadeHealthPerBioMass = 5
 kFadeDamageReduction = {
     --["Mine"] = 1.1,
     --["MarineSentry"] = 1.1,
@@ -132,11 +132,11 @@ kFadeDamageReduction = {
 }
 
 --700 450 50
-kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 25
+kOnosHealth = 750    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 25
 kOnosBoneShieldDefaultReduction = 0.2
 kOnosBoneShieldDamageReduction = {
-    ["HeavyMachineGun"] = 0.25,
-    ["Minigun"] = 0.3,
+    --["HeavyMachineGun"] = 0.25,
+    --["Minigun"] = 0.3,
     ["Railgun"] = 0,
 }
 
@@ -146,13 +146,13 @@ kOnosDamageReduction = {
     --["MarineSentry"] = 2,
 
     ["Shotgun"] = 0.88,
-    --["Rifle"] = 0.95,
-    --["SubMachineGun"] = 0.95,
+    --["Rifle"] = 0.92,
+    --["SubMachineGun"] = 0.92,
     --["LightMachineGun"] = 0.92,
     --["HeavyMachineGun"] = 1.08,
 }
 
-kProwlerHealth = 120 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 7
+kProwlerHealth = 135 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 7
 kProwlerDamageReduction = {
     ["Grenade"] = 0.75,
     ["ImpactGrenade"] = 0.75,
