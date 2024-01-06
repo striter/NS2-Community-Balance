@@ -111,5 +111,12 @@ function DropTeamStructureAbility:SetActiveStructure(_structureTechId)
     return DropStructureAbility.SetActiveStructure(self, _structureTechId)
 end
 
+if Client then
+
+    function DropTeamStructureAbility:GetHUDText(_structureId)
+        return Locale.ResolveString(LookupTechData(_structureId,kTechDataDisplayName)),.7
+    end
+end
+
 
 Shared.LinkClassToMap("DropTeamStructureAbility", DropTeamStructureAbility.kMapName, {})

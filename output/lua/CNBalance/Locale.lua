@@ -123,7 +123,7 @@ if kTranslateMessage then
     kTranslateMessage["ORIGIN_FORM"]="原始族群"
     kTranslateMessage["ORIGIN_FORM_TOOLTIP"]="虫群不再拥有母巢意志.\n*Gorge替代指挥放置建筑.\n*死亡的敌方单位将提供资源."
 
-    kTranslateMessage["TUNNEL_EXIT_HINT"]="未链接的虫洞出口."
+    kTranslateMessage["TUNNEL_EXIT_HINT"]="虫洞出口."
     
     kTranslateMessage["DROP_TEAM_STRUCTURE"]="工蜂"
     kTranslateMessage["DROP_TEAM_STRUCTURE_TOOLTIP"]="*仅在原始族群状态可用.\n*巢(提供范围强化/攻击)\n*资源塔(提供被动资源收入)\n*母巢(提供生物质)\n*属性塔(提供演化强化).\n*蛹(提供复活点).\n*虫洞(双端建成以提供迅捷通道)."
@@ -295,8 +295,9 @@ if kLocales then
     kLocales["ORIGIN_FORM"]="Origin Form"
     kLocales["ORIGIN_FORM_TOOLTIP"]="No more commanding form hive.\n*Gorge build team structures now.\n*Enemies provide personal resource on death."
 
-    kLocales["TUNNEL_EXIT_HINT"]="Unconnected Tunnel Exit"
-    
+    kLocales["TUNNEL_ENTRANCE"]="Entrance"
+    kLocales["TUNNEL_EXIT"]="Exit"
+    kLocales["TUNNEL_EXIT_HINT"]="Tunnel Exit"
     
     kLocales["DROP_TEAM_STRUCTURE"]="Worker"
     kLocales["DROP_TEAM_STRUCTURE_TOOLTIP"]="*Available with Origin Form.\n*You will build every team-thing now."
@@ -307,9 +308,9 @@ if kLocales then
     kLocales["XENOCIDE_FUEL"]="Xenocide fuel"
     kLocales["XENOCIDE_FUEL_TOOLTIP"]="Make xenocide deadlier.\n*Increase the range for xenocide.\n*Increase the damage for xenocide.\n*Reduce the respawn time when successfully."
 
-    kLocales["SPOREMINE"]="Spore Chunk"
+    kLocales["SPOREMINE"]="Chunk"
     kLocales["SPOREMINE_TOOLTIP"]="Mine.\n*Explode when enemies nearby."
-    kLocales["BABBLER_MINE"]="Babbler Hive"
+    kLocales["BABBLER_MINE"]="Nest"
     kLocales["BABBLER_MINE_TOOLTIP"]="Mine.\n*Hatch when enemies nearby.\n*Release six babblers to chase the target."
 
     kLocales["UPGRADE_PROWLER"] = "Prowler Evolve"

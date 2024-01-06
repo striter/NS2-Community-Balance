@@ -691,6 +691,14 @@ end
 
 if Client then
 
+    function DropStructureAbility:GetHUDText(_structureId)
+        local maxStructures = GorgeBuild_GetMaxNumStructure(_structureId)
+        local numBuilt = self:GetNumStructuresBuilt(_structureId)
+
+        --return string.format("%s\n%d/%d",Locale.ResolveString(LookupTechData(_structureId,kTechDataDisplayName)),numBuilt,maxStructures),1
+        return numBuilt .. "/" .. maxStructures,1
+    end
+
     function DropStructureAbility:OnProcessIntermediate(input)
 
         local player = self:GetParent()
@@ -810,6 +818,9 @@ if Client then
     end
 
 end
+
+
+
 
 Shared.LinkClassToMap("DropStructureAbility", DropStructureAbility.kMapName, networkVars)
 

@@ -1,6 +1,13 @@
+Script.Load("lua/PointGiverMixin.lua")
 Welder.kHealPResAdded = 0.1
 Welder.kHealScoreAdded = 2
 Welder.kAmountHealedForPoints = 400
+
+local baseOnCreate = Welder.OnCreate
+function Welder:OnCreate()
+    baseOnCreate(self)
+    InitMixin(self, PointGiverMixin)
+end
 
 function Welder:GetReplacementWeaponMapName()
     return Axe.kMapName or Knife.kMapName

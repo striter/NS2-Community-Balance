@@ -77,7 +77,7 @@ end
 
 kAlienTechMap =
 {
-                                         { kTechId.OriginForm , 7 , -1},
+                                         { kTechId.OriginForm , 7 , -1},    { kTechId.DropTeamStructureAbility , 9 , -1},
                                  
     { kTechId.Whip, 5.5, 0.5 }, { kTechId.Shift, 6.5, 0.5 }, { kTechId.Shade, 7.5, 0.5 }, { kTechId.Crag, 8.5, 0.5 },
     { kTechId.Harvester, 4, 1.5 }, { kTechId.Hive, 7, 1.5 }, { kTechId.Drifter, 10, 1.5 },
@@ -121,6 +121,8 @@ kAlienTechMap =
 kAlienLines =
 {
     GetLinePositionForTechMap(kAlienTechMap, kTechId.OriginForm, kTechId.Hive),
+    GetLinePositionForTechMap(kAlienTechMap, kTechId.OriginForm, kTechId.DropTeamStructureAbility),
+    
     GetLinePositionForTechMap(kAlienTechMap, kTechId.Hive, kTechId.Crag),
     GetLinePositionForTechMap(kAlienTechMap, kTechId.Hive, kTechId.Shift),
     GetLinePositionForTechMap(kAlienTechMap, kTechId.Hive, kTechId.Shade),

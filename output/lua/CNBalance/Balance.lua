@@ -20,7 +20,9 @@ kTechDataPersonalResOnKill = {
     [kTechId.Armory] = 3,[kTechId.Observatory] = 3, [kTechId.PhaseGate] = 5,
     [kTechId.CommandStation] = 12, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [ kTechId.ElectronicStation ] = 15,
     [kTechId.Mine] = 0.3, [kTechId.InfantryPortal] = 2, [kTechId.MarineSentry] = 1,   --PPVE
+    
     [kTechId.Shotgun] = 1.5, [kTechId.HeavyMachineGun] = 1.5, [kTechId.GrenadeLauncher] = 1.5, [kTechId.Flamethrower] = 1.5,     --Special one for gorgie
+    [kTechId.Welder] = 0.1, [kTechId.CombatBuilder] = 0.2,
     
     --Aliens
     [kTechId.Egg] = 0.2,[kTechId.Cyst] = 0.2, [kTechId.Drifter] = 0.3,    --[kTechId.DrifterEgg] = 0.5,
@@ -578,9 +580,11 @@ kNanoShieldCost = 3
 kNanoShieldCooldown = 5
 kNanoShieldDamageReductionDamage = 0.68
 
+kWelderPointValue = 1
+
 kCombatBuilderCost = 3
 kCombatBuilderDropCost = 5
-kCombatBuilderPointValue = 5
+kCombatBuilderPointValue = 2
 
 kMarineSentryCost = 2
 kMarineSentryPersonalCost = 8
@@ -665,7 +669,7 @@ kGorgeAbilitiesCost = {
 }
 kGorgeStructureScorePerRes = 0.5
 kOriginPersonalResourcesPerKill = {
-    [kTechId.Marine] = 2, [kTechId.JetpackMarine] = 5, [kTechId.Exo] = 10,
+    [kTechId.Marine] = 2, [kTechId.JetpackMarine] = 5, [kTechId.Exo] = 10, [kTechId.Exosuit] = 10,
 }
 
 kGorgeHiveBuildTime = kHiveBuildTime
@@ -673,6 +677,7 @@ kGorgeHiveBuildTime = kHiveBuildTime
 kOriginFormAdditionalTRes = 40
 kOriginFormInitialGorgePRes = 60
 kOriginFormExtraGorgePRes = 20
+kOriginFormTeamResScalarHiveCount = { 0.25 , 0.125 , 0.125 , 0.125 , 0.125 , 0.125}
 
 kBiomassPerTower = {0,1,3,6}
 function GetOriginFormBiomassLevel(count)

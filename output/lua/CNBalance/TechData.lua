@@ -430,6 +430,17 @@ function BuildTechData()
     } )
 
     table.insert(techData,{
+        [kTechDataId] = kTechId.Welder,
+        [kTechDataMaxHealth] = kMarineWeaponHealth,
+        [kTechDataMapName] = Welder.kMapName,
+        [kTechDataDisplayName] = "WELDER",
+        [kTechDataModel] = Welder.kModelName,
+        [kTechDataDamageType] = kWelderDamageType,
+        [kTechDataCostKey] = kWelderCost,
+        [kTechDataPointValue] = kWelderPointValue,
+    })
+    
+    table.insert(techData,{
         [kTechDataId] = kTechId.CombatBuilder,
         [kTechDataDisplayName] = "COMBATBUILDER",
         [kTechDataMapName] = CombatBuilder.kMapName,
@@ -567,6 +578,17 @@ function BuildTechData()
         [kStructureAttachRequiresPower] = true,
     })
 
+    table.insert(techData,
+    {
+        [kTechDataId] = kTechId.Exosuit,
+        [kTechDataDisplayName] = "EXOSUIT",
+        [kTechDataMapName] = "exo",
+        [kTechDataCostKey] = kExosuitCost,
+        [kTechDataHotkey] = Move.E,
+        [kTechDataTooltipInfo] = "EXOSUIT_TECH_TOOLTIP",
+        [kTechDataSpawnHeightOffset] = kCommanderEquipmentDropSpawnHeight,
+        [kTechDataPointValue] = kExosuitPointValue,
+    })
     --table.insert(techData,  {
     --    [kTechDataId] = kTechId.Heavy,
     --    [kTechDataMapName] = Heavy.kMapName,

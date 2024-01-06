@@ -3,6 +3,7 @@ Script.Load("lua/Combat/ArmoryAbility.lua")
 Script.Load("lua/PickupableWeaponMixin.lua")
 Script.Load("lua/LiveMixin.lua")
 Script.Load("lua/BuilderVariantMixin.lua")
+Script.Load("lua/PointGiverMixin.lua")
 
 class 'CombatBuilder' (Weapon)
 
@@ -56,7 +57,7 @@ function CombatBuilder:OnCreate()
     InitMixin(self, BuilderVariantMixin)
     InitMixin(self, PickupableWeaponMixin)
     InitMixin(self, LiveMixin)
-    InitMixin(self,PointGiverMixin)
+    InitMixin(self, PointGiverMixin)
     
     if Server then
         self.lastCreatedId = Entity.invalidId

@@ -234,7 +234,7 @@ function Mine:OnInitialized()
         InitMixin(self, TriggerMixin)
         self:SetSphere(kMineTriggerRange)
 
-        self.camouflaged = GetHasTech(self,kTechId.ArmorStation)
+        self.camouflaged = false -- GetHasTech(self,kTechId.ArmorStation)
     end
 
     self:SetModel(Mine.kModelName)

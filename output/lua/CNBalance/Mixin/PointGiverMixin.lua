@@ -17,7 +17,7 @@ if Server then
 
         local _techID = self:GetTechId()
         local pResReward = kTechDataPersonalResOnKill[_techID] or 0
-        --Shared.Message(tostring(pResReward))
+        --Shared.Message(EnumToString(kTechId, _techID) .. " " .. tostring(pResReward))
 
         if attacker and GetAreEnemies(self, attacker) then -- pve kills count
             if selfIsPlayer and attacker:isa("Player") then

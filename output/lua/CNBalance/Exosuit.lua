@@ -1,3 +1,15 @@
+Script.Load("lua/PointGiverMixin.lua")
+
+local baseOnCreate = Exosuit.OnCreate
+function Exosuit:OnCreate()
+    baseOnCreate(self)
+    InitMixin(self, PointGiverMixin)
+end
+
+function Exosuit:GetTechId()
+    return kTechId.Exosuit
+end
+
 if Server then
 
     function Exosuit:OnUseDeferred()
