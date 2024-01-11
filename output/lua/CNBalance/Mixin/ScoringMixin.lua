@@ -18,11 +18,6 @@ if Server then
             or self:GetIsVirtual()
         then return end
     
-        local gamerule =  GetGamerules()
-        local nonRookieMode =  not gamerule or not gamerule.gameInfo or not gamerule.gameInfo:GetRookieMode()
-        local rookieMode = not nonRookieMode
-        --if rookieMode then return end  --Don't open without rookie mode
-        
         if(damageTable.damage <= 0) then return end
     
         local damageScalar = 1
@@ -32,15 +27,12 @@ if Server then
         --Self Bounty Damage Taken Increase
         if bountyScore > 0 then   
             local scalar = bountyScore  * (0.1 / self.kBountyThreshold)
-            if rookieMode then  --0-10%,20%-40%,60%-90% ...
-                scalar = scalar * (math.floor(bountyScore / self.kBountyThreshold)+ 1)
-            end
+            scalar = scalar * (math.floor(bountyScore / self.kBountyThreshold)+ 1)
             damageScalar = damageScalar + scalar      --Receive Additional Damage And Die Please
         end
 
         --KDRatio adjustment
-        if rookieMode
-                and bountyScore <= 0
+        if bountyScore <= 0
                 and self.kKDRatioMaxDamageReduction
                 and self:GetPlayerSkill() < kNoneRookieSkill
         then
@@ -62,8 +54,7 @@ if Server then
         end
 
         --Bounty Damage Dealt Decrease
-        if rookieMode
-                and bountyScore <= 0
+        if bountyScore <= 0
                 and attacker.kBountyDamageDecrease 
         then
             local attackerBountyScore = attacker:GetBountyCurrentLife()

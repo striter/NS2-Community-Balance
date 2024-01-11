@@ -124,7 +124,7 @@ kLerkDamageReduction = {
     --["PulseGrenade"] = 0.75,
 }
 
-kFadeHealth = 280  kFadeArmor = 80  kFadePointValue = 20 kFadeHealthPerBioMass = 5
+kFadeHealth = 300  kFadeArmor = 80  kFadePointValue = 20 kFadeHealthPerBioMass = 5
 kFadeDamageReduction = {
     --["Mine"] = 1.1,
     --["MarineSentry"] = 1.1,
