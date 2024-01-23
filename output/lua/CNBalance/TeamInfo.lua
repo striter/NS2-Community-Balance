@@ -75,23 +75,15 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.PhaseTech,
 
     kTechId.StandardSupply,
-    kTechId.LightMachineGunUpgrade,
-    kTechId.DragonBreath,
-    kTechId.Cannon,
-
     kTechId.ExplosiveSupply,
-    --kTechId.GrenadeLauncherDetectionShot,
-    --kTechId.GrenadeLauncherAllyBlast,
-    
     kTechId.ElectronicSupply,
-    kTechId.GrenadeLauncherUpgrade,
+    kTechId.ArmorSupply,
+    kTechId.DragonBreath,
     kTechId.MACEMPBlast,
-    kTechId.PoweredExtractorTech,
+    kTechId.GrenadeLauncherUpgrade,
+    kTechId.ArmorRegen,
     kTechId.PoweredExtractorUpgrade,
 
-    kTechId.ArmorSupply,
-    kTechId.ArmorRegen,
-    kTechId.LifeSustain,
 }
 
 TeamInfo.kRelevantTechIdsAlien =

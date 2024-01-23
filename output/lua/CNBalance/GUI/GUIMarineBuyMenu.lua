@@ -804,20 +804,19 @@ function GUIMarineBuyMenu:CreatePrototypeLabUI_NewComer()
     local buttonGroupX = 97
     local buttonGroupY = 149
 
-    local buttonPositions = kWeaponGroupButtonPositions[self.kButtonGroupFrame_Labeled_x3]
+    local buttonPositions = kWeaponGroupButtonPositions[self.kButtonGroupFrame_Unlabeled_x2]
 
     local buttonGroup = self:CreateAnimatedGraphicItem()
     buttonGroup:AddAsChildTo(self.background)
     buttonGroup:SetIsScaling(false)
     buttonGroup:SetPosition(Vector(buttonGroupX, buttonGroupY, 0))
-    buttonGroup:SetTexture(self.kButtonGroupFrame_Labeled_x3)
+    buttonGroup:SetTexture(self.kButtonGroupFrame_Unlabeled_x2)
     buttonGroup:SetSizeFromTexture()
     buttonGroup:SetOptionFlag(GUIItem.CorrectScaling)
     self:_InitializeWeaponGroup(buttonGroup, buttonPositions,
     {
         kTechId.Jetpack,
         kTechId.DualMinigunExosuit,
-        kTechId.DualRailgunExosuit,
     })
 
     local groupLabel = self:CreateAnimatedTextItem()

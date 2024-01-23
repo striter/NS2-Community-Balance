@@ -156,6 +156,15 @@ function Mine:Arm()
 
 end
 
+function Mine:GetSendDeathMessageOverride(messageViewerTeam,killer)
+    if messageViewerTeam and self == killer then
+
+        if messageViewerTeam.GetTeamType and messageViewerTeam:GetTeamType() ~= self:GetTeamType() then
+            return false
+        end
+    end
+end
+
 function Mine:CheckEntityExplodesMine(entity)
 
     if not self.active then
@@ -234,7 +243,7 @@ function Mine:OnInitialized()
         InitMixin(self, TriggerMixin)
         self:SetSphere(kMineTriggerRange)
 
-        self.camouflaged = false -- GetHasTech(self,kTechId.ArmorStation)
+        self.camouflaged = GetHasTech(self,kTechId.ExplosiveStation)
     end
 
     self:SetModel(Mine.kModelName)
