@@ -1,10 +1,16 @@
 
 
 function PrototypeLab:GetTechButtons(techId)
-    local techTable = { kTechId.JetpackTech, kTechId.None, kTechId.None, kTechId.None, 
+    local techTable = { kTechId.JetpackTech, kTechId.CannonTech, kTechId.None, kTechId.None, 
              kTechId.ExosuitTech, kTechId.None, kTechId.None, kTechId.None }
              
     return techTable
+end
+
+function PrototypeLab:GetItemList(forPlayer)
+
+    return { kTechId.Jetpack, kTechId.DualMinigunExosuit, kTechId.DualRailgunExosuit, kTechId.Cannon}
+
 end
 
 --local baseGetCanBeUsed = PrototypeLab.GetCanBeUsed

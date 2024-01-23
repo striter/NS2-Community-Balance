@@ -166,7 +166,17 @@ function BuildTechData()
         [kTechDataCostKey] = kUpgradedCommandStationCost,
         [kTechDataEngagementDistance] = kCommandStationEngagementDistance,
     })
-    
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.MineDeploy,
+        [kTechDataIgnorePathingMesh] = true,
+        [kTechDataMapName] = Mine.kMapName,
+        [kTechDataDisplayName] = "MINE_DEPLOY",
+        [kTechDataCostKey] = kMineDeployCost,
+        [kTechDataModel] = Mine.kModelName,
+        [kTechDataTooltipInfo] = "MINE_DEPLOY_TOOLTIP",
+        [kTechDataSpawnHeightOffset] = kCommanderDropSpawnHeight,
+    })
     --table.insert(techData, {
     --    [kTechDataId] = kTechId.GrenadeLauncherDetectionShot,
     --    [kTechDataCostKey] = kGrenadeLauncherDetectionShotResearchCost,
@@ -397,6 +407,26 @@ function BuildTechData()
     } )
     
     table.insert(techData,{
+        [kTechDataId] = kTechId.CannonTech,
+        [kTechDataCostKey] = kCannonTechResearchCost,
+        [kTechDataResearchTimeKey] = kCannonTechResearchTime,
+        [kTechDataDisplayName] = "RESEARCH_CANNON",
+        [kTechDataResearchName] = "RESEARCH_CANNON",
+    } )
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.DropCannon,
+        [kTechDataMapName] = Cannon.kMapName,
+        [kTechDataDisplayName] = "CANNON_DROP",
+        [kTechDataTooltipInfo] = "CANNON_TOOLTIP",
+        [kTechDataModel] = Cannon.kModelName,
+        [kTechDataCostKey] = kCannonDropCost,
+        [kStructureAttachId] = { kTechId.PrototypeLab },
+        [kStructureAttachRange] = kArmoryWeaponAttachRange,
+        [kStructureAttachRequiresPower] = true,
+    } )
+
+    table.insert(techData,{
         [kTechDataId] = kTechId.Cannon,
         [kTechDataMaxHealth] = kMarineWeaponHealth,
         [kTechDataTooltipInfo] = "CANNON_TOOLTIP",
@@ -409,27 +439,6 @@ function BuildTechData()
     } )
 
     table.insert(techData,{
-        [kTechDataId] = kTechId.CannonTech,
-        [kTechDataCostKey] = kCannonTechResearchCost,
-        [kTechDataResearchTimeKey] = kCannonTechResearchTime,
-        [kTechDataDisplayName] = "RESEARCH_CANNON",
-        [kTechDataTooltipInfo] = "RESEARCH_CANNON_TOOLTIP",
-        [kTechDataResearchName] = "RESEARCH_CANNON",
-    } )
-
-    table.insert(techData,{
-        [kTechDataId] = kTechId.DropCannon,
-        [kTechDataMapName] = Cannon.kMapName,
-        [kTechDataDisplayName] = "CANNON_DROP",
-        [kTechDataTooltipInfo] = "CANNON_TOOLTIP",
-        [kTechDataModel] = Cannon.kModelName,
-        [kTechDataCostKey] = kCannonDropCost,
-        [kStructureAttachId] = { kTechId.AdvancedArmory },
-        [kStructureAttachRange] = kArmoryWeaponAttachRange,
-        [kStructureAttachRequiresPower] = true,
-    } )
-
-    table.insert(techData,{
         [kTechDataId] = kTechId.Welder,
         [kTechDataMaxHealth] = kMarineWeaponHealth,
         [kTechDataMapName] = Welder.kMapName,
@@ -438,6 +447,19 @@ function BuildTechData()
         [kTechDataDamageType] = kWelderDamageType,
         [kTechDataCostKey] = kWelderCost,
         [kTechDataPointValue] = kWelderPointValue,
+    })
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.Mine,
+        [kTechDataMapName] = Mine.kMapName,
+        [kTechDataHint] = "MINE_HINT",
+        [kTechDataDisplayName] = "MINE_SINGULAR",
+        [kTechDataEngagementDistance] = kMineDetonateRange,
+        [kTechDataMaxHealth] = kMineHealth,
+        [kTechDataTooltipInfo] = "MINE_TOOLTIP",
+        [kTechDataMaxArmor] = kMineArmor,
+        [kTechDataModel] = Mine.kModelName,
+        [kTechDataPointValue] = kMinePointValue,
     })
     
     table.insert(techData,{

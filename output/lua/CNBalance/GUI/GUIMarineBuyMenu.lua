@@ -232,12 +232,6 @@ local kTechIdStats =
         Range = 0.85,
     },
 
-    [kTechId.Cannon] =
-    {
-        LifeFormDamage = 1,
-        StructureDamage = 1,
-        Range = 1,
-    },
  ------------
 
     [kTechId.Rifle] =
@@ -306,13 +300,20 @@ local kTechIdStats =
         Range = 0.7,
     },
 
-    -- Prototype Lab "big" pictures are a seperate texture file.
     [kTechId.DualRailgunExosuit] =
     {
         LifeFormDamage = 1,
         StructureDamage = 0.6,
         Range = 1,
     },
+    
+    [kTechId.Cannon] =
+    {
+        LifeFormDamage = 0.8,
+        StructureDamage = 0.6,
+        Range = 1,
+    },
+
 }
 
 local function GetStatsForTechId(techId)
@@ -377,13 +378,6 @@ local kTechIdInfo =
         Stats = GetStatsForTechId(kTechId.SubMachineGun)
     },
 
-    [kTechId.Cannon] =
-    {
-        ButtonTextureIndex = 17,
-        BigPictureIndex = 14,
-        Description = "CANNON_BUYDESCRIPTION",    
-        Stats = GetStatsForTechId(kTechId.Cannon)
-    },
 -----------
     [kTechId.Rifle] =
     {
@@ -476,6 +470,14 @@ local kTechIdInfo =
     },
 
     -- Prototype Lab "big" pictures are a seperate texture file.
+    [kTechId.Cannon] =
+    {
+        ButtonTextureIndex = 17,
+        BigPictureIndex = 3,
+        Description = "CANNON_BUYDESCRIPTION",
+        Stats = GetStatsForTechId(kTechId.Cannon)
+    },
+    
     [kTechId.Jetpack] =
     {
         ButtonTextureIndex = 12,
@@ -754,22 +756,27 @@ function GUIMarineBuyMenu:SetHostStructure(hostStructure)
 
     self.hostStructure = hostStructure
 
+    local isNewComer = (Client.GetLocalPlayer():GetPlayerSkill() + Client.GetLocalPlayer():GetPlayerSkillOffset()) <= kMarineNewComerRank
+    
     if self.hostStructure:isa("Armory") then
-        local skill = Client.GetLocalPlayer():GetPlayerSkill() - Client.GetLocalPlayer():GetPlayerSkillOffset()
-        if skill >= kMarineNewComerRank then
-            self:CreateArmoryUI()
-        else
+        if isNewComer then
             self:CreateArmoryUI_NewComer()
+        else
+            self:CreateArmoryUI()
         end
     elseif self.hostStructure:isa("PrototypeLab") then
-        self:CreatePrototypeLabUI()
+        if isNewComer then
+            self:CreatePrototypeLabUI_NewComer()
+        else
+            self:CreatePrototypeLabUI()
+        end
     else
         Log(string.format("ERROR: No generator found for class: %s", self.hostStructure:GetClassName()))
     end
     
 end
 
-function GUIMarineBuyMenu:CreatePrototypeLabUI()
+function GUIMarineBuyMenu:CreatePrototypeLabUI_NewComer()
 
     self.defaultTechId = kTechId.Jetpack
 
@@ -782,6 +789,17 @@ function GUIMarineBuyMenu:CreatePrototypeLabUI()
     self.background:SetScale(self.customScaleVector)
     self.background:SetOptionFlag(GUIItem.CorrectScaling)
     self.background:SetLayer(kGUILayerMarineBuyMenu)
+
+    local title = self:CreateAnimatedTextItem()
+    title:SetAnchor(GUIItem.Middle, GUIItem.Top)
+    title:SetPosition(Vector(0, -50, 0))
+    title:SetTextAlignmentX(GUIItem.Align_Center)
+    title:SetTextAlignmentY(GUIItem.Align_Min)
+    title:SetText(Locale.ResolveString("NEWCOMER_ENABLED"))
+    title:SetIsScaling(false)
+    title:SetColor(Color(125/255, 206/255, 160/255, 1))
+    title:SetFontName(Fonts.kAgencyFB_Large_Bold)
+    self.background:AddChild(title)
 
     local buttonGroupX = 97
     local buttonGroupY = 149
@@ -816,6 +834,55 @@ function GUIMarineBuyMenu:CreatePrototypeLabUI()
     local rightSideStartPos = Vector(580, 38, 0)
     self:_CreateRightSide(rightSideStartPos)
 
+end
+
+function GUIMarineBuyMenu:CreatePrototypeLabUI()
+
+    self.defaultTechId = kTechId.Jetpack
+
+    self.background = self:CreateAnimatedGraphicItem()
+    self.background:SetTexture(self.kPrototypeLabBackgroundTexture)
+    self.background:SetSizeFromTexture()
+    self.background:SetIsScaling(false)
+    self.background:SetAnchor(GUIItem.Middle, GUIItem.Center)
+    self.background:SetHotSpot(Vector(0.5, 0.5, 0))
+    self.background:SetScale(self.customScaleVector)
+    self.background:SetOptionFlag(GUIItem.CorrectScaling)
+    self.background:SetLayer(kGUILayerMarineBuyMenu)
+
+    local buttonGroupX = 97
+    local buttonGroupY = 149
+
+    local buttonPositions = kWeaponGroupButtonPositions[self.kButtonGroupFrame_Labeled_x4]
+
+    local buttonGroup = self:CreateAnimatedGraphicItem()
+    buttonGroup:AddAsChildTo(self.background)
+    buttonGroup:SetIsScaling(false)
+    buttonGroup:SetPosition(Vector(buttonGroupX, buttonGroupY, 0))
+    buttonGroup:SetTexture(self.kButtonGroupFrame_Labeled_x4)
+    buttonGroup:SetSizeFromTexture()
+    buttonGroup:SetOptionFlag(GUIItem.CorrectScaling)
+    self:_InitializeWeaponGroup(buttonGroup, buttonPositions,
+            {
+                kTechId.Jetpack,
+                kTechId.DualMinigunExosuit,
+                kTechId.DualRailgunExosuit,
+                kTechId.Cannon
+            })
+
+    local groupLabel = self:CreateAnimatedTextItem()
+    groupLabel:SetIsScaling(false)
+    groupLabel:AddAsChildTo(buttonGroup)
+    groupLabel:SetPosition(Vector(330, -1, 0))
+    groupLabel:SetAnchor(GUIItem.Left, GUIItem.Top)
+    groupLabel:SetTextAlignmentX(GUIItem.Align_Min)
+    groupLabel:SetTextAlignmentY(GUIItem.Align_Min)
+    groupLabel:SetText(Locale.ResolveString("BUYMENU_GROUPLABEL_SPECIAL"))
+    groupLabel:SetOptionFlag(GUIItem.CorrectScaling)
+    GUIMakeFontScale(groupLabel, "kAgencyFB", 24)
+
+    local rightSideStartPos = Vector(580, 38, 0)
+    self:_CreateRightSide(rightSideStartPos)
 end
 
 function PlayerUI_GetHasTech(techId)

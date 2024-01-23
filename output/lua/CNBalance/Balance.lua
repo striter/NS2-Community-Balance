@@ -142,14 +142,15 @@ kDragonBreathResearchCost = 30
 kDragonBreathResearchTime = 60
 kLightMachineGunUpgradeCost = nil --20
 kLightMachineGunUpgradeTime = nil --90
-kCannonTechResearchCost = 30
-kCannonTechResearchTime = 90
 
 --Explosive Supply
 kMinesUpgradeResearchCost = nil--10
 kMinesUpgradeResearchTime = nil--60
 kGrenadeLauncherUpgradeResearchCost = 20
 kGrenadeLauncherUpgradeResearchTime = 60
+kMineDeployCost = 4
+
+
 kMACEMPBlastResearchCost = 15
 kMACEMPBlastResearchTime = 60
 kMACEmpBlastDetectInterval = 0.5
@@ -184,11 +185,6 @@ kGrenadeLauncherImpactGrenadeDamage = 80
 kGrenadeLauncherDetectionShotRadius = 3.5
 
 kGrenadeLauncherClipSize = 4
-
-
-kGrenadeLauncherWeapons1DamageScalar = 1.1
-kGrenadeLauncherWeapons2DamageScalar = 1.2
-kGrenadeLauncherWeapons3DamageScalar = 1.3
 
 kCombatBuilderResearchCost = 15
 kCombatBuilderResearchTime = 60
@@ -249,17 +245,6 @@ kHeavyMarineHealth = 200
 kHeavyMarineArmor = 150
 kHeavyMarineArmorPerUpgradeLevel = 40
 
---Cannon
-kCannonCost = 20
-
-kCannonDamage = 95
-kCannonRateOfFire = 0.7
-kCannonAoeDamage = 0
-kCannonSelfDamage = kCannonAoeDamage
-kCannonClipSize = 6
-kCannonPointValue = 15
-kCannonDamageType = kDamageType.Structural
-kCannonDropCost = 15
 
 kFlamethrowerCost = 20
 kFlamethrowerDropCost = 15
@@ -317,6 +302,10 @@ kSentryBatteryBuildTime = 5
 kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 90
 kPrototypeLabCost = 35
+
+kCannonTechResearchCost = 30
+kCannonTechResearchTime = 90
+
 kJetpackTechResearchCost = 25
 kJetpackTechResearchTime = 90
 kExosuitTechResearchCost = 20
@@ -327,6 +316,18 @@ kRoboticsFactoryBuildTime = 8
 kJetpackCost = 25
 kJetpackDropCost = 18
 kJetpackDropCooldown = 0
+
+--Cannon
+kCannonCost = 25
+kCannonDropCost = 20
+
+kCannonDamage = 20
+kCannonAoeRadius = 2.5
+kCannonRateOfFire = 0.7
+kCannonAoeDamage = 80
+kCannonClipSize = 6
+kCannonPointValue = 15
+kCannonDamageType = kDamageType.Structural
 
 kDualExosuitCost = 55
 kDualRailgunExosuitCost = 55
@@ -482,10 +483,11 @@ kBoneShieldMinimumFuel = 0.15
 kBoneShieldMaxDuration = 8
 
 kStompEnergyCost = 35
-kStompDamageType = kDamageType.Normal
-kStompDamage = 90 kStompDisruptTime = 2
-kStompSecondDamage = 45 kStompSecondDisruptTime = 1
-kStompElseDamage = 10
+kStompDamageType = kDamageType.Structural
+kStompDamage = 60
+kStompFirstPDamage = 0  kStompDisruptTime = 3
+kStompSecondPDamage = 0 kStompSecondDisruptTime = 1.5
+kStompElseDamage = 0
 kStompRange = 12 
 
 

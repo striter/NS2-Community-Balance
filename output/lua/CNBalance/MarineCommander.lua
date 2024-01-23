@@ -105,7 +105,7 @@ local gMarineMenuButtons =
                             kTechId.RoboticsFactory, kTechId.ArmsLab, kTechId.None, kTechId.None },
                             
     [kTechId.AdvancedMenu] = { kTechId.Sentry, kTechId.Observatory, kTechId.PhaseGate, kTechId.PrototypeLab, 
-                               kTechId.SentryBattery, kTechId.None, kTechId.None, kTechId.None },
+                               kTechId.SentryBattery, kTechId.MineDeploy, kTechId.None, kTechId.None },
 
     [kTechId.AssistMenu] = { kTechId.AmmoPack, kTechId.MedPack, kTechId.NanoShield, kTechId.Scan,
                              kTechId.PowerSurge, kTechId.CatPack, kTechId.WeaponsMenu, kTechId.ProtosMenu },
@@ -215,7 +215,7 @@ if Server then
             success = self:TriggerDropPack(position, techId)
             keepProcessing = false
 
-        elseif GetIsEquipment(techId) then
+        elseif GetIsEquipment(techId) or techId == kTechId.MineDeploy then
 
             success = self:AttemptToBuild(techId, position, normal, orientation, pickVec, false, entity)
 

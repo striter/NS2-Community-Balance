@@ -18,12 +18,6 @@ local kCannonBulletSize = 0.15
 
 local kRange = 250
 local kSpread = Math.Radians(1)
-local kMinSpread = Math.Radians(0.35)
-local kAoeRadius = 4
-
-local kButtRange = 1.1
-
-local kExplosionCinematic = PrecacheAsset("cinematics/marine/cannon_impact_explos.cinematic")
 local kTracerCinematic = PrecacheAsset("cinematics/marine/cannon_tracer.cinematic")
 local kTracerResidueCinematic = PrecacheAsset("cinematics/marine/cannon_tracer_residue.cinematic")
 
@@ -171,31 +165,30 @@ function Cannon:OverrideWeaponName()
     return "rifle"
 end
 
-function Cannon:ApplyBulletGameplayEffects(player, target, endPoint, direction, damage, surface, showTracer)
+function Cannon:OnFireBullets(shootCoords)
+    local player = self:GetParent()
+    if not player then return end
 
-    if not(tostring(endPoint.x) == tostring((-1)^.5) or tostring(endPoint.y) == tostring((-1)^.5) or tostring(endPoint.z) == tostring((-1)^.5)) and Server then
-        local surface = GetSurfaceFromEntity(target)
-        local params = { surface = surface }
-        params[kEffectHostCoords] = Coords.GetTranslation(endPoint)
-        GetEffectManager():TriggerEffects("cannon_hit", params)
+    local crouching = player:GetCrouching() and player:GetIsOnGround()
+    local force = crouching and 2 or 10
+    local velocity = player:GetVelocity() -shootCoords.zAxis * force
+    player:SetVelocity(velocity)
+    player:DisableGroundMove(.2)
+end
+
+local function NoFalloff()
+    return 0
+end
+
+function Cannon:OnBulletFirstHit(spreadDirection,endPoint,target)
+    local hitEntities = GetEntitiesWithMixinWithinRange("Live", endPoint, kCannonAoeRadius)
+    RadiusDamage(hitEntities, endPoint, kCannonAoeRadius, kCannonAoeDamage, self ,false ,NoFalloff,false)
+    if target and target:isa("Player") then
+        local mass = lastTarget.GetMass and lastTarget:GetMass() or Player.kMass
+        if mass < 100 then
+            ApplyPushback(target,.5,spreadDirection*8)
+        end
     end
-    local hitEntities = GetEntitiesWithMixinWithinRange("Live", endPoint, kAoeRadius)
-    
-      --Fades' blink is interrupted by the cannon hit.
-      --currently at 10% chance. to disrupt blink. ::TODO change magic numbers!!
-
-    
-    table.removevalue(hitEntities, target)
-    
-    -- reduced damage to yourself
-    if (table.contains(hitEntities, player)) then
-       table.removevalue(hitEntities, player)
-       self:DoDamage(kCannonSelfDamage, player, endPoint, direction, surface, false, showTracer)
-    end
-    
-    RadiusDamage(hitEntities, endPoint, kAoeRadius, kCannonAoeDamage, self)
-    
-
 end
 
 function Cannon:OnTag(tagName)

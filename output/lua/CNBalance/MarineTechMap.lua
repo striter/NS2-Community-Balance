@@ -22,9 +22,8 @@ kMarineTechMap =
 
 
         --M
-                    { kTechId.AdvancedWeaponry, 6, 4.5 },                        { kTechId.HeavyMachineGunTech, 8, 4.5 },
                                                     { kTechId.AdvancedArmory, 7, 5.5 },
-                                           { kTechId.GrenadeLauncherUpgrade, 7, 6.5},
+                    { kTechId.AdvancedWeaponry, 6, 6.5 },                        { kTechId.HeavyMachineGunTech, 8, 6.5 },
     --R
                                             { kTechId.JetpackTech, 11, 4.5 },       --{ kTechId.JetpackFuelTech, 12, 6.5 },   
                 { kTechId.PrototypeLab, 10, 5.5 },       { kTechId.ExosuitTech, 11,5.5 },
@@ -32,8 +31,9 @@ kMarineTechMap =
 
 
                                                                                                                                                       { kTechId.MilitaryProtocol, 5, 8 },{ kTechId.CommandStation, 7, 8 }, {kTechId.InfantryPortal, 9, 8 },
-                        { kTechId.LightMachineGunUpgrade, 2.5, 10 }, { kTechId.StandardStation, 3.5, 10 },{kTechId.CatPack, 4.5 ,10 },                       { kTechId.LifeSustain, 6, 10 },       { kTechId.ArmorStation, 7, 10 },  { kTechId.NanoShield, 8, 10 },                                                       { kTechId.PoweredExtractorTech,9.5,10}, { kTechId.ElectronicStation, 10.5, 10 }, { kTechId.PowerSurge, 11.5, 10 },
-                                                { kTechId.DragonBreath,3.5 , 11 },                                                                                                               { kTechId.ArmorRegen, 7, 11 },                                                                                                                          { kTechId.MACEMPBlast, 10.5, 11 },
+    { kTechId.LightMachineGunUpgrade, 0.5, 10 }, { kTechId.StandardStation, 1.5, 10 },{kTechId.CatPack, 2.5 ,10 },             { kTechId.LifeSustain, 4, 10 },       { kTechId.ArmorStation, 5, 10 },  { kTechId.NanoShield, 6, 10 },                    { kTechId.PoweredExtractorTech,8,10}, { kTechId.ElectronicStation, 9, 10 }, { kTechId.PowerSurge, 10, 10 },        { kTechId.MinesUpgrade,11.5,10}, { kTechId.ExplosiveStation, 12.5, 10 }, { kTechId.MineDeploy, 13.5, 10 },
+                                                    { kTechId.DragonBreath,1.5 , 11 },                                                                                { kTechId.ArmorRegen, 5, 11 },                                                                                          { kTechId.MACEMPBlast, 9, 11 },                                                                                   { kTechId.GrenadeLauncherUpgrade, 12.5, 11},
+
 }
 
 kMarineLines = 
@@ -78,33 +78,37 @@ kMarineLines =
     GetLinePositionForTechMap(kMarineTechMap, kTechId.Armory, kTechId.AdvancedArmory),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.AdvancedArmory, kTechId.HeavyMachineGunTech),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.AdvancedArmory, kTechId.AdvancedWeaponry),
-    GetLinePositionForTechMap(kMarineTechMap, kTechId.AdvancedArmory, kTechId.GrenadeLauncherUpgrade),
 
     --Command Station
     --Supplies
     GetLinePositionForTechMap(kMarineTechMap, kTechId.CommandStation, kTechId.InfantryPortal),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.CommandStation, kTechId.MilitaryProtocol),
     { 7, 8, 7, 9 },
-    { 3.5, 9, 10.5, 9 },
+    { 1.5, 9, 12.5, 9 },
 
     -- Standard Supply
-    { 3.5, 9, 3.5, 10 },
+    { 1.5, 9, 1.5, 10 },
     GetLinePositionForTechMap(kMarineTechMap, kTechId.StandardStation, kTechId.CatPack),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.StandardStation, kTechId.DragonBreath),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.StandardStation, kTechId.LightMachineGunUpgrade),
 
     --Armor Supply
-    { 7, 9, 7, 10 },
+    { 5, 9, 5, 10 },
     GetLinePositionForTechMap(kMarineTechMap, kTechId.ArmorStation, kTechId.LifeSustain),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.ArmorStation, kTechId.ArmorRegen),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.ArmorStation, kTechId.NanoShield),
-    --GetLinePositionForTechMap(kMarineTechMap, kTechId.ArmorStation, kTechId.MinesUpgrade),
     
     --Electronic Supply
-    { 10.5, 9, 10.5, 10 },
+    { 9, 9, 9, 10 },
     GetLinePositionForTechMap(kMarineTechMap, kTechId.ElectronicStation, kTechId.PowerSurge),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.ElectronicStation, kTechId.MACEMPBlast),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.ElectronicStation, kTechId.PoweredExtractorTech),
+
+    --Explosive Supply
+    { 12.5, 9, 12.5, 10 },
+    GetLinePositionForTechMap(kMarineTechMap, kTechId.ExplosiveStation, kTechId.MinesUpgrade),
+    GetLinePositionForTechMap(kMarineTechMap, kTechId.ExplosiveStation, kTechId.MineDeploy),
+    GetLinePositionForTechMap(kMarineTechMap, kTechId.ExplosiveStation, kTechId.GrenadeLauncherUpgrade),
 
     --Prototype Lab
     GetLinePositionForTechMap(kMarineTechMap, kTechId.AdvancedArmory, kTechId.PrototypeLab),

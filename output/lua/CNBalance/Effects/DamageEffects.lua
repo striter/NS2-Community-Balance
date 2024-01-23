@@ -19,6 +19,7 @@ kAdditionalEffects =
         damageEffects =
         {
 			{player_cinematic = "cinematics/materials/%s/axe.cinematic", doer = "Knife", done = true},
+            {player_cinematic = "cinematics/marine/cannon_impact_explos.cinematic", doer = "Cannon", done = true},
         },        
     },
     

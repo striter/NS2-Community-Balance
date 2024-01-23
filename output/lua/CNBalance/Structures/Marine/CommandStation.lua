@@ -42,16 +42,22 @@ function CommandStation:GetTechButtons()
         techButtons[1] = ConditionalValue(GetSupplyResearchAllowed(self,kTechId.StandardSupply),kTechId.StandardSupply,kTechId.None)
         techButtons[2] = ConditionalValue(GetSupplyResearchAllowed(self,kTechId.ArmorSupply),kTechId.ArmorSupply,kTechId.None)
         techButtons[3] = ConditionalValue(GetSupplyResearchAllowed(self,kTechId.ElectronicSupply),kTechId.ElectronicSupply,kTechId.None)
-        --techButtons[4] = ConditionalValue(GetSupplyResearchAllowed(self,kTechId.ExplosiveSupply),kTechId.ExplosiveSupply,kTechId.None)
+        techButtons[4] = ConditionalValue(GetSupplyResearchAllowed(self,kTechId.ExplosiveSupply),kTechId.ExplosiveSupply,kTechId.None)
     elseif techId == kTechId.ElectronicStation then
         techButtons[1] = kTechId.MACEMPBlast
+        techButtons[4] = kTechId.PoweredExtractorTech
     elseif techId == kTechId.StandardStation then
         techButtons[1] = kTechId.DragonBreath
-        --techButtons[2] = kTechId.LightMachineGunUpgrade
+        techButtons[4] = kTechId.LightMachineGunUpgrade
     elseif techId == kTechId.ArmorStation then
         techButtons[1] = kTechId.ArmorRegen
+        techButtons[4] = kTechId.LifeSustain
+    elseif techId == kTechId.ExplosiveStation then
+        techButtons[1] = kTechId.GrenadeLauncherUpgrade
+        techButtons[4] = kTechId.MinesUpgrade
     end
-    techButtons[4] = kTechId.MilitaryProtocol
+    
+    techButtons[5] = kTechId.MilitaryProtocol
     
     return techButtons
 end
@@ -71,15 +77,13 @@ end
 
 class 'StandardStation' (CommandStation)
 StandardStation.kMapName = "standard_station"
---Shared.LinkClassToMap("StandardStation", StandardStation.kMapName, { })
---
+
 class 'ExplosiveStation' (CommandStation)
 ExplosiveStation.kMapName = "explosive_station"
---Shared.LinkClassToMap("ExplosiveStation",ExplosiveStation.kMapName , { })
---
+
 class 'ArmorStation' (CommandStation)
 ArmorStation.kMapName = "armor_station"
---Shared.LinkClassToMap("ExplosiveStation",ArmorStation.kMapName , { })
+
 class 'ElectronicStation' (CommandStation)
 ElectronicStation.kMapName = "electronic_station"
 

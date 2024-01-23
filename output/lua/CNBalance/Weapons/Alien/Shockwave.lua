@@ -62,22 +62,26 @@ function Shockwave:Detonate()
                 end
 
 
-                local damage = kStompDamage
-                if enemy:isa("Player") then
+                local finalDamage = kStompDamage
+                if enemy:isa("Player") and not enemy:isa("Exo") then
 
                     local index = #self.damagedEntIds
                     if index <= 2 then
                         local firstOne = index == 1
-                        damage = firstOne and kStompDamage or kStompSecondDamage
+                        finalDamage = firstOne and kStompFirstPDamage or kStompSecondPDamage
                         if HasMixin(enemy, "Stun") then
                             enemy:SetStun(firstOne and kStompDisruptTime or kStompSecondDisruptTime)
                         end
                     else
-                        damage = kStompElseDamage
+                        finalDamage = kStompElseDamage
                     end
+                    
                     ApplyPushback(enemy,0.2,self:GetCoords().zAxis * 4 + Vector(0,4,0))
                 end
-                self:DoDamage(damage, enemy, enemy:GetOrigin(), GetNormalizedVector(enemy:GetOrigin() - groundTrace.endPoint), "none")
+                
+                if finalDamage > 0 then
+                    self:DoDamage(finalDamage, enemy, enemy:GetOrigin(), GetNormalizedVector(enemy:GetOrigin() - groundTrace.endPoint), "none")
+                end
 
 
             end

@@ -76,10 +76,10 @@ kExplosiveSelfDamage =
 {
     ["Grenade"] = 60,
     ["ImpactGrenade"] = 40,
-    ["ClusterGrenade"] = 20,
-    ["ClusterFragment"] = 5,
+    ["ClusterGrenade"] = 20, ["ClusterFragment"] = 5,
     ["PulseGrenade"] = 40,
     ["Mine"] = 80,
+    ["Cannon"] = 40,
 }
 
 kJetpackDamageReduction = {
@@ -107,7 +107,7 @@ kSkulkDamageReduction = {
     ["Grenade"] = 0.7,
     ["ImpactGrenade"] = 0.7,
     ["PulseGrenade"] = 0.7,
-    --["Cannon"] = 0.9,
+    ["Cannon"] = 0.8,
     --["Shotgun"] = 0.88,
     --["Railgun"] = 0.9,
 }
@@ -119,8 +119,7 @@ kLerkDamageReduction = {
     ["Grenade"] = 0.7,
     ["ImpactGrenade"] = 0.7,
     --["Shotgun"] = 0.88,
-    --["Cannon"] = 0.8,
-    --["Railgun"] = 0.8,
+    ["Railgun"] = 0.8,
     --["PulseGrenade"] = 0.75,
 }
 
@@ -145,7 +144,7 @@ kOnosDamageReduction = {
     --["Sentry"] = 2,
     --["MarineSentry"] = 2,
 
-    ["Shotgun"] = 0.88,
+    ["Shotgun"] = 0.85,
     --["Rifle"] = 0.92,
     --["SubMachineGun"] = 0.92,
     --["LightMachineGun"] = 0.92,

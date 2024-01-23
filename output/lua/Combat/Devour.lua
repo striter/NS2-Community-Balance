@@ -15,7 +15,7 @@ Devour.energyRate = 0 --kEnergyUpdateRate * 14
 
 local kAttackRadius = 0.8
 local kAttackOriginDistance = 1.7
-local kAttackRange = 1.7 --2
+local kAttackRange = 2 --1.7
 local kDevourUpdateRate = 0.183 --0.15
 --local kMissedEnergyCost = 15
 
