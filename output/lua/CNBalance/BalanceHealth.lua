@@ -72,6 +72,10 @@ kARCRoboticsFactoryHealth = 2500    kARCRoboticsFactoryArmor = 400    kARCRoboti
 kSentryBatteryHealth = 800    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5     --600 200
 kSentryHealth = 500    kSentryArmor = 125    kSentryPointValue = 3      --500 125
 
+
+kPrototypeLabHealth = 2000    kPrototypeLabArmor = 500    kPrototypeLabPointValue = 10
+kUpgradedPrototypeLabHealth = 3000 kUpgradedPrototypeLabArmor = 500 kUpgradedPrototypeLabPointValue = 20
+
 kExplosiveSelfDamage =
 {
     ["Grenade"] = 60,

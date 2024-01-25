@@ -184,7 +184,7 @@ function Cannon:OnBulletFirstHit(spreadDirection,endPoint,target)
     local hitEntities = GetEntitiesWithMixinWithinRange("Live", endPoint, kCannonAoeRadius)
     RadiusDamage(hitEntities, endPoint, kCannonAoeRadius, kCannonAoeDamage, self ,false ,NoFalloff,false)
     if target and target:isa("Player") then
-        local mass = lastTarget.GetMass and lastTarget:GetMass() or Player.kMass
+        local mass = target.GetMass and target:GetMass() or Player.kMass
         if mass < 100 then
             ApplyPushback(target,.5,spreadDirection*8)
         end

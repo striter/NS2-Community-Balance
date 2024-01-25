@@ -819,20 +819,8 @@ function GUIMarineBuyMenu:CreatePrototypeLabUI_NewComer()
         kTechId.DualMinigunExosuit,
     })
 
-    local groupLabel = self:CreateAnimatedTextItem()
-    groupLabel:SetIsScaling(false)
-    groupLabel:AddAsChildTo(buttonGroup)
-    groupLabel:SetPosition(Vector(330, -1, 0))
-    groupLabel:SetAnchor(GUIItem.Left, GUIItem.Top)
-    groupLabel:SetTextAlignmentX(GUIItem.Align_Min)
-    groupLabel:SetTextAlignmentY(GUIItem.Align_Min)
-    groupLabel:SetText(Locale.ResolveString("BUYMENU_GROUPLABEL_SPECIAL"))
-    groupLabel:SetOptionFlag(GUIItem.CorrectScaling)
-    GUIMakeFontScale(groupLabel, "kAgencyFB", 24)
-
     local rightSideStartPos = Vector(580, 38, 0)
     self:_CreateRightSide(rightSideStartPos)
-
 end
 
 function GUIMarineBuyMenu:CreatePrototypeLabUI()

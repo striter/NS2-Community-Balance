@@ -301,13 +301,14 @@ kSentryBatteryBuildTime = 5
 
 kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 90
-kPrototypeLabCost = 35
+kPrototypeLabCost = 25
 
-kCannonTechResearchCost = 30
+kCannonTechResearchCost = 25
 kCannonTechResearchTime = 90
 
-kJetpackTechResearchCost = 25
+kJetpackTechResearchCost = 30
 kJetpackTechResearchTime = 90
+
 kExosuitTechResearchCost = 20
 kExosuitTechResearchTime = 90
 

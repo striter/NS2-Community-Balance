@@ -405,38 +405,7 @@ function BuildTechData()
         [kStructureAttachRequiresPower] = true,
         [kTechDataPlayersRestrictionKey] = kFlameThrowerPlayersAlert,
     } )
-    
-    table.insert(techData,{
-        [kTechDataId] = kTechId.CannonTech,
-        [kTechDataCostKey] = kCannonTechResearchCost,
-        [kTechDataResearchTimeKey] = kCannonTechResearchTime,
-        [kTechDataDisplayName] = "RESEARCH_CANNON",
-        [kTechDataResearchName] = "RESEARCH_CANNON",
-    } )
 
-    table.insert(techData,{
-        [kTechDataId] = kTechId.DropCannon,
-        [kTechDataMapName] = Cannon.kMapName,
-        [kTechDataDisplayName] = "CANNON_DROP",
-        [kTechDataTooltipInfo] = "CANNON_TOOLTIP",
-        [kTechDataModel] = Cannon.kModelName,
-        [kTechDataCostKey] = kCannonDropCost,
-        [kStructureAttachId] = { kTechId.PrototypeLab },
-        [kStructureAttachRange] = kArmoryWeaponAttachRange,
-        [kStructureAttachRequiresPower] = true,
-    } )
-
-    table.insert(techData,{
-        [kTechDataId] = kTechId.Cannon,
-        [kTechDataMaxHealth] = kMarineWeaponHealth,
-        [kTechDataTooltipInfo] = "CANNON_TOOLTIP",
-        [kTechDataPointValue] = kCannonPointValue,
-        [kTechDataMapName] = Cannon.kMapName,
-        [kTechDataDisplayName] = "CANNON",
-        [kTechDataModel] = Cannon.kModelName,
-        [kTechDataDamageType] = kCannonDamageType,
-        [kTechDataCostKey] = kCannonCost,
-    } )
 
     table.insert(techData,{
         [kTechDataId] = kTechId.Welder,
@@ -572,6 +541,87 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "PROTOS_MENU_TOOLTIP",
     })
 
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.ExosuitPrototypeLab,
+        [kTechDataGhostModelClass] = "MarineGhostModel",
+        [kTechDataRequiresPower] = true,
+        [kTechDataNotOnInfestation] = kPreventMarineStructuresOnInfestation,
+        [kTechDataMapName] = PrototypeLab.kMapName,
+        [kTechDataCostKey] = kPrototypeLabCost + kExosuitTechResearchCost,
+        [kTechDataMaxHealth] = kUpgradedPrototypeLabHealth,
+        [kTechDataMaxArmor] = kUpgradedPrototypeLabArmor,
+        [kTechDataPointValue] = kUpgradedPrototypeLabPointValue,
+        [kTechDataDisplayName] = "EXOSUIT_PROTOTYPE_LAB",
+        [kTechDataTooltipInfo] = "EXOSUIT_PROTOTYPE_LAB_TOOLTIP",
+        [kTechDataHint] = "EXOSUIT_PROTOTYPE_LAB_HINT",
+        [kTechDataObstacleRadius] = 0.65,
+    } )
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.CannonPrototypeLab,
+        [kTechDataGhostModelClass] = "MarineGhostModel",
+        [kTechDataRequiresPower] = true,
+        [kTechDataNotOnInfestation] = kPreventMarineStructuresOnInfestation,
+        [kTechDataMapName] = PrototypeLab.kMapName,
+        [kTechDataCostKey] = kPrototypeLabCost + kCannonTechResearchCost,
+        [kTechDataMaxHealth] = kUpgradedPrototypeLabHealth,
+        [kTechDataMaxArmor] = kUpgradedPrototypeLabArmor,
+        [kTechDataPointValue] = kUpgradedPrototypeLabPointValue,
+        [kTechDataDisplayName] = "CANNON_PROTOTYPE_LAB",
+        [kTechDataTooltipInfo] = "CANNON_PROTOTYPE_LAB_TOOLTIP",
+        [kTechDataHint] = "CANNON_PROTOTYPE_LAB_HINT",
+        [kTechDataObstacleRadius] = 0.65,
+    } )
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.JetpackPrototypeLab,
+        [kTechDataGhostModelClass] = "MarineGhostModel",
+        [kTechDataRequiresPower] = true,
+        [kTechDataNotOnInfestation] = kPreventMarineStructuresOnInfestation,
+        [kTechDataMapName] = PrototypeLab.kMapName,
+        [kTechDataCostKey] = kPrototypeLabCost + kJetpackTechResearchCost,
+        [kTechDataMaxHealth] = kUpgradedPrototypeLabHealth,
+        [kTechDataMaxArmor] = kUpgradedPrototypeLabArmor,
+        [kTechDataPointValue] = kUpgradedPrototypeLabPointValue,
+        [kTechDataDisplayName] = "JETPACK_PROTOTYPE_LAB",
+        [kTechDataTooltipInfo] = "JETPACK_PROTOTYPE_LAB_TOOLTIP",
+        [kTechDataHint] = "JETPACK_PROTOTYPE_LAB_HINT",
+        [kTechDataObstacleRadius] = 0.65,
+    } )
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.CannonTech,
+        [kTechDataCostKey] = kCannonTechResearchCost,
+        [kTechDataResearchTimeKey] = kCannonTechResearchTime,
+        [kTechDataDisplayName] = "RESEARCH_CANNON",
+        [kTechDataResearchName] = "RESEARCH_CANNON",
+    } )
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.DropCannon,
+        [kTechDataMapName] = Cannon.kMapName,
+        [kTechDataDisplayName] = "CANNON_DROP",
+        [kTechDataTooltipInfo] = "CANNON_TOOLTIP",
+        [kTechDataModel] = Cannon.kModelName,
+        [kTechDataCostKey] = kCannonDropCost,
+        [kStructureAttachId] = {kTechId.PrototypeLab,kTechId.CannonPrototypeLab,kTechId.JetpackPrototypeLab,kTechId.ExosuitPrototypeLab},
+        [kStructureAttachRange] = kArmoryWeaponAttachRange,
+        [kStructureAttachRequiresPower] = true,
+    } )
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.Cannon,
+        [kTechDataMaxHealth] = kMarineWeaponHealth,
+        [kTechDataTooltipInfo] = "CANNON_TOOLTIP",
+        [kTechDataPointValue] = kCannonPointValue,
+        [kTechDataMapName] = Cannon.kMapName,
+        [kTechDataDisplayName] = "CANNON",
+        [kTechDataModel] = Cannon.kModelName,
+        [kTechDataDamageType] = kCannonDamageType,
+        [kTechDataCostKey] = kCannonCost,
+    } )
+    
     table.insert(techData,
     {
         [kTechDataId] = kTechId.DropDualMinigunExosuit,
@@ -581,7 +631,7 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "DUAL_MINIGUN_TOOLTIP",
         [kTechDataLayoutKey] = "MinigunMinigun",
         [kTechDataCostKey] = kDualExosuitDropCost,
-        [kStructureAttachId] = kTechId.PrototypeLab,
+        [kStructureAttachId] = {kTechId.PrototypeLab,kTechId.CannonPrototypeLab,kTechId.JetpackPrototypeLab,kTechId.ExosuitPrototypeLab},
         [kStructureAttachRange] = kArmoryWeaponAttachRange,
         [kStructureAttachRequiresPower] = true,
     })
@@ -596,10 +646,24 @@ function BuildTechData()
         [kTechDataLayoutKey] = "RailgunRailgun",
         [kTechDataCostKey] = kDualExosuitDropCost,
         [kStructureAttachId] = kTechId.PrototypeLab,
-        [kStructureAttachRange] = kArmoryWeaponAttachRange,
+        [kStructureAttachId] = {kTechId.PrototypeLab,kTechId.CannonPrototypeLab,kTechId.JetpackPrototypeLab,kTechId.ExosuitPrototypeLab},
         [kStructureAttachRequiresPower] = true,
     })
 
+
+    table.insert(techData,
+        [kTechDataId] = kTechId.DropJetpack,
+        [kTechDataMapName] = Jetpack.kMapName,
+        [kTechDataDisplayName] = "JETPACK_DROP",
+        [kTechIDShowEnables] = false,
+        [kTechDataTooltipInfo] = "JETPACK_TOOLTIP",
+        [kTechDataModel] = Jetpack.kModelName,
+        [kTechDataCostKey] = kJetpackDropCost,
+        [kStructureAttachId] = {kTechId.PrototypeLab,kTechId.CannonPrototypeLab,kTechId.JetpackPrototypeLab,kTechId.ExosuitPrototypeLab},
+        [kStructureAttachRange] = kArmoryWeaponAttachRange,
+        [kStructureAttachRequiresPower] = true,
+    })
+    
     table.insert(techData,
     {
         [kTechDataId] = kTechId.Exosuit,
@@ -611,6 +675,7 @@ function BuildTechData()
         [kTechDataSpawnHeightOffset] = kCommanderEquipmentDropSpawnHeight,
         [kTechDataPointValue] = kExosuitPointValue,
     })
+    
     --table.insert(techData,  {
     --    [kTechDataId] = kTechId.Heavy,
     --    [kTechDataMapName] = Heavy.kMapName,
