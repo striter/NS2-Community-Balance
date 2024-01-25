@@ -24,6 +24,9 @@ local kBuildTechIdToSenseMap =
     [kTechId.PhaseGate]          = "mainPhaseGate"         ,
     [kTechId.AdvancedArmory]     = "mainAdvancedArmory"    ,
     [kTechId.PrototypeLab]       = "mainPrototypeLab"      ,
+    [kTechId.JetpackTech]       = "mainPrototypeLab"      ,
+    [kTechId.ExosuitTech]       = "mainPrototypeLab"      ,
+    [kTechId.CannonTech]       = "mainPrototypeLab"      ,
     --[kTechId.RoboticsFactory]    = "hasRoboticsFactoryInBase"   ,
     --[kTechId.ARCRoboticsFactory] = "hasARCRoboticsFactoryInBase",
 }

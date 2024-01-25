@@ -29,7 +29,7 @@ if kTranslateMessage then
     kTranslateMessage["MOTION_TRACK_TOOLTIP"] = "每隔一段时间.\n揭露站点内的高速活跃生物."
 
     kTranslateMessage["STANDARD_SUPPLY"] = "制式武器研发站"
-    kTranslateMessage["STANDARD_SUPPLY_TOOLTIP"] = "升级为制式武器研发基地.\n>解锁轻机枪购买."
+    kTranslateMessage["STANDARD_SUPPLY_TOOLTIP"] = "升级为制式武器研发基地."
     kTranslateMessage["STANDARD_STATION"] = "指挥站 (制式装备研发)"
     kTranslateMessage["STANDARD_STATION_HINT"] = "陆战队基地"
     kTranslateMessage["LIGHTMACHINEGUN_UPGRADE"]="制式步枪升级"
@@ -38,7 +38,7 @@ if kTranslateMessage then
     kTranslateMessage["DRAGON_BREATH_TOOLTIP"] = "*子弹将点燃敌方单位."
     
     kTranslateMessage["ARMOR_SUPPLY"] = "制式装备研发站"
-    kTranslateMessage["ARMOR_SUPPLY_TOOLTIP"] = "升级为制式装备研发基地.\n>同时解锁生命维持装置.\n+脱战后迅速回复生命值."
+    kTranslateMessage["ARMOR_SUPPLY_TOOLTIP"] = "升级为制式装备研发基地."
     kTranslateMessage["ARMOR_STATION"] = "指挥站 (制式装备研发)"
     kTranslateMessage["ARMOR_STATION_HINT"] = "陆战队基地"
     kTranslateMessage["NANO_ARMOR"]="纳米护甲"
@@ -50,18 +50,20 @@ if kTranslateMessage then
     kTranslateMessage["GRENADE_LAUNCHER_UPGRADE_TOOLTIP"] = "+改进装弹加速榴弹枪换弹.\n+撞击榴弹内置智能引信."
     
     kTranslateMessage["EXPLOSIVE_SUPPLY"] = "可燃物研发站"
-    kTranslateMessage["EXPLOSIVE_SUPPLY_TOOLTIP"] = "升级为可燃物研发基地.\n>同时解锁地雷遮光图层.\n+降低地雷对异形的可见性"
+    kTranslateMessage["EXPLOSIVE_SUPPLY_TOOLTIP"] = "升级为可燃物研发基地."
     kTranslateMessage["EXPLOSIVE_STATION"] = "指挥站 (可燃物研发)"
     kTranslateMessage["EXPLOSIVE_STATION_HINT"] = "陆战队基地(可燃物研发基地)"
     kTranslateMessage["MINES_UPGRADE"]="地雷遮光涂层"
     kTranslateMessage["MINES_UPGRADE_TOOLTIP"]="*降低地雷对卡拉异形的可见性."
+    kTranslateMessage["MINE_DEPLOY"]="部署地雷"
+    kTranslateMessage["MINE_DEPLOY_TOOLTIP"]="部署一个立刻启用的地雷."
     --kTranslateMessage["GRENADE_LAUNCHER_DETECTION_SHOT"] = "智能引信 (副攻击)"
     --kTranslateMessage["GRENADE_LAUNCHER_DETECTION_SHOT_TOOLTIP"] = "撞击榴弹将内置智能芯片\n*探测到临近敌方单位立刻爆炸."
     --kTranslateMessage["GRENADE_LAUNCHER_ALLY_BLAST"] = "智能爆燃"
     --kTranslateMessage["GRENADE_LAUNCHER_ALLY_BLAST_TOOLTIP"] = "*降低对使用者的伤害."
 
     kTranslateMessage["ELECTRONIC_SUPPLY"] = "站点机械化研发"
-    kTranslateMessage["ELECTRONIC_SUPPLY_TOOLTIP"] = "升级为站点机械化研发基地.\n>解锁采集器电极升级.\n+可对采集器进行感电防御升级."
+    kTranslateMessage["ELECTRONIC_SUPPLY_TOOLTIP"] = "升级为站点机械化研发基地."
     kTranslateMessage["ELECTRONIC_STATION"] = "指挥站 (站点机械化)"
     kTranslateMessage["ELECTRONIC_STATION_HINT"] = "陆战队基地"
     kTranslateMessage["MAC_EMP_BLAST"] = "电磁芯片"
@@ -71,6 +73,19 @@ if kTranslateMessage then
     kTranslateMessage["POWERED_EXTRACTOR"] = "电极采集器"
     kTranslateMessage["POWERED_EXTRACTOR_HINT"] = "团队/玩家收入. 受攻击时将尝试电击单位."
 
+    kTranslateMessage["PROTOTYPE_LAB_TOOLTIP"] = "科技实验室 (高斯枪)"
+    kTranslateMessage["CANNON_PROTOTYPE_LAB"] = "科技实验室 (高斯枪)"
+    kTranslateMessage["CANNON_PROTOTYPE_LAB_HINT"] = "提供高斯枪升级购买"
+    kTranslateMessage["CANNON_PROTOTYPE_LAB_TOOLTIP"] = "于陆战队解锁原型高斯枪."
+
+    kTranslateMessage["JETPACK_PROTOTYPE_LAB"] = "科技实验室 (喷气背包)"
+    kTranslateMessage["JETPACK_PROTOTYPE_LAB_HINT"] = "提供喷气背包升级购买"
+    kTranslateMessage["JETPACK_PROTOTYPE_LAB_TOOLTIP"] = "于陆战队解锁喷气背包."
+    
+    kTranslateMessage["EXOSUIT_PROTOTYPE_LAB"] = "科技实验室 (机甲)"
+    kTranslateMessage["EXOSUIT_PROTOTYPE_LAB_HINT"] = "提供机甲升级购买"
+    kTranslateMessage["EXOSUIT_PROTOTYPE_LAB_TOOLTIP"] = "于陆战队解锁原型机甲购买."
+    
     kTranslateMessage["WELDER_BUYDESCRIPTION"]="制式维修工具.\n*修复陆战队护甲以及机甲.\n*修复建筑以及电力节点,加速建造建筑.\n*对菌毯造成高额伤害,可以灼烧孢子云."
     kTranslateMessage["KNIFE"]="步战刀"
     kTranslateMessage["KNIFE_BUYDESCRIPTION"]="制式步战刀.\n+最快的移动速度.\n+对建筑双倍伤害,无需弹药.\n-近距离搏斗."
@@ -86,8 +101,8 @@ if kTranslateMessage then
     kTranslateMessage["CANNON"]="高斯枪"
     kTranslateMessage["CANNON_DROP"]="发放高斯枪"
     kTranslateMessage["STATUS_CANNON"]="高斯枪"
-    kTranslateMessage["CANNON_BUYDESCRIPTION"]="单兵携带式磁轨炮.\n*单发高额伤害,精准对点打击.\n-较慢的射速与低载弹量"
-    kTranslateMessage["RESEARCH_CANNON"]="高斯枪研发"
+    kTranslateMessage["CANNON_BUYDESCRIPTION"]="单兵携带式磁轨炮.\n*单发高额伤害,精准对点打击,以及小范围攻击.\n-较慢的射速与低载弹量.\n-小心他超高的重量以及无法控制后坐力."
+    kTranslateMessage["RESEARCH_CANNON"]="研发高斯枪"
     kTranslateMessage["RESEARCH_CANNON_TOOLTIP"]="*进行高斯枪研发.\n*适用于压制高机动目标."
     kTranslateMessage["CANNON_TOOLTIP"]="*单兵高斯枪研发.\n*适用于压制高机动目标."
 
@@ -228,6 +243,8 @@ if kLocales then
     kLocales["EXPLOSIVE_SUPPLY_TOOLTIP"] = "Begin the combustible research."
     kLocales["EXPLOSIVE_STATION"] = "Command Station (Combustible Lab)"
     kLocales["EXPLOSIVE_STATION_HINT"] = "Marine Base"
+    kLocales["MINE_DEPLOY"]="Deploy mine"
+    kLocales["MINE_DEPLOY_TOOLTIP"]="Instantly deploy a mine at target location."
     --kLocales["GRENADE_LAUNCHER_DETECTION_SHOT"] = "Sensor Chip (Alt attack)"
     --kLocales["GRENADE_LAUNCHER_DETECTION_SHOT_TOOLTIP"] = "Impact shot will self detonate when enemies nearby."
     --kLocales["GRENADE_LAUNCHER_ALLY_BLAST"] = "Directed Blast"
@@ -246,6 +263,19 @@ if kLocales then
     kLocales["POWERED_EXTRACTOR"] = "Fusion Extractor"
     kLocales["POWERED_EXTRACTOR_HINT"] = "Team/Personal Imcome. Will try deal damage to attacker."
 
+
+    kLocales["CANNON_PROTOTYPE_LAB"] = "Prototype Lab (Gauss)"
+    kLocales["CANNON_PROTOTYPE_LAB_HINT"] = "Provide gauss acquirement"
+    kLocales["CANNON_PROTOTYPE_LAB_TOOLTIP"] = "Unlock gauss for marines."
+
+    kLocales["JETPACK_PROTOTYPE_LAB"] = "Prototype Lab (Jetpack)"
+    kLocales["JETPACK_PROTOTYPE_LAB_HINT"] = "Provide Jetpack acquirement"
+    kLocales["JETPACK_PROTOTYPE_LAB_TOOLTIP"] = "Unlock Jetpack for marines."
+
+    kLocales["EXOSUIT_PROTOTYPE_LAB"] = "Prototype Lab (Exosuit)"
+    kLocales["EXOSUIT_PROTOTYPE_LAB_HINT"] = "Provide Exosuit acquirement"
+    kLocales["EXOSUIT_PROTOTYPE_LAB_TOOLTIP"] = "Unlock Exosuit for marines."
+    
     kLocales["KNIFE"]="Knife"
     kLocales["KNIFE_BUYDESCRIPTION"]="Standard Knife.\n+Double damage to structure,cost no ammo.\n-Close combat."
     kLocales["REVOLVER"]="Revolver"

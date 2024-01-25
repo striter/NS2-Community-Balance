@@ -36,6 +36,9 @@ kTechIdToMaterialOffset[kTechId.ArmorStation] = 213
 kTechIdToMaterialOffset[kTechId.LifeSustain] = 198
 kTechIdToMaterialOffset[kTechId.ArmorRegen] = 195
 
+kTechIdToMaterialOffset[kTechId.CannonPrototypeLab] = 204
+kTechIdToMaterialOffset[kTechId.ExosuitPrototypeLab] = 25
+kTechIdToMaterialOffset[kTechId.JetpackPrototypeLab] = 89
 
 kTechIdToMaterialOffset[kTechId.ProtosMenu] = 25
 kTechIdToMaterialOffset[kTechId.DropDualMinigunExosuit] = 84

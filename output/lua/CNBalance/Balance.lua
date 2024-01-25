@@ -301,7 +301,7 @@ kSentryBatteryBuildTime = 5
 
 kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 90
-kPrototypeLabCost = 25
+kPrototypeLabCost = 30
 
 kCannonTechResearchCost = 25
 kCannonTechResearchTime = 90

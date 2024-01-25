@@ -19,7 +19,7 @@ function CommandStation:OnInitialized()
     end
 end
 
-kResearchToStationType =
+CommandStation.kResearchToStationType =
 {
     [kTechId.StandardSupply] = kTechId.StandardStation,
     [kTechId.ExplosiveSupply] = kTechId.ExplosiveStation,
@@ -28,8 +28,9 @@ kResearchToStationType =
 }
 
 local function GetSupplyResearchAllowed(self, techId)
-    local stationTypeTechId = kResearchToStationType[techId]
-    return not GetHasTech(self, stationTypeTechId) and not GetIsTechResearching(self, techId)
+    local stationTypeTechId = CommandStation.kResearchToStationType[techId]
+    local available = not GetHasTech(self, stationTypeTechId) and not GetIsTechResearching(self, techId)
+    return available and techId or kTechId.None
 end
 
 function CommandStation:GetTechButtons()
@@ -39,10 +40,10 @@ function CommandStation:GetTechButtons()
 
     local techId = self:GetTechId()
     if techId == kTechId.CommandStation then
-        techButtons[1] = ConditionalValue(GetSupplyResearchAllowed(self,kTechId.StandardSupply),kTechId.StandardSupply,kTechId.None)
-        techButtons[2] = ConditionalValue(GetSupplyResearchAllowed(self,kTechId.ArmorSupply),kTechId.ArmorSupply,kTechId.None)
-        techButtons[3] = ConditionalValue(GetSupplyResearchAllowed(self,kTechId.ElectronicSupply),kTechId.ElectronicSupply,kTechId.None)
-        techButtons[4] = ConditionalValue(GetSupplyResearchAllowed(self,kTechId.ExplosiveSupply),kTechId.ExplosiveSupply,kTechId.None)
+        techButtons[1] = GetSupplyResearchAllowed(self,kTechId.StandardSupply)
+        techButtons[2] = GetSupplyResearchAllowed(self,kTechId.ArmorSupply)
+        techButtons[3] = GetSupplyResearchAllowed(self,kTechId.ElectronicSupply)
+        techButtons[4] = GetSupplyResearchAllowed(self,kTechId.ExplosiveSupply)
     elseif techId == kTechId.ElectronicStation then
         techButtons[1] = kTechId.MACEMPBlast
         techButtons[4] = kTechId.PoweredExtractorTech
@@ -63,14 +64,9 @@ function CommandStation:GetTechButtons()
 end
 
 function CommandStation:OnResearchComplete(researchId)
-    if researchId == kTechId.ExplosiveSupply then
-        self:UpgradeToTechId(kTechId.ExplosiveStation)
-    elseif researchId == kTechId.StandardSupply then
-        self:UpgradeToTechId(kTechId.StandardStation)
-    elseif researchId == kTechId.ArmorSupply then
-        self:UpgradeToTechId(kTechId.ArmorStation)
-    elseif researchId == kTechId.ElectronicSupply then
-        self:UpgradeToTechId(kTechId.ElectronicStation)
+    local upgradeTech = CommandStation.kResearchToStationType[researchId]
+    if upgradeTech then
+        self:UpgradeToTechId(upgradeTech)
     end
 end
 
