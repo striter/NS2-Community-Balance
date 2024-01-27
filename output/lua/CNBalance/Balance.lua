@@ -1,4 +1,5 @@
 --Resources system starts here
+kShowDeathStatus = true
 kPlayingTeamInitialTeamRes = 60   --60
 kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
@@ -63,9 +64,9 @@ kBountyClaimMinSkulk = 5 kBountyClaimMinAlien = 8  kBountyClaimMinOnos = 12
 kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 20
 
 --Toy for marine commander (remove all marines passive income, harsh one)
-kMilitaryProtocolResearchCost = 5
+kMilitaryProtocolResearchCost = 0
 kMilitaryProtocolResearchTime = 10
-kMilitaryProtocolResearchDurationMultiply = 1.2     --1.33?
+kMilitaryProtocolResearchDurationMultiply = 1 --1.2     --1.33?
 kMilitaryProtocolAggressivePersonalResourcesScalar = 1.5      --They don't need too much pres to buy defensive or grenades/welders (and they can shared it tbh)
 kMilitaryProtocolTResPerBountyClaim = 0.5   --Bounty score, don't give them pres, its doomed
 kMilitaryProtocolTeamResourcesPerKill = {          --Replaced refund system , append kTechDataTeamResOnKill above
@@ -134,7 +135,7 @@ kHeavyMachineGunSpread = Math.Radians(5)  --4
 
 kCommandStationCost = 20
 kCommandStationUpgradeCost = 10
-kCommandStationUpgradeTime = 60
+kCommandStationUpgradeTime = 30
 kUpgradedCommandStationCost = kCommandStationCost + kCommandStationUpgradeCost
 
 -- Standard Supply

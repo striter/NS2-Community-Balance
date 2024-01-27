@@ -24,6 +24,7 @@ Script.Load("lua/PointGiverMixin.lua")
 Script.Load("lua/Ragdoll.lua")
 Script.Load("lua/MapBlipMixin.lua")
 Script.Load("lua/CombatMixin.lua")
+Script.Load("lua/LaserMixin.lua")
 
 class 'Mine' (ScriptActor)
 
@@ -47,6 +48,7 @@ local kMineMaxShakeIntensity = 0.13
 
 local networkVars = {
     camouflaged = "boolean",
+    showLaser = "boolean",
 }
 
 AddMixinNetworkVars(BaseModelMixin, networkVars)
@@ -57,6 +59,7 @@ AddMixinNetworkVars(TeamMixin, networkVars)
 AddMixinNetworkVars(ParasiteMixin, networkVars)
 AddMixinNetworkVars(LOSMixin, networkVars)
 AddMixinNetworkVars(CombatMixin, networkVars)
+AddMixinNetworkVars(LaserMixin, networkVars)
 
 function Mine:OnCreate()
 
@@ -74,16 +77,19 @@ function Mine:OnCreate()
     InitMixin(self, LOSMixin)
     InitMixin(self, PointGiverMixin)
     InitMixin(self, CombatMixin)
+    InitMixin(self, LaserMixin)
 
+    self.camouflaged = false
+    self.showLaser = false
     if Client then
         InitMixin(self, MarineOutlineMixin)
     end
 
     if Server then
 
+
         -- init after OwnerMixin since 'OnEntityChange' is expected callback
         InitMixin(self, SleeperMixin)
-
         self:SetUpdates(true, kDefaultUpdateRate)
 
     end
@@ -243,7 +249,6 @@ function Mine:OnInitialized()
         InitMixin(self, TriggerMixin)
         self:SetSphere(kMineTriggerRange)
 
-        self.camouflaged = GetHasTech(self,kTechId.ExplosiveStation)
     end
 
     self:SetModel(Mine.kModelName)
@@ -321,6 +326,10 @@ if Server then
             self:CheckAllEntsInTriggerExplodeMine()
             self.lastMineUpdateTime = now
 
+
+            local owner = self:GetOwner()
+            self.showLaser = self.active and (owner and owner:isa("MarineCommander"))
+            self.camouflaged = self.active and GetHasTech(self,kTechId.ExplosiveStation)
         end
 
     end
@@ -449,6 +458,21 @@ if Client then
         return self.camouflaged and 0.94 or 1
     end
 
+end
+
+
+function Mine:GetLaserAttachCoords()
+    local coords = self:GetCoords()
+    local zAxis = coords.zAxis
+    coords.origin = coords.origin + coords.yAxis * 0.1
+    coords.zAxis = coords.yAxis
+    coords.yAxis = -zAxis
+    
+    return coords
+end
+
+function Mine:GetIsLaserActive()
+    return self.showLaser
 end
 
 Shared.LinkClassToMap("MineRagdoll", MineRagdoll.kMapName, {})

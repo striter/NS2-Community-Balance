@@ -58,6 +58,7 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.GrenadeTech,
 
     kTechId.AdvancedArmory,
+    kTechId.AdvancedArmoryUpgrade,
 
     kTechId.Weapons1,
     kTechId.Weapons2,
@@ -66,7 +67,7 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.Armor2,
     kTechId.Armor3,
 
-    kTechId.JetpackTech,    
+    kTechId.JetpackTech,
     kTechId.ExosuitTech,
     kTechId.CannonTech,
     kTechId.JetpackPrototypeLab,
@@ -77,10 +78,10 @@ TeamInfo.kRelevantTechIdsMarine =
 
     kTechId.PhaseTech,
 
-    kTechId.StandardSupply,
-    kTechId.ExplosiveSupply,
-    kTechId.ElectronicSupply,
-    kTechId.ArmorSupply,
+    kTechId.StandardStation,
+    kTechId.ExplosiveStation,
+    kTechId.ElectronicStation,
+    kTechId.ArmorStation,
     kTechId.DragonBreath,
     kTechId.MACEMPBlast,
     kTechId.GrenadeLauncherUpgrade,

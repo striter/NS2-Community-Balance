@@ -1,0 +1,1 @@
+GUIScoreboard.kShowDeathStatus = true

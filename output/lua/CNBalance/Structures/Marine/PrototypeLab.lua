@@ -1,6 +1,6 @@
 
 
-PrototypeLab.kPrototypeResearchType =
+PrototypeLab.kUpgradeToTargetType =
 {
     [kTechId.JetpackTech] = kTechId.JetpackPrototypeLab,
     [kTechId.CannonTech] = kTechId.CannonPrototypeLab,
@@ -8,7 +8,7 @@ PrototypeLab.kPrototypeResearchType =
 }
 
 local function GetResearchAllowed(self, techId)
-    local stationTypeTechId = PrototypeLab.kPrototypeResearchType[techId]
+    local stationTypeTechId = PrototypeLab.kUpgradeToTargetType[techId]
     local available = not GetHasTech(self, stationTypeTechId) and not GetIsTechResearching(self, techId)
     return available and techId or kTechId.None
 end
@@ -27,13 +27,57 @@ function PrototypeLab:GetTechButtons()
     return techButtons
 end
 
+if Server then
 
-function PrototypeLab:OnResearchComplete(researchId)
-    local upgradeTech = PrototypeLab.kPrototypeResearchType[researchId]
-    if upgradeTech then
-        self:UpgradeToTechId(upgradeTech)
+    function PrototypeLab:UpdateResearch()
+
+        local researchId = self:GetResearchingId()
+        local stationTypeTechId = PrototypeLab.kUpgradeToTargetType[researchId]
+
+        if stationTypeTechId then
+
+            local techTree = self:GetTeam():GetTechTree()
+            local researchNode = techTree:GetTechNode(stationTypeTechId)
+            researchNode:SetResearchProgress(self.researchProgress)
+            techTree:SetTechNodeChanged(researchNode, string.format("researchProgress = %.2f", self.researchProgress))
+
+        end
     end
+
+    function PrototypeLab:OnResearchCancel(researchId)
+
+        local stationTypeTechId = PrototypeLab.kUpgradeToTargetType[researchId]
+        if stationTypeTechId then
+
+            local team = self:GetTeam()
+            if team then
+                local techTree = team:GetTechTree()
+                local researchNode = techTree:GetTechNode(stationTypeTechId)
+                if researchNode then
+                    researchNode:ClearResearching()
+                    techTree:SetTechNodeChanged(researchNode, string.format("researchProgress = %.2f", 0))
+                end
+            end
+        end
+    end
+
+    function PrototypeLab:OnResearchComplete(researchId)
+        local upgradeTech = PrototypeLab.kUpgradeToTargetType[researchId]
+        if upgradeTech then
+            self:UpgradeToTechId(upgradeTech)
+        end
+        local techTree = self:GetTeam():GetTechTree()
+        local researchNode = techTree:GetTechNode(upgradeTech)
+
+        if researchNode then
+            researchNode:SetResearchProgress(1)
+            techTree:SetTechNodeChanged(researchNode, string.format("researchProgress = %.2f", self.researchProgress))
+            researchNode:SetResearched(true)
+        end
+    end
+
 end
+
 
 function PrototypeLab:GetItemList(forPlayer)
     return { kTechId.Jetpack, kTechId.DualMinigunExosuit, kTechId.DualRailgunExosuit, kTechId.Cannon}

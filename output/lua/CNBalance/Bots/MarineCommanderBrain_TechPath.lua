@@ -24,9 +24,9 @@ local kBuildTechIdToSenseMap =
     [kTechId.PhaseGate]          = "mainPhaseGate"         ,
     [kTechId.AdvancedArmory]     = "mainAdvancedArmory"    ,
     [kTechId.PrototypeLab]       = "mainPrototypeLab"      ,
-    [kTechId.JetpackTech]       = "mainPrototypeLab"      ,
-    [kTechId.ExosuitTech]       = "mainPrototypeLab"      ,
-    [kTechId.CannonTech]       = "mainPrototypeLab"      ,
+    [kTechId.JetpackPrototypeLab]       = "mainJetpackLab"      ,
+    [kTechId.ExosuitPrototypeLab]       = "mainExosuitLab"      ,
+    [kTechId.StandardStation]       = "mainStandardStation"      ,
     --[kTechId.RoboticsFactory]    = "hasRoboticsFactoryInBase"   ,
     --[kTechId.ARCRoboticsFactory] = "hasARCRoboticsFactoryInBase",
 }
@@ -70,21 +70,28 @@ local kMarineCommanderTechPath =
     {
         kTechId.AdvancedArmoryUpgrade, -- Flamethrower, GL, HMG all unlocked by this upgrade
         kTechId.PrototypeLab,
+        kTechId.JetpackTech,
     },
 
     -- Tier 5
     {
-        kTechId.JetpackTech,
-        kTechId.ExosuitTech,
+        --kTechId.ExosuitTech,
         kTechId.Weapons3,
         kTechId.Armor3,
         
         -- Till comm could really research standard supply?
         --kTechId.StandardSupply,
-        --kTechId.LightMachineGunUpgrade,
         --kTechId.DragonBreath,
-        --kTechId.GrenadeLauncherUpgrade,
+        --kTechId.MotionTrack,
     },
+}
+
+local kTechTestReroutes =
+{
+    [kTechId.AdvancedArmoryUpgrade] = kTechId.AdvancedArmory,
+    [kTechId.ExosuitTech] = kTechId.ExosuitPrototypeLab,
+    [kTechId.JetpackTech] = kTechId.JetpackPrototypeLab,
+    [kTechId.StandardSupply] = kTechId.JetpackPrototypeLab,
 }
 
 local kMarineTechPathOverrides =
@@ -119,11 +126,6 @@ local kMarineTechPathOverrides =
 
         end,
     }
-}
-
-local kTechTestReroutes =
-{
-    [kTechId.AdvancedArmoryUpgrade] = kTechId.AdvancedArmory
 }
 
 --[[

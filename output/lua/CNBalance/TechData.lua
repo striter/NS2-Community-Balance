@@ -169,7 +169,6 @@ function BuildTechData()
 
     table.insert(techData,{
         [kTechDataId] = kTechId.MineDeploy,
-        [kTechDataIgnorePathingMesh] = true,
         [kTechDataMapName] = Mine.kMapName,
         [kTechDataDisplayName] = "MINE_DEPLOY",
         [kTechDataCostKey] = kMineDeployCost,
@@ -556,6 +555,7 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "EXOSUIT_PROTOTYPE_LAB_TOOLTIP",
         [kTechDataHint] = "EXOSUIT_PROTOTYPE_LAB_HINT",
         [kTechDataObstacleRadius] = 0.65,
+        [kTechDataUpgradeTech] = kTechId.PrototypeLab,
     } )
 
     table.insert(techData,{
@@ -572,6 +572,7 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "CANNON_PROTOTYPE_LAB_TOOLTIP",
         [kTechDataHint] = "CANNON_PROTOTYPE_LAB_HINT",
         [kTechDataObstacleRadius] = 0.65,
+        [kTechDataUpgradeTech] = kTechId.PrototypeLab,
     } )
 
     table.insert(techData,{
@@ -588,6 +589,7 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "JETPACK_PROTOTYPE_LAB_TOOLTIP",
         [kTechDataHint] = "JETPACK_PROTOTYPE_LAB_HINT",
         [kTechDataObstacleRadius] = 0.65,
+        [kTechDataUpgradeTech] = kTechId.PrototypeLab,
     } )
 
     table.insert(techData,{

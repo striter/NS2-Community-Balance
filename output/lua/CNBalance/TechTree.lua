@@ -109,4 +109,35 @@ if Server then
 
     end
     
-end 
+end
+
+local kInstancedTechIds
+function GetTechIdIsInstanced(techId)
+
+    if not kInstancedTechIds then
+
+        kInstancedTechIds = set
+        {
+            kTechId.UpgradeToCragHive,
+            kTechId.UpgradeToShadeHive,
+            kTechId.UpgradeToShiftHive,
+
+            kTechId.AdvancedArmoryUpgrade,
+            kTechId.UpgradeRoboticsFactory,
+
+            kTechId.StandardSupply,
+            kTechId.ArmorSupply,
+            kTechId.ElectronicSupply,
+            kTechId.ExplosiveSupply,
+
+            kTechId.JetpackTech,
+            kTechId.ExosuitTech,
+            kTechId.CannonTech,
+
+        }
+
+    end
+
+    return kInstancedTechIds[techId]
+
+end

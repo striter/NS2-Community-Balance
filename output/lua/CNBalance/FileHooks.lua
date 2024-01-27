@@ -38,6 +38,7 @@ ModLoader.SetupFileHook("lua/Hud2/topBar/GUIHudTopBarObjectClasses.lua", "lua/CN
 ModLoader.SetupFileHook("lua/GUIMinimap.lua", "lua/CNBalance/GUI/GUIMinimap.lua", "post" )
 ModLoader.SetupFileHook("lua/GUIWorldText.lua", "lua/CNBalance/GUI/GUIWorldText.lua", "post" )
 ModLoader.SetupFileHook("lua/GUIUnitStatus.lua", "lua/CNBalance/GUI/GUIUnitStatus.lua", "replace" )
+ModLoader.SetupFileHook("lua/GUIScoreboard.lua", "lua/CNBalance/GUI/GUIScoreboard.lua", "post" )
 
 
 --Effects
@@ -107,6 +108,7 @@ ModLoader.SetupFileHook("lua/MarineBuy_Client.lua", "lua/CNBalance/MarineBuy_Cli
 ModLoader.SetupFileHook("lua/MarineTeam.lua", "lua/CNBalance/MarineTeam.lua", "post")
 ModLoader.SetupFileHook("lua/MarineTeamInfo.lua", "lua/CNBalance/MarineTeamInfo.lua", "replace")
 
+ModLoader.SetupFileHook("lua/DropPack.lua", "lua/CNBalance/DropPack.lua", "post")
 ModLoader.SetupFileHook("lua/AmmoPack.lua", "lua/CNBalance/AmmoPack.lua", "post")
 ModLoader.SetupFileHook("lua/MedPack.lua", "lua/CNBalance/MedPack.lua", "post")
 ModLoader.SetupFileHook("lua/Mine.lua", "lua/CNBalance/Mine.lua", "replace")
@@ -239,7 +241,7 @@ ModLoader.SetupFileHook("lua/Egg.lua", "lua/CNBalance/Structures/Alien/Egg.lua",
 --Bot
 ModLoader.SetupFileHook("lua/Clog.lua", "lua/CNBalance/Bots/Clog.lua", "post" )
 ModLoader.SetupFileHook("lua/bots/MarineCommanerBrain_TechPath.lua", "lua/CNBalance/Bots/MarineCommanderBrain_TechPath.lua", "replace" )
---ModLoader.SetupFileHook("lua/bots/MarineCommanderBrain_Senses.lua", "lua/CNBalance/Bots/MarineCommanderBrain_Senses.lua", "post" )
+ModLoader.SetupFileHook("lua/bots/MarineCommanderBrain_Senses.lua", "lua/CNBalance/Bots/MarineCommanderBrain_Senses.lua", "post" )
 ModLoader.SetupFileHook("lua/bots/AlienCommanderBrain_TechPathData.lua", "lua/CNBalance/Bots/AlienCommanderBrain_TechPathData.lua", "replace" )
 ModLoader.SetupFileHook("lua/bots/MarineBrain_Data.lua", "lua/CNBalance/Bots/MarineBrain_Data.lua", "post" )
 
