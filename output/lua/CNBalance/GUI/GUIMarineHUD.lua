@@ -82,9 +82,10 @@ function GUIMarineHUD:Initialize()
     table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.HeavyMachineGun))
     table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.GrenadeLauncher))
     table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.Flamethrower))
-    table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.Jetpack))
+    table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.Cannon))
     table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.DualRailgunExosuit))
     table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.DualMinigunExosuit))
+    table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.Jetpack))
     baseInitialize(self)
 
     self.resourceDisplay.background:AddChild(self.autoMedPack)
@@ -94,7 +95,7 @@ function GUIMarineHUD:Initialize()
     for index,element in ipairs(self.teamCountElements) do
         --Vector(25, 46, 0)
         local offset = index - 1
-        element:SetPosition(GUIMarineHUD.kTeamCountIconStart + Vector(offset * 50, offset * 2,0))
+        element:SetPosition(GUIMarineHUD.kTeamCountIconStart + Vector(offset * 48, offset * 2,0))
         self.background:AddChild(element)
     end
 end

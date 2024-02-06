@@ -328,7 +328,7 @@ if Server then
 
 
             local owner = self:GetOwner()
-            self.showLaser = self.active and (owner and owner:isa("MarineCommander"))
+            self.showLaser = self.showLaser or (self.active and (owner and owner:isa("MarineCommander")))
             self.camouflaged = self.active and GetHasTech(self,kTechId.ExplosiveStation)
         end
 

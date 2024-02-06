@@ -19,7 +19,7 @@ kTechIdToMaterialOffset[kTechId.DragonBreath] = 212
 kTechIdToMaterialOffset[kTechId.ExplosiveSupply] = 214
 kTechIdToMaterialOffset[kTechId.ExplosiveStation] = 214
 kTechIdToMaterialOffset[kTechId.MinesUpgrade] = 194
-kTechIdToMaterialOffset[kTechId.MineDeploy] = 8
+kTechIdToMaterialOffset[kTechId.MineDeploy] = 221
 
 kTechIdToMaterialOffset[kTechId.ElectronicSupply] = 200
 kTechIdToMaterialOffset[kTechId.ElectronicStation] = 200
@@ -41,8 +41,10 @@ kTechIdToMaterialOffset[kTechId.ExosuitPrototypeLab] = 25
 kTechIdToMaterialOffset[kTechId.JetpackPrototypeLab] = 89
 
 kTechIdToMaterialOffset[kTechId.ProtosMenu] = 25
+kTechIdToMaterialOffset[kTechId.DualMinigunExosuit] = 84
 kTechIdToMaterialOffset[kTechId.DropDualMinigunExosuit] = 84
 kTechIdToMaterialOffset[kTechId.DropDualRailgunExosuit] = 116
+kTechIdToMaterialOffset[kTechId.DualRailgunExosuit] = 116
 kTechIdToMaterialOffset[kTechId.CannonTech] = 204
 kTechIdToMaterialOffset[kTechId.DropCannon] = 204
 

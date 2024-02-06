@@ -6,7 +6,7 @@ if kTranslateMessage then
     kTranslateMessage["NEWCOMER_ENABLED"] = "正在浏览新兵采购页,升级军衔以解锁更多内容."
     
     kTranslateMessage["GAME_LENGTH_TEAM1"] = "站点清理 [%s:%s]"
-    kTranslateMessage["RESPAWN_EXTEND_TEAM1"] = "增援消耗 [%i秒]"
+    kTranslateMessage["RESPAWN_EXTEND_TEAM1"] = "增援耗时 [%i秒]"
     
     kTranslateMessage["TEAM_RESOURCES_EFFICIENCY1"] = "资源效率 [%i%%]"
     kTranslateMessage["TEAM_BOUNTY1"] = "资源储备 [%i*]"

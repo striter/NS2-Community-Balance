@@ -1,10 +1,10 @@
 --Rookie Protection
 kNoneRookieSkill = 500
-kMarineNewComerRank = kNoneRookieSkill
+kVeteranSkill = 1000
 kAlienNewComerRestriction = {
     [kTechId.Prowler] = kNoneRookieSkill,
+    [kTechId.Vokex] = kVeteranSkill
 }
-
 
 --Mediumize players KD Ratio by reduce taken damage with low KD, increase taken damage with high KD , combined with upper value lel
 kKDRatioEachDeath = 1 kKDRatioClaimOnAddKill = 1 kKDRatioClaimOnAddAssist = 0.25
@@ -60,7 +60,7 @@ kAlienCrushDamagePercentByLevel = 0.07 --0.07
 
 kFocusDamageBonusAtMax = 0.66 kFocusAttackSlowAtMax = 2
 kSpitFocusDamageBonusAtMax = 0.66  kSpitFocusAttackSlowAtMax = 0
-kVolleyFocusDamageBonusAtMax = 0.33  kVolleyFocusAttackSlowAtMax = 0
+kVolleyFocusDamageBonusAtMax = 0.2  kVolleyFocusAttackSlowAtMax = 0
 kSwipeFocusDamageBonusAtMax = 0.6
 kGoreFocusDamageBonusAtMax = 1  kGoreFocusAttackSlowAtMax = 1
 

@@ -23,24 +23,22 @@ AcidRocketBomb.kClearOnImpact = true
 AcidRocketBomb.kClearOnEnemyImpact = true
 local kWhipBombTrailCinematic = PrecacheAsset("cinematics/alien/whip/dripping_slime.cinematic")
 
+AcidRocketBomb.kMinLifeTime = 0
 -- // The max amount of time a AcidRocketBomb can last for
 AcidRocketBomb.kLifetime = 6
 
 local networkVars = {}
 
-AddMixinNetworkVars(BaseModelMixin, networkVars)
 AddMixinNetworkVars(ModelMixin, networkVars)
 AddMixinNetworkVars(TeamMixin, networkVars)
 
 function AcidRocketBomb:OnCreate()
 
     PredictedProjectile.OnCreate(self)
-    
+
     InitMixin(self, DamageMixin)
     InitMixin(self, TeamMixin)
 
-    self.radius = kAcidRocketBombRadius
-    
     if Server then
         self:AddTimedCallback(AcidRocketBomb.TimeUp, AcidRocketBomb.kLifetime)
     end
@@ -64,48 +62,59 @@ end
 
 if Server then
 
-    local function SineFalloff(distanceFraction)
-        local piFraction = Clamp(distanceFraction, 0, 1) * math.pi / 2
-        return math.cos(piFraction + math.pi) + 1 
-    end
-
     function AcidRocketBomb:ProcessHit(targetHit, surface, normal)
 
-        if not self.detonated then
-            
-            local dotMarker = CreateEntity(DotMarker.kMapName, self:GetOrigin() + normal * 0.2, self:GetTeamNumber())
-            dotMarker:SetDamageType(kAcidRocketBombDamageType)
-            dotMarker:SetLifeTime(kAcidRocketBombDuration)
-            dotMarker:SetDamage(kAcidRocketBombDamage) --was set to kAcidRocketBombDamage, made newdamage type to slow down dps.
-            dotMarker:SetRadius(kAcidRocketBombSplashRadius)
-            dotMarker:SetDamageIntervall(kAcidRocketBombDotIntervall)
-            dotMarker:SetDotMarkerType(DotMarker.kType.Static)
-            dotMarker:SetTargetEffectName("bilebomb_hit")
-            dotMarker:SetDeathIconIndex(kDeathMessageIcon.AcidRocket)
-            dotMarker:SetOwner(self:GetOwner())
-            dotMarker:SetFallOffFunc(SineFalloff)
-            
-            dotMarker:TriggerEffects("acidrocket_hit")
-
-            DestroyEntity(self)
-            
-            CreateExplosionDecals(self, "bilebomb_decal")
-
+        if not self:GetIsDestroyed() then
+            self:Detonate(normal)
         end
-
     end
-    
+
     function AcidRocketBomb:TimeUp(currentRate)
 
-        DestroyEntity(self)
+        if not self:GetIsDestroyed() then
+            self:Detonate(Vector(0,0,0))
+        end
         return false
-    
+
     end
 
+    local function NoFalloff()
+        return 0
+    end
+    function AcidRocketBomb:Detonate(normal)
+
+        local dotMarker = CreateEntity(DotMarker.kMapName, self:GetOrigin() + normal * 0.2, self:GetTeamNumber())
+        dotMarker:SetDamageType(kAcidRocketBombDamageType)
+        dotMarker:SetLifeTime(kAcidRocketBombDuration)
+        dotMarker:SetDamage(kAcidRocketBombDamage) --was set to kAcidRocketBombDamage, made newdamage type to slow down dps.
+        dotMarker:SetRadius(kAcidRocketBombSplashRadius)
+        dotMarker:SetDamageIntervall(kAcidRocketBombDotIntervall)
+        dotMarker:SetDotMarkerType(DotMarker.kType.Static)
+        dotMarker:SetTargetEffectName("bilebomb_hit")
+        dotMarker:SetDeathIconIndex(kDeathMessageIcon.AcidRocket)
+        dotMarker:SetOwner(self:GetOwner())
+        dotMarker:SetFallOffFunc(NoFalloff)
+
+        dotMarker:TriggerEffects("acidrocket_hit")
+
+        DestroyEntity(self)
+
+        CreateExplosionDecals(self, "bilebomb_decal")
+    end
+    
 end
 
 function AcidRocketBomb:GetNotifiyTarget()
     return false
+end
+
+
+
+function AcidRocketBomb:OnModifyRenderCoords(coords)
+    local xAxis = coords.xAxis      --Wrong axis
+    coords.xAxis = coords.zAxis
+    coords.zAxis = -xAxis
+    return coords
 end
 
 

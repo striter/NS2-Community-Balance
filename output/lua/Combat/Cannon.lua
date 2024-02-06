@@ -166,14 +166,17 @@ function Cannon:OverrideWeaponName()
 end
 
 function Cannon:OnFireBullets(shootCoords)
+    
     local player = self:GetParent()
     if not player then return end
 
-    local crouching = player:GetCrouching() and player:GetIsOnGround()
-    local force = crouching and 2 or 10
-    local velocity = player:GetVelocity() -shootCoords.zAxis * force
-    player:SetVelocity(velocity)
-    player:DisableGroundMove(.2)
+    local onGround = player:GetIsOnGround()
+    if onGround then
+        local force = player:GetCrouching() and 5 or 8
+        ApplyPushback(player, .3, -player:GetCoords().zAxis * force + Vector(0,2,0))
+    else
+        player:SetVelocity(player:GetVelocity() -shootCoords.zAxis * 10)
+    end
 end
 
 local function NoFalloff()

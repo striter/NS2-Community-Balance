@@ -152,17 +152,17 @@ function AcidRocket:FireBombProjectile(player)
         local viewCoords = player:GetViewCoords()
         local eyePos = player:GetEyePos()
         
-        local startPoint = player:GetEyePos() + (viewCoords.xAxis * -0.5) + (viewCoords.zAxis - 0.15)
-        local startPointTrace = Shared.TraceCapsule(startPoint, startPoint + viewCoords.zAxis, 0.2, 0, CollisionRep.Move, PhysicsMask.PredictedProjectileGroup, EntityFilterTwo(self, player))
-        startPoint = startPointTrace.endPoint
+
+        local startPointTrace = Shared.TraceCapsule(eyePos, eyePos + (viewCoords.xAxis * -0.5) + (viewCoords.zAxis - 0.15), 0.2, 0, CollisionRep.Damage, PhysicsMask.PredictedProjectileGroup, EntityFilterOneAndIsa(player, "Babbler"))
+        local startPoint = startPointTrace.endPoint
         
-        local endPointTrace = Shared.TraceRay(player:GetEyePos(), player:GetEyePos() + viewCoords.zAxis * 1000 , CollisionRep.Damage, PhysicsMask.Bullets, EntityFilterOne(player))            
+        local endPointTrace = Shared.TraceRay(eyePos, eyePos + viewCoords.zAxis * 1000 , CollisionRep.Damage, PhysicsMask.Bullets, EntityFilterOne(player))            
         
-        local rightCoords = (Coords.GetLookIn(startPoint, GetNormalizedVector(endPointTrace.endPoint - startPoint) ))
-        local direction = rightCoords.zAxis
-        local startVelocity = direction * kAcidRocketVelocity
+        local startVelocity = GetNormalizedVector(endPointTrace.endPoint - startPoint) * kAcidRocketVelocity
+        --player:CreatePredictedProjectile("AcidRocketBomb", startPoint, startVelocity, 0, 0, 0)
+        player:CreatePredictedProjectile("Spit", startPoint, startVelocity, 0, 0, 0)
         
-        local bomb = player:CreatePredictedProjectile("AcidRocketBomb", startPoint, startVelocity, 0, 0, 0)
+        --DebugLine(startPoint, endPointTrace.endPoint, .2, 1,0,0,1)
         
         if Client and not player:GetIsFirstPerson() then
             local worldCinematic = Client.CreateCinematic(RenderScene.Zone_Default)

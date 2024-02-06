@@ -47,9 +47,9 @@ local kJumpHeight = 1.4
 
 local kVokexScanDuration = 4
 
-local kShadowStepCooldown = 0.73
+local kShadowStepCooldown = 0.4
 local kShadowStepSpeed = 30
-Vokex.kShadowStepDuration = 0.25
+Vokex.kShadowStepDuration = 0.16
 
 local kMaxSpeed = 6.2
 
@@ -435,8 +435,8 @@ function Vokex:TriggerShadowStep()
     
     if canShadowStep and not self:GetHasShadowStepCooldown() then
 
-        local velocity = self:GetVelocity()
-        
+        --local velocity = self:GetVelocity()
+        self.hasDoubleJumped = false
         self:SetVelocity( self.shadowStepDirection * kShadowStepSpeed * self:GetSlowSpeedModifier())
         
         self.timeShadowStep = Shared.GetTime()

@@ -56,15 +56,21 @@ local kEndGameTolerance = 900
     --return Lerp(0,20,param)
 --end
 
-function GetRespawnTimeExtend(team,_gameLength)
+function GetRespawnTimeExtend(player,teamIndex, _gameLength)
     --_gameLength = _gameLength * 60
     local x = _gameLength
     --
     local respawnParam =  math.Clamp(math.max(0,x - kEndGameBegin) / kEndGameTolerance,0,1)
     respawnParam = respawnParam * respawnParam
-    local respawnExtension =  Lerp(0,32,respawnParam)
+    local respawnExtension =  Lerp(0,12,respawnParam)
 
-    local teamExtension = math.max(GetPlayersAboveLimit(team) - 2,0) * 1
+    local teamExtension = math.max(GetPlayersAboveLimit(teamIndex),0) * kRespawnTimeExtensionPerPlayerAboveLimit
+    for k,v in pairs(kTechRespawnTimeExtension) do
+        if GetHasTech(player,k) then
+            teamExtension = teamExtension + v
+        end
+    end
+    
     return respawnExtension + teamExtension
 end
 

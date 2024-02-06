@@ -32,7 +32,7 @@ function Team:PutPlayerInRespawnQueue(player)
             --if player:GetResources() >= costResources then
             --    player:AddResources(-costResources)
             --else
-                extraTime = extraTime + GetRespawnTimeExtend(self:GetTeamType(),gameLength)
+                extraTime = extraTime + GetRespawnTimeExtend(player,self:GetTeamType(),gameLength)
             --end
         end
 

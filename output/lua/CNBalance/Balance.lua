@@ -268,7 +268,7 @@ kStructureFireDamageMaxStack = { kStructureFireDOTPerSecond * 3 , kStructureFire
 kMinigunDamage = 9
 kMinigunDamageType = kDamageType.Exosuit
 kRailgunDamage = 10
-kRailgunChargeDamage = 140
+kRailgunChargeDamage = 150
 kRailgunDamageType = kDamageType.Exosuit
 
 kPulseGrenadeDamageRadius = 4
@@ -302,12 +302,12 @@ kSentryBatteryBuildTime = 5
 
 kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 90
-kPrototypeLabCost = 30
+kPrototypeLabCost = 25
 
 kCannonTechResearchCost = 25
 kCannonTechResearchTime = 90
 
-kJetpackTechResearchCost = 30
+kJetpackTechResearchCost = 25
 kJetpackTechResearchTime = 90
 
 kExosuitTechResearchCost = 20
@@ -325,7 +325,7 @@ kCannonDropCost = 20
 
 kCannonDamage = 20
 kCannonAoeRadius = 2.5
-kCannonRateOfFire = 0.7
+kCannonRateOfFire = 0.82
 kCannonAoeDamage = 80
 kCannonClipSize = 6
 kCannonPointValue = 15
@@ -671,9 +671,9 @@ kGorgeAbilitiesCost = {
     [kTechId.Harvester] = 8, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
                          [kTechId.Spur] = 12, [kTechId.Shell] = 12, [kTechId.Veil] = 12,
 }
-kGorgeStructureScorePerRes = 0.5
+kGorgeStructureScorePerRes = 0.4
 kOriginPersonalResourcesPerKill = {
-    [kTechId.Marine] = 2, [kTechId.JetpackMarine] = 5, [kTechId.Exo] = 10, [kTechId.Exosuit] = 10,
+    [kTechId.Marine] = 2, [kTechId.JetpackMarine] = 4, [kTechId.Exo] = 8, [kTechId.Exosuit] = 8,
 }
 
 kGorgeHiveBuildTime = kHiveBuildTime
@@ -693,3 +693,21 @@ function GetOriginFormBiomassLevel(count)
     end
     return level
 end
+
+kRespawnTimeExtensionPerPlayerAboveLimit = 1
+kTechRespawnTimeExtension =     --6 early game 10 mid-game 16 late-game 20 all researched
+{
+    --[kTechId.Armor1] = 0,[kTechId.Weapons1] = 0, [kTechId.Observatory] = 0,
+    [kTechId.Armor2] = 1,[kTechId.Weapons2] = 1, [kTechId.MinesTech] = 1,[kTechId.ShotgunTech] = 1,
+    [kTechId.PhaseGate] = 2, [kTechId.AdvancedArmory] = 2,
+    [kTechId.ExosuitPrototypeLab] = 2, [kTechId.JetpackPrototypeLab] = 2, 
+    [kTechId.Armor3] = 2, [kTechId.Weapons3] = 2, --[kTechId.CannonPrototypeLab] = 2,
+    [kTechId.DragonBreath] = 1, [kTechId.ArmorRegen] = 1,  [kTechId.MotionTrack] = 2, --[kTechId.MACEmpBlast] = 1,[kTechId.GrenadeLauncherUpgrade] = 1,
+    
+    --[kTechId.BioMassOne] = 0, [kTechId.BioMassTwo] = 0, 
+    [kTechId.BioMassThree] = 1, [kTechId.BioMassFour] = 1, [kTechId.BioMassFive] = 1, [kTechId.BioMassSix] = 1,
+    [kTechId.TwoVeils] = 1,[kTechId.ThreeVeils] = 1,[kTechId.TwoShells] = 1,[kTechId.ThreeShells] = 1,[kTechId.TwoSpurs] = 1, [kTechId.ThreeSpurs] = 1,
+    [kTechId.BioMassSeven] = 2, [kTechId.BioMassEight] = 2,
+    [kTechId.BioMassNine] = 2, [kTechId.BioMassTen] = 2,
+    [kTechId.BioMassEleven] = 1, [kTechId.BioMassTwelve] = 1,
+}

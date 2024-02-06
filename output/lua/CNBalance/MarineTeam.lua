@@ -169,19 +169,19 @@ function MarineTeam:InitTechTree()
     self.techTree:AddBuyNode(kTechId.Jetpack,                    kTechId.JetpackPrototypeLab)
     --self.techTree:AddResearchNode(kTechId.JetpackFuelTech,           kTechId.JetpackTech)
 
-    -- Exosuit
-    self.techTree:AddUpgradeNode(kTechId.ExosuitTech,           kTechId.PrototypeLab, kTechId.None)
-    --self.techTree:AddTargetedActivation(kTechId.DropExosuit,     kTechId.ExosuitTech, kTechId.None)
-    self.techTree:AddTargetedActivation(kTechId.DropDualRailgunExosuit,     kTechId.ExosuitPrototypeLab, kTechId.None)
-    self.techTree:AddTargetedActivation(kTechId.DropDualMinigunExosuit,     kTechId.ExosuitPrototypeLab, kTechId.None)
-    self.techTree:AddBuyNode(kTechId.DualMinigunExosuit, kTechId.ExosuitPrototypeLab, kTechId.None)
-    self.techTree:AddBuyNode(kTechId.DualRailgunExosuit, kTechId.ExosuitPrototypeLab, kTechId.None)
-    
     --Cannon
     self.techTree:AddUpgradeNode(kTechId.CannonTech , kTechId.PrototypeLab, kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.DropCannon, kTechId.CannonPrototypeLab)
     self.techTree:AddBuyNode(kTechId.Cannon,   kTechId.CannonPrototypeLab)
 
+    -- Exosuit
+    self.techTree:AddUpgradeNode(kTechId.ExosuitTech,           kTechId.PrototypeLab, kTechId.None)
+    --self.techTree:AddTargetedActivation(kTechId.DropExosuit,     kTechId.ExosuitTech, kTechId.None)
+    self.techTree:AddBuyNode(kTechId.DualMinigunExosuit, kTechId.ExosuitPrototypeLab, kTechId.None)
+    self.techTree:AddTargetedActivation(kTechId.DropDualMinigunExosuit,     kTechId.ExosuitPrototypeLab, kTechId.None)
+    self.techTree:AddBuyNode(kTechId.DualRailgunExosuit, kTechId.ExosuitPrototypeLab, kTechId.CannonPrototypeLab)
+    self.techTree:AddTargetedActivation(kTechId.DropDualRailgunExosuit,     kTechId.ExosuitPrototypeLab, kTechId.CannonPrototypeLab)
+    
     -- Robotics factory menus
     self.techTree:AddMenu(kTechId.RoboticsFactoryARCUpgradesMenu)
     self.techTree:AddMenu(kTechId.RoboticsFactoryMACUpgradesMenu)

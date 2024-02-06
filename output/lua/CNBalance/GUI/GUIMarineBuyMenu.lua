@@ -756,7 +756,9 @@ function GUIMarineBuyMenu:SetHostStructure(hostStructure)
 
     self.hostStructure = hostStructure
 
-    local isNewComer = (Client.GetLocalPlayer():GetPlayerSkill() + Client.GetLocalPlayer():GetPlayerSkillOffset()) <= kMarineNewComerRank
+    local skill = Client.GetLocalPlayer():GetPlayerSkill() + Client.GetLocalPlayer():GetPlayerSkillOffset()
+    local isNewComer = skill <= kNoneRookieSkill
+    local isVeteran = skill <= kVeteranSkill
     
     if self.hostStructure:isa("Armory") then
         if isNewComer then
@@ -768,7 +770,7 @@ function GUIMarineBuyMenu:SetHostStructure(hostStructure)
         if isNewComer then
             self:CreatePrototypeLabUI_NewComer()
         else
-            self:CreatePrototypeLabUI()
+            self:CreatePrototypeLabUI(isVeteran)
         end
     else
         Log(string.format("ERROR: No generator found for class: %s", self.hostStructure:GetClassName()))
@@ -823,7 +825,7 @@ function GUIMarineBuyMenu:CreatePrototypeLabUI_NewComer()
     self:_CreateRightSide(rightSideStartPos)
 end
 
-function GUIMarineBuyMenu:CreatePrototypeLabUI()
+function GUIMarineBuyMenu:CreatePrototypeLabUI(isVeteran)
 
     self.defaultTechId = kTechId.Jetpack
 
@@ -840,22 +842,42 @@ function GUIMarineBuyMenu:CreatePrototypeLabUI()
     local buttonGroupX = 97
     local buttonGroupY = 149
 
-    local buttonPositions = kWeaponGroupButtonPositions[self.kButtonGroupFrame_Labeled_x4]
+    local buttonPositions
+    local buttonGroup
+    if isVeteran then
 
-    local buttonGroup = self:CreateAnimatedGraphicItem()
-    buttonGroup:AddAsChildTo(self.background)
-    buttonGroup:SetIsScaling(false)
-    buttonGroup:SetPosition(Vector(buttonGroupX, buttonGroupY, 0))
-    buttonGroup:SetTexture(self.kButtonGroupFrame_Labeled_x4)
-    buttonGroup:SetSizeFromTexture()
-    buttonGroup:SetOptionFlag(GUIItem.CorrectScaling)
-    self:_InitializeWeaponGroup(buttonGroup, buttonPositions,
-            {
-                kTechId.Jetpack,
-                kTechId.DualMinigunExosuit,
-                kTechId.DualRailgunExosuit,
-                kTechId.Cannon
-            })
+        buttonPositions = kWeaponGroupButtonPositions[self.kButtonGroupFrame_Labeled_x3]
+
+        buttonGroup = self:CreateAnimatedGraphicItem()
+        buttonGroup:AddAsChildTo(self.background)
+        buttonGroup:SetIsScaling(false)
+        buttonGroup:SetPosition(Vector(buttonGroupX, buttonGroupY, 0))
+        buttonGroup:SetTexture(self.kButtonGroupFrame_Labeled_x3)
+        buttonGroup:SetSizeFromTexture()
+        buttonGroup:SetOptionFlag(GUIItem.CorrectScaling)
+        self:_InitializeWeaponGroup(buttonGroup, buttonPositions, {
+            kTechId.Jetpack,
+            kTechId.DualMinigunExosuit,
+            kTechId.DualRailgunExosuit,
+        })
+    else
+
+        buttonPositions = kWeaponGroupButtonPositions[self.kButtonGroupFrame_Labeled_x4]
+
+        buttonGroup = self:CreateAnimatedGraphicItem()
+        buttonGroup:AddAsChildTo(self.background)
+        buttonGroup:SetIsScaling(false)
+        buttonGroup:SetPosition(Vector(buttonGroupX, buttonGroupY, 0))
+        buttonGroup:SetTexture(self.kButtonGroupFrame_Labeled_x4)
+        buttonGroup:SetSizeFromTexture()
+        buttonGroup:SetOptionFlag(GUIItem.CorrectScaling)
+        self:_InitializeWeaponGroup(buttonGroup, buttonPositions, {
+            kTechId.Jetpack,
+            kTechId.DualMinigunExosuit,
+            kTechId.DualRailgunExosuit,
+            kTechId.Cannon
+        })
+    end
 
     local groupLabel = self:CreateAnimatedTextItem()
     groupLabel:SetIsScaling(false)
