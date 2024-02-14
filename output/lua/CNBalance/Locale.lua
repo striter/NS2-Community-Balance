@@ -3,8 +3,10 @@ if kTranslateMessage then
     kTranslateMessage["RESOURCES_ALIEN"] = "进化因子"
     kTranslateMessage["RESOURCES_MARINE"] = "军需补给点"
 
-    kTranslateMessage["NEWCOMER_ENABLED"] = "正在浏览新兵采购页,升级军衔以解锁更多内容."
-    
+    kTranslateMessage["BUYMENU_ERROR_RANKREQUIRED"] = "需要军衔[%s]"
+    kTranslateMessage["ABM_RANK"] = "需要段位[%s]"
+    kTranslateMessage["ABM_DISABLED"] ="开发中"
+
     kTranslateMessage["GAME_LENGTH_TEAM1"] = "站点清理 [%s:%s]"
     kTranslateMessage["RESPAWN_EXTEND_TEAM1"] = "增援耗时 [%i秒]"
     
@@ -73,16 +75,16 @@ if kTranslateMessage then
     kTranslateMessage["POWERED_EXTRACTOR"] = "电极采集器"
     kTranslateMessage["POWERED_EXTRACTOR_HINT"] = "团队/玩家收入. 受攻击时将尝试电击单位."
 
-    kTranslateMessage["PROTOTYPE_LAB_TOOLTIP"] = "科技实验室 (高斯枪)"
-    kTranslateMessage["CANNON_PROTOTYPE_LAB"] = "科技实验室 (高斯枪)"
+    kTranslateMessage["PROTOTYPE_LAB_TOOLTIP"] = "用于升级解锁各项原型科技."
+    kTranslateMessage["CANNON_PROTOTYPE_LAB"] = "[高斯枪]科技实验室"
     kTranslateMessage["CANNON_PROTOTYPE_LAB_HINT"] = "提供高斯枪升级购买"
     kTranslateMessage["CANNON_PROTOTYPE_LAB_TOOLTIP"] = "于陆战队解锁原型高斯枪."
 
-    kTranslateMessage["JETPACK_PROTOTYPE_LAB"] = "科技实验室 (喷气背包)"
+    kTranslateMessage["JETPACK_PROTOTYPE_LAB"] = "[喷气背包]科技实验室"
     kTranslateMessage["JETPACK_PROTOTYPE_LAB_HINT"] = "提供喷气背包升级购买"
     kTranslateMessage["JETPACK_PROTOTYPE_LAB_TOOLTIP"] = "于陆战队解锁喷气背包."
     
-    kTranslateMessage["EXOSUIT_PROTOTYPE_LAB"] = "科技实验室 (机甲)"
+    kTranslateMessage["EXOSUIT_PROTOTYPE_LAB"] = "[机甲]科技实验室"
     kTranslateMessage["EXOSUIT_PROTOTYPE_LAB_HINT"] = "提供机甲升级购买"
     kTranslateMessage["EXOSUIT_PROTOTYPE_LAB_TOOLTIP"] = "于陆战队解锁原型机甲购买."
     
@@ -159,7 +161,7 @@ if kTranslateMessage then
 
     kTranslateMessage["PROWLER"] = "Prowler"
     kTranslateMessage["PROWLER_EGG"] = "蛹(Prowler)"
-    kTranslateMessage["PROWLER_TOOLTIP"] = "地面远程骚然单位.\n同时也是滞空单位的噩梦.\n*齐射钉刺远程输出\n*(进化)通过绳网快速移动\n*(进化)酸液投掷范围攻击."
+    kTranslateMessage["PROWLER_TOOLTIP"] = "地面远程骚然单位.\n同时也是滞空单位的噩梦.\n*齐射钉刺远程输出\n*通过绳网快速移动\n*(进化)投掷酸液范围攻击."
     kTranslateMessage["VOLLEY"] = "齐射"
     kTranslateMessage["VOLLEY_TOOLTIP"] = "齐射一轮远程钉刺.\n*直线瞬发弹道."
     kTranslateMessage["RAPPEL"] = "网绳"
@@ -167,6 +169,14 @@ if kTranslateMessage then
     kTranslateMessage["ACIDSPRAY"] = "酸液投掷"
     kTranslateMessage["ACIDSPRAY_TOOLTIP"] = "投掷一串酸性炸弹.\n*抛物线弹道."
 
+    kTranslateMessage["VOKEX"] = "Vokex"
+    kTranslateMessage["VOKEX_EGG"] = "蛹(Vokex)"
+    kTranslateMessage["VOKEX_TOOLTIP"] = "近程与中程专家.\n使用挥砍对敌人造成伤害.\n使用暗影步快速机动接近敌人.\n(进化)酸液飞弹进行范围攻击."
+    kTranslateMessage["ACIDROCKET"] = "酸液飞弹"
+    kTranslateMessage["ACIDROCKET_TOOLTIP"] = "发射一枚直线飞弹.\n*撞击后造成范围酸液伤害."
+    kTranslateMessage["SHADOWSTEP"] = "暗影步"
+    kTranslateMessage["SHADOWSTEP_TOOLTIP"] = "朝运动方向高速移动.\n*期间受到伤害降低."
+    
     kTranslateMessage["DEVOUR"] = "吞噬"
     kTranslateMessage["ONOS_DEVOUR"] = "吞噬"
     kTranslateMessage["ONOS_DEVOUR_TOOLTIP"] = "*Onos将陆战队员吞进肚子.\n*吞噬单位将无法使用武器\n-消化过程将遇到抵抗。"
@@ -182,6 +192,9 @@ if kTranslateMessage then
     kTranslateMessage["SHADE_TUNNEL"] = "拟态虫洞"
     kTranslateMessage["SHADE_TUNNEL_TOOLTIP"] = "*虫洞入口脱战后将对敌方单位不可见."
     
+    kTranslateMessage["BABBLER_MINE_TOOLTIP"] = "自动感应式.\n*释放子虫追踪并攻击临近区域的敌方单位.\n*死亡时释放所有子虫攻击目标."
+    kTranslateMessage["BUILD_ABILITY_TOOLTIP"] = "消耗体力建造阵地.\n*刺花(远程攻击范围内可视目标).\n*泥团(用于抵挡子弹)\n*孢子团块(死亡时爆炸并造成护甲伤害)\n    升级后将持续释放孢子云覆盖阵地.\n*拌网(减缓触碰的敌方单位速度)"
+    
     kTranslateMessage["BIOMASS_PRESERVATION"] = "生物质贮存"
     kTranslateMessage["BIOMASS_PRESERVATION_TOOLTIP"] = "卡拉异形已吸收此生物质.\n*在生物质因故剥离后.\n*可以更快演化至该级生物质."
     kTranslateMessage["BIOMASS_RECOVER"] = "生物量演化"
@@ -194,7 +207,10 @@ end
 if kLocales then
     kLocales["RESOURCES_ALIEN"] = "Evolve Matter"
     kLocales["RESOURCES_MARINE"] = "Supply Point"
-    kLocales["NEWCOMER_ENABLED"] = "NewComer requisitions,More available with higher rank."
+    
+    kLocales["BUYMENU_ERROR_RANKREQUIRED"] = "Rank Required(%s)"
+    kLocales["ABM_RANK"] ="Rank Required(%s)"
+    kLocales["ABM_DISABLED"] ="Developing"
     
     kLocales["GAME_LENGTH_TEAM1"] = "Cleaning:[%s:%s]"
     kLocales["RESPAWN_EXTEND_TEAM1"] = "Reinforce:[%is]"
@@ -264,6 +280,7 @@ if kLocales then
     kLocales["POWERED_EXTRACTOR_HINT"] = "Team/Personal Imcome. Will try deal damage to attacker."
 
 
+    kLocales["PROTOTYPE_LAB_TOOLTIP"] = "Upgrade & Unlock Field Prototypes"
     kLocales["CANNON_PROTOTYPE_LAB"] = "Prototype Lab (Gauss)"
     kLocales["CANNON_PROTOTYPE_LAB_HINT"] = "Provide gauss acquirement"
     kLocales["CANNON_PROTOTYPE_LAB_TOOLTIP"] = "Unlock gauss for marines."
@@ -356,6 +373,14 @@ if kLocales then
     kLocales["ACIDSPRAY"] = "Acid spray"
     kLocales["ACIDSPRAY_TOOLTIP"] = "Acid bombardment.\n*Projectile."
 
+    kLocales["VOKEX"] = "Vokex"
+    kLocales["VOKEX_EGG"] = "Egg(Vokex)"
+    kLocales["VOKEX_TOOLTIP"] = "Medium and close range expert."
+    kLocales["ACIDROCKET"] = "Acid Rocket"
+    kLocales["ACIDROCKET_TOOLTIP"] = "Fire a long range projectile.\n*Splash acids on hit"
+    kLocales["SHADOWSTEP"] = "Shadow Step"
+    kLocales["SHADOWSTEP_TOOLTIP"] = "Blink towards move direction.\n*Receives minor damage while blinking"
+    
     kLocales["DEVOUR"] = "Devour"
     kLocales["ONOS_DEVOUR"] = "Devour"
     kLocales["ONOS_DEVOUR_TOOLTIP"] = "*Onos can devour marines.\n-Will gain resistance when digesting。"

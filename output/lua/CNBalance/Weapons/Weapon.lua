@@ -39,3 +39,69 @@ function Weapon:OnUpdateRender()
     end
     
 end
+
+if Server then
+
+    local ignoredWeapons = set { "Pistol", "Rifle" , "SubMachineGun" ,"LightMachineGun" , "Revolver"}
+    function Weapon:StartExpiration()
+
+        self.weaponWorldStateTime = Shared.GetTime()
+        self.expireTime = Shared.GetTime() +  kWeaponStayTime
+
+        if GetHasTech(self,kTechId.MilitaryProtocol) then
+            self.expireTime = self.expireTime + kMilitaryProtocolWeaponAdditionalStayTime
+        end
+
+        if not self.timerActive then
+        self.timerActive = true
+        self:AddTimedCallback(self.CheckExpireTime, 0.5)
+        end
+        
+    end
+
+    -- The return value for this function tells the TimedCallback engine whether or not to repeat the timer. True means repeat.
+    function Weapon:CheckExpireTime()
+        PROFILE("Weapon:CheckExpireTime")
+
+        if self:GetExpireTime() == 0 then
+            self.timerActive = false
+            return false
+        end
+
+        if not self.weaponWorldState then
+            self.timerActive = false
+            return false
+        end
+
+        -- don't check if there are nearby armories for weapons that should decay at armory
+        if ignoredWeapons[self:GetClassName()] then
+            return true
+        end
+
+        if #GetEntitiesForTeamWithinRange("Marine", self:GetTeamNumber(), self:GetOrigin(), 1.5) > 0 then
+            self.weaponWorldStateTime = Shared.GetTime()
+            self.expireTime = Shared.GetTime() + kWeaponStayTime
+            if GetHasTech(self,kTechId.MilitaryProtocol) then
+                self.expireTime = self.expireTime + kMilitaryProtocolWeaponAdditionalStayTime
+            end
+            return true
+        end
+
+        local armories = GetEntitiesForTeamWithinRange("Armory", self:GetTeamNumber(), self:GetOrigin(), kArmoryDroppedWeaponAttachRange)
+        local nearbyArmory = false
+        for _, armory in ipairs(armories) do
+            if GetIsUnitActive(armory) then
+                nearbyArmory = true
+                break
+            end
+        end
+
+
+        if nearbyArmory then
+            self:PreventExpiration()
+            return false
+        end
+
+        return true
+    end
+end

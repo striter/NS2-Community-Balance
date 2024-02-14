@@ -30,6 +30,7 @@ if Server then
         if self.freeMACCheck and time - self.freeMACCheck < 1 then return end
         self.freeMACCheck = time
         
+        if self:GetIsInCombat() then return end
         if not self.deployed or not GetIsUnitActive(self) then return end
         if self.open or self:GetIsResearching() then return end
         

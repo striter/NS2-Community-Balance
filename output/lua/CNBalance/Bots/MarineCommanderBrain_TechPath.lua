@@ -44,6 +44,7 @@ local kMarineCommanderTechPath =
     {
         kTechId.ArmsLab,
         kTechId.Armor1,
+        kTechId.Weapons1,
         kTechId.Armory,
         kTechId.GrenadeTech,
     },
@@ -54,7 +55,6 @@ local kMarineCommanderTechPath =
         kTechId.Observatory,
         kTechId.PhaseTech,
 
-        kTechId.Weapons1,
         kTechId.PhaseGate,
         kTechId.MinesTech,
         kTechId.Armor2,
@@ -70,7 +70,7 @@ local kMarineCommanderTechPath =
     {
         kTechId.AdvancedArmoryUpgrade, -- Flamethrower, GL, HMG all unlocked by this upgrade
         kTechId.PrototypeLab,
-        kTechId.JetpackTech,
+        kTechId.JetpackProtoUpgrade,
     },
 
     -- Tier 5
@@ -89,9 +89,9 @@ local kMarineCommanderTechPath =
 local kTechTestReroutes =
 {
     [kTechId.AdvancedArmoryUpgrade] = kTechId.AdvancedArmory,
-    [kTechId.ExosuitTech] = kTechId.ExosuitPrototypeLab,
-    [kTechId.JetpackTech] = kTechId.JetpackPrototypeLab,
-    [kTechId.StandardSupply] = kTechId.JetpackPrototypeLab,
+    [kTechId.JetpackProtoUpgrade] = kTechId.JetpackPrototypeLab,
+    [kTechId.ExosuitProtoUpgrade] = kTechId.ExosuitPrototypeLab,
+    [kTechId.StandardSupply] = kTechId.StandardStation,
 }
 
 local kMarineTechPathOverrides =

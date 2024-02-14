@@ -1,9 +1,13 @@
 --Rookie Protection
-kNoneRookieSkill = 500
-kVeteranSkill = 1000
-kAlienNewComerRestriction = {
-    [kTechId.Prowler] = kNoneRookieSkill,
-    [kTechId.Vokex] = kVeteranSkill
+kTechRankRestriction = {
+    [kTechId.GasGrenade] = 100,
+    [kTechId.GrenadeLauncher] = 300,
+    [kTechId.DualRailgunExosuit] = 500, [kTechId.CombatBuilder] = 1000,
+    [kTechId.SubMachineGun] = 1500, [kTechId.Revolver] = 1500, [kTechId.Knife] = 1500,
+    [kTechId.Cannon] = 2100,
+
+    [kTechId.Lerk] = 300, [kTechId.Gorge] = 500,
+    [kTechId.Prowler] = 1000, [kTechId.Vokex] = 2100,
 }
 
 --Mediumize players KD Ratio by reduce taken damage with low KD, increase taken damage with high KD , combined with upper value lel
@@ -40,7 +44,7 @@ kJetpackUseFuelRate = 0.18  --0.21
 kJetpackReplenishFuelRate = 0.24 --0.21
 
 kItemStayTime = 20
-kWeaponStayTime = 20
+kWeaponStayTime = 20 kMilitaryProtocolWeaponAdditionalStayTime = 10
 kWeaponDropRateLimit = 0.2
 
 kAlienStructureMoveSpeed = 1.5
@@ -101,11 +105,11 @@ kStartSupply = 120
 kSupplyEachTechPoint = 40
 
 kMACSupply = 0
-kArmorySupply = 5
-kObservatorySupply = 20
+kArmorySupply = 10
+kObservatorySupply = 30
 kARCSupply = 20
 kSentrySupply = 0
-kSentryBatterySupply = 35
+kSentryBatterySupply = 40
 kRoboticsFactorySupply = 10
 kInfantryPortalSupply = 0
 kPhaseGateSupply = 10

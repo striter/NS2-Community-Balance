@@ -60,6 +60,7 @@ local kButtonShowState = enum({
     'Unresearched',
     'InsufficientFunds',
     'Available',
+    'RankRequired',
     'Disabled', -- Tutorial should block 'Axe' purchasing, for example. Override 'GUIMarineBuyMenu:GetTechIDDisabled(techID)' for this.
 })
 
@@ -77,6 +78,13 @@ local kButtonShowStateDefinitions =
         TextColor = Color(94/255, 116/255, 128/255)
     },
 
+    [kButtonShowState.RankRequired] = {
+        ShowError = true,
+        Text = "BUYMENU_ERROR_RANKREQUIRED",
+        TextColor = Color(240/255, 178/255, 122/255)
+    },
+    
+    
     [kButtonShowState.Occupied] = {
         ShowError = true,
         Text = "BUYMENU_ERROR_OCCUPIED",
@@ -315,6 +323,13 @@ local kTechIdStats =
     },
 
 }
+
+local function GetIsSkillRestricted(techId)
+    local skill = Client.GetLocalPlayer():GetPlayerSkill() + Client.GetLocalPlayer():GetPlayerSkillOffset()
+    local rank = kTechRankRestriction[techId]
+    if not rank then return false end
+    return skill < rank,rank
+end
 
 local function GetStatsForTechId(techId)
 
@@ -756,73 +771,14 @@ function GUIMarineBuyMenu:SetHostStructure(hostStructure)
 
     self.hostStructure = hostStructure
 
-    local skill = Client.GetLocalPlayer():GetPlayerSkill() + Client.GetLocalPlayer():GetPlayerSkillOffset()
-    local isNewComer = skill <= kNoneRookieSkill
-    local isVeteran = skill <= kVeteranSkill
-    
     if self.hostStructure:isa("Armory") then
-        if isNewComer then
-            self:CreateArmoryUI_NewComer()
-        else
-            self:CreateArmoryUI()
-        end
+        self:CreateArmoryUI()
     elseif self.hostStructure:isa("PrototypeLab") then
-        if isNewComer then
-            self:CreatePrototypeLabUI_NewComer()
-        else
-            self:CreatePrototypeLabUI(isVeteran)
-        end
+        self:CreatePrototypeLabUI()
     else
         Log(string.format("ERROR: No generator found for class: %s", self.hostStructure:GetClassName()))
     end
     
-end
-
-function GUIMarineBuyMenu:CreatePrototypeLabUI_NewComer()
-
-    self.defaultTechId = kTechId.Jetpack
-
-    self.background = self:CreateAnimatedGraphicItem()
-    self.background:SetTexture(self.kPrototypeLabBackgroundTexture)
-    self.background:SetSizeFromTexture()
-    self.background:SetIsScaling(false)
-    self.background:SetAnchor(GUIItem.Middle, GUIItem.Center)
-    self.background:SetHotSpot(Vector(0.5, 0.5, 0))
-    self.background:SetScale(self.customScaleVector)
-    self.background:SetOptionFlag(GUIItem.CorrectScaling)
-    self.background:SetLayer(kGUILayerMarineBuyMenu)
-
-    local title = self:CreateAnimatedTextItem()
-    title:SetAnchor(GUIItem.Middle, GUIItem.Top)
-    title:SetPosition(Vector(0, -50, 0))
-    title:SetTextAlignmentX(GUIItem.Align_Center)
-    title:SetTextAlignmentY(GUIItem.Align_Min)
-    title:SetText(Locale.ResolveString("NEWCOMER_ENABLED"))
-    title:SetIsScaling(false)
-    title:SetColor(Color(125/255, 206/255, 160/255, 1))
-    title:SetFontName(Fonts.kAgencyFB_Large_Bold)
-    self.background:AddChild(title)
-
-    local buttonGroupX = 97
-    local buttonGroupY = 149
-
-    local buttonPositions = kWeaponGroupButtonPositions[self.kButtonGroupFrame_Unlabeled_x2]
-
-    local buttonGroup = self:CreateAnimatedGraphicItem()
-    buttonGroup:AddAsChildTo(self.background)
-    buttonGroup:SetIsScaling(false)
-    buttonGroup:SetPosition(Vector(buttonGroupX, buttonGroupY, 0))
-    buttonGroup:SetTexture(self.kButtonGroupFrame_Unlabeled_x2)
-    buttonGroup:SetSizeFromTexture()
-    buttonGroup:SetOptionFlag(GUIItem.CorrectScaling)
-    self:_InitializeWeaponGroup(buttonGroup, buttonPositions,
-    {
-        kTechId.Jetpack,
-        kTechId.DualMinigunExosuit,
-    })
-
-    local rightSideStartPos = Vector(580, 38, 0)
-    self:_CreateRightSide(rightSideStartPos)
 end
 
 function GUIMarineBuyMenu:CreatePrototypeLabUI(isVeteran)
@@ -896,131 +852,6 @@ end
 
 function PlayerUI_GetHasTech(techId)
     return GetHasTech(Client.GetLocalPlayer(),techId)
-end
-
-function GUIMarineBuyMenu:CreateArmoryUI_NewComer()
-    local paddingX = 105 -- Start of content from left side of background.
-    local paddingY = 36
-    -- 449
-    local paddingXWeaponGroups = 29
-    -- 449
-    local paddingYWeaponGroups = 6
-    local paddingXWeaponGroupsToRightSide = 36 -- 724 after this till end. (not including end cap)
-
-    self.defaultTechId = kTechId.Rifle
-
-    self.background = self:CreateAnimatedGraphicItem()
-    self.background:SetTexture(self.kArmoryBackgroundTexture)
-    self.background:SetSizeFromTexture()
-    self.background:SetIsScaling(false)
-    self.background:SetAnchor(GUIItem.Middle, GUIItem.Center)
-    self.background:SetHotSpot(Vector(0.5, 0.5, 0))
-    self.background:SetScale(self.customScaleVector)
-    self.background:SetOptionFlag(GUIItem.CorrectScaling)
-    self.background:SetLayer(kGUILayerMarineBuyMenu)
-
-
-    local title = self:CreateAnimatedTextItem()
-    title:SetAnchor(GUIItem.Middle, GUIItem.Top)
-    title:SetPosition(Vector(0, -50, 0))
-    title:SetTextAlignmentX(GUIItem.Align_Center)
-    title:SetTextAlignmentY(GUIItem.Align_Min)
-    title:SetText(Locale.ResolveString("NEWCOMER_ENABLED"))
-    title:SetIsScaling(false)
-    title:SetColor(Color(125/255, 206/255, 160/255, 1))
-    title:SetFontName(Fonts.kAgencyFB_Large_Bold)
-    self.background:AddChild(title)
-    
-    local x2ButtonPositions = kWeaponGroupButtonPositions[self.kButtonGroupFrame_Unlabeled_x2]
-    local x4ButtonPositions = kWeaponGroupButtonPositions[self.kButtonGroupFrame_Labeled_x4]
-
-    local weaponGroupTopLeft = self:CreateAnimatedGraphicItem()
-    weaponGroupTopLeft:SetIsScaling(false)
-    weaponGroupTopLeft:SetPosition(Vector(paddingX, paddingY, 0))
-    weaponGroupTopLeft:SetTexture(self.kButtonGroupFrame_Unlabeled_x2)
-    weaponGroupTopLeft:SetSizeFromTexture()
-    weaponGroupTopLeft:SetOptionFlag(GUIItem.CorrectScaling)
-    self.background:AddChild(weaponGroupTopLeft)
-    self:_InitializeWeaponGroup(weaponGroupTopLeft, x2ButtonPositions,
-            {
-                kTechId.Rifle,
-                kTechId.Pistol,
-            })
-
-    local weaponGroupBottomLeft = self:CreateAnimatedGraphicItem()
-    weaponGroupBottomLeft:SetIsScaling(false)
-    weaponGroupBottomLeft:SetPosition(Vector(paddingX, weaponGroupTopLeft:GetPosition().y + weaponGroupTopLeft:GetSize().y + paddingYWeaponGroups, 0))
-    weaponGroupBottomLeft:SetTexture(self.kButtonGroupFrame_Labeled_x4)
-    weaponGroupBottomLeft:SetSizeFromTexture()
-    weaponGroupBottomLeft:SetOptionFlag(GUIItem.CorrectScaling)
-    self.background:AddChild(weaponGroupBottomLeft)
-    self:_InitializeWeaponGroup(weaponGroupBottomLeft, x4ButtonPositions,
-            {
-                kTechId.Shotgun,
-                kTechId.LightMachineGunAcquire,
-                kTechId.HeavyMachineGun,
-                kTechId.Flamethrower,
-            })
-
-    local x4LabelStartX = 335
-
-    local labelItemBottomLeft = self:CreateAnimatedTextItem()
-    labelItemBottomLeft:SetIsScaling(false)
-    labelItemBottomLeft:AddAsChildTo(weaponGroupBottomLeft)
-    labelItemBottomLeft:SetPosition(Vector(x4LabelStartX, 0, 0))
-    labelItemBottomLeft:SetAnchor(GUIItem.Left, GUIItem.Top)
-    labelItemBottomLeft:SetTextAlignmentX(GUIItem.Align_Min)
-    labelItemBottomLeft:SetTextAlignmentY(GUIItem.Align_Min)
-    labelItemBottomLeft:SetFontName(Fonts.kAgencyFB_Tiny)
-    labelItemBottomLeft:SetText(Locale.ResolveString("BUYMENU_GROUPLABEL_WEAPONS"))
-    labelItemBottomLeft:SetOptionFlag(GUIItem.CorrectScaling)
-    GUIMakeFontScale(labelItemBottomLeft, "kAgencyFB", 24)
-
-    local weaponGroupTopRight = self:CreateAnimatedGraphicItem()
-    weaponGroupTopRight:SetIsScaling(false)
-    weaponGroupTopRight:AddAsChildTo(self.background)
-    weaponGroupTopRight:SetPosition(Vector(weaponGroupTopLeft:GetPosition().x + weaponGroupTopLeft:GetSize().x + paddingXWeaponGroups, paddingY, 0))
-    weaponGroupTopRight:SetTexture(self.kButtonGroupFrame_Unlabeled_x2)
-    weaponGroupTopRight:SetSizeFromTexture()
-    weaponGroupTopRight:SetOptionFlag(GUIItem.CorrectScaling)
-    self:_InitializeWeaponGroup(weaponGroupTopRight, x2ButtonPositions,
-            {
-                kTechId.Axe,
-                kTechId.Welder,
-            },2)
-
-    local weaponGroupBottomRight = self:CreateAnimatedGraphicItem()
-    weaponGroupBottomRight:SetIsScaling(false)
-    weaponGroupBottomRight:AddAsChildTo(self.background)
-    weaponGroupBottomRight:SetPosition(Vector(weaponGroupTopRight:GetPosition().x, weaponGroupTopRight:GetPosition().y + weaponGroupTopRight:GetSize().y + paddingYWeaponGroups, 0))
-    weaponGroupBottomRight:SetTexture(self.kButtonGroupFrame_Labeled_x4)
-    weaponGroupBottomRight:SetSizeFromTexture()
-    weaponGroupBottomRight:SetOptionFlag(GUIItem.CorrectScaling)
-    self:_InitializeWeaponGroup(weaponGroupBottomRight, x4ButtonPositions,
-            {
-                kTechId.LayMines,
-                kTechId.ClusterGrenade,
-                kTechId.PulseGrenade,
-                kTechId.GrenadeLauncher,
-            })
-
-    local labelItemBottomRight = self:CreateAnimatedTextItem()
-    labelItemBottomRight:SetIsScaling(false)
-    labelItemBottomRight:AddAsChildTo(weaponGroupBottomRight)
-    labelItemBottomRight:SetPosition(Vector(x4LabelStartX, 0, 0))
-    labelItemBottomRight:SetAnchor(GUIItem.Left, GUIItem.Top)
-    labelItemBottomRight:SetTextAlignmentX(GUIItem.Align_Min)
-    labelItemBottomRight:SetTextAlignmentY(GUIItem.Align_Min)
-    labelItemBottomRight:SetFontName(Fonts.kAgencyFB_Tiny)
-    labelItemBottomRight:SetText(Locale.ResolveString("BUYMENU_GROUPLABEL_UTILITY"))
-    labelItemBottomRight:SetOptionFlag(GUIItem.CorrectScaling)
-    GUIMakeFontScale(labelItemBottomRight, "kAgencyFB", 24)
-
-    
-    local rightSideStartPos = weaponGroupTopRight:GetPosition()
-    rightSideStartPos.x = rightSideStartPos.x + weaponGroupTopRight:GetSize().x
-    rightSideStartPos.x = rightSideStartPos.x + paddingXWeaponGroupsToRightSide
-    self:_CreateRightSide(rightSideStartPos)
 end
 
 function GUIMarineBuyMenu:CreateArmoryUI()
@@ -1120,8 +951,8 @@ function GUIMarineBuyMenu:CreateArmoryUI()
     weaponGroupAdditional:SetOptionFlag(GUIItem.CorrectScaling)
     self:_InitializeWeaponGroup(weaponGroupAdditional, x2ButtonPositions,
     {
+        kTechId.CombatBuilder,
         kTechId.LayMines,
-        kTechId.CombatBuilder
     },2)
     
 --------------
@@ -1383,7 +1214,7 @@ function GUIMarineBuyMenu:_CreateRightSide(startPos,bigPicOffset)
     if self.hostStructure:isa("PrototypeLab") then
 
         self.specialFrame:AddAsChildTo(self.background)
-        self.specialFrame:SetPosition(Vector(buttonGroupX, buttonGroupY, 0))
+        self.specialFrame:SetPosition(Vector(buttonGroupX, buttonGroupY + 118, 0)) --magic
 
     elseif self.hostStructure:isa("Armory") then
 
@@ -1592,7 +1423,7 @@ function GUIMarineBuyMenu:_UpdateRealTimeElements(buttonTable, techId, techAvail
     end
 end
 
-function GUIMarineBuyMenu:_UpdateBuyButtonAvailability(buttonTable, hoverStateChanged, useHoverTexture, buttonState)
+function GUIMarineBuyMenu:_UpdateBuyButtonAvailability(buttonTable, hoverStateChanged, useHoverTexture, buttonState,text)
 
     assert(buttonState ~= kButtonShowState.Uninitialized)
 
@@ -1606,7 +1437,7 @@ function GUIMarineBuyMenu:_UpdateBuyButtonAvailability(buttonTable, hoverStateCh
         local showError = buttonShowStateDef.ShowError
         buttonTable.ErrorFrame:SetIsVisible(showError)
         if showError then
-            buttonTable.ErrorTextItem:SetText(Locale.ResolveString(buttonShowStateDef.Text))
+            buttonTable.ErrorTextItem:SetText(text or Locale.ResolveString(buttonShowStateDef.Text))
             buttonTable.ErrorTextItem:SetColor(buttonShowStateDef.TextColor)
 
             -- Resize the error text frame to the size of the text, plus some padding
@@ -1665,10 +1496,12 @@ function GUIMarineBuyMenu:Update(deltaTime)
 
         end
 
+        local rankRequired,rank = GetIsSkillRestricted(techId)
         local initEvent = ((techId == self.defaultTechId) and not self.initialized)
-        local techAvailable = techResearched and not (techAlreadyEquipped or techOccupied) and buttonTable.Hosted and not buttonTable.Disabled
+        local techAvailable = techResearched and not (techAlreadyEquipped or techOccupied) and buttonTable.Hosted and not buttonTable.Disabled and not rankRequired
         local currentMoney = math.floor(PlayerUI_GetPersonalResources() * 10) / 10
         local useHoverTexture = hovering and techAvailable
+
 
         -- Update details section.
         local techCost = LookupTechData(techId, kTechDataCostKey, -1)
@@ -1678,9 +1511,13 @@ function GUIMarineBuyMenu:Update(deltaTime)
 
         -- Get the button's new state, then update it.
         local buttonState = kButtonShowState.Available
+        local text = nil
 
         if buttonTable.Disabled then
             buttonState = kButtonShowState.Disabled
+        elseif rankRequired then
+            buttonState = kButtonShowState.RankRequired
+            text = string.format(Locale.ResolveString("BUYMENU_ERROR_RANKREQUIRED"),rank)
         elseif not buttonTable.Hosted then
             buttonState = kButtonShowState.NotHosted
         elseif techOccupied then
@@ -1693,7 +1530,7 @@ function GUIMarineBuyMenu:Update(deltaTime)
             buttonState = kButtonShowState.InsufficientFunds
         end
 
-        self:_UpdateBuyButtonAvailability(buttonTable, changed, useHoverTexture, buttonState)
+        self:_UpdateBuyButtonAvailability(buttonTable, changed, useHoverTexture, buttonState,text)
         self:_UpdateRealTimeElements(buttonTable, techId, techAvailable, currentMoney, techCost)
 
         if hovering then
@@ -1778,7 +1615,7 @@ local function HandleItemClicked(self)
         local canAfford = PlayerUI_GetPlayerResources() >= itemCost
         local hasItem = PlayerUI_GetHasItem(item.TechID)
 
-        if not item.Disabled and researched and canAfford and not hasItem then
+        if not item.Disabled and researched and canAfford and not hasItem and not GetIsSkillRestricted(item.TechID) then
 
             MarineBuy_PurchaseItem(item.TechID)
             MarineBuy_OnClose()

@@ -2,9 +2,9 @@
 
 PrototypeLab.kUpgradeToTargetType =
 {
-    [kTechId.JetpackTech] = kTechId.JetpackPrototypeLab,
-    [kTechId.CannonTech] = kTechId.CannonPrototypeLab,
-    [kTechId.ExosuitTech] = kTechId.ExosuitPrototypeLab,
+    [kTechId.JetpackProtoUpgrade] = kTechId.JetpackPrototypeLab,
+    [kTechId.ExosuitProtoUpgrade] = kTechId.ExosuitPrototypeLab,
+    [kTechId.CannonProtoUpgrade] = kTechId.CannonPrototypeLab,
 }
 
 local function GetResearchAllowed(self, techId)
@@ -19,11 +19,18 @@ function PrototypeLab:GetTechButtons()
     local techButtons = { kTechId.None, kTechId.None, kTechId.None, kTechId.None,
                           kTechId.None, kTechId.None, kTechId.None, kTechId.None }
     if techId == kTechId.PrototypeLab then
-        techButtons[1] = GetResearchAllowed(self,kTechId.JetpackTech)
-        techButtons[2] = GetResearchAllowed(self,kTechId.ExosuitTech)
-        techButtons[5] = GetResearchAllowed(self,kTechId.CannonTech)
+        techButtons[1] = GetResearchAllowed(self,kTechId.JetpackProtoUpgrade)
+        techButtons[2] = GetResearchAllowed(self,kTechId.ExosuitProtoUpgrade)
+        techButtons[5] = GetResearchAllowed(self,kTechId.CannonProtoUpgrade)
     end
-
+    --elseif techId == kTechId.JetpackPrototypeLab then
+    --    techButtons[1] = kTechId.JetpackTech
+    --elseif techId == kTechId.CannonPrototypeLab then
+    --    techButtons[1] = kTechId.CannonTech
+    --elseif techId == kTechId.ExosuitPrototypeLab then
+    --    techButtons[1] = kTechId.ExosuitTech
+    --end
+    
     return techButtons
 end
 

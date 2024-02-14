@@ -540,7 +540,37 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "PROTOS_MENU_TOOLTIP",
     })
 
+    table.insert(techData,
+    {
+        [kTechDataId] = kTechId.JetpackProtoUpgrade,
+        [kTechDataCostKey] = kJetpackTechResearchCost,
+        [kTechDataResearchTimeKey] = kJetpackTechResearchTime,
+        [kTechIDShowEnables] = false,
+        [kTechDataDisplayName] = "JETPACK_PROTOTYPE_LAB",
+        [kTechDataTooltipInfo] = "JETPACK_PROTOTYPE_LAB_TOOLTIP",
+        [kTechDataResearchName] = "JETPACK_PROTOTYPE_LAB"
+    })
+    table.insert(techData,
+    {
+        [kTechDataId] = kTechId.ExosuitProtoUpgrade,
+        [kTechDataCostKey] = kExosuitTechResearchCost,
+        [kTechDataResearchTimeKey] = kExosuitTechResearchTime,
+        [kTechIDShowEnables] = false,
+        [kTechDataDisplayName] = "EXOSUIT_PROTOTYPE_LAB",
+        [kTechDataTooltipInfo] = "EXOSUIT_PROTOTYPE_LAB_TOOLTIP",
+        [kTechDataResearchName] = "EXOSUIT_PROTOTYPE_LAB"
+    })
 
+    table.insert(techData,
+    {
+        [kTechDataId] = kTechId.CannonProtoUpgrade,
+        [kTechDataCostKey] = kCannonTechResearchCost,
+        [kTechDataResearchTimeKey] = kCannonTechResearchTime,
+        [kTechIDShowEnables] = false,
+        [kTechDataDisplayName] = "CANNON_PROTOTYPE_LAB",
+        [kTechDataTooltipInfo] = "CANNON_PROTOTYPE_LAB_TOOLTIP",
+        [kTechDataResearchName] = "CANNON_PROTOTYPE_LAB"
+    })
     table.insert(techData,{
         [kTechDataId] = kTechId.ExosuitPrototypeLab,
         [kTechDataGhostModelClass] = "MarineGhostModel",
@@ -645,8 +675,8 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "DUAL_RAILGUN_TOOLTIP",
         [kTechDataLayoutKey] = "RailgunRailgun",
         [kTechDataCostKey] = kDualExosuitDropCost,
-        [kStructureAttachId] = kTechId.PrototypeLab,
         [kStructureAttachId] = {kTechId.PrototypeLab,kTechId.CannonPrototypeLab,kTechId.JetpackPrototypeLab,kTechId.ExosuitPrototypeLab},
+        [kStructureAttachRange] = kArmoryWeaponAttachRange,
         [kStructureAttachRequiresPower] = true,
     })
 
@@ -993,17 +1023,6 @@ function BuildTechData()
         [kTechDataMapName] = MetabolizeShadowStep.kMapName,
         [kTechDataDisplayName] = "METABOLIZE_SHADOWSTEP",
         [kTechDataTooltipInfo] = "METABOLIZE_SHADOWSTEP_TOOLTIP",
-    })
-
-    table.insert(techData, {
-        [kTechDataId] = kTechId.MetabolizeShadowStep,
-        [kTechDataCategory] = kTechId.Vokex,
-        [kTechDataMapName] = MetabolizeShadowStep.kMapName,
-        [kTechDataCostKey] = kMetabolizeEnergyResearchCost,
-        [kTechDataResearchTimeKey] = kMetabolizeEnergyResearchTime,
-        [kTechDataDisplayName] = "METABOLIZE",
-        [kTechDataTooltipInfo] = "METABOLIZE_TOOLTIP",
-        [kTechDataResearchName] = "METABOLIZE",
     })
 
     table.insert(techData, {

@@ -665,6 +665,7 @@ if Server then
 
         if not GetGamerules():GetGameStarted() then return end
         if not CouldUseACommander(self) then return end
+        if self:GetIsInCombat() then return end
         if not GetIsUnitActive(self) then return end
         
         if self.spawnedDrifterID ~= Entity.invalidId then

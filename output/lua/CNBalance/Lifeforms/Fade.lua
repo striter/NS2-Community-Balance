@@ -60,3 +60,14 @@ function Fade:HandleButtons(input)
     baseHandleButtons(self,input)
 end
 
+
+function Fade:GetHealthPerTeamExceed()
+    return kFadeHealthPerPlayerAboveLimit
+end
+
+--function Fade:OnInterrupt()
+--    if not self:GetIsBlinking() then return end
+--    
+--    self:SecondaryAttackEnd()
+--    self:DeductAbilityEnergy(20)
+--end

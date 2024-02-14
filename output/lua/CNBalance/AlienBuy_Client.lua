@@ -1,9 +1,13 @@
 
 local indexToAlienTechIdTable = debug.getupvaluex(IndexToAlienTechId, "indexToAlienTechIdTable")
-table.insert(indexToAlienTechIdTable, kTechId.Prowler)
-kProwlerTechIdIndex = #indexToAlienTechIdTable
-table.insert(indexToAlienTechIdTable, kTechId.Vokex)
-kVokexTechIdIndex = #indexToAlienTechIdTable
+table.clear(indexToAlienTechIdTable)
+indexToAlienTechIdTable[1] = kTechId.Gorge
+indexToAlienTechIdTable[2] = kTechId.Skulk
+indexToAlienTechIdTable[3] = kTechId.Prowler
+indexToAlienTechIdTable[4] = kTechId.Lerk
+indexToAlienTechIdTable[5] = kTechId.Fade
+indexToAlienTechIdTable[6] = kTechId.Vokex
+indexToAlienTechIdTable[7] = kTechId.Onos
 
 function AlienBuy_GetClassStats(idx)
 
@@ -39,19 +43,6 @@ function AlienBuy_OnSelectAlien(type)
         type = "Fade"
     end
     oldAlienBuy_OnSelectAlien(type)
-end
-
-
-
-function AlienBuy_IsAlienVisible(alienType)
-    local scoreRestriction = kAlienNewComerRestriction[IndexToAlienTechId(alienType)]
-    if scoreRestriction then
-        local skill = Client.GetLocalPlayer():GetPlayerSkill() - Client.GetLocalPlayer():GetPlayerSkillOffset()
-        if skill < scoreRestriction then
-            return false
-        end
-    end
-    return true
 end
 
 function AlienBuy_IsAlienResearched(alienType)

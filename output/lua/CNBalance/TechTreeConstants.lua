@@ -37,8 +37,11 @@ debug.appendtoenum(kTechId, "CannonTech")
 debug.appendtoenum(kTechId, "Cannon")
 debug.appendtoenum(kTechId, "DropCannon")
 
+debug.appendtoenum(kTechId, "JetpackProtoUpgrade")
 debug.appendtoenum(kTechId, "JetpackPrototypeLab")
+debug.appendtoenum(kTechId, "ExosuitProtoUpgrade")
 debug.appendtoenum(kTechId, "ExosuitPrototypeLab")
+debug.appendtoenum(kTechId, "CannonProtoUpgrade")
 debug.appendtoenum(kTechId, "CannonPrototypeLab")
 
 --Weapons

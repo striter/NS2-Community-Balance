@@ -22,7 +22,7 @@ kTechDataPersonalResOnKill = {
     [kTechId.CommandStation] = 12, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [ kTechId.ElectronicStation ] = 15,
     [kTechId.Mine] = 0.3, [kTechId.InfantryPortal] = 2, [kTechId.MarineSentry] = 1,   --PPVE
     
-    [kTechId.Shotgun] = 1.5, [kTechId.HeavyMachineGun] = 1.5, [kTechId.GrenadeLauncher] = 1.5, [kTechId.Flamethrower] = 1.5,     --Special one for gorgie
+    [kTechId.Shotgun] = 1.5, [kTechId.HeavyMachineGun] = 1.5, [kTechId.GrenadeLauncher] = 1.5, [kTechId.Flamethrower] = 1.5, [kTechId.Cannon] = 1.5,    --Special one for gorgie
     [kTechId.Welder] = 0.1, [kTechId.CombatBuilder] = 0.2,
     
     --Aliens
@@ -78,7 +78,7 @@ kMilitaryProtocolTeamResourcesPerKill = {          --Replaced refund system , ap
 }
 kMilitaryProtocolPResRefundOnDeath = 0.5
 
-kMatchMinPlayers = 10
+kMatchMinPlayers = 8
 kMarineRespawnTime = 9
 kAlienSpawnTime = 10
 
@@ -134,9 +134,14 @@ kHeavyMachineGunSecondaryRange = 1.1
 kHeavyMachineGunSpread = Math.Radians(5)  --4
 
 kCommandStationCost = 20
-kCommandStationUpgradeCost = 10
+kCommandStationUpgradeCost = 15
 kCommandStationUpgradeTime = 30
 kUpgradedCommandStationCost = kCommandStationCost + kCommandStationUpgradeCost
+
+kObservatoryCost = 10
+kPhaseGateCost = 15
+kPhaseTechResearchCost = 10
+
 
 -- Standard Supply
 kDragonBreathResearchCost = 30
@@ -147,7 +152,7 @@ kLightMachineGunUpgradeTime = nil --90
 --Explosive Supply
 kMinesUpgradeResearchCost = nil--10
 kMinesUpgradeResearchTime = nil--60
-kGrenadeLauncherUpgradeResearchCost = 20
+kGrenadeLauncherUpgradeResearchCost = 25
 kGrenadeLauncherUpgradeResearchTime = 60
 kMineDeployCost = 4
 
@@ -591,7 +596,7 @@ kCombatBuilderDropCost = 5
 kCombatBuilderPointValue = 2
 
 kMarineSentryCost = 2
-kMarineSentryPersonalCost = 8
+kMarineSentryPersonalCost = 10
 kMarineSentryDamage = 3  kMarineSentryWeapon1Scalar = 1.11  kMarineSentryWeapon2Scalar = 1.22 kMarineSentryWeapon3Scalar = 1.33
 kMarineSentryBuildTime = 3
 
@@ -700,8 +705,8 @@ kTechRespawnTimeExtension =     --6 early game 10 mid-game 16 late-game 20 all r
     --[kTechId.Armor1] = 0,[kTechId.Weapons1] = 0, [kTechId.Observatory] = 0,
     [kTechId.Armor2] = 1,[kTechId.Weapons2] = 1, [kTechId.MinesTech] = 1,[kTechId.ShotgunTech] = 1,
     [kTechId.PhaseGate] = 2, [kTechId.AdvancedArmory] = 2,
-    [kTechId.ExosuitPrototypeLab] = 2, [kTechId.JetpackPrototypeLab] = 2, 
-    [kTechId.Armor3] = 2, [kTechId.Weapons3] = 2, --[kTechId.CannonPrototypeLab] = 2,
+    [kTechId.ExosuitPrototypeLab] = 2, [kTechId.JetpackPrototypeLab] = 2, --[kTechId.CannonPrototypeLab] = 2,
+    [kTechId.Armor3] = 2, [kTechId.Weapons3] = 2, 
     [kTechId.DragonBreath] = 1, [kTechId.ArmorRegen] = 1,  [kTechId.MotionTrack] = 2, --[kTechId.MACEmpBlast] = 1,[kTechId.GrenadeLauncherUpgrade] = 1,
     
     --[kTechId.BioMassOne] = 0, [kTechId.BioMassTwo] = 0, 

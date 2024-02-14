@@ -218,7 +218,7 @@ ModLoader.SetupFileHook("lua/GUIGorgeBuildMenu.lua", "lua/CNBalance/Weapons/Alie
 
 
 ModLoader.SetupFileHook("lua/GUIEggDisplay.lua", "lua/CNBalance/GUI/GUIEggDisplay.lua", "post" )
-ModLoader.SetupFileHook("lua/GUIAlienBuyMenu.lua", "lua/CNBalance/GUI/GUIAlienBuyMenu.lua", "post" )
+ModLoader.SetupFileHook("lua/GUIAlienBuyMenu.lua", "lua/CNBalance/GUI/GUIAlienBuyMenu.lua", "replace" )
 ModLoader.SetupFileHook("lua/EvolutionChamber.lua", "lua/CNBalance/EvolutionChamber.lua", "post")
 ModLoader.SetupFileHook("lua/AlienTunnelManager.lua", "lua/CNBalance/AlienTunnelManager.lua", "post")
 
@@ -246,7 +246,7 @@ ModLoader.SetupFileHook("lua/Clog.lua", "lua/CNBalance/Bots/Clog.lua", "post" )
 ModLoader.SetupFileHook("lua/bots/MarineCommanerBrain_TechPath.lua", "lua/CNBalance/Bots/MarineCommanderBrain_TechPath.lua", "replace" )
 ModLoader.SetupFileHook("lua/bots/MarineCommanderBrain_Senses.lua", "lua/CNBalance/Bots/MarineCommanderBrain_Senses.lua", "post" )
 ModLoader.SetupFileHook("lua/bots/AlienCommanderBrain_TechPathData.lua", "lua/CNBalance/Bots/AlienCommanderBrain_TechPathData.lua", "replace" )
-ModLoader.SetupFileHook("lua/bots/MarineBrain_Data.lua", "lua/CNBalance/Bots/MarineBrain_Data.lua", "post" )
+ModLoader.SetupFileHook("lua/bots/MarineBrain_Data.lua", "lua/CNBalance/Bots/MarineBrain_Data.lua", "replace" )
 
 if AddHintModPanel then
     local panelMaterial = PrecacheAsset("materials/CNPlaygroundBalance/Banner.material")

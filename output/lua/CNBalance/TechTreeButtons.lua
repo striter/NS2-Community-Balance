@@ -36,6 +36,9 @@ kTechIdToMaterialOffset[kTechId.ArmorStation] = 213
 kTechIdToMaterialOffset[kTechId.LifeSustain] = 198
 kTechIdToMaterialOffset[kTechId.ArmorRegen] = 195
 
+kTechIdToMaterialOffset[kTechId.CannonProtoUpgrade] = 204
+kTechIdToMaterialOffset[kTechId.ExosuitProtoUpgrade] = 25
+kTechIdToMaterialOffset[kTechId.JetpackProtoUpgrade] = 89
 kTechIdToMaterialOffset[kTechId.CannonPrototypeLab] = 204
 kTechIdToMaterialOffset[kTechId.ExosuitPrototypeLab] = 25
 kTechIdToMaterialOffset[kTechId.JetpackPrototypeLab] = 89
