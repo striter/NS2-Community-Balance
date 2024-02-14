@@ -116,6 +116,10 @@ kSkulkDamageReduction = {
 }
 
 kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7 kGorgeHealthPerBioMass = 3
+kGorgeDamageReduction = {
+    ["Sentry"] = 0.5,
+    ["MarineSentry"] = 0.5,
+}
 
 kLerkHealth = 180    kLerkArmor = 30  kLerkPointValue = 15 kLerkHealthPerBioMass = 3
 kLerkDamageReduction = {
@@ -144,8 +148,8 @@ kOnosBoneShieldDamageReduction = {
 
 kOnosDamageReduction = {
     ["Mine"] = 2,
-    --["Sentry"] = 2,
-    --["MarineSentry"] = 2,
+    ["Sentry"] = 0.5,
+    ["MarineSentry"] = 0.5,
     ["Shotgun"] = 0.92,
     --["Rifle"] = 0.92,
     --["SubMachineGun"] = 0.92,
@@ -176,15 +180,15 @@ kOnosBaseCarapaceUpgradeAmount  = 180   kOnosCarapaceArmorPerBiomass  = 10
 kVokexBaseCarapaceUpgradeAmount = 50    kVokexCarapaceArmorPerBiomass = 0
 
 --4000 750 6000 1400
-kHiveHealth = 4000    kHiveArmor = 750 kMatureHiveHealth = 5000 kMatureHiveArmor = 1900
+kHiveHealth = 3600    kHiveArmor = 750 kMatureHiveHealth = 5000 kMatureHiveArmor = 1900
 kHiveHealthPerPlayerAdd = 200
 
 --2000 200 2300 320
-kHarvesterHealth = 2000 kHarvesterArmor = 200 kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 320  kHarvesterPointValue = 15
+kHarvesterHealth = 1850 kHarvesterArmor = 200 kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 320  kHarvesterPointValue = 15
 kHarvesterHealthPerPlayerAdd = 75
 
 --1000 ---100    --1250 -200
-kTunnelEntranceHealth = 1000  kTunnelEntranceArmor = 100 kMatureTunnelEntranceHealth = 1250 kMatureTunnelEntranceArmor = 200
+kTunnelEntranceHealth = 900  kTunnelEntranceArmor = 100 kMatureTunnelEntranceHealth = 1250 kMatureTunnelEntranceArmor = 200
 kTunnelEntranceHealthPerPlayerAdd = 50 kCragTunnelArmorAdditive = 400 kTunnelEntrancePointValue = 5
 
 --These stuff is required but , won't called due to its matured when infested

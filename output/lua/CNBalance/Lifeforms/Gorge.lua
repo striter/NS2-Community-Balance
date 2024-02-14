@@ -76,4 +76,11 @@ if Client then
     end
 end
 
+function Fade:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
+    local reduction = kGorgeDamageReduction[doer:GetClassName()]
+    if reduction then
+        damageTable.damage = damageTable.damage * reduction
+    end
+end
+
 Shared.LinkClassToMap("Gorge", Gorge.kMapName, networkVars, true)
