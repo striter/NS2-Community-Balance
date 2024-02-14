@@ -6,7 +6,7 @@ kTechRankRestriction = {
     [kTechId.SubMachineGun] = 1500, [kTechId.Revolver] = 1500, [kTechId.Knife] = 1500,
     [kTechId.Cannon] = 2100,
 
-    [kTechId.Lerk] = 300, [kTechId.Gorge] = 500,
+    [kTechId.Lerk] = 300, --[kTechId.Gorge] = 500,
     [kTechId.Prowler] = 1000, [kTechId.Vokex] = 2100,
 }
 

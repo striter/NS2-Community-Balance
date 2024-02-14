@@ -7,7 +7,7 @@ if kTranslateMessage then
     kTranslateMessage["ABM_RANK"] = "需要段位[%s]"
     kTranslateMessage["ABM_DISABLED"] ="开发中"
 
-    kTranslateMessage["GAME_LENGTH_TEAM1"] = "站点清理 [%s:%s]"
+    kTranslateMessage["GAME_LENGTH_TEAM1"] = "站点清理 [%i:%02i]"
     kTranslateMessage["RESPAWN_EXTEND_TEAM1"] = "增援耗时 [%i秒]"
     
     kTranslateMessage["TEAM_RESOURCES_EFFICIENCY1"] = "资源效率 [%i%%]"
@@ -15,8 +15,8 @@ if kTranslateMessage then
     kTranslateMessage["NEXT_SPAWN_IN_TEAM1"] = "等待增援:%i"
     kTranslateMessage["WAITING_SPAWN_TEAM1"] = "等待传送中..."
     
-    kTranslateMessage["GAME_LENGTH_TEAM2"] = "区域侵入中 [%s:%s]"
-    kTranslateMessage["RESPAWN_EXTEND_TEAM2"] = "生物质重构[%i秒]"
+    kTranslateMessage["GAME_LENGTH_TEAM2"] = "区域侵入中 [%i:%02i]"
+    kTranslateMessage["RESPAWN_EXTEND_TEAM2"] = "生物质重构[%02i秒]"
     kTranslateMessage["TEAM_RESOURCES_EFFICIENCY2"] = "资源收集率 [%i%%]"
     kTranslateMessage["TEAM_BOUNTY2"] = "资源块增殖 [%i*]"
     kTranslateMessage["NEXT_SPAWN_IN_TEAM2"] = "生物质重构:%i"
@@ -150,18 +150,13 @@ if kTranslateMessage then
 
     kTranslateMessage["XENOCIDE_FUEL"]="自爆充能"
     kTranslateMessage["XENOCIDE_FUEL_TOOLTIP"]="使Skulk的自爆变得更加致命.\n*增加自爆的范围.\n*增加自爆的伤害.\n*降低玩家复活所需时间."
-
-    kTranslateMessage["SPOREMINE"]="孢子团块"
-    kTranslateMessage["SPOREMINE_TOOLTIP"]="自动感应式.\n*探测到临近敌方单位后.\n自爆以释放酸液攻击敌人."
-    kTranslateMessage["BABBLER_MINE"]="虫巢"
-    kTranslateMessage["BABBLER_MINE_TOOLTIP"]="自动感应式.\n*探测到临近敌方单位后.\n释放6个子虫攻击敌方单位."
-
+    
     kTranslateMessage["UPGRADE_PROWLER"] = "Prowler 演化"
     kTranslateMessage["UPGRADE_PROWLER_TOOLTIP"] = "解锁Prowler技能.\n*酸液飞弹"
 
     kTranslateMessage["PROWLER"] = "Prowler"
     kTranslateMessage["PROWLER_EGG"] = "蛹(Prowler)"
-    kTranslateMessage["PROWLER_TOOLTIP"] = "地面远程骚然单位.\n同时也是滞空单位的噩梦.\n*齐射钉刺远程输出\n*通过绳网快速移动\n*(进化)投掷酸液范围攻击."
+    kTranslateMessage["PROWLER_TOOLTIP"] = "地面远程骚然单位.\n同时也是滞空单位的噩梦.\n*通过绳网快速移动"
     kTranslateMessage["VOLLEY"] = "齐射"
     kTranslateMessage["VOLLEY_TOOLTIP"] = "齐射一轮远程钉刺.\n*直线瞬发弹道."
     kTranslateMessage["RAPPEL"] = "网绳"
@@ -171,7 +166,7 @@ if kTranslateMessage then
 
     kTranslateMessage["VOKEX"] = "Vokex"
     kTranslateMessage["VOKEX_EGG"] = "蛹(Vokex)"
-    kTranslateMessage["VOKEX_TOOLTIP"] = "近程与中程专家.\n使用挥砍对敌人造成伤害.\n使用暗影步快速机动接近敌人.\n(进化)酸液飞弹进行范围攻击."
+    kTranslateMessage["VOKEX_TOOLTIP"] = "近程与中程专家.\n使用挥砍造成伤害.\n通过暗影步快速机动接近敌人."
     kTranslateMessage["ACIDROCKET"] = "酸液飞弹"
     kTranslateMessage["ACIDROCKET_TOOLTIP"] = "发射一枚直线飞弹.\n*撞击后造成范围酸液伤害."
     kTranslateMessage["SHADOWSTEP"] = "暗影步"
@@ -192,8 +187,10 @@ if kTranslateMessage then
     kTranslateMessage["SHADE_TUNNEL"] = "拟态虫洞"
     kTranslateMessage["SHADE_TUNNEL_TOOLTIP"] = "*虫洞入口脱战后将对敌方单位不可见."
     
+    kTranslateMessage["BUILD_ABILITY_TOOLTIP"] = "消耗体力建造阵地.\n*刺花(远程攻击范围内可视目标).\n*泥团(用于抵挡子弹)\n*孢子团块(死亡时爆炸并造成护甲伤害)\n-升级后将持续释放孢子云覆盖阵地.\n*拌网(减缓触碰的敌方单位速度)"
     kTranslateMessage["BABBLER_MINE_TOOLTIP"] = "自动感应式.\n*释放子虫追踪并攻击临近区域的敌方单位.\n*死亡时释放所有子虫攻击目标."
-    kTranslateMessage["BUILD_ABILITY_TOOLTIP"] = "消耗体力建造阵地.\n*刺花(远程攻击范围内可视目标).\n*泥团(用于抵挡子弹)\n*孢子团块(死亡时爆炸并造成护甲伤害)\n    升级后将持续释放孢子云覆盖阵地.\n*拌网(减缓触碰的敌方单位速度)"
+    kTranslateMessage["SPOREMINE"]="孢子团块"
+    kTranslateMessage["SPOREMINE_TOOLTIP"]="自动感应式.\n*探测到临近敌方单位后.\n自爆以释放酸液攻击敌人."
     
     kTranslateMessage["BIOMASS_PRESERVATION"] = "生物质贮存"
     kTranslateMessage["BIOMASS_PRESERVATION_TOOLTIP"] = "卡拉异形已吸收此生物质.\n*在生物质因故剥离后.\n*可以更快演化至该级生物质."
@@ -338,6 +335,10 @@ if kLocales then
 
     kLocales["BUILD_ABILITY"]="Builder"
     kLocales["BUILD_ABILITY_TOOLTIP"]="Place frontline structures.\n*Hydra(Range damage dealer)\n*Clog(Damage receiver)\n*Babbler Egg(Attack nearby enemies)\n*Web(Slow target)"
+    kLocales["SPOREMINE"]="Chunk"
+    kLocales["SPOREMINE_TOOLTIP"]="Mine.\n*Explode when enemies nearby."
+    kLocales["BABBLER_MINE"]="Nest"
+    kLocales["BABBLER_MINE_TOOLTIP"]="Mine.\n*Hatch when enemies nearby.\n*Release all babblers on death"
 
     kLocales["ORIGIN_FORM"]="Origin Form"
     kLocales["ORIGIN_FORM_TOOLTIP"]="No more commanding form hive.\n*Gorge build team structures now.\n*Enemies provide personal resource on death."
@@ -354,11 +355,6 @@ if kLocales then
 
     kLocales["XENOCIDE_FUEL"]="Xenocide fuel"
     kLocales["XENOCIDE_FUEL_TOOLTIP"]="Make xenocide deadlier.\n*Increase the range for xenocide.\n*Increase the damage for xenocide.\n*Reduce the respawn time when successfully."
-
-    kLocales["SPOREMINE"]="Chunk"
-    kLocales["SPOREMINE_TOOLTIP"]="Mine.\n*Explode when enemies nearby."
-    kLocales["BABBLER_MINE"]="Nest"
-    kLocales["BABBLER_MINE_TOOLTIP"]="Mine.\n*Hatch when enemies nearby.\n*Release six babblers to chase the target."
 
     kLocales["UPGRADE_PROWLER"] = "Prowler Evolve"
     kLocales["UPGRADE_PROWLER_TOOLTIP"] = "Unlock Prowler Abilities.\n*Acid Spray"
