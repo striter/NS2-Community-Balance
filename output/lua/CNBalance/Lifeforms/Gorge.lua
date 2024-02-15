@@ -76,7 +76,7 @@ if Client then
     end
 end
 
-function Fade:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
+function Gorge:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
     local reduction = kGorgeDamageReduction[doer:GetClassName()]
     if reduction then
         damageTable.damage = damageTable.damage * reduction

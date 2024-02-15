@@ -32,26 +32,26 @@ if Server then
         end
 
         --KDRatio adjustment
-        if bountyScore <= 0
-                and self.kKDRatioMaxDamageReduction
-                and self:GetPlayerSkill() < kNoneRookieSkill
-        then
-            local kdRatioUnforeseen = math.floor( self.deaths - self.kills * kKDRatioClaimOnAddKill - self.assistkills * kKDRatioClaimOnAddAssist)
-            if kdRatioUnforeseen > 0 then       --Low KD Player, reduce its damage taken
-                local damageDecreaseParam = kdRatioUnforeseen - kKDRatioProtectionStep
-                if damageDecreaseParam > 0 then
-                    local scalar = math.min(damageDecreaseParam * kKDRatioProtectionEachValue,self.kKDRatioMaxDamageReduction)
-                    damageScalar = damageScalar - scalar
-                end
-            else
-                --if not self.kIgnoreKDDamageReceive then --High KD Player, increase its damage receive
-                --    local damageIncreaseParam = -kdRatioUnforeseen - kKDRatioBoostStep
-                --    if damageIncreaseParam > 0 then
-                --        damageScalar = damageScalar + damageIncreaseParam * kKDRatioDamageIncreaseEachValue
-                --    end
-                --end
-            end
-        end
+        --if bountyScore <= 0
+        --        and self.kKDRatioMaxDamageReduction
+        --        and self:GetPlayerSkill() < 500
+        --then
+        --    local kdRatioUnforeseen = math.floor( self.deaths - self.kills * kKDRatioClaimOnAddKill - self.assistkills * kKDRatioClaimOnAddAssist)
+        --    if kdRatioUnforeseen > 0 then       --Low KD Player, reduce its damage taken
+        --        local damageDecreaseParam = kdRatioUnforeseen - kKDRatioProtectionStep
+        --        if damageDecreaseParam > 0 then
+        --            local scalar = math.min(damageDecreaseParam * kKDRatioProtectionEachValue,self.kKDRatioMaxDamageReduction)
+        --            damageScalar = damageScalar - scalar
+        --        end
+        --    else
+        --        --if not self.kIgnoreKDDamageReceive then --High KD Player, increase its damage receive
+        --        --    local damageIncreaseParam = -kdRatioUnforeseen - kKDRatioBoostStep
+        --        --    if damageIncreaseParam > 0 then
+        --        --        damageScalar = damageScalar + damageIncreaseParam * kKDRatioDamageIncreaseEachValue
+        --        --    end
+        --        --end
+        --    end
+        --end
 
         --Bounty Damage Dealt Decrease
         if bountyScore <= 0
