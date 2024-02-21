@@ -122,7 +122,7 @@ kGorgeDamageReduction = {
     ["MarineSentry"] = 0.5,
 }
 
-kLerkHealth = 180    kLerkArmor = 30  kLerkPointValue = 15 kLerkHealthPerBioMass = 2
+kLerkHealth = 180    kLerkArmor = 30  kLerkPointValue = 15 kLerkHealthPerBioMass = 3
 kLerkDamageReduction = {
     ["Grenade"] = 0.7,
     ["ImpactGrenade"] = 0.7,
