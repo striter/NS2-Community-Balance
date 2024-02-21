@@ -50,8 +50,8 @@ if Server then
         
         if healthPerBiomass == 0 and healthPerPlayerExceed == 0 then return end
         
-        local level = math.max(0, bioMassLevel - 1)
-        local newBiomassHealth = level * healthPerBiomass + playersAboveLimit * healthPerPlayerExceed
+        local levelMultiplier = math.Clamp( bioMassLevel - 1,0,kMaxBiomassHealthMultiplyLevel)
+        local newBiomassHealth = levelMultiplier * healthPerBiomass + playersAboveLimit * healthPerPlayerExceed
         newBiomassHealth = math.min(newBiomassHealth,3000)  --Clamp it due to hive max health greater than expected limit (?)
 
         if newBiomassHealth ~= self.biomMassHealth  then

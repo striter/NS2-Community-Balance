@@ -76,16 +76,19 @@ if kTranslateMessage then
     kTranslateMessage["POWERED_EXTRACTOR_HINT"] = "团队/玩家收入. 受攻击时将尝试电击单位."
 
     kTranslateMessage["PROTOTYPE_LAB_TOOLTIP"] = "用于升级解锁各项原型科技."
+    kTranslateMessage["CANNON_PROTOTYPE_UPGRADE"] = "[高斯枪]升级"
     kTranslateMessage["CANNON_PROTOTYPE_LAB"] = "[高斯枪]科技实验室"
     kTranslateMessage["CANNON_PROTOTYPE_LAB_HINT"] = "提供高斯枪升级购买"
     kTranslateMessage["CANNON_PROTOTYPE_LAB_TOOLTIP"] = "于陆战队解锁原型高斯枪."
 
+    kTranslateMessage["JETPACK_PROTOTYPE_UPGRADE"] = "[喷气背包]升级"
     kTranslateMessage["JETPACK_PROTOTYPE_LAB"] = "[喷气背包]科技实验室"
     kTranslateMessage["JETPACK_PROTOTYPE_LAB_HINT"] = "提供喷气背包升级购买"
     kTranslateMessage["JETPACK_PROTOTYPE_LAB_TOOLTIP"] = "于陆战队解锁喷气背包."
-    
-    kTranslateMessage["EXOSUIT_PROTOTYPE_LAB"] = "[机甲]科技实验室"
-    kTranslateMessage["EXOSUIT_PROTOTYPE_LAB_HINT"] = "提供机甲升级购买"
+
+    kTranslateMessage["EXOSUIT_PROTOTYPE_UPGRADE"] = "[单兵机甲]升级"
+    kTranslateMessage["EXOSUIT_PROTOTYPE_LAB"] = "[单兵机甲]科技实验室"
+    kTranslateMessage["EXOSUIT_PROTOTYPE_LAB_HINT"] = "提供单兵机甲升级购买"
     kTranslateMessage["EXOSUIT_PROTOTYPE_LAB_TOOLTIP"] = "于陆战队解锁原型机甲购买."
     
     kTranslateMessage["WELDER_BUYDESCRIPTION"]="制式维修工具.\n*修复陆战队护甲以及机甲.\n*修复建筑以及电力节点,加速建造建筑.\n*对菌毯造成高额伤害,可以灼烧孢子云."
@@ -278,14 +281,17 @@ if kLocales then
 
 
     kLocales["PROTOTYPE_LAB_TOOLTIP"] = "Upgrade & Unlock Field Prototypes"
+    kLocales["CANNON_PROTOTYPE_UPGRADE"] = "Gauss Upgrade"
     kLocales["CANNON_PROTOTYPE_LAB"] = "Prototype Lab (Gauss)"
     kLocales["CANNON_PROTOTYPE_LAB_HINT"] = "Provide gauss acquirement"
     kLocales["CANNON_PROTOTYPE_LAB_TOOLTIP"] = "Unlock gauss for marines."
 
+    kLocales["JETPACK_PROTOTYPE_UPGRADE"] = "Jetpack Upgrade"
     kLocales["JETPACK_PROTOTYPE_LAB"] = "Prototype Lab (Jetpack)"
     kLocales["JETPACK_PROTOTYPE_LAB_HINT"] = "Provide Jetpack acquirement"
     kLocales["JETPACK_PROTOTYPE_LAB_TOOLTIP"] = "Unlock Jetpack for marines."
 
+    kLocales["EXOSUIT_PROTOTYPE_UPGRADE"] = "Exosuit Upgrade"
     kLocales["EXOSUIT_PROTOTYPE_LAB"] = "Prototype Lab (Exosuit)"
     kLocales["EXOSUIT_PROTOTYPE_LAB_HINT"] = "Provide Exosuit acquirement"
     kLocales["EXOSUIT_PROTOTYPE_LAB_TOOLTIP"] = "Unlock Exosuit for marines."

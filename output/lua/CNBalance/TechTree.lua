@@ -130,10 +130,9 @@ function GetTechIdIsInstanced(techId)
             kTechId.ElectronicSupply,
             kTechId.ExplosiveSupply,
 
-            kTechId.JetpackTech,
-            kTechId.ExosuitTech,
-            kTechId.CannonTech,
-
+            kTechId.JetpackProtoUpgrade,
+            kTechId.ExosuitProtoUpgrade,
+            kTechId.CannonProtoUpgrade,
         }
 
     end

@@ -546,9 +546,9 @@ function BuildTechData()
         [kTechDataCostKey] = kJetpackTechResearchCost,
         [kTechDataResearchTimeKey] = kJetpackTechResearchTime,
         [kTechIDShowEnables] = false,
-        [kTechDataDisplayName] = "JETPACK_PROTOTYPE_LAB",
+        [kTechDataDisplayName] = "JETPACK_PROTOTYPE_UPGRADE",
         [kTechDataTooltipInfo] = "JETPACK_PROTOTYPE_LAB_TOOLTIP",
-        [kTechDataResearchName] = "JETPACK_PROTOTYPE_LAB"
+        [kTechDataResearchName] = "JETPACK_PROTOTYPE_UPGRADE"
     })
     table.insert(techData,
     {
@@ -556,9 +556,9 @@ function BuildTechData()
         [kTechDataCostKey] = kExosuitTechResearchCost,
         [kTechDataResearchTimeKey] = kExosuitTechResearchTime,
         [kTechIDShowEnables] = false,
-        [kTechDataDisplayName] = "EXOSUIT_PROTOTYPE_LAB",
+        [kTechDataDisplayName] = "EXOSUIT_PROTOTYPE_UPGRADE",
         [kTechDataTooltipInfo] = "EXOSUIT_PROTOTYPE_LAB_TOOLTIP",
-        [kTechDataResearchName] = "EXOSUIT_PROTOTYPE_LAB"
+        [kTechDataResearchName] = "EXOSUIT_PROTOTYPE_UPGRADE"
     })
 
     table.insert(techData,
@@ -567,9 +567,9 @@ function BuildTechData()
         [kTechDataCostKey] = kCannonTechResearchCost,
         [kTechDataResearchTimeKey] = kCannonTechResearchTime,
         [kTechIDShowEnables] = false,
-        [kTechDataDisplayName] = "CANNON_PROTOTYPE_LAB",
+        [kTechDataDisplayName] = "CANNON_PROTOTYPE_UPGRADE",
         [kTechDataTooltipInfo] = "CANNON_PROTOTYPE_LAB_TOOLTIP",
-        [kTechDataResearchName] = "CANNON_PROTOTYPE_LAB"
+        [kTechDataResearchName] = "CANNON_PROTOTYPE_UPGRADE"
     })
     table.insert(techData,{
         [kTechDataId] = kTechId.ExosuitPrototypeLab,

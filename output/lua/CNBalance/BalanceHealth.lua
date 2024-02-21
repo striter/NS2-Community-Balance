@@ -103,7 +103,8 @@ kExoDamageReduction = {
 }
 
 --Alien
-kHealingClampMaxHPAmount = 0.15
+kHealingClampMaxHPAmount = 0.12
+kMaxBiomassHealthMultiplyLevel = 8 --N-1
 
 kSkulkHealth = 73    kSkulkArmor = 10    kSkulkPointValue = 5  kSkulkHealthPerBioMass = 3 kSkulkHealthPerPlayerAboveLimit = 1
 kSkulkDamageReduction = {
@@ -121,12 +122,12 @@ kGorgeDamageReduction = {
     ["MarineSentry"] = 0.5,
 }
 
-kLerkHealth = 180    kLerkArmor = 30  kLerkPointValue = 15 kLerkHealthPerBioMass = 3
+kLerkHealth = 180    kLerkArmor = 30  kLerkPointValue = 15 kLerkHealthPerBioMass = 2
 kLerkDamageReduction = {
     ["Grenade"] = 0.7,
     ["ImpactGrenade"] = 0.7,
     --["Shotgun"] = 0.88,
-    ["Railgun"] = 0.8,
+    --["Railgun"] = 0.8,
     --["PulseGrenade"] = 0.75,
 }
 

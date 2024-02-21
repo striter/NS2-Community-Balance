@@ -309,14 +309,14 @@ kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 90
 kPrototypeLabCost = 25
 
-kCannonTechResearchCost = 25
-kCannonTechResearchTime = 90
+kCannonTechResearchCost = 20
+kCannonTechResearchTime = 75
 
 kJetpackTechResearchCost = 25
-kJetpackTechResearchTime = 90
+kJetpackTechResearchTime = 75
 
 kExosuitTechResearchCost = 20
-kExosuitTechResearchTime = 90
+kExosuitTechResearchTime = 75
 
 kRoboticsFactoryBuildTime = 8
 
@@ -326,9 +326,9 @@ kJetpackDropCooldown = 0
 
 --Cannon
 kCannonCost = 25
-kCannonDropCost = 20
+kCannonDropCost = 18
 
-kCannonDamage = 20
+kCannonDamage = 25
 kCannonAoeRadius = 2.5
 kCannonRateOfFire = 0.82
 kCannonAoeDamage = 80
@@ -699,20 +699,19 @@ function GetOriginFormBiomassLevel(count)
     return level
 end
 
-kRespawnTimeExtensionPerPlayerAboveLimit = 1
-kTechRespawnTimeExtension =     --6 early game 10 mid-game 16 late-game 20 all researched
+kTechRespawnTimeExtension = 
 {
     --[kTechId.Armor1] = 0,[kTechId.Weapons1] = 0, [kTechId.Observatory] = 0,
-    [kTechId.Armor2] = 1,[kTechId.Weapons2] = 1, [kTechId.MinesTech] = 1,[kTechId.ShotgunTech] = 1,
-    [kTechId.PhaseGate] = 2, [kTechId.AdvancedArmory] = 2,
-    [kTechId.ExosuitPrototypeLab] = 2, [kTechId.JetpackPrototypeLab] = 2, --[kTechId.CannonPrototypeLab] = 2,
-    [kTechId.Armor3] = 2, [kTechId.Weapons3] = 2, 
-    [kTechId.DragonBreath] = 1, [kTechId.ArmorRegen] = 1,  [kTechId.MotionTrack] = 2, --[kTechId.MACEmpBlast] = 1,[kTechId.GrenadeLauncherUpgrade] = 1,
+    --[kTechId.MinesTech] = 0,[kTechId.ShotgunTech] = 0,
+    [kTechId.Armor2] = 1,[kTechId.Weapons2] = 1, [kTechId.Armor3] = 1, [kTechId.Weapons3] = 1,
+    [kTechId.PhaseGate] = 1, [kTechId.AdvancedArmory] = 1,
+    [kTechId.ExosuitPrototypeLab] = 1, [kTechId.JetpackPrototypeLab] = 1, [kTechId.CannonPrototypeLab] = 1,
+    [kTechId.DragonBreath] = 1, [kTechId.ArmorRegen] = 1,  [kTechId.MotionTrack] = 1, --[kTechId.MACEmpBlast] = 1,[kTechId.GrenadeLauncherUpgrade] = 1,
     
     --[kTechId.BioMassOne] = 0, [kTechId.BioMassTwo] = 0, 
-    [kTechId.BioMassThree] = 1, [kTechId.BioMassFour] = 1, [kTechId.BioMassFive] = 1, [kTechId.BioMassSix] = 1,
-    [kTechId.TwoVeils] = 1,[kTechId.ThreeVeils] = 1,[kTechId.TwoShells] = 1,[kTechId.ThreeShells] = 1,[kTechId.TwoSpurs] = 1, [kTechId.ThreeSpurs] = 1,
-    [kTechId.BioMassSeven] = 2, [kTechId.BioMassEight] = 2,
+    [kTechId.BioMassThree] = 0, [kTechId.BioMassFour] = 1, [kTechId.BioMassFive] = 1, [kTechId.BioMassSix] = 1,
+    [kTechId.TwoVeils] = 0,[kTechId.ThreeVeils] = 1,[kTechId.TwoShells] = 0,[kTechId.ThreeShells] = 1,[kTechId.TwoSpurs] = 0, [kTechId.ThreeSpurs] = 1,
+    [kTechId.BioMassSeven] = 1, [kTechId.BioMassEight] = 1,
     [kTechId.BioMassNine] = 2, [kTechId.BioMassTen] = 2,
-    [kTechId.BioMassEleven] = 1, [kTechId.BioMassTwelve] = 1,
+    --[kTechId.BioMassEleven] = 1, [kTechId.BioMassTwelve] = 1,
 }

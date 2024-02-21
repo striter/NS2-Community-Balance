@@ -14,9 +14,9 @@ if Client then
 				local index
 				local mapname = weapon:GetMapName()
 
-				if mapname == Rifle.kMapName or mapname == HeavyMachineGun.kMapName or mapname == LightMachineGun.kMapName  then
+				if mapname == Rifle.kMapName or mapname == HeavyMachineGun.kMapName or mapname == LightMachineGun.kMapName or mapname == Cannon.kMapName then
 					index = 0
-				elseif mapname == Pistol.kMapName or mapname == Revolver.kMapName or mapname == Cannon.kMapName then
+				elseif mapname == Pistol.kMapName or mapname == Revolver.kMapName then
 					index = 1
 				elseif mapname == Shotgun.kMapName or mapname == SubMachineGun.kMapName then
 					index = 3
