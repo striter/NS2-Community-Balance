@@ -1,9 +1,7 @@
 --Rookie Protection
 kTechRankRestriction = {
-    [kTechId.GasGrenade] = 100,
-    [kTechId.GrenadeLauncher] = 300,
-    [kTechId.DualRailgunExosuit] = 500, [kTechId.CombatBuilder] = 1000,
-    [kTechId.SubMachineGun] = 1500, [kTechId.Revolver] = 1500, [kTechId.Knife] = 1500,
+    [kTechId.DualRailgunExosuit] = 500, [kTechId.CombatBuilder] = 900,
+    [kTechId.SubMachineGun] = 1200, [kTechId.Revolver] = 1500, [kTechId.Knife] = 1800,
     [kTechId.Cannon] = 2100,
 
     [kTechId.Lerk] = 300, --[kTechId.Gorge] = 500,

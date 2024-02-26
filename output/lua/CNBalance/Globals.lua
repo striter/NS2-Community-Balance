@@ -1,3 +1,5 @@
+kSuicideDelay = 10
+
 debug.appendtoenum(kPlayerStatus, "Devoured")
 debug.appendtoenum(kPlayerStatus, "Revolver")
 debug.appendtoenum(kPlayerStatus, "SubMachineGun")
@@ -62,7 +64,7 @@ function GetRespawnTimeExtend(player,teamIndex, _gameLength)
     --
     local respawnParam =  math.Clamp(math.max(0,x - kEndGameBegin) / kEndGameTolerance,0,1)
     respawnParam = respawnParam * respawnParam
-    local respawnExtension =  Lerp(0,12,respawnParam)
+    local respawnExtension =  Lerp(0,16,respawnParam)
 
     local teamExtension = math.max(GetPlayersAboveLimit(teamIndex) - 2,0) * 1
     for k,v in pairs(kTechRespawnTimeExtension) do

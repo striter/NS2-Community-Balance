@@ -678,7 +678,7 @@ kGorgeAbilitiesCost = {
 }
 kGorgeStructureScorePerRes = 0.4
 kOriginPersonalResourcesPerKill = {
-    [kTechId.Marine] = 2, [kTechId.JetpackMarine] = 4, [kTechId.Exo] = 8, [kTechId.Exosuit] = 8,
+    [kTechId.Marine] = 2, [kTechId.JetpackMarine] = 3, [kTechId.Exo] = 4, [kTechId.Exosuit] = 2,
 }
 
 kGorgeHiveBuildTime = kHiveBuildTime

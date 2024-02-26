@@ -339,10 +339,13 @@ if Server then
     end
 
     function SporeMine:OnKill(attacker, doer, point, direction)
-        self:Explode()
         self:TriggerEffects("death")
-        if GetIsTechUnlocked(self,kTechId.Spores) then
-            self:CastSpore(attacker and attacker:GetOrigin() or nil)
+        if self:GetIsBuilt() then
+            if GetIsTechUnlocked(self,kTechId.Spores) then
+                self:CastSpore(attacker and attacker:GetOrigin() or nil)
+            else
+                self:Explode()
+            end         
         end
     end
     

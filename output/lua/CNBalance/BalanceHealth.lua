@@ -86,7 +86,7 @@ kExplosiveSelfDamage =
 }
 
 kJetpackDamageReduction = {
-    ["VolleyRappel"] = 1.5,
+    ["VolleyRappel"] = 1.33,
     ["Spike"] = 1.5,
     ["Spit"] = 1.66,
     ["Hydra"] = 1.66,
@@ -131,7 +131,7 @@ kLerkDamageReduction = {
     --["PulseGrenade"] = 0.75,
 }
 
-kFadeHealth = 260  kFadeArmor = 80  kFadePointValue = 20 kFadeHealthPerBioMass = 5 kFadeHealthPerPlayerAboveLimit = 5
+kFadeHealth = 260  kFadeArmor = 80  kFadePointValue = 20 kFadeHealthPerBioMass = 5 kFadeHealthPerPlayerAboveLimit = 0
 kFadeDamageReduction = {
     --["Mine"] = 1.1,
     --["MarineSentry"] = 1.1,
@@ -143,7 +143,8 @@ kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMa
 kOnosBoneShieldDefaultReduction = 0.2
 kOnosBoneShieldDamageReduction = {
     --["HeavyMachineGun"] = 0.25,
-    ["Cannon"] = 0,
+    ["Cannon"] = 0.5,
+    ["Grenade"] = 0.5,
     ["Railgun"] = 0,
 }
 
@@ -158,7 +159,7 @@ kOnosDamageReduction = {
     --["HeavyMachineGun"] = 1.08,
 }
 
-kProwlerHealth = 135 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 7
+kProwlerHealth = 135 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 5
 kProwlerDamageReduction = {
     ["Grenade"] = 0.75,
     ["ImpactGrenade"] = 0.75,

@@ -15,24 +15,29 @@ end
 
 if Server then
 
+    local kMACReproductionTime = 15
+    
     local baseOnCreate = RoboticsFactory.OnCreate
     function RoboticsFactory:OnCreate()
         baseOnCreate(self)
         self.spawnedFreeMACID = Entity.invalidId
+        self.spawnedFreeMACTime = Shared.GetTime() - kMACReproductionTime
     end
     
     function RoboticsFactory:OnUpdate()
         local comm = self:GetTeam():GetCommander()
         if not comm then return end
         
-        if self:GetTechId() == kTechId.ARCRoboticsFactory then return end       --Don't give arc factory free macs then
         local time = Shared.GetTime()
         if self.freeMACCheck and time - self.freeMACCheck < 1 then return end
         self.freeMACCheck = time
-        
+
         if self:GetIsInCombat() then return end
+        if self:GetTechId() == kTechId.ARCRoboticsFactory then return end       --Don't give arc factory free macs then
         if not self.deployed or not GetIsUnitActive(self) then return end
         if self.open or self:GetIsResearching() then return end
+        
+        if time - self.spawnedFreeMACTime < kMACReproductionTime then return end
         
         if self.spawnedFreeMACID ~= Entity.invalidId then
             local MAC = Shared.GetEntity(self.spawnedFreeMACID)
@@ -40,9 +45,10 @@ if Server then
                 self.spawnedFreeMACID = Entity.invalidId
             end
         end
-    
+
         if self.spawnedFreeMACID == Entity.invalidId then
             self.spawnedFreeMACID = self:OverrideCreateManufactureEntity(kTechId.MAC):GetId()
+            self.spawnedFreeMACTime = time
         end
     end
 end
