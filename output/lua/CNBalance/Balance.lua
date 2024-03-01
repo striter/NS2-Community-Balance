@@ -338,7 +338,7 @@ kCannonDamageType = kDamageType.Structural
 
 kDualExosuitCost = 55
 kDualRailgunExosuitCost = 55
-kDualExosuitDropCost = 40
+kDualExosuitDropCost = 35
 kExosuitCost = kDualExosuitCost   --Used in some ways... (newcomer protection from )
 
 kOnosDevourCost = 10
@@ -671,9 +671,9 @@ kOriginFormOnInfestationMinHealPerSecond = 10
 
 kGorgeAbilitiesCost = {
     [kTechId.Hydra] = 0, [kTechId.Clog] = 0, [kTechId.Web] = 0,[kTechId.SporeMine] = 0, [kTechId.BabblerEgg] = 3,
-    [kTechId.Cyst] = 0.5,    [kTechId.Egg] = 1.5, [kTechId.Tunnel] = 5, [kTechId.TunnelExit] = 1,
+    [kTechId.Cyst] = 0.5,    [kTechId.Egg] = 1.5, [kTechId.Tunnel] = 5, [kTechId.TunnelExit] = 2,
     [kTechId.Whip] = 8, [kTechId.Shift] = 12, [kTechId.Shade] = 12, [kTechId.Crag] = 12,
-    [kTechId.Harvester] = 8, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
+    [kTechId.Harvester] = 7, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
                          [kTechId.Spur] = 12, [kTechId.Shell] = 12, [kTechId.Veil] = 12,
 }
 kGorgeStructureScorePerRes = 0.4

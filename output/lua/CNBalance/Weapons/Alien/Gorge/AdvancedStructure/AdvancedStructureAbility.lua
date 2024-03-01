@@ -18,14 +18,23 @@ function AdvancedStructureAbility:GetIsPositionValid(position, player, normal, l
         extents = Vector(maxExtent, maxExtent, maxExtent)
     end
         
-    local traceStart = position + normal * extents.y/2 
-    local traceEnd = position + normal * extents.y
-    trace = Shared.TraceBox(extents, traceStart, traceEnd, CollisionRep.Damage, PhysicsMask.Bullets)
+    local traceStart = position + normal * (extents.y - 0.01)
+    local traceEnd = position + normal * (extents.y + 0.01)
+    local trace = Shared.TraceBox(extents, traceStart, traceEnd, CollisionRep.Damage, PhysicsMask.Bullets,EntityFilterOneAndIsa(player, "Player"))
     --DebugTraceBox(extents, traceStart, traceEnd, 0.1, 45, 45, 45, 1)
     
     if trace.fraction ~= 1 then
         return false
     end
+    
+    local rayStart = position + normal * 0.01
+    local rayEnd = position + normal * (extents.y * 2 - 0.01)
+    trace = Shared.TraceRay(rayStart,rayEnd, CollisionRep.Damage, PhysicsMask.Bullets,EntityFilterOneAndIsa(player, "Player"))
+    --DebugTraceRay(rayStart,rayEnd,PhysicsMask.Bullets)
+    if trace.fraction ~= 1 then
+        return false
+    end
+    
     
     local upwardFraction = normal:DotProduct(kUpVector)
     local side = self:GetStructurePlaceSide()

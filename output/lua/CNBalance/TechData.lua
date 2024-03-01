@@ -1293,7 +1293,7 @@ function BuildTechData()
     
     table.insert(techData, {
         [kTechDataId] = kTechId.TunnelExit,
-        [kTechDataMaxExtents] = Vector(1.2, 1.2, 1.2),
+        [kTechDataMaxExtents] = Vector(1.1,1.4,1.1),
         [kTechDataTooltipInfo] = "TUNNEL_EXIT_TOOLTIP",
         [kTechDataGhostModelClass] = "AlienGhostModel",
         [kTechDataMapName] = TunnelEntrance.kMapName,

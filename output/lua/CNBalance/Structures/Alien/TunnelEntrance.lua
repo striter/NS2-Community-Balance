@@ -926,7 +926,6 @@ function TunnelEntrance:OnResearchComplete(techId)
 end
 --
 
-
 local baseOnUpdate = TunnelEntrance.OnUpdate
 function TunnelEntrance:OnUpdate(deltaTime)
     baseOnUpdate(self,deltaTime)

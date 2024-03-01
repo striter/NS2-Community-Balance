@@ -817,6 +817,8 @@ function AlienTeam:UpdateTeamAutoHeal()
                 end
 
                 if requiresInfestation then
+                    local reduceHealth = not isOnInfestation
+
                     if self:IsOriginForm() then
                         if isOnInfestation then
                             if not entity.GetIsInCombat or not entity:GetIsInCombat() then
@@ -824,32 +826,30 @@ function AlienTeam:UpdateTeamAutoHeal()
                                 healPerSecond = math.max(healPerSecond, kOriginFormOnInfestationMinHealPerSecond)
                                 local heal = healPerSecond * deltaTime
                                 entity:AddHealth(heal, false, false, false, nil, true)
+                                reduceHealth = false
                             end
-                            
                         end
-                    else
-                        if  not isOnInfestation then
+                    end
+                    
+                    if reduceHealth then                         -- Take damage!
 
-                            -- Take damage!
-                            local damagePerSecondPercentage = kBalanceOffInfestationHurtPercentPerSecond
-                            if entity.GetOffInfestationHurtPercentPerSecond then
-                                damagePerSecondPercentage = entity:GetOffInfestationHurtPercentPerSecond()
-                            end
-
-                            local damagePerSecond = entity:GetMaxHealth() * damagePerSecondPercentage
-                            damagePerSecond = math.max(damagePerSecond, kMinOffInfestationHurtPerSecond)
-                            local damage = damagePerSecond * deltaTime
-
-                            local attacker
-                            if entity.lastAttackerDidDamageTime and Shared.GetTime() < entity.lastAttackerDidDamageTime + 60 then
-                                attacker = entity:GetLastAttacker()
-                            end
-
-                            entity:DeductHealth(damage, attacker)
+                        local damagePerSecondPercentage = kBalanceOffInfestationHurtPercentPerSecond
+                        if entity.GetOffInfestationHurtPercentPerSecond then
+                            damagePerSecondPercentage = entity:GetOffInfestationHurtPercentPerSecond()
                         end
 
+                        local damagePerSecond = entity:GetMaxHealth() * damagePerSecondPercentage
+                        damagePerSecond = math.max(damagePerSecond, kMinOffInfestationHurtPerSecond)
+                        local damage = damagePerSecond * deltaTime
 
-                    end 
+                        local attacker
+                        if entity.lastAttackerDidDamageTime and Shared.GetTime() < entity.lastAttackerDidDamageTime + 60 then
+                            attacker = entity:GetLastAttacker()
+                        end
+
+                        entity:DeductHealth(damage, attacker)
+                    end
+
                 end
 
             end

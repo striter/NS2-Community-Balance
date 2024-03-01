@@ -104,10 +104,10 @@ kSupplyEachTechPoint = 40
 
 kMACSupply = 0
 kArmorySupply = 10
-kObservatorySupply = 30
+kObservatorySupply = 25
 kARCSupply = 20
 kSentrySupply = 0
-kSentryBatterySupply = 40
+kSentryBatterySupply = 35
 kRoboticsFactorySupply = 10
 kInfantryPortalSupply = 0
 kPhaseGateSupply = 10
