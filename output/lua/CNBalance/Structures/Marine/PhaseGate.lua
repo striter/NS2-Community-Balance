@@ -1,9 +1,16 @@
 Script.Load("lua/BiomassHealthMixin.lua")
 
+local kPhaseCooldownBase = 1
+local kPhaseCooldownPerGateUpEnd = 0.9
+local kBeaconInstantPhaseCooldown = 15
+
 local baseOnCreate = PhaseGate.OnCreate
 function PhaseGate:OnCreate()
     baseOnCreate(self)
     InitMixin(self, BiomassHealthMixin)
+    if Server then
+        self.cooldownNextPhase = 1
+    end
 end
 
 function PhaseGate:GetHealthPerTeamExceed()
@@ -39,6 +46,40 @@ local function TransformPlayerCoordsForPhaseGate(player, srcCoords, dstCoords)
 
 end
 
+local function GetDestinationGate(self)
+
+    -- Find next phase gate to teleport to
+    local phaseGates = {}
+    for index, phaseGate in ipairs( GetEntitiesForTeam("PhaseGate", self:GetTeamNumber()) ) do
+        if GetIsUnitActive(phaseGate) then
+            table.insert(phaseGates, phaseGate)
+        end
+    end
+
+    if table.icount(phaseGates) < 2 then
+        return nil
+    end
+
+    -- Find our index and add 1
+    local index = table.find(phaseGates, self)
+    if (index ~= nil) then
+        local nextIndex
+        if directionBackwards then
+            nextIndex = ConditionalValue(index == 1, table.icount(phaseGates), index - 1)
+        else
+            nextIndex = ConditionalValue(index == table.icount(phaseGates), 1, index + 1)
+        end
+
+        ASSERT(nextIndex >= 1)
+        ASSERT(nextIndex <= table.icount(phaseGates))
+        return phaseGates[nextIndex],#phaseGates
+
+    end
+
+    return nil
+
+end
+
 function PhaseGate:Phase(user)
 
     if self.phase then
@@ -64,6 +105,16 @@ function PhaseGate:Phase(user)
         --to remove the need for the plyaer-centric 2D sound, and simplify effects definitions
         self.performedPhaseLastUpdate = true
 
+        if Server then
+            local phaseTime = kPhaseCooldownBase
+            if not user.timeLastBeacon or Shared.GetTime() - user.timeLastBeacon > kBeaconInstantPhaseCooldown then
+                local _,gateCount = GetDestinationGate(self)
+                gateCount = gateCount or 2
+                phaseTime = phaseTime + math.max( 0,gateCount - 2) * kPhaseCooldownPerGateUpEnd
+            end
+            self.cooldownNextPhase = phaseTime
+        end
+        
         self.timeOfLastPhase = Shared.GetTime()
 
         return true
@@ -75,39 +126,6 @@ function PhaseGate:Phase(user)
 end
 
 if Server then
-    local function GetDestinationGate(self)
-
-        -- Find next phase gate to teleport to
-        local phaseGates = {}
-        for index, phaseGate in ipairs( GetEntitiesForTeam("PhaseGate", self:GetTeamNumber()) ) do
-            if GetIsUnitActive(phaseGate) then
-                table.insert(phaseGates, phaseGate)
-            end
-        end
-
-        if table.icount(phaseGates) < 2 then
-            return nil
-        end
-
-        -- Find our index and add 1
-        local index = table.find(phaseGates, self)
-        if (index ~= nil) then
-            local nextIndex
-            if directionBackwards then
-                nextIndex = ConditionalValue(index == 1, table.icount(phaseGates), index - 1)
-            else
-                nextIndex = ConditionalValue(index == table.icount(phaseGates), 1, index + 1)
-            end
-
-            ASSERT(nextIndex >= 1)
-            ASSERT(nextIndex <= table.icount(phaseGates))
-            return phaseGates[nextIndex],#phaseGates
-
-        end
-
-        return nil
-
-    end
     
     local function ComputeDestinationLocationId(self, destGate)
 
@@ -150,10 +168,8 @@ if Server then
             self.performedPhaseLastUpdate = false
         end
 
-        gateCount = gateCount or 2
-        local phaseTime = (gateCount - 1) * 1
         
-        self.phase = (self.timeOfLastPhase ~= nil) and (Shared.GetTime() < (self.timeOfLastPhase + phaseTime))
+        self.phase = (self.timeOfLastPhase ~= nil) and (Shared.GetTime() < (self.timeOfLastPhase + self.cooldownNextPhase))
 
         if destinationPhaseGate ~= nil and GetIsUnitActive(self) and self.deployed and destinationPhaseGate.deployed then
 
@@ -187,6 +203,26 @@ if Server then
         end
 
         return true
+
+    end
+
+end
+
+if Client then
+
+    function PhaseGate:OnUpdateRender()
+
+        PROFILE("PhaseGate:OnUpdateRender")
+
+        local linked = self.linked and not self.phase
+        if self.clientLinked ~= linked then
+
+            self.clientLinked = linked
+
+            local effects = ConditionalValue(linked and self:GetIsVisible(), "phase_gate_linked", "phase_gate_unlinked")
+            self:TriggerEffects(effects) --FIXME This is really wasteful
+
+        end
 
     end
 

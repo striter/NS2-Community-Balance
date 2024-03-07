@@ -820,13 +820,13 @@ function AlienTeam:UpdateTeamAutoHeal()
                     local reduceHealth = not isOnInfestation
 
                     if self:IsOriginForm() then
+                        reduceHealth = false
                         if isOnInfestation then
                             if not entity.GetIsInCombat or not entity:GetIsInCombat() then
                                 local healPerSecond = entity:GetMaxHealth() * kOriginFormOnInfestationHealPercentPerSecond
                                 healPerSecond = math.max(healPerSecond, kOriginFormOnInfestationMinHealPerSecond)
                                 local heal = healPerSecond * deltaTime
                                 entity:AddHealth(heal, false, false, false, nil, true)
-                                reduceHealth = false
                             end
                         end
                     end

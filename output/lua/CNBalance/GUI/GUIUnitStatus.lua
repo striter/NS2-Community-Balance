@@ -588,6 +588,7 @@ function GUIUnitStatus:UpdateUnitStatusBlip(blipIndex, localPlayerIsCommander, b
 
     -- Name
     local showName = alpha > 0 and (not localPlayerIsCommander or isCrosshairTarget)
+    showName = showName and (not blipData.IsPlayer or not isEnemy)
     if ( blipData.ForceName and blipData.IsPlayer ) or showName then
         updateBlip.NameText:SetIsVisible(self.visible)
         updateBlip.NameText:SetText(blipNameText)

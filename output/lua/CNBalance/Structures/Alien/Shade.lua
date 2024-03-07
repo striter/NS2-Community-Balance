@@ -9,7 +9,7 @@ end
 local baseOnInitialized = Shade.OnInitialized
 function Shade:OnInitialized()
     baseOnInitialized(self)
-    self.timeLastInked = Shared.GetTime() - kShadeInkCooldown
+    self.timeLastInked = Shared.GetTime() - kShadeHiveInkCooldown
 end
 
 function Shade:GetHealthPerBioMass()
@@ -32,8 +32,8 @@ end
 function Shade:TriggerInk()
     if not GetIsUnitActive(self) then return false end
     
-    local now = Shared.GetTime()
-    if (now - self.timeLastInked) < kShadeInkCooldown then
+    local cooldown = GetHasTech(self, kTechId.ShadeHive) and kShadeHiveInkCooldown or kNormalShadeInkCooldown
+    if (Shared.GetTime() - self.timeLastInked) < cooldown then
         return false
     end
 

@@ -313,11 +313,11 @@ local function CouldUseACommander(self)
 end
 
 if Server then
-    local kMaximizeBiomassResearchId = {
-        [kTechId.ShiftHive] = kTechId.ShiftTunnel,
-        [kTechId.CragHive] = kTechId.CragTunnel,
-        [kTechId.ShadeHive] = kTechId.ShadeTunnel,
-    }
+    --local kMaximizeBiomassResearchId = {
+    --    [kTechId.ShiftHive] = kTechId.ShiftTunnel,
+    --    [kTechId.CragHive] = kTechId.CragTunnel,
+    --    [kTechId.ShadeHive] = kTechId.ShadeTunnel,
+    --}
 
     local kHiveBiomassSource = {
         [kTechId.ShiftHive] = "Shift",
@@ -335,13 +335,13 @@ if Server then
         if self.bioMassLevel == newBiomassLevel then return end
         self.bioMassLevel = newBiomassLevel
         team:SetBioMassPreserve(techId,self.bioMassLevel)
-        if self.bioMassLevel == 4 then
-            local techId = kMaximizeBiomassResearchId[techId]
-            local techTree = team:GetTechTree()
-            local researchNode = techTree:GetTechNode(techId)                
-            researchNode:SetResearched(true)
-            techTree:QueueOnResearchComplete(techId, self)
-        end
+        --if self.bioMassLevel == 4 then
+        --    local techId = kMaximizeBiomassResearchId[techId]
+        --    local techTree = team:GetTechTree()
+        --    local researchNode = techTree:GetTechNode(techId)                
+        --    researchNode:SetResearched(true)
+        --    techTree:QueueOnResearchComplete(techId, self)
+        --end
     end
     
 end
@@ -469,10 +469,48 @@ ShiftHive.kMapName = Hive.kMapName
 Script.Load("lua/CNBalance/Mixin/SupplyProviderMixin.lua")
 local baseOnInitialized = Hive.OnInitialized
 function Hive:OnInitialized()
-    baseOnInitialized(self)
+
+    InitMixin(self, InfestationMixin)
+
+    CommandStructure.OnInitialized(self)
+
+    -- Pre-compute list of egg spawn points.
     if Server then
-        InitMixin(self, SupplyProviderMixin)
+
+        self:SetModel(Hive.kModelName, kAnimationGraph)
+
+        -- This Mixin must be inited inside this OnInitialized() function.
+        if not HasMixin(self, "MapBlip") then
+            InitMixin(self, MapBlipMixin)
+        end
+
+        InitMixin(self, StaticTargetMixin)
+
+        local evochamber = CreateEntity( "evolutionchamber", self:GetOrigin(), self:GetTeamNumber())
+        self.evochamberid = evochamber:GetId()
+        evochamber:SetOwner( self )
+
+        if Server then
+            InitMixin(self, SupplyProviderMixin)
+        end
+    elseif Client then
+
+        InitMixin(self, UnitStatusMixin)
+        InitMixin(self, HiveVisionMixin)
+
+        self.glowIntensity = ConditionalValue(self:GetIsBuilt(), 1, 0)
+
     end
+
+    InitMixin(self, IdleMixin)
+
+    --Must be init'd last
+    if not Predict then
+        self.setupStructureEffects = false
+        self.startSpecsTime = Shared.GetTime() + 5 --delay so network data can propagate
+        InitMixin(self, AlienStructureVariantMixin)
+    end
+
 end
 
 

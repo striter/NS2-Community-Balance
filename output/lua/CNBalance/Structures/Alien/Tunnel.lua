@@ -16,11 +16,8 @@ if Server then
         local destinationOrigin = exit:GetOrigin() 
 
         local normal =exit:GetCoords().yAxis
-        if normal.y == 1 then
-            destinationOrigin = destinationOrigin + normal*0.3
-        else
-            destinationOrigin = destinationOrigin + normal * (0.5 +extent.y * 2)
-        end
+        destinationOrigin = destinationOrigin + Vector(0,0.3,0)
+        destinationOrigin =  destinationOrigin + normal * (0.5 + extent.y * (1 - Math.DotProduct(normal,Vector(0,1,0))))
         
         if entity.OnUseGorgeTunnel then
             entity:OnUseGorgeTunnel(destinationOrigin)

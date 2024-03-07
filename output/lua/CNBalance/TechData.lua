@@ -1071,7 +1071,7 @@ function BuildTechData()
     --Tunnels
     table.insert(techData, {
         [kTechDataId] = kTechId.ShiftTunnel,
-        [kTechDataCostKey] = kTunnelUpgradeCost,
+        [kTechDataCostKey] = kShiftTunnelUpgradeCost,
         [kTechDataResearchTimeKey] = kTunnelUpgradeTime,
         [kTechDataDisplayName] = "SHIFT_TUNNEL",
         [kTechDataTooltipInfo] = "SHIFT_TUNNEL_TOOLTIP",
@@ -1080,7 +1080,7 @@ function BuildTechData()
 
     table.insert(techData, {
         [kTechDataId] = kTechId.CragTunnel,
-        [kTechDataCostKey] = kTunnelUpgradeCost,
+        [kTechDataCostKey] = kCragTunnelUpgradeCost,
         [kTechDataResearchTimeKey] = kTunnelUpgradeTime,
         [kTechDataDisplayName] = "CRAG_TUNNEL",
         [kTechDataTooltipInfo] = "CRAG_TUNNEL_TOOLTIP",
@@ -1089,7 +1089,7 @@ function BuildTechData()
     
     table.insert(techData, {
         [kTechDataId] = kTechId.ShadeTunnel,
-        [kTechDataCostKey] = kTunnelUpgradeCost,
+        [kTechDataCostKey] = kShadeTunnelUpgradeCost,
         [kTechDataResearchTimeKey] = kTunnelUpgradeTime,
         [kTechDataDisplayName] = "SHADE_TUNNEL",
         [kTechDataTooltipInfo] = "SHADE_TUNNEL_TOOLTIP",

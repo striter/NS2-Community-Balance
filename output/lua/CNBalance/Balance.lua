@@ -60,7 +60,7 @@ kTechDataTeamResRefundOnKill = {
 kAssistMinimumDamageFraction = 0.35      --Avoid parasiter or babbler assists ,feels pretty weird
 kBountyScoreEachAssist = 1 kBountyScoreEachKill = 2 kMaxBountyScore = 512       --You can't kill 256 players in a row?
 kBountyClaimMinMarine = 5 kBountyClaimMinJetpack = 8 kBountyClaimMinExo = 12
-kBountyClaimMinSkulk = 5 kBountyClaimMinAlien = 8  kBountyClaimMinOnos = 12
+kBountyClaimMinSkulk = 5 kBountyClaimMinAlien = 8 kBountyClaimMinFade = 8 kBountyClaimMinOnos = 12
 kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 20
 
 --Toy for marine commander (remove all marines passive income, harsh one)
@@ -72,7 +72,7 @@ kMilitaryProtocolTResPerBountyClaim = 0.5   --Bounty score, don't give them pres
 kMilitaryProtocolTeamResourcesPerKill = {          --Replaced refund system , append kTechDataTeamResOnKill above
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.Drifter] = 1,
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
-    [kTechId.Skulk] = 2, [kTechId.Gorge] = 3,[kTechId.Prowler] = 4, [kTechId.Lerk] = 6, [kTechId.Fade] = 10, [kTechId.Onos] = 15,
+    [kTechId.Skulk] = 2, [kTechId.Gorge] = 5,[kTechId.Prowler] = 8, [kTechId.Lerk] = 10, [kTechId.Fade] = 15, [kTechId.Onos] = 20,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
     [kTechId.Hive] = 10, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20
 }
@@ -349,8 +349,10 @@ kUmbraBulletModifier = 0.8
 kDevourEnergyCost = 55 --50
 kDevourPunchDamage = 65 --100
 
-kTunnelUpgradeCost = 15
 kTunnelUpgradeTime = 60
+kShiftTunnelUpgradeCost = 25
+kShadeTunnelUpgradeCost = 15
+kCragTunnelUpgradeCost = 15
 
 kEggGestateTime = 15
 kGorgeCost = 10
@@ -540,7 +542,8 @@ kEchoSpurCost = 2
 kEchoShellCost = 2
 kEchoEggCost = 1
 
-kShadeInkCooldown = 17.5
+kShadeHiveInkCooldown = 17.5
+kNormalShadeInkCooldown = kShadeHiveInkCooldown + kShadeInkDuration
 kShadeInkDuration = 6.3
 
 kWhipSlapDamage = 50
@@ -673,7 +676,7 @@ kGorgeAbilitiesCost = {
     [kTechId.Hydra] = 0, [kTechId.Clog] = 0, [kTechId.Web] = 0,[kTechId.SporeMine] = 0, [kTechId.BabblerEgg] = 3,
     [kTechId.Cyst] = 0.5,    [kTechId.Egg] = 1.5, [kTechId.Tunnel] = 5, [kTechId.TunnelExit] = 2,
     [kTechId.Whip] = 8, [kTechId.Shift] = 12, [kTechId.Shade] = 12, [kTechId.Crag] = 12,
-    [kTechId.Harvester] = 7, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
+    [kTechId.Harvester] = 8, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
                          [kTechId.Spur] = 12, [kTechId.Shell] = 12, [kTechId.Veil] = 12,
 }
 kGorgeStructureScorePerRes = 0.4

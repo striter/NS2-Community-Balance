@@ -219,7 +219,7 @@ ModLoader.SetupFileHook("lua/GUIGorgeBuildMenu.lua", "lua/CNBalance/Weapons/Alie
 
 ModLoader.SetupFileHook("lua/GUIEggDisplay.lua", "lua/CNBalance/GUI/GUIEggDisplay.lua", "post" )
 ModLoader.SetupFileHook("lua/GUIAlienBuyMenu.lua", "lua/CNBalance/GUI/GUIAlienBuyMenu.lua", "replace" )
-ModLoader.SetupFileHook("lua/EvolutionChamber.lua", "lua/CNBalance/EvolutionChamber.lua", "post")
+ModLoader.SetupFileHook("lua/EvolutionChamber.lua", "lua/CNBalance/EvolutionChamber.lua", "replace")
 ModLoader.SetupFileHook("lua/AlienTunnelManager.lua", "lua/CNBalance/AlienTunnelManager.lua", "post")
 
 --Structures
