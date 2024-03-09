@@ -1152,6 +1152,7 @@ function AlienTeam:InitTechTree()
     self.techTree:AddActivation(kTechId.MetabolizeShadowStep,        kTechId.BioMassThree, kTechId.None)
 
     self.techTree:AddResearchNode(kTechId.OriginForm)
+    self.techTree:AddBuyNode(kTechId.OriginFormResourceFetch, kTechId.OriginForm, kTechId.None, kTechId.AllAliens)
     
     self.techTree:SetComplete()
 
@@ -1390,20 +1391,19 @@ function AlienTeam:IsOriginForm()
     return self.originTechNode and self.originTechNode:GetResearched()
 end
 
-function AlienTeam:OnLifeFormGestation(player,class)
-    if not self:IsOriginForm() 
-        or not (class == Gorge.kMapName)
-    then
+function AlienTeam:OnOriginFormResourceFetch(player)
+    if not self:IsOriginForm() then
         return
     end
 
+    Shared.Message("?")
     self.timeGorgeGestated = self.timeGorgeGestated + 1
     
     local desirePRes =  self.timeGorgeGestated == 1 and kOriginFormInitialGorgePRes or kOriginFormExtraGorgePRes
     local teamResource = math.floor(self:GetTeamResources())
     local finalPRes = math.min(teamResource,desirePRes)
 
-    if finalPRes < 10 then return end
+    if finalPRes < kOriginFormTeamResourceFetchThreshold then return end
     player:AddResources(finalPRes)
     self:AddTeamResources(-finalPRes)
 end

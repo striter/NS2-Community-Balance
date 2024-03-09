@@ -137,9 +137,9 @@ function DevouredViewModel:OnTag(tagName)
 		local coords = parent:GetViewCoords()
 		if Client and parent and parent:GetIsLocalPlayer() then
 			if tagName == "attack_left_start" then
-				Shared.PlayPrivateSound(parent, kPunchSoundLeft, nil, 1.0, coords.origin + coords.xAxis - 0.1)
+				Shared.PlayPrivateSound(parent, kPunchSoundLeft, nil, OptionsDialogUI_GetMusicVolume() / 100, coords.origin + coords.xAxis - 0.1)
 			elseif tagName == "attack_right_start" then
-				Shared.PlayPrivateSound(parent, kPunchSoundRight, nil, 1.0, coords.origin + coords.xAxis + 0.1)
+				Shared.PlayPrivateSound(parent, kPunchSoundRight, nil, OptionsDialogUI_GetMusicVolume() / 100, coords.origin + coords.xAxis + 0.1)
 			end
 		end
 		

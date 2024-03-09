@@ -689,6 +689,7 @@ kGorgeHiveBuildTime = kHiveBuildTime
 kOriginFormAdditionalTRes = 40
 kOriginFormInitialGorgePRes = 60
 kOriginFormExtraGorgePRes = 20
+kOriginFormTeamResourceFetchThreshold = 10
 kOriginFormTeamResScalarHiveCount = { 0.25 , 0.125 , 0.125 , 0.125 , 0.125 , 0.125}
 
 kBiomassPerTower = {0,1,3,6}

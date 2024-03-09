@@ -64,6 +64,7 @@ ModLoader.SetupFileHook("lua/TechMixin.lua", "lua/CNBalance/Mixin/TechMixin.lua"
 ModLoader.SetupFileHook("lua/MaturityMixin.lua", "lua/CNBalance/Mixin/MaturityMixin.lua", "post")
 ModLoader.SetupFileHook("lua/LiveMixin.lua", "lua/CNBalance/Mixin/LiveMixin.lua", "post")
 ModLoader.SetupFileHook("lua/ConstructMixin.lua", "lua/CNBalance/Mixin/ConstructMixin.lua", "post")
+ModLoader.SetupFileHook("lua/UpgradableMixin.lua", "lua/CNBalance/Mixin/UpgradableMixin.lua", "post")
 
 ModLoader.SetupFileHook("lua/CloakableMixin.lua", "lua/CNBalance/Mixin/CloakableMixin.lua", "replace")
 ModLoader.SetupFileHook("lua/DetectableMixin.lua", "lua/CNBalance/Mixin/DetectableMixin.lua", "replace")

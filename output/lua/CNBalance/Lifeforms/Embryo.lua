@@ -17,15 +17,5 @@ function Embryo:OnCreate()
     InitMixin(self,RequestHandleMixin)
 end
 
-function Embryo:Replace(mapName, newTeamNumber, preserveWeapons, atOrigin, extraValues, isPickup)
-
-    if Server then
-        local team = self:GetTeam()
-        team:OnLifeFormGestation(self,mapName)
-    end
-    
-    return Player.Replace(self,mapName, newTeamNumber, preserveWeapons, atOrigin, extraValues, isPickup)
-end
-
 
 Shared.LinkClassToMap("Embryo", Embryo.kMapName, networkVars)

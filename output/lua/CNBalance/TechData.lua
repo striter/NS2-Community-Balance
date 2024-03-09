@@ -1067,6 +1067,13 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "ORIGIN_FORM_TOOLTIP",
         [kTechDataResearchName] = "ORIGIN_FORM",
     })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.OriginFormResourceFetch,
+        [kTechDataCategory] = kTechId.OriginForm,
+        [kTechDataDisplayName] = "ORIGIN_FORM_RESOURCE_FETCH",
+        [kTechDataTooltipInfo] = "ORIGIN_FORM_RESOURCE_FETCH_TOOLTIP",
+    })
     
     --Tunnels
     table.insert(techData, {

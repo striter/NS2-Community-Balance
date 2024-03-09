@@ -143,6 +143,11 @@ if kTranslateMessage then
     kTranslateMessage["ORIGIN_FORM"]="原始族群"
     kTranslateMessage["ORIGIN_FORM_TOOLTIP"]="虫群不再拥有母巢意志.\n*Gorge替代指挥放置建筑.\n*死亡的敌方单位将提供资源."
 
+    kTranslateMessage["ORIGIN_FORM_RESOURCE_FETCH"]="生物质同步"
+    kTranslateMessage["ORIGIN_FORM_RESOURCE_FETCH_TOOLTIP"]="获取团队资源以用于建造.\n蛹化后使部分团队资源转为个人资源.\n*在资源不足的情况下无法使用/失效."
+    kTranslateMessage["ABM_GORGE"] ="仅[Gorge]可用"
+    kTranslateMessage["ABM_RESOURCE_LOW"] ="资源不足以同步"
+
     kTranslateMessage["TUNNEL_EXIT_HINT"]="虫洞出口."
     
     kTranslateMessage["DROP_TEAM_STRUCTURE"]="工蜂"
@@ -349,6 +354,11 @@ if kLocales then
     kLocales["ORIGIN_FORM"]="Origin Form"
     kLocales["ORIGIN_FORM_TOOLTIP"]="No more commanding form hive.\n*Gorge build team structures now.\n*Enemies provide personal resource on death."
 
+    kLocales["ORIGIN_FORM_RESOURCE_FETCH"]="Biomass Fetch"
+    kLocales["ORIGIN_FORM_RESOURCE_FETCH_TOOLTIP"]="Convert team resources into personal.\nGets personal resource once upgraded.\n*Disabled when team resources low."
+    kLocales["ABM_GORGE"] ="Only [Gorge] Available"
+    kLocales["ABM_RESOURCE_LOW"] ="Team Resources Low"
+    
     kLocales["TUNNEL_ENTRANCE"]="Entrance"
     kLocales["TUNNEL_EXIT"]="Exit"
     kLocales["TUNNEL_EXIT_HINT"]="Tunnel Exit"

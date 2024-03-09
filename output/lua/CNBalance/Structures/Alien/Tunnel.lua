@@ -11,13 +11,14 @@ if Server then
 
     function Tunnel:UseExit(entity, exit, exitSide)
         
-        local extent = GetExtents(entity:GetTechId())
         
         local destinationOrigin = exit:GetOrigin() 
 
         local normal =exit:GetCoords().yAxis
-        destinationOrigin = destinationOrigin + Vector(0,0.3,0)
-        destinationOrigin =  destinationOrigin + normal * (0.5 + extent.y * (1 - Math.DotProduct(normal,Vector(0,1,0))))
+
+        local extents = GetExtents(entity:GetTechId())
+        local maxExtent = math.max(extents.x,extents.y,extents.z)
+        destinationOrigin =  destinationOrigin + normal * (0.3 + 0.5 + maxExtent * (1 - Math.DotProduct(normal,Vector(0,1,0))))
         
         if entity.OnUseGorgeTunnel then
             entity:OnUseGorgeTunnel(destinationOrigin)

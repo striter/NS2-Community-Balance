@@ -239,17 +239,23 @@ function GUIAlienBuyMenu:_InitializeSlots()
 
 	local anglePerSlot = (math.pi * 0.6) / (#self.slots-1)
 
+	local distance = GUIAlienBuyMenu.kSlotDistance
 	for i = 1, #self.slots do
 
 		local angle = (i-1) * anglePerSlot + math.pi * 0.2
-		local distance = GUIAlienBuyMenu.kSlotDistance
 
 		self.slots[i].Graphic:SetPosition( Vector( math.cos(angle) * distance - GUIAlienBuyMenu.kSlotSize * .5, math.sin(angle) * distance - GUIAlienBuyMenu.kSlotSize * .5, 0) )
 		self.slots[i].Angle = angle
 
 	end
 
-
+	if GetHasTech(Client.GetLocalPlayer(), kTechId.OriginForm) then
+		local angle = math.pi * 1
+		CreateSlot(self, kTechId.OriginForm)
+		self.slots[4].Graphic:SetPosition( Vector( math.cos(angle) * distance - GUIAlienBuyMenu.kSlotSize * .5, math.sin(angle) * distance - GUIAlienBuyMenu.kSlotSize * .5, 0) )
+		self.slots[4].Angle = angle
+	end
+	
 end
 
 function GUIAlienBuyMenu:GetOffsetAngleForCategory(category)
@@ -638,7 +644,7 @@ function GUIAlienBuyMenu:_InitializeUpgradeButtons()
 
 		local upgrades = AlienUI_GetUpgradesForCategory(self.slots[i].Category)
 		local offsetAngle = self.slots[i].Angle
-		local anglePerUpgrade = math.pi * 0.25 / 3
+		local anglePerUpgrade = #upgrades == 1 and 0 or math.pi * 0.25 / 3
 		local category = self.slots[i].Category
 
 		for upgradeIndex = 1, #upgrades do
@@ -1104,6 +1110,31 @@ local function GetIsDisabled(type)
 	return IndexToAlienTechId(type) == kTechId.Vokex
 end
 
+local function ResourceFetchingDisabled(self, type)
+	local fetchingResource = false
+	
+	for i, currentButton in ipairs(self.upgradeButtons) do
+
+		if currentButton.Selected and currentButton.TechId == kTechId.OriginFormResourceFetch then
+			fetchingResource = true
+			break
+		end
+
+	end
+
+	if fetchingResource then
+		if Client.GetLocalPlayer():GetTeamResources() < kOriginFormTeamResourceFetchThreshold then
+			return true, "ABM_RESOURCE_LOW"
+		end
+		
+		if IndexToAlienTechId(type) ~= kTechId.Gorge then
+			return true, "ABM_GORGE"
+		end
+	end
+	
+	return false 
+end
+
 local function GetCanAffordAlienTypeAndUpgrades(self, alienType)
 
 	local alienCost = AlienBuy_GetAlienCost(alienType, false)
@@ -1133,9 +1164,14 @@ local function UpdateEvolveButton(self)
 	local evolveCost
 	local rankRestricted,rank = GetIsSkillRestricted(self.selectedAlienType)
 
+	local resourceFetchValid, fetchingKey = ResourceFetchingDisabled(self,self.selectedAlienType)
+	
 	if GetIsDisabled(self.selectedAlienType) then
 		evolveButtonTextureCoords = GUIAlienBuyMenu.kEvolveButtonNeedResourcesTextureCoordinates
 		evolveText = Locale.ResolveString("ABM_DISABLED")
+	elseif resourceFetchValid then
+		evolveButtonTextureCoords = GUIAlienBuyMenu.kEvolveButtonNeedResourcesTextureCoordinates
+		evolveText = Locale.ResolveString(fetchingKey)
 	elseif rankRestricted then
 		evolveButtonTextureCoords = GUIAlienBuyMenu.kEvolveButtonNeedResourcesTextureCoordinates
 		evolveText = string.format(Locale.ResolveString("ABM_RANK"),rank)
@@ -1339,7 +1375,7 @@ function GUIAlienBuyMenu:_UpdateAlienButtons()
 
 			local skillRestricted = GetIsSkillRestricted(alienButton.TypeData.Index)
 			local isCurrentAlien = AlienBuy_GetCurrentAlien() == alienButton.TypeData.Index
-			if skillRestricted or GetIsDisabled(alienButton.TypeData.Index) then
+			if skillRestricted or GetIsDisabled(alienButton.TypeData.Index) or ResourceFetchingDisabled(self,alienButton.TypeData.Index) then
 				alienButton.Button:SetColor(GUIAlienBuyMenu.kDisabledColor)
 			elseif researched and (isCurrentAlien or self:_GetCanAffordAlienType(alienButton.TypeData.Index)) then
 				alienButton.Button:SetColor(GUIAlienBuyMenu.kEnabledColor)
@@ -1586,6 +1622,7 @@ function GUIAlienBuyMenu:SendKeyEvent(key, down)
 			allowedToEvolve = allowedToEvolve and GetAlienOrUpgradeSelected(self)
 			allowedToEvolve = allowedToEvolve and not GetIsSkillRestricted(self.selectedAlienType)
 			allowedToEvolve = allowedToEvolve and not GetIsDisabled(self.selectedAlienType)
+			allowedToEvolve = allowedToEvolve and not ResourceFetchingDisabled(self,self.selectedAlienType)
 			
 			if allowedToEvolve and self:_GetIsMouseOver(self.evolveButtonBackground) then
 

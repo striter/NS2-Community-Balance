@@ -323,7 +323,7 @@ if Client then
         local player = self:GetParent()
 		
 		StartSoundEffectAtOrigin(kOneShotSoundName, self:GetOrigin())
-        Shared.PlaySound(self, kAttackSoundName)
+        StartSoundEffectOnEntity(kAttackSoundName,self)
         
         if not self.muzzleCinematic then            
             CreateMuzzleEffect(self)                
@@ -378,7 +378,7 @@ if Client then
 		if player and player:GetIsLocalPlayer() then
 			Shared.StopSound(self, kLocalAttackSoundName)
 		end
-        Shared.PlaySound(self, kEndSound)
+        StartSoundEffectOnEntity(kEndSound,self)
         
         if self.muzzleCinematic and self.muzzleCinematic ~= Entity.invalidId then
             self.muzzleCinematic:SetIsVisible(false)
