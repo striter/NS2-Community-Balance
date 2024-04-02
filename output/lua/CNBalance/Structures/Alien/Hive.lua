@@ -371,31 +371,6 @@ function Hive:GetCanResearchOverride(techId)
 
 end
 
-function Hive:GetTechButtons()
-
-    local techButtons = { kTechId.ShiftHatch, kTechId.None, kTechId.None, kTechId.LifeFormMenu,
-                          kTechId.None, kTechId.None, kTechId.None, kTechId.None }
-
-    local techId = self:GetTechId()
-    if techId == kTechId.Hive then
-        techButtons[5] = ConditionalValue(GetHiveTypeResearchAllowed(self, kTechId.UpgradeToCragHive), kTechId.UpgradeToCragHive, kTechId.None)
-        techButtons[6] = ConditionalValue(GetHiveTypeResearchAllowed(self, kTechId.UpgradeToShadeHive), kTechId.UpgradeToShadeHive, kTechId.None)
-        techButtons[7] = ConditionalValue(GetHiveTypeResearchAllowed(self, kTechId.UpgradeToShiftHive), kTechId.UpgradeToShiftHive, kTechId.None)
-    elseif techId == kTechId.CragHive then
-        techButtons[5] = kTechId.DrifterRegeneration
-        techButtons[6] = kTechId.CystCarapace
-    elseif techId == kTechId.ShiftHive then
-        techButtons[5] = kTechId.DrifterCelerity
-        techButtons[6] = kTechId.CystCelerity
-    elseif techId == kTechId.ShadeHive then
-        techButtons[5] = kTechId.DrifterCamouflage
-        techButtons[6] = kTechId.CystCamouflage
-    end
-
-    return techButtons
-
-end
-
 function Hive:OnSighted(sighted)
 
     if sighted then
@@ -525,17 +500,20 @@ function Hive:GetTechButtons()
         techButtons[6] = ConditionalValue(GetHiveTypeResearchAllowed(self, kTechId.UpgradeToShadeHive), kTechId.UpgradeToShadeHive, kTechId.None)
         techButtons[7] = ConditionalValue(GetHiveTypeResearchAllowed(self, kTechId.UpgradeToShiftHive), kTechId.UpgradeToShiftHive, kTechId.None)
     elseif techId == kTechId.CragHive then
-        techButtons[5] = kTechId.DrifterRegeneration
-        techButtons[6] = kTechId.CystCarapace
-        techButtons[3] = kTechId.CragTunnel
+        techButtons[5] = kTechId.CragTunnel
+        techButtons[6] = kTechId.DrifterRegeneration
+        techButtons[7] = kTechId.CystCarapace
+        techButtons[8] = kTechId.OriginForm
     elseif techId == kTechId.ShiftHive then
-        techButtons[5] = kTechId.DrifterCelerity
-        techButtons[6] = kTechId.CystCelerity
-        techButtons[3] = kTechId.ShiftTunnel
+        techButtons[5] = kTechId.ShiftTunnel
+        techButtons[6] = kTechId.DrifterCelerity
+        techButtons[7] = kTechId.CystCelerity
+        techButtons[8] = kTechId.OriginForm
     elseif techId == kTechId.ShadeHive then
-        techButtons[5] = kTechId.DrifterCamouflage
-        techButtons[6] = kTechId.CystCamouflage
-        techButtons[3] = kTechId.ShadeTunnel
+        techButtons[5] = kTechId.ShadeTunnel
+        techButtons[6] = kTechId.DrifterCamouflage
+        techButtons[7] = kTechId.CystCamouflage
+        techButtons[8] = kTechId.OriginForm
     end
 
     if self.bioMassLevel < self.bioMassPreserve then

@@ -754,7 +754,7 @@ function GUIUnitStatus:UpdateUnitStatusBlip(blipIndex, localPlayerIsCommander, b
 
     -- Maturity
     if maturityFraction ~= -1 and alpha > 0 and isCrosshairTarget then
-        local text = string.format("Maturity: %.f%%", maturityFraction * 100)
+        local text = string.format(Locale.ResolveString("MATURITY_STATUS") , maturityFraction * 100)
         updateBlip.MaturityText:SetIsVisible(self.visible)
         updateBlip.MaturityText:SetText(text)
         updateBlip.MaturityText:SetColor(textColor)

@@ -1119,7 +1119,6 @@ function AlienTeam:InitTechTree()
     self.techTree:AddBuildNode(kTechId.Web)
     --self.techTree:AddBuyNode(kTechId.Web,                   kTechId.BioMassTwo)
     self.techTree:AddBuyNode(kTechId.BabblerEgg,            kTechId.BioMassTwo, kTechId.None,kTechId.AllAliens)
-    self.techTree:AddActivation(kTechId.DropTeamStructureAbility,              kTechId.BioMassFour, kTechId.None,kTechId.AllAliens)
     
     -- lerk researches
     self.techTree:AddActivation(kTechId.Spores,              kTechId.BioMassFour, kTechId.None,kTechId.AllAliens)
@@ -1152,6 +1151,7 @@ function AlienTeam:InitTechTree()
     self.techTree:AddActivation(kTechId.MetabolizeShadowStep,        kTechId.BioMassThree, kTechId.None)
 
     self.techTree:AddResearchNode(kTechId.OriginForm)
+    self.techTree:AddActivation(kTechId.DropTeamStructureAbility, kTechId.OriginForm, kTechId.None,kTechId.AllAliens)
     self.techTree:AddBuyNode(kTechId.OriginFormResourceFetch, kTechId.OriginForm, kTechId.None, kTechId.AllAliens)
     
     self.techTree:SetComplete()
@@ -1159,6 +1159,21 @@ function AlienTeam:InitTechTree()
     self.originTechNode = self.techTree:GetTechNode(kTechId.OriginForm)
     self.timeGorgeGestated = 0
 end
+
+
+function AlienTeam:OnResearchComplete(structure, researchId)
+    PlayingTeam.OnResearchComplete(self,structure,researchId)
+
+    if researchId ~= kTechId.OriginForm then return end
+
+    local targetCommander = GetCommanderForTeam(self:GetTeamNumber())
+    if targetCommander and targetCommander.Eject then
+        targetCommander:Eject()
+    end
+    self.timeGorgeGestated = 1  --Prevent gorge get 60 res midgame
+
+end
+
 
 function AlienTeam:OnGameStateChanged(_state)
     if _state == kGameState.Countdown then
@@ -1396,9 +1411,7 @@ function AlienTeam:OnOriginFormResourceFetch(player)
         return
     end
 
-    Shared.Message("?")
     self.timeGorgeGestated = self.timeGorgeGestated + 1
-    
     local desirePRes =  self.timeGorgeGestated == 1 and kOriginFormInitialGorgePRes or kOriginFormExtraGorgePRes
     local teamResource = math.floor(self:GetTeamResources())
     local finalPRes = math.min(teamResource,desirePRes)

@@ -65,7 +65,7 @@ kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyCl
 
 --Toy for marine commander (remove all marines passive income, harsh one)
 kMilitaryProtocolResearchCost = 0
-kMilitaryProtocolResearchTime = 10
+kMilitaryProtocolResearchTime = 15
 kMilitaryProtocolResearchDurationMultiply = 1 --1.2     --1.33?
 kMilitaryProtocolAggressivePersonalResourcesScalar = 1.5      --They don't need too much pres to buy defensive or grenades/welders (and they can shared it tbh)
 kMilitaryProtocolTResPerBountyClaim = 0.5   --Bounty score, don't give them pres, its doomed
@@ -666,8 +666,8 @@ kGorgeTunnelBuildTime = 18.5
 kBalanceOffInfestationHurtPercentPerSecond = 0.02
 kMinOffInfestationHurtPerSecond = 20
 
-kOriginFormResearchCost = 5
-kOriginFormResearchTime = 20
+kOriginFormResearchCost = 0
+kOriginFormResearchTime = 15
 
 kOriginFormOnInfestationHealPercentPerSecond = 0.01
 kOriginFormOnInfestationMinHealPerSecond = 10
