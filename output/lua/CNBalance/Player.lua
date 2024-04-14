@@ -1,4 +1,12 @@
 
+local baseTriggerBeaconEffects = Player.TriggerBeaconEffects
+function Player:TriggerBeaconEffects()
+	baseTriggerBeaconEffects(self)
+
+	if HasMixin(self, "ParasiteAble") and self:GetIsParasited() then
+		self:RemoveParasite()
+	end
+end
 
 if Client then
 	

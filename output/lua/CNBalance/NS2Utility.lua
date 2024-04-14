@@ -187,20 +187,9 @@ function PlayerUI_GetGameTimeString()
     local respawnExtend = GetRespawnTimeExtend(player, teamIndex,gameTime)
     respawnDuration = respawnDuration + respawnExtend
     
-    --local respawnCost = GetDeathPlayerResources(gameTime)
-    if respawnDuration > 1 then --and respawnCost > 0.1 then
+    if respawnDuration > 1 then 
         gameTimeString = gameTimeString .. string.format(appender.. Locale.ResolveString(string.format("RESPAWN_EXTEND_TEAM%i", teamIndex)),respawnDuration)
     end
-    
-    --local refundBase = GetTeamResourceRefundBase(team)
-    --if refundBase > kTeamResourceRefundBase then
-    --    gameTimeString = gameTimeString .. string.format(appender.. Locale.ResolveString(string.format("TEAM_BOUNTY%i",team)),refundBase - kTeamResourceRefundBase)
-    --end
-    --
-    --local efficiency = GetPassiveResourceEfficiency(gameTime)
-    --if efficiency < 0.99 then
-    --    gameTimeString = gameTimeString .. string.format(appender.. Locale.ResolveString(string.format("TEAM_RESOURCES_EFFICIENCY%i",team)),efficiency*100)
-    --end
     
     return gameTimeString
 end

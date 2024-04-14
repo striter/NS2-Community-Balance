@@ -92,32 +92,12 @@ function PlayingTeam:OnTeamKill(techID,bountyScore)
     if tResReward then
         self:AddTeamResources(tResReward,true)      --Treat this as income
     end
-
-    local refundBase = self:GetRefundBase() 
-    if refundBase > kTeamResourceRefundBase then
-        local maxRefund = kTechDataTeamResRefundOnKill[techID]
-        
-        if maxRefund then
-            maxRefund = maxRefund * math.floor(refundBase/kTeamResourceRefundBase)
-
-            local refund = math.min(refundBase, maxRefund)
-            local tResPerRefund, pResPerRefund = self:GetResourcesPerRefund()
-            
-            self:CollectTeamResources(refund ,refund * pResPerRefund)  --Refund
-            self:AddTeamResources(refund * tResPerRefund - refund)
-        end
-    end
-
     local pResReward = 0
     if bountyScore > 0 then
         local pResClaimPerBounty = (self:GetTeamType() == kAlienTeamType and kPResPerBountyClaimAsAlien or kPResPerBountyClaimAsMarine)
         pResReward = bountyScore * pResClaimPerBounty
     end
     return pResReward
-end
-
-function PlayingTeam:GetResourcesPerRefund()
-    assert(true,"Override this please")
 end
 
 function PlayingTeam:AddTeamResources(amount, isIncome)
@@ -193,15 +173,6 @@ function PlayingTeam:CollectTeamResources(teamRes,playerRes)
             end
         end
     end
-end
-
-function PlayingTeam:GetRefundBase()
-    return 0
-    --local enemyTeam = GetGamerules():GetTeam(GetEnemyTeamNumber(self:GetTeamType()))
-    --if enemyTeam then
-    --    return math.max((enemyTeam:GetTotalTeamResources() or 0) - (self:GetTotalTeamResources() or 0),0)
-    --end
-    --return 0
 end
 
 local oldGetIsResearchRelevant = debug.getupvaluex(PlayingTeam.OnResearchComplete, "GetIsResearchRelevant")

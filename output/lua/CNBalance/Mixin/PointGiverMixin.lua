@@ -53,11 +53,7 @@ if Server then
                     resReward = resReward + team:CollectKillReward(_techID)
                 end
                 
-                if team and team.CollectAggressivePlayerResources then
-                    resReward = team:CollectAggressivePlayerResources(currentAttacker,resReward)
-                else
-                    resReward = currentAttacker:AddResources(resReward,true)
-                end
+                resReward = currentAttacker:AddResources(resReward,true)
                 
                 if damageFraction > kAssistMinimumDamageFraction and selfIsPlayer and currentAttacker ~= attacker then
                     currentAttacker:AddAssistKill()

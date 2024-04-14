@@ -14,7 +14,10 @@ if Client then
         if self.playing and self.soundEffectInstance then
             local volume = OptionsDialogUI_GetSoundVolume() / 100
             volume = volume * (gMuteCustomVoices and 0 or 1)
-            self.soundEffectInstance:SetVolume(volume)
+            if self.volume ~= volume then
+                self.volume = volume
+                self.soundEffectInstance:SetVolume(volume)
+            end
         end
     end
 
@@ -64,7 +67,7 @@ if Client then
     function StartSoundEffectForPlayer(soundEffectName, forPlayer, volume)
         baseStartSoundEffectForPlayer(soundEffectName, forPlayer, GetVolume(soundEffectName,volume))
     end
-    
-    
-    
+
+
+
 end

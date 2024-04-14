@@ -367,14 +367,14 @@ function CloakableMixin:OnScan()
 
 end
 
-function CloakableMixin:PrimaryAttack()
-
-    self:TriggerUncloak()
-
-end
-
 function CloakableMixin:OnGetIsSelectable(result, byTeamNumber)
     result.selectable = result.selectable and (byTeamNumber == self:GetTeamNumber() or not self:GetIsCloaked())
+end
+
+function CloakableMixin:PrimaryAttack()
+    local weapon = self:GetActiveWeapon()
+    if weapon and not weapon.kKeepCloakWhenPrimary then return end
+    self:TriggerUncloak()
 end
 
 function CloakableMixin:SecondaryAttack()

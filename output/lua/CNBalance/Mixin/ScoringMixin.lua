@@ -85,9 +85,6 @@ if Server then
 
     local function AddBounty(self,value)
         --if GetWarmupActive() then return end
-        local gamerule =  GetGamerules()
-        if GetTeamResourceRefundBase(self:GetTeamNumber()) > kTeamResourceRefundBase then return end    --Don't increase bounty while in inferior position(?)
-
         self.bountyCurrentLife = Clamp(self.bountyCurrentLife + value, 0, kMaxBountyScore)
         self.bountyCooldown = 0
     end

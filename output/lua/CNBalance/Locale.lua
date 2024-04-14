@@ -1,8 +1,5 @@
 
 if kTranslateMessage then
-    kTranslateMessage["RESOURCES_ALIEN"] = "进化因子"
-    kTranslateMessage["RESOURCES_MARINE"] = "军需补给点"
-
     kTranslateMessage["BUYMENU_ERROR_RANKREQUIRED"] = "需要军衔[%s]"
     kTranslateMessage["ABM_RANK"] = "需要段位[%s]"
     kTranslateMessage["ABM_DISABLED"] ="开发中"
@@ -210,8 +207,6 @@ if kTranslateMessage then
 end
 
 if kLocales then
-    kLocales["RESOURCES_ALIEN"] = "Evolve Matter"
-    kLocales["RESOURCES_MARINE"] = "Supply Point"
     
     kLocales["BUYMENU_ERROR_RANKREQUIRED"] = "Rank Required(%s)"
     kLocales["ABM_RANK"] ="Rank Required(%s)"

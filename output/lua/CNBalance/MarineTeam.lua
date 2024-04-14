@@ -248,29 +248,19 @@ function MarineTeam:Update(timePassed)
     TickMotionTrack(self)
 end
 
-
-
 function MarineTeam:OnTeamKill(techId, bountyScore)
+
+    local pRes = PlayingTeam.OnTeamKill(self,techId, bountyScore)
     if self.militaryProtocolTechNode:GetResearched() then
-        local baseRefund = kMilitaryProtocolTeamResourcesPerKill[techId] or 0
-        baseRefund = baseRefund + bountyScore * kMilitaryProtocolTResPerBountyClaim
-
-        if baseRefund > 0 then
-            self:AddTeamResources(baseRefund )
+        local tRes = kMilitaryProtocolTeamResourcesPerKill[techId] or 0
+        if tRes > 0 then
+            self:AddTeamResources(tRes)  
         end
+        
+        pRes = pRes + (kMilitaryProtocolPlayerResourcesPerKill[techId] or 0)
     end
-
-    return PlayingTeam.OnTeamKill(self,techId, 0) --Bounty claimed already
-end
-
-function MarineTeam:CollectAggressivePlayerResources(player,amount)
-    amount = amount * (self.militaryProtocolTechNode:GetResearched() and kMilitaryProtocolAggressivePersonalResourcesScalar or 1)
-    player:AddResources(amount,true)
-    return amount
-end
-
-function MarineTeam:GetResourcesPerRefund()
-    return 1.25,0.05
+    
+    return pRes
 end
 
 function MarineTeam:CollectTeamResources(teamRes,playerRes)

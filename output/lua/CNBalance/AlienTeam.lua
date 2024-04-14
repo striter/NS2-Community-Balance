@@ -1379,10 +1379,6 @@ function AlienTeam:GetTotalInRespawnQueue()
 
 end
 
-function AlienTeam:GetResourcesPerRefund()
-    return 0.5,0.2
-end
-
 function AlienTeam:CollectTeamResources(teamRes,playerRes)
     if self:IsOriginForm() then
         local activeHiveCount = self:GetActiveHiveCount()

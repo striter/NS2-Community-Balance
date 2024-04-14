@@ -48,16 +48,6 @@ end
 local kEndGameBegin = 1500
 local kEndGameTolerance = 900
 
--- Fuck bie bie le
---function GetDeathPlayerResources(_gameLength)
-    --_gameLength = _gameLength * 60
-    --local x = _gameLength
-    --
-    --local param =  math.Clamp(math.max(0,x - kEndGameBegin) / kEndGameTolerance,0,1)
-    --param = param* param
-    --return Lerp(0,20,param)
---end
-
 function GetRespawnTimeExtend(player,teamIndex, _gameLength)
     --_gameLength = _gameLength * 60
     local x = _gameLength
@@ -74,21 +64,4 @@ function GetRespawnTimeExtend(player,teamIndex, _gameLength)
     end
     
     return respawnExtension + teamExtension
-end
-
-function GetPassiveResourceEfficiency(_gameLength)
-    return 1
-
-    --_gameLength = _gameLength * 60
-    --
-    --local x = _gameLength
-    --local param =  math.Clamp(math.max(0,x - kEndGameBegin ) / kEndGameTolerance,0,1)
-    --param = param* param
-    --return Lerp(1,0,param)
-end
-
-function GetTeamResourceRefundBase(team)
-    local info = GetTeamInfoEntity(team)
-    if not info then return 0 end
-    return info.teamRefundResourcesBase
 end

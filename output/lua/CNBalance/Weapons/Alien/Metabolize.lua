@@ -14,6 +14,9 @@ local networkVars =
     useHudSlot = "boolean",
 }
 
+Metabolize.kKeepCloakWhenPrimary = true
+Metabolize.kKeepCloakWhenSecondary = true
+
 kMetabolizeDelay = 2.0
 local kMetabolizeEnergyRegain = 20
 local kMetabolizeHealthRegain = 25

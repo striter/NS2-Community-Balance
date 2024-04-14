@@ -2,7 +2,8 @@ Script.Load("lua/BiomassHealthMixin.lua")
 
 local kPhaseCooldownBase = 0.8
 local kPhaseCooldownPerGateUpEnd = 0.9
-local kBeaconInstantPhaseCooldown = 15
+local kBeaconInstantPhaseDuration = 15
+local kBeaconInstantPhaseCooldown = 0
 
 local baseOnCreate = PhaseGate.OnCreate
 function PhaseGate:OnCreate()
@@ -106,12 +107,17 @@ function PhaseGate:Phase(user)
         self.performedPhaseLastUpdate = true
 
         if Server then
-            local phaseTime = kPhaseCooldownBase
-            if not user.timeLastBeacon or Shared.GetTime() - user.timeLastBeacon > kBeaconInstantPhaseCooldown then
+            
+            
+            local phaseTime = kBeaconInstantPhaseCooldown
+
+            local instantPhase = user.timeLastBeacon and Shared.GetTime() - user.timeLastBeacon <= kBeaconInstantPhaseDuration
+            if not instantPhase then
                 local _,gateCount = GetDestinationGate(self)
                 gateCount = gateCount or 2
-                phaseTime = phaseTime + math.max( 0,gateCount - 2) * kPhaseCooldownPerGateUpEnd
+                phaseTime = kPhaseCooldownBase + math.max( 0,gateCount - 2) * kPhaseCooldownPerGateUpEnd
             end
+            
             self.cooldownNextPhase = phaseTime
         end
         

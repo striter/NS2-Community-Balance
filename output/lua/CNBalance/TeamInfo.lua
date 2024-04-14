@@ -26,7 +26,6 @@ local networkVars =
 {
     teamResources =  "float (0 to " .. kMaxTeamResources .. " by 0.1 [ 4 ])",
     totalTeamResources = "float (0 to " .. kMaxTotalTeamResources .. " by 1 [ 1 ])",
-    teamRefundResourcesBase = "float (0 to " .. kMaxTotalTeamResources .. " by 1 [ 1 ])",
     personalResources = "float (0 to " .. kMaxTotalPersonalResources .. " by 0.1) [ 4 ]",
     numResourceTowers = "integer (0 to 99)",
     numCapturedResPoints = "integer (0 to 99)",
@@ -204,7 +203,6 @@ if Server then
         self.lastCommIsBot = false
         self.lastCommLoginTime = 0
         self.totalTeamResources = 0
-        self.teamRefundResourcesBase = 0
         self.techActiveMask = 0
         self.techOwnedMask = 0
         self.playerCount = 0
@@ -292,7 +290,6 @@ function TeamInfo:UpdateInfo()
         self.teamResources = self.team:GetTeamResources()
         self.playerCount = Clamp(self.team:GetNumPlayers(), 0, 31)
         self.totalTeamResources = self.team:GetTotalTeamResources()
-        self.teamRefundResourcesBase = self.team:GetRefundBase()
         self.personalResources = 0
         for index, player in ipairs(self.team:GetPlayers()) do
             self.personalResources = self.personalResources + player:GetResources()

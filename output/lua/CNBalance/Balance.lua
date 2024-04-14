@@ -37,23 +37,10 @@ kTechDataPersonalResOnKill = {
 --TRes reward to kill certain structures, snowball rolling
 kTechDataTeamResOnKill = {
     --Marines
-    --[kTechId.ARC] = 4,      --Super aggressive one i mean
     [kTechId.CommandStation] = 12, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [kTechId.ElectronicStation] = 15,
     
     --Aliens
-    [kTechId.Hive] = 10, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20,
-}
-
--- Resource refund base on teams total income minus (anti snowball,could cause "miracle")
-kTeamResourceRefundBase = 100
-kTechDataTeamResRefundOnKill = {
-    --[kTechId.Exo] = 5,  [kTechId.JetpackMarine] = 3,  --[kTechId.Exosuit] = 0.05, Aint working due to its not attached with pointgivermixin
-    --[kTechId.Gorge] = 2, [kTechId.Prowler] = 3, [kTechId.Lerk] = 4, [kTechId.Fade] = 6, [kTechId.Onos] = 8,
-    --[kTechId.Extractor] = 5, [kTechId.PoweredExtractor] = 5, [kTechId.Harvester] = 5,
-    --[kTechId.PhaseGate] = 5, [kTechId.Tunnel] = 5,[kTechId.InfestedTunnel] = 5,
-    --?
-    --[kTechId.CommandStation] = 8, [kTechId.StandardStation] = 10, [kTechId.ExplosiveStation] = 10, [kTechId.ArmorStation] = 10, [kTechId.ElectronicStation] = 10,
-    --[kTechId.Hive] = 8, [kTechId.ShiftHive] = 10, [kTechId.CragHive] = 10, [kTechId.ShadeHive] = 10,
+    [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20,
 }
 
 --If a player kills too many players and crushing the game 
@@ -66,17 +53,18 @@ kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyCl
 --Toy for marine commander (remove all marines passive income, harsh one)
 kMilitaryProtocolResearchCost = 0
 kMilitaryProtocolResearchTime = 15
+kMilitaryProtocolTResPerBountyClaim = 0.5
 kMilitaryProtocolResearchDurationMultiply = 1 --1.2     --1.33?
-kMilitaryProtocolAggressivePersonalResourcesScalar = 1.5      --They don't need too much pres to buy defensive or grenades/welders (and they can shared it tbh)
-kMilitaryProtocolTResPerBountyClaim = 0.5   --Bounty score, don't give them pres, its doomed
-kMilitaryProtocolTeamResourcesPerKill = {          --Replaced refund system , append kTechDataTeamResOnKill above
+kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKill above
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.Drifter] = 1,
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
     [kTechId.Skulk] = 2, [kTechId.Gorge] = 5,[kTechId.Prowler] = 8, [kTechId.Lerk] = 10, [kTechId.Fade] = 15, [kTechId.Onos] = 20,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
-    [kTechId.Hive] = 10, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20
+    [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20
 }
-kMilitaryProtocolPResRefundOnDeath = 0.5
+kMilitaryProtocolPlayerResourcesPerKill = {
+    [kTechId.Skulk] = 0.5, [kTechId.Gorge] = 1, [kTechId.Prowler] = 2, [kTechId.Lerk] = 2, [kTechId.Fade] = 3, [kTechId.Onos] = 4,
+}
 
 kMatchMinPlayers = 8
 kMarineRespawnTime = 9
@@ -399,7 +387,7 @@ kXenocideDamageType = kDamageType.Structural
 kXenocideDamage = 150  kXenocideFuelDamage = 210 --200
 kXenocideRange = 8 kXenocideFuelRange = 12 -- 14
 kXenocideDamageScalarEmptyHealth = 0.2 kXenocideDamageHealthScalar = 1 - kXenocideDamageScalarEmptyHealth
-kXenocideSpawnReduction = 0.75 kXenocideFuelSpawnReduction = 0.5
+kXenocideSpawnReduction = 0.75 kXenocideFuelSpawnReduction = 0.6
 
 kBileBombResearchCost = 10
 kBileBombResearchTime = 40
@@ -489,7 +477,7 @@ kChargeDamage = 12
 kBoneShieldCooldown = 16
 kBoneShieldMinimumEnergyNeeded = 0
 kBoneShieldMinimumFuel = 0.15
-kBoneShieldMaxDuration = 8
+kBoneShieldMaxDuration = 10
 
 kStompEnergyCost = 35
 kStompDamageType = kDamageType.Structural

@@ -433,15 +433,10 @@ if Server then
         return variant
     end
     
-    local baseOnKill = Marine.OnKill
-    function Marine:OnKill(killer, doer, point, direction)
-        baseOnKill(self,killer, doer, point, direction)
-
-        local hasMP = GetHasTech(self,kTechId.MilitaryProtocol)
-        if hasMP then
-            self:AddResources(kMilitaryProtocolPResRefundOnDeath)
-        end
-    end
+    --local baseOnKill = Marine.OnKill
+    --function Marine:OnKill(killer, doer, point, direction)
+    --    baseOnKill(self,killer, doer, point, direction)
+    --end
     
     function Marine:GiveHeavy()
 

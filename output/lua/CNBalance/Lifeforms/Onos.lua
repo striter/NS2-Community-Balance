@@ -24,7 +24,7 @@ set {
 }
 
 local kEnergyClamp = 15
-local kEnergyReductionOnHit = 1
+local kFuelDeductPerHit = 1 / 200
 function Onos:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
 
     local classname = doer:GetClassName()
@@ -33,10 +33,15 @@ function Onos:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoin
         --TODO Exclude local player and trigger local-player only effect
         if reduction ~= 0 then
             damageTable.damage = damageTable.damage * reduction
-            if self:GetEnergy() > kEnergyClamp then
-                self:DeductAbilityEnergy(kEnergyReductionOnHit)
-            end
             self:TriggerEffects("boneshield_blocked", { effecthostcoords = Coords.GetTranslation(hitPoint) } )
+
+
+            local boneShield = self:GetActiveWeapon()
+            local fuel = boneShield:GetFuel() - kFuelDeductPerHit
+            boneShield:SetFuel(fuel)
+            if fuel <= 0 then
+                self:TriggerEffects("onos_shield_break")
+            end
         end
         return
     end
