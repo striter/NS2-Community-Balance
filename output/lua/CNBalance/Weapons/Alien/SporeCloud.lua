@@ -308,6 +308,10 @@ function SporeCloud:GetHealthPerBioMass()
     return kSporeCloudHealthPerBiomass
 end
 
+function SporeCloud:GetBiomassBaseReduction()
+    return 4
+end
+
 if Server then
 
     function SporeCloud:OnKill()

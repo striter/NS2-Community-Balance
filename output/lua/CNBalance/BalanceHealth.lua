@@ -237,8 +237,8 @@ kMatureSpurHealth = 900  kMatureSpurArmor = 300  kMatureSpurPointValue = 15  --9
 kVeilHealth = 900     kVeilArmor = 0     kVeilPointValue = 12
 kMatureVeilHealth = 1500     kMatureVeilArmor = 0     kVeilPointValue = 15  -- 1100 0
 
-kSporeCloudHealth = 25   kSporeCloudHealthPerBiomass = 25   --Spore Only plays with stuffs down below
-kWelderSporeDamagePerSecond = 250 kFlamethrowerSporeDamagePerSecond = 500
+kSporeCloudHealth = 5   kSporeCloudHealthPerBiomass = 25   --Spore Only plays with stuffs down below
+kWelderSporeDamagePerSecond = 250 kFlamethrowerSporeDamagePerSecond = 1000
 
 --Combat
 kWeaponCacheHealth = 800    kWeaponCacheArmor = 150   kWeaponCachePointValue = 10

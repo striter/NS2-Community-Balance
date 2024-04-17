@@ -47,10 +47,11 @@ if Server then
         
         local healthPerBiomass = self.GetHealthPerBioMass and self:GetHealthPerBioMass() or 0
         local healthPerPlayerExceed = self.GetHealthPerTeamExceed and self:GetHealthPerTeamExceed() or 0
+        local baseReduction = self.GetBiomassBaseReduction and self:GetBiomassBaseReduction() or 1
         
         if healthPerBiomass == 0 and healthPerPlayerExceed == 0 then return end
         
-        local levelMultiplier = math.Clamp( bioMassLevel - 1,0,kMaxBiomassHealthMultiplyLevel)
+        local levelMultiplier = math.Clamp( bioMassLevel - baseReduction,0,kMaxBiomassHealthMultiplyLevel)
         local newBiomassHealth = levelMultiplier * healthPerBiomass + playersAboveLimit * healthPerPlayerExceed
         newBiomassHealth = math.min(newBiomassHealth,3000)  --Clamp it due to hive max health greater than expected limit (?)
 
@@ -65,4 +66,5 @@ if Server then
     function BiomassHealthMixin:GetAdditionalHealth()
         return self.biomassHealth
     end
+    
 end

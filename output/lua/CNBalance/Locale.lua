@@ -193,6 +193,7 @@ if kTranslateMessage then
     kTranslateMessage["SHADE_TUNNEL_TOOLTIP"] = "*虫洞入口脱战后将对敌方单位不可见."
     
     kTranslateMessage["BUILD_ABILITY_TOOLTIP"] = "消耗体力建造阵地.\n*刺花(远程攻击范围内可视目标).\n*泥团(用于抵挡子弹)\n*孢子团块(死亡时爆炸并造成护甲伤害)\n-升级后将持续释放孢子云覆盖阵地.\n*拌网(减缓触碰的敌方单位速度)"
+    kTranslateMessage["BABBLER_MINE"] = "虫巢"
     kTranslateMessage["BABBLER_MINE_TOOLTIP"] = "自动感应式.\n*释放子虫追踪并攻击临近区域的敌方单位.\n*死亡时释放所有子虫攻击目标."
     kTranslateMessage["SPOREMINE"]="孢子团块"
     kTranslateMessage["SPOREMINE_TOOLTIP"]="自动感应式.\n*探测到临近敌方单位后.\n自爆以释放酸液攻击敌人."
