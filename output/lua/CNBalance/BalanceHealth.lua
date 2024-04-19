@@ -20,7 +20,7 @@
 
 kMarineHealth = 100    kMarineArmor = 30    kArmorPerUpgradeLevel = 20          kNanoMarineArmor = 35    kNanoArmorPerUpgradeLevel = 20
 kJetpackHealth = 120    kJetpackArmor = 45   kJetpackArmorPerUpgradeLevel = 25  kMPJetpackMarineArmor = 45   kMPJetpackArmorPerUpgradeLevel = 25  
-kExosuitHealth = 100    kExosuitArmor = 320  kExosuitArmorPerUpgradeLevel = 30  kExosuitMPArmor = 330 kExosuitMPArmorPerUpgradeLevel = 40
+kExosuitHealth = 100    kExosuitArmor = 320  kExosuitArmorPerUpgradeLevel = 30  kExosuitMPArmor = 320 kExosuitMPArmorPerUpgradeLevel = 30
 kMarinePointValue = 5   kJetpackPointValue = 12   kExosuitPointValue = 20
 
 kMedpackHeal = 25   kMedpackRegen = 25

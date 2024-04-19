@@ -373,7 +373,9 @@ end
 
 function CloakableMixin:PrimaryAttack()
     local weapon = self:GetActiveWeapon()
-    if weapon and not weapon.kKeepCloakWhenPrimary then return end
+    if not weapon 
+        or weapon.kKeepCloakWhenPrimary 
+    then return end
     self:TriggerUncloak()
 end
 
@@ -381,9 +383,7 @@ function CloakableMixin:SecondaryAttack()
 
     local weapon = self:GetActiveWeapon()
     if weapon and weapon:GetHasSecondary(self) and not weapon.kKeepCloakWhenSecondary then
-        
         self:TriggerUncloak()
-
     end
 
 end

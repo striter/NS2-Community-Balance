@@ -58,12 +58,12 @@ kMilitaryProtocolResearchDurationMultiply = 1 --1.2     --1.33?
 kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKill above
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.Drifter] = 1,
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
-    [kTechId.Skulk] = 2, [kTechId.Gorge] = 5,[kTechId.Prowler] = 8, [kTechId.Lerk] = 10, [kTechId.Fade] = 15, [kTechId.Onos] = 20,
+    [kTechId.Skulk] = 2, [kTechId.Gorge] = 5,[kTechId.Prowler] = 8, [kTechId.Lerk] = 10, [kTechId.Fade] = 15, [kTechId.Onos] = 18,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
     [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20
 }
 kMilitaryProtocolPlayerResourcesPerKill = {
-    [kTechId.Skulk] = 0.5, [kTechId.Gorge] = 1, [kTechId.Prowler] = 2, [kTechId.Lerk] = 2, [kTechId.Fade] = 3, [kTechId.Onos] = 4,
+    [kTechId.Skulk] = 1, [kTechId.Gorge] = 2, [kTechId.Prowler] = 3, [kTechId.Lerk] = 4, [kTechId.Fade] = 6, [kTechId.Onos] = 8,
 }
 
 kMatchMinPlayers = 8
@@ -326,7 +326,7 @@ kCannonDamageType = kDamageType.Structural
 
 kDualExosuitCost = 55
 kDualRailgunExosuitCost = 55
-kDualExosuitDropCost = 35
+kDualExosuitDropCost = 36
 kExosuitCost = kDualExosuitCost   --Used in some ways... (newcomer protection from )
 
 kOnosDevourCost = 10

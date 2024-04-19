@@ -248,23 +248,32 @@ function MarineTeam:Update(timePassed)
     TickMotionTrack(self)
 end
 
-function MarineTeam:OnTeamKill(techId, bountyScore)
+function MarineTeam:IsMilitaryProtocol()
+    return self.militaryProtocolTechNode:GetResearched()
+end
 
-    local pRes = PlayingTeam.OnTeamKill(self,techId, bountyScore)
-    if self.militaryProtocolTechNode:GetResearched() then
-        local tRes = kMilitaryProtocolTeamResourcesPerKill[techId] or 0
+function MarineTeam:OnTeamKill(_techId, bountyScore)
+
+    local pRes = PlayingTeam.OnTeamKill(self, _techId, bountyScore)
+    if self:IsMilitaryProtocol() then
+        local tRes = kMilitaryProtocolTeamResourcesPerKill[_techId] or 0
         if tRes > 0 then
             self:AddTeamResources(tRes)  
         end
-        
-        pRes = pRes + (kMilitaryProtocolPlayerResourcesPerKill[techId] or 0)
     end
     
     return pRes
 end
 
+function MarineTeam:CollectKillReward(_techId)
+    if self:IsMilitaryProtocol() then
+        return (kMilitaryProtocolPlayerResourcesPerKill[_techId] or 0)
+    end
+    return 0
+end
+
 function MarineTeam:CollectTeamResources(teamRes,playerRes)
-    if self.militaryProtocolTechNode:GetResearched() then
+    if self:IsMilitaryProtocol() then
         playerRes = 0   --No player res now
     end
 
@@ -272,11 +281,11 @@ function MarineTeam:CollectTeamResources(teamRes,playerRes)
 end
 
 function MarineTeam:GetResearchTimeFactor()
-    return self.militaryProtocolTechNode:GetResearched() and kMilitaryProtocolResearchDurationMultiply or 1
+    return self:IsMilitaryProtocol() and kMilitaryProtocolResearchDurationMultiply or 1
 end
 
 function MarineTeam:ShouldHandleManualAlert()            --He can handle it himself
-    return not self.militaryProtocolTechNode:GetResearched()
+    return not self:IsMilitaryProtocol()
 end
 
 function MarineTeam:OnResearchComplete(structure, researchId)
