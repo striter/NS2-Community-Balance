@@ -61,6 +61,7 @@ local kAmmoBarColors =
     [kTechId.Flamethrower] = Color(1,1,0,1),     -- yellow
     [kTechId.GrenadeLauncher] = Color(1,0,1,1),  -- magenta
     [kTechId.HeavyMachineGun] = Color(0.9,0,0,1),  -- red
+    [kTechId.Cannon] = Color(1,0.5,0,1), -- orange
 }
 
 local kAbilityBarColor = Color(0.65, 0.65, 0.65, 1)

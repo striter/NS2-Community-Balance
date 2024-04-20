@@ -630,17 +630,6 @@ function BuildTechData()
         [kTechDataResearchName] = "RESEARCH_CANNON",
     } )
 
-    table.insert(techData,{
-        [kTechDataId] = kTechId.DropCannon,
-        [kTechDataMapName] = Cannon.kMapName,
-        [kTechDataDisplayName] = "CANNON_DROP",
-        [kTechDataTooltipInfo] = "CANNON_TOOLTIP",
-        [kTechDataModel] = Cannon.kModelName,
-        [kTechDataCostKey] = kCannonDropCost,
-        [kStructureAttachId] = {kTechId.PrototypeLab,kTechId.CannonPrototypeLab,kTechId.JetpackPrototypeLab,kTechId.ExosuitPrototypeLab},
-        [kStructureAttachRange] = kArmoryWeaponAttachRange,
-        [kStructureAttachRequiresPower] = true,
-    } )
 
     table.insert(techData,{
         [kTechDataId] = kTechId.Cannon,
@@ -652,6 +641,18 @@ function BuildTechData()
         [kTechDataModel] = Cannon.kModelName,
         [kTechDataDamageType] = kCannonDamageType,
         [kTechDataCostKey] = kCannonCost,
+    } )
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.DropCannon,
+        [kTechDataMapName] = Cannon.kMapName,
+        [kTechDataDisplayName] = "CANNON_DROP",
+        [kTechDataTooltipInfo] = "CANNON_TOOLTIP",
+        [kTechDataModel] = Cannon.kModelName,
+        [kTechDataCostKey] = kCannonDropCost,
+        [kStructureAttachId] = {kTechId.PrototypeLab,kTechId.CannonPrototypeLab,kTechId.JetpackPrototypeLab,kTechId.ExosuitPrototypeLab},
+        [kStructureAttachRange] = kArmoryWeaponAttachRange,
+        [kStructureAttachRequiresPower] = true,
     } )
     
     table.insert(techData, {

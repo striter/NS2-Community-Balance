@@ -61,7 +61,7 @@ kAlienCrushDamagePercentByLevel = 0.07 --0.07
 
 
 kFocusDamageBonusAtMax = 0.66 kFocusAttackSlowAtMax = 2
-kSpitFocusDamageBonusAtMax = 0.66  kSpitFocusAttackSlowAtMax = 0
+kSpitFocusDamageBonusAtMax = 0.5  kSpitFocusAttackSlowAtMax = 0
 kVolleyFocusDamageBonusAtMax = 0.2  kVolleyFocusAttackSlowAtMax = 0
 kSwipeFocusDamageBonusAtMax = 0.6
 kGoreFocusDamageBonusAtMax = 1  kGoreFocusAttackSlowAtMax = 1
