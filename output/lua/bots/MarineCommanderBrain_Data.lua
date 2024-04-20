@@ -566,7 +566,7 @@ function(bot, brain, com)
                     if buildPos and
                             brain:GetIsSafeToDropInLocation(cs:GetLocationName(), com:GetTeamNumber(), senses:Get("isEarlyGame")) and
                             #GetEntitiesAliveForTeamWithinRange("Marine", com:GetTeamNumber(), buildPos, kMarinesNearbyRange) > 0 then
-                        -- Hier überprüfe ich, ob die Anzahl der Roboterfabriken im Team kleiner als kMaxRoboticsFactories ist, indem ich die Funktion GetEntitiesForTeam aufrufe
+                        -- Hier ï¿½berprï¿½fe ich, ob die Anzahl der Roboterfabriken im Team kleiner als kMaxRoboticsFactories ist, indem ich die Funktion GetEntitiesForTeam aufrufe
                         local allRoboticsFactories = GetEntitiesForTeam("RoboticsFactory", comTeam)
                         if #allRoboticsFactories < kMaxRoboticsFactories then
                             -- Wenn ja, dann setze ich das Gewicht auf den normalen Wert, um den Bot eine Roboterfabrik bauen zu lassen
@@ -1032,7 +1032,7 @@ function(bot, brain, com)
                         if targetPosGL then
                         brain:ExecuteTechId(com, kTechId.DropGrenadeLauncher, targetPosGL, com, protoToDropNear:GetId())
            
-                                                                                                             -- zusätzlicher Befehl     --orginal nur kTechId.DropJetpack
+                                                                                                             -- zusï¿½tzlicher Befehl     --orginal nur kTechId.DropJetpack
                 end
             local message = string.format("I dropped supplies in our starting base!", overrideName)
             bot:SendTeamMessage(message, 10, false, true)

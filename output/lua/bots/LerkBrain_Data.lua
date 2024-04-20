@@ -436,8 +436,8 @@ local function PerformAttack( eyePos, mem, bot, brain, move )
         end
 
         PerformAttackEntity( eyePos, target, mem.lastSeenPos, bot, brain, move )
-        local chatMsg =  bot:SendTeamMessage( "Wings and venom earthlings! " .. target:GetMapName() .. " in " .. target:GetLocationName() )
-            bot:SendTeamMessage(chatMsg, 60)
+        --local chatMsg =  bot:SendTeamMessage( "Wings and venom earthlings! " .. target:GetMapName() .. " in " .. target:GetLocationName() )
+        --    bot:SendTeamMessage(chatMsg, 60)
 
     else
         assert(false)

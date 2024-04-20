@@ -356,7 +356,7 @@ local function PerformAttackEntity( eyePos, bestTarget, lastSeenPos, bot, brain,
             if isNotDetected and bot.sneakyAbility and distance < 20.0 and distance > 4.0 and isDodgeable and
                 (not bot.lastFoughtEnemy or bot.lastFoughtEnemy + 10 < time) and not sighted then
                 
-                --bot:SendTeamMessage("I can hear enemys are near!", 60) --für mehr Spielgefühl/Spaß
+                --bot:SendTeamMessage("I can hear enemys are near!", 60) --fï¿½r mehr Spielgefï¿½hl/Spaï¿½
                 move.commands = AddMoveCommand( move.commands, Move.MovementModifier )
             end
             
@@ -400,21 +400,21 @@ local function PerformAttackEntity( eyePos, bestTarget, lastSeenPos, bot, brain,
             local botToTarget = GetNormalizedVectorXZ(marinePos - eyePos)
             local sideVector = botToTarget:CrossProduct(Vector(0, 1, 0))
             
-            -- Zufällige Auswahl des Seitenvektors
+            -- Zufï¿½llige Auswahl des Seitenvektors
             if math.random() < 0.5 then
                 bot.jumpOffset = botToTarget + sideVector
             else
                 bot.jumpOffset = botToTarget - sideVector
             end
             
-            -- Zufällige Verzögerung vor der nächsten Aktion
+            -- Zufï¿½llige Verzï¿½gerung vor der nï¿½chsten Aktion
             bot.nextActionTime = Shared.GetTime() + math.random() * 0.5
             
-            -- Setzen des gewünschten Blickziels des Bots
+            -- Setzen des gewï¿½nschten Blickziels des Bots
             bot:GetMotion():SetDesiredViewTarget(bestTarget:GetEngagementPoint())
         end
         
-        -- Zufällige Bewegungsrichtung nach dem Sprung
+        -- Zufï¿½llige Bewegungsrichtung nach dem Sprung
         if bot.nextActionTime ~= nil and Shared.GetTime() >= bot.nextActionTime then
             local randomDirection = Vector(math.random() - 0.5, 0, math.random() - 0.5):GetUnit()
             bot:GetMotion():SetDesiredMoveDirection(randomDirection)
@@ -453,8 +453,8 @@ local function PerformAttack( eyePos, mem, bot, brain, move )
         if not target:isa("Player") or GetDistanceToTouch(  eyePos, target ) < 15 then
             brain.teamBrain:UnassignBot(bot)
             brain.teamBrain:AssignBotToMemory(bot, mem)
-             local chatMsg =  bot:SendTeamMessage( "Leap and bite all mankind! " .. target:GetMapName() .. " in " .. target:GetLocationName() )
-            bot:SendTeamMessage(chatMsg, 60)
+             --local chatMsg =  bot:SendTeamMessage( "Leap and bite all mankind! " .. target:GetMapName() .. " in " .. target:GetLocationName() )
+            --bot:SendTeamMessage(chatMsg, 60)
         end
         
         PerformAttackEntity( eyePos, target, mem.lastSeenPos, bot, brain, move )

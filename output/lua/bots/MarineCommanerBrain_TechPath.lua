@@ -9,10 +9,10 @@
 Script.Load("lua/TechTreeConstants.lua")
 
 kMarineTechPathOverrideType = enum(
-{
-    'None',
-    'Shotguns'
-})
+        {
+            'None',
+            'Shotguns'
+        })
 
 local kMaxSimultaneousResearch = 2
 
@@ -24,6 +24,9 @@ local kBuildTechIdToSenseMap =
     [kTechId.PhaseGate]          = "mainPhaseGate"         ,
     [kTechId.AdvancedArmory]     = "mainAdvancedArmory"    ,
     [kTechId.PrototypeLab]       = "mainPrototypeLab"      ,
+    [kTechId.JetpackPrototypeLab]       = "mainJetpackLab"      ,
+    [kTechId.ExosuitPrototypeLab]       = "mainExosuitLab"      ,
+    [kTechId.StandardStation]       = "mainStandardStation"      ,
     --[kTechId.RoboticsFactory]    = "hasRoboticsFactoryInBase"   ,
     --[kTechId.ARCRoboticsFactory] = "hasARCRoboticsFactoryInBase",
 }
@@ -41,7 +44,9 @@ local kMarineCommanderTechPath =
     {
         kTechId.ArmsLab,
         kTechId.Armor1,
-        kTechId.Armory,      
+        kTechId.Weapons1,
+        kTechId.Armory,
+        kTechId.GrenadeTech,
     },
 
     -- Tier 2
@@ -50,7 +55,6 @@ local kMarineCommanderTechPath =
         kTechId.Observatory,
         kTechId.PhaseTech,
 
-        kTechId.Weapons1,
         kTechId.PhaseGate,
         kTechId.MinesTech,
         kTechId.Armor2,
@@ -61,23 +65,33 @@ local kMarineCommanderTechPath =
         -- Auxillary stuff
         kTechId.ShotgunTech,
         kTechId.Weapons2,
-        kTechId.GrenadeTech,
     },
-
     -- Tier 4
     {
         kTechId.AdvancedArmoryUpgrade, -- Flamethrower, GL, HMG all unlocked by this upgrade
-        kTechId.PrototypeLab,     
+        kTechId.PrototypeLab,
     },
 
     -- Tier 5
     {
-        kTechId.JetpackTech,
-        kTechId.ExosuitTech,
-        kTechId.AdvancedMarineSupport, -- Nanoshield, Powersurge, Catpack
+        --kTechId.ExosuitTech,
+        kTechId.JetpackProtoUpgrade,
         kTechId.Weapons3,
         kTechId.Armor3,
+
+        -- Till comm could really research standard supply?
+        --kTechId.StandardSupply,
+        --kTechId.DragonBreath,
+        --kTechId.MotionTrack,
     },
+}
+
+local kTechTestReroutes =
+{
+    [kTechId.AdvancedArmoryUpgrade] = kTechId.AdvancedArmory,
+    [kTechId.JetpackProtoUpgrade] = kTechId.JetpackPrototypeLab,
+    [kTechId.ExosuitProtoUpgrade] = kTechId.ExosuitPrototypeLab,
+    [kTechId.StandardSupply] = kTechId.StandardStation,
 }
 
 local kMarineTechPathOverrides =
@@ -112,11 +126,6 @@ local kMarineTechPathOverrides =
 
         end,
     }
-}
-
-local kTechTestReroutes =
-{
-    [kTechId.AdvancedArmoryUpgrade] = kTechId.AdvancedArmory
 }
 
 --[[

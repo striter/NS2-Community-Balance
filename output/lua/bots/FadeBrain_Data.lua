@@ -222,7 +222,7 @@ local function PerformAttackEntity( eyePos, bestTarget, bot, brain, move )
     --fuzzy range, to allow self+targ move to potentially get hit in range (plus latency, etc.)
     if dist <= kFadeAttackRange + math.random(0.05, 0.125) then
         doFire = true
-        move.commands = AddMoveCommand( move.commands, Move.PrimaryAttack ) -- hinzugefügt für mehr Trefferchancen....
+        move.commands = AddMoveCommand( move.commands, Move.PrimaryAttack ) -- hinzugefï¿½gt fï¿½r mehr Trefferchancen....
     end
 
     local idealMoveTo = GetPositionBehindTarget( fade, bestTarget, kFadeAttackRange )
@@ -287,8 +287,8 @@ local function PerformAttack( eyePos, mem, bot, brain, move )
     if target ~= nil then
 
         PerformAttackEntity( eyePos, target, bot, brain, move )
-         local chatMsg =  bot:SendTeamMessage( "Blink and slash marines! " .. target:GetMapName() .. " in " .. target:GetLocationName() )
-            bot:SendTeamMessage(chatMsg, 60)
+         --local chatMsg =  bot:SendTeamMessage( "Blink and slash marines! " .. target:GetMapName() .. " in " .. target:GetLocationName() )
+         --   bot:SendTeamMessage(chatMsg, 60)
 
     else
     

@@ -444,8 +444,8 @@ local function PerformAttack( eyePos, mem, bot, brain, move )
 
     if target ~= nil then
         PerformAttackEntity( eyePos, target, mem.lastSeenPos, bot, brain, move )
-                 local chatMsg =  bot:SendTeamMessage( "Spit and bile on humanity! " .. target:GetMapName() .. " in " .. target:GetLocationName() )
-            bot:SendTeamMessage(chatMsg, 60)
+                 --local chatMsg =  bot:SendTeamMessage( "Spit and bile on humanity! " .. target:GetMapName() .. " in " .. target:GetLocationName() )
+            --bot:SendTeamMessage(chatMsg, 60)
     else
         -- mem is too far to be relevant, so move towards it
         bot:GetMotion():SetDesiredViewTarget(nil)
@@ -1456,14 +1456,14 @@ function CreateGorgeBrainSenses()
             function( mem )                    
                 local ent = Shared.GetEntity( mem.entId )
                 
-                --Entferne die Zeilen, die Marines und PowerPoints ausschließen.
+                --Entferne die Zeilen, die Marines und PowerPoints ausschlieï¿½en.
                 if HasMixin(ent, "Corrode") then
                 --if HasMixin(ent, "Corrode") then
                     local isAlive = HasMixin(ent, "Live") and ent:GetIsAlive()
                     local isEnemy = HasMixin(ent, "Team") and ent:GetTeamNumber() ~= team                    
                     
                     if HasMixin(ent, "Construct") then
-                        --Passe die Zeile an, die die Konstruktion berücksichtigt
+                        --Passe die Zeile an, die die Konstruktion berï¿½cksichtigt
                         --return isAlive and isEnemy and ent:GetIsBuilt()    
                         return isAlive and isEnemy and ent:GetIsBuilt()
                     end

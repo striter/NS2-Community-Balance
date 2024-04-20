@@ -9,32 +9,47 @@
 Script.Load("lua/TechTreeConstants.lua")
 
 kAlienTechPathOverrideType = enum(
-{
-    'None',
-    'BileBomb'
-})
+        {
+            'None',
+            'BileBomb'
+        })
 
 local kMaxConcurrentTechSteps = 2
-
 -- Table of research order of Alien Commander Bot.
 -- Each group of things in a "tier" can be randomized to provide variance,
 -- but they're already ordered in terms of biomass requirements
 local kAlienCommanderTechPath =
 {
 
-    -- Tier 1 - 4
+    -- Tier 1
     {
-        kTechId.MetabolizeEnergy, -- Bio 3
         kTechId.Leap, -- Bio 4
+        kTechId.MetabolizeEnergy, -- Bio 3
         kTechId.BileBomb, -- Bio 2
-        kTechId.Spores, -- Bio 6
-        kTechId.MetabolizeHealth, -- Bio 5
-        kTechId.BoneShield, -- Bio 6
+        kTechId.Spores, -- Bio 4
+        kTechId.Devour,
+    },
+
+    -- Tier 2
+    {
         kTechId.Umbra, -- Bio 6
+        kTechId.MetabolizeHealth, -- Bio 5
+        kTechId.ShiftTunnel, --Bio 5
+        kTechId.BoneShield, -- Bio 6
+    },
+
+    -- Tier 3
+    {
+        kTechId.AcidSpray,
+        kTechId.Stomp,
         kTechId.Stab,
-        kTechId.Stomp, -- Bio 8
-        kTechId.Xenocide, -- Bio 9
-        kTechId.Contamination, -- Bio 12, Not a research node, but this should nudge ComBot to get biomass 12
+        kTechId.Xenocide,
+    },
+
+    -- Tier 4
+    {
+        kTechId.Contamination,
+        kTechId.XenocideFuel,
     }
 
 }

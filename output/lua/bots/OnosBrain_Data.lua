@@ -277,7 +277,7 @@ local function PerformAttackEntity( eyePos, bestTarget, bot, brain, move )
         local tNow = Shared.GetTime()
         local isStomping = hasStomp and goreWeapon:GetIsStomping()
         if brain.lastIsStomping and brain.lastIsStomping ~= isStomping then
-            --brain.wantsToStomp = false --Orginal = false (fehler der mit der zeit bewirkt das der onos nicht mehr kämpfen kann und in seiner stomp animation festhängt, wenn auf false) bot kann sich selbst debuggen wenn der fehler autritt (SwitchToBoneShield) /false bezieht sich nur auf den code if not brain.wantsToStomp wenn er aktiv ist.  
+            --brain.wantsToStomp = false --Orginal = false (fehler der mit der zeit bewirkt das der onos nicht mehr kï¿½mpfen kann und in seiner stomp animation festhï¿½ngt, wenn auf false) bot kann sich selbst debuggen wenn der fehler autritt (SwitchToBoneShield) /false bezieht sich nur auf den code if not brain.wantsToStomp wenn er aktiv ist.  
         end
 
         brain.lastIsStomping = isStomping
@@ -325,8 +325,8 @@ local function PerformAttack( eyePos, mem, bot, brain, move )
     if target ~= nil then
 
         PerformAttackEntity( eyePos, target, bot, brain, move )
-         local chatMsg =  bot:SendTeamMessage( "Stomp and crush TSF! " .. target:GetMapName() .. " in " .. target:GetLocationName() )
-            bot:SendTeamMessage(chatMsg, 60)
+         --local chatMsg =  bot:SendTeamMessage( "Stomp and crush TSF! " .. target:GetMapName() .. " in " .. target:GetLocationName() )
+         --   bot:SendTeamMessage(chatMsg, 60)
 
     else
     

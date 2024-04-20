@@ -2260,7 +2260,7 @@ kMarineBrainObjectiveActions =
 
         local techTree = GetTechTree(marine:GetTeamNumber())
 
-        if not techTree:GetHasTech(kTechId.ExosuitTech, true) then
+        if not techTree:GetIsTechAvailable(kTechId.DualMinigunExosuit) then
             return kNilAction
         end
 
@@ -2291,7 +2291,7 @@ kMarineBrainObjectiveActions =
         end
 
         local buyId = kTechId.DualMinigunExosuit
-        if totalRailgunsAllowed > 0 and math.random() > 0.5 then
+        if totalRailgunsAllowed > 0 and techTree:GetIsTechAvailable(kTechId.DualRailgunExosuit) and math.random() > 0.5 then
             buyId = kTechId.DualRailgunExosuit -- Don't need many railguns, miniguns much more useful
         end
 
@@ -2374,22 +2374,22 @@ kMarineBrainObjectiveActions =
             local armoryGoal = sdb:Get("nearbyArmory")
             local armory = armoryGoal and armoryGoal.armory or nil
             targetArmory = armory
-            local isAdvArmory = targetArmory ~= nil and targetArmory:isa("AdvancedArmory") or false
-
-            --local wantAdvancedWeapon = brain.activeWeaponPurchaseTechId ~= kTechId.Shotgun -- Dieser Befehl sorgt nur dafür, dass die Bots nur die Schrotflinte im aktvien Spiel kaufen.
-
-            if wantAdvancedWeapon and not isAdvArmory then
-            --Only update if needed
-                local advArmoryGoal = sdb:Get("nearbyAdvancedArmory")
-                if advArmoryGoal and advArmoryGoal.armory then
-                    targetArmory = advArmoryGoal.armory
-                else
-                --Adv armory doesn't exist, or was destroyed, bail-out on this action
-                    wantNewWeapon = false
-                    targetArmory = nil
-                    weight = 0
-                end
-            end
+            --local isAdvArmory = targetArmory ~= nil and targetArmory:isa("AdvancedArmory") or false
+            --
+            --local wantAdvancedWeapon = brain.activeWeaponPurchaseTechId ~= kTechId.Shotgun 
+            --
+            --if wantAdvancedWeapon and not isAdvArmory then
+            ----Only update if needed
+            --    local advArmoryGoal = sdb:Get("nearbyAdvancedArmory")
+            --    if advArmoryGoal and advArmoryGoal.armory then
+            --        targetArmory = advArmoryGoal.armory
+            --    else
+            --    --Adv armory doesn't exist, or was destroyed, bail-out on this action
+            --        wantNewWeapon = false
+            --        targetArmory = nil
+            --        weight = 0
+            --    end
+            --end
 
             if targetArmory then
                 weight = GetMarineObjectiveBaselineWeight( kMarineBrainObjectiveTypes.BuyWeapons )
@@ -2419,7 +2419,7 @@ kMarineBrainObjectiveActions =
             local techTree = GetTechTree(marine:GetTeamNumber())    --BOT-TODO This kind of thing could be cached in TeamBrain when Tech-Unlock message is triggered
             if techTree then
                 for _, weaponTechId in ipairs(weapons) do
-                    if techTree:GetHasTech(weaponTechs[weaponTechId], true) then
+                    if techTree:GetIsTechAvailable(weaponTechs[weaponTechId], true) then
                         availableWeapons[#availableWeapons + 1] = weaponTechId
                         availableWeapons[weaponTechId] = true
                         hasAnyOptions = true
@@ -2516,7 +2516,7 @@ kMarineBrainObjectiveActions =
         
         local techTree = GetTechTree(marine:GetTeamNumber())
         
-        if proto and protoDist and not marine:isa("JetpackMarine") and techTree:GetHasTech(kTechId.JetpackTech, true) and resources >= LookupTechData(kTechId.Jetpack, kTechDataCostKey) then
+        if proto and protoDist and not marine:isa("JetpackMarine") and techTree:GetIsTechAvailable(kTechId.JetpackTech, true) and resources >= LookupTechData(kTechId.Jetpack, kTechDataCostKey) then
             weight = GetMarineObjectiveBaselineWeight( kMarineBrainObjectiveTypes.BuyJetpack )
                     
             if bot.wantsJetpack then
@@ -2851,6 +2851,7 @@ end, -- BUY HandGrenades
 local IsLifeformThreat = function(mem)
     local t = mem.btype
     local isThreat = t >= kMinimapBlipType.Skulk and t <= kMinimapBlipType.Gorge
+        or t == kMinimapBlipType.Prowler
         or t == kMinimapBlipType.Drifter
         or t == kMinimapBlipType.Whip
         or t == kMinimapBlipType.Hydra
@@ -4169,6 +4170,7 @@ function CreateMarineBrainSenses()
                     local shouldIgnore = (mem.btype >= kMinimapBlipType.Skulk and mem.btype <= kMinimapBlipType.Gorge)
                         or mem.btype == kMinimapBlipType.Infestation
                         or mem.btype == kMinimapBlipType.InfestationDying
+                        or mem.btype == kMinimapBlipType.Prowler
 
                     if shouldIgnore then
                         return nil
