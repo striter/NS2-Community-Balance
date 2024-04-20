@@ -817,7 +817,7 @@ local function HasGoodWeapon(marine)
     local primaryWep = marine:GetWeaponInHUDSlot(1)
     if not primaryWep then return false end
 
-    local goodWeps = {'Shotgun','HeavyMachineGun','Flamethrower','GrenadeLauncher'}
+    local goodWeps = {'Shotgun','HeavyMachineGun','Flamethrower','GrenadeLauncher','Cannon'}
     return table.icontains( goodWeps, primaryWep:GetClassName() )
     --[[
     return 
@@ -2405,6 +2405,7 @@ kMarineBrainObjectiveActions =
                 kTechId.Shotgun,
                 kTechId.Flamethrower,
                 kTechId.GrenadeLauncher,
+                kTechId.Cannon,
             })
 
             local weaponTechs = 
@@ -2413,6 +2414,7 @@ kMarineBrainObjectiveActions =
                 [kTechId.Flamethrower] = kTechId.AdvancedWeaponry,
                 [kTechId.GrenadeLauncher] = kTechId.AdvancedWeaponry,
                 [kTechId.HeavyMachineGun] = kTechId.AdvancedWeaponry,
+                [kTechId.Cannon] = kTechId.PrototypeLab,
             }
 
             local hasAnyOptions = false
@@ -3561,7 +3563,9 @@ kMarineBrainActions =
                 if className == "Shotgun" or
                     className == "GrenadeLauncher" or
                     className == "HeavyMachineGun" or
-                    className == "Flamethrower" then
+                    className == "Flamethrower" or
+                    className == "Cannon"
+                then
 
                     weapons[#weapons + 1] = ent
                 end

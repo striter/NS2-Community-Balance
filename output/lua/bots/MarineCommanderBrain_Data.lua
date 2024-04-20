@@ -885,7 +885,7 @@ function(bot, brain, com)
         local senses = brain:GetSenses()
         local comTeam = com:GetTeamNumber()
         local doables = senses:Get("doableTechIds")
-        local tooMuchRes = com:GetTeamResources() >= 200
+        local tooMuchRes = com:GetTeamResources() >= 160
 
         local weight = 0
         local protoToDropNear
@@ -902,141 +902,30 @@ function(bot, brain, com)
             end
 
         end
+
+        local function DropWeapon(origin, radius, execTechId)
+            local targetPos = GetRandomSpawnForCapsule(radius, radius, origin, 0.01, kArmoryWeaponAttachRange * 0.65, EntityFilterAll(), nil)
+            if targetPos then
+                brain:ExecuteTechId(com, execTechId, targetPos, com, protoToDropNear:GetId())
+            end
+        end
         
         return { name = name, weight = weight,
             perform = function(move)
-
-                local aroundPos = protoToDropNear:GetOrigin()
-                local targetPos = GetRandomSpawnForCapsule(0.4,
-                        0.4,
-                        aroundPos,
-                        0.01,
-                        kArmoryWeaponAttachRange * 0.65,
-                        EntityFilterAll(), nil)
-                        
-                        if targetPos then
-                        brain:ExecuteTechId(com, kTechId.DropJetpack, targetPos, com, protoToDropNear:GetId())
-                        end
-                        
-                local aroundPosJP2 = protoToDropNear:GetOrigin()
-                local targetPosJP2 = GetRandomSpawnForCapsule(0.7,
-                        0.7,
-                        aroundPosJP2,
-                        0.01,
-                        kArmoryWeaponAttachRange * 0.65,
-                        EntityFilterAll(), nil)
-                        
-                        if targetPos then
-                        brain:ExecuteTechId(com, kTechId.DropJetpack, targetPosJP2, com, protoToDropNear:GetId())
-                        end
-                local aroundPosJP3 = protoToDropNear:GetOrigin()
-                local targetPosJP3 = GetRandomSpawnForCapsule(0.8,
-                        0.8,
-                        aroundPosJP3,
-                        0.01,
-                        kArmoryWeaponAttachRange * 0.65,
-                        EntityFilterAll(), nil)
-                        
-                        if targetPos then
-                        brain:ExecuteTechId(com, kTechId.DropJetpack, targetPosJP3, com, protoToDropNear:GetId())
-                        end
-                local aroundPosJP4 = protoToDropNear:GetOrigin()
-                local targetPosJP4 = GetRandomSpawnForCapsule(0.6,
-                        0.6,
-                        aroundPosJP4,
-                        0.01,
-                        kArmoryWeaponAttachRange * 0.65,
-                        EntityFilterAll(), nil)
-                        
-                        if targetPos then
-                        brain:ExecuteTechId(com, kTechId.DropJetpack, targetPosJP4, com, protoToDropNear:GetId())
-                        end
-                local aroundPosJP5 = protoToDropNear:GetOrigin()
-                local targetPosJP5 = GetRandomSpawnForCapsule(0.6,
-                        0.6,
-                        aroundPosJP5,
-                        0.01,
-                        kArmoryWeaponAttachRange * 0.65,
-                        EntityFilterAll(), nil)
-                        
-                        if targetPos then
-                        brain:ExecuteTechId(com, kTechId.DropJetpack, targetPosJP5, com, protoToDropNear:GetId())
-                        end
-                local aroundPosSG = protoToDropNear:GetOrigin()
-                local targetPosSG = GetRandomSpawnForCapsule(0.2,
-                        0.2,
-                        aroundPosSG,
-                        0.01,
-                        kArmoryWeaponAttachRange * 0.75,
-                        EntityFilterAll(), nil)
-                        
-                 if targetPosSG then
-                    brain:ExecuteTechId(com, kTechId.DropShotgun, targetPosSG, com, protoToDropNear:GetId())
-                   end
-               local aroundPosSG2 = protoToDropNear:GetOrigin()
-               local targetPosSG2 = GetRandomSpawnForCapsule(0.1,
-                        0.1,
-                        aroundPosSG2,
-                        0.01,
-                        kArmoryWeaponAttachRange * 0.75,
-                        EntityFilterAll(), nil)
-                        
-                 if targetPosSG then
-                    brain:ExecuteTechId(com, kTechId.DropShotgun, targetPosSG2, com, protoToDropNear:GetId())
-                   end
-              
-                local aroundPosFT = protoToDropNear:GetOrigin()
-                local targetPosFT = GetRandomSpawnForCapsule(0.3,
-                        0.3,
-                        aroundPosFT,
-                        0.01,
-                        kArmoryWeaponAttachRange * 0.75,
-                        EntityFilterAll(), nil)
-                        
-                    if targetPosFT then
-                    brain:ExecuteTechId(com, kTechId.DropFlamethrower, targetPosFT, com, protoToDropNear:GetId())
-                   end
-                   
-                local aroundPosFT2 = protoToDropNear:GetOrigin()
-                local targetPosFT2 = GetRandomSpawnForCapsule(0.3,
-                        0.3,
-                        aroundPosFT2,
-                        0.01,
-                        kArmoryWeaponAttachRange * 0.75,
-                        EntityFilterAll(), nil)
-                        
-                    if targetPosFT then
-                    brain:ExecuteTechId(com, kTechId.DropFlamethrower, targetPosFT2, com, protoToDropNear:GetId())
-                   end  
-                   
-               local aroundPosHMG = protoToDropNear:GetOrigin()                     
-               local targetPosHMG = GetRandomSpawnForCapsule(0.5,
-                        0.5,
-                        aroundPosHMG,
-                        0.01,
-                        kArmoryWeaponAttachRange * 0.75,
-                        EntityFilterAll(), nil)
-                        
-                        if targetPosHMG then
-                        brain:ExecuteTechId(com, kTechId.DropHeavyMachineGun, targetPosHMG, com, protoToDropNear:GetId())
-                        end
-                        
-               local aroundPosGL = protoToDropNear:GetOrigin()                     
-               local targetPosGL = GetRandomSpawnForCapsule(0.9,
-                        0.9,
-                        aroundPosGL,
-                        0.01,
-                        kArmoryWeaponAttachRange * 0.75,
-                        EntityFilterAll(), nil)
-                        
-                        if targetPosGL then
-                        brain:ExecuteTechId(com, kTechId.DropGrenadeLauncher, targetPosGL, com, protoToDropNear:GetId())
-           
-                                                                                                             -- zus�tzlicher Befehl     --orginal nur kTechId.DropJetpack
-                end
-            local message = string.format("I dropped supplies in our starting base!", overrideName)
-            bot:SendTeamMessage(message, 10, false, true)
-
+                local protoOrigin = protoToDropNear:GetOrigin()
+                DropWeapon(protoOrigin,0.4,kTechId.DropJetpack)
+                DropWeapon(protoOrigin,0.7,kTechId.DropJetpack)
+                DropWeapon(protoOrigin,0.8,kTechId.DropJetpack)
+                DropWeapon(protoOrigin,0.6,kTechId.DropJetpack)
+                DropWeapon(protoOrigin,0.6,kTechId.DropJetpack)
+                DropWeapon(protoOrigin,0.2,kTechId.DropShotgun)
+                DropWeapon(protoOrigin,0.1,kTechId.DropShotgun)
+                DropWeapon(protoOrigin,0.3,kTechId.DropFlamethrower)
+                DropWeapon(protoOrigin,0.3,kTechId.DropFlamethrower)
+                DropWeapon(protoOrigin,0.5,kTechId.DropHeavyMachineGun)
+                DropWeapon(protoOrigin,0.3,kTechId.DropGrenadeLauncher)
+                local message = string.format("I dropped supplies in our starting base!", overrideName)
+                bot:SendTeamMessage(message, 10, false, true)
             end}
 
     end, -- Drop Jetpack und/oder Waffen
