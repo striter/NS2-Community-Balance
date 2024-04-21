@@ -28,14 +28,11 @@ function Flamethrower:BurnSporesAndUmbra(startPoint, endPoint)
             burnSpent = true
         end
 
-        local clouds = GetEntitiesWithinRange("CragUmbra", checkAtPoint, CragUmbra.kRadius)
-        table.copy(GetEntitiesWithinRange("StormCloud", checkAtPoint, StormCloud.kRadius), clouds, true)
-        table.copy(GetEntitiesWithinRange("MucousMembrane", checkAtPoint, MucousMembrane.kRadius), clouds, true)
-        table.copy(GetEntitiesWithinRange("EnzymeCloud", checkAtPoint, EnzymeCloud.kRadius), clouds, true)
-
         local bombs = GetEntitiesWithinRange("Bomb", checkAtPoint, 1.6)
         table.copy(GetEntitiesWithinRange("WhipBomb", checkAtPoint, 1.6), bombs, true)
-
+        table.copy(GetEntitiesWithinRange("AcidMissile", checkAtPoint, 1.6), bombs, true)
+        table.copy(GetEntitiesWithinRange("AcidRocketBomb", checkAtPoint, 1.6), bombs, true)
+        table.copy(GetEntitiesWithinRange("DotMarker", checkAtPoint, 1.6), bombs, true)
 
         for i = 1, #bombs do
             local bomb = bombs[i]
@@ -44,13 +41,19 @@ function Flamethrower:BurnSporesAndUmbra(startPoint, endPoint)
             burnSpent = true
         end
 
+        local clouds = GetEntitiesWithinRange("CragUmbra", checkAtPoint, CragUmbra.kRadius)
+        table.copy(GetEntitiesWithinRange("StormCloud", checkAtPoint, StormCloud.kRadius), clouds, true)
+        table.copy(GetEntitiesWithinRange("MucousMembrane", checkAtPoint, MucousMembrane.kRadius), clouds, true)
+        table.copy(GetEntitiesWithinRange("EnzymeCloud", checkAtPoint, EnzymeCloud.kRadius), clouds, true)
+
         for i = 1, #clouds do
             local cloud = clouds[i]
             self:TriggerEffects("burn_umbra", { effecthostcoords = Coords.GetTranslation(cloud:GetOrigin()) } )
             DestroyEntity(cloud)
             burnSpent = true
         end
-
+        
+        
         if burnSpent then
             break
         end

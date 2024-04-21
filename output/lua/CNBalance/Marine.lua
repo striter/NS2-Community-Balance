@@ -315,21 +315,39 @@ function Marine:DevourEscape()
 	end
 end
 
-local oldGetStatusDesc = Marine.GetPlayerStatusDesc
+local kWeaponToStatusDesc = {
+    ["Rifle"] = kPlayerStatus.Rifle,
+    ["LightMachineGun"] = kPlayerStatus.LightMachineGun,
+    ["SubMachineGun"] = kPlayerStatus.SubMachineGun,
+    ["HeavyMachineGun"] = kPlayerStatus.HeavyMachineGun,
+    ["Flamethrower"] = kPlayerStatus.Flamethrower,
+    ["Shotgun"] = kPlayerStatus.Shotgun,
+    ["GrenadeLauncher"] = kPlayerStatus.GrenadeLauncher,
+    ["Cannon"] = kPlayerStatus.Cannon,
+    ["Pistol"] = kPlayerStatus.Pistol,
+    ["Revolver"] = kPlayerStatus.Revolver,
+    ["Axe"] = kPlayerStatus.Axe,
+    ["Knife"] = kPlayerStatus.Knife,
+    ["Welder"] = kPlayerStatus.Welder,
+}
+
 function Marine:GetPlayerStatusDesc()
-		  
-    local weapon = self:GetWeaponInHUDSlot(1)
-	if (weapon) then
-		if (weapon:isa("LightMachineGun")) then
-			return kPlayerStatus.LightMachineGun
-        elseif (weapon:isa("SubMachineGun")) then
-            return kPlayerStatus.SubMachineGun
-        elseif (weapon:isa("Cannon")) then
-            return kPlayerStatus.Cannon
+    if (self:GetIsAlive() == false) then
+        return kPlayerStatus.Dead
+    end
+
+    for i = 1,3 do
+        local weapon = self:GetWeaponInHUDSlot(i)
+        if weapon then
+            local returnVal = kWeaponToStatusDesc[weapon:GetClassName()]
+            if not returnVal then
+                Shared.Message(weapon:GetClassName() .. " Not A Valid Status Desc")
+            end
+            return returnVal
         end
-	end
+    end
 		
-	return oldGetStatusDesc(self)
+	return kPlayerStatus.Void
 end
 
 function Marine:OverrideInput(input)

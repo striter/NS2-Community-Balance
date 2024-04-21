@@ -115,6 +115,8 @@ TeamInfo.kRelevantTechIdsAlien =
     kTechId.ShiftTunnel,
     kTechId.CragTunnel,
     kTechId.ShadeTunnel,
+    
+    kTechId.OriginForm,
 
     --kTechId.Leap,
     --kTechId.Xenocide,

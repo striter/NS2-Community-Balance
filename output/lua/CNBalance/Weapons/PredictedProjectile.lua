@@ -89,23 +89,6 @@ function PredictedProjectileShooterMixin:CreatePredictedProjectile(className, st
 
         local coords = Coords.GetLookIn(startPoint, GetNormalizedVector(velocity))
 
-        if _G[className].kModelName then
-
-            local modelIndex = Shared.GetModelIndex(_G[className].kModelName)
-            if modelIndex then
-
-                projectileModel = Client.CreateRenderModel(RenderScene.Zone_Default)
-                projectileModel:SetModel(modelIndex)
-
-                if(_G[className].OnModifyRenderCoords) then
-                    _G[className].OnModifyRenderCoords(nil,coords)
-                end
-                
-                projectileModel:SetCoords(coords)
-
-            end
-
-        end
 
         local cinematicName = _G[className].kProjectileCinematic
         if cinematicName then
@@ -118,6 +101,22 @@ function PredictedProjectileShooterMixin:CreatePredictedProjectile(className, st
 
         end
 
+        if _G[className].kModelName then
+
+            local modelIndex = Shared.GetModelIndex(_G[className].kModelName)
+            if modelIndex then
+
+                projectileModel = Client.CreateRenderModel(RenderScene.Zone_Default)
+                projectileModel:SetModel(modelIndex)
+
+                if(_G[className].OnModifyModelCoords) then
+                    _G[className].OnModifyModelCoords(nil,coords)
+                end
+
+                projectileModel:SetCoords(coords)
+
+            end
+        end
     end
 
     self.predictedProjectiles[self.nextProjectileId] = {className = className, Controller = projectileController, Model = projectileModel, EntityId = projectileEntId, CreationTime = Shared.GetTime(), Cinematic = projectileCinematic }
@@ -152,22 +151,21 @@ local function UpdateProjectiles(self, input, predict)
 
             UpdateRenderCoords(entry.Controller)
             local renderCoords = entry.Controller.renderCoords
-            local className = entry.className
-            if(_G[className].OnModifyRenderCoords) then
-                _G[className].OnModifyRenderCoords(nil,renderCoords)
-            end
-            
             local isVisible = entry.Controller.stopSimulation ~= true
-
-            if entry.Model then
-                entry.Model:SetCoords(renderCoords)
-                entry.Model:SetIsVisible(isVisible)
-
-            end
 
             if entry.Cinematic then
                 entry.Cinematic:SetCoords(renderCoords)
                 entry.Cinematic:SetIsVisible(isVisible)
+            end
+            
+            if entry.Model then
+                local className = entry.className
+                if(_G[className].OnModifyModelCoords) then
+                    _G[className].OnModifyModelCoords(nil,renderCoords)
+                end
+
+                entry.Model:SetCoords(renderCoords)
+                entry.Model:SetIsVisible(isVisible)
             end
 
         end
@@ -632,18 +630,17 @@ if Client then
     function PredictedProjectile:OnUpdate(deltaTime)
         Entity.OnUpdate(self, deltaTime)
         UpdateRenderCoords(self)
-        if self.OnModifyRenderCoords then
-            self.renderCoords = self:OnModifyRenderCoords(self.renderCoords)
-        end
-
-        if self.renderModel then
-            self.renderModel:SetCoords(self.renderCoords)
-        end
-
         if self.projectileCinematic then
             self.projectileCinematic:SetCoords(self.renderCoords)
         end
-
+        
+        if self.renderModel then
+            if self.OnModifyModelCoords then
+                self:OnModifyModelCoords(self.renderCoords)
+            end
+            
+            self.renderModel:SetCoords( self.renderCoords)
+        end
     end
 end
 

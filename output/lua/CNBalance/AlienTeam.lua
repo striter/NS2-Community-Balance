@@ -1166,12 +1166,20 @@ function AlienTeam:OnResearchComplete(structure, researchId)
 
     if researchId ~= kTechId.OriginForm then return end
 
-    local targetCommander = GetCommanderForTeam(self:GetTeamNumber())
+    local teamNumber = self:GetTeamNumber()
+    
+    local targetCommander = GetCommanderForTeam(teamNumber)
     if targetCommander and targetCommander.Eject then
         targetCommander:Eject()
     end
     self.timeGorgeGestated = 1  --Prevent gorge get 60 res midgame
-
+    for _, gorge in ipairs(GetEntitiesForTeam( "Gorge", teamNumber)) do
+        if gorge:GetIsAlive() then
+            gorge:GiveItem(DropTeamStructureAbility.kMapName,false)
+        end 
+    end
+    
+    
 end
 
 

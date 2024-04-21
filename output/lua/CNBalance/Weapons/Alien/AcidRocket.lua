@@ -159,8 +159,8 @@ function AcidRocket:FireBombProjectile(player)
         local endPointTrace = Shared.TraceRay(eyePos, eyePos + viewCoords.zAxis * 1000 , CollisionRep.Damage, PhysicsMask.Bullets, EntityFilterOne(player))            
         
         local startVelocity = GetNormalizedVector(endPointTrace.endPoint - startPoint) * kAcidRocketVelocity
-        --player:CreatePredictedProjectile("AcidRocketBomb", startPoint, startVelocity, 0, 0, 0)
-        player:CreatePredictedProjectile("Spit", startPoint, startVelocity, 0, 0, 0)
+        player:CreatePredictedProjectile("AcidRocketBomb", startPoint, startVelocity, 0, 0, 0)
+        --player:CreatePredictedProjectile("Spit", startPoint, startVelocity, 0, 0, 0)
         
         --DebugLine(startPoint, endPointTrace.endPoint, .2, 1,0,0,1)
         

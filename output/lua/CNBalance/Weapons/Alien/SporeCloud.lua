@@ -15,6 +15,7 @@ Script.Load("lua/OwnerMixin.lua")
 Script.Load("lua/DamageMixin.lua")
 Script.Load("lua/EffectsMixin.lua")
 Script.Load("lua/EntityChangeMixin.lua")
+Script.Load("lua/PointGiverMixin.lua")
 Script.Load("lua/LOSMixin.lua")
 Script.Load("lua/BiomassHealthMixin.lua")
 
@@ -68,6 +69,7 @@ function SporeCloud:OnCreate()
     InitMixin(self, EntityChangeMixin)
     InitMixin(self, LOSMixin)
     InitMixin(self, BiomassHealthMixin)
+    InitMixin(self, PointGiverMixin)
     
     if Server then
 

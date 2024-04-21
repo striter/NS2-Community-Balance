@@ -1,6 +1,11 @@
 kSuicideDelay = 10
 
 debug.appendtoenum(kPlayerStatus, "Devoured")
+debug.appendtoenum(kPlayerStatus, "Axe")
+debug.appendtoenum(kPlayerStatus, "Knife")
+debug.appendtoenum(kPlayerStatus, "Welder")
+
+debug.appendtoenum(kPlayerStatus, "Pistol")
 debug.appendtoenum(kPlayerStatus, "Revolver")
 debug.appendtoenum(kPlayerStatus, "SubMachineGun")
 debug.appendtoenum(kPlayerStatus, "LightMachineGun")

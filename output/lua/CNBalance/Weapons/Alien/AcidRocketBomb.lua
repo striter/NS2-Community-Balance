@@ -19,9 +19,9 @@ class 'AcidRocketBomb' (PredictedProjectile)
 
 AcidRocketBomb.kMapName            = "acidrocketbomb"
 AcidRocketBomb.kModelName          = PrecacheAsset("models/alien/fade/acidRocket/acidbomb.model")
+AcidRocketBomb.kProjectileCinematic = PrecacheAsset("cinematics/alien/gorge/gorge_spit.cinematic")
 AcidRocketBomb.kClearOnImpact = true
 AcidRocketBomb.kClearOnEnemyImpact = true
-local kWhipBombTrailCinematic = PrecacheAsset("cinematics/alien/whip/dripping_slime.cinematic")
 
 AcidRocketBomb.kMinLifeTime = 0
 -- // The max amount of time a AcidRocketBomb can last for
@@ -31,6 +31,7 @@ local networkVars = {}
 
 AddMixinNetworkVars(ModelMixin, networkVars)
 AddMixinNetworkVars(TeamMixin, networkVars)
+
 
 function AcidRocketBomb:OnCreate()
 
@@ -42,7 +43,21 @@ function AcidRocketBomb:OnCreate()
     if Server then
         self:AddTimedCallback(AcidRocketBomb.TimeUp, AcidRocketBomb.kLifetime)
     end
+
 end
+
+function AcidRocketBomb:OnUpdate(deltaTime)
+    PredictedProjectile.OnUpdate(self,deltaTime)
+
+end
+
+function AcidRocketBomb:OnDestroy()
+
+    PredictedProjectile.OnDestroy(self)
+
+
+end
+
 --[[
 function AcidRocketBomb:OnInitialized()
 
@@ -110,10 +125,10 @@ end
 
 
 
-function AcidRocketBomb:OnModifyRenderCoords(coords)
-    local xAxis = coords.xAxis      --Wrong axis
-    coords.xAxis = coords.zAxis
-    coords.zAxis = -xAxis
+function AcidRocketBomb:OnModifyModelCoords(coords)     --Wrong axis
+    local xAxis = coords.xAxis 
+    coords.xAxis = -coords.zAxis
+    coords.zAxis = xAxis
     return coords
 end
 

@@ -87,6 +87,11 @@ if kTranslateMessage then
     kTranslateMessage["EXOSUIT_PROTOTYPE_LAB"] = "[单兵机甲]科技实验室"
     kTranslateMessage["EXOSUIT_PROTOTYPE_LAB_HINT"] = "提供单兵机甲升级购买"
     kTranslateMessage["EXOSUIT_PROTOTYPE_LAB_TOOLTIP"] = "于陆战队解锁原型机甲购买."
+
+    kTranslateMessage["STATUS_PISTOL"]="手枪"
+    kTranslateMessage["STATUS_AXE"]="折叠斧"
+    kTranslateMessage["STATUS_KNIFE"]="步战刀"
+    kTranslateMessage["STATUS_WELDER"]="焊枪"
     
     kTranslateMessage["WELDER_BUYDESCRIPTION"]="制式维修工具.\n*修复陆战队护甲以及机甲.\n*修复建筑以及电力节点,加速建造建筑.\n*对菌毯造成高额伤害,可以灼烧孢子云."
     kTranslateMessage["KNIFE"]="步战刀"
@@ -296,6 +301,11 @@ if kLocales then
     kLocales["EXOSUIT_PROTOTYPE_LAB"] = "Prototype Lab (Exosuit)"
     kLocales["EXOSUIT_PROTOTYPE_LAB_HINT"] = "Provide Exosuit acquirement"
     kLocales["EXOSUIT_PROTOTYPE_LAB_TOOLTIP"] = "Unlock Exosuit for marines."
+
+    kLocales["STATUS_PISTOL"]="Pistol"
+    kLocales["STATUS_AXE"]="Axe"
+    kLocales["STATUS_KNIFE"]="Knife"
+    kLocales["STATUS_WELDER"]="Welder"
     
     kLocales["KNIFE"]="Knife"
     kLocales["KNIFE_BUYDESCRIPTION"]="Standard Knife.\n+Double damage to structure,cost no ammo.\n-Close combat."

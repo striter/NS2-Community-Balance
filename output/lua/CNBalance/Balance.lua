@@ -26,6 +26,7 @@ kTechDataPersonalResOnKill = {
     [kTechId.Welder] = 0.1, [kTechId.CombatBuilder] = 0.2,
     
     --Aliens
+    [kTechId.Spores] = 0.1,
     [kTechId.Egg] = 0.2,[kTechId.Cyst] = 0.2, [kTechId.Drifter] = 0.3,    --[kTechId.DrifterEgg] = 0.5,
     [kTechId.Hydra] = 0.1,[kTechId.SporeMine] = 0.1,[kTechId.BabblerEgg] = 1,       --PPVE
     [kTechId.Shell] = 2.5, [kTechId.Veil] = 2.5, [kTechId.Spur] = 2.5,
@@ -52,7 +53,7 @@ kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyCl
 
 --Toy for marine commander (remove all marines passive income, harsh one)
 kMilitaryProtocolResearchCost = 0
-kMilitaryProtocolResearchTime = 15
+kMilitaryProtocolResearchTime = 12
 kMilitaryProtocolTResPerBountyClaim = 0.5
 kMilitaryProtocolResearchDurationMultiply = 1 --1.2     --1.33?
 kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKill above
@@ -453,7 +454,7 @@ kShadowStepResearchTime = 40
 kAcidRocketResearchCost = 25
 kAcidRocketResearchTime = 40
 
-kAcidRocketVelocity = 40
+kAcidRocketVelocity = 35
 kAcidRocketEnergyCost = 15
 kAcidRocketFireDelay = 0.01
 kAcidRocketBombDamageType = kDamageType.Normal
@@ -655,7 +656,7 @@ kBalanceOffInfestationHurtPercentPerSecond = 0.02
 kMinOffInfestationHurtPerSecond = 20
 
 kOriginFormResearchCost = 0
-kOriginFormResearchTime = 15
+kOriginFormResearchTime = 12
 
 kOriginFormOnInfestationHealPercentPerSecond = 0.01
 kOriginFormOnInfestationMinHealPerSecond = 10

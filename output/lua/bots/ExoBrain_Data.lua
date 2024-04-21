@@ -433,7 +433,7 @@ kExoBrainObjectives =
 
             pingPos = db:Get("comPingPosition")
 
-            if brain.lastReachedPingPos ~= nil and pingPos:GetDistance(brain.lastReachedPingPos) < 5 then
+            if brain.lastReachedPingPos ~= nil and pingPos ~=nil and pingPos:GetDistance(brain.lastReachedPingPos) < 5 then
                 -- we already reached this ping - ignore it
                 pingPos = nil
             end

@@ -914,6 +914,7 @@ function BuildTechData()
         [kTechDataCostKey] = kSporesResearchCost,
         [kTechDataResearchTimeKey] = kSporesResearchTime,
         [kTechDataMaxHealth] = kSporeCloudHealth,
+        [kTechDataPointValue] = kSporeCloudPointValue,
         [kTechDataTooltipInfo] = "SPORES_TOOLTIP",
         [kTechDataResearchName] = "SPORES",
     })
