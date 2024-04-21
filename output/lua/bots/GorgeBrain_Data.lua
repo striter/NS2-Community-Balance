@@ -737,7 +737,7 @@ local kExecBuildAction = function(move, bot, brain, gorge, action)
             --Handle moving TO objective, and special movement along the way
             PerformMove( gorge:GetOrigin(), targetPos, bot, brain, move )
         end
-        bot:SendTeamMessage("I'll build the " .. target:GetMapName() .. " in " .. target:GetLocationName(), 120)
+        --bot:SendTeamMessage("I'll build the " .. target:GetMapName() .. " in " .. target:GetLocationName(), 120)
 
     end
 end

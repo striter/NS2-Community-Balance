@@ -2045,16 +2045,16 @@ kMarineBrainObjectiveActions =
                 table.sort( nearStructuresDamaged, 
                     function(a, b) 
                         return
-                            GetBotWalkDistance(Shared.GetEntity(a.entId) or a.pos, marine)
+                            GetBotWalkDistance(marine,Shared.GetEntity(a.entId) or a.pos)
                             <
-                            GetBotWalkDistance(Shared.GetEntity(b.entId) or b.pos, marine)
+                            GetBotWalkDistance(marine,Shared.GetEntity(b.entId) or b.pos)
                     end
                 )
 
                 local defendTargetEntId = nearStructuresDamaged[1].entId
                 defendTarget = Shared.GetEntity(defendTargetEntId)
 
-                if defendTarget then
+                if defendTarget and defendTarget.GetHealthScalar then
 
                     local tNow = Shared.GetTime()
                     local applyWeight = false
