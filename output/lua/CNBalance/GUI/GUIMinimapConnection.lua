@@ -45,21 +45,8 @@ function GUIMinimapConnection:UpdateAnimation(teamNumber, modeIsMini)
 
 end
 
-local kTunnelColor1=Color(123)
-local kTunnelColor2=Color(123)
-local kTunnelColor3=Color(123)
-local kTunnelColor4=Color(123)
-local kTunnelColor5=Color(123)
-local kTunnelColor6=Color(123)
-local kTunnelColor7=Color(123)
-local kTunnelColor8=Color(123)
-local tunnelColorTable = {kTunnelColor1, kTunnelColor2, kTunnelColor3, kTunnelColor4, kTunnelColor5, kTunnelColor6, kTunnelColor7, kTunnelColor8}
 
-local function getLineColor(tunnelIndex)
-    return tunnelColorTable[tunnelIndex]
-end
-
-function GUIMinimapConnection:UpdateAnimation_Alien(modeIsMini, tunnelIndex)
+function GUIMinimapConnection:UpdateAnimation_Alien(modeIsMini, color)
     if not self.isVisible then return end
                 
     local x1Coord = kLineTextureCoord[1] - 0
@@ -70,12 +57,9 @@ function GUIMinimapConnection:UpdateAnimation_Alien(modeIsMini, tunnelIndex)
     local textureIndex = 0
     
     self.line:SetTexturePixelCoordinates(x1Coord, textureIndex, x2Coord, textureIndex + 16)
-    local calcedTunnelIndex = tunnelIndex % 8
-    self.line:SetColor(getLineColor(calcedTunnelIndex))
+    self.line:SetColor(color)
     self.line:SetSize(Vector(self.length, GUIScale(ConditionalValue(modeIsMini, 6, 10)), 0))
 end
-
-
 
 function GUIMinimapConnection:Setup(startPoint, endPoint, parent)
 

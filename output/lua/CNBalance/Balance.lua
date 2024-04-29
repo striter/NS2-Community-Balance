@@ -31,7 +31,7 @@ kTechDataPersonalResOnKill = {
     [kTechId.Hydra] = 0.1,[kTechId.SporeMine] = 0.1,[kTechId.BabblerEgg] = 1,       --PPVE
     [kTechId.Shell] = 2.5, [kTechId.Veil] = 2.5, [kTechId.Spur] = 2.5,
     [kTechId.Whip] = 1.5, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,       --CPVE
-    [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 4,
+    [kTechId.Harvester] = 2, [kTechId.Tunnel] = 3, [kTechId.InfestedTunnel] = 3, [kTechId.GorgeTunnel] = 3,
     [kTechId.Hive] = 12, [kTechId.ShiftHive] = 15, [kTechId.CragHive] = 15, [kTechId.ShadeHive] = 15,
 }
 
@@ -57,7 +57,8 @@ kMilitaryProtocolResearchTime = 12
 kMilitaryProtocolTResPerBountyClaim = 0.5
 kMilitaryProtocolResearchDurationMultiply = 1 --1.2     --1.33?
 kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKill above
-    [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.Drifter] = 1,
+    [kTechId.Drifter] = 1,
+    [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.GorgeTunnel] = 3,
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
     [kTechId.Skulk] = 2, [kTechId.Gorge] = 5,[kTechId.Prowler] = 8, [kTechId.Lerk] = 10, [kTechId.Fade] = 15, [kTechId.Onos] = 18,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,

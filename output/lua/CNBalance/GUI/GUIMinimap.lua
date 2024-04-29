@@ -1243,9 +1243,21 @@ local function RemoveMinimapConnection(self, index)
     self.minimapConnections[index] = nil
 end
 
+local tunnelColorTable = {
+    Color(247/255.0, 220/255.0, 111/255.0,1), Color(248/255.0, 196/255.0, 113/255.0,1), Color(240/255.0, 178/255.0, 122/255.0,1), Color(229/255.0, 152/255.0, 102/255.0,1),
+    Color(244/255.0, 208/255.0, 63/255.0,1), Color(245/255.0, 176/255.0, 65/255.0,1), Color(235/255.0, 152/255.0, 78/255.0,1), Color(220/255.0, 118/255.0, 51/255.0,1),
+    Color(241/255.0, 196/255.0, 15/255.0,1), Color(243/255.0, 156/255.0, 18/255.0,1), Color(230/255.0, 126/255.0, 34/255.0,1), Color(221/255.0, 84/255.0, 0/255.0,1),
+}
+
+local function getLineColor(tunnelIndex)
+    local colorIndex = (tunnelIndex % #tunnelColorTable) + 1
+    return tunnelColorTable[colorIndex]
+end
+
 local function UpdateConnections(self)
     local mapConnectors = Shared.GetEntitiesWithClassname("MapConnector")
     local numConnectors = 0
+    local tunnelEntranceIndex = 0
     for _, connector in ientitylist(mapConnectors) do
         -- using numConnectors as index for minimapConnections as the mapConnectors list may contain invalid ents
         numConnectors = numConnectors + 1
@@ -1261,7 +1273,12 @@ local function UpdateConnections(self)
         local endPoint = Vector(self:PlotToMap(cEndPoint.x, cEndPoint.z))
 
         minimapConnection:Setup(startPoint, endPoint, self.minimap)
-        minimapConnection:UpdateAnimation(connector:GetTeamNumber(), self.comMode == GUIMinimapFrame.kModeMini)
+        if(connector:GetTeamNumber() == kTeam2Index) then
+            minimapConnection:UpdateAnimation_Alien(self.comMode == GUIMinimapFrame.kModeMini, getLineColor(tunnelEntranceIndex))
+            tunnelEntranceIndex = tunnelEntranceIndex + 1
+        else
+            minimapConnection:UpdateAnimation(connector:GetTeamNumber(), self.comMode == GUIMinimapFrame.kModeMini)
+        end
 
         self.minimapConnections[numConnectors] = minimapConnection
     end
@@ -1272,7 +1289,6 @@ local function UpdateConnections(self)
     end
 
     --Print("num minimap connections %s", ToString(#self.minimapConnections))
-
 end
 
 local function UpdateCommanderPing(self)
