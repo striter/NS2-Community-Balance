@@ -375,7 +375,7 @@ kRecoverBioMassThreeTime = 25
 --Skulk
 kParasiteEnergyCost = 30
 kAdrenalineParasiteEnergyCost = 17.5
-kParasiteDamageType = kDamageType.Structural
+kParasiteDamageType = kDamageType.Normal
 
 kXenocideResearchCost = 20
 kXenocideResearchTime = 60
