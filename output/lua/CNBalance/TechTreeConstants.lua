@@ -65,6 +65,7 @@ debug.appendtoenum(kTechId, "HeavyMarine")
 
 --Alien
 debug.appendtoenum(kTechId, "OriginForm")
+debug.appendtoenum(kTechId, "OriginFormPassive")
 debug.appendtoenum(kTechId, "OriginFormResourceFetch")
 
 debug.appendtoenum(kTechId, "ShiftTunnel")

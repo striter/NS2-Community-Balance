@@ -16,7 +16,7 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "MILITARY_PROTOCOL_TOOLTIP",
         [kTechDataResearchName] = "MILITARY_PROTOCOL",
     } )
-    
+
     table.insert(techData,{
         [kTechDataId] = kTechId.MotionTrack,
         [kTechDataCostKey] = kMotionTrackResearchCost,
@@ -25,7 +25,7 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "MOTION_TRACK_TOOLTIP",
         [kTechDataResearchName] = "MOTION_TRACK",
     } )
-    
+
     table.insert(techData, {
         [kTechDataId] = kTechId.CombatBuilderTech,
         [kTechDataCostKey] = kCombatBuilderResearchCost,
@@ -43,7 +43,7 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "GRENADE_LAUNCHER_UPGRADE_TOOLTIP",
         [kTechDataResearchName] = "GRENADE_LAUNCHER_UPGRADE",
     })
-    
+
     table.insert(techData, {
         [kTechDataId] = kTechId.StandardSupply,
         [kTechDataCostKey] = kCommandStationUpgradeCost,
@@ -53,7 +53,7 @@ function BuildTechData()
         [kTechDataResearchName] = "STANDARD_SUPPLY",
         [kTechDataUpgradeTech] = kTechId.CommandStation,
     })
-    
+
     table.insert(techData,{
         [kTechDataId] = kTechId.StandardStation,
         [kTechDataMapName] = CommandStation.kMapName,
@@ -69,7 +69,7 @@ function BuildTechData()
         [kTechDataCostKey] = kUpgradedCommandStationCost,
         [kTechDataEngagementDistance] = kCommandStationEngagementDistance,
     })
-    
+
     table.insert(techData, {
         [kTechDataId] = kTechId.LightMachineGunUpgrade,
         [kTechDataCostKey] = kLightMachineGunUpgradeCost,
@@ -140,7 +140,7 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "LIFE_SUSTAIN_TOOLTIP",
         [kTechDataResearchName] = "LIFE_SUSTAIN",
     })
-    
+
     table.insert(techData, {
         [kTechDataId] = kTechId.ExplosiveSupply,
         [kTechDataCostKey] = kCommandStationUpgradeCost,
@@ -220,7 +220,7 @@ function BuildTechData()
         [kTechDataCostKey] = kUpgradedCommandStationCost,
         [kTechDataEngagementDistance] = kCommandStationEngagementDistance,
     })
-    
+
     table.insert(techData, {
         [kTechDataId] = kTechId.MACEMPBlast,
         [kTechDataCostKey] = kMACEMPBlastResearchCost,
@@ -237,7 +237,7 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "POWERED_EXTRACTOR_TECH_TOOLTIP",
         [kTechDataResearchName] = "POWERED_EXTRACTOR_TECH",
     })
-    
+
     table.insert(techData,{
         [kTechDataId] = kTechId.PoweredExtractor,
         [kTechDataIgnorePathingMesh] = true,
@@ -262,7 +262,7 @@ function BuildTechData()
         [kTechDataPointValue] = kPoweredExtractorPointValue,
         [kTechDataCostKey] = kPoweredExtractorCost,
     })
-    
+
     table.insert(techData, {
         [kTechDataId] = kTechId.PoweredExtractorUpgrade,
         [kTechDataCostKey] = kPoweredExtractorUpgradeCost,
@@ -271,7 +271,7 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "POWERED_EXTRACTOR_TECH_TOOLTIP",
         [kTechDataResearchName] = "POWERED_EXTRACTOR_TECH",
     })
-    
+
     table.insert(techData, {
         [kTechDataId] = kTechId.InfantryPortal,
         [kTechDataHint] = "INFANTRY_PORTAL_HINT",
@@ -297,7 +297,7 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "INFANTRY_PORTAL_TOOLTIP",
         [kTechDataObstacleRadius] = 1.125,
     })
-    
+
     table.insert(techData, {
         [kTechDataId] = kTechId.Scan,
         [kTechDataAllowStacking] = true,
@@ -364,7 +364,7 @@ function BuildTechData()
         [kTechDataMapName] = LightMachineGun.kMapName,
         [kTechDataCostKey] = kLightMachineGunAcquireCost,
     })
-    
+
     table.insert(techData,{
         [kTechDataId] = kTechId.LightMachineGunUpgrade,
         [kTechDataMapName] = LightMachineGun.kMapName,
@@ -372,7 +372,7 @@ function BuildTechData()
         [kTechDataDisplayName] = "LIGHTMACHINEGUN",
         [kTechDataCostKey] = kLightMachineGunUpgradeCost,
     })
-    
+
     table.insert(techData,{
         [kTechDataId] = kTechId.GrenadeLauncher,
         [kTechDataMaxHealth] = kMarineWeaponHealth,
@@ -429,7 +429,7 @@ function BuildTechData()
         [kTechDataModel] = Mine.kModelName,
         [kTechDataPointValue] = kMinePointValue,
     })
-    
+
     table.insert(techData,{
         [kTechDataId] = kTechId.CombatBuilder,
         [kTechDataDisplayName] = "COMBATBUILDER",
@@ -493,7 +493,7 @@ function BuildTechData()
         [kVisualRange] = SentryBattery.kRange,
         [kTechDataObstacleRadius] = 0.55,
     })
-    
+
     table.insert(techData,  {
         [kTechDataId] = kTechId.MarineSentry,
         [kTechDataMapName] = MarineSentry.kMapName,
@@ -516,61 +516,61 @@ function BuildTechData()
     })
 
     table.insert(techData,
-    {
-        [kTechDataId] = kTechId.BuildMenu,
-        [kTechDataDisplayName] = "BUILD",
-        [kTechDataHotkey] = Move.W,
-        [kTechDataTooltipInfo] = "BUILD_TOOLTIP",
-        [kTechDataAllowConsumeDrop] = true,
-    })
+            {
+                [kTechDataId] = kTechId.BuildMenu,
+                [kTechDataDisplayName] = "BUILD",
+                [kTechDataHotkey] = Move.W,
+                [kTechDataTooltipInfo] = "BUILD_TOOLTIP",
+                [kTechDataAllowConsumeDrop] = true,
+            })
 
     table.insert(techData,
-    {
-        [kTechDataId] = kTechId.AdvancedMenu,
-        [kTechDataDisplayName] = "ADVANCED",
-        [kTechDataHotkey] = Move.W,
-        [kTechDataTooltipInfo] = "ADVANCED_TOOLTIP",
-        [kTechDataAllowConsumeDrop] = true,
-    })
+            {
+                [kTechDataId] = kTechId.AdvancedMenu,
+                [kTechDataDisplayName] = "ADVANCED",
+                [kTechDataHotkey] = Move.W,
+                [kTechDataTooltipInfo] = "ADVANCED_TOOLTIP",
+                [kTechDataAllowConsumeDrop] = true,
+            })
 
     table.insert(techData,
-    {
-        [kTechDataId] = kTechId.ProtosMenu,
-        [kTechDataDisplayName] = "PROTOS_MENU",
-        [kTechDataTooltipInfo] = "PROTOS_MENU_TOOLTIP",
-    })
+            {
+                [kTechDataId] = kTechId.ProtosMenu,
+                [kTechDataDisplayName] = "PROTOS_MENU",
+                [kTechDataTooltipInfo] = "PROTOS_MENU_TOOLTIP",
+            })
 
     table.insert(techData,
-    {
-        [kTechDataId] = kTechId.JetpackProtoUpgrade,
-        [kTechDataCostKey] = kJetpackTechResearchCost,
-        [kTechDataResearchTimeKey] = kJetpackTechResearchTime,
-        [kTechIDShowEnables] = false,
-        [kTechDataDisplayName] = "JETPACK_PROTOTYPE_UPGRADE",
-        [kTechDataTooltipInfo] = "JETPACK_PROTOTYPE_LAB_TOOLTIP",
-        [kTechDataResearchName] = "JETPACK_PROTOTYPE_UPGRADE"
-    })
+            {
+                [kTechDataId] = kTechId.JetpackProtoUpgrade,
+                [kTechDataCostKey] = kJetpackTechResearchCost,
+                [kTechDataResearchTimeKey] = kJetpackTechResearchTime,
+                [kTechIDShowEnables] = false,
+                [kTechDataDisplayName] = "JETPACK_PROTOTYPE_UPGRADE",
+                [kTechDataTooltipInfo] = "JETPACK_PROTOTYPE_LAB_TOOLTIP",
+                [kTechDataResearchName] = "JETPACK_PROTOTYPE_UPGRADE"
+            })
     table.insert(techData,
-    {
-        [kTechDataId] = kTechId.ExosuitProtoUpgrade,
-        [kTechDataCostKey] = kExosuitTechResearchCost,
-        [kTechDataResearchTimeKey] = kExosuitTechResearchTime,
-        [kTechIDShowEnables] = false,
-        [kTechDataDisplayName] = "EXOSUIT_PROTOTYPE_UPGRADE",
-        [kTechDataTooltipInfo] = "EXOSUIT_PROTOTYPE_LAB_TOOLTIP",
-        [kTechDataResearchName] = "EXOSUIT_PROTOTYPE_UPGRADE"
-    })
+            {
+                [kTechDataId] = kTechId.ExosuitProtoUpgrade,
+                [kTechDataCostKey] = kExosuitTechResearchCost,
+                [kTechDataResearchTimeKey] = kExosuitTechResearchTime,
+                [kTechIDShowEnables] = false,
+                [kTechDataDisplayName] = "EXOSUIT_PROTOTYPE_UPGRADE",
+                [kTechDataTooltipInfo] = "EXOSUIT_PROTOTYPE_LAB_TOOLTIP",
+                [kTechDataResearchName] = "EXOSUIT_PROTOTYPE_UPGRADE"
+            })
 
     table.insert(techData,
-    {
-        [kTechDataId] = kTechId.CannonProtoUpgrade,
-        [kTechDataCostKey] = kCannonTechResearchCost,
-        [kTechDataResearchTimeKey] = kCannonTechResearchTime,
-        [kTechIDShowEnables] = false,
-        [kTechDataDisplayName] = "CANNON_PROTOTYPE_UPGRADE",
-        [kTechDataTooltipInfo] = "CANNON_PROTOTYPE_LAB_TOOLTIP",
-        [kTechDataResearchName] = "CANNON_PROTOTYPE_UPGRADE"
-    })
+            {
+                [kTechDataId] = kTechId.CannonProtoUpgrade,
+                [kTechDataCostKey] = kCannonTechResearchCost,
+                [kTechDataResearchTimeKey] = kCannonTechResearchTime,
+                [kTechIDShowEnables] = false,
+                [kTechDataDisplayName] = "CANNON_PROTOTYPE_UPGRADE",
+                [kTechDataTooltipInfo] = "CANNON_PROTOTYPE_LAB_TOOLTIP",
+                [kTechDataResearchName] = "CANNON_PROTOTYPE_UPGRADE"
+            })
     table.insert(techData,{
         [kTechDataId] = kTechId.ExosuitPrototypeLab,
         [kTechDataGhostModelClass] = "MarineGhostModel",
@@ -654,7 +654,7 @@ function BuildTechData()
         [kStructureAttachRange] = kArmoryWeaponAttachRange,
         [kStructureAttachRequiresPower] = true,
     } )
-    
+
     table.insert(techData, {
         [kTechDataId] = kTechId.DropDualMinigunExosuit,
         [kTechDataMapName] = Exosuit.kMapName,
@@ -694,7 +694,7 @@ function BuildTechData()
         [kStructureAttachRange] = kArmoryWeaponAttachRange,
         [kStructureAttachRequiresPower] = true,
     })
-    
+
     table.insert(techData, {
         [kTechDataId] = kTechId.Exosuit,
         [kTechDataDisplayName] = "EXOSUIT",
@@ -705,7 +705,7 @@ function BuildTechData()
         [kTechDataSpawnHeightOffset] = kCommanderEquipmentDropSpawnHeight,
         [kTechDataPointValue] = kExosuitPointValue,
     })
-    
+
     --table.insert(techData,  {
     --    [kTechDataId] = kTechId.Heavy,
     --    [kTechDataMapName] = Heavy.kMapName,
@@ -753,6 +753,12 @@ function BuildTechData()
         [kTechDataResearchName] = "DROP_TEAM_STRUCTURE",
     })
 
+    table.insert(techData, {
+        [kTechDataId] = kTechId.GorgeTunnel,
+        [kTechDataDisplayName] = "TUNNEL_EXIT",
+        [kTechDataHint] = "TUNNEL_ENTRANCE_HINT",
+    })
+    
     table.insert(techData,{
         [kTechDataId] = kTechId.SporeMine,
         -- [kTechDataCategory] = kTechId.Gorge,
@@ -1068,6 +1074,13 @@ function BuildTechData()
         [kTechDataDisplayName] = "ORIGIN_FORM",
         [kTechDataTooltipInfo] = "ORIGIN_FORM_TOOLTIP",
         [kTechDataResearchName] = "ORIGIN_FORM",
+    })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.OriginFormPassive,
+        [kTechDataDisplayName] = "ORIGIN_FORM_PASSIVE",
+        [kTechDataTooltipInfo] = "ORIGIN_FORM_TOOLTIP_PASSIVE",
+        [kTechDataResearchName] = "ORIGIN_FORM_PASSIVE",
     })
 
     table.insert(techData, {

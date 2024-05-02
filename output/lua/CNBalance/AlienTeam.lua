@@ -1151,6 +1151,7 @@ function AlienTeam:InitTechTree()
     self.techTree:AddActivation(kTechId.MetabolizeShadowStep,        kTechId.BioMassThree, kTechId.None)
 
     self.techTree:AddResearchNode(kTechId.OriginForm)
+    self.techTree:AddPassive(kTechId.OriginFormPassive)
     self.techTree:AddActivation(kTechId.DropTeamStructureAbility, kTechId.OriginForm, kTechId.None,kTechId.AllAliens)
     self.techTree:AddBuyNode(kTechId.OriginFormResourceFetch, kTechId.OriginForm, kTechId.None, kTechId.AllAliens)
     
@@ -1408,6 +1409,24 @@ end
 
 function AlienTeam:IsOriginForm()
     return self.originTechNode and self.originTechNode:GetResearched()
+end
+
+function AlienTeam:CanEvolveOriginForm()
+
+    local canEvolve = true
+
+    for _, hive in ipairs(GetEntitiesForTeam("Hive", self:GetTeamNumber())) do
+
+        if not hive:GetIsBuilt() 
+                or hive:GetTechId() == kTechId.Hive
+        then
+            canEvolve = false
+        end
+        
+    end
+
+    return canEvolve
+    
 end
 
 function AlienTeam:OnOriginFormResourceFetch(player)

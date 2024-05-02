@@ -85,6 +85,7 @@ kTechIdToMaterialOffset[kTechId.Devour] = 109
 kTechIdToMaterialOffset[kTechId.WeaponCache] = 1
 kTechIdToMaterialOffset[kTechId.MarineSentry] = 5
 kTechIdToMaterialOffset[kTechId.OriginForm] = 191
+kTechIdToMaterialOffset[kTechId.OriginFormPassive] = 191
 kTechIdToMaterialOffset[kTechId.OriginFormResourceFetch] = 191
 kTechIdToMaterialOffset[kTechId.DropTeamStructureAbility] = 220
 

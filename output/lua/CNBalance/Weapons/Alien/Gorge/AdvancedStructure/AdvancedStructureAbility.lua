@@ -27,15 +27,6 @@ function AdvancedStructureAbility:GetIsPositionValid(position, player, normal, l
         return false
     end
     
-    local rayStart = position + normal * 0.01
-    local rayEnd = position + normal * (extents.y * 2 - 0.01)
-    trace = Shared.TraceRay(rayStart,rayEnd, CollisionRep.Damage, PhysicsMask.Bullets,EntityFilterOneAndIsa(player, "Player"))
-    --DebugTraceRay(rayStart,rayEnd,PhysicsMask.Bullets)
-    if trace.fraction ~= 1 then
-        return false
-    end
-    
-    
     local upwardFraction = normal:DotProduct(kUpVector)
     local side = self:GetStructurePlaceSide()
     if side == AdvancedStructureAbility.kStructurePlaceSide.All then

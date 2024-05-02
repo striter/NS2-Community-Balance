@@ -25,6 +25,7 @@ AlienTeamInfo.kLifeformEntityTypes = {"Skulk","Prowler","Fade","Onos","Gorge","L
 local networkVars =
 {
     isOriginForm = "boolean",
+    canEvolveOriginForm = "boolean",
     
     numHives = "integer (0 to 10)",
     eggCount = "integer (0 to 120)",
@@ -364,6 +365,7 @@ if Server then
         if team then    --???? How would there never be a team?
         
             self.isOriginForm = team:IsOriginForm()
+            self.canEvolveOriginForm = team:CanEvolveOriginForm()
             self.numHives = team:GetNumHives()
             self.eggCount = team:GetActiveEggCount()
             self.maxBioMassLevel = Clamp(team:GetMaxBioMassLevel(), 0 , 12)

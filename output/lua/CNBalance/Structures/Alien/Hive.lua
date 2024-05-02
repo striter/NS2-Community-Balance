@@ -494,6 +494,7 @@ function Hive:GetTechButtons()
     local techButtons = { kTechId.ShiftHatch, kTechId.None, kTechId.None, kTechId.None, --kTechId.LifeFormMenu,
                           kTechId.None, kTechId.None, kTechId.None, kTechId.None }
 
+    
     local techId = self:GetTechId()
     if techId == kTechId.Hive then
         techButtons[5] = ConditionalValue(GetHiveTypeResearchAllowed(self, kTechId.UpgradeToCragHive), kTechId.UpgradeToCragHive, kTechId.None)
@@ -503,18 +504,22 @@ function Hive:GetTechButtons()
         techButtons[5] = kTechId.CragTunnel
         techButtons[6] = kTechId.DrifterRegeneration
         techButtons[7] = kTechId.CystCarapace
-        techButtons[8] = kTechId.OriginForm
     elseif techId == kTechId.ShiftHive then
         techButtons[5] = kTechId.ShiftTunnel
         techButtons[6] = kTechId.DrifterCelerity
         techButtons[7] = kTechId.CystCelerity
-        techButtons[8] = kTechId.OriginForm
     elseif techId == kTechId.ShadeHive then
         techButtons[5] = kTechId.ShadeTunnel
         techButtons[6] = kTechId.DrifterCamouflage
         techButtons[7] = kTechId.CystCamouflage
-        techButtons[8] = kTechId.OriginForm
     end
+
+    local alienTeamInfo = GetTeamInfoEntity(self:GetTeamNumber())
+    local originFormTech = kTechId.OriginFormPassive
+    if alienTeamInfo and alienTeamInfo.canEvolveOriginForm then
+        originFormTech = kTechId.OriginForm
+    end
+    techButtons[8] = originFormTech
 
     if self.bioMassLevel < self.bioMassPreserve then
         if self.bioMassLevel <= 1 then
