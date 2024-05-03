@@ -22,10 +22,9 @@ function Flamethrower:BurnSporesAndUmbra(startPoint, endPoint)
         local checkAtPoint = startPoint + toTarget * i * stepLength
 
         local spores = GetEntitiesWithinRange("SporeCloud", checkAtPoint, kSporesDustCloudRadius)
-        for i = 1, #spores do
-            local spore = spores[i]
+        for j = 1, #spores do
+            local spore = spores[j]
             self:DoDamage(kFlamethrowerSporeDamagePerSecond * timeLastBurn, spore, endPoint, nil)
-            burnSpent = true
         end
 
         local bombs = GetEntitiesWithinRange("Bomb", checkAtPoint, 1.6)
@@ -34,8 +33,8 @@ function Flamethrower:BurnSporesAndUmbra(startPoint, endPoint)
         table.copy(GetEntitiesWithinRange("AcidRocketBomb", checkAtPoint, 1.6), bombs, true)
         table.copy(GetEntitiesWithinRange("DotMarker", checkAtPoint, 1.6), bombs, true)
 
-        for i = 1, #bombs do
-            local bomb = bombs[i]
+        for j = 1, #bombs do
+            local bomb = bombs[j]
             bomb:TriggerEffects("burn_bomb", { effecthostcoords = Coords.GetTranslation(bomb:GetOrigin()) } )
             DestroyEntity(bomb)
             burnSpent = true
@@ -46,8 +45,8 @@ function Flamethrower:BurnSporesAndUmbra(startPoint, endPoint)
         table.copy(GetEntitiesWithinRange("MucousMembrane", checkAtPoint, MucousMembrane.kRadius), clouds, true)
         table.copy(GetEntitiesWithinRange("EnzymeCloud", checkAtPoint, EnzymeCloud.kRadius), clouds, true)
 
-        for i = 1, #clouds do
-            local cloud = clouds[i]
+        for j = 1, #clouds do
+            local cloud = clouds[j]
             self:TriggerEffects("burn_umbra", { effecthostcoords = Coords.GetTranslation(cloud:GetOrigin()) } )
             DestroyEntity(cloud)
             burnSpent = true
@@ -55,6 +54,10 @@ function Flamethrower:BurnSporesAndUmbra(startPoint, endPoint)
         
         
         if burnSpent then
+            local owner = self:GetParent()
+            if owner then
+                owner:AddContinuousScore("FlameThrowerBurns",kFlameThrowerEntityBurnReward, kFlameThrowerEntityBurnRewardInterval,kFlameThrowerEntityBurnScoreRewardEachInterval,kFlameThrowerEntityBurnPResRewardEachInterval)
+            end
             break
         end
 

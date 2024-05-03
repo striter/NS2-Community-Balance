@@ -84,7 +84,6 @@ function MarineTeam:InitTechTree()
     self.techTree:AddTargetedBuyNode(kTechId.Shotgun,            kTechId.ShotgunTech)
     self.techTree:AddTargetedActivation(kTechId.DropShotgun,     kTechId.ShotgunTech)
 
-    --self.techTree:AddResearchNode(kTechId.CombatBuilderTech,kTechId.Armory)
 
     self.techTree:AddResearchNode(kTechId.MinesTech,            kTechId.Armory)
     self.techTree:AddTargetedBuyNode(kTechId.LayMines,          kTechId.MinesTech)
@@ -97,9 +96,9 @@ function MarineTeam:InitTechTree()
 
     self.techTree:AddTargetedBuyNode(kTechId.Welder,          kTechId.Armory,        kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.DropWelder,   kTechId.Armory,        kTechId.None)
-    self.techTree:AddTargetedBuyNode(kTechId.CombatBuilder, kTechId.MinesTech)
-    self.techTree:AddTargetedActivation(kTechId.DropCombatBuilder,kTechId.MinesTech)
 
+    self.techTree:AddResearchNode(kTechId.CombatBuilderTech,kTechId.Armory)
+    self.techTree:AddTargetedActivation(kTechId.DropCombatBuilder,kTechId.CombatBuilderTech)
     -- Door actions
     -- self.techTree:AddBuildNode(kTechId.Door, kTechId.None, kTechId.None)
     -- self.techTree:AddActivation(kTechId.DoorOpen)

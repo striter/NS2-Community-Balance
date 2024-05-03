@@ -48,7 +48,7 @@ function AutoWeldMixin:__initmixin()
         -- NOTE: The InitMixin() call for AutoWeldMixin should come AFTER the InitMixin() for
         -- CombatMixin, otherwise it won't be able to use it.
         if HasMixin(self, "Combat") then
-            self.__GetIsInCombatForAutoRepair = CombatMixin.GetIsInCombat
+            self.__GetIsInCombatForAutoRepair = CombatMixin.GetIsUnderFire
         else
             self.__GetIsInCombatForAutoRepair = GetIsInCombat_WithoutCombatMixin
         end
@@ -93,7 +93,7 @@ if Server then
             local healthToRegen = self:GetMaxHealth() * healthCap - self:GetHealth()
             if healthToRegen > 0 then
                 local regenPerSecond = self:GetAutoHealPerSecond(lifeSustainResearched)
-                self:Heal( math.min(AutoWeldMixin.kRegenInterval * regenPerSecond,healthToRegen))
+                self:Heal(math.min(AutoWeldMixin.kRegenInterval * regenPerSecond,healthToRegen))
             end
         end
 

@@ -139,7 +139,7 @@ kFadeDamageReduction = {
 }
 
 --700 450 50
-kOnosHealth = 750    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 25
+kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 25
 kOnosBoneShieldDefaultReduction = 0.2
 kOnosBoneShieldDamageReduction = {
     ["HeavyMachineGun"] = 0.25,

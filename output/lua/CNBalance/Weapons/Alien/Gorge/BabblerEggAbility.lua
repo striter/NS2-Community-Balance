@@ -12,10 +12,13 @@ local function IsPathable(position)
 end
 
 function BabblerEggAbility:GetIsPositionValid(position, player, surfaceNormal)
-    local rayTracePosition = position + surfaceNormal * 0.05
-    local trace = Shared.TraceRay(rayTracePosition, rayTracePosition + kDownCheck, CollisionRep.Move, PhysicsMask.DefaultOnly)
+    local startPosition = position + surfaceNormal * 0.3
+    local endPosition = startPosition + kDownCheck
+    local trace = Shared.TraceRay(startPosition,endPosition , CollisionRep.Default, PhysicsMask.Movement)
     if trace.fraction ~= 1.0 then
+        --DebugLine(startPosition, trace.endPoint, .2, 1,0,0,1)
         return IsPathable(trace.endPoint)
     end
+    --DebugLine(startPosition, endPosition, .2, 0,0,1, 1)
     return IsPathable(position)
 end 

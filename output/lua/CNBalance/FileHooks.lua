@@ -65,6 +65,7 @@ ModLoader.SetupFileHook("lua/LiveMixin.lua", "lua/CNBalance/Mixin/LiveMixin.lua"
 ModLoader.SetupFileHook("lua/ConstructMixin.lua", "lua/CNBalance/Mixin/ConstructMixin.lua", "post")
 ModLoader.SetupFileHook("lua/UpgradableMixin.lua", "lua/CNBalance/Mixin/UpgradableMixin.lua", "post")
 ModLoader.SetupFileHook("lua/TunnelUserMixin.lua", "lua/CNBalance/Mixin/TunnelUserMixin.lua", "replace")
+ModLoader.SetupFileHook("lua/EnergizeMixin.lua", "lua/CNBalance/Mixin/EnergizeMixin.lua", "replace")
 ModLoader.SetupFileHook("lua/Weapons/Alien/HealSprayMixin.lua", "lua/CNBalance/Mixin/HealSprayMixin.lua", "replace")
 
 ModLoader.SetupFileHook("lua/CloakableMixin.lua", "lua/CNBalance/Mixin/CloakableMixin.lua", "replace")

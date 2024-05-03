@@ -35,6 +35,12 @@ kMaxInfantryPortalsPerCommandStation = 99
 kNumMines = 2
 kGrenadeLauncherPlayersAlert = 5
 kFlameThrowerPlayersAlert = 3
+
+kFlameThrowerEntityBurnReward = 1
+kFlameThrowerEntityBurnRewardInterval = kFlameThrowerEntityBurnReward * 3
+kFlameThrowerEntityBurnScoreRewardEachInterval = 1
+kFlameThrowerEntityBurnPResRewardEachInterval = 0.1
+
 -- Jetpack
 --kUpgradedJetpackUseFuelRate = 0.18
 kJetpackingAccel = 0.8
@@ -66,7 +72,7 @@ kVolleyFocusDamageBonusAtMax = 0.2  kVolleyFocusAttackSlowAtMax = 0
 kSwipeFocusDamageBonusAtMax = 0.6
 kGoreFocusDamageBonusAtMax = 1  kGoreFocusAttackSlowAtMax = 1
 
-kAlienRegenerationCombatModifier = 0.5
+kAlienRegenerationCombatModifier = 1
 
 kHydrasPerHive = 3
 kClogsPerHive = 10
@@ -146,5 +152,6 @@ kMarineBuildRadius = 1.5
 
 kSporeMineMatureTime = 5
 
-kPlayerEnergyPerEnergize = 10  --15
+kPlayerEnergyPerEnergize = 15  --15
+kPlayerEnergyPerEnergizeInCombat = 6
 kEnergizeUpdateRate = 1

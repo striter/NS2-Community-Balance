@@ -79,7 +79,7 @@ kWelderDropCost = 2
 kWelderDropCooldown = 0
 
 kMineResearchCost  = 10
-kMineResearchTime  = 45
+kMineResearchTime  = 20
 
 kGrenadeTechResearchCost = 10   --10
 kGrenadeTechResearchTime = 45   --45
@@ -182,8 +182,8 @@ kGrenadeLauncherDetectionShotRadius = 3.5
 
 kGrenadeLauncherClipSize = 4
 
-kCombatBuilderResearchCost = 15
-kCombatBuilderResearchTime = 60
+kCombatBuilderResearchCost = 10
+kCombatBuilderResearchTime = 20
 
 --Armor Supply
 kLifeSustainResearchCost = 15
