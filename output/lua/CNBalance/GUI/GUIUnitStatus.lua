@@ -57,6 +57,8 @@ local kActionDefaultPos
 local kAmmoBarColors =
 {
     [kTechId.Rifle] = Color(0,1,1,1),            -- teal
+    [kTechId.LightMachineGun] = Color(0,1,1,1),
+    [kTechId.SubMachineGun] = Color(0,1,1,1),
     [kTechId.Shotgun] = Color(0,1,0,1),          -- green
     [kTechId.Flamethrower] = Color(1,1,0,1),     -- yellow
     [kTechId.GrenadeLauncher] = Color(1,0,1,1),  -- magenta

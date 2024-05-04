@@ -98,6 +98,7 @@ function MarineTeam:InitTechTree()
     self.techTree:AddTargetedActivation(kTechId.DropWelder,   kTechId.Armory,        kTechId.None)
 
     self.techTree:AddResearchNode(kTechId.CombatBuilderTech,kTechId.Armory)
+    self.techTree:AddTargetedBuyNode(kTechId.CombatBuilder,          kTechId.CombatBuilderTech,        kTechId.None)
     self.techTree:AddTargetedActivation(kTechId.DropCombatBuilder,kTechId.CombatBuilderTech)
     -- Door actions
     -- self.techTree:AddBuildNode(kTechId.Door, kTechId.None, kTechId.None)

@@ -54,6 +54,7 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.MotionTrack,
     kTechId.ShotgunTech,
     kTechId.MinesTech,
+    kTechId.CombatBuilderTech,
     kTechId.GrenadeTech,
 
     kTechId.AdvancedArmory,
