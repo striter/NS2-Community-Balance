@@ -15,8 +15,16 @@ function BuildTechData()
         [kTechDataDisplayName] = "MILITARY_PROTOCOL",
         [kTechDataTooltipInfo] = "MILITARY_PROTOCOL_TOOLTIP",
         [kTechDataResearchName] = "MILITARY_PROTOCOL",
+        [kTechDataResearchIgnoreCompleteAlert] = true,
     } )
 
+    table.insert(techData,{
+        [kTechDataId] = kTechId.MilitaryProtocolBroadCast,
+        [kTechDataAlertSound] = MarineCommander.kMilitaryProtocolBroadCast,
+        [kTechDataAlertType] = kAlertType.Info,
+        [kTechDataAlertText] = "MILITARY_PROTOCOL",
+    } )
+    
     table.insert(techData,{
         [kTechDataId] = kTechId.MotionTrack,
         [kTechDataCostKey] = kMotionTrackResearchCost,

@@ -1,6 +1,7 @@
 --Marine
 --Researches
 debug.appendtoenum(kTechId, "MilitaryProtocol")
+debug.appendtoenum(kTechId, "MilitaryProtocolBroadCast")
 debug.appendtoenum(kTechId, "MotionTrack")
 
 

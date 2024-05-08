@@ -288,11 +288,18 @@ function MarineTeam:ShouldHandleManualAlert()            --He can handle it hims
     return not self:IsMilitaryProtocol()
 end
 
+MarineTeam.kMilitaryProtocolBroadcast = PrecacheAsset("sound/ns2plus.fev/comm/mpBroadcast")
 function MarineTeam:OnResearchComplete(structure, researchId)
     PlayingTeam.OnResearchComplete(self,structure,researchId)
 
     if researchId ~= kTechId.MilitaryProtocol then return end
 
+    local gamerules = GetGamerules()
+    gamerules.worldTeam:PlayPrivateTeamSound(MarineTeam.kMilitaryProtocolBroadcast)
+    gamerules.team1:PlayPrivateTeamSound(MarineTeam.kMilitaryProtocolBroadcast)
+    gamerules.team2:PlayPrivateTeamSound(MarineTeam.kMilitaryProtocolBroadcast)
+    gamerules.spectatorTeam:PlayPrivateTeamSound(MarineTeam.kMilitaryProtocolBroadcast)
+    
     local gameInfo = GetGameInfoEntity()
     local teamIdx = self:GetTeamNumber()
     local commStructSkin = kMarineStructureVariants.Chroma
