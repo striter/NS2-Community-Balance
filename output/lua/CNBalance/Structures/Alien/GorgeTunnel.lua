@@ -23,6 +23,10 @@ function GorgeTunnel:OnCreate()
     
 end
 
+function GorgeTunnel:GetTechId()
+    return kTechId.Tunnel
+end
+
 function GorgeTunnel:OnDestroy()
     
     TunnelEntrance.OnDestroy(self)

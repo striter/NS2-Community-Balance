@@ -334,7 +334,7 @@ function DropStructureAbility:DropStructure(player, origin, direction, structure
                 end
 
                 if maxStructures > 0 then
-                    player:GetTeam():AddGorgeStructure(player, structure,maxStructures)
+                    player:GetTeam():AddPlayerStructure(player,structureAbility:GetDropStructureId(), structure,maxStructures)
                 end
 
                 -- Check for space

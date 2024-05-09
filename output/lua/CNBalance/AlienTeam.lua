@@ -457,15 +457,13 @@ function AlienTeam:RemoveGorgeStructureFromClient(techId, clientId)
 
 end
 
-
 --Biomass adapted gorger structures
-function AlienTeam:AddGorgeStructure(player, structure,maxStructure)
+function AlienTeam:AddPlayerStructure(player,techId, structure,maxStructure)
 
     if player ~= nil and structure ~= nil then
 
         local clientId = Server.GetOwner(player):GetUserId()
         local structureId = structure:GetId()
-        local techId = structure:GetTechId()
 
         if not self.clientOwnedStructures[clientId] then
             table.insert(self.clientStructuresOwner, clientId)

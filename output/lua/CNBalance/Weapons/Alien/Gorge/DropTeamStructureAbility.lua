@@ -38,6 +38,12 @@ DropStructureAbility.kSupportedStructures[kTechId.Egg] = EggAbility
 DropStructureAbility.kSupportedStructures[kTechId.Tunnel] = TunnelEntranceAbility
 DropStructureAbility.kSupportedStructures[kTechId.TunnelExit] = TunnelExitAbility
 
+local networkVars =
+{
+    entranceDropped = "private boolean",
+    exitDropped = "private boolean",
+}
+
 DropTeamStructureAbility.kMapName = "drop_team_structure_ability"
 
 if Client then
@@ -118,5 +124,49 @@ if Client then
     end
 end
 
+function DropTeamStructureAbility:GetNumStructuresBuilt(techId)
 
-Shared.LinkClassToMap("DropTeamStructureAbility", DropTeamStructureAbility.kMapName, {})
+    if techId == kTechId.Tunnel then
+        return self.entranceDropped and 1 or 0
+    end
+
+    if techId == kTechId.TunnelExit then
+        return self.exitDropped and 1 or 0
+    end
+
+    -- unlimited
+    return -1
+end
+
+
+function DropTeamStructureAbility:ProcessMoveOnWeapon(input)
+
+    local player = self:GetParent()
+    if player and player:GetIsAlive() then
+
+        if Server then
+
+            local team = player:GetTeam()
+            self.entranceDropped = team:GetNumDroppedGorgeStructures(player, kTechId.Tunnel) > 0
+            self.exitDropped = team:GetNumDroppedGorgeStructures(player, kTechId.TunnelExit) > 0
+        end
+
+    end
+
+end
+
+
+function DropTeamStructureAbility:GetNumStructuresCanDrop(techId,biomassLevel)
+
+    if techId == kTechId.Tunnel then
+        return TunnelEntranceAbility.GetMaxStructures(nil,biomassLevel)
+    end
+
+    if techId == kTechId.TunnelExit then
+        return TunnelExitAbility.GetMaxStructures(nil,biomassLevel)
+    end
+
+    -- unlimited
+    return -1
+end
+Shared.LinkClassToMap("DropTeamStructureAbility", DropTeamStructureAbility.kMapName, networkVars)
