@@ -1160,11 +1160,19 @@ function AlienTeam:InitTechTree()
 end
 
 
+AlienTeam.kOriginFormBroadCast = PrecacheAsset("sound/ns2plus.fev/comm/originForm")
+AlienTeam.kOriginFormBroadCastSelf = PrecacheAsset("sound/ns2plus.fev/khamm/originForm")
 function AlienTeam:OnResearchComplete(structure, researchId)
     PlayingTeam.OnResearchComplete(self,structure,researchId)
 
     if researchId ~= kTechId.OriginForm then return end
 
+    local gameRules = GetGamerules()
+    gameRules.worldTeam:PlayPrivateTeamSound(AlienTeam.kOriginFormBroadCast)
+    gameRules.team1:PlayPrivateTeamSound(AlienTeam.kOriginFormBroadCast)
+    gameRules.spectatorTeam:PlayPrivateTeamSound(AlienTeam.kOriginFormBroadCast)
+    self:PlayPrivateTeamSound(AlienTeam.kOriginFormBroadCastSelf)
+    
     local teamNumber = self:GetTeamNumber()
     
     local targetCommander = GetCommanderForTeam(teamNumber)

@@ -1,5 +1,6 @@
 Script.Load("lua/BiomassHealthMixin.lua")
 
+
 local baseOnCreate = CommandStation.OnCreate
 function CommandStation:OnCreate()
     baseOnCreate(self)
@@ -19,6 +20,9 @@ function CommandStation:OnInitialized()
     end
 end
 
+CommandStation.kUpgradeType = {
+    kTechId.StandardSupply,kTechId.ExplosiveSupply,kTechId.ArmorSupply,kTechId.ElectronicSupply
+}
 CommandStation.kUpgradeToTargetType =
 {
     [kTechId.StandardSupply] = kTechId.StandardStation,

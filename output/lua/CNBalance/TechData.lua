@@ -60,6 +60,7 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "STANDARD_SUPPLY_TOOLTIP",
         [kTechDataResearchName] = "STANDARD_SUPPLY",
         [kTechDataUpgradeTech] = kTechId.CommandStation,
+        [kTechDataResearchIgnoreCompleteAlert] = true,
     })
 
     table.insert(techData,{
@@ -104,6 +105,7 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "ARMOR_SUPPLY_TOOLTIP",
         [kTechDataResearchName] = "ARMOR_SUPPLY",
         [kTechDataUpgradeTech] = kTechId.CommandStation,
+        [kTechDataResearchIgnoreCompleteAlert] = true,
     })
 
     table.insert(techData,{
@@ -157,6 +159,7 @@ function BuildTechData()
         [kTechDataResearchName] = "EXPLOSIVE_SUPPLY",
         [kTechDataTooltipInfo] = "EXPLOSIVE_SUPPLY_TOOLTIP",
         [kTechDataUpgradeTech] = kTechId.CommandStation,
+        [kTechDataResearchIgnoreCompleteAlert] = true,
     })
 
     table.insert(techData,{
@@ -211,6 +214,7 @@ function BuildTechData()
         [kTechDataResearchName] = "ELECTRONIC_SUPPLY",
         [kTechDataTooltipInfo] = "ELECTRONIC_SUPPLY_TOOLTIP",
         [kTechDataUpgradeTech] = kTechId.CommandStation,
+        [kTechDataResearchIgnoreCompleteAlert] = true,
     })
 
     table.insert(techData,{
@@ -1087,7 +1091,7 @@ function BuildTechData()
     table.insert(techData, {
         [kTechDataId] = kTechId.OriginFormPassive,
         [kTechDataDisplayName] = "ORIGIN_FORM_PASSIVE",
-        [kTechDataTooltipInfo] = "ORIGIN_FORM_TOOLTIP_PASSIVE",
+        [kTechDataTooltipInfo] = "ORIGIN_FORM_PASSIVE_TOOLTIP",
         [kTechDataResearchName] = "ORIGIN_FORM_PASSIVE",
     })
 

@@ -20,6 +20,15 @@ function GUIEvent:GetTimeLeftForResearch(techId, entityId)
     return timeLeftSeconds
 end
 
+GUIEvent.kBroadCastVO = {
+    kTechId.MilitaryProtocol,
+    kTechId.StandardSupply,
+    kTechId.ArmorSupply,
+    kTechId.ExplosiveSupply,
+    kTechId.ElectronicSupply,
+    kTechId.OriginForm,
+}
+
 function GUIEvent:Update(_, newNotification)
 
     local remainingNotifications = {}
@@ -204,7 +213,9 @@ function GUIEvent:Update(_, newNotification)
                 if completedThisUpdate then
 
                     displayedNotification:SetCompleted()
-                    Client.GetLocalPlayer():TriggerEffects("upgrade_complete")
+                    if not table.contains(GUIEvent.kBroadCastVO,displayedNotification.techId) then
+                        Client.GetLocalPlayer():TriggerEffects("upgrade_complete")
+                    end
 
                 elseif cancelledThisUpdate then
 

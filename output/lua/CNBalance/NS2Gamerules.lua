@@ -300,4 +300,11 @@
          end
 
      end
+     
+     function NS2Gamerules:BroadCastVO(_name)
+         self.worldTeam:PlayPrivateTeamSound(_name)
+         self.team1:PlayPrivateTeamSound(_name)
+         self.team2:PlayPrivateTeamSound(_name)
+         self.spectatorTeam:PlayPrivateTeamSound(_name)
+     end
  end

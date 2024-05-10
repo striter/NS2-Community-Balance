@@ -21,3 +21,15 @@ function Observatory:GetTechButtons(techId)
     return nil
 
 end
+
+Observatory.kBeaconVO = PrecacheAsset("sound/ns2plus.fev/comm/beacon")
+local baseTriggerDistressBeacon = Observatory.TriggerDistressBeacon
+function Observatory:TriggerDistressBeacon()
+
+    local success = baseTriggerDistressBeacon(self)
+    if success then
+        self:GetTeam():PlayPrivateTeamSound(Observatory.kBeaconVO)
+    end
+    return success, not success
+
+end
