@@ -41,7 +41,10 @@ if Server then
             local direction = target:GetOrigin() - self:GetOrigin()
             direction.y = 0
             direction:Normalize()
-            ApplyPushback(target,0.2,direction * 4.5)
+            local mass = target.GetMass and target:GetMass() or Player.kMass
+            if mass < 100 then
+                ApplyPushback(target,0.2,direction * 4.5)
+            end
         end
         
         local infested = self:GetGameEffectMask(kGameEffect.OnInfestation)
@@ -58,4 +61,8 @@ if Server then
     end
 
 
-end 
+end
+-- CQ: EyePos seems to be somewhat hackish; used in several places but not owned anywhere... predates Mixins
+function Whip:GetEyePos()
+    return self:GetOrigin() + self:GetCoords().yAxis * 1.7
+end
