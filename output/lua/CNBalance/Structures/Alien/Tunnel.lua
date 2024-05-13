@@ -9,6 +9,11 @@ if Server then
         self.ownerClientId = clientId
     end
 
+    local function remap(x,t1,t2,s1,s2)
+        local invLerp= ((x - t1) / (t2 - t1))
+        return  invLerp * (s2 - s1) + s1
+    end
+    
     function Tunnel:UseExit(entity, exit, exitSide)
         
         
@@ -18,7 +23,12 @@ if Server then
 
         local extents = GetExtents(entity:GetTechId())
         local maxExtent = math.max(extents.x,extents.y,extents.z)
-        destinationOrigin =  destinationOrigin + normal * (0.3 + 0.5 + maxExtent * (1 - Math.DotProduct(normal,Vector(0,1,0))))
+        local upValue = Math.DotProduct(normal,Vector(0,1,0))  -- -1 down 1 up
+        local downParam = remap(upValue,1,-1,0,1)
+        local sideParam = remap(math.abs(upValue),0,1,1,0)
+        
+        destinationOrigin =  destinationOrigin + normal * (0.3 + downParam * maxExtent * 2)
+        destinationOrigin = destinationOrigin - Vector(0,sideParam * maxExtent ,0)
         
         if entity.OnUseGorgeTunnel then
             entity:OnUseGorgeTunnel(destinationOrigin)
