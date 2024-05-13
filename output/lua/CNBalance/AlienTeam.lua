@@ -1406,9 +1406,9 @@ function AlienTeam:CollectTeamResources(teamRes,playerRes)
     PlayingTeam.CollectTeamResources(self,teamRes,playerRes)
 end
 
-function AlienTeam:CollectKillReward(_techId)
+function AlienTeam:CollectKillReward(_techId,_fraction)
     if self:IsOriginForm() then
-        return kOriginPersonalResourcesPerKill[_techId] or 0
+        return (kOriginPersonalResourcesPerKill[_techId] or 0) * _fraction
     end
     return 0
 end

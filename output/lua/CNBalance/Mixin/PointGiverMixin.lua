@@ -16,7 +16,15 @@ if Server then
         local selfIsPlayer = self:isa("Player")
 
         local _techID = self:GetTechId()
-        local pResReward = kTechDataPersonalResOnKill[_techID] or 0
+        local resRewardFraction = 1
+        if selfIsPlayer and Shine then
+            local npEnabled, np = Shine:IsExtensionEnabled( "newcomerprotection" )
+            if npEnabled then
+                resRewardFraction = 1 - np:GetRefundPercent(self)
+            end
+        end
+        
+        local pResReward = (kTechDataPersonalResOnKill[_techID] or 0)* resRewardFraction
         --Shared.Message(EnumToString(kTechId, _techID) .. " " .. tostring(pResReward))
 
         if attacker and GetAreEnemies(self, attacker) then -- pve kills count
@@ -26,7 +34,7 @@ if Server then
 
             local attackerTeam = attacker:GetTeam()
             if attackerTeam then
-                pResReward = pResReward + attackerTeam:OnTeamKill(_techID,selfIsPlayer and self:ClaimBounty() or 0,true)
+                pResReward = pResReward + attackerTeam:OnTeamKill(_techID, resRewardFraction,selfIsPlayer and self:ClaimBounty() or 0,true)
             end
         end
 
@@ -47,10 +55,8 @@ if Server then
 
                 local team = currentAttacker:GetTeam()
                 local isKiller = attacker == currentAttacker
-                if isKiller 
-                    and team and team.CollectKillReward
-                then
-                    resReward = resReward + team:CollectKillReward(_techID)
+                if isKiller and team and team.CollectKillReward then
+                    resReward = resReward + team:CollectKillReward(_techID,resRewardFraction)
                 end
                 
                 resReward = currentAttacker:AddResources(resReward,true)

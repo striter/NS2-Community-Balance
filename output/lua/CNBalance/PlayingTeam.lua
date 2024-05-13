@@ -87,15 +87,15 @@ function PlayingTeam:Update()
 
 end
 
-function PlayingTeam:OnTeamKill(techID,bountyScore)
+function PlayingTeam:OnTeamKill(techID, _fraction, _bountyScore)
     local tResReward = kTechDataTeamResOnKill[techID]
     if tResReward then
-        self:AddTeamResources(tResReward,true)      --Treat this as income
+        self:AddTeamResources(tResReward * _fraction,true)      --Treat this as income
     end
     local pResReward = 0
-    if bountyScore > 0 then
+    if _bountyScore > 0 then
         local pResClaimPerBounty = (self:GetTeamType() == kAlienTeamType and kPResPerBountyClaimAsAlien or kPResPerBountyClaimAsMarine)
-        pResReward = bountyScore * pResClaimPerBounty
+        pResReward = _bountyScore * pResClaimPerBounty
     end
     return pResReward
 end
