@@ -70,6 +70,7 @@ ModLoader.SetupFileHook("lua/Weapons/Alien/HealSprayMixin.lua", "lua/CNBalance/M
 
 ModLoader.SetupFileHook("lua/CloakableMixin.lua", "lua/CNBalance/Mixin/CloakableMixin.lua", "replace")
 ModLoader.SetupFileHook("lua/DetectableMixin.lua", "lua/CNBalance/Mixin/DetectableMixin.lua", "replace")
+ModLoader.SetupFileHook("lua/DetectorMixin.lua", "lua/CNBalance/Mixin/DetectorMixin.lua", "replace")
 ModLoader.SetupFileHook("lua/ClogFallMixin.lua", "lua/CNBalance/Mixin/ClogFallMixin.lua", "replace")
 ModLoader.SetupFileHook("lua/ShieldableMixin.lua", "lua/CNBalance/Mixin/ShieldableMixin.lua", "post" )
 ModLoader.SetupFileHook("lua/PlayerHallucinationMixin.lua", "lua/CNBalance/Mixin/PlayerHallucinationMixin.lua", "post" )
