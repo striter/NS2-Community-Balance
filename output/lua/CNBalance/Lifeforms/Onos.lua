@@ -83,6 +83,15 @@ function Onos:CanBeStampeded(ent)
     return true
 end
 
+function Onos:GetIsDevouring()
+
+    local devourWeapon = self:GetWeapon(Devour.kMapName)
+    if devourWeapon then
+        return devourWeapon.devouringScalar and devourWeapon.devouringScalar > 0.01
+    end
+    return false
+end
+
 function Onos:GetMaxSpeed(possible)
 
     if possible then
@@ -94,8 +103,12 @@ function Onos:GetMaxSpeed(possible)
 
     if GetHasCarapaceUpgrade(self) then
         local shellLevel = self:GetShellLevel()
-        chargeSpeed = chargeSpeed - shellLevel * 0.5
+        chargeSpeed = chargeSpeed - shellLevel * 0.66
         normalSpeed = normalSpeed - shellLevel * 0.2
+    end
+
+    if self:GetIsDevouring() then
+        chargeSpeed = chargeSpeed - 2.5
     end
     
     local boneShieldSlowdown = self:GetIsBoneShieldActive() and kBoneShieldMoveFraction or 1
@@ -107,9 +120,12 @@ end
 
 function Onos:ModifyCelerityBonus( celerityBonus )
 
-    if self:GetIsBoneShieldActive() then
+    if self:GetIsBoneShieldActive()
+        or self:GetIsDevouring() 
+    then
         return 0
     end
+    
 
     return celerityBonus * kOnosCeleritySpeedMultiply
 
@@ -134,3 +150,40 @@ function Onos:GetPlayFootsteps()
             and not self:GetCrouching()
 end
 
+
+function Onos:Stampede()
+    if not self:GetCanStampede() then return end
+
+    local axis = self:GetViewAngles():GetCoords().zAxis
+    local hitAxis = (axis * Vector(1, 0, 1)):GetUnit()
+    local chargeExtends = Onos.kChargeExtents
+
+    
+    local hitOrigin = self:GetOrigin() + Vector(0, 1, 0) + (hitAxis * chargeExtends.z)
+    local stampedables = self:GetNearbyStampedeables(hitOrigin)
+    
+    local clogs = GetEntitiesWithinRange("Clog", hitOrigin, Onos.kStampedeCheckRadius)
+    for _,clog in pairs(clogs) do
+        clog:OnKill()
+        DestroyEntity(clog)
+    end
+
+    if #stampedables < 1 then return end
+
+    local hitboxCoords = Coords.GetLookIn(hitOrigin, hitAxis, Vector(0, 1, 0))
+    local invHitboxCoords = hitboxCoords:GetInverse() -- could possibly optimize with Transpose() instead?
+    for i = 1, #stampedables do
+        local marine = stampedables[i]
+        local localSpacePosition = invHitboxCoords:TransformPoint(marine:GetEngagementPoint())
+        local extents = marine:GetExtents()
+
+        -- If entity is touching box, impact it.
+        if math.abs(localSpacePosition.x) <= chargeExtends.x + extents.x and
+                math.abs(localSpacePosition.y) <= chargeExtends.y + extents.y and
+                math.abs(localSpacePosition.z) <= chargeExtends.z + extents.z then
+
+            self:Impact(marine)
+
+        end
+    end
+end

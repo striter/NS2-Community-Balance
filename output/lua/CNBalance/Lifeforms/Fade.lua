@@ -6,10 +6,10 @@ local kBlinkAddAcceleration = 1  --1 Speed after holding
 local kBlinkSpeedCap = 25 --25 Blink Max Speed,Normal ppl wont reach it. except proDDDDDD
 
 Fade.kAdrenalineEnergyRecuperationRate = 20
-local kAdrenalineBlinkSpeed = 13.5
-local kAdrenalineBlinkAcceleration = 30
-local kAdrenalineBlinkAddAcceleration = 0.5
-local kAdrenalineBlinkSpeedCap = 20
+local kAdrenalineBlinkSpeed = 13
+local kAdrenalineBlinkAcceleration = 20
+local kAdrenalineBlinkAddAcceleration = 0
+local kAdrenalineBlinkSpeedCap = 15
 
 
 function Fade:ModifyVelocity(input, velocity, deltaTime)
@@ -24,6 +24,10 @@ function Fade:ModifyVelocity(input, velocity, deltaTime)
             acceleration =  kAdrenalineBlinkAcceleration
             addAccelection = kAdrenalineBlinkAddAcceleration
             speedCap = kAdrenalineBlinkSpeedCap
+        end
+
+        if GetHasCarapaceUpgrade(self) then
+            addAccelection = 0
         end
 
         local wishDir = self:GetViewCoords().zAxis

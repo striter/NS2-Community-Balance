@@ -81,11 +81,7 @@ function BoneShield:GetCanUseBoneShield(player)
             and player:GetIsOnGround()
             and not self.secondaryAttacking
             and not player.charging and Shared.GetTime() - self.lastShieldTime > .5
-    local devourWeapon = player:GetWeapon(Devour.kMapName)
-    if devourWeapon then
-        local devouring = devourWeapon.devouringScalar and devourWeapon.devouringScalar > 0.01
-        canUse = canUse and not devouring
-    end
+            and not player:GetIsDevouring()
     return canUse
 end
 

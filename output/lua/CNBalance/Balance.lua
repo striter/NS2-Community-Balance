@@ -389,7 +389,7 @@ kXenocideDamageType = kDamageType.Structural
 kXenocideDamage = 150  kXenocideFuelDamage = 210 --200
 kXenocideRange = 8 kXenocideFuelRange = 12 -- 14
 kXenocideDamageScalarEmptyHealth = 0.2 kXenocideDamageHealthScalar = 1 - kXenocideDamageScalarEmptyHealth
-kXenocideSpawnReduction = 0.75 kXenocideFuelSpawnReduction = 0.6
+kXenocideSpawnReduction = 1 kXenocideFuelSpawnReduction = 1
 
 kBileBombResearchCost = 10
 kBileBombResearchTime = 40
@@ -481,7 +481,7 @@ kBoneShieldMinimumEnergyNeeded = 0
 kBoneShieldMinimumFuel = 0.15
 kBoneShieldMaxDuration = 10
 
-kStompEnergyCost = 35
+kStompEnergyCost = 40
 kStompDamageType = kDamageType.Structural
 kStompDamage = 60
 kStompFirstPDamage = 0  kStompDisruptTime = 3
@@ -664,7 +664,7 @@ kOriginFormOnInfestationMinHealPerSecond = 10
 
 kGorgeAbilitiesCost = {
     [kTechId.Hydra] = 0, [kTechId.Clog] = 0, [kTechId.Web] = 0,[kTechId.SporeMine] = 0, [kTechId.BabblerEgg] = 3,
-    [kTechId.Cyst] = 0.5,    [kTechId.Egg] = 1.5, [kTechId.Tunnel] = 5, [kTechId.TunnelExit] = 2,
+    [kTechId.Cyst] = 0.5,    [kTechId.Egg] = 1.5, [kTechId.Tunnel] = 4, [kTechId.TunnelExit] = 4,
     [kTechId.Whip] = 8, [kTechId.Shift] = 12, [kTechId.Shade] = 12, [kTechId.Crag] = 12,
     [kTechId.Harvester] = 8, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
                          [kTechId.Spur] = 12, [kTechId.Shell] = 12, [kTechId.Veil] = 12,
