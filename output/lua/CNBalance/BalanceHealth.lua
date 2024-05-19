@@ -131,9 +131,9 @@ kLerkDamageReduction = {
     --["PulseGrenade"] = 0.75,
 }
 
-kFadeHealth = 280  kFadeArmor = 80  kFadePointValue = 20 kFadeHealthPerBioMass = 5 kFadeHealthPerPlayerAboveLimit = 5
+kFadeHealth = 260  kFadeArmor = 80  kFadePointValue = 20 kFadeHealthPerBioMass = 5 kFadeHealthPerPlayerAboveLimit = 5
 kFadeDamageReduction = {
-    --["Mine"] = 1.1,
+    ["Mine"] = 1.25,
     --["MarineSentry"] = 1.1,
     --["HeavyMachineGun"] = 0.92,
 }
@@ -178,7 +178,7 @@ kSkulkBaseCarapaceUpgradeAmount = 9    kSkulkCarapaceArmorPerBiomass = 1
 kGorgeBaseCarapaceUpgradeAmount = 25    kGorgeCarapaceArmorPerBiomass = 1.25
 kProwlerBaseCarapaceUpgradeAmount = 10  kProwlerCarapaceArmorPerBiomass = 1.25 --kProwlerArmorFullyUpgradedAmount = 28
 kLerkBaseCarapaceUpgradeAmount  = 25    kLerkCarapaceArmorPerBiomass  = 1.25
-kFadeBaseCarapaceUpgradeAmount  = 30    kFadeCarapaceArmorPerBiomass  = 2.5
+kFadeBaseCarapaceUpgradeAmount  = 22.5    kFadeCarapaceArmorPerBiomass  = 2.5
 kOnosBaseCarapaceUpgradeAmount  = 180   kOnosCarapaceArmorPerBiomass  = 10
 kVokexBaseCarapaceUpgradeAmount = 50    kVokexCarapaceArmorPerBiomass = 0
 
