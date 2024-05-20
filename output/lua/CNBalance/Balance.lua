@@ -285,8 +285,9 @@ kInfantryPortalCost = 15
 kRoboticsFactoryCost = 10
 kUpgradeRoboticsFactoryCost = 5
 kUpgradeRoboticsFactoryTime = 20
+kARCDamage = 600
 kARCCost = 15
-kARCBuildTime = 10
+kARCBuildTime = 5
 kMACCost = 4
 
 kSentryDamage = 4  kSentryWeapon1Scalar = 1.125 kSentryWeapon2Scalar = 1.25 kSentryWeapon3Scalar = 1.375
@@ -697,15 +698,15 @@ kTechRespawnTimeExtension =
 {
     --[kTechId.Armor1] = 0,[kTechId.Weapons1] = 0, [kTechId.Observatory] = 0,
     --[kTechId.MinesTech] = 0,[kTechId.ShotgunTech] = 0,
-    [kTechId.Armor2] = 1,[kTechId.Weapons2] = 1, [kTechId.Armor3] = 1, [kTechId.Weapons3] = 1,
+    [kTechId.Armor2] = 1,[kTechId.Weapons2] = 1, [kTechId.Armor3] = 2, [kTechId.Weapons3] = 2,
     [kTechId.PhaseGate] = 1, [kTechId.AdvancedArmory] = 1,
-    [kTechId.ExosuitPrototypeLab] = 1, [kTechId.JetpackPrototypeLab] = 1, [kTechId.CannonPrototypeLab] = 1,
-    [kTechId.DragonBreath] = 1, [kTechId.ArmorRegen] = 1,  [kTechId.MotionTrack] = 1, --[kTechId.MACEmpBlast] = 1,[kTechId.GrenadeLauncherUpgrade] = 1,
+    [kTechId.ExosuitPrototypeLab] = 2, [kTechId.JetpackPrototypeLab] = 2, [kTechId.CannonPrototypeLab] = 2,
+    [kTechId.DragonBreath] = 2, [kTechId.ArmorRegen] = 2,  [kTechId.MotionTrack] = 2, --[kTechId.MACEmpBlast] = 1,[kTechId.GrenadeLauncherUpgrade] = 1,
     
     --[kTechId.BioMassOne] = 0, [kTechId.BioMassTwo] = 0, 
-    [kTechId.BioMassThree] = 0, [kTechId.BioMassFour] = 1, [kTechId.BioMassFive] = 1, [kTechId.BioMassSix] = 1,
-    [kTechId.TwoVeils] = 0,[kTechId.ThreeVeils] = 1,[kTechId.TwoShells] = 0,[kTechId.ThreeShells] = 1,[kTechId.TwoSpurs] = 0, [kTechId.ThreeSpurs] = 1,
-    [kTechId.BioMassSeven] = 1, [kTechId.BioMassEight] = 1,
-    [kTechId.BioMassNine] = 2, [kTechId.BioMassTen] = 2,
+    [kTechId.BioMassThree] = 1, [kTechId.BioMassFour] = 1, [kTechId.BioMassFive] = 1, [kTechId.BioMassSix] = 1,
+    [kTechId.TwoVeils] = 1,[kTechId.ThreeVeils] = 1,[kTechId.TwoShells] = 1,[kTechId.ThreeShells] = 1,[kTechId.TwoSpurs] = 1, [kTechId.ThreeSpurs] = 1,
+    [kTechId.BioMassSeven] = 2, [kTechId.BioMassEight] = 2,
+    [kTechId.BioMassNine] = 3, [kTechId.BioMassTen] = 3,
     --[kTechId.BioMassEleven] = 1, [kTechId.BioMassTwelve] = 1,
 }
