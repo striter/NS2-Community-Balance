@@ -1398,7 +1398,7 @@ function AlienTeam:CollectTeamResources(teamRes,playerRes)
     if self:IsOriginForm() then
         local activeHiveCount = self:GetActiveHiveCount()
         if activeHiveCount > 0 then
-            local scalar = kOriginFormTeamResScalarHiveCount[activeHiveCount]
+            local scalar = kOriginFormTeamResScalarHiveCount[activeHiveCount + 1]
             teamRes = teamRes * scalar
         end
     end

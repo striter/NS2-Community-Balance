@@ -54,16 +54,16 @@ if Server then
         --end
 
         --Bounty Damage Dealt Decrease
-        if bountyScore <= 0
-                and attacker.kBountyDamageDecrease 
-        then
-            local attackerBountyScore = attacker:GetBountyCurrentLife()
-            if attackerBountyScore > 0 then   --0-5%,10%-20%,30%-45%,60%-80% ...
-                local scalar = attackerBountyScore * (0.05 / attacker.kBountyThreshold)
-                scalar = scalar * (math.floor(attackerBountyScore / attacker.kBountyThreshold)+ 1)
-                damageScalar = damageScalar - scalar
-            end
-        end
+        --if bountyScore <= 0
+        --        and attacker.kBountyDamageDecrease 
+        --then
+        --    local attackerBountyScore = attacker:GetBountyCurrentLife()
+        --    if attackerBountyScore > 0 then   --0-5%,10%-20%,30%-45%,60%-80% ...
+        --        local scalar = attackerBountyScore * (0.05 / attacker.kBountyThreshold)
+        --        scalar = scalar * (math.floor(attackerBountyScore / attacker.kBountyThreshold)+ 1)
+        --        damageScalar = damageScalar - scalar
+        --    end
+        --end
 
         damageScalar = math.Clamp(damageScalar,0.2,5.0)        --Seems enough
         damageTable.damage = damageTable.damage * damageScalar

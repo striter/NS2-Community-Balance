@@ -5,10 +5,10 @@ kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
 kResourceTowerResourceInterval = 6
 kTeamResourceWithoutTower = 0.5
-kMaxEfficiencyTowers = 3
+kMaxEfficiencyTowers = 99
 kTeamResourceEachTower = 1
 kTeamResourceEachTowerAboveThreshold = 0.5
-kPlayerResEachTower = 0.125
+kPlayerResEachTower = 0.11
 kPlayerResEachTowerAboveThreshold = 0.05
 
 --Pres reward for aggressive playing (too many farmers?)
