@@ -571,7 +571,7 @@ function DropStructureAbility:OnDraw(player, previousWeaponMapName)
 
     Ability.OnDraw(self, player, previousWeaponMapName)
 
-    if previousWeaponMapName == DropStructureAbility.kMapName or previousWeaponMapName == DropTeamStructureAbility.kMapName then
+    if previousWeaponMapName == DropStructureAbility.kMapName or previousWeaponMapName == DropTeamStructureAbility.kMapName  then
         self.previousWeaponMapName = player:GetWeapon(previousWeaponMapName).previousWeaponMapName
     else
         self.previousWeaponMapName = previousWeaponMapName
@@ -768,7 +768,7 @@ if Client then
         end
 
         if self.buildMenu then
-            self.buildMenu:SetIsVisible(player and localPlayer == player and player:isa("Gorge") and self.menuActive and not HelpScreen_GetHelpScreen():GetIsBeingDisplayed() and not GetMainMenu():GetVisible())
+            self.buildMenu:SetIsVisible(player and localPlayer == player and self.menuActive and not HelpScreen_GetHelpScreen():GetIsBeingDisplayed() and not GetMainMenu():GetVisible())
         end
 
     end
@@ -819,9 +819,4 @@ if Client then
 
 end
 
-
-
-
 Shared.LinkClassToMap("DropStructureAbility", DropStructureAbility.kMapName, networkVars)
-
-Script.Load("lua/CNBalance/Weapons/Alien/Gorge/DropTeamStructureAbility.lua")

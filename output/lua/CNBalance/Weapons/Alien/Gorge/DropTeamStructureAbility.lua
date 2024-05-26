@@ -1,4 +1,5 @@
-﻿Script.Load("lua/CNBalance/Weapons/Alien/Gorge/AdvancedStructure/WhipAbility.lua")
+﻿Script.Load("lua/Weapons/Alien/DropStructureAbility.lua")
+Script.Load("lua/CNBalance/Weapons/Alien/Gorge/AdvancedStructure/WhipAbility.lua")
 Script.Load("lua/CNBalance/Weapons/Alien/Gorge/AdvancedStructure/ShadeAbility.lua")
 Script.Load("lua/CNBalance/Weapons/Alien/Gorge/AdvancedStructure/ShiftAbility.lua")
 Script.Load("lua/CNBalance/Weapons/Alien/Gorge/AdvancedStructure/CragAbility.lua")

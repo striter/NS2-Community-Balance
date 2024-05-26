@@ -15,33 +15,29 @@ Script.Load("lua/TunnelUserMixin.lua")
 
 Script.Load("lua/Prowler/VolleyRappel.lua")
 Script.Load("lua/Prowler/AcidSpray.lua")
+Script.Load("lua/Prowler/ProwlerStructureAbility.lua")
 Script.Load("lua/Prowler/ReadyRoomRappel.lua")
 Script.Load("lua/Weapons/PredictedProjectile.lua")
 Script.Load("lua/IdleMixin.lua")
---Script.Load("lua/SkulkVariantMixin.lua")
 
 class 'Prowler' (Alien)
 
 Prowler.kMapName = "prowler"
 
 Prowler.kMaxSpeed = 6.6 -- skulk is 7.25
+Prowler.kMaxRappelSpeed = 12.15
+
 Prowler.kWalkBackwardSpeedScalar = 1.0 --0.9
-Prowler.kHorizontalJumpForce = 1.4 --7.2
-Prowler.kVerticalExtraJumpForce = 3.11 --2.92
-Prowler.kSneakSpeedModifier = 0.606
-Prowler.kMaxVerticalSpeed = 11.5 --8.5
 Prowler.kRappelVerticalForce = 40 --13.5
-Prowler.kSilentSneakSpeed = 6.0
-Prowler.kAirAddAcceleration = 4.0
-Prowler.kRappelHorizontalAcceleration = 16.0
-Prowler.GlideAirSpeed = 8.0
-Prowler.MaxAirSpeed = 12.15
-Prowler.RappelCelerityBonusSpeed = 2
-Prowler.kWalljumpForce = 8
 
 Prowler.kHealth = kProwlerHealth
 Prowler.kArmor  = kProwlerArmor
 Prowler.kAdrenalineEnergyRecuperationRate = 18
+
+Prowler.kRappelAddAcceleration = 2
+Prowler.kRappelHorizontalAcceleration = 16.0
+Prowler.RappelCelerityBonusSpeed = 2
+Prowler.kMaxVerticalSpeed = 11.5 --8.5
 
 local kProwlerScale = 1.50  -- unused
 local kModelYScale = 1.10   -- unused
@@ -66,7 +62,6 @@ Prowler.kViewOffsetHeight = .6 -- * kProwlerScale
 Prowler.kGlideEnergyCost = 15 -- not used
 
 Prowler.kGravity = -20
-Prowler.kGlideGravity = -8.0
 Prowler.kRappelGravity = -10.0 -- -3.3
 
 if Server then
@@ -82,8 +77,7 @@ local networkVars =
     --gliding = "compensated boolean",
     rappelling = "compensated boolean",
     timeRappelStart = "private compensated time",
-    wallGripAllowed = "private compensated boolean",
-    wallGripping = "private compensated boolean",
+    wallWalking = "compensated boolean",
     timeLastWallWalkCheck = "private compensated time",
     rappelPoint = "private vector",
     rappelFollow = "private entityid"
@@ -132,9 +126,9 @@ function Prowler:OnCreate()
     
     --self.gliding = false
     self.rappelling = false
+    self.wallWalking = false
+    self.wallWalkingNormalGoal = Vector.yAxis
     self.timeRappelStart = 0
-    self.wallGripAllowed = false
-    self.wallGripping = false
     self.rappelFollow = Entity.invalidId
     self.rappelPoint = nil
     self.timeLastWallWalkCheck = 0
@@ -166,6 +160,7 @@ function Prowler:OnInitialized()
         --self:AddHelpWidget("GUIProwlerRappelHelp", 2)
         
     end
+    self.currentWallWalkingAngles = Angles(0.0, 0.0, 0.0)
 
     InitMixin(self, IdleMixin)
     
@@ -191,13 +186,6 @@ end
 
 function Prowler:GetStepLength()
     return 0.8
-end
-
-function Prowler:GetCanJump()
-    --local canWallJump = self.wallGripping and (self.timeOfLastJump == nil or self.timeOfLastJump + .19 < Shared.GetTime())
-    --experimental simple wall jump
-    local canWallJump = (self.wallGripping or Shared.GetTime() - self.timeLastWallWalkCheck < 0.09) and (self.timeOfLastJump == nil or self.timeOfLastJump + .19 < Shared.GetTime())
-    return self:GetIsOnGround() or canWallJump
 end
 
 function Prowler:GetAirControl()
@@ -245,7 +233,7 @@ end
 
 function Prowler:GetAirFriction()
     -- prowler is "in air" when wall gripping
-    return self.wallGripping and 8 or self.rappelling and 0.3 or 0.08 -- - (GetHasCelerityUpgrade(self) and GetSpurLevel(self:GetTeamNumber()) or 0) * 0.006
+    return self:GetIsWallWalking() and 8 or self.rappelling and 0.3 or 0.08 -- - (GetHasCelerityUpgrade(self) and GetSpurLevel(self:GetTeamNumber()) or 0) * 0.006
 end
 
 local kProwlerEngageOffset = Vector(0, 0.4, 0)
@@ -283,22 +271,6 @@ function Prowler:PlayerCameraCoordsAdjustment(cameraCoords)
 
     return viewModelTiltCoords
 
-end
-
-function Prowler:GetMaxSpeed(possible)
-
-    if possible then
-        return Prowler.GlideAirSpeed
-    end
-    
-    local maxspeed = self:GetIsOnGround() and Prowler.kMaxSpeed or Prowler.GlideAirSpeed
-    
-    if self.movementModiferState then
-        maxspeed = maxspeed * Prowler.kSneakSpeedModifier
-    end
-    
-    return maxspeed
-    
 end
 
 function Prowler:GetMaxBackwardSpeedScalar()
@@ -347,246 +319,139 @@ function Prowler:GetMaxViewOffsetHeight()
     return Prowler.kViewOffsetHeight
 end
 
-function Prowler:ModifyJump(input, velocity, jumpVelocity)
-    -- add extra jump force when aiming upward
-                                                          
-    local wishDir
+local kNormalWallWalkRange = 0.35
+local kNormalWallWalkFeelerSize = 0.25
 
-    if input.move:GetLength() > 0 then
-        local notRecentlyLanded = self:GetTimeGroundTouched() + self:GetGroundTransistionTime() < Shared.GetTime()
-        wishDir = self:GetViewCoords():TransformVector(input.move)
-        local celerityBonus = GetHasCelerityUpgrade(self) and self:GetSpurLevel() * 0.42 or 0
-        local verticalForce = Clamp(wishDir.y * 1.2, 0, 1) * (Prowler.kVerticalExtraJumpForce + celerityBonus)
-        wishDir.y = 0
-        --wishDir:Normalize()  -- jumping up reduces forward force to increase control
-        
-        -- jump with more force on the first jump and while not sneaking
-        local jumpAddForce = notRecentlyLanded and not self.movementModiferState and (Prowler.kHorizontalJumpForce + celerityBonus) or 0.4
-        local verticalModifier = self.rappelling and 0.5 or 1
-        jumpVelocity.y = (jumpVelocity.y + verticalForce) * verticalModifier
-        jumpVelocity:Add(wishDir * jumpAddForce)
-        
-    elseif self.wallGripping or (Shared.GetTime() - self.timeLastWallWalkCheck < 0.09) then
-        local celerityBonus = GetHasCelerityUpgrade(self) and self:GetSpurLevel() * 0.44 or 0
-        local jumpForce = Prowler.kWalljumpForce + celerityBonus
-        jumpVelocity.y = 3.33
-        jumpVelocity:Add(self:GetViewAngles():GetCoords().zAxis * jumpForce)
-        jumpVelocity.y = Clamp(jumpVelocity.y, -Prowler.kMaxVerticalSpeed, Prowler.kMaxVerticalSpeed)
-    end                                       
-    self.wallGripping = false
+function Prowler:GetCanProwl()
+
+    local wallWalkNormal = self:GetAverageWallWalkingNormal(kNormalWallWalkRange, kNormalWallWalkFeelerSize)
+    if not wallWalkNormal then return false end
     
+    return wallWalkNormal.y < 0.5,wallWalkNormal
 end
 
-function Prowler:OnJump( modifiedVelocity )
+function Prowler:ModifyJump(input, velocity, jumpVelocity)
+    local notRecentlyLanded = self:GetTimeGroundTouched() + self:GetGroundTransistionTime() < Shared.GetTime()
+    local canJump,wallWalkNormal  =  self:GetCanProwl()
+    if canJump and notRecentlyLanded then
+        local viewCoords = self:GetViewCoords()
+        local wishDir = viewCoords.zAxis
 
-    local material = self:GetMaterialBelowPlayer()    
-        
-    self:TriggerEffects("jump_good", {surface = material})
-    
+        local bonusParam = Vector.DotProduct(wallWalkNormal,wishDir) *.5 + .5
+
+        local currentSpeed = velocity:GetLength()
+        local speed = math.max( Prowler.kMaxRappelSpeed,currentSpeed + (2 * bonusParam))
+                + (GetHasCelerityUpgrade(self) and self:GetSpurLevel() * 0.42 or 0)
+
+        velocity.x = wishDir.x
+        velocity.y = wishDir.y
+        velocity.z = wishDir.z
+        velocity:Scale(speed)
+        --DebugLine(viewCoords.origin, viewCoords.origin + velocity, .2, 1,0,0, 1)
+        --jumpVelocity:Scale(bonusParam)
+    end
+    self.wallWalking = false
 end
 
 function Prowler:GetIsRappelling( )
     return self.rappelling
 end
 
-function Prowler:ModifyCelerityBonus(celerityBonus)
-    
-    if self.movementModiferState then
-        celerityBonus = celerityBonus * Prowler.kSneakSpeedModifier
-    end
-    
-    return celerityBonus
-    
-end
-
-function Prowler:ModifyGravityForce(gravityTable)
-    if self:GetIsOnGround() or self.wallGripping then
-        gravityTable.gravity = 0
-    else
-        
-        gravityTable.gravity = self:GetCrouching() and Prowler.kGravity or 
-                               self.rappelling and Prowler.kRappelGravity or 
-                               --self.gliding and Prowler.kGlideGravity or 
-                               Prowler.kGravity
-    end
-end
-
---[[function Prowler:OverrideUpdateOnGround(onGround)
-    return onGround and not self.gliding
-end--]]
-
---local oldOnAdjustModelCoords = Prowler.OnAdjustModelCoords
---function Prowler:OnAdjustModelCoords(modelCoords)
---    --modelCoords = oldOnAdjustModelCoords(self, modelCoords)
---    --modelCoords.xAxis = modelCoords.xAxis * kProwlerScale
---    --modelCoords.yAxis = modelCoords.yAxis * kModelYScale
---    --modelCoords.zAxis = modelCoords.zAxis * kProwlerScale
---    modelCoords.origin.y = modelCoords.origin.y + kProwlerVertAdjust
---    --if self.primaryAttacking then
---    --    modelCoords.origin.y = modelCoords.origin.y + kProwlerAttackVertAdjust
---    --end
---    return modelCoords
---end
-
-function Prowler:GetIsWallGripping()
-    return self.wallGripping and self.wallGripAllowed
-end
-
-function Prowler:GetIsUsingBodyYaw()
-    return not self.wallGripping
-end
-
-function Prowler:GetDesiredAngles(deltaTime)
-    
-    if self:GetIsWallGripping() then
-        return self:GetAnglesFromWallNormal( self.wallGripNormalGoal )
-    end
-    
-    local desiredAngles = Angles()
-    if self.onGround then
-        desiredAngles.pitch = 0
-    else
-        desiredAngles.pitch = self.wallGripping and 0.99 or self:GetIsJumping() and -0.4 or 0 --self:GetIsJumping() and -0.4 or self.wallGripping and 0.99 or 0
-    end
-    desiredAngles.roll = self.viewRoll
-    desiredAngles.yaw = self.viewYaw
-    
-    return desiredAngles
-
-end
-
-function Prowler:OnWorldCollision(normal)
-
-    PROFILE("Prowler:OnWorldCollision")
-    
-    --self.rappelling = self.rappelling and normal.y < 0.7 --normal.y < 0.7
-    
-    if normal.y < 0.5 and not self:GetCrouching() then
-        self.wallGripAllowed = Shared.GetTime() - self.timeOfLastJump > 0.19
-        self.timeLastWallWalkCheck = Shared.GetTime()
-    end
-    
-end
-
-Prowler.kWallGripRange = 0.2
-Prowler.kWallGripFeelerSize = 0.25
-
-function Prowler:PreUpdateMove(input, runningPrediction)
-
-    PROFILE("Prowler:PreUpdateMove")
-
-    local wallGripPressed = bit.band(input.commands, Move.MovementModifier) ~= 0 and bit.band(input.commands, Move.Jump) == 0
-
-    if not self:GetIsWallGripping() and wallGripPressed and self.wallGripAllowed then
-
-        -- check if we can grab anything around us
-        local wallNormal = self:GetAverageWallWalkingNormal(Prowler.kWallGripRange, Prowler.kWallGripFeelerSize)
-
-        if wallNormal then
-            self.wallGripping = true
-            self.wallGripNormalGoal = wallNormal
-            self:SetVelocity(Vector(0,0,0))
-
-        end
-
-    else
-
-        local breakWallGrip = bit.band(input.commands, Move.Jump) ~= 0 or input.move:GetLength() > 0 or self:GetCrouching()
-
-        if breakWallGrip then
-
-            self.wallGripping = false
-            self.wallGripNormal = nil
-            self.wallGripAllowed = false
-
-        end
-
-    end
-end
-
-local kRappelFollowDistance = 1.5
-
 function Prowler:ModifyVelocity(input, velocity, deltaTime)
 
-    if self.movementModiferState then
+    if not self.rappelling then
+        return
+    end
+
+    -- fly toward rappel anchor point/target
+    local origin = self:GetModelOrigin()
+    --local speed = velocity:GetLength()
+    local followEntity = Shared.GetEntity(self.rappelFollow)
+    local isTether = false
+    if followEntity and followEntity ~= Entity.invalidId and followEntity.GetModelOrigin then
+
+        local followOrigin = followEntity:GetModelOrigin() or nil
+
+        self.rappelPoint = followOrigin
+        isTether = true
+    else
+        self.rappelFollow = Entity.invalidId
+    end
+    
+    if self:GetIsOnGround() or self:GetIsWallWalking() then
         return
     end
     
-    if self.rappelling and self.rappelPoint ~= nil and not self.wallGripping then
-        -- fly toward rappel anchor point/target
-        local origin = self:GetModelOrigin()
-        --local speed = velocity:GetLength()
-        local followEntity = Shared.GetEntity(self.rappelFollow)
-        local isTether = false
-        
-        if followEntity and followEntity ~= Entity.invalidId and followEntity.GetModelOrigin then
 
-            local followOrigin = followEntity:GetModelOrigin() or nil
-            
-            self.rappelPoint = followOrigin
-            isTether = true
-        else
-            self.rappelFollow = Entity.invalidId
+    local tetherVector = self.rappelPoint - origin
+    local YDiff = self.rappelPoint.y - origin.y
+    local YDirection = (YDiff > -1) and 1 or -1
+    --local distance = math.max(tetherVector:GetLength(), 0.01)
+    --local xzDistance = tetherVector:GetLengthXZ()
+    local tetherLength = tetherVector:GetLength()
+    local followDistance = isTether and kRappelFollowDistance or 0.5
+
+    local isJumping = bit.band(input.commands, Move.Jump) ~= 0
+
+    local wishDir = self:GetViewCoords():TransformVector(input.move)
+    wishDir.y = self:GetCrouching() and -1  -- crouch to rappel down
+            or YDiff < 0 and 0      -- can't grapple much higher than the grapple point
+            or isJumping and 2  -- jump to pull up
+            or 1.0 --wishDir.y * 0.9
+
+    --local verticalForce = Clamp((22.5 + 66 / distance) * YDirection, -0.5 * Prowler.kRappelVerticalForce, Prowler.kRappelVerticalForce) --Clamp(YDirection * 20/(speed + 10), -0.5 * Prowler.kRappelVerticalForce, Prowler.kRappelVerticalForce)
+    --local verticalForce = Clamp(20 * wishDir.y, -Prowler.kRappelVerticalForce, Prowler.kRappelVerticalForce)
+
+    local verticalForce = Clamp(
+            (YDirection * wishDir.y) * (-Prowler.kRappelGravity + 1) * Clamp(0.2 + math.max(YDiff, 0)/math.max(tetherLength * 0.7, 0.1), -1, 1.25),
+            Prowler.kGravity, Prowler.kRappelVerticalForce)
+
+    local celerityLevel = GetHasCelerityUpgrade(self) and self:GetSpurLevel() or 0
+    local maxYSpeed = Prowler.kMaxVerticalSpeed + celerityLevel * 0.8
+
+    --verticalForce = verticalForce + 30 * Clamp(self:GetViewAngles():GetCoords().zAxis.y * 2, -1, 1) - velocity.y * 3
+    velocity.y = math.min(velocity.y + verticalForce * deltaTime, maxYSpeed)
+
+    local maxSpeedTable = { maxSpeed = Prowler.kMaxRappelSpeed }
+    self:ModifyMaxSpeed(maxSpeedTable, input)
+
+    local pullDirection = Vector(self.rappelPoint.x - origin.x, 0, self.rappelPoint.z - origin.z) --self:GetViewCoords():TransformVector(input.move)
+    pullDirection.y = 0
+    pullDirection:Normalize()
+
+    -- horizontal pull
+    if tetherLength > followDistance or isJumping then
+        local xzPullStrength = (Prowler.kRappelHorizontalAcceleration * (isJumping and 1.25 or 1) + celerityLevel * 1.2) --* math.min(0.7 + tetherLength * 0.075, 1) 
+
+        local maxSpeed = Prowler.kMaxRappelSpeed + (celerityLevel * 0.333) * Prowler.RappelCelerityBonusSpeed
+
+        xzPullStrength = self:GetCrouching() and 0 or xzPullStrength
+
+        velocity:Add(pullDirection * xzPullStrength * deltaTime)
+        if velocity:GetLengthXZ() > maxSpeed then
+            local yVel = velocity.y
+            velocity.y = 0
+            velocity:Normalize()
+            velocity:Scale(maxSpeed)
+            velocity.y = yVel
         end
-        
-        -- rappel movement
-       
-        local tetherVector = self.rappelPoint - origin
-        local YDiff = self.rappelPoint.y - origin.y
-        local YDirection = (YDiff > -1) and 1 or -1
-        --local distance = math.max(tetherVector:GetLength(), 0.01)
-        --local xzDistance = tetherVector:GetLengthXZ()
-        local tetherLength = tetherVector:GetLength()
-        local followDistance = isTether and kRappelFollowDistance or 0.5
-                                                                     
-        local isJumping = bit.band(input.commands, Move.Jump) ~= 0
-                                 
-        local wishDir = self:GetViewCoords():TransformVector(input.move)
-        wishDir.y = self:GetCrouching() and -1  -- crouch to rappel down
-                    or YDiff < 0 and 0      -- can't grapple much higher than the grapple point
-                    or isJumping and 2  -- jump to pull up
-                    or 1.0 --wishDir.y * 0.9
-               
-        --local verticalForce = Clamp((22.5 + 66 / distance) * YDirection, -0.5 * Prowler.kRappelVerticalForce, Prowler.kRappelVerticalForce) --Clamp(YDirection * 20/(speed + 10), -0.5 * Prowler.kRappelVerticalForce, Prowler.kRappelVerticalForce)
-        --local verticalForce = Clamp(20 * wishDir.y, -Prowler.kRappelVerticalForce, Prowler.kRappelVerticalForce)
+    end
 
-        local verticalForce = Clamp(
-                                (YDirection * wishDir.y) * (-Prowler.kRappelGravity + 1) * Clamp(0.2 + math.max(YDiff, 0)/math.max(tetherLength * 0.7, 0.1), -1, 1.25), 
-                              Prowler.kGravity, Prowler.kRappelVerticalForce)
-                              
-        local celerityLevel = GetHasCelerityUpgrade(self) and self:GetSpurLevel() or 0
-        local maxYSpeed = Prowler.kMaxVerticalSpeed + celerityLevel * 0.8
+end
 
-        --verticalForce = verticalForce + 30 * Clamp(self:GetViewAngles():GetCoords().zAxis.y * 2, -1, 1) - velocity.y * 3
-        velocity.y = math.min(velocity.y + verticalForce * deltaTime, maxYSpeed)
-        
-        local maxSpeedTable = { maxSpeed = Prowler.MaxAirSpeed }
-        self:ModifyMaxSpeed(maxSpeedTable, input)
-        
-        local pullDirection = Vector(self.rappelPoint.x - origin.x, 0, self.rappelPoint.z - origin.z) --self:GetViewCoords():TransformVector(input.move)
-        pullDirection.y = 0
-        pullDirection:Normalize()
-                
-        -- horizontal pull
-        if tetherLength > followDistance or isJumping then
-            local xzPullStrength = (Prowler.kRappelHorizontalAcceleration * (isJumping and 1.25 or 1) + celerityLevel * 1.2) --* math.min(0.7 + tetherLength * 0.075, 1) 
-            
-            local maxSpeed = Prowler.MaxAirSpeed + (celerityLevel * 0.333) * Prowler.RappelCelerityBonusSpeed
-            
-            xzPullStrength = self:GetCrouching() and 0 or xzPullStrength
-                        
-            velocity:Add(pullDirection * xzPullStrength * deltaTime)
-            if velocity:GetLengthXZ() > maxSpeed then
-                local yVel = velocity.y
-                velocity.y = 0
-                velocity:Normalize()
-                velocity:Scale(maxSpeed)
-                velocity.y = yVel
-            end
-        end
 
+function Prowler:GetMaxSpeed(possible)
+
+    if possible then
+        return Prowler.kMaxRappelSpeed
+    end
+
+    local walking = self:GetIsOnGround() or self:GetIsWallWalking()
+    if not walking and self:GetIsRappelling() then
+        return Prowler.kMaxRappelSpeed
     end
     
+    return Prowler.kMaxSpeed
 end
 
 function Prowler:OnUpdateAnimationInput(modelMixin)
@@ -594,10 +459,6 @@ function Prowler:OnUpdateAnimationInput(modelMixin)
     PROFILE("Prowler:OnUpdateAnimationInput")
     
     Alien.OnUpdateAnimationInput(self, modelMixin)
-end
-
-function Prowler:GetPlayFootsteps()
-    return self:GetVelocityLength() > Prowler.kSilentSneakSpeed and self:GetIsOnGround() and self:GetIsAlive()
 end
 
 function Prowler:GetMass()
@@ -616,67 +477,44 @@ function Prowler:GetHealthPerBioMass()
     return kProwlerHealthPerBioMass
 end
 
-
-function Prowler:SpawnCloud(techId)
-
-    local position = self:GetOrigin() + self:GetViewCoords().zAxis * 5
-    
-    local mapName = LookupTechData(techId, kTechDataMapName)
-    if mapName and Server then
-    
-        local cloudEntity = CreateEntity(mapName, position, self:GetTeamNumber())
-        
+function Prowler:ModifyGravityForce(gravityTable)
+    if self:GetIsRappelling() then
+        gravityTable.gravity = -9.8
+    elseif self:GetIsWallWalking() or self:GetIsOnGround() then
+        gravityTable.gravity = 0 
     end
-
 end
 
---[[function Prowler:RappelMove()
+function Prowler:OnJump( modifiedVelocity )
 
-    self.rappelDirection = self:GetViewCoords().zAxis
-    self.rappelPoint = impactPoint
-    
-    local velocity = self:GetVelocity()
-    local forwardVec = self.rappelDirection
-    local verticalVector = math.min(forwardVec.y + 0.2, 1)
-    forwardVec.y = 0
-    local newVelocity = velocity * 0.3 + forwardVec * 10.3
-    
-    -- Add in vertical component.
-    newVelocity.y = math.min(Prowler.kMaxVerticalSpeed, math.max(-Prowler.kMaxVerticalSpeed, velocity.y * 0.5) + Prowler.kRappelVerticalForce * verticalVector)
-    
-    self:SetVelocity(newVelocity)
-    
-    self.jumping = true
-    self.rappelling = newVelocity.y >= 0 --true  -- rappel downward uses normal physics
-    self:DisableGroundMove(0.2)
-    self.timeRappelStart = Shared.GetTime()
-    self.wallGripping = false
-    self.wallGripAllowed = false
-    
-    return false
-end--]]
+    local material = self:GetMaterialBelowPlayer()
+
+    self:TriggerEffects("jump_good", {surface = material})
+    self.wallWalking = false
+end
 
 function Prowler:OnRappel(impactPoint, hitEntity)
-
-    --self:RappelMove()
 
     if self.movementModiferState then
         return
     end
     
-    self.rappelDirection = self:GetViewCoords().zAxis
+    --self:RappelMove()
+    self.wallWalking = false
     
     local velocity = self:GetVelocity()
-    local forwardVec = self.rappelDirection
-    local verticalVector = math.min(forwardVec.y + 0.2, 1)  -- always aim slightly higher upward
-    forwardVec.y = 0
-    local celerityBonus = GetHasCelerityUpgrade(self) and self:GetSpurLevel() * 0.5 or 0
-    local newVelocity = velocity * 0.66 + forwardVec * (4 + celerityBonus)  --velocity * 0.2 + forwardVec * 11.5 --10.3
-    
-    -- Add in vertical component.
-    newVelocity.y = math.min(Prowler.kMaxVerticalSpeed, math.max(Prowler.kGravity, velocity.y * 0.5 + (6.8 + celerityBonus) * verticalVector))
-    
-    self:SetVelocity(newVelocity)
+    local viewCoords = self:GetViewCoords()
+    local speed = velocity:GetLength()
+    local wishDir = viewCoords.zAxis
+    velocity.x = wishDir.x
+    velocity.y = wishDir.y
+    velocity.z = wishDir.z
+    local accel = Prowler.kRappelAddAcceleration
+    if GetHasCelerityUpgrade(self) then
+        accel = accel + (self:GetSpurLevel() * 0.3 or 0)
+    end
+    velocity:Scale(speed)
+    self:SetVelocity(velocity)
     
     self.jumping = true
     self.rappelling = true
@@ -684,78 +522,7 @@ function Prowler:OnRappel(impactPoint, hitEntity)
     self.rappelFollow = hitEntity and hitEntity:GetId() or Entity.invalidId
     self.timeRappelStart = Shared.GetTime()
     self:DisableGroundMove(0.15)
-    self.wallGripAllowed = false
-    
-    --[[if Server then
-        self.rappelDirection = self:GetViewCoords().zAxis
-        self:AddTimedCallback(self.RappelMove, 0.2)
-    end--]]
-    
 end
-
---[[function Prowler:OnHowl()
-
-    local shotWeb = false
-    
-    if GetHasTech(self, kTechId.ShiftHive, true) then
-        self:SpawnCloud(kTechId.EnzymeCloud)
-        shotWeb = true
-    end
-    if GetHasTech(self, kTechId.ShadeHive, true) then
-        if Server then
-            local newAlienExtents = LookupTechData(self:GetTechId(), kTechDataMaxExtents)
-            local capsuleHeight, capsuleRadius = GetTraceCapsuleFromExtents(newAlienExtents) 
-            
-            local spawnPoint = GetRandomSpawnForCapsule(newAlienExtents.y, capsuleRadius, self:GetModelOrigin(), 0.5, 5)
-            
-            if spawnPoint then
-
-                local hallucinatedPlayer = CreateEntity(Skulk.kMapName, spawnPoint, self:GetTeamNumber())
-                
-                hallucinatedPlayer:SetVariant(kSkulkVariant.normal)
-                hallucinatedPlayer.isHallucination = true
-                InitMixin(hallucinatedPlayer, PlayerHallucinationMixin)                
-                InitMixin(hallucinatedPlayer, SoftTargetMixin)                
-                InitMixin(hallucinatedPlayer, OrdersMixin, { kMoveOrderCompleteDistance = kPlayerMoveOrderCompleteDistance }) 
-
-                hallucinatedPlayer:SetName(self:GetName())
-                hallucinatedPlayer:SetHallucinatedClientIndex(self:GetClientIndex())
-            
-            end 
-        end
-        shotWeb = true
-    end
-    if GetHasTech(self, kTechId.CragHive, true) then
-        self:SpawnCloud(kTechId.MucousMembrane)
-        shotWeb = true
-    end
-    
-    if shotWeb and Server then
-        --self:TriggerEffects("drifter_shoot_enzyme", {effecthostcoords = self:GetCoords() } )
-        self:TriggerEffects("drifter_shoot_enzyme", {effecthostcoords = Coords.GetLookIn(self:GetEyePos(), GetNormalizedVectorXZ(self:GetViewAngles():GetCoords().zAxis * 5 )) } )
-    end
-    
-end--]]
-
-
---[[if Server then
-    function Prowler:OnKill(attacker, doer, point, direction)
-    
-        Alien.OnKill(self, attacker, doer, point, direction)
-        --self:TriggerEffects("death", { classname = "Skulk", effecthostcoords = Coords.GetTranslation(self:GetOrigin()), doer = "Railgun"})
-        
-        local useModelName = self:GetModelName()
-        local useGraphName = self:GetGraphName()
-        
-        local ragdoll = CreateEntity(Ragdoll.kMapName, self:GetOrigin())
-        ragdoll:SetCoords(self:GetCoords())
-        ragdoll:SetModel(useModelName, useGraphName)
-        ragdoll:SetPhysicsType(PhysicsType.Dynamic)
-        ragdoll:SetPhysicsGroup(PhysicsGroup.RagdollGroup)
-        
-        self:SetModel(nil)
-    end
-end--]]
 
 local kRappelBreakDistance = 10
 function Prowler:PostUpdateMove(input)
@@ -830,42 +597,6 @@ function Prowler:ModifyAttackSpeed(attackSpeedTable)
 
 end
 
-if Client then
-
-    function Prowler:GetShowGhostModel()
-            
-        return self.rappelling
-        
-    end
-    
-    function Prowler:GetGhostModelOverride()
-        return self.rappelling and Bomb.kModelName or nil
-    end
-
-    function Prowler:GetGhostModelTechId()
-    
-        return self.rappelling and kTechId.Umbra or nil
-        
-    end
-    
-    function Prowler:GetGhostModelCoords()
-        if self.rappelPoint ~= nil then
-            return Coords.GetLookIn( self.rappelPoint,(self.rappelPoint - self:GetOrigin()):GetUnit() )
-        end
-        return nil
-    end
-    
-    function Prowler:GetLastClickedPosition()
-    
-        return self.rappelPoint
-        
-    end
-    
-    function Prowler:GetIsPlacementValid()
-        return self.rappelPoint ~= nil
-    end
-end
-
 -- new uwe balance mod stuff
 function Prowler:GetArmorFullyUpgradedAmount()
 
@@ -896,6 +627,180 @@ function Prowler:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitP
         damageTable.damage = damageTable.damage * reduction
         return
     end
+end
+
+--Wallwakings
+function Prowler:OnWorldCollision(normal, impactForce, newVelocity)
+
+    PROFILE("Prowler:OnWorldCollision")
+
+    self.wallWalking = self.wallWalking and not self:GetCrouching()
+    self.wallWalking = self.wallWalking or (self.movementModiferState and self:GetIsWallWalkingPossible() and normal.y < 0.5)
+    
+end
+
+function Prowler:GetIsWallWalkingPossible()
+    return not self:GetRecentlyJumped() 
+            and not self:GetIsRappelling()
+end
+function Prowler:GetMoveSpeedIs2D()
+    return not self:GetIsWallWalking() 
+            and not self:GetIsRappelling()
+end
+
+function Prowler:GetPerformsVerticalMove()
+    return self:GetIsWallWalking()
+        or self:GetIsRappelling()
+end
+function Prowler:OverrideUpdateOnGround(onGround)
+    return onGround or self:GetIsWallWalking()
+end
+
+function Prowler:GetIsWallWalking()
+    return self.wallWalking
+end
+
+function Prowler:GetIsUsingBodyYaw()
+    return not self:GetIsWallWalking()
+end
+
+function Prowler:PreUpdateMove(input, runningPrediction)
+
+    PROFILE("Prowler:PreUpdateMove")
+
+    local activeWeapon = self:GetActiveWeapon()
+    if activeWeapon and not HasMixin(activeWeapon,"Rappel") then
+        self.rappelling = false
+        self.rappelPoint = nil
+    end
+    
+    self.movementModiferState = bit.band(input.commands, Move.MovementModifier) ~= 0
+    
+    if self.wallWalking then
+
+        -- Most of the time, it returns a fraction of 0, which means
+        -- trace started outside the world (and no normal is returned)
+        local goal = self:GetAverageWallWalkingNormal(kNormalWallWalkRange, kNormalWallWalkFeelerSize, PhysicsMask.AllButPCsAndWebs)
+        if goal ~= nil then
+
+            self.wallWalkingNormalGoal = goal
+            self.wallWalking = true
+
+        else
+            self.wallWalking = false
+        end
+
+    end
+
+
+    if not self:GetIsWallWalking() then
+        -- When not wall walking, the goal is always directly up (running on ground).
+        self.wallWalkingNormalGoal = Vector.yAxis
+    end
+
+    if self.leaping and Shared.GetTime() > self.timeOfLeap + kLeapTime then
+        self.leaping = false
+    end
+
+    self.currentWallWalkingAngles = self:GetAnglesFromWallNormal(self.wallWalkingNormalGoal or Vector.yAxis) or self.currentWallWalkingAngles
+    
+end
+
+function Prowler:GetDesiredAngles(deltaTime)
+
+    if self:GetIsWallWalking() then
+        return self:GetAnglesFromWallNormal( self.wallWalkingNormalGoal )
+    end
+
+    local desiredAngles = Angles()
+    if self.onGround then
+        desiredAngles.pitch = 0
+    else
+        desiredAngles.pitch = self:GetIsWallWalking() and 0.99 or self:GetIsJumping() and -0.4 or 0 --self:GetIsJumping() and -0.4 or self.wallWalking and 0.99 or 0
+    end
+    desiredAngles.roll = self.viewRoll
+    desiredAngles.yaw = self.viewYaw
+
+    return desiredAngles
+
+end
+
+if Client then
+    
+    function Prowler:GetShowGhostModel()
+
+        local weapon = self:GetActiveWeapon()
+        if weapon and weapon:isa("DropStructureAbility") then
+            return weapon:GetShowGhostModel()
+        end
+
+        return self.rappelling
+
+    end
+
+    function Prowler:GetGhostModelOverride()
+
+        local weapon = self:GetActiveWeapon()
+        if weapon and weapon:isa("DropStructureAbility") and weapon.GetGhostModelName then
+            return weapon:GetGhostModelName(self)
+        end
+
+        return self.rappelling and Bomb.kModelName or nil
+    end
+
+    function Prowler:GetGhostModelTechId()
+
+        local weapon = self:GetActiveWeapon()
+        if weapon and weapon:isa("DropStructureAbility") then
+            return weapon:GetGhostModelTechId()
+        end
+
+        return self.rappelling and kTechId.Umbra or nil
+    end
+
+    function Prowler:GetGhostModelCoords()
+
+        local weapon = self:GetActiveWeapon()
+        if weapon and weapon:isa("DropStructureAbility") then
+            return weapon:GetGhostModelCoords()
+        end
+
+        if self.rappelPoint ~= nil then
+            return Coords.GetLookIn( self.rappelPoint,(self.rappelPoint - self:GetOrigin()):GetUnit() )
+        end
+        return nil
+    end
+
+    function Prowler:GetLastClickedPosition()
+
+        local weapon = self:GetActiveWeapon()
+        if weapon and weapon:isa("DropStructureAbility") then
+            return weapon.lastClickedPosition
+        end
+
+        return self.rappelPoint
+    end
+
+    function Prowler:GetIsPlacementValid()
+
+        local weapon = self:GetActiveWeapon()
+        if weapon and weapon:isa("DropStructureAbility") then
+            return weapon:GetIsPlacementValid()
+        end
+
+        return self.rappelPoint ~= nil
+    end
+
+    function Prowler:GetIgnoreGhostHighlight()
+
+        local weapon = self:GetActiveWeapon()
+        if weapon and weapon:isa("DropStructureAbility") and weapon.GetIgnoreGhostHighlight then
+            return weapon:GetIgnoreGhostHighlight()
+        end
+
+        return self.rappelPoint ~= nil
+    end
+
 end
 
 

@@ -29,7 +29,7 @@ function AcidSpray:OnCreate()
 end
 
 function AcidSpray:GetHUDSlot()
-    return 2
+    return 3
 end
 
 local kBombVelocity = 22.5

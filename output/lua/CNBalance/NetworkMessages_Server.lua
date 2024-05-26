@@ -29,10 +29,8 @@ function OnCommandGorgeBuildStructure(client, message)
         return 
     end
     
-    local mapName = activeAbility:GetMapName()
-    if mapName == DropStructureAbility.kMapName or mapName == DropTeamStructureAbility.kMapName then
+    if activeAbility.OnDropStructure then
         activeAbility:OnDropStructure(origin, direction, structureTechId, lastClickedPosition, lastClickedPositionNormal)
     end
-
 end
 Server.HookNetworkMessage("GorgeBuildStructure", OnCommandGorgeBuildStructure)

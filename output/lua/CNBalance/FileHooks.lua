@@ -191,7 +191,7 @@ ModLoader.SetupFileHook("lua/AlienTechMap.lua", "lua/CNBalance/AlienTechMap.lua"
 ModLoader.SetupFileHook("lua/Alien.lua", "lua/CNBalance/Alien.lua", "post")
 ModLoader.SetupFileHook("lua/Alien_Server.lua", "lua/CNBalance/Alien_Server.lua", "post")
 ModLoader.SetupFileHook("lua/Skulk.lua", "lua/CNBalance/Lifeforms/Skulk.lua", "post")
-ModLoader.SetupFileHook("lua/Skulk.lua", "lua/Prowler/Prowler.lua", "post")     --Hack
+ModLoader.SetupFileHook("lua/Gorge.lua", "lua/Prowler/Prowler.lua", "post")     --Hack
 ModLoader.SetupFileHook("lua/Fade.lua", "lua/CNBalance/Lifeforms/Vokex.lua", "post")     --Hack
 ModLoader.SetupFileHook("lua/Embryo.lua", "lua/CNBalance/Lifeforms/Embryo.lua", "post")
 

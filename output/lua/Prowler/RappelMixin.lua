@@ -39,7 +39,7 @@ function RappelMixin:__initmixin()
 end
 
 function RappelMixin:GetHasSecondary(player)
-    return player.twoHives
+    return true
 end
 
 function RappelMixin:GetSecondaryEnergyCost(player)

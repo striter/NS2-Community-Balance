@@ -76,7 +76,11 @@ function Onos:CanBeStampeded(ent)
         return false
     end
     
-    if not GetAreEnemies(self, ent) or not ent:GetIsAlive() or ent:isa("DevouredPlayer") then
+    if not ent:GetIsAlive() or ent:isa("DevouredPlayer") then
+        return false
+    end
+
+    if ent:isa("Onos") and ent:GetIsCharging() then
         return false
     end
     
@@ -148,6 +152,26 @@ function Onos:GetPlayFootsteps()
             and self:GetIsOnGround() 
             and self:GetIsAlive()
             and not self:GetCrouching()
+end
+
+
+
+function Onos:GetNearbyStampedeables(origin)
+    local players = GetEntitiesWithinRange("Player", origin, Onos.kStampedeCheckRadius)
+    local targets = {}
+
+    for i = 1, #players do
+        local player = players[i]
+        if player ~= self then
+
+            if self:CanBeStampeded(player) then
+                table.insert(targets, player)
+            end
+        end
+        
+    end
+
+    return targets
 end
 
 

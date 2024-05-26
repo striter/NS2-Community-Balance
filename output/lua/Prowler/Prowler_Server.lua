@@ -11,7 +11,7 @@ function Prowler:InitWeapons()
     Alien.InitWeapons(self)
     
     self:GiveItem(VolleyRappel.kMapName)
-
+    self:GiveItem(ProwlerStructureAbility.kMapName)
     self:SetActiveWeapon(VolleyRappel.kMapName)    
     
 end
@@ -23,10 +23,6 @@ function Prowler:InitWeaponsForReadyRoom()
     self:GiveItem(ReadyRoomRappel.kMapName)
     self:SetActiveWeapon(ReadyRoomRappel.kMapName)
     
-end
-
-function Prowler:GetTierTwoTechId()
-    return kTechId.Rappel
 end
 
 function Prowler:GetTierThreeTechId()

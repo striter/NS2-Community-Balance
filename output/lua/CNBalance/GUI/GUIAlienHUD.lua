@@ -96,17 +96,17 @@ function GUIAlienHUD:UpdateAbilities(deltaTime)
     self.lastActiveHudSlot = activeHudSlot
 
     local player = Client.GetLocalPlayer()
-    local gorgeBuiltTextVisible = false
-    if player and player:isa("Gorge") and GUIGorgeBuildMenu then
+    local buildTextureTextVisible = false
+    if player and GUIGorgeBuildMenu then
 
         local activeWeapon = player:GetActiveWeapon()
         if activeWeapon and activeWeapon:isa("DropStructureAbility") then
 
             local structure = activeWeapon:GetActiveStructure()
             local structureId = structure and structure:GetDropStructureId() or -1
-            gorgeBuiltTextVisible = structureId ~= -1
+            buildTextureTextVisible = structureId ~= -1
 
-            if gorgeBuiltTextVisible then
+            if buildTextureTextVisible then
                 local text,scale = activeWeapon:GetHUDText(structureId)
                 self.gorgeBuiltText:SetText(text)
                 self.gorgeBuiltText:SetScale(GetScaledVector() * scale)
@@ -117,8 +117,8 @@ function GUIAlienHUD:UpdateAbilities(deltaTime)
 
     end
 
-    self.gorgeBuiltText:SetIsVisible(gorgeBuiltTextVisible)
-    self.activeAbilityIcon:SetIsVisible(not gorgeBuiltTextVisible)
+    self.gorgeBuiltText:SetIsVisible(buildTextureTextVisible)
+    self.activeAbilityIcon:SetIsVisible(not buildTextureTextVisible)
 
     -- Secondary ability.
     abilityData = PlayerUI_GetSecondaryAbilityData()

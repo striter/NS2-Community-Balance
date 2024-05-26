@@ -158,10 +158,10 @@ kPoweredExtractorCost = 30
 
 kPoweredExtractorResearchCost = nil--10
 kPoweredExtractorResearchTime = nil--60
-kPoweredExtractorUpgradeCost = 20
-kPoweredExtractorUpgradeTime = 45
-kPoweredExtractorChargingInterval = 2.5
-kPoweredExtractorDamageDistance = 3
+kPoweredExtractorUpgradeCost = 25
+kPoweredExtractorUpgradeTime = 30
+kPoweredExtractorChargingInterval = 5
+kPoweredExtractorDamageDistance = 5
 kPoweredExtractorDamage = 40
 kPoweredExtractorElectrifyDuration = 5
 --kGrenadeLauncherDetectionShotResearchCost = 15
@@ -301,13 +301,13 @@ kAdvancedArmoryResearchTime = 90
 kPrototypeLabCost = 25
 
 kCannonTechResearchCost = 20
-kCannonTechResearchTime = 75
+kCannonTechResearchTime = 120
 
 kJetpackTechResearchCost = 25
-kJetpackTechResearchTime = 75
+kJetpackTechResearchTime = 120
 
 kExosuitTechResearchCost = 20
-kExosuitTechResearchTime = 75
+kExosuitTechResearchTime = 120
 
 kRoboticsFactoryBuildTime = 8
 
@@ -548,12 +548,12 @@ kObservatoryDistressBeaconCost = 10
 kArmsLabCost = 15
 
 kWeapons1ResearchCost = 25 kWeapons1ResearchTime = 75
-kWeapons2ResearchCost = 30 kWeapons2ResearchTime = 105
-kWeapons3ResearchCost = 45 kWeapons3ResearchTime = 135
+kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 105
+kWeapons3ResearchCost = 50 kWeapons3ResearchTime = 135
 
 kArmor1ResearchCost = 25 kArmor1ResearchTime = 75
-kArmor2ResearchCost = 30 kArmor2ResearchTime = 90
-kArmor3ResearchCost = 45 kArmor3ResearchTime = 120
+kArmor2ResearchCost = 35 kArmor2ResearchTime = 105
+kArmor3ResearchCost = 50 kArmor3ResearchTime = 135
 
 kAdvancedMarineSupportResearchCost = 20
 kAdvancedMarineSupportResearchTime = 90
@@ -681,7 +681,7 @@ kOriginFormAdditionalTRes = 40
 kOriginFormInitialGorgePRes = 60
 kOriginFormExtraGorgePRes = 20
 kOriginFormTeamResourceFetchThreshold = 10
-kOriginFormTeamResScalarHiveCount = { 0.25 , 0.125 , 0.125 , 0.125 , 0.125 , 0.125}
+kOriginFormTeamResScalarHiveCount = { 0.75 , 0.25 , 0.125 , 0.125 , 0.125 , 0.125,0.125}
 
 kBiomassPerTower = {0,1,3,6}
 function GetOriginFormBiomassLevel(count)

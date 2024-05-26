@@ -46,7 +46,11 @@ local kAdditionalEffects = {
         }
     },
 
-
+    death = {
+        generalDeathCinematicEffects = {
+            { cinematic = "cinematics/alien/skulk/explode.cinematic", classname = "Prowler", doer = "Railgun", done = true },
+        },
+    }
 }
 
 GetEffectManager():AddEffectData("GeneralEffectData", kAdditionalEffects)

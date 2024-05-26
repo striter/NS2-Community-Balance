@@ -20,9 +20,7 @@ local function GetDropStructureAbility()
 
     local player = Client.GetLocalPlayer()
     local ability = player:GetActiveWeapon()
-    if ability:isa("DropStructureAbility")
-            or ability:isa("DropTeamStructureAbility") 
-    then
+    if ability:isa("DropStructureAbility") then
         return ability
     end
     return nil

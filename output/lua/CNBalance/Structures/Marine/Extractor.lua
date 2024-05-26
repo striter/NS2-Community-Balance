@@ -128,6 +128,29 @@ function Extractor:OnUpdate(deltaTime)
         local techID = self:GetTechId()
         
         self.charged = techID == kTechId.PoweredExtractor and Shared.GetTime() - self.chargeTime > kPoweredExtractorChargingInterval
+
+        if self.charged then
+            if not self.electrifyCheck or Shared.GetTime() - self.electrifyCheck > .5 then
+                self.electrifyCheck = Shared.GetTime()
+
+                for k, nearbyTarget in pairs(GetEntitiesWithinRange("Player",self:GetOrigin(),kPoweredExtractorDamageDistance)) do
+                    if GetAreEnemies(self,nearbyTarget) then
+                        self.charged = false
+                        self.chargeTime = Shared.GetTime()
+
+                        self:DoDamage(kPoweredExtractorDamage,nearbyTarget,self:GetOrigin())
+                        if nearbyTarget.SetElectrified then
+                            nearbyTarget:SetElectrified(kPoweredExtractorElectrifyDuration)
+                        end
+                        nearbyTarget:TriggerEffects("emp_blasted")
+                    end
+                end
+
+                if not self.charged then
+                    self:TriggerEffects("powered_extractor_blast")
+                end
+            end
+        end
     end
 
     if Client then
@@ -201,28 +224,6 @@ end
 
 function Extractor:GetHealthPerTeamExceed()
     return kExtractorHealthPerPlayerAdd
-end
-if Server then
-    function Extractor:OnTakeDamage(_, attacker, doer)
-
-        if not attacker then return end
-        
-        if attacker:isa("Player") and GetAreEnemies(self,attacker) then
-            if  (attacker:GetOrigin() - self:GetOrigin()):GetLengthXZ() > kPoweredExtractorDamageDistance then return end   --Don't damage out of distance
-
-            if not self.charged then return end
-            self.charged = false
-            self.chargeTime = Shared.GetTime()
-
-            self:DoDamage(kPoweredExtractorDamage,attacker,self:GetOrigin())
-            if attacker.SetElectrified then
-                attacker:SetElectrified(kPoweredExtractorElectrifyDuration)
-            end
-            attacker:TriggerEffects("emp_blasted")
-        end
-
-    end
-    
 end
 
 Shared.LinkClassToMap("Extractor", Extractor.kMapName, networkVars)

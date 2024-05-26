@@ -1140,6 +1140,7 @@ function AlienTeam:InitTechTree()
     -- prowler researches
     self.techTree:AddPassive(kTechId.Volley)
     self.techTree:AddPassive(kTechId.Rappel)
+    self.techTree:AddPassive(kTechId.ProwlerStructureAbility)
     -- self.techTree:AddResearchNode(kTechId.Rappel,              kTechId.BioMassThree,  kTechId.None, kTechId.AllAliens)
     self.techTree:AddActivation(kTechId.AcidSpray,           kTechId.BioMassSix,  kTechId.None,kTechId.AllAliens)
     
@@ -1397,10 +1398,7 @@ end
 function AlienTeam:CollectTeamResources(teamRes,playerRes)
     if self:IsOriginForm() then
         local activeHiveCount = self:GetActiveHiveCount()
-        if activeHiveCount > 0 then
-            local scalar = kOriginFormTeamResScalarHiveCount[activeHiveCount + 1]
-            teamRes = teamRes * scalar
-        end
+        teamRes = teamRes * kOriginFormTeamResScalarHiveCount[activeHiveCount + 1]
     end
 
     PlayingTeam.CollectTeamResources(self,teamRes,playerRes)

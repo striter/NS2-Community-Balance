@@ -960,7 +960,15 @@ function BuildTechData()
         [kTechDataTooltipInfo] = "RAPPEL_TOOLTIP"
     })
 
-
+    table.insert(techData,{
+        [kTechDataId] = kTechId.ProwlerStructureAbility,
+        [kTechDataMapName] = ProwlerStructureAbility.kMapName,
+        [kTechDataCategory] = kTechId.Prowler,
+        [kTechDataDisplayName] = "PROWLER_STRUCTURE",
+        [kTechDataTooltipInfo] = "PROWLER_STRUCTURE_TOOLTIP",
+        [kTechDataResearchName] = "PROWLER_STRUCTURE",
+    })
+    
     table.insert(techData, {
         [kTechDataId] = kTechId.AcidSpray,
         [kTechDataCategory] = kTechId.Prowler,

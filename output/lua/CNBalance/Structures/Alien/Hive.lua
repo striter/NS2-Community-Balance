@@ -646,6 +646,19 @@ if Server then
 
     end
     
+    local baseOnKill = Hive.OnKill
+    function Hive:OnKill(attacker, doer, point, direction)
+
+        local techId = self:GetTechId()
+        if table.contains(kResearchTypeToHiveType,techId) then
+            local techTree = self:GetTeam():GetTechTree()
+            local researchNode = techTree:GetTechNode(techId)
+            researchNode:ClearResearching()
+            techTree:SetTechNodeChanged(researchNode, string.format("researchProgress = %.2f", 0))
+        end
+        baseOnKill(self,attacker, doer, point, direction)
+    end
+    
     local function CreateDrifterEgg(self, comm)
 
         local mapName = LookupTechData(kTechId.DrifterEgg, kTechDataMapName)

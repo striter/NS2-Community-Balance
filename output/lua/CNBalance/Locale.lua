@@ -68,9 +68,9 @@ if kTranslateMessage then
     kTranslateMessage["MAC_EMP_BLAST"] = "电磁芯片"
     kTranslateMessage["MAC_EMP_BLAST_TOOLTIP"] = "+探测到临近敌方单位时.\nMAC将触发一道冲击波."
     kTranslateMessage["POWERED_EXTRACTOR_TECH"] = "采集器电极升级"
-    kTranslateMessage["POWERED_EXTRACTOR_TECH_TOOLTIP"] = "+强化采集器耐久度.\n+受伤时对攻击单位造成伤害."
+    kTranslateMessage["POWERED_EXTRACTOR_TECH_TOOLTIP"] = "+强化采集器耐久度.\n+蓄能电击临近单位."
     kTranslateMessage["POWERED_EXTRACTOR"] = "电极采集器"
-    kTranslateMessage["POWERED_EXTRACTOR_HINT"] = "团队/玩家收入. 受攻击时将尝试电击单位."
+    kTranslateMessage["POWERED_EXTRACTOR_HINT"] = "团队/玩家收入. 附近有敌方单位时将触发蓄能电机."
 
     kTranslateMessage["PROTOTYPE_LAB_TOOLTIP"] = "用于升级解锁各项原型科技."
     kTranslateMessage["CANNON_PROTOTYPE_UPGRADE"] = "[高斯枪]升级"
@@ -168,13 +168,15 @@ if kTranslateMessage then
 
     kTranslateMessage["PROWLER"] = "Prowler"
     kTranslateMessage["PROWLER_EGG"] = "蛹(Prowler)"
-    kTranslateMessage["PROWLER_TOOLTIP"] = "地面远程骚然单位.\n同时也是滞空单位的噩梦.\n*通过绳网快速移动"
+    kTranslateMessage["PROWLER_TOOLTIP"] = "栖息于墙面的远程骚扰单位.\n也是滞空单位的噩梦.\n*通过绳网快速移动."
     kTranslateMessage["VOLLEY"] = "齐射"
     kTranslateMessage["VOLLEY_TOOLTIP"] = "齐射一轮远程钉刺.\n*直线瞬发弹道."
     kTranslateMessage["RAPPEL"] = "网绳"
     kTranslateMessage["RAPPEL_TOOLTIP"] = "将Prowler快速拉向目标.\n*对击中的敌方单位造成伤害."
     kTranslateMessage["ACIDSPRAY"] = "酸液投掷"
     kTranslateMessage["ACIDSPRAY_TOOLTIP"] = "投掷一串酸性炸弹.\n*抛物线弹道."
+    kTranslateMessage["PROWLER_STRUCTURE"] = "拌网"
+    kTranslateMessage["PROWLER_STRUCTURE_TOOLTIP"] = "构建能够粘住敌人的拌网."
 
     kTranslateMessage["VOKEX"] = "Vokex"
     kTranslateMessage["VOKEX_EGG"] = "蛹(Vokex)"
@@ -283,10 +285,9 @@ if kLocales then
     kLocales["MAC_EMP_BLAST"] = "MAC EMP Blast"
     kLocales["MAC_EMP_BLAST_TOOLTIP"] = "MAC Triggers EMP When enemies Nearby"
     kLocales["POWERED_EXTRACTOR_TECH"] = "Extractor Fusion Core"
-    kLocales["POWERED_EXTRACTOR_TECH_TOOLTIP"] = "+Increase health.\n+Will try deal damage to attacker when damaged."
+    kLocales["POWERED_EXTRACTOR_TECH_TOOLTIP"] = "+Increase health.\n+Will try deal damage to attacker."
     kLocales["POWERED_EXTRACTOR"] = "Fusion Extractor"
     kLocales["POWERED_EXTRACTOR_HINT"] = "Team/Personal Imcome. Will try deal damage to attacker."
-
 
     kLocales["PROTOTYPE_LAB_TOOLTIP"] = "Upgrade & Unlock Field Prototypes"
     kLocales["CANNON_PROTOTYPE_UPGRADE"] = "Gauss Upgrade"
@@ -394,6 +395,8 @@ if kLocales then
     kLocales["RAPPEL_TOOLTIP"] = "Pull Prowler to target.\n*Deal damage to target."
     kLocales["ACIDSPRAY"] = "Acid spray"
     kLocales["ACIDSPRAY_TOOLTIP"] = "Acid bombardment.\n*Projectile."
+    kLocales["PROWLER_STRUCTURE"] = "Webs"
+    kLocales["PROWLER_STRUCTURE_TOOLTIP"] = "Traps Marines and prevents them from moving for a limited time."
 
     kLocales["VOKEX"] = "Vokex"
     kLocales["VOKEX_EGG"] = "Egg(Vokex)"

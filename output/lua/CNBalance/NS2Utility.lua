@@ -40,6 +40,7 @@ function GetTexCoordsForTechId(techId)
 		gTechIdPosition[kTechId.CombatBuilder] = kDeathMessageIcon.CombatBuilder
         gTechIdPosition[kTechId.SporeMine] = kDeathMessageIcon.SporeMine
         gTechIdPosition[kTechId.DropTeamStructureAbility] = kDeathMessageIcon.TeamBuildAbility
+        gTechIdPosition[kTechId.ProwlerStructureAbility] = kDeathMessageIcon.BuildAbility
 
         gTechIdPosition[kTechId.Jetpack] = kDeathMessageIcon.Jetpack
         gTechIdPosition[kTechId.DualMinigunExosuit] = kDeathMessageIcon.Minigun
