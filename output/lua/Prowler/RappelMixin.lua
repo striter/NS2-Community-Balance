@@ -89,14 +89,6 @@ function RappelMixin:PerformSecondaryAttack(player)
             if hitTarget and HasMixin(hitTarget, "Team")  then
                 if hitTarget:GetTeamNumber() ~= self:GetTeamNumber() then
                     self:DoDamage(kRappelDamage, hitTarget, impactPoint, direction, trace.surface, true, true)
-
-                    if HasMixin(hitTarget, "ParasiteAble" ) then
-                        hitTarget:SetParasited( player, kRappelParasiteTime ) --Will give Commander point(s)
-                    end
-                    
-                    if HasMixin(hitTarget, "Webable") then
-                        hitTarget:SetWebbed(kRappelWebTime, true)
-                    end
                 end
                 
                 if hitTarget:isa("Player") then -- or hitTarget:isa("Exo") then
@@ -105,10 +97,7 @@ function RappelMixin:PerformSecondaryAttack(player)
                         local reelDirection =  player:GetOrigin() - hitTarget:GetOrigin()
                         reelDirection:Normalize()
                         --local reelUpForce = 1.5
-                        local reelForce = 11
-
-                        local slapVel =  reelDirection * reelForce + Vector(0, 1, 0)
-                        ApplyPushback(hitTarget,0.2,slapVel)
+                        ApplyPushback(hitTarget,0.2,reelDirection * kRappelReelInitialSpeed + Vector(0, 1, 0))
                     end
                 end
             else
@@ -116,7 +105,7 @@ function RappelMixin:PerformSecondaryAttack(player)
             end
             
             self.rappelling = true
-            player:DeductAbilityEnergy(reel and kRappelReelEnergyCost or kRappelEnergyCost)
+            player:DeductAbilityEnergy(kRappelEnergyCost)
             player:OnRappel(trace.endPoint, hitTarget)
             --player:TriggerEffects("spikes_attack")
             --self:TriggerEffects("spit_hit", { effecthostcoords = trace.endPoint:GetCoords() })
