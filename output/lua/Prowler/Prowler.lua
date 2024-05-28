@@ -738,7 +738,6 @@ if Client then
         end
 
         return self.rappelling
-
     end
 
     function Prowler:GetGhostModelOverride()
@@ -747,7 +746,6 @@ if Client then
         if weapon and weapon:isa("DropStructureAbility") and weapon.GetGhostModelName then
             return weapon:GetGhostModelName(self)
         end
-
         return self.rappelling and Bomb.kModelName or nil
     end
 
@@ -757,7 +755,6 @@ if Client then
         if weapon and weapon:isa("DropStructureAbility") then
             return weapon:GetGhostModelTechId()
         end
-
         return self.rappelling and kTechId.Umbra or nil
     end
 
@@ -804,6 +801,54 @@ if Client then
         return self.rappelPoint ~= nil
     end
 
+
+    local kWebMaterial = PrecacheAsset("models/alien/gorge/web.material")
+    local baseOnInitialized = Prowler.OnInitialized
+    function Prowler:OnInitialized()
+        baseOnInitialized(self)
+
+        if not self.webRenderModel then
+            self.webRenderModel = DynamicMesh_Create()
+            self.webRenderModel:SetMaterial(kWebMaterial)
+        end
+    end
+
+    local baseOnDestroy = Prowler.OnDestroy
+    function Prowler:Destroy()
+
+        baseOnDestroy(self)
+
+        if self.webRenderModel then
+            DynamicMesh_Destroy(self.webRenderModel)
+            self.webRenderModel = nil
+            self.webRenderModel:SetMaterial(kWebMaterial)
+        end
+    end
+
+    function Prowler:OnUpdateRender()
+
+        local isVisible = self:GetIsRappelling()
+
+        if isVisible then
+            local coords = self:GetViewCoords()
+            local width = 0.1
+            if self:GetIsLocalPlayer() and self:GetIsFirstPerson() then
+                coords.origin = coords.origin + Vector(0,-0.2,0)
+                width = 0.01
+            end
+
+            local targetPos = self.rappelPoint
+            local length = (coords.origin - targetPos):GetLength()
+
+            coords.zAxis = GetNormalizedVector(targetPos - coords.origin)
+            coords.xAxis = coords.zAxis:GetPerpendicular()
+            coords.yAxis = coords.zAxis:CrossProduct(coords.xAxis)
+
+            DynamicMesh_SetTwoSidedLine(self.webRenderModel, coords, width, length, Color(1,1,1,1),Color(1,1,1,1))
+        end
+
+        self.webRenderModel:SetIsVisible(isVisible)
+    end
 end
 
 

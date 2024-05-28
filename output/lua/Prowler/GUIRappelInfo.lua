@@ -17,7 +17,8 @@ function GUIRappelInfo:Uninitialize()
 
 end
 function GUIRappelInfo:GetIsVisible()
-    return self.background:GetIsVisible()
+    return false
+    --return self.background:GetIsVisible()
 end
 function GUIRappelInfo:SetIsVisible(isVisible)
     self.background:SetIsVisible(isVisible == true)

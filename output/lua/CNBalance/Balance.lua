@@ -5,10 +5,10 @@ kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
 kResourceTowerResourceInterval = 6
 kTeamResourceWithoutTower = 0.5
-kMaxEfficiencyTowers = 99
+kMaxEfficiencyTowers = 3
 kTeamResourceEachTower = 1
 kTeamResourceEachTowerAboveThreshold = 0.5
-kPlayerResEachTower = 0.11
+kPlayerResEachTower = 0.125
 kPlayerResEachTowerAboveThreshold = 0.05
 
 --Pres reward for aggressive playing (too many farmers?)
@@ -285,7 +285,7 @@ kInfantryPortalCost = 15
 kRoboticsFactoryCost = 10
 kUpgradeRoboticsFactoryCost = 5
 kUpgradeRoboticsFactoryTime = 20
-kARCDamage = 600
+kARCDamage = 570
 kARCCost = 15
 kARCBuildTime = 5
 kMACCost = 4
@@ -413,7 +413,7 @@ kVolleyEnergyCost = 7.0 --7.0
 kVolleyWebTime = 1.5
 
 kRappelDamage = 10 kRappelContinuousDamage = 5
-kRappelReelInitialSpeed = 10 kRappelReelContinuousSpeed = 5
+kRappelReelInitialSpeed = 10 kRappelReelContinuousSpeed = 6
 kRappelResearchCost = 10
 kRappelResearchTime = 20
 kRappelEnergyCost = 15
@@ -548,12 +548,12 @@ kObservatoryDistressBeaconCost = 10
 kArmsLabCost = 15
 
 kWeapons1ResearchCost = 25 kWeapons1ResearchTime = 75
-kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 105
-kWeapons3ResearchCost = 50 kWeapons3ResearchTime = 135
+kWeapons2ResearchCost = 30 kWeapons2ResearchTime = 105
+kWeapons3ResearchCost = 45 kWeapons3ResearchTime = 135
 
 kArmor1ResearchCost = 25 kArmor1ResearchTime = 75
-kArmor2ResearchCost = 35 kArmor2ResearchTime = 105
-kArmor3ResearchCost = 50 kArmor3ResearchTime = 135
+kArmor2ResearchCost = 30 kArmor2ResearchTime = 105
+kArmor3ResearchCost = 45 kArmor3ResearchTime = 135
 
 kAdvancedMarineSupportResearchCost = 20
 kAdvancedMarineSupportResearchTime = 90

@@ -183,45 +183,45 @@ end--]]
 
 if Client then
 
-    function RappelMixin:CreateRappelInfo()
+    --function RappelMixin:CreateRappelInfo()
     
-        if not self.rappelInfo then
-            self.rappelInfo = GetGUIManager():CreateGUIScript("Prowler/GUIRappelInfo")
-        end
+        --if not self.rappelInfo then
+        --    self.rappelInfo = GetGUIManager():CreateGUIScript("Prowler/GUIRappelInfo")
+        --end
         
-    end
+    --end
     
-    function RappelMixin:DestroyRappelInfo()
-        if self.rappelInfo ~= nil then
-            GetGUIManager():DestroyGUIScript(self.rappelInfo)
-            self.rappelInfo = nil
-        end
-    end
+    --function RappelMixin:DestroyRappelInfo()
+        --if self.rappelInfo ~= nil then
+        --    GetGUIManager():DestroyGUIScript(self.rappelInfo)
+        --    self.rappelInfo = nil
+        --end
+    --end
     
-    local function UpdateGUI(self, player)
-        local localPlayer = Client.GetLocalPlayer()
-        if localPlayer == player then
-            self:CreateRappelInfo()
-        end
-        
-        if self.rappelInfo then
-            self.rappelInfo:SetIsVisible(player and localPlayer == player and self:GetIsActive() and self.rappelling)
-        end
-    end
+    --local function UpdateGUI(self, player)
+    --    local localPlayer = Client.GetLocalPlayer()
+    --    if localPlayer == player then
+    --        self:CreateRappelInfo()
+    --    end
+    --    
+    --    if self.rappelInfo then
+    --        self.rappelInfo:SetIsVisible(player and localPlayer == player and self:GetIsActive() and self.rappelling)
+    --    end
+    --end
+    --
+    --function RappelMixin:OnUpdateRender()
+    --    UpdateGUI(self, self:GetParent())    
+    --end
     
-    function RappelMixin:OnUpdateRender()
-        UpdateGUI(self, self:GetParent())    
-    end
-    
-    function RappelMixin:OnDestroy()
-        self:DestroyRappelInfo()
-    end
+    --function RappelMixin:OnDestroy()
+    --    self:DestroyRappelInfo()
+    --end
 
-    local function CleanUI(self)
-
-        self:DestroyRappelInfo()
-        
-    end
+    --local function CleanUI(self)
+    --
+    --    self:DestroyRappelInfo()
+    --    
+    --end
 
 
     function RappelMixin:OnProcessIntermediate(input)
