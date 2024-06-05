@@ -60,27 +60,51 @@ function TunnelEntranceAbility:GetIsPositionValid(position, player, normal, last
     end
 
     local extents = GetExtents(self:GetDropStructureId())
+    local maxExtent = math.max(extents.x,extents.y,extents.z)
     if math.abs(normal.y) < 0.95 then
-        local maxExtent = math.max(extents.x,extents.y,extents.z)
         extents = Vector(maxExtent, maxExtent, maxExtent)
     end
 
-    local traceStart = position + normal * (extents.y - 0.01)
-    local traceEnd = position + normal * (extents.y + 0.01)
-    local trace = Shared.TraceBox(extents, traceStart, traceEnd, CollisionRep.Damage, PhysicsMask.Movement,EntityFilterOneAndIsa(player, "Player"))
-    --DebugTraceBox(extents, traceStart, traceEnd, 0.1, 45, 45, 45, 1)
-
+    local traceStart = position + normal * (extents.y - 0.02)
+    local traceEnd = position + normal * (extents.y + 0.02)
+    local trace = Shared.TraceBox(extents, traceStart, traceEnd, CollisionRep.Move, PhysicsMask.Movement,EntityFilterOneAndIsa(player, "Player"))
+    --DebugTraceBox(extents, traceEnd, traceStart, 0.1, 45, 45, 45, 1)
+    
     if trace.fraction ~= 1 then
         return false
     end
 
-    local rayStart = position + normal * 0.01
-    local rayEnd = position + normal * (extents.y * 2 - 0.01)
-    trace = Shared.TraceRay(rayStart,rayEnd, CollisionRep.Damage, PhysicsMask.Movement,EntityFilterOneAndIsa(player, "Player"))
+    local sphereRadius =  maxExtent 
+    local sphereCenter = position + normal * (sphereRadius + 0.1)
+    local bias = 0.05       --That guy Biase was smurfing around 2024.05 - 2024.06
+    sphereRadius = sphereRadius - bias
+    local height = bias * 2
+    local capsuleStart =  sphereCenter + normal * -bias
+    local capsuleEnd =  sphereCenter + normal * bias
+    trace = Shared.TraceCapsule(capsuleStart, capsuleEnd, sphereRadius,height,
+            CollisionRep.Move, PhysicsMask.Movement, EntityFilterOneAndIsa(self, "Player"))
+    --DebugCapsule(capsuleStart, capsuleEnd, sphereRadius,height, 0.1,true)
+    if trace.fraction ~= 1 then
+        return false
+    end
+
+    --normal = Vector(0,1,0)
+    --capsuleStart =  sphereCenter + normal * -bias * 2
+    --capsuleEnd =  sphereCenter + normal * bias * 2
+    --trace = Shared.TraceCapsule(capsuleStart, capsuleEnd, sphereRadius,height,
+    --        CollisionRep.Move, PhysicsMask.Movement, EntityFilterOneAndIsa(self, "Player"))
+    --DebugCapsule(capsuleStart, capsuleEnd, sphereRadius,height, 0.1,true)
+    --if trace.fraction ~= 1 then
+    --    return false
+    --end
+    
+    --local rayStart = position + normal * 0.01
+    --local rayEnd = position + normal * (extents.y * 2 - 0.01)
+    --trace = Shared.TraceRay(rayStart,rayEnd, CollisionRep.Damage, PhysicsMask.Movement,EntityFilterOneAndIsa(player, "Player"))
     --DebugTraceRay(rayStart,rayEnd,PhysicsMask.Bullets)
-    if trace.fraction ~= 1 then
-        return false
-    end
+    --if trace.fraction ~= 1 then
+    --    return false
+    --end
 
     local upwardFraction = normal:DotProduct(kUpVector)
     local side = self:GetStructurePlaceSide()

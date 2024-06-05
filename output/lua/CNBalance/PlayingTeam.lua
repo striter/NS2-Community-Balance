@@ -150,15 +150,23 @@ function PlayingTeam:UpdateResTick()
             end
         end
 
-        local rtAboveThreshold = math.max( rtActiveCount - kMaxEfficiencyTowers,0)
-        local rtInsideThreshold = math.min(rtActiveCount,kMaxEfficiencyTowers)
-        local teamResourceToCollect = rtInsideThreshold * kTeamResourceEachTower + rtAboveThreshold * kTeamResourceEachTowerAboveThreshold
-        local playerResourceToCollect = rtInsideThreshold * kPlayerResEachTower + rtAboveThreshold * kPlayerResEachTowerAboveThreshold
-        if rtActiveCount <= 0 then
-            teamResourceToCollect = kTeamResourceWithoutTower
+        local finalResParam = rtActiveCount
+
+        if GetGamerules().gameInfo:GetRookieMode() then
+            local rtAboveThreshold = math.max( rtActiveCount - kMaxEfficiencyTowers,0)
+            local rtInsideThreshold = math.min(rtActiveCount,kMaxEfficiencyTowers)
+            finalResParam = rtInsideThreshold * 1 + rtAboveThreshold * .5
         end
 
-        self:CollectTeamResources(teamResourceToCollect,playerResourceToCollect)
+        if finalResParam <= 0 then
+            finalResParam = kTeamResourceWithoutTower
+        end
+
+        local pResEachRT = kPlayerResEachTower - GetPlayersAboveLimit(self:GetTeamNumber()) * kPlayerResDeductionAboveLimit
+
+        local pRes = finalResParam * pResEachRT
+        local tRes = finalResParam * kTeamResourceEachTower
+        self:CollectTeamResources(tRes, pRes)
     end
 end
 

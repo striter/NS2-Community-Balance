@@ -1,3 +1,5 @@
+kMatchMinPlayers = 8
+
 --Resources system starts here
 kShowDeathStatus = true
 kPlayingTeamInitialTeamRes = 60   --60
@@ -7,9 +9,7 @@ kResourceTowerResourceInterval = 6
 kTeamResourceWithoutTower = 0.5
 kMaxEfficiencyTowers = 3
 kTeamResourceEachTower = 1
-kTeamResourceEachTowerAboveThreshold = 0.5
-kPlayerResEachTower = 0.125
-kPlayerResEachTowerAboveThreshold = 0.05
+kPlayerResEachTower = 0.135 kPlayerResDeductionAboveLimit = 0.005
 
 --Pres reward for aggressive playing (too many farmers?)
 kTechDataPersonalResOnKill = {
@@ -51,6 +51,9 @@ kBountyClaimMinMarine = 5 kBountyClaimMinJetpack = 8 kBountyClaimMinExo = 12
 kBountyClaimMinSkulk = 5 kBountyClaimMinAlien = 8 kBountyClaimMinFade = 8 kBountyClaimMinOnos = 12
 kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 20
 
+--When a high elo player joins lower rank 
+kSkillDiffActive = 1500 kSkillDiffThreshold = 1000 kSkillDiffStep = 500 kSkillDiffDamageScalarEachStep = 0.05
+
 --Toy for marine commander (remove all marines passive income, harsh one)
 kMilitaryProtocolResearchCost = 0
 kMilitaryProtocolResearchTime = 12
@@ -68,7 +71,6 @@ kMilitaryProtocolPlayerResourcesPerKill = {
     [kTechId.Skulk] = 1, [kTechId.Gorge] = 2, [kTechId.Prowler] = 3, [kTechId.Lerk] = 4, [kTechId.Fade] = 6, [kTechId.Onos] = 8,
 }
 
-kMatchMinPlayers = 8
 kMarineRespawnTime = 9
 kAlienSpawnTime = 10
 
@@ -412,7 +414,7 @@ kVolleyRappelDamageType = kDamageType.Normal
 kVolleyEnergyCost = 7.0 --7.0
 kVolleyWebTime = 1.5
 
-kRappelDamage = 10 kRappelContinuousDamage = 5
+kRappelDamage = 10 kRappelContinuousDamage = 5 kRappelContinuousDamageAgainstStructure = 80
 kRappelReelInitialSpeed = 10 kRappelReelContinuousSpeed = 6
 kRappelResearchCost = 10
 kRappelResearchTime = 20

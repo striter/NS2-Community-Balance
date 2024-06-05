@@ -25,6 +25,7 @@ class 'Prowler' (Alien)
 Prowler.kMapName = "prowler"
 
 Prowler.kMaxSpeed = 6.6 -- skulk is 7.25
+Prowler.kMaxSneakySpeed = 4.6 -- skulk is 7.25
 Prowler.kMaxRappelSpeed = 12.15
 
 Prowler.kWalkBackwardSpeedScalar = 1.0 --0.9
@@ -79,8 +80,8 @@ local networkVars =
     timeRappelStart = "private compensated time",
     wallWalking = "compensated boolean",
     timeLastWallWalkCheck = "private compensated time",
-    rappelPoint = "private vector",
-    rappelFollow = "private entityid"
+    rappelPoint = "vector",
+    rappelFollow = "entityid"
 }
 
 AddMixinNetworkVars(BaseMoveMixin, networkVars)
@@ -236,6 +237,10 @@ function Prowler:GetAirFriction()
     return self:GetIsWallWalking() and 8 or self.rappelling and 0.3 or 0.08 -- - (GetHasCelerityUpgrade(self) and GetSpurLevel(self:GetTeamNumber()) or 0) * 0.006
 end
 
+function Prowler:GetPlayFootsteps()
+    return self:GetVelocityLength() > .75 and self:GetIsOnGround() and self:GetIsAlive() and not self.movementModiferState
+end
+
 local kProwlerEngageOffset = Vector(0, 0.4, 0)
 function Prowler:GetEngagementPointOverride()
     return self:GetOrigin() + kProwlerEngageOffset
@@ -370,35 +375,45 @@ function Prowler:ModifyVelocity(input, velocity, deltaTime)
     local ignoreRappel = self:GetIsWallWalking() or self:GetCrouching() or self.movementModiferState
     if ignoreRappel then
         local hitTarget = followEntity      --Reel target
-        if hitTarget and hitTarget:isa("Player") then -- or hitTarget:isa("Exo") then
-            local mass = hitTarget.GetMass and hitTarget:GetMass() or Player.kMass
-            if mass < 100 then
-                if now > (self.timeRappelStart + kContinuousReelInterval) and now > (self.timeLastReel + kContinuousReelInterval) then
-                    self.timeLastReel = now
-                    local endPoint = hitTarget:GetOrigin()
+        if hitTarget then
+            local isPlayer = hitTarget:isa("Player")
+            if isPlayer then -- or hitTarget:isa("Exo") then
+                local mass = hitTarget.GetMass and hitTarget:GetMass() or Player.kMass
+                if mass < 100 then
                     local reelDirection =  self:GetOrigin() - hitTarget:GetOrigin()
                     reelDirection:Normalize()
-                    ApplyPushback(hitTarget,kContinuousReelInterval * 2,(reelDirection * kRappelReelContinuousSpeed))
-                    local energyCost = kContinuousReelInterval * kRappelReelEnergyCost
-                    self:DeductAbilityEnergy(energyCost)
+                    ApplyPushback(hitTarget,0.5,(reelDirection * kRappelReelContinuousSpeed))
+                end
+            end
 
-                    if GetAreEnemies(self,hitTarget) then
-                        local volleyWeapon = self:GetWeapon(VolleyRappel.kMapName)
-                        if volleyWeapon then
-                            volleyWeapon:DoDamage(kRappelReelContinuousSpeed * kContinuousReelInterval, hitTarget, endPoint, self:GetViewCoords().zAxis, "organic", false)
-                        end
+            if GetAreEnemies(self,hitTarget) then
+                local energyCost = deltaTime * kRappelReelEnergyCost
+                self:DeductAbilityEnergy(energyCost)
+                if now > (self.timeRappelStart + kContinuousReelInterval) and now > (self.timeLastReel + kContinuousReelInterval) then
+                    self.timeLastReel = now
 
-                        if HasMixin(hitTarget, "ParasiteAble" ) then
-                            hitTarget:SetParasited( hitTarget, 3 ) --Will give Commander point(s)
-                        end
-                        if HasMixin(hitTarget, "Webable") then
-                            hitTarget:SetWebbed(3, true)
-                        end
+                    local endPoint = hitTarget:GetOrigin()
+                    local volleyWeapon = self:GetWeapon(VolleyRappel.kMapName)
+                    if volleyWeapon then
+                        local damage = isPlayer and kRappelContinuousDamage or kRappelContinuousDamageAgainstStructure
+                        volleyWeapon:DoDamage(damage * kContinuousReelInterval, hitTarget, endPoint, self:GetViewCoords().zAxis, "organic", false)
+                    end
+
+                    if HasMixin(hitTarget, "ParasiteAble" ) then
+                        hitTarget:SetParasited( hitTarget, 3 )
+                    end
+                    
+                    if HasMixin(hitTarget, "Webable") then
+                        hitTarget:SetWebbed(3, true)
+                    end
+
+                    if (hitTarget.SetCorroded) then
+                        hitTarget:SetCorroded()
                     end
                 end
             end
         end
-        
+
         return
     end
     
@@ -469,7 +484,7 @@ function Prowler:GetMaxSpeed(possible)
         return Prowler.kMaxRappelSpeed
     end
     
-    return Prowler.kMaxSpeed
+    return self.movementModiferState and Prowler.kMaxSneakySpeed or Prowler.kMaxSpeed
 end
 
 function Prowler:OnUpdateAnimationInput(modelMixin)
@@ -552,6 +567,9 @@ function Prowler:PostUpdateMove(input)
     if self.rappelFollow ~= Entity.invalidId then
         if followEntity and followEntity.GetIsAlive and followEntity:GetIsAlive() then
             self.rappelPoint = followEntity:GetModelOrigin()
+            if self:GetEnergy() < kRappelEnergyCost then
+               breakRappel = true 
+            end
         else
             breakRappel = true
         end
@@ -561,7 +579,6 @@ function Prowler:PostUpdateMove(input)
     local trace = Shared.TraceRay(origin, self.rappelPoint, CollisionRep.Move, PhysicsMask.Bullets, EntityFilterTwoAndIsa(self, followEntity, "Babbler"))
     --local trace = Shared.TraceRay(origin, self.rappelPoint, CollisionRep.Move, PhysicsMask.AllButPCs, EntityFilterOneAndIsa(self, "Babbler"))
     if (self:GetOrigin() - self.rappelPoint):GetLength() > kRappelRange
-        or self:GetEnergy() < kRappelEnergyCost 
         or trace.fraction ~= 1 
         or (trace.endPoint - self.rappelPoint):GetLength() > 0.5
     then
@@ -642,8 +659,11 @@ function Prowler:OnWorldCollision(normal, impactForce, newVelocity)
 
     PROFILE("Prowler:OnWorldCollision")
 
-    self.wallWalking = self.wallWalking and not self:GetCrouching()
-    self.wallWalking = self.wallWalking or (self.movementModiferState and not self:GetRecentlyJumped() and normal.y < 0.5)
+    self.wallWalking = self.wallWalking and not self:GetCrouching() and not self:GetRecentlyJumped()
+    
+    local coords = self:GetViewCoords()
+    self.wallWalking = self.wallWalking or self.movementModiferState or Math.DotProduct(-coords.zAxis,normal) > .6
+    
 end
 
 function Prowler:GetMoveSpeedIs2D()
@@ -678,6 +698,10 @@ function Prowler:PreUpdateMove(input, runningPrediction)
     end
     
     self.movementModiferState = bit.band(input.commands, Move.MovementModifier) ~= 0
+
+    if self:GetCrouching() then
+        self.wallWalking = false
+    end
     
     if self.wallWalking then
 
@@ -701,10 +725,6 @@ function Prowler:PreUpdateMove(input, runningPrediction)
         self.wallWalkingNormalGoal = Vector.yAxis
     end
 
-    if self.leaping and Shared.GetTime() > self.timeOfLeap + kLeapTime then
-        self.leaping = false
-    end
-
     self.currentWallWalkingAngles = self:GetAnglesFromWallNormal(self.wallWalkingNormalGoal or Vector.yAxis) or self.currentWallWalkingAngles
     
 end
@@ -726,6 +746,12 @@ function Prowler:GetDesiredAngles(deltaTime)
 
     return desiredAngles
 
+end
+
+local baseOnKill = Prowler.OnKill
+function Prowler:OnKill(attacker,doer,point, direction)
+    baseOnKill(self,attacker,doer,point, direction)
+    self.rappelling = false
 end
 
 if Client then
@@ -814,14 +840,13 @@ if Client then
     end
 
     local baseOnDestroy = Prowler.OnDestroy
-    function Prowler:Destroy()
+    function Prowler:OnDestroy()
 
         baseOnDestroy(self)
 
         if self.webRenderModel then
             DynamicMesh_Destroy(self.webRenderModel)
             self.webRenderModel = nil
-            self.webRenderModel:SetMaterial(kWebMaterial)
         end
     end
 

@@ -14,8 +14,9 @@ if Server then
     
     function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint)
         
-        if  self.isHallucination
-            or self:GetIsVirtual()
+        if self.isHallucination
+            --or self:GetIsVirtual()
+            --or (attacker.GetIsVirtual and attacker:GetIsVirtual())
         then return end
     
         if(damageTable.damage <= 0) then return end
@@ -31,39 +32,38 @@ if Server then
             damageScalar = damageScalar + scalar      --Receive Additional Damage And Die Please
         end
 
-        --KDRatio adjustment
-        --if bountyScore <= 0
-        --        and self.kKDRatioMaxDamageReduction
-        --        and self:GetPlayerSkill() < 500
-        --then
-        --    local kdRatioUnforeseen = math.floor( self.deaths - self.kills * kKDRatioClaimOnAddKill - self.assistkills * kKDRatioClaimOnAddAssist)
-        --    if kdRatioUnforeseen > 0 then       --Low KD Player, reduce its damage taken
-        --        local damageDecreaseParam = kdRatioUnforeseen - kKDRatioProtectionStep
-        --        if damageDecreaseParam > 0 then
-        --            local scalar = math.min(damageDecreaseParam * kKDRatioProtectionEachValue,self.kKDRatioMaxDamageReduction)
-        --            damageScalar = damageScalar - scalar
-        --        end
-        --    else
-        --        --if not self.kIgnoreKDDamageReceive then --High KD Player, increase its damage receive
-        --        --    local damageIncreaseParam = -kdRatioUnforeseen - kKDRatioBoostStep
-        --        --    if damageIncreaseParam > 0 then
-        --        --        damageScalar = damageScalar + damageIncreaseParam * kKDRatioDamageIncreaseEachValue
-        --        --    end
-        --        --end
-        --    end
-        --end
+        if GetGamerules().gameInfo:GetRookieMode() then
+            if self.GetPlayerTeamSkill and attacker.GetPlayerTeamSkill then
+                local selfSkill = self:GetPlayerTeamSkill()
+                local targetSkill = attacker:GetPlayerTeamSkill()
+                --if self:GetIsVirtual() then
+                --    selfSkill = 2100
+                --end
+                --if attacker:GetIsVirtual() then
+                --    targetSkill = 2100
+                --end
 
-        --Bounty Damage Dealt Decrease
-        --if bountyScore <= 0
-        --        and attacker.kBountyDamageDecrease 
-        --then
-        --    local attackerBountyScore = attacker:GetBountyCurrentLife()
-        --    if attackerBountyScore > 0 then   --0-5%,10%-20%,30%-45%,60%-80% ...
-        --        local scalar = attackerBountyScore * (0.05 / attacker.kBountyThreshold)
-        --        scalar = scalar * (math.floor(attackerBountyScore / attacker.kBountyThreshold)+ 1)
-        --        damageScalar = damageScalar - scalar
-        --    end
-        --end
+                local skillOffset = (selfSkill - targetSkill)
+                local value = math.max(math.abs(skillOffset) - kSkillDiffThreshold,0)
+
+                if value > 0 then
+
+                    local sign = skillOffset >= 0 and 1 or -1
+                    local available = true
+                    if selfSkill > kSkillDiffActive and sign < 0 then
+                        available = false
+                    elseif targetSkill > kSkillDiffActive and sign > 0 then
+                        available = false
+                    end
+
+                    if available then
+                        local damageParam = sign * (math.floor(value / kSkillDiffStep) + 1) * kSkillDiffDamageScalarEachStep
+                        damageScalar = damageScalar + (damageParam /1)
+                    end
+                end
+            end
+
+        end
 
         damageScalar = math.Clamp(damageScalar,0.2,5.0)        --Seems enough
         damageTable.damage = damageTable.damage * damageScalar
