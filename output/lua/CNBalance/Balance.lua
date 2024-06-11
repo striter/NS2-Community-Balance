@@ -51,8 +51,6 @@ kBountyClaimMinMarine = 5 kBountyClaimMinJetpack = 8 kBountyClaimMinExo = 12
 kBountyClaimMinSkulk = 5 kBountyClaimMinAlien = 8 kBountyClaimMinFade = 8 kBountyClaimMinOnos = 12
 kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 20
 
---When a high elo player joins lower rank 
-kSkillDiffActive = 1500 kSkillDiffThreshold = 1000 kSkillDiffStep = 500 kSkillDiffDamageScalarEachStep = 0.05
 
 --Toy for marine commander (remove all marines passive income, harsh one)
 kMilitaryProtocolResearchCost = 0
@@ -136,6 +134,7 @@ kPhaseTechResearchCost = 10
 
 
 -- Standard Supply
+kDragonBreathResearchCost = 30
 kDragonBreathResearchCost = 30
 kDragonBreathResearchTime = 60
 kLightMachineGunUpgradeCost = nil --20
@@ -415,7 +414,7 @@ kVolleyEnergyCost = 7.0 --7.0
 kVolleyWebTime = 1.5
 
 kRappelDamage = 10 kRappelContinuousDamage = 5 kRappelContinuousDamageAgainstStructure = 80
-kRappelReelInitialSpeed = 10 kRappelReelContinuousSpeed = 6
+kRappelReelInitialSpeed = 10 kRappelReelContinuousSpeed = 4
 kRappelResearchCost = 10
 kRappelResearchTime = 20
 kRappelEnergyCost = 15
@@ -426,7 +425,7 @@ kAcidSprayResearchCost = 10
 kAcidSprayResearchTime = 60
 kAcidSprayEnergyCost = 22
 kAcidSprayDamage = 20  -- 3 missiles
-kAcidSprayDamageType = kDamageType.Structural
+kAcidSprayDamageType = kDamageType.Normal
 
 -- Fade
 kSwipeDamageType = kDamageType.Puncture

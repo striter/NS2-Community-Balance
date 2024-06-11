@@ -35,7 +35,7 @@ Prowler.kHealth = kProwlerHealth
 Prowler.kArmor  = kProwlerArmor
 Prowler.kAdrenalineEnergyRecuperationRate = 18
 
-Prowler.kRappelAddAcceleration = 2
+Prowler.kRappelAddAcceleration = 3
 Prowler.kRappelHorizontalAcceleration = 16.0
 Prowler.RappelCelerityBonusSpeed = 2
 Prowler.kMaxVerticalSpeed = 11.5 --8.5
@@ -74,7 +74,7 @@ end
 local networkVars =
 {
     --timeOfLastHowl = "private compensated time",
-    
+
     --gliding = "compensated boolean",
     rappelling = "compensated boolean",
     timeRappelStart = "private compensated time",
@@ -98,7 +98,7 @@ AddMixinNetworkVars(IdleMixin, networkVars)
 
 
 function Prowler:OnCreate()
-    
+
 
     InitMixin(self, BaseMoveMixin, { kGravity = Player.kGravity })
     InitMixin(self, GroundMoveMixin)
@@ -114,22 +114,23 @@ function Prowler:OnCreate()
     InitMixin(self, BabblerClingMixin)
     InitMixin(self, TunnelUserMixin)
     InitMixin(self, PredictedProjectileShooterMixin)
-    
+
     if Client then
         --InitMixin(self, RailgunTargetMixin)
         --self.timeDashChanged = 0
         self.runDist = 0
         self.step = 0
     end
-    
+
     --self.timeOfLastHowl = 0
     --self.variant = kDefaultSkulkVariant
-    
+
     --self.gliding = false
     self.rappelling = false
     self.wallWalking = false
     self.wallWalkingNormalGoal = Vector.yAxis
     self.timeRappelStart = 0
+    self.timeLastReel = 0
     self.rappelFollow = Entity.invalidId
     self.rappelPoint = nil
     self.timeLastWallWalkCheck = 0
@@ -146,25 +147,25 @@ end
 function Prowler:OnInitialized()
 
     Alien.OnInitialized(self)
-    
-    
+
+
     self:SetModel(Prowler.kModelName, Prowler.kAnimationGraph)
-    
+
     if Client then
-    
+
         self.currentCameraRoll = 0
         self.goalCameraRoll = 0
-        
+
         self:AddHelpWidget("GUIEvolveHelp", 2)
         self:AddHelpWidget("GUIMapHelp", 1)
         self:AddHelpWidget("GUITunnelEntranceHelp", 1)
         --self:AddHelpWidget("GUIProwlerRappelHelp", 2)
-        
+
     end
     self.currentWallWalkingAngles = Angles(0.0, 0.0, 0.0)
 
     InitMixin(self, IdleMixin)
-    
+
 end
 
 function Prowler:GetViewModelName()
@@ -173,8 +174,8 @@ end
 
 -- these two are for third person mod
 function Prowler:GetThirdPersonOffset()
-  local z = -1.8 - self:GetVelocityLength() / self:GetMaxSpeed(true) * 0.4
-  return Vector(0, 0.6, z) 
+    local z = -1.8 - self:GetVelocityLength() / self:GetMaxSpeed(true) * 0.4
+    return Vector(0, 0.6, z)
 end
 
 function Prowler:GetHeartOffset()
@@ -182,7 +183,7 @@ function Prowler:GetHeartOffset()
 end
 
 function Prowler:GetFirstPersonFov()
-  return kProwlerFov
+    return kProwlerFov
 end
 
 function Prowler:GetStepLength()
@@ -303,7 +304,7 @@ end--]]
 function Prowler:OnProcessMove(input)
 
     Alien.OnProcessMove(self, input)
-    
+
     if Client and self:GetPlayFootsteps() then
         local delta = self:GetVelocity():GetLength() * input.time
         self.runDist = self.runDist + delta
@@ -331,7 +332,7 @@ function Prowler:GetCanProwl()
 
     local wallWalkNormal = self:GetAverageWallWalkingNormal(kNormalWallWalkRange, kNormalWallWalkFeelerSize)
     if not wallWalkNormal then return false end
-    
+
     return wallWalkNormal.y < 0.5,wallWalkNormal
 end
 
@@ -380,9 +381,14 @@ function Prowler:ModifyVelocity(input, velocity, deltaTime)
             if isPlayer then -- or hitTarget:isa("Exo") then
                 local mass = hitTarget.GetMass and hitTarget:GetMass() or Player.kMass
                 if mass < 100 then
-                    local reelDirection =  self:GetOrigin() - hitTarget:GetOrigin()
+                    local viewCoords = self:GetViewCoords()
+                    local reelDirection = (viewCoords.origin - followEntity:GetModelOrigin())
+                    if Math.DotProduct(-viewCoords.zAxis,reelDirection) > 0.2 then
+                        reelDirection = (viewCoords.origin + viewCoords.zAxis * 1) - hitTarget:GetOrigin()
+                    end
                     reelDirection:Normalize()
-                    ApplyPushback(hitTarget,0.5,(reelDirection * kRappelReelContinuousSpeed))
+                    local selfVelocity = self:GetVelocity()
+                    ApplyPushback(hitTarget,0.5, selfVelocity * .5 + (reelDirection * kRappelReelContinuousSpeed))
                 end
             end
 
@@ -400,9 +406,9 @@ function Prowler:ModifyVelocity(input, velocity, deltaTime)
                     end
 
                     if HasMixin(hitTarget, "ParasiteAble" ) then
-                        hitTarget:SetParasited( hitTarget, 3 )
+                        hitTarget:SetParasited( self, 3 )
                     end
-                    
+
                     if HasMixin(hitTarget, "Webable") then
                         hitTarget:SetWebbed(3, true)
                     end
@@ -416,7 +422,7 @@ function Prowler:ModifyVelocity(input, velocity, deltaTime)
 
         return
     end
-    
+
     local tetherVector = self.rappelPoint - origin
     local YDiff = self.rappelPoint.y - origin.y
     local YDirection = (YDiff > -1) and 1 or -1
@@ -483,14 +489,14 @@ function Prowler:GetMaxSpeed(possible)
     if not walking and self:GetIsRappelling() then
         return Prowler.kMaxRappelSpeed
     end
-    
+
     return self.movementModiferState and Prowler.kMaxSneakySpeed or Prowler.kMaxSpeed
 end
 
 function Prowler:OnUpdateAnimationInput(modelMixin)
 
     PROFILE("Prowler:OnUpdateAnimationInput")
-    
+
     Alien.OnUpdateAnimationInput(self, modelMixin)
 end
 
@@ -518,7 +524,7 @@ function Prowler:ModifyGravityForce(gravityTable)
     end
 
     if self:GetIsWallWalking() or self:GetIsOnGround() then
-        gravityTable.gravity = 0 
+        gravityTable.gravity = 0
     end
 end
 
@@ -533,7 +539,7 @@ end
 function Prowler:OnRappel(impactPoint, hitEntity)
 
     --self:RappelMove()
-    if not self.movementModiferState then
+    if not self.movementModiferState and not self:GetCrouching() then
         local velocity = self:GetVelocity()
         local viewCoords = self:GetViewCoords()
         local speed = velocity:GetLength()
@@ -551,7 +557,7 @@ function Prowler:OnRappel(impactPoint, hitEntity)
         self:DisableGroundMove(0.15)
         self.wallWalking = false
     end
-    
+
     self.rappelling = true
     self.rappelPoint = self.rappelling and impactPoint or nil
     self.rappelFollow = hitEntity and hitEntity:GetId() or Entity.invalidId
@@ -559,6 +565,7 @@ function Prowler:OnRappel(impactPoint, hitEntity)
     self.timeLastReel = Shared.GetTime()
 end
 
+local breakRappelTolerance = 0.2
 function Prowler:PostUpdateMove(input)
     if not self.rappelling then return end
     local breakRappel = false
@@ -568,7 +575,7 @@ function Prowler:PostUpdateMove(input)
         if followEntity and followEntity.GetIsAlive and followEntity:GetIsAlive() then
             self.rappelPoint = followEntity:GetModelOrigin()
             if self:GetEnergy() < kRappelEnergyCost then
-               breakRappel = true 
+                breakRappel = true
             end
         else
             breakRappel = true
@@ -576,16 +583,19 @@ function Prowler:PostUpdateMove(input)
     end
 
     local origin = self:GetModelOrigin()
-    local trace = Shared.TraceRay(origin, self.rappelPoint, CollisionRep.Move, PhysicsMask.Bullets, EntityFilterTwoAndIsa(self, followEntity, "Babbler"))
+    local trace = Shared.TraceRay(origin, self.rappelPoint,  CollisionRep.Default, PhysicsMask.AllButPCsAndRagdolls, EntityFilterTwoAndIsa(self, followEntity, "Babbler"))
     --local trace = Shared.TraceRay(origin, self.rappelPoint, CollisionRep.Move, PhysicsMask.AllButPCs, EntityFilterOneAndIsa(self, "Babbler"))
     if (self:GetOrigin() - self.rappelPoint):GetLength() > kRappelRange
-        or trace.fraction ~= 1 
-        or (trace.endPoint - self.rappelPoint):GetLength() > 0.5
+            or trace.fraction ~= 1
+            or (trace.endPoint - self.rappelPoint):GetLength() > 0.5
     then
-        breakRappel = true
+        self.rappelToleranceDuration = (self.rappelToleranceDuration or 0) + input.time
+        breakRappel = breakRappel or self.rappelToleranceDuration > breakRappelTolerance
+    else
+        self.rappelToleranceDuration = 0
     end
 
-    
+
     if not breakRappel then return end
 
     self.rappelling = false
@@ -615,9 +625,9 @@ function Prowler:ModifyAttackSpeed(attackSpeedTable)
 
     if activeWeapon then
         local attackSpeedMod = activeWeapon:isa("VolleyRappel") and VolleyRappel.AttackSpeedMod or activeWeapon:isa("AcidSpray") and AcidSpray.AttackSpeedMod or 1.0
-        
+
         attackSpeedTable.attackSpeed = attackSpeedTable.attackSpeed * attackSpeedMod
-        
+
     end
 
 end
@@ -660,20 +670,20 @@ function Prowler:OnWorldCollision(normal, impactForce, newVelocity)
     PROFILE("Prowler:OnWorldCollision")
 
     self.wallWalking = self.wallWalking and not self:GetCrouching() and not self:GetRecentlyJumped()
-    
+
     local coords = self:GetViewCoords()
     self.wallWalking = self.wallWalking or self.movementModiferState or Math.DotProduct(-coords.zAxis,normal) > .6
-    
+
 end
 
 function Prowler:GetMoveSpeedIs2D()
-    return not self:GetIsWallWalking() 
+    return not self:GetIsWallWalking()
             and not self:GetIsRappelling()
 end
 
 function Prowler:GetPerformsVerticalMove()
     return self:GetIsWallWalking()
-        or self:GetIsRappelling()
+            or self:GetIsRappelling()
 end
 function Prowler:OverrideUpdateOnGround(onGround)
     return onGround or self:GetIsWallWalking()
@@ -696,13 +706,13 @@ function Prowler:PreUpdateMove(input, runningPrediction)
         self.rappelling = false
         self.rappelPoint = nil
     end
-    
+
     self.movementModiferState = bit.band(input.commands, Move.MovementModifier) ~= 0
 
     if self:GetCrouching() then
         self.wallWalking = false
     end
-    
+
     if self.wallWalking then
 
         -- Most of the time, it returns a fraction of 0, which means
@@ -726,7 +736,7 @@ function Prowler:PreUpdateMove(input, runningPrediction)
     end
 
     self.currentWallWalkingAngles = self:GetAnglesFromWallNormal(self.wallWalkingNormalGoal or Vector.yAxis) or self.currentWallWalkingAngles
-    
+
 end
 
 function Prowler:GetDesiredAngles(deltaTime)
@@ -755,7 +765,7 @@ function Prowler:OnKill(attacker,doer,point, direction)
 end
 
 if Client then
-    
+
     function Prowler:GetShowGhostModel()
 
         local weapon = self:GetActiveWeapon()

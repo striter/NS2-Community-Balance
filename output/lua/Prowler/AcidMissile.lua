@@ -4,7 +4,7 @@
 
 Script.Load("lua/Weapons/Projectile.lua")
 Script.Load("lua/TeamMixin.lua")
---Script.Load("lua/Weapons/DotMarker.lua")
+Script.Load("lua/Weapons/DotMarker.lua")
 Script.Load("lua/DamageMixin.lua")
 Script.Load("lua/Weapons/PredictedProjectile.lua")
 PrecacheAsset("cinematics/vfx_materials/decals/bilebomb_decal.surface_shader")
@@ -59,27 +59,41 @@ if Server then
         return math.cos(piFraction + math.pi) + 1 
     end--]]
 
-    function AcidMissile:ProcessHit(targetHit, surface, normal)        
-        
+    function AcidMissile:ProcessHit(targetHit, surface, normal)
+
+
+        local dotMarker = CreateEntity(DotMarker.kMapName, self:GetOrigin() + normal * 0.2, self:GetTeamNumber())
+        dotMarker:SetTechId(kTechId.BileBomb)
+        dotMarker:SetDamageType(self:GetDamageType())
+        dotMarker:SetLifeTime(2)
+        dotMarker:SetDamage(AcidMissile.kDamage)
+        dotMarker:SetRadius(AcidMissile.kSplashRadius)
+        dotMarker:SetDamageIntervall(kBileBombDotInterval)
+        dotMarker:SetDotMarkerType(DotMarker.kType.Static)
+        dotMarker:SetTargetEffectName("bilebomb_onstructure")
+        dotMarker:SetDeathIconIndex(kDeathMessageIcon.AcidSpray)
+        dotMarker:SetIsAffectedByCrush(true)
+        dotMarker:SetOwner(self:GetOwner())
+        local function NoFalloff()
+            return 0
+        end
+        dotMarker:SetFallOffFunc(NoFalloff)
+        dotMarker:TriggerEffects("whipbomb_hit")
+
         local explosionOrigin = self:GetOrigin()
         local hitEntities = GetEntitiesWithMixinForTeamWithinRange("Live", GetEnemyTeamNumber(self:GetTeamNumber()), explosionOrigin, AcidMissile.kSplashRadius)
-        
-        if targetHit then
+        for _, hitEntity in ipairs(hitEntities) do
 
-            table.removevalue(hitEntities, targetHit)
-            
-            if not HasMixin(targetHit, "Team") or self:GetTeamNumber() ~= targetHit:GetTeamNumber() then
-                self:DoDamage(AcidMissile.kDamage, targetHit, targetHit:GetOrigin(), GetNormalizedVector(targetHit:GetOrigin() - explosionOrigin), "none")
+            local targetOrigin = GetTargetOrigin(hitEntity)
+            if not GetWallBetween(explosionOrigin, targetOrigin, hitEntity) then
+                if HasMixin(hitEntity, "Webable") then
+                    hitEntity:SetWebbed(1, true)
+                end
+
+                if (hitEntity.SetCorroded) then
+                    hitEntity:SetCorroded()
+                end
             end
-        end
-
-        for _, entity in ipairs(hitEntities) do
-
-            local targetOrigin = GetTargetOrigin(entity)
-            if not GetWallBetween(explosionOrigin, targetOrigin, entity) then
-                self:DoDamage(AcidMissile.kDamage, entity, targetOrigin, GetNormalizedVector(entity:GetOrigin() - explosionOrigin), "none")
-            end
-
         end
         
         self:TriggerEffects("whipbomb_hit")

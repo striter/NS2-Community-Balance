@@ -152,7 +152,7 @@ function PlayingTeam:UpdateResTick()
 
         local finalResParam = rtActiveCount
 
-        if GetGamerules().gameInfo:GetRookieMode() then
+        if NS2Gamerules.kBalanceConfig.resourceEfficiency then
             local rtAboveThreshold = math.max( rtActiveCount - kMaxEfficiencyTowers,0)
             local rtInsideThreshold = math.min(rtActiveCount,kMaxEfficiencyTowers)
             finalResParam = rtInsideThreshold * 1 + rtAboveThreshold * .5

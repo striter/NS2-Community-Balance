@@ -15,8 +15,8 @@ if Server then
     function ScoringMixin:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint)
         
         if self.isHallucination
-            --or self:GetIsVirtual()
-            --or (attacker.GetIsVirtual and attacker:GetIsVirtual())
+            or self:GetIsVirtual()
+            or (attacker.GetIsVirtual and attacker:GetIsVirtual())
         then return end
     
         if(damageTable.damage <= 0) then return end
@@ -30,39 +30,6 @@ if Server then
             local scalar = bountyScore  * (0.1 / self.kBountyThreshold)
             scalar = scalar * (math.floor(bountyScore / self.kBountyThreshold)+ 1)
             damageScalar = damageScalar + scalar      --Receive Additional Damage And Die Please
-        end
-
-        if GetGamerules().gameInfo:GetRookieMode() then
-            if self.GetPlayerTeamSkill and attacker.GetPlayerTeamSkill then
-                local selfSkill = self:GetPlayerTeamSkill()
-                local targetSkill = attacker:GetPlayerTeamSkill()
-                --if self:GetIsVirtual() then
-                --    selfSkill = 2100
-                --end
-                --if attacker:GetIsVirtual() then
-                --    targetSkill = 2100
-                --end
-
-                local skillOffset = (selfSkill - targetSkill)
-                local value = math.max(math.abs(skillOffset) - kSkillDiffThreshold,0)
-
-                if value > 0 then
-
-                    local sign = skillOffset >= 0 and 1 or -1
-                    local available = true
-                    if selfSkill > kSkillDiffActive and sign < 0 then
-                        available = false
-                    elseif targetSkill > kSkillDiffActive and sign > 0 then
-                        available = false
-                    end
-
-                    if available then
-                        local damageParam = sign * (math.floor(value / kSkillDiffStep) + 1) * kSkillDiffDamageScalarEachStep
-                        damageScalar = damageScalar + (damageParam /1)
-                    end
-                end
-            end
-
         end
 
         damageScalar = math.Clamp(damageScalar,0.2,5.0)        --Seems enough
@@ -92,12 +59,18 @@ if Server then
     local baseAddKill = ScoringMixin.AddKill
     function ScoringMixin:AddKill()
         baseAddKill(self)
+        if not NS2Gamerules.kBalanceConfig.bountyActive then
+            return
+        end
         AddBounty(self,kBountyScoreEachKill)
     end
 
     local baseAddAssistKill = ScoringMixin.AddAssistKill
     function ScoringMixin:AddAssistKill()
         baseAddAssistKill(self)
+        if not NS2Gamerules.kBalanceConfig.bountyActive then
+            return
+        end
         AddBounty(self,kBountyScoreEachAssist)
     end
     

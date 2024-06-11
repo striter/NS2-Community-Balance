@@ -139,7 +139,7 @@ local function UpdateDesiredCloakFraction(self, deltaTime)
 
                 if self:isa("Player") then
                     local veilLevel = self:GetVeilLevel()
-                    self.maxCloakFraction = 0.78 + veilLevel * 0.04     --Player sync veil level
+                    self.maxCloakFraction = 0.82 + veilLevel * 0.03     --Player sync veil level
                     self.cloakRate = veilLevel
                 elseif self:isa("Drifter")  or self:isa("Web") then
                     self.maxCloakFraction = 0.9

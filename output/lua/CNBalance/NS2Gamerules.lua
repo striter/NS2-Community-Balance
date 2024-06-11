@@ -1,5 +1,10 @@
  if Server then
-    
+
+     NS2Gamerules.kBalanceConfig = LoadConfigFile("NS2.0Config.json", {
+         bountyActive = false,
+         resourceEfficiency = false,
+     }, true)
+     
      local kRandomTencentage = 4
      
      function NS2Gamerules:RandomTechPoint(techPoints, teamNumber)
@@ -8,7 +13,6 @@
           table.removevalue(techPoints, chosenTechPoint)
          return chosenTechPoint
      end
-
 
      local baseSetGameState = NS2Gamerules.SetGameState
      function NS2Gamerules:SetGameState(_state)
