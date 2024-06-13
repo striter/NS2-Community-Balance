@@ -531,8 +531,7 @@ end
 function Prowler:OnJump( modifiedVelocity )
 
     local material = self:GetMaterialBelowPlayer()
-
-    self:TriggerEffects("jump_good", {surface = material})
+    self:TriggerEffects("jump", {surface = material})
     self.wallWalking = false
 end
 

@@ -44,7 +44,7 @@ ModLoader.SetupFileHook("lua/GUIScoreboard.lua", "lua/CNBalance/GUI/GUIScoreboar
 
 --Effects
 ModLoader.SetupFileHook("lua/GeneralEffects.lua", "lua/CNBalance/Effects/GeneralEffects.lua", "post" )
-ModLoader.SetupFileHook("lua/PlayerEffects.lua", "lua/CNBalance/Effects/PlayerEffects.lua", "post" )
+ModLoader.SetupFileHook("lua/PlayerEffects.lua", "lua/CNBalance/Effects/PlayerEffects.lua", "replace" )
 ModLoader.SetupFileHook("lua/DamageEffects.lua", "lua/CNBalance/Effects/DamageEffects.lua", "post" )
 ModLoader.SetupFileHook("lua/MarineStructureEffects.lua", "lua/CNBalance/Effects/MarineStructureEffects.lua", "post")
 ModLoader.SetupFileHook("lua/MarineWeaponEffects.lua", "lua/CNBalance/Effects/MarineWeaponEffects.lua", "post")
