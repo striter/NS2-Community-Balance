@@ -16,6 +16,7 @@ Script.Load("lua/BabblerClingMixin.lua")
 Script.Load("lua/Weapons/PredictedProjectile.lua")
 Script.Load("lua/IdleMixin.lua")
 Script.Load("lua/FilteredCinematicMixin.lua")
+Script.Load("lua/RailgunTargetMixin.lua")
 
 class 'Vokex' (Alien)
 
@@ -148,7 +149,8 @@ function Vokex:OnInitialized()
         
         self:AddHelpWidget("GUIFadeShadowStepHelp", 2)
         self:AddHelpWidget("GUITunnelEntranceHelp", 1)
-        
+
+        InitMixin(self, RailgunTargetMixin)
     end
     
     InitMixin(self, IdleMixin)

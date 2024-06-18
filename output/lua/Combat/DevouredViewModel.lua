@@ -160,7 +160,7 @@ end
 function DevouredViewModel:UpdateViewModelPoseParameters(viewModel, input)
 	local parent = self:GetParent()
 	if parent then
-		local devourPercent = (1 - self:GetParent():GetHealthScalar()) * 100
+		local devourPercent = (1 - self:GetParent():GetHealthFraction()) * 100
 		viewModel:SetPoseParam("devour_percent", devourPercent)
 	end
 	

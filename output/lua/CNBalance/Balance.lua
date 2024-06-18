@@ -542,18 +542,18 @@ kWhipSlapDamage = 50
 kWhipBombardDamage = 45
 kWhipBombardDamageType = kDamageType.Structural
 
-kObservatoryScanCost = 3
-kScanCooldown = 0
+kObservatoryScanCost = 4
+kScanCooldown = 5
 kObservatoryDistressBeaconCost = 10
 
 kArmsLabCost = 15
 
 kWeapons1ResearchCost = 25 kWeapons1ResearchTime = 75
-kWeapons2ResearchCost = 30 kWeapons2ResearchTime = 105
+kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 105
 kWeapons3ResearchCost = 45 kWeapons3ResearchTime = 135
 
 kArmor1ResearchCost = 25 kArmor1ResearchTime = 75
-kArmor2ResearchCost = 30 kArmor2ResearchTime = 105
+kArmor2ResearchCost = 35 kArmor2ResearchTime = 105
 kArmor3ResearchCost = 45 kArmor3ResearchTime = 135
 
 kAdvancedMarineSupportResearchCost = 20

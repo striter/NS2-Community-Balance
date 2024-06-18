@@ -168,23 +168,20 @@ end
 
 function DetectableMixin:SetDetected(state)
 
-    if state == self.detected then return end
-
-    self.detected = state
-    if self.OnDetectedChange then
-        self:OnDetectedChange(state)
-    end
-    
-
-    DetectableMixinDirtyTable:Insert(self:GetId())
-
-
     if state then
         self.timeWasDetected = Shared.GetTime()
     else
         self.timeWasDetected = nil
     end
-
+    
+    if state == self.detected then return end
+    self.detected = state
+    
+    if self.OnDetectedChange then
+        self:OnDetectedChange(state)
+    end
+    
+    DetectableMixinDirtyTable:Insert(self:GetId())
 end
 
 function DetectableMixin:OnUpdateRender()

@@ -1,9 +1,9 @@
 Script.Load("lua/BiomassHealthMixin.lua")
 
-local kPhaseCooldownBase = 0.8
-local kPhaseCooldownPerGateUpEnd = 0.9
+local kPhaseCooldownBase = 1
+local kPhaseCooldownPerGateUpEnd = 0.8
 local kBeaconInstantPhaseDuration = 15
-local kBeaconInstantPhaseCooldown = 0
+local kBeaconInstantPhaseCooldown = 0.5
 
 local baseOnCreate = PhaseGate.OnCreate
 function PhaseGate:OnCreate()

@@ -18,4 +18,15 @@ function Embryo:OnCreate()
 end
 
 
+--function Babbler:GetIsCamouflaged()
+--    if self.clinged then
+--        local parent = self:GetParent()
+--        if parent and HasMixin(parent, "Cloakable") then
+--            return parent:GetIsCamouflaged()
+--        end
+--    end
+--
+--    return false
+--end
+
 Shared.LinkClassToMap("Embryo", Embryo.kMapName, networkVars)

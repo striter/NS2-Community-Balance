@@ -1,4 +1,12 @@
 Lerk.kAdrenalineEnergyRecuperationRate = 18.0
+Script.Load("lua/RailgunTargetMixin.lua")
+local baseOnInitialized = Lerk.OnInitialized
+function Lerk:OnInitialized()
+    baseOnInitialized(self)
+    if Client then
+        InitMixin(self, RailgunTargetMixin)
+    end
+end
 
 function Lerk:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
         local reduction = kLerkDamageReduction[doer:GetClassName()]

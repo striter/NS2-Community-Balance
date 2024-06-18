@@ -11,7 +11,7 @@ Script.Load("lua/WallMovementMixin.lua")
 Script.Load("lua/DissolveMixin.lua")
 Script.Load("lua/BabblerClingMixin.lua")
 Script.Load("lua/TunnelUserMixin.lua")
---Script.Load("lua/RailgunTargetMixin.lua")
+Script.Load("lua/RailgunTargetMixin.lua")
 
 Script.Load("lua/Prowler/VolleyRappel.lua")
 Script.Load("lua/Prowler/AcidSpray.lua")
@@ -116,7 +116,7 @@ function Prowler:OnCreate()
     InitMixin(self, PredictedProjectileShooterMixin)
 
     if Client then
-        --InitMixin(self, RailgunTargetMixin)
+        InitMixin(self, RailgunTargetMixin)
         --self.timeDashChanged = 0
         self.runDist = 0
         self.step = 0
