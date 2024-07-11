@@ -106,7 +106,7 @@ kExoDamageReduction = {
 kHealingClampMaxHPAmount = 0.12
 kMaxBiomassHealthMultiplyLevel = 8 --N-1
 
-kSkulkHealth = 73    kSkulkArmor = 10    kSkulkPointValue = 5  kSkulkHealthPerBioMass = 3 kSkulkHealthPerPlayerAboveLimit = 1
+kSkulkHealth = 72    kSkulkArmor = 10    kSkulkPointValue = 5  kSkulkHealthPerBioMass = 3 kSkulkHealthPerPlayerAboveLimit = 1.5
 kSkulkDamageReduction = {
     ["Grenade"] = 0.7,
     ["ImpactGrenade"] = 0.7,
@@ -160,7 +160,7 @@ kOnosDamageReduction = {
     --["HeavyMachineGun"] = 1.08,
 }
 
-kProwlerHealth = 135 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 5
+kProwlerHealth = 150 kProwlerArmor  = 20 kProwlerPointValue = 15 kProwlerHealthPerBioMass = 5
 kProwlerDamageReduction = {
     ["Grenade"] = 0.75,
     ["ImpactGrenade"] = 0.75,

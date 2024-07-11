@@ -4,7 +4,7 @@ local kUpEndFallOffDoers = {
     ["ImpactGrenade"] = true,
     ["Mine"] = true,
     --["ClusterGrenade"] = true,
-    --["PulseGrenade"] = true,        --Unable due to some reason
+    ["PulseGrenade"] = true,        --Unable due to some reason
 }
 
 function RadiusDamageWithUpEnd(entities, centerOrigin, radius, fullDamage, doer, ignoreLOS, fallOffFunc, useXZDistance)

@@ -1,7 +1,8 @@
 Script.Load("lua/BiomassHealthMixin.lua")
 
-local kPhaseCooldownBase = 1
-local kPhaseCooldownPerGateUpEnd = 0.8
+local kPhaseCooldownBase = 0.8
+local kPhaseCooldownPerPlayerAboveLimit = 0.1
+local kPhaseCooldownPerGateUpEnd = 0.5
 local kBeaconInstantPhaseDuration = 15
 local kBeaconInstantPhaseCooldown = 0.5
 
@@ -108,7 +109,6 @@ function PhaseGate:Phase(user)
 
         if Server then
             
-            
             local phaseTime = kBeaconInstantPhaseCooldown
 
             local instantPhase = user.timeLastBeacon and Shared.GetTime() - user.timeLastBeacon <= kBeaconInstantPhaseDuration
@@ -118,7 +118,9 @@ function PhaseGate:Phase(user)
                 phaseTime = kPhaseCooldownBase + math.max( 0,gateCount - 2) * kPhaseCooldownPerGateUpEnd
             end
             
-            self.cooldownNextPhase = phaseTime
+            local playerAboveLimit = GetPlayersAboveLimit(self:GetTeamNumber())
+            
+            self.cooldownNextPhase = phaseTime + playerAboveLimit * kPhaseCooldownPerPlayerAboveLimit
         end
         
         self.timeOfLastPhase = Shared.GetTime()

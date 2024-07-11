@@ -56,7 +56,7 @@ kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyCl
 kMilitaryProtocolResearchCost = 0
 kMilitaryProtocolResearchTime = 12
 kMilitaryProtocolTResPerBountyClaim = 0.5
-kMilitaryProtocolResearchDurationMultiply = 1 --1.2     --1.33?
+kMilitaryProtocolResearchDurationMultiply = 1.2     --1.33?
 kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKill above
     [kTechId.Drifter] = 1,
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.GorgeTunnel] = 3,
