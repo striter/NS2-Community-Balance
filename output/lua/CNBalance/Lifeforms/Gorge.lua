@@ -46,12 +46,7 @@ if Server then
 
         self:GiveItem(SpitSpray.kMapName)
         self:GiveItem(DropStructureAbility.kMapName)
-
-        local team = self:GetTeam()
-        if team.IsOriginForm and team:IsOriginForm() then
-            self:GiveItem(DropTeamStructureAbility.kMapName)
-        end
-
+        self:GiveItem(DropTeamStructureAbility.kMapName)
         self:SetActiveWeapon(SpitSpray.kMapName)
     end
 

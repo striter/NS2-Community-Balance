@@ -1,7 +1,7 @@
 
 if kTranslateMessage then
-    kTranslateMessage["BUYMENU_ERROR_RANKREQUIRED"] = "需要军衔[%s]"
-    kTranslateMessage["ABM_RANK"] = "需要段位[%s]"
+    kTranslateMessage["BUYMENU_ERROR_RANKREQUIRED"] = "需要信誉值达到[%s]"
+    kTranslateMessage["ABM_RANK"] = "需要信誉值达到[%s]"
     kTranslateMessage["ABM_DISABLED"] ="开发中"
 
     kTranslateMessage["GAME_LENGTH_TEAM1"] = "站点清理 [%i:%02i]"
@@ -218,8 +218,8 @@ end
 
 if kLocales then
     
-    kLocales["BUYMENU_ERROR_RANKREQUIRED"] = "Rank Required(%s)"
-    kLocales["ABM_RANK"] ="Rank Required(%s)"
+    kLocales["BUYMENU_ERROR_RANKREQUIRED"] = "Reputation Required(%s)"
+    kLocales["ABM_RANK"] ="Reputation Required (%s)"
     kLocales["ABM_DISABLED"] ="Developing"
     
     kLocales["GAME_LENGTH_TEAM1"] = "Cleaning:[%s:%s]"

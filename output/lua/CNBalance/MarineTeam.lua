@@ -230,6 +230,15 @@ local function TickMotionTrack(self)
     local now = Shared.GetTime()
     if now - self.timeLastMotionTrack < kMotionTrackInterval then return end
     self.timeLastMotionTrack = now
+
+    for _, babbler in ipairs(GetEntitiesForTeam("Babbler", GetEnemyTeamNumber(self:GetTeamNumber()))) do
+        if babbler.SetDetected 
+            and not babbler:GetIsClinged()
+            and not babbler:GetIsCamouflaged()
+        then
+            babbler:SetDetected(true)
+        end
+    end
     
     for _, alien in ipairs(GetEntitiesForTeam("Alien", GetEnemyTeamNumber(self:GetTeamNumber()))) do
         if alien.SetDetected 

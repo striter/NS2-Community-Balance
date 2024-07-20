@@ -106,7 +106,7 @@ kExoDamageReduction = {
 kHealingClampMaxHPAmount = 0.12
 kMaxBiomassHealthMultiplyLevel = 8 --N-1
 
-kSkulkHealth = 72    kSkulkArmor = 10    kSkulkPointValue = 5  kSkulkHealthPerBioMass = 3 kSkulkHealthPerPlayerAboveLimit = 1.5
+kSkulkHealth = 73    kSkulkArmor = 10    kSkulkPointValue = 5  kSkulkHealthPerBioMass = 3 kSkulkHealthPerPlayerAboveLimit = 1
 kSkulkDamageReduction = {
     ["Grenade"] = 0.7,
     ["ImpactGrenade"] = 0.7,
@@ -131,7 +131,7 @@ kLerkDamageReduction = {
     --["PulseGrenade"] = 0.75,
 }
 
-kFadeHealth = 280  kFadeArmor = 80  kFadePointValue = 20 kFadeHealthPerBioMass = 5 kFadeHealthPerPlayerAboveLimit = 5
+kFadeHealth = 280  kFadeArmor = 80  kFadePointValue = 20 kFadeHealthPerBioMass = 5 kFadeHealthPerPlayerAboveLimit = 3
 kFadeDamageReduction = {
     ["Mine"] = 1.25,
     --["MarineSentry"] = 1.1,
@@ -139,7 +139,7 @@ kFadeDamageReduction = {
 }
 
 --700 450 50
-kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 25
+kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 15
 kOnosBoneShieldDefaultReduction = 0.2
 kOnosBoneShieldDamageReduction = {
     --["HeavyMachineGun"] = 0.25,
@@ -198,7 +198,7 @@ kTunnelEntranceHealthPerPlayerAdd = 50 kCragTunnelArmorAdditive = 400 kTunnelEnt
 kMatureInfestedTunnelEntranceHealth = kMatureTunnelEntranceHealth    kMatureInfestedTunnelEntranceArmor = kMatureTunnelEntranceArmor
 kInfestedTunnelEntranceHealth = kTunnelEntranceHealth    kInfestedTunnelEntranceArmor = kTunnelEntranceArmor    
 
-kCystHealth = 50    kCystArmor = 1
+kCystHealth = 125    kCystArmor = 1
 kMatureCystHealth = 400    kMatureCystArmor = 1    kCystPointValue = 1
 kMinMatureCystHealth = 200 kMinCystScalingDistance = 48 kMaxCystScalingDistance = 168
 
@@ -212,6 +212,9 @@ kMatureSporeMineHealth = 120 kMatureSporeMineArmor = 0
 
 kBabblerEggHealth = 100  kBabblerEggArmor = 0 kBabblerEggHealthPerBiomass = 15  kBabblerEggPointValue = 3
 kMatureBabblerEggHealth = 200 kMatureBabblerEggArmor = 0
+
+kBabblerHealth = 12    kBabblerArmor = 0    kBabblerPointValue = 0
+kBabblerDefaultLifeTime = 5 kBabblerEggHatchLifetime = 30 kBabblerPheromoneHatchLifeTime = 8
 
 kBoneWallHealth = 100 kBoneWallArmor = 200    kBoneWallHealthPerBioMass = 75
 kContaminationHealth = 1450 kContaminationArmor = 0    kContaminationPointValue = 2

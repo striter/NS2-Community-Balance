@@ -13,7 +13,11 @@ function Cyst:OnInitialized()
             biomassLevel = teamInfo.bioMassLevel
         end
     end
-    self.cystInfestationRadius = kInfestationRadius + math.max(biomassLevel - 1,0) * kInfestationPerBiomass
+
+    self.cystInfestationRadius = kInfestationRadius
+    if not GetHasTech(self,kTechId.OriginForm) then
+        self.cystInfestationRadius = kInfestationRadius + math.max(biomassLevel - 1,0) * kInfestationPerBiomass
+    end
     baseOnInitialized(self)
 end
 
@@ -23,6 +27,10 @@ end
 
 function Cyst:GetInfestationMaxRadius()
     return self.cystInfestationRadius
+end
+
+function Cyst:GetHealSprayBuildAllowed()
+    return self:CanBeBuilt() or self:GetIsCatalysted()
 end
 
 local kParentSearchRange = 400

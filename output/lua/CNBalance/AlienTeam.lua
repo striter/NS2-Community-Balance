@@ -1181,13 +1181,6 @@ function AlienTeam:OnResearchComplete(structure, researchId)
         targetCommander:Eject()
     end
     self.timeGorgeGestated = 1  --Prevent gorge get 60 res midgame
-    for _, gorge in ipairs(GetEntitiesForTeam( "Gorge", teamNumber)) do
-        if gorge:GetIsAlive() then
-            gorge:GiveItem(DropTeamStructureAbility.kMapName,false)
-        end 
-    end
-    
-    
 end
 
 

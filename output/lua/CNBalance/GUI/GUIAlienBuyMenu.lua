@@ -1099,11 +1099,8 @@ local function GetNumberOfSelectedUpgrades(self)
 
 end
 
-local function GetIsSkillRestricted(type)
-	local skill = Client.GetLocalPlayer():GetPlayerSkill() - Client.GetLocalPlayer():GetPlayerSkillOffset()
-	local rank = kTechRankRestriction[IndexToAlienTechId(type)]
-	if not rank then return false end
-	return skill < rank,rank
+local function GetIsRestricted(type)
+	return GetTechRestricted(IndexToAlienTechId(type))
 end
 
 local function GetIsDisabled(type)
@@ -1162,7 +1159,7 @@ local function UpdateEvolveButton(self)
 	local hasGameStarted = PlayerUI_GetHasGameStarted()
 	local evolveText = Locale.ResolveString("ABM_GAME_NOT_STARTED")
 	local evolveCost
-	local rankRestricted,rank = GetIsSkillRestricted(self.selectedAlienType)
+	local restricted, requirement = GetIsRestricted(self.selectedAlienType)
 
 	local resourceFetchValid, fetchingKey = ResourceFetchingDisabled(self,self.selectedAlienType)
 	
@@ -1172,9 +1169,9 @@ local function UpdateEvolveButton(self)
 	elseif resourceFetchValid then
 		evolveButtonTextureCoords = GUIAlienBuyMenu.kEvolveButtonNeedResourcesTextureCoordinates
 		evolveText = Locale.ResolveString(fetchingKey)
-	elseif rankRestricted then
+	elseif restricted then
 		evolveButtonTextureCoords = GUIAlienBuyMenu.kEvolveButtonNeedResourcesTextureCoordinates
-		evolveText = string.format(Locale.ResolveString("ABM_RANK"),rank)
+		evolveText = string.format(Locale.ResolveString("ABM_RANK"), requirement)
 	elseif hasGameStarted then
 
 		evolveText = Locale.ResolveString("ABM_SELECT_UPGRADES")
@@ -1373,9 +1370,9 @@ function GUIAlienBuyMenu:_UpdateAlienButtons()
 		-- Don't bother updating anything else unless it is visible.
 		if buttonIsVisible then
 
-			local skillRestricted = GetIsSkillRestricted(alienButton.TypeData.Index)
+			local restricted = GetIsRestricted(alienButton.TypeData.Index)
 			local isCurrentAlien = AlienBuy_GetCurrentAlien() == alienButton.TypeData.Index
-			if skillRestricted or GetIsDisabled(alienButton.TypeData.Index) or ResourceFetchingDisabled(self,alienButton.TypeData.Index) then
+			if restricted or GetIsDisabled(alienButton.TypeData.Index) or ResourceFetchingDisabled(self,alienButton.TypeData.Index) then
 				alienButton.Button:SetColor(GUIAlienBuyMenu.kDisabledColor)
 			elseif researched and (isCurrentAlien or self:_GetCanAffordAlienType(alienButton.TypeData.Index)) then
 				alienButton.Button:SetColor(GUIAlienBuyMenu.kEnabledColor)
@@ -1620,7 +1617,7 @@ function GUIAlienBuyMenu:SendKeyEvent(key, down)
 			-- Check if the evolve button was selected.
 			local allowedToEvolve = GetCanAffordAlienTypeAndUpgrades(self, self.selectedAlienType) and PlayerUI_GetHasGameStarted()
 			allowedToEvolve = allowedToEvolve and GetAlienOrUpgradeSelected(self)
-			allowedToEvolve = allowedToEvolve and not GetIsSkillRestricted(self.selectedAlienType)
+			allowedToEvolve = allowedToEvolve and not GetIsRestricted(self.selectedAlienType)
 			allowedToEvolve = allowedToEvolve and not GetIsDisabled(self.selectedAlienType)
 			allowedToEvolve = allowedToEvolve and not ResourceFetchingDisabled(self,self.selectedAlienType)
 			

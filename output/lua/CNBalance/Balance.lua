@@ -356,8 +356,8 @@ kFadeEggCost = 70
 kOnosCost = 62
 kOnosEggCost = 100
 
-kTunnelEntranceCost = 8
-kTunnelRelocateCost = 6
+kTunnelEntranceCost = 7
+kTunnelRelocateCost = 5
 
 --Research with skill activation
 kResearchBioMassOneCost = 30
@@ -391,7 +391,7 @@ kXenocideDamageType = kDamageType.Structural
 kXenocideDamage = 150  kXenocideFuelDamage = 210 --200
 kXenocideRange = 8 kXenocideFuelRange = 12 -- 14
 kXenocideDamageScalarEmptyHealth = 0.2 kXenocideDamageHealthScalar = 1 - kXenocideDamageScalarEmptyHealth
-kXenocideSpawnReduction = 1 kXenocideFuelSpawnReduction = 1
+kXenocideSpawnReduction = 1 kXenocideFuelSpawnReduction = 0.5
 
 kBileBombResearchCost = 10
 kBileBombResearchTime = 40
@@ -418,7 +418,7 @@ kRappelReelInitialSpeed = 10 kRappelReelContinuousSpeed = 4
 kRappelResearchCost = 10
 kRappelResearchTime = 20
 kRappelEnergyCost = 15
-kRappelReelEnergyCost = 24
+kRappelReelEnergyCost = 20
 kRappelRange = 25
 
 kAcidSprayResearchCost = 10
@@ -630,10 +630,15 @@ kBabblerEggDamageDuration = 3
 kBabblerEggDamageRadius = 7
 kBabblerEggDotInterval = 0.4
 
+kBabblerDamage = 8
+kBabblerExplosionRange = 4
+kBabblerExplosionDamage = 16
+kBabblerDamageType = kDamageType.Normal
+kBabblerCost = 0
+
 --Hatch
 kBabblerExplodeAmount = 6
-kBabblerHatchMaxAmount = 15
-kBabblerEggHatchInterval = 2.5
+kBabblerEggHatchInterval = 3
 kBabblerEggHatchRadius = 22
 
 kDrifterHatchTime = 12

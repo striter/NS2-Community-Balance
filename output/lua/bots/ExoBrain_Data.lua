@@ -635,10 +635,8 @@ local function GetAttackUrgency(bot, exo, mem)
             [kMinimapBlipType.Lerk] = numOthers >= 2   and 0.1 or 5.0,
             [kMinimapBlipType.Fade] = numOthers >= 3   and 0.1 or 6.0,
             [kMinimapBlipType.Onos] =  numOthers >= 4  and 0.1 or 7.0,
+            [kMinimapBlipType.Prowler] = numOthers >= 2 and 0.1 or 4.0
         }
-        if table.contains(kMinimapBlipType, "Prowler") then
-            activeUrgencies[kMinimapBlipType.Prowler] = numOthers >= 2 and 0.1 or 4.0
-        end
         return activeUrgencies
     end
 

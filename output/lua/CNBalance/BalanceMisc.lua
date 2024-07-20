@@ -1,11 +1,12 @@
---Rookie Protection
-kTechRankRestriction = {
-    --[kTechId.DualRailgunExosuit] = 500, [kTechId.CombatBuilder] = 900,
-    [kTechId.SubMachineGun] = 500, [kTechId.Revolver] = 700, [kTechId.Knife] = 900,
-    [kTechId.Cannon] = 1200,
-
-    --[kTechId.Lerk] = 300, --[kTechId.Gorge] = 500,
-    [kTechId.Prowler] = 500, --[kTechId.Vokex] = 2100,
+kTechReputationByPass = {
+    [kTechId.CombatBuilder] = 50,
+    [kTechId.SubMachineGun] = 70,
+    [kTechId.Revolver] = 80,
+    [kTechId.Knife] = 90, 
+    [kTechId.Cannon] = 120,
+    
+    [kTechId.Prowler] = 80,
+    --[kTechId.Vokex] = 100,
 }
 
 --Mediumize players KD Ratio by reduce taken damage with low KD, increase taken damage with high KD , combined with upper value lel

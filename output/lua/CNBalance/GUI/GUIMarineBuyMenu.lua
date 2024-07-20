@@ -324,11 +324,8 @@ local kTechIdStats =
 
 }
 
-local function GetIsSkillRestricted(techId)
-    local skill = Client.GetLocalPlayer():GetPlayerSkill() + Client.GetLocalPlayer():GetPlayerSkillOffset()
-    local rank = kTechRankRestriction[techId]
-    if not rank then return false end
-    return skill < rank,rank
+local function GetIsRestricted(techId)
+    return GetTechRestricted(techId)
 end
 
 local function GetStatsForTechId(techId)
@@ -1496,12 +1493,11 @@ function GUIMarineBuyMenu:Update(deltaTime)
 
         end
 
-        local rankRequired,rank = GetIsSkillRestricted(techId)
+        local reputationRequired,reputation = GetIsRestricted(techId)
         local initEvent = ((techId == self.defaultTechId) and not self.initialized)
-        local techAvailable = techResearched and not (techAlreadyEquipped or techOccupied) and buttonTable.Hosted and not buttonTable.Disabled and not rankRequired
+        local techAvailable = techResearched and not (techAlreadyEquipped or techOccupied) and buttonTable.Hosted and not buttonTable.Disabled and not reputationRequired
         local currentMoney = math.floor(PlayerUI_GetPersonalResources() * 10) / 10
         local useHoverTexture = hovering and techAvailable
-
 
         -- Update details section.
         local techCost = LookupTechData(techId, kTechDataCostKey, -1)
@@ -1515,9 +1511,9 @@ function GUIMarineBuyMenu:Update(deltaTime)
 
         if buttonTable.Disabled then
             buttonState = kButtonShowState.Disabled
-        elseif rankRequired then
+        elseif reputationRequired then
             buttonState = kButtonShowState.RankRequired
-            text = string.format(Locale.ResolveString("BUYMENU_ERROR_RANKREQUIRED"),rank)
+            text = string.format(Locale.ResolveString("BUYMENU_ERROR_RANKREQUIRED"),reputation)
         elseif not buttonTable.Hosted then
             buttonState = kButtonShowState.NotHosted
         elseif techOccupied then
@@ -1615,7 +1611,7 @@ local function HandleItemClicked(self)
         local canAfford = PlayerUI_GetPlayerResources() >= itemCost
         local hasItem = PlayerUI_GetHasItem(item.TechID)
 
-        if not item.Disabled and researched and canAfford and not hasItem and not GetIsSkillRestricted(item.TechID) then
+        if not item.Disabled and researched and canAfford and not hasItem and not GetIsRestricted(item.TechID) then
 
             MarineBuy_PurchaseItem(item.TechID)
             MarineBuy_OnClose()

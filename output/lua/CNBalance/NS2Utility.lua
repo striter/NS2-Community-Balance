@@ -269,3 +269,18 @@ function AlienDetectionParry(teamNumber, origin, radius)
     end
     return successful
 end
+
+if Client then
+    
+    function GetTechRestricted(techId)
+        local reputationRequirement = kTechReputationByPass[techId]
+        if not reputationRequirement then return false end
+        local player = Client.GetLocalPlayer()
+        local skill = player:GetPlayerTeamSkill()
+        if skill > 2100 then return false end
+        local reputation = Scoreboard_GetPlayerRecord(player:GetClientIndex()).reputation
+        if not reputation then return false end
+        
+        return reputation < reputationRequirement, reputationRequirement
+    end 
+end

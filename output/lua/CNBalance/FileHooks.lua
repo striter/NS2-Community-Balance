@@ -177,7 +177,7 @@ ModLoader.SetupFileHook("lua/Weapons/Marine/ClipWeapon.lua", "lua/Combat/Cannon.
 ModLoader.SetupFileHook("lua/Weapons/Marine/Welder.lua", "lua/Combat/CombatBuilder.lua", "post")
 
 -- Aliens
-ModLoader.SetupFileHook("lua/GUIAlienHUD.lua", "lua/CNBalance/GUI/GUIAlienHUD.lua", "post" )
+ModLoader.SetupFileHook("lua/GUIAlienHUD.lua", "lua/CNBalance/GUI/GUIAlienHUD.lua", "replace" )
 ModLoader.SetupFileHook("lua/GUIHiveStatus.lua", "lua/CNBalance/GUI/GUIHiveStatus.lua", "replace")
 
 ModLoader.SetupFileHook( "lua/CommAbilities/Alien/HallucinationCloud.lua", "lua/CNBalance/HallucinationCloud.lua", "post" )
@@ -210,6 +210,7 @@ ModLoader.SetupFileHook("lua/Weapons/Alien/Gore.lua", "lua/CNBalance/Weapons/Ali
 ModLoader.SetupFileHook("lua/Weapons/Alien/Metabolize.lua", "lua/CNBalance/Weapons/Alien/Metabolize.lua", "replace")
 ModLoader.SetupFileHook("lua/Weapons/Alien/BoneShield.lua", "lua/CNBalance/Weapons/Alien/BoneShield.lua", "replace")
 
+ModLoader.SetupFileHook("lua/Babbler.lua", "lua/CNBalance/Structures/Alien/Babbler.lua", "post")
 ModLoader.SetupFileHook("lua/BabblerEgg.lua", "lua/Combat/SporeMine.lua", "post")
 ModLoader.SetupFileHook("lua/BabblerEgg.lua", "lua/CNBalance/Structures/Alien/BabblerEgg.lua", "replace")
 ModLoader.SetupFileHook("lua/Weapons/Alien/HydraAbility.lua", "lua/CNBalance/Weapons/Alien/Gorge/HydraAbility.lua", "post")
@@ -246,10 +247,4 @@ ModLoader.SetupFileHook("lua/Harvester.lua", "lua/CNBalance/Structures/Alien/Har
 ModLoader.SetupFileHook("lua/Weapons/Alien/Web.lua", "lua/CNBalance/Structures/Alien/Web.lua", "post")
 ModLoader.SetupFileHook("lua/Egg.lua", "lua/CNBalance/Structures/Alien/Egg.lua", "post")
 
-if AddHintModPanel then
-    local panelMaterial = PrecacheAsset("materials/CNPlaygroundBalance/Banner.material")
-    AddHintModPanel(panelMaterial, "https://docs.qq.com/doc/DUEZSeUtrR0tWTGJ4","看看司马策划又改了什么东西")
-end
-
-
-Shared.Message("[CN] Natural Selection 2.0 Mounted 2023.11.14")
+Shared.Message("[CN] Natural Selection 2.0 Mounted 2024.07.20")

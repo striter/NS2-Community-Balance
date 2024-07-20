@@ -250,7 +250,7 @@ if Server then
         babbler:TriggerEffects("babbler_engage")
         babbler:SetOwner(owner)
         babbler.clinged = true
-        babbler:Detach(true)
+        babbler:Detach(true,kBabblerEggHatchLifetime)
         return babbler
     end
 
@@ -272,7 +272,9 @@ if Server then
             return false
         end
 
-        if self:GetIsBuilt() and owner.GetBabblerCount and owner:GetBabblerCount() < kBabblerHatchMaxAmount then
+        if self:GetIsBuilt()
+                --and owner.GetBabblerCount and owner:GetBabblerCount() < kBabblerHatchMaxAmount 
+        then
             local otherTeam = GetEnemyTeamNumber(self:GetTeamNumber())
             local allEnemies = GetEntitiesWithMixinForTeamWithinRange("Live", otherTeam, self:GetOrigin(), kBabblerEggHatchRadius)
 
