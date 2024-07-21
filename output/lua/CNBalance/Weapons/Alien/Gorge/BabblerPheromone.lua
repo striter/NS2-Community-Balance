@@ -114,7 +114,7 @@ if Server then
                 local moveType = GetMoveType(self, entity)
                 local origin = self:GetOrigin()
                 if moveType == kBabblerMoveType.Attack then
-                    Hatch(self,entity)
+                    
                 elseif moveType == kBabblerMoveType.Cling then
                     local position = HasMixin(entity, "Target") and entity:GetEngagementPoint() or entity:GetOrigin()
                     for _, babbler in ipairs(GetEntitiesForTeamWithinRange("Babbler", self:GetTeamNumber(), origin, kBabblerSearchRange )) do
@@ -140,13 +140,23 @@ if Server then
 
     end
 
-    function BabblerPheromone:TimeUp()
+    function BabblerPheromone:OnDestroy()
         for _, entity in pairs(GetEntitiesWithMixinForTeamWithinRange("Live", GetEnemyTeamNumber(self:GetTeamNumber()), self:GetOrigin(), 10)) do
             if entity:GetCanTakeDamage() and entity:GetIsAlive() then
                 Hatch(self,entity)
                 break
             end
         end
+        
+        Projectile.OnDestroy(self)
+
+        if Server and not self.triggeredPuff then
+            self:TriggerEffects("babbler_pheromone_puff")
+        end
+
+    end
+    
+    function BabblerPheromone:TimeUp()
         DestroyEntity(self)
     end
     function BabblerPheromone:OnUpdate(deltaTime)
