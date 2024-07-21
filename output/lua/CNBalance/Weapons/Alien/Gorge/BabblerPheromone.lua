@@ -66,6 +66,24 @@ if Server then
         end
     end
     
+    local function Hatch(self,entity)
+        local owner = self:GetOwner()
+        local moveType = GetMoveType(self, entity)
+        local origin = self:GetOrigin()
+        local position = HasMixin(entity, "Target") and entity:GetEngagementPoint() or entity:GetOrigin()
+        local newBabbler = CreateEntity(Babbler.kMapName, origin, self:GetTeamNumber())
+        local client = owner:GetClient()
+        if client and client.variantData then
+            newBabbler:SetVariant( client.variantData.babblerVariant )
+        end
+        newBabbler:TriggerEffects("babbler_engage")
+        newBabbler:SetOwner(owner)
+        newBabbler.clinged = true
+        newBabbler:Detach(true,kBabblerPheromoneHatchLifeTime)
+        newBabbler:SetMoveType(moveType, entity, position, true)
+        self:TriggerEffects("Babbler_hatch")
+    end 
+    
     function BabblerPheromone:ProcessHit(entity)
 
         if not self.worldCollision then
@@ -95,20 +113,10 @@ if Server then
                 local owner = self:GetOwner()
                 local moveType = GetMoveType(self, entity)
                 local origin = self:GetOrigin()
-                local position = HasMixin(entity, "Target") and entity:GetEngagementPoint() or entity:GetOrigin()
                 if moveType == kBabblerMoveType.Attack then
-                    local newBabbler = CreateEntity(Babbler.kMapName, origin, self:GetTeamNumber())
-                    local client = owner:GetClient()
-                    if client and client.variantData then
-                        newBabbler:SetVariant( client.variantData.babblerVariant )
-                    end
-                    newBabbler:TriggerEffects("babbler_engage")
-                    newBabbler:SetOwner(owner)
-                    newBabbler.clinged = true
-                    newBabbler:Detach(true,kBabblerPheromoneHatchLifeTime)
-                    newBabbler:SetMoveType(moveType, entity, position, true)
-                    self:TriggerEffects("Babbler_hatch")
+                    Hatch(self,entity)
                 elseif moveType == kBabblerMoveType.Cling then
+                    local position = HasMixin(entity, "Target") and entity:GetEngagementPoint() or entity:GetOrigin()
                     for _, babbler in ipairs(GetEntitiesForTeamWithinRange("Babbler", self:GetTeamNumber(), origin, kBabblerSearchRange )) do
                         if babbler:GetOwner() == owner then
                             if babbler:GetIsClinged() then
@@ -124,7 +132,6 @@ if Server then
                     end
                 end
 
-
                 DestroyEntity(self)
 
             end
@@ -132,7 +139,16 @@ if Server then
         end
 
     end
-    
+
+    function BabblerPheromone:TimeUp()
+        for _, entity in pairs(GetEntitiesWithMixinForTeamWithinRange("Live", GetEnemyTeamNumber(self:GetTeamNumber()), self:GetOrigin(), 10)) do
+            if entity:GetCanTakeDamage() and entity:GetIsAlive() then
+                Hatch(self,entity)
+                break
+            end
+        end
+        DestroyEntity(self)
+    end
     function BabblerPheromone:OnUpdate(deltaTime)
 
         Projectile.OnUpdate(self, deltaTime)
