@@ -9,7 +9,7 @@ kResourceTowerResourceInterval = 6
 kTeamResourceWithoutTower = 0.5
 kMaxEfficiencyTowers = 3
 kTeamResourceEachTower = 1
-kPlayerResEachTower = 0.135 kPlayerResDeductionAboveLimit = 0.005
+kPlayerResEachTower = 0.13 kPlayerResDeductionAboveLimit = 0.0025
 
 --Pres reward for aggressive playing (too many farmers?)
 kTechDataPersonalResOnKill = {
@@ -82,7 +82,7 @@ kMineResearchCost  = 10
 kMineResearchTime  = 20
 
 kGrenadeTechResearchCost = 10   --10
-kGrenadeTechResearchTime = 45   --45
+kGrenadeTechResearchTime = 20   --45
 
 kMineCost = 10
 kMineDamage = 135
@@ -549,11 +549,11 @@ kObservatoryDistressBeaconCost = 10
 kArmsLabCost = 15
 
 kWeapons1ResearchCost = 25 kWeapons1ResearchTime = 75
-kWeapons2ResearchCost = 30 kWeapons2ResearchTime = 105
+kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 105
 kWeapons3ResearchCost = 45 kWeapons3ResearchTime = 135
 
 kArmor1ResearchCost = 25 kArmor1ResearchTime = 75
-kArmor2ResearchCost = 30 kArmor2ResearchTime = 105
+kArmor2ResearchCost = 35 kArmor2ResearchTime = 105
 kArmor3ResearchCost = 45 kArmor3ResearchTime = 135
 
 kAdvancedMarineSupportResearchCost = 20
