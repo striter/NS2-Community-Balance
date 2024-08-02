@@ -68,7 +68,7 @@ if Server then
         dotMarker:SetLifeTime(2)
         dotMarker:SetDamage(AcidMissile.kDamage)
         dotMarker:SetRadius(AcidMissile.kSplashRadius)
-        dotMarker:SetDamageIntervall(kBileBombDotInterval)
+        dotMarker:SetDamageIntervall(0.2)
         dotMarker:SetDotMarkerType(DotMarker.kType.Static)
         dotMarker:SetTargetEffectName("bilebomb_onstructure")
         dotMarker:SetDeathIconIndex(kDeathMessageIcon.AcidSpray)

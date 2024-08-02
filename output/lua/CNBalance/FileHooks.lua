@@ -52,6 +52,7 @@ ModLoader.SetupFileHook("lua/AlienWeaponEffects.lua", "lua/CNBalance/Effects/Ali
 ModLoader.SetupFileHook("lua/AlienStructureEffects.lua", "lua/CNBalance/Effects/AlienStructureEffects.lua", "post")
 ModLoader.SetupFileHook("lua/SoundEffect.lua", "lua/CNBalance/SoundEffect.lua", "post" )
 
+ModLoader.SetupFileHook("lua/Weapons/DotMarker.lua", "lua/CNBalance/Weapons/DotMarker.lua", "replace")
 --Mixin
 
 ModLoader.SetupFileHook("lua/ClientLOSMixin.lua", "lua/CNBalance/Mixin/ClientLOSMixin.lua", "post" )

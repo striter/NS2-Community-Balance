@@ -141,7 +141,7 @@ if Server then
     end
 
     function BabblerPheromone:OnDestroy()
-        for _, entity in pairs(GetEntitiesWithMixinForTeamWithinRange("Live", GetEnemyTeamNumber(self:GetTeamNumber()), self:GetOrigin(), 10)) do
+        for _, entity in pairs(GetEntitiesWithMixinForTeamWithinRange("Live", GetEnemyTeamNumber(self:GetTeamNumber()), self:GetOrigin(), 7)) do
             if entity:GetCanTakeDamage() and entity:GetIsAlive() then
                 Hatch(self,entity)
                 break

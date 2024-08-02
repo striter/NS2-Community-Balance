@@ -423,7 +423,7 @@ kRappelRange = 25
 
 kAcidSprayResearchCost = 10
 kAcidSprayResearchTime = 60
-kAcidSprayEnergyCost = 22
+kAcidSprayEnergyCost = 24
 kAcidSprayDamage = 20  -- 3 missiles
 kAcidSprayDamageType = kDamageType.Normal
 
@@ -630,6 +630,8 @@ kBabblerEggDamageDuration = 3
 kBabblerEggDamageRadius = 7
 kBabblerEggDotInterval = 0.4
 
+
+kBabblerPheromoneEnergyCost = 12
 kBabblerDamage = 8
 kBabblerExplosionRange = 4
 kBabblerExplosionDamage = 16
@@ -716,3 +718,5 @@ kTechRespawnTimeExtension =
     [kTechId.BioMassNine] = 3, [kTechId.BioMassTen] = 3,
     --[kTechId.BioMassEleven] = 1, [kTechId.BioMassTwelve] = 1,
 }
+
+kDOTPlayerDamageMaxLifeTime = 2

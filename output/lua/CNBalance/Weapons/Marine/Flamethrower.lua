@@ -31,6 +31,8 @@ function Flamethrower:BurnSporesAndUmbra(startPoint, endPoint)
         table.copy(GetEntitiesWithinRange("WhipBomb", checkAtPoint, 1.6), bombs, true)
         table.copy(GetEntitiesWithinRange("AcidMissile", checkAtPoint, 1.6), bombs, true)
         table.copy(GetEntitiesWithinRange("AcidRocketBomb", checkAtPoint, 1.6), bombs, true)
+        table.copy(GetEntitiesWithinRange("BabblerPheromone", checkAtPoint, 1.6), bombs, true)
+        table.copy(GetEntitiesWithinRange("Spit", checkAtPoint, 1.6), bombs, true)
         table.copy(GetEntitiesWithinRange("DotMarker", checkAtPoint, 1.6), bombs, true)
 
         for j = 1, #bombs do
