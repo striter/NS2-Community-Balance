@@ -602,9 +602,6 @@ function Prowler:PostUpdateMove(input)
     self.rappelFollow = Entity.invalidId
 end
 
---[[function Prowler:GetArmorFullyUpgradedAmount()
-    return kProwlerArmorFullyUpgradedAmount
-end--]]
 
 function Prowler:GetBabblerShieldPercentage()
     return kProwlerBabblerShieldPercent
@@ -631,20 +628,6 @@ function Prowler:ModifyAttackSpeed(attackSpeedTable)
 
 end
 
--- new uwe balance mod stuff
-function Prowler:GetArmorFullyUpgradedAmount()
-
-    --local teamEnt = GetGamerules():GetTeam(kTeam2Index)
-    if self:GetTeamNumber() ~= kNeutralTeamType then -- teamEnt then
-
-        -- TODO(Salads): There really should be a constant global for "12"...
-        return self:GetBaseArmor() + self:GetBaseCarapaceArmorBuff() + (self:GetCarapaceBonusPerBiomass() * 12)
-
-    end
-
-    return 0
-
-end
 
 function Prowler:GetBaseCarapaceArmorBuff()
     return kProwlerBaseCarapaceUpgradeAmount

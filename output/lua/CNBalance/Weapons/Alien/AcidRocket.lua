@@ -20,6 +20,9 @@ local kViewModel = PrecacheAsset("models/alien/fade/acidRocket/acidRocket_view.m
 local kAnimationGraph = PrecacheAsset("models/alien/fade/acidRocket/acidRocket.animation_graph")
 local kAcidRocketViewEffect = PrecacheAsset("cinematics/alien/fade/acid_rocket_residue.cinematic")
 
+local kAttackDuration = Shared.GetAnimationLength(kViewModel, "Fire1")
+local kAttackScalar = kAttackDuration * kAcidRocketRoundPerSecond
+
 local kAttachPoint = "FX_Node_01"
 
 local networkVars =
@@ -45,11 +48,7 @@ function AcidRocket:GetAnimationGraphName()
 end
 
 function AcidRocket:GetEnergyCost(player)
-    local energyMultiplier = 1
-    if HasMixin(player, "Focus") then
-        energyMultiplier = player:GetFocusEnergyMultiplier()
-    end
-    return kAcidRocketEnergyCost * energyMultiplier
+    return kAcidRocketEnergyCost
 end
 
 function AcidRocket:GetHUDSlot()
@@ -81,16 +80,15 @@ function AcidRocket:GetSecondaryTechId()
     return kTechId.ShadowStep
 end
 
-function AcidRocket:GetShadowStepAllowed()
-    return true
-end
 
 local function DelayedShoot(self)
 
     local player = self:GetParent()        
     if player then
-    
-        self:FireBombProjectile(player)
+
+        if Server or (Client and Client.GetIsControllingPlayer()) then
+            self:FireBombProjectile(player)
+        end
         
         player:DeductAbilityEnergy(self:GetEnergyCost(player))            
         self.timeLastAcidRocket = Shared.GetTime()
@@ -114,7 +112,7 @@ function AcidRocket:OnTag(tagName)
     PROFILE("AcidRocket:OnTag")
 
     if self.primaryAttacking and tagName == "shoot" then   
-        self:AddTimedCallback(DelayedShoot, kAcidRocketFireDelay)   
+        self:AddTimedCallback(DelayedShoot, 0.05)   
     end
     
 end
@@ -146,32 +144,32 @@ end
 function AcidRocket:FireBombProjectile(player)
 
     PROFILE("AcidRocket:FireBombProjectile")
-    
-    if not Predict and (Server or (Client and Client.GetIsControllingPlayer())) then
-        
+
+    if not Predict then
         local viewCoords = player:GetViewCoords()
         local eyePos = player:GetEyePos()
-        
 
         local startPointTrace = Shared.TraceCapsule(eyePos, eyePos + (viewCoords.xAxis * -0.5) + (viewCoords.zAxis - 0.15), 0.2, 0, CollisionRep.Damage, PhysicsMask.PredictedProjectileGroup, EntityFilterOneAndIsa(player, "Babbler"))
         local startPoint = startPointTrace.endPoint
-        
-        local endPointTrace = Shared.TraceRay(eyePos, eyePos + viewCoords.zAxis * 1000 , CollisionRep.Damage, PhysicsMask.Bullets, EntityFilterOne(player))            
-        
+
+        local endPointTrace = Shared.TraceRay(eyePos, eyePos + viewCoords.zAxis * 1000 , CollisionRep.Damage, PhysicsMask.Bullets, EntityFilterOne(player))
+
         local startVelocity = GetNormalizedVector(endPointTrace.endPoint - startPoint) * kAcidRocketVelocity
         player:CreatePredictedProjectile("AcidRocketBomb", startPoint, startVelocity, 0, 0, 0)
-        --player:CreatePredictedProjectile("Spit", startPoint, startVelocity, 0, 0, 0)
-        
+
         --DebugLine(startPoint, endPointTrace.endPoint, .2, 1,0,0,1)
-        
+
         if Client and not player:GetIsFirstPerson() then
             local worldCinematic = Client.CreateCinematic(RenderScene.Zone_Default)
             worldCinematic:SetAttachPoint(player:GetAttachPointIndex("fxnode_acidrocket"))
             worldCinematic:SetCinematic(kAcidRocketViewEffect)
         end
-        
     end
     
+end
+
+function AcidRocket:ModifyAttackSpeedView(attackSpeedTable)
+    attackSpeedTable.attackSpeed = attackSpeedTable.attackSpeed * kAttackScalar
 end
 
 function AcidRocket:OnUpdateAnimationInput(modelMixin)

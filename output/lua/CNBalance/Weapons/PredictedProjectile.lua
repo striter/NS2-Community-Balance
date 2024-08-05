@@ -397,6 +397,10 @@ function ProjectileController:Update(deltaTime, projectile, predict)
 
         if impact then
 
+            if self.clearOnImpact then
+                oldEnough = true
+            end
+            
             -- some projectiles may predict impact
             if projectile and oldEnough then --and not hasBounced
 

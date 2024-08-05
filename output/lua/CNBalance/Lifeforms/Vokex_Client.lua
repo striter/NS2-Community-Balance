@@ -112,7 +112,7 @@ function Vokex:OnUpdateRender()
         
     end
 
-    self:SetOpacity( (self.ethereal or self:GetIsShadowStepping())  and 0 or 1, "blinkAmount")
+    self:SetOpacity( (self:GetIsShadowStepping())  and 0 or 1, "blinkAmount")
 end  
 
 function Vokex:CreateTrailCinematic()

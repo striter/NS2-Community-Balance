@@ -1049,8 +1049,18 @@ function BuildTechData()
     table.insert(techData, {
         [kTechDataId] = kTechId.MetabolizeShadowStep,
         [kTechDataMapName] = MetabolizeShadowStep.kMapName,
-        [kTechDataDisplayName] = "METABOLIZE_SHADOWSTEP",
-        [kTechDataTooltipInfo] = "METABOLIZE_SHADOWSTEP_TOOLTIP",
+        [kTechDataCategory] = kTechId.Vokex,
+        [kTechDataDisplayName] = "METABOLIZE",
+        [kTechDataTooltipInfo] = "METABOLIZE_TOOLTIP",
+        [kTechDataResearchName] = "METABOLIZE",
+    })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.MetabolizeShadowStepHealth,
+        [kTechDataCategory] = kTechId.Vokex,
+        [kTechDataDisplayName] = "METABOLIZE_ADV",
+        [kTechDataTooltipInfo] = "METABOLIZE_ADV_TOOLTIP",
+        [kTechDataResearchName] = "METABOLIZE_ADV",
     })
 
     table.insert(techData, {

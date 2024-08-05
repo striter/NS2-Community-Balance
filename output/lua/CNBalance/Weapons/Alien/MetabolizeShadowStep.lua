@@ -1,4 +1,4 @@
---
+﻿--
 -- lua\Weapons\Alien\Metabolize.lua
 
 Script.Load("lua/Weapons/Alien/Ability.lua")
@@ -59,10 +59,6 @@ end
 
 function MetabolizeShadowStep:GetDeathIconIndex()
     return kDeathMessageIcon.Metabolize
-end
-
-function MetabolizeShadowStep:GetShadowStepAllowed()
-    return true
 end
 
 function MetabolizeShadowStep:GetAttackDelay()

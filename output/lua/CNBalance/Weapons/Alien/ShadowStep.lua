@@ -29,9 +29,9 @@ function ShadowStep:OnInitialized()
 
     Ability.OnInitialized(self)
     
-    self.secondaryAttacking = false
     self.timeBlinkStarted = 0
-    
+
+    self.secondaryAttacking = false
 end
 
 function ShadowStep:OnHolster(player)
@@ -78,7 +78,7 @@ function ShadowStep:GetIsShadowStepping()
     local player = self:GetParent()
     
     if player then
-        return player:GetIsShadowStepping() or player.ethereal
+        return player:GetIsShadowStepping()
     end
     
     return false
@@ -96,41 +96,32 @@ end
 
 function ShadowStep:OnSecondaryAttack(player)
 
-    local minTimePassed = not player:GetRecentlyBlinked()
+    local minTimePassed = not player:GetIsShadowStepping()
     local hasEnoughEnergy = player:GetEnergy() > kVokexShadowStepCost
     if not player.etherealStartTime or minTimePassed and hasEnoughEnergy and player:GetShadowStepAllowed() then
-    
-        -- Enter "ether" fast movement mode, but don't keep going ethereal when button still held down after
-        -- running out of energy.
         if not self.secondaryAttacking then
-        
+
             self:SetEthereal(player, true)
-            
             self.timeBlinkStarted = Shared.GetTime()
-            
             self.secondaryAttacking = true
-            
+
         end
-        
     end
-    
+
     Ability.OnSecondaryAttack(self, player)
-    
 end
 
 function ShadowStep:OnSecondaryAttackEnd(player)
-
-    if player.ethereal then
-    
-        self:SetEthereal(player, false)
-
-    end
-    
-    Ability.OnSecondaryAttackEnd(self, player)
-    
     self.secondaryAttacking = false
-    
+    Ability.OnSecondaryAttackEnd(self, player)
 end
+
+function ShadowStep:ProcessMoveOnWeapon(player, input)
+    if player.ethereal and not player:GetIsShadowStepping() then
+        self:SetEthereal(player,false)
+    end
+end
+
 
 function ShadowStep:SetEthereal(player, state)
 
@@ -157,7 +148,7 @@ function ShadowStep:SetEthereal(player, state)
         if player.ethereal then
         
             -- Deduct blink start energy amount.
-            player:DeductAbilityEnergy(kVokexShadowStepStartCost)
+            player:DeductAbilityEnergy(kVokexShadowStepCost)
             player:TriggerShadowStep()
             
         -- A case where OnBlinkEnd() does not exist is when a Fade becomes Commanders and
@@ -168,34 +159,7 @@ function ShadowStep:SetEthereal(player, state)
         elseif player.OnShadowStepEnd then
             player:OnShadowStepEnd()
         end
-
     end
-    
-end
-
-function ShadowStep:ProcessMoveOnWeapon(player, input)
- 
-    if self:GetIsActive() and player.ethereal then
-    
-        -- Decrease energy while in blink mode.
-        -- Don't deduct energy for blink for a short time to make sure that when we blink,
-        -- we always get at least a short blink out of it.
-        if Shared.GetTime() > (self.timeBlinkStarted + 0.08) then
-        
-            local energyCost = input.time * kVokexShadowStepCost
-            player:DeductAbilityEnergy(energyCost)
-            
-        end
-        
-    end
-    
-    -- End blink mode if out of energy or when dead
-    if (player:GetEnergy() == 0 or not player:GetIsAlive()) and player.ethereal then
-    
-        self:SetEthereal(player, false)
-
-    end
-    
 end
 
 function ShadowStep:OnUpdateAnimationInput(modelMixin)

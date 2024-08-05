@@ -1104,6 +1104,10 @@ local function GetIsRestricted(type)
 end
 
 local function GetIsDisabled(type)
+	if GetOwnsItem(kBlackArmorItemId) then
+		return false
+	end
+	
 	return IndexToAlienTechId(type) == kTechId.Vokex
 end
 

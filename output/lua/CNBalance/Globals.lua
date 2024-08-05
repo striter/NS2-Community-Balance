@@ -31,6 +31,7 @@ debug.appendtoenum(kDeathMessageIcon, "CombatBuilder")
 debug.appendtoenum(kDeathMessageIcon, "SporeMine")
 debug.appendtoenum(kDeathMessageIcon, "TeamBuildAbility")
 debug.appendtoenum(kDeathMessageIcon, "AcidRocket")
+debug.appendtoenum(kDeathMessageIcon, "ShadowStep")
 
 debug.appendtoenum(kMinimapBlipType, "HeavyMarine")
 debug.appendtoenum(kMinimapBlipType, "DevouredPlayer")

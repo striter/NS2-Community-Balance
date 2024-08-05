@@ -23,8 +23,9 @@ class 'Vokex' (Alien)
 Vokex.kMapName = "vokex"
 
 Vokex.kModelName = PrecacheAsset("models/alien/fade/vokex.model")
-local kVokexAnimationGraph = PrecacheAsset("models/alien/fade/vokex.animation_graph")
-local kViewModelName = PrecacheAsset("models/alien/fade/fade_view.model")
+local kVokexAnimationGraph = PrecacheAsset("models/alien/fade/fade.animation_graph")
+local kViewModelName = PrecacheAsset("models/alien/fade/fade_albino_view.model")
+local kViewAnimationGraphName = PrecacheAsset("models/alien/vokex/vokex_view.model")
 
 PrecacheAsset("models/alien/fade/fade.surface_shader")
 
@@ -48,15 +49,15 @@ local kJumpHeight = 1.4
 
 local kVokexScanDuration = 4
 
-local kShadowStepCooldown = 0.4
-local kShadowStepSpeed = 30
+local kShadowStepSpeed = 32 --40
+local kShadowStepSpeedBonusPerCelerity = 3
 Vokex.kShadowStepDuration = 0.16
+local kShadowStepCooldown = 0.32
 
-local kMaxSpeed = 6.2
+local kMaxSpeed = 7.2
 
 local kCelerityFrictionFactor = 0.04
 
-Vokex.kMinEnterEtherealTime = 0.4
 
 local kVokexGravityMod = 1.5
 
@@ -276,8 +277,8 @@ function Vokex:GetHealthPerBioMass()
     return kVokexHealthPerBioMass
 end
 
-function Vokex:GetArmorFullyUpgradedAmount()
-    return kVokexArmorFullyUpgradedAmount
+function Vokex:GetCarapaceBonusPerBiomass()
+    return kVokexCarapaceArmorPerBiomass
 end
 
 function Vokex:GetMaxViewOffsetHeight()
@@ -294,7 +295,6 @@ function Vokex:OnJump()
         self.hasDoubleJumped = true
         self:TriggerEffects("blink_out", {effecthostcoords = Coords.GetTranslation(self:GetOrigin())})
     end
-    
 end
 
 function Vokex:GetHasDoubleJumped()
@@ -355,7 +355,7 @@ end
 function Vokex:ModifyVelocity(input, velocity, deltaTime)
 
     if self:GetIsShadowStepping() then
-        local wishDir = self.shadowStepDirection * kShadowStepSpeed
+        --local wishDir = self.shadowStepDirection * kShadowStepSpeed
     end
 
 end
@@ -387,20 +387,12 @@ function Vokex:GetJumpHeight()
     return kJumpHeight
 end
 
-function Vokex:GetRecentlyBlinked(player)
-    return Shared.GetTime() - self.etherealEndTime < Vokex.kMinEnterEtherealTime
-end
-
 function Vokex:GetHasShadowStepAbility()
     return self:GetHasTwoHives()
 end
 
 function Vokex:GetHasShadowStepCooldown()
     return self.timeShadowStep + kShadowStepCooldown > Shared.GetTime()
-end
-
-function Vokex:GetRecentlyShadowStepped()
-    return self.timeShadowStep + kShadowStepCooldown * 2 > Shared.GetTime()
 end
 
 function Vokex:GetMovementSpecialTechId()
@@ -439,7 +431,9 @@ function Vokex:TriggerShadowStep()
 
         --local velocity = self:GetVelocity()
         self.hasDoubleJumped = false
-        self:SetVelocity( self.shadowStepDirection * kShadowStepSpeed * self:GetSlowSpeedModifier())
+        local speed = kShadowStepSpeed + (GetHasCelerityUpgrade(self) and self:GetSpurLevel() * kShadowStepSpeedBonusPerCelerity or 0)
+        
+        self:SetVelocity( self.shadowStepDirection * speed * self:GetSlowSpeedModifier())
         
         self.timeShadowStep = Shared.GetTime()
         self.shadowStepping = true
@@ -484,7 +478,7 @@ function Vokex:OnProcessMove(input)
     
     if not self:GetHasMetabolizeAnimationDelay() and self.previousweapon ~= nil and not self:GetIsShadowStepping() then
 
-        if self:GetActiveWeapon():GetMapName() == Metabolize.kMapName then
+        if self:GetActiveWeapon():GetMapName() == MetabolizeShadowStep.kMapName then
             self:SetActiveWeapon(self.previousweapon)
         end
 
@@ -493,15 +487,6 @@ function Vokex:OnProcessMove(input)
 end
 
 function Vokex:GetShadowStepAllowed()
-    local weapons = self:GetWeapons()
-    for i = 1, #weapons do
-    
-        if not weapons[i]:GetShadowStepAllowed() then
-            return false
-        end
-        
-    end
-
     return true
 end
 
@@ -553,7 +538,7 @@ function Vokex:OnUpdateAnimationInput(modelMixin)
         end
     else
         local weapon = self:GetActiveWeapon()
-        if weapon ~= nil and weapon.OnUpdateAnimationInput and weapon:GetMapName() == Metabolize.kMapName then
+        if weapon ~= nil and weapon.OnUpdateAnimationInput and weapon:GetMapName() == MetabolizeShadowStep.kMapName then
             weapon:OnUpdateAnimationInput(modelMixin)
         end
     end
@@ -592,7 +577,7 @@ function Vokex:GetMovementSpecialCooldown()
     local cooldown = 0
     local timeLeft = (Shared.GetTime() - self.timeMetabolize)
     
-    local metabolizeWeapon = self:GetWeapon(Metabolize.kMapName)
+    local metabolizeWeapon = self:GetWeapon(MetabolizeShadowStep.kMapName)
     local metaDelay = metabolizeWeapon and metabolizeWeapon:GetAttackDelay() or 0
     if timeLeft < metaDelay then
         return Clamp(timeLeft / metaDelay, 0, 1)
@@ -607,6 +592,33 @@ end
 
 function Vokex:GetCarapaceBonusPerBiomass()
     return kVokexCarapaceArmorPerBiomass
+end
+
+local kDefaultAttackSpeed = 1
+function Vokex:OnUpdateAnimationInput(modelMixin)
+
+    Player.OnUpdateAnimationInput(self, modelMixin)
+
+    local attackSpeed = self:GetIsEnzymed() and kEnzymeAttackSpeed or kDefaultAttackSpeed
+    attackSpeed = attackSpeed * ( self.electrified and kElectrifiedAttackSpeed or 1 )
+    if self.ModifyAttackSpeed then
+
+        local attackSpeedTable = { attackSpeed = attackSpeed }
+        self:ModifyAttackSpeed(attackSpeedTable)
+        attackSpeed = attackSpeedTable.attackSpeed
+
+    end
+
+    modelMixin:SetAnimationInput("attack_speed", attackSpeed)
+
+    local activeWeapon = self:GetActiveWeapon()
+    if activeWeapon and activeWeapon.ModifyAttackSpeedView then
+        local attackSpeedTable = { attackSpeed = attackSpeed }
+        activeWeapon:ModifyAttackSpeedView(attackSpeedTable)
+        attackSpeed = attackSpeedTable.attackSpeed
+    end
+    modelMixin:SetAnimationInput("attack_speed_view", attackSpeed)
+
 end
 
 Shared.LinkClassToMap("Vokex", Vokex.kMapName, networkVars, true)

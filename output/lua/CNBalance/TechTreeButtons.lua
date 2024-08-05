@@ -67,6 +67,8 @@ kTechIdToMaterialOffset[kTechId.ProwlerStructureAbility] = 102
 
 kTechIdToMaterialOffset[kTechId.ShadowStep] = 160
 kTechIdToMaterialOffset[kTechId.AcidRocket] = 209
+kTechIdToMaterialOffset[kTechId.MetabolizeShadowStep] = 169
+kTechIdToMaterialOffset[kTechId.MetabolizeShadowStepHealth] = 170
 kTechIdToMaterialOffset[kTechId.BabblerEgg] = 210
 
 kTechIdToMaterialOffset[kTechId.TunnelRelocate] = 189

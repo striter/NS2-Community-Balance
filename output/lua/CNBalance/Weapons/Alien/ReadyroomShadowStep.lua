@@ -29,10 +29,6 @@ function ReadyRoomShadowStep:GetSecondaryTechId()
     return kTechId.ShadowStep
 end
 
-function ReadyRoomShadowStep:GetShadowStepAllowed()
-    return true
-end
-
 function ReadyRoomShadowStep:GetViewModelName()
     return ""
 end

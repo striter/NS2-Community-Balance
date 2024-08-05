@@ -12,8 +12,9 @@ SwipeShadowStep.kSwipeEnergyCost = kSwipeEnergyCost
 SwipeShadowStep.kDamage = kSwipeDamage
 SwipeShadowStep.kRange = 1.6
 
-local kAnimationGraph = PrecacheAsset("models/alien/fade/fade_view.animation_graph")
+local kAnimationGraph = PrecacheAsset("models/alien/vokex/vokex_view.animation_graph")
 local kAttackDuration = Shared.GetAnimationLength("models/alien/fade/fade_view.model", "swipe_attack")
+local kAttackScalar = Shared.GetAnimationLength("models/alien/fade/fade_view.model", "swipe_attack3") / kAttackDuration
 
 function SwipeShadowStep:OnCreate()
 
@@ -58,9 +59,6 @@ function SwipeShadowStep:GetSecondaryTechId()
     return kTechId.ShadowStep
 end
 
-function SwipeShadowStep:GetShadowStepAllowed()
-    return true
-end
 
 function SwipeShadowStep:OnPrimaryAttack(player)
     local notethereal = not player.ethereal
@@ -123,6 +121,10 @@ function SwipeShadowStep:OnTag(tagName)
     
     end
 
+end
+
+function SwipeShadowStep:ModifyAttackSpeedView(attackSpeedTable)
+    attackSpeedTable.attackSpeed = attackSpeedTable.attackSpeed * kAttackScalar
 end
 
 function SwipeShadowStep:PerformMeleeAttack()

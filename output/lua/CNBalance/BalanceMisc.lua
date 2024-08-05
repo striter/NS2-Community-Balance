@@ -3,10 +3,10 @@ kTechReputationByPass = {
     [kTechId.SubMachineGun] = 70,
     [kTechId.Revolver] = 80,
     [kTechId.Knife] = 90, 
-    [kTechId.Cannon] = 120,
+    [kTechId.Cannon] = 150,
     
-    [kTechId.Prowler] = 80,
-    --[kTechId.Vokex] = 100,
+    [kTechId.Prowler] = 100,
+    --[kTechId.Vokex] = 200,
 }
 
 --Mediumize players KD Ratio by reduce taken damage with low KD, increase taken damage with high KD , combined with upper value lel

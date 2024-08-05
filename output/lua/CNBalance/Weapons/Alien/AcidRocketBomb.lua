@@ -22,10 +22,11 @@ AcidRocketBomb.kModelName          = PrecacheAsset("models/alien/fade/acidRocket
 AcidRocketBomb.kProjectileCinematic = PrecacheAsset("cinematics/alien/gorge/gorge_spit.cinematic")
 AcidRocketBomb.kClearOnImpact = true
 AcidRocketBomb.kClearOnEnemyImpact = true
+AcidRocketBomb.kRadius = 0.25
 
 AcidRocketBomb.kMinLifeTime = 0
 -- // The max amount of time a AcidRocketBomb can last for
-AcidRocketBomb.kLifetime = 6
+AcidRocketBomb.kLifetime = 3
 
 local networkVars = {}
 

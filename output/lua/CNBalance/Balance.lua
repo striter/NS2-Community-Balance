@@ -444,8 +444,7 @@ kHealthOnBlink = 0
 kVokexCost = 42
 kVokexUpgradeCost = 6
 
-kVokexShadowStepStartCost = 15
-kVokexShadowStepCost = 15
+kVokexShadowStepCost = 12
 
 kVokexGestateTime = 25
 kVokexEggCost = 80
@@ -457,16 +456,15 @@ kShadowStepResearchTime = 40
 kAcidRocketResearchCost = 25
 kAcidRocketResearchTime = 40
 
-kAcidRocketVelocity = 35
-kAcidRocketEnergyCost = 15
-kAcidRocketFireDelay = 0.01
-kAcidRocketBombDamageType = kDamageType.Normal
+kAcidRocketVelocity = 32
+kAcidRocketEnergyCost = 9
+kAcidRocketRoundPerSecond = 2.4
+kAcidRocketBombDamageType = kDamageType.Corrode
 kAcidRocketBombDamage = 30
 kAcidRocketBombRadius = 0.3
-kAcidRocketBombSplashRadius = 4
-kAcidRocketBombDotIntervall = 0.5
-kAcidRocketBombDotDamage = 10
-kAcidRocketBombDuration = 1
+kAcidRocketBombSplashRadius = 5
+kAcidRocketBombDotIntervall = 0.4
+kAcidRocketBombDuration = 2.4
 
 -- Onos
 kBoneShieldResearchCost = 20

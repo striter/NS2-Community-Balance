@@ -170,7 +170,7 @@ kProwlerDamageReduction = {
     --["Cannon"] = 0.9,
 }
 
-kVokexHealth = 200   kVokexArmor = 80    kVokexPointvalue = 25   kVokexHealthPerBioMass = 4
+kVokexHealth = 210   kVokexArmor = 80   kVokexPointvalue = 25   kVokexHealthPerBioMass = 5
 
 kParasitePlayerPointValue = 1
 
@@ -180,7 +180,7 @@ kProwlerBaseCarapaceUpgradeAmount = 10  kProwlerCarapaceArmorPerBiomass = 1.25 -
 kLerkBaseCarapaceUpgradeAmount  = 25    kLerkCarapaceArmorPerBiomass  = 1.25
 kFadeBaseCarapaceUpgradeAmount  = 22.5    kFadeCarapaceArmorPerBiomass  = 2.5
 kOnosBaseCarapaceUpgradeAmount  = 180   kOnosCarapaceArmorPerBiomass  = 10
-kVokexBaseCarapaceUpgradeAmount = 50    kVokexCarapaceArmorPerBiomass = 0
+kVokexBaseCarapaceUpgradeAmount = 25    kVokexCarapaceArmorPerBiomass = 2.5
 
 --4000 750 6000 1400
 kHiveHealth = 3600    kHiveArmor = 750 kMatureHiveHealth = 5000 kMatureHiveArmor = 1900
