@@ -181,6 +181,7 @@ if kTranslateMessage then
     kTranslateMessage["VOKEX"] = "Vokex"
     kTranslateMessage["VOKEX_EGG"] = "蛹(Vokex)"
     kTranslateMessage["VOKEX_TOOLTIP"] = "近程与中程专家.\n使用挥砍造成伤害.\n通过暗影步快速机动接近敌人."
+    kTranslateMessage["SWIPESHADOWSTEP"] = "切割"
     kTranslateMessage["ACIDROCKET"] = "酸液飞弹"
     kTranslateMessage["ACIDROCKET_TOOLTIP"] = "发射一枚直线飞弹.\n*撞击后造成范围酸液伤害."
     kTranslateMessage["SHADOWSTEP"] = "暗影步"

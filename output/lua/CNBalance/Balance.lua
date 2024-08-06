@@ -429,7 +429,7 @@ kAcidSprayDamageType = kDamageType.Normal
 
 -- Fade
 kSwipeDamageType = kDamageType.Puncture
-kSwipeDamage = 40
+kSwipeDamage = 37.5
 kSwipeEnergyCost = 7
 
 kStabDamage = 119
@@ -444,8 +444,8 @@ kHealthOnBlink = 0
 kVokexCost = 42
 kVokexUpgradeCost = 6
 
-kVokexShadowStepCost = 12
-
+kVokexShadowStepEnergyCost = 14
+kSwipeShadowStepDamage = 40
 kVokexGestateTime = 25
 kVokexEggCost = 80
 kVokexBabblerShieldPercent = 0.25

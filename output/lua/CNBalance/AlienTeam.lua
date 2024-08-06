@@ -1147,7 +1147,7 @@ function AlienTeam:InitTechTree()
     -- vokex researches
     self.techTree:AddPassive(kTechId.ShadowStep,           kTechId.None)
     self.techTree:AddActivation(kTechId.AcidRocket,           kTechId.BioMassFive,  kTechId.None,kTechId.AllAliens)
-    self.techTree:AddUnlockActivation(kTechId.MetabolizeShadowStep,        kTechId.BioMassThree, kTechId.None,kTechId.AllAliens)
+    self.techTree:AddUnlockActivation(kTechId.MetabolizeShadowStep,        kTechId.BioMassTwo, kTechId.None,kTechId.AllAliens)
     self.techTree:AddActivation(kTechId.MetabolizeShadowStepHealth,        kTechId.BioMassFive, kTechId.None,kTechId.AllAliens)
 
     self.techTree:AddResearchNode(kTechId.OriginForm)

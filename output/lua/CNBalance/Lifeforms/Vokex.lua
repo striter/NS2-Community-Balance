@@ -49,10 +49,10 @@ local kJumpHeight = 1.4
 
 local kVokexScanDuration = 4
 
-local kShadowStepSpeed = 32 --40
-local kShadowStepSpeedBonusPerCelerity = 3
-Vokex.kShadowStepDuration = 0.16
-local kShadowStepCooldown = 0.32
+local kShadowStepSpeed = 27.5 --40
+local kShadowStepSpeedBonusPerCelerity = 1.5
+Vokex.kShadowStepDuration = 0.18
+local kShadowStepCooldown = 0.4
 
 local kMaxSpeed = 7.2
 
@@ -408,7 +408,7 @@ function Vokex:GetHasMovementSpecial()
 end
 
 function Vokex:GetMovementSpecialEnergyCost()
-    return kVokexShadowStepCost
+    return kVokexShadowStepEnergyCost
 end
 
 function Vokex:GetCollisionSlowdownFraction()
@@ -487,7 +487,7 @@ function Vokex:OnProcessMove(input)
 end
 
 function Vokex:GetShadowStepAllowed()
-    return true
+    return not self:GetHasShadowStepCooldown()
 end
 
 function Vokex:GetStepHeight()

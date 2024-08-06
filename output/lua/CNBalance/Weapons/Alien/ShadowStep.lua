@@ -91,13 +91,13 @@ function ShadowStep:GetPrimaryAttackAllowed()
 end
 
 function ShadowStep:GetSecondaryEnergyCost()
-    return kVokexShadowStepCost
+    return kVokexShadowStepEnergyCost
 end
 
 function ShadowStep:OnSecondaryAttack(player)
 
     local minTimePassed = not player:GetIsShadowStepping()
-    local hasEnoughEnergy = player:GetEnergy() > kVokexShadowStepCost
+    local hasEnoughEnergy = player:GetEnergy() > kVokexShadowStepEnergyCost
     if not player.etherealStartTime or minTimePassed and hasEnoughEnergy and player:GetShadowStepAllowed() then
         if not self.secondaryAttacking then
 
@@ -148,7 +148,7 @@ function ShadowStep:SetEthereal(player, state)
         if player.ethereal then
         
             -- Deduct blink start energy amount.
-            player:DeductAbilityEnergy(kVokexShadowStepCost)
+            player:DeductAbilityEnergy(kVokexShadowStepEnergyCost)
             player:TriggerShadowStep()
             
         -- A case where OnBlinkEnd() does not exist is when a Fade becomes Commanders and

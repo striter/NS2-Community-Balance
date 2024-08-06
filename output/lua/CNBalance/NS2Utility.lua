@@ -5,7 +5,7 @@ function BuildClassToGrid()
     
 	ClassToGrid["DevouredPlayer"] = { 8, 2 }
     ClassToGrid["Prowler"] = { 1, 9 }
-    ClassToGrid["Vokex"] = { 8, 2 }
+    ClassToGrid["Vokex"] = { 4, 3 }
 
     ClassToGrid["WeaponCache"] = { 8, 5 }
     ClassToGrid["HeavyMarine"] = { 7, 8 }

@@ -7,6 +7,8 @@ Script.Load("lua/CNBalance/Weapons/Alien/ShadowStep.lua")
 class 'MetabolizeShadowStep' (ShadowStep)
 
 MetabolizeShadowStep.kMapName = "metabolizeshadowstep"
+MetabolizeShadowStep.kKeepCloakWhenPrimary = true
+MetabolizeShadowStep.kKeepCloakWhenSecondary = true
 
 local networkVars =
 {

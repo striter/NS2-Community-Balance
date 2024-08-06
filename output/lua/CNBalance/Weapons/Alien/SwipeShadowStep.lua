@@ -2,6 +2,7 @@ Script.Load("lua/CNBalance/Weapons/Alien/ShadowStep.lua")
 
 class 'SwipeShadowStep' (ShadowStep)
 SwipeShadowStep.kMapName = "swipeshadowstep"
+SwipeShadowStep.kKeepCloakWhenSecondary = true
 
 local networkVars =
 {
@@ -9,7 +10,7 @@ local networkVars =
 
 -- Make sure to keep damage vs. structures less then Skulk
 SwipeShadowStep.kSwipeEnergyCost = kSwipeEnergyCost
-SwipeShadowStep.kDamage = kSwipeDamage
+SwipeShadowStep.kDamage = kSwipeShadowStepDamage
 SwipeShadowStep.kRange = 1.6
 
 local kAnimationGraph = PrecacheAsset("models/alien/vokex/vokex_view.animation_graph")

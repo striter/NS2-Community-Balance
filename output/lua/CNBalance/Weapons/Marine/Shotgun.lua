@@ -8,7 +8,7 @@ Shotgun.kShotgunRings =
 }
 Shotgun._RecalculateSpreadVectors()
 
-local kShotgunFireSpeedMult = 1.08
+local kShotgunFireSpeedMult = 1 -- 1.08
 local kShotgunFireAnimationLength = 0.8474577069282532 / kShotgunFireSpeedMult -- defined by art asset.     --0.8474577069282532
 Shotgun.kFireDuration = kShotgunFireAnimationLength -- same duration for now.
 
