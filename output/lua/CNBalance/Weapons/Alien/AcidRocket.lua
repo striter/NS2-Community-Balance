@@ -81,38 +81,31 @@ function AcidRocket:GetSecondaryTechId()
 end
 
 
-local function DelayedShoot(self)
-
-    local player = self:GetParent()        
-    if player then
-
-        if Server or (Client and Client.GetIsControllingPlayer()) then
-            self:FireBombProjectile(player)
-        end
-        
-        player:DeductAbilityEnergy(self:GetEnergyCost(player))            
-        self.timeLastAcidRocket = Shared.GetTime()
-        
-        self:TriggerEffects("acidrocket_attack")
-        
-        if Client then
-            local cinematic = Client.CreateCinematic(RenderScene.Zone_ViewModel)
-            cinematic:SetCinematic(kAcidRocketViewEffect)
-        end
-        
-        -- TEST_EVENT("DelayedShoot")
-        
-    end
-    return false
-    
-end
 
 function AcidRocket:OnTag(tagName)
 
     PROFILE("AcidRocket:OnTag")
 
-    if self.primaryAttacking and tagName == "shoot" then   
-        self:AddTimedCallback(DelayedShoot, 0.05)   
+    if self.primaryAttacking and tagName == "shoot" then
+        local player = self:GetParent()
+        if player then
+
+            if Server or (Client and Client.GetIsControllingPlayer()) then
+                self:FireBombProjectile(player)
+            end
+
+            player:DeductAbilityEnergy(self:GetEnergyCost(player))
+            self.timeLastAcidRocket = Shared.GetTime()
+
+            self:TriggerEffects("acidrocket_attack")
+
+            if Client then
+                local cinematic = Client.CreateCinematic(RenderScene.Zone_ViewModel)
+                cinematic:SetCinematic(kAcidRocketViewEffect)
+            end
+
+            -- TEST_EVENT("DelayedShoot")
+        end
     end
     
 end

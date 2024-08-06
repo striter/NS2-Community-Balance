@@ -35,7 +35,7 @@ if Client then
 					-- All alien crosshairs are the same for now
 				elseif mapname == LerkBite.kMapName or mapname == Spores.kMapName or mapname == LerkUmbra.kMapName or mapname == Parasite.kMapName or mapname == BileBomb.kMapName or mapname == VolleyRappel.kMapName then
 					index = 6
-				elseif mapname == SpitSpray.kMapName or mapname == BabblerAbility.kMapName then
+				elseif mapname == SpitSpray.kMapName or mapname == BabblerAbility.kMapName or mapname == AcidRocket.kMapName then
 					index = 7
 					-- Blanks (with default damage indicator)
 				else
