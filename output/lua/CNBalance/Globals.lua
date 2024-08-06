@@ -1,5 +1,7 @@
 kSuicideDelay = 10
 
+kNS2PlusPlayTestItemId = 9002
+
 debug.appendtoenum(kPlayerStatus, "Devoured")
 debug.appendtoenum(kPlayerStatus, "Axe")
 debug.appendtoenum(kPlayerStatus, "Knife")

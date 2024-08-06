@@ -2,7 +2,7 @@
 if kTranslateMessage then
     kTranslateMessage["BUYMENU_ERROR_RANKREQUIRED"] = "需要信誉值达到[%s]"
     kTranslateMessage["ABM_RANK"] = "需要信誉值达到[%s]"
-    kTranslateMessage["ABM_DISABLED"] ="开发中"
+    kTranslateMessage["ABM_DISABLED"] ="原型测试中"
 
     kTranslateMessage["GAME_LENGTH_TEAM1"] = "站点清理 [%i:%02i]"
     kTranslateMessage["RESPAWN_EXTEND_TEAM1"] = "增援耗时 [%i秒]"
@@ -147,8 +147,8 @@ if kTranslateMessage then
     kTranslateMessage["ORIGIN_FORM_PASSIVE"]="原始族群"
     kTranslateMessage["ORIGIN_FORM_PASSIVE_TOOLTIP"]="当场内母巢获得属性升级后.\n可选择演化为原始族群."
 
-    kTranslateMessage["ORIGIN_FORM_RESOURCE_FETCH"]="生物质同步"
-    kTranslateMessage["ORIGIN_FORM_RESOURCE_FETCH_TOOLTIP"]="获取团队资源以用于建造.\n蛹化后使部分团队资源转为个人资源.\n*在资源不足的情况下无法使用/失效."
+    kTranslateMessage["ORIGIN_FORM_RESOURCE_FETCH"]="资源池获取"
+    kTranslateMessage["ORIGIN_FORM_RESOURCE_FETCH_TOOLTIP"]="获取团队资源以用于建造.\n使部分团队资源转为个人资源.\n*在资源不足的情况下无法使用/失效."
     kTranslateMessage["ABM_GORGE"] ="仅[Gorge]可用"
     kTranslateMessage["ABM_RESOURCE_LOW"] ="资源不足以同步"
 
@@ -180,12 +180,12 @@ if kTranslateMessage then
 
     kTranslateMessage["VOKEX"] = "Vokex"
     kTranslateMessage["VOKEX_EGG"] = "蛹(Vokex)"
-    kTranslateMessage["VOKEX_TOOLTIP"] = "近程与中程专家.\n使用挥砍造成伤害.\n通过暗影步快速机动接近敌人."
-    kTranslateMessage["SWIPESHADOWSTEP"] = "切割"
+    kTranslateMessage["VOKEX_TOOLTIP"] = "战场刺客与中程骚扰专家.\n*使用挥砍造成伤害.\n*通过暗影步水平快速机动.\n*通过进行二段跳进行垂直移动."
+    kTranslateMessage["SWIPESHADOWSTEP"] = "挥砍"
     kTranslateMessage["ACIDROCKET"] = "酸液飞弹"
     kTranslateMessage["ACIDROCKET_TOOLTIP"] = "发射一枚直线飞弹.\n*撞击后造成范围酸液伤害."
     kTranslateMessage["SHADOWSTEP"] = "暗影步"
-    kTranslateMessage["SHADOWSTEP_TOOLTIP"] = "朝运动方向高速移动.\n*期间受到伤害降低."
+    kTranslateMessage["SHADOWSTEP_TOOLTIP"] = "朝运动方向高速移动.\n*结束后将短暂隐形."
     
     kTranslateMessage["DEVOUR"] = "吞噬"
     kTranslateMessage["ONOS_DEVOUR"] = "吞噬"

@@ -1427,7 +1427,7 @@ function AlienTeam:CanEvolveOriginForm()
     
 end
 
-function AlienTeam:OnOriginFormResourceFetch(player)
+function AlienTeam:OnOriginFormResourceFetch(_player)
     if not self:IsOriginForm() then
         return
     end
@@ -1438,6 +1438,12 @@ function AlienTeam:OnOriginFormResourceFetch(player)
     local finalPRes = math.min(teamResource,desirePRes)
 
     if finalPRes < kOriginFormTeamResourceFetchThreshold then return end
-    player:AddResources(finalPRes)
+    _player:AddResources(finalPRes)
     self:AddTeamResources(-finalPRes)
+
+    local chatMessage = string.format("<%s>从资源池获取了[%s]点资源.", _player:GetName(),finalPRes)
+    local teamNumber = self:GetTeamNumber()
+    for _, broadCastPlayer in pairs(GetEntitiesForTeam("Player", teamNumber)) do
+        Server.SendNetworkMessage(broadCastPlayer, "Chat", BuildChatMessage(true, "[原数族群]", -1, teamNumber, self:GetTeamType(), chatMessage), true)
+    end
 end

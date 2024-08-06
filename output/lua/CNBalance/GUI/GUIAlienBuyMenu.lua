@@ -1032,6 +1032,10 @@ local function GetUpgradeCostForLifeForm(player, alienType, upgradeId)
 		local alienTechNode = GetAlienTechNode(alienType, true)
 		if alienTechNode then
 
+			if upgradeId == kTechId.OriginFormResourceFetch then
+				return 0
+			end
+			
 			if player:GetTechId() == alienTechNode:GetTechId() and player:GetHasUpgrade(upgradeId) then
 				return 0
 			end
@@ -1104,7 +1108,7 @@ local function GetIsRestricted(type)
 end
 
 local function GetIsDisabled(type)
-	if GetOwnsItem(kBlackArmorItemId) then
+	if GetOwnsItem(kNS2PlusPlayTestItemId) then
 		return false
 	end
 	
