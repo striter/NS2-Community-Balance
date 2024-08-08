@@ -85,9 +85,8 @@ function ShadowStep:GetIsShadowStepping()
     
 end
 
--- Cannot attack while shadowStepping.
 function ShadowStep:GetPrimaryAttackAllowed()
-    return not self:GetIsShadowStepping()
+    return true
 end
 
 function ShadowStep:GetSecondaryEnergyCost()

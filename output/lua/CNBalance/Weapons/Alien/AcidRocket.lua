@@ -142,8 +142,7 @@ function AcidRocket:FireBombProjectile(player)
         local viewCoords = player:GetViewCoords()
         local eyePos = player:GetEyePos()
 
-        local startPointTrace = Shared.TraceCapsule(eyePos, eyePos + (viewCoords.xAxis * -0.5) + (viewCoords.zAxis - 0.15), 0.2, 0, CollisionRep.Damage, PhysicsMask.PredictedProjectileGroup, EntityFilterOneAndIsa(player, "Babbler"))
-        local startPoint = startPointTrace.endPoint
+        local startPoint =  eyePos + viewCoords.xAxis * -0.5 + viewCoords.zAxis * 1.5 + viewCoords.yAxis * 0.15
 
         local endPointTrace = Shared.TraceRay(eyePos, eyePos + viewCoords.zAxis * 1000 , CollisionRep.Damage, PhysicsMask.Bullets, EntityFilterOne(player))
 

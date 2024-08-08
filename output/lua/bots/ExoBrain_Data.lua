@@ -634,6 +634,7 @@ local function GetAttackUrgency(bot, exo, mem)
             [kMinimapBlipType.Drifter] = numOthers >= 1  and 0.1 or 1.0,
             [kMinimapBlipType.Lerk] = numOthers >= 2   and 0.1 or 5.0,
             [kMinimapBlipType.Fade] = numOthers >= 3   and 0.1 or 6.0,
+            [kMinimapBlipType.Vokex] = numOthers >= 3   and 0.1 or 6.0,
             [kMinimapBlipType.Onos] =  numOthers >= 4  and 0.1 or 7.0,
             [kMinimapBlipType.Prowler] = numOthers >= 2 and 0.1 or 4.0
         }

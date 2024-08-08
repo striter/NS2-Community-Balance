@@ -8,7 +8,8 @@ function ShieldableMixin:GetMaxOverShieldAmount()
             [Fade.kMapName] = kSwipeVampirismScalar,
             [Onos.kMapName] = kGoreVampirismScalar,
 --------------
-            [Prowler.kMapName] = kVolleyRappelVampirismScalar
+            [Prowler.kMapName] = kVolleyRappelVampirismScalar,
+            [Vokex.kMapName] = kSwipeShadowStepVampirismScalar
 ---------------
         }
     end

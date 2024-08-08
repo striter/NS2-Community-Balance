@@ -49,10 +49,10 @@ local kJumpHeight = 1.4
 
 local kVokexScanDuration = 4
 
-local kShadowStepSpeed = 27.5 --40
-local kShadowStepSpeedBonusPerCelerity = 1.5
-Vokex.kShadowStepDuration = 0.18
-local kShadowStepCooldown = 0.4
+local kShadowStepSpeed = 24 --40
+local kShadowStepSpeedBonusPerCelerity = 1
+Vokex.kShadowStepDuration = 0.2
+local kShadowStepCooldown = 0.6
 
 local kMaxSpeed = 7.2
 
@@ -160,6 +160,10 @@ end
 
 function Vokex:GetShowElectrifyEffect()
     return self.hasEtherealGate or self.electrified
+end
+
+function Vokex:GetMapBlipType()
+    return kMinimapBlipType.Vokex
 end
 
 function Vokex:ModifyJump(input, velocity, jumpVelocity)

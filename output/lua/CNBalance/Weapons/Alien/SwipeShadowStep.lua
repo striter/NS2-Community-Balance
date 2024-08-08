@@ -53,7 +53,7 @@ function SwipeShadowStep:GetDeathIconIndex()
 end
 
 function SwipeShadowStep:GetVampiricLeechScalar()
-    return kSwipeVampirismScalar
+    return kSwipeShadowStepVampirismScalar
 end
 
 function SwipeShadowStep:GetSecondaryTechId()

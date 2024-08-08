@@ -176,7 +176,7 @@ if kTranslateMessage then
     kTranslateMessage["ACIDSPRAY"] = "酸液投掷"
     kTranslateMessage["ACIDSPRAY_TOOLTIP"] = "投掷一串酸性炸弹.\n*抛物线弹道."
     kTranslateMessage["PROWLER_STRUCTURE"] = "拌网"
-    kTranslateMessage["PROWLER_STRUCTURE_TOOLTIP"] = "构建能够粘住敌人的拌网."
+    kTranslateMessage["PROWLER_STRUCTURE_TOOLTIP"] = "构建能够粘住敌人  的拌网."
 
     kTranslateMessage["VOKEX"] = "Vokex"
     kTranslateMessage["VOKEX_EGG"] = "蛹(Vokex)"

@@ -444,7 +444,7 @@ kHealthOnBlink = 0
 kVokexCost = 42
 kVokexUpgradeCost = 5
 
-kVokexShadowStepEnergyCost = 14
+kVokexShadowStepEnergyCost = 16
 kSwipeShadowStepDamage = 40
 kVokexGestateTime = 25
 kVokexEggCost = 80
