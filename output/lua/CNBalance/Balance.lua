@@ -457,14 +457,14 @@ kAcidRocketResearchCost = 25
 kAcidRocketResearchTime = 40
 
 kAcidRocketVelocity = 32
-kAcidRocketEnergyCost = 9
-kAcidRocketRoundPerSecond = 2.4
+kAcidRocketEnergyCost = 10
+kAcidRocketRoundPerSecond = 2
 kAcidRocketBombDamageType = kDamageType.Corrode
 kAcidRocketBombDamage = 30
 kAcidRocketBombRadius = 0.3
-kAcidRocketBombSplashRadius = 5
+kAcidRocketBombSplashRadius = 4.5
 kAcidRocketBombDotIntervall = 0.4
-kAcidRocketBombDuration = 2.4
+kAcidRocketBombDuration = 2
 
 -- Onos
 kBoneShieldResearchCost = 20

@@ -68,9 +68,9 @@ function AcidRocketBomb:OnInitialized()
 
 end
 ]]--
-function AcidRocketBomb:GetProjectileModel()
-    return AcidRocketBomb.kModelName
-end 
+--function AcidRocketBomb:GetProjectileModel()
+--    return AcidRocketBomb.kModelName
+--end 
    
 function AcidRocketBomb:GetDeathIconIndex()
     return kDeathMessageIcon.AcidRocket
@@ -124,14 +124,11 @@ function AcidRocketBomb:GetNotifiyTarget()
     return false
 end
 
-
-
-function AcidRocketBomb:OnModifyModelCoords(coords)     --Wrong axis
-    local xAxis = coords.xAxis 
-    coords.xAxis = -coords.zAxis
-    coords.zAxis = xAxis
-    return coords
-end
-
+--function AcidRocketBomb:OnModifyModelCoords(coords)     --Wrong axis
+--    local xAxis = coords.xAxis 
+--    coords.xAxis = -coords.zAxis
+--    coords.zAxis = xAxis
+--    return coords
+--end
 
 Shared.LinkClassToMap("AcidRocketBomb", AcidRocketBomb.kMapName, networkVars)
