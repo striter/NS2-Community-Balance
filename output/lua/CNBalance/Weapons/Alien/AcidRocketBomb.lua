@@ -18,7 +18,7 @@ PrecacheAsset("cinematics/vfx_materials/decals/bilebomb_decal.surface_shader")
 class 'AcidRocketBomb' (PredictedProjectile)
 
 AcidRocketBomb.kMapName            = "acidrocketbomb"
-AcidRocketBomb.kModelName          = PrecacheAsset("models/alien/fade/acidRocket/acidbomb.model")
+--AcidRocketBomb.kModelName          = PrecacheAsset("models/alien/fade/acidRocket/acidbomb.model")
 AcidRocketBomb.kProjectileCinematic = PrecacheAsset("cinematics/alien/gorge/gorge_spit.cinematic")
 AcidRocketBomb.kClearOnImpact = true
 AcidRocketBomb.kClearOnEnemyImpact = true

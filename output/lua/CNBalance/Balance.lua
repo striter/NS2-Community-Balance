@@ -424,8 +424,8 @@ kRappelRange = 25
 kAcidSprayResearchCost = 10
 kAcidSprayResearchTime = 60
 kAcidSprayEnergyCost = 24
-kAcidSprayDamage = 20  -- 3 missiles
-kAcidSprayDamageType = kDamageType.Normal
+kAcidSprayDamage = 25  -- 3 missiles
+kAcidSprayDamageType = kDamageType.Corrode
 
 -- Fade
 kSwipeDamageType = kDamageType.Puncture

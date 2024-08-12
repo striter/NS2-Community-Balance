@@ -18,7 +18,7 @@ AcidMissile.kProjectileCinematic = PrecacheAsset("cinematics/alien/gorge/gorge_s
 AcidMissile.kRadius             = 0.16
 AcidMissile.kClearOnImpact      = true
 AcidMissile.kClearOnEnemyImpact = true
-AcidMissile.kSplashRadius       = 2.0
+AcidMissile.kSplashRadius       = 3.5
 AcidMissile.kDamage             = kAcidSprayDamage
 
 -- The max amount of time a AcidMissile can last for
