@@ -46,6 +46,7 @@ function Flamethrower:BurnSporesAndUmbra(startPoint, endPoint)
         table.copy(GetEntitiesWithinRange("StormCloud", checkAtPoint, StormCloud.kRadius), clouds, true)
         table.copy(GetEntitiesWithinRange("MucousMembrane", checkAtPoint, MucousMembrane.kRadius), clouds, true)
         table.copy(GetEntitiesWithinRange("EnzymeCloud", checkAtPoint, EnzymeCloud.kRadius), clouds, true)
+        table.copy(GetEntitiesWithinRange("Vortex", checkAtPoint, Vortex.kRadius), clouds, true)
 
         for j = 1, #clouds do
             local cloud = clouds[j]

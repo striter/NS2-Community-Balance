@@ -391,7 +391,7 @@ kXenocideDamageType = kDamageType.Structural
 kXenocideDamage = 150  kXenocideFuelDamage = 210 --200
 kXenocideRange = 8 kXenocideFuelRange = 12 -- 14
 kXenocideDamageScalarEmptyHealth = 0.2 kXenocideDamageHealthScalar = 1 - kXenocideDamageScalarEmptyHealth
-kXenocideSpawnReduction = 1 kXenocideFuelSpawnReduction = 0.5
+kXenocideSpawnReduction = 1 kXenocideFuelSpawnReduction = 0.7
 
 kBileBombResearchCost = 10
 kBileBombResearchTime = 40
@@ -470,9 +470,12 @@ kVortexShadowStepResearchCost = 30
 kVortexShadowStepResearchTime = 90
 kVortexLifetime = 5 kVortexInitTime = 0.5
 kVortexRadius = 4
-kVortexEnergyCost = 55
-kVortexPlayerDamagePerSecond = 10 kVortexStructureDamagePerSecond = 75
-kVortexSuckinVelocityPerSecond = 35
+kVortexEnergyCost = 50
+kVortexPlayerDamagePerSecond = 4 kVortexStructureDamagePerSecond = 80
+kVortexSuckinVelocityPerSecond = 30
+
+kVortexMaxDamageEndurance = 10 kVortexPerPlayerDamageEnduranceCostPerSecond = 1 --kVortexProjectileEnduranceCost = 0
+
 -- Onos
 kBoneShieldResearchCost = 20
 kBoneShieldResearchTime = 40

@@ -23,9 +23,8 @@ class 'Vortex' (Entity)
 
 -- Spores didn't stack in NS1 so consider that
 Vortex.kMapName = "vortex"
-Vortex.kMaxRange = 17
-Vortex.kTravelSpeed = 5 --m/s
 Vortex.kModelName = PrecacheAsset("models/alien/fade/vortex.model")
+Vortex.kRadius = kVortexRadius
 local kDamageInterval = 0.1
 
 local networkVars =
@@ -56,6 +55,7 @@ function Vortex:OnCreate()
         InitMixin(self, OwnerMixin)
         self.destroyTime = creationTime + kVortexLifetime + kVortexInitTime
         self.damageInterval = kDamageInterval
+        self.endurance = kVortexMaxDamageEndurance
     end
     self.initialTime = creationTime + kVortexInitTime
 
@@ -66,7 +66,13 @@ end
 
 function Vortex:OnInitialized()
     Entity.OnInitialized(self)
-    self:TriggerEffects("blink_out", {effecthostcoords = Coords.GetTranslation(self:GetOrigin() + Vector(0,-.6,0))})
+    local origin = self:GetOrigin()
+    self:TriggerEffects("blink_out", {effecthostcoords = Coords.GetTranslation(origin + Vector(0,-.6,0))})
+    for _,v in pairs(GetEntitiesWithinRange("Vortex",origin,Vortex.kRadius)) do
+        if v ~= self then
+            DestroyEntity(v)
+        end
+    end
 end
 
 
@@ -95,32 +101,6 @@ function Vortex:GetShowHitIndicator()
     return false
 end
 
-if Server then
-    function Vortex:DestroyProjectiles(_deltaTime)
-
-        local checkAtPoint = self:GetOrigin()
-        local projectiles = GetEntitiesWithinRange("PredictedProjectile", checkAtPoint, kVortexRadius)
-
-        for j = 1, #projectiles do
-            local projectile = projectiles[j]
-            DestroyEntity(projectile)
-            self:TriggerEffects("blink_out", {effecthostcoords = Coords.GetTranslation(projectile:GetOrigin() + Vector(0,-.6,0))})
-        end
-
-    end
-    
-    function Vortex:OnKill()
-        --self:TriggerEffects("burn_spore", { effecthostcoords = Coords.GetTranslation(self:GetOrigin()) } )
-    end
-
-    function Vortex:GetDestroyOnKill()
-        return true
-    end
-
-    function Vortex:GetSendDeathMessageOverride()
-        return false
-    end
-end
 
 local kStartScale = 0.2
 local kFinalScale = 1
@@ -144,7 +124,9 @@ function Vortex:OnUpdate(_deltaTime)
     end
     
     if Server then
-        if time > self.destroyTime then
+        if time > self.destroyTime 
+                or self.endurance <= 0
+        then
             DestroyEntity(self)
             return
         end
@@ -158,15 +140,16 @@ end
 
 function Vortex:SuckinPlayers(_deltaTime)
     local attackPoint = self:GetOrigin()
-    local players = GetEntitiesWithinRange("Player", attackPoint, kVortexRadius)
+    local players = GetEntitiesWithinRange("Player", attackPoint, Vortex.kRadius)
     for _, entity in pairs(players) do
 
         local mass = entity.GetMass and entity:GetMass() or Player.kMass
-        if mass < kPushBackMass then
+        if mass < 200 then
             local playerOrigin = entity:GetEyePos()
 
-            local reelDirection = (attackPoint - playerOrigin)
-            entity:SetVelocity(entity:GetVelocity() + reelDirection * kVortexSuckinVelocityPerSecond * _deltaTime)
+            local reelOffset = (attackPoint - playerOrigin)
+            --reelOffset:Normalize()
+            entity:SetVelocity(entity:GetVelocity() + reelOffset * kVortexSuckinVelocityPerSecond * _deltaTime)
         end
     end
 end
@@ -181,7 +164,7 @@ function Vortex:DamageEntities(_deltaTime)
     
     local attackPoint = self:GetOrigin()
     local otherTeam = GetEnemyTeamNumber(self:GetTeamNumber())
-    local enemies = GetEntitiesWithMixinForTeamWithinRange("Live",otherTeam, attackPoint, kVortexRadius)
+    local enemies = GetEntitiesWithMixinForTeamWithinRange("Live",otherTeam, attackPoint, Vortex.kRadius)
     for index, entity in ipairs(enemies) do
         
         local receiverPoint = entity:GetOrigin()
@@ -189,10 +172,40 @@ function Vortex:DamageEntities(_deltaTime)
         if entity:isa("Player") then
             receiverPoint = entity:GetEyePos()
             damage = kVortexPlayerDamagePerSecond
+            self.endurance = self.endurance - kVortexPerPlayerDamageEnduranceCostPerSecond * kDamageInterval
         end
-        self:DoDamage(damage * kDamageInterval, entity, attackPoint, (receiverPoint - attackPoint):GetUnit())
+        self:DoDamage(damage * kDamageInterval, entity, receiverPoint, (receiverPoint - attackPoint):GetUnit())
     end
 end
 
+if Server then
+    function Vortex:DestroyProjectiles(_deltaTime)
+
+        local checkAtPoint = self:GetOrigin()
+        local projectiles = GetEntitiesWithinRange("PredictedProjectile", checkAtPoint, Vortex.kRadius)
+        table.copy(GetEntitiesWithinRange("CragUmbra", checkAtPoint, CragUmbra.kRadius),projectiles,true)
+        table.copy(GetEntitiesWithinRange("SporeCloud", checkAtPoint, kSporesDustCloudRadius), projectiles, true)
+
+        for j = 1, #projectiles do
+            local projectile = projectiles[j]
+            DestroyEntity(projectile)
+            self:TriggerEffects("blink_out", {effecthostcoords = Coords.GetTranslation(projectile:GetOrigin() + Vector(0,-.6,0))})
+            --self.endurance = self.endurance - kVortexProjectileEnduranceCost
+        end
+
+    end
+
+    function Vortex:OnKill()
+        --self:TriggerEffects("burn_spore", { effecthostcoords = Coords.GetTranslation(self:GetOrigin()) } )
+    end
+
+    function Vortex:GetDestroyOnKill()
+        return true
+    end
+
+    function Vortex:GetSendDeathMessageOverride()
+        return false
+    end
+end
 
 Shared.LinkClassToMap("Vortex", Vortex.kMapName, networkVars)
