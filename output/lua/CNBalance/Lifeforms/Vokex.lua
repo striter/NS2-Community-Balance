@@ -2,6 +2,7 @@ Script.Load("lua/Utility.lua")
 Script.Load("lua/CNBalance/Weapons/Alien/SwipeShadowStep.lua")
 Script.Load("lua/CNBalance/Weapons/Alien/ReadyRoomShadowStep.lua")
 Script.Load("lua/CNBalance/Weapons/Alien/MetabolizeShadowStep.lua")
+Script.Load("lua/CNBalance/Weapons/Alien/VortexShadowStep.lua")
 Script.Load("lua/CNBalance/Weapons/Alien/AcidRocket.lua")
 Script.Load("lua/Alien.lua")
 Script.Load("lua/Mixins/BaseMoveMixin.lua")
@@ -26,6 +27,7 @@ Vokex.kModelName = PrecacheAsset("models/alien/fade/vokex.model")
 local kVokexAnimationGraph = PrecacheAsset("models/alien/fade/fade.animation_graph")
 local kViewModelName = PrecacheAsset("models/alien/fade/fade_albino_view.model")
 local kViewAnimationGraphName = PrecacheAsset("models/alien/vokex/vokex_view.model")
+Vokex.kBountyThreshold = kBountyClaimMinFade
 
 PrecacheAsset("models/alien/fade/fade.surface_shader")
 
@@ -480,7 +482,7 @@ function Vokex:OnProcessMove(input)
 
     end
     
-    if not self:GetHasMetabolizeAnimationDelay() and self.previousweapon ~= nil and not self:GetIsShadowStepping() then
+    if not self:GetHasMetabolizeAnimationDelay() and self.previousweapon ~= nil then
 
         if self:GetActiveWeapon():GetMapName() == MetabolizeShadowStep.kMapName then
             self:SetActiveWeapon(self.previousweapon)
@@ -530,6 +532,11 @@ function Vokex:SetDetected(state)
         
     end
     
+end
+
+function Vokex:GetIsStabbing()
+    local stabWeapon = self:GetWeapon(VortexShadowStep.kMapName)
+    return stabWeapon and stabWeapon:GetIsStabbing()
 end
 
 function Vokex:OnUpdateAnimationInput(modelMixin)

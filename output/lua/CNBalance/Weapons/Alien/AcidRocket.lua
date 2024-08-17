@@ -43,6 +43,16 @@ function AcidRocket:OnCreate()
     
 end
 
+function AcidRocket:OnDraw(player, previousWeaponMapName)
+    Ability.OnDraw(self,player,previousWeaponMapName)
+
+    local stabWep = self:GetParent():GetWeapon(VortexShadowStep.kMapName)
+    if stabWep and stabWep.stabbing then
+        stabWep.stabbing = false
+    end
+end
+
+
 function AcidRocket:GetAnimationGraphName()
     return kAnimationGraph
 end

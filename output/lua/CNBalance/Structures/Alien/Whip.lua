@@ -41,10 +41,7 @@ if Server then
             local direction = target:GetOrigin() - self:GetOrigin()
             direction.y = 0
             direction:Normalize()
-            local mass = target.GetMass and target:GetMass() or Player.kMass
-            if mass < 100 then
-                ApplyPushback(target,0.2,direction * 4.5)
-            end
+            ApplyPushback(target,0.2,direction * 4.5)
         end
         
         local infested = self:GetGameEffectMask(kGameEffect.OnInfestation)

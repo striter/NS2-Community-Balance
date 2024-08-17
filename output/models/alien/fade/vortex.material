@@ -1,3 +1,0 @@
-shader = "cinematics/vfx_materials/vortex.surface_shader"
-EmissiveMap = "models/alien/fade/vortex.dds"
-MaskMap = "models/alien/fade/vortex_mask.dds"

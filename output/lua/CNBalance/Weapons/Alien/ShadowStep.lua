@@ -163,10 +163,10 @@ end
 
 function ShadowStep:OnUpdateAnimationInput(modelMixin)
 
-    local player = self:GetParent()
-    if self:GetIsShadowStepping() and (not self.GetHasMetabolizeAnimationDelay or not self:GetHasMetabolizeAnimationDelay()) then
-        modelMixin:SetAnimationInput("move", "blink")
-    end
+    --local player = self:GetParent()
+    --if self:GetIsShadowStepping() and (not self.GetHasMetabolizeAnimationDelay or not self:GetHasMetabolizeAnimationDelay()) then
+    --    modelMixin:SetAnimationInput("move", "blink")
+    --end
     
 end
 

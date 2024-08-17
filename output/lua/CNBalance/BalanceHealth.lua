@@ -170,7 +170,7 @@ kProwlerDamageReduction = {
     --["Cannon"] = 0.9,
 }
 
-kVokexHealth = 230   kVokexArmor = 60   kVokexPointvalue = 25   kVokexHealthPerBioMass = 5
+kVokexHealth = 240   kVokexArmor = 60   kVokexPointvalue = 25   kVokexHealthPerBioMass = 5
 
 kParasitePlayerPointValue = 1
 

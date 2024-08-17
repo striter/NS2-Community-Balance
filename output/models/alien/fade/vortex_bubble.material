@@ -1,2 +1,0 @@
-shader = "shaders/Emissive.surface_shader"
-emissiveMap = "models/alien/fade/vortex_bubble.dds"

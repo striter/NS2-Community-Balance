@@ -62,15 +62,13 @@ end
 
 
 function SwipeShadowStep:OnPrimaryAttack(player)
-    local notethereal = not player.ethereal
     local hasEnergy = player:GetEnergy() >= self:GetEnergyCost()
     local cooledDown = (not self.nextAttackTime) or (Shared.GetTime() >= self.nextAttackTime)
-    if notethereal and hasEnergy and cooledDown then
+    if hasEnergy and cooledDown then
         self.primaryAttacking = true
     else
         self.primaryAttacking = false
     end
-    
 end
 
 function SwipeShadowStep:OnPrimaryAttackEnd()
@@ -103,12 +101,12 @@ function SwipeShadowStep:OnTag(tagName)
     
     if tagName == "hit" then
     
-        -- local stabWep = self:GetParent():GetWeapon(StabBlink.kMapName)
-        -- if stabWep and stabWep.stabbing then
-        --     -- player is using stab and has switched to swipe really fast, but the attack the "hit"
-        --     -- tag is from is still a stab, and thus should do stab damage.
-        --     stabWep:DoAttack()
-        -- else
+         local stabWep = self:GetParent():GetWeapon(VortexShadowStep.kMapName)
+         if stabWep and stabWep.stabbing then
+             -- player is using stab and has switched to swipe really fast, but the attack the "hit"
+             -- tag is from is still a stab, and thus should do stab damage.
+             stabWep:DoAttack()
+         else
             self:TriggerEffects("swipe_attack")    
             self:PerformMeleeAttack()
         
@@ -118,7 +116,7 @@ function SwipeShadowStep:OnTag(tagName)
                 self:OnAttack(player)
             
             end
-        -- end
+         end
     
     end
 

@@ -19,7 +19,7 @@ kMetabolizeDelay = 2.0
 local kMetabolizeEnergyRegain = 35
 local kMetabolizeHealthRegain = 20
 
-local kAnimationGraph = PrecacheAsset("models/alien/fade/fade_view.animation_graph")
+local kAnimationGraph = PrecacheAsset("models/alien/vokex/vokex_view.animation_graph")
 
 function MetabolizeShadowStep:OnCreate()
 
@@ -77,7 +77,7 @@ end
 
 function MetabolizeShadowStep:GetHasAttackDelay()
     local parent = self:GetParent()
-    return self.lastPrimaryAttackTime + kMetabolizeDelay > Shared.GetTime()
+    return self.lastPrimaryAttackTime + kMetabolizeDelay > Shared.GetTime() or parent and parent:GetIsStabbing()
 end
 
 function MetabolizeShadowStep:OnPrimaryAttack(player)
@@ -134,6 +134,13 @@ function MetabolizeShadowStep:OnTag(tagName)
         end
     end
 
+    if tagName == "hit" then
+
+        local stabWep = self:GetParent():GetWeapon(VortexShadowStep.kMapName)
+        if stabWep and stabWep.stabbing then
+            stabWep:DoAttack()
+        end
+    end
 end
 
 function MetabolizeShadowStep:OnUpdateAnimationInput(modelMixin)

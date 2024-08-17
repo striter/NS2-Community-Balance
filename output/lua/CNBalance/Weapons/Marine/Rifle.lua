@@ -33,13 +33,10 @@ function Rifle:PerformMeleeAttack(player)
 
     if didHit and lastTarget then
         if lastTarget:isa("Player") then
-            local mass = lastTarget.GetMass and lastTarget:GetMass() or Player.kMass
-            if mass < 100 then
-                local direction = player:GetViewCoords().zAxis
-                direction.y = 0
-                direction:Normalize()
-                ApplyPushback(lastTarget,0.2,direction * 4.5)
-            end
+            local direction = player:GetViewCoords().zAxis
+            direction.y = 0
+            direction:Normalize()
+            ApplyPushback(lastTarget,0.2,direction * 4.5)
         end 
     end
 end

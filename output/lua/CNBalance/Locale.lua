@@ -180,12 +180,15 @@ if kTranslateMessage then
 
     kTranslateMessage["VOKEX"] = "Vokex"
     kTranslateMessage["VOKEX_EGG"] = "蛹(Vokex)"
-    kTranslateMessage["VOKEX_TOOLTIP"] = "战场刺客与中程骚扰专家.\n*使用挥砍造成伤害.\n*通过暗影步水平快速机动.\n*通过进行二段跳进行垂直移动."
+    kTranslateMessage["VOKEX_TOOLTIP"] = "战场刺客与支援专家.\n擅长使用中程技能骚扰敌方单位.\n*使用挥砍造成伤害.\n*通过暗影步进行水平方向机动.\n*可以进行二段跳进行垂直移动."
     kTranslateMessage["SWIPESHADOWSTEP"] = "挥砍"
     kTranslateMessage["ACIDROCKET"] = "酸液飞弹"
     kTranslateMessage["ACIDROCKET_TOOLTIP"] = "发射一枚直线飞弹.\n*撞击后造成范围酸液伤害."
     kTranslateMessage["SHADOWSTEP"] = "暗影步"
-    kTranslateMessage["SHADOWSTEP_TOOLTIP"] = "朝运动方向高速移动.\n*结束后将短暂隐形."
+    kTranslateMessage["SHADOWSTEP_TOOLTIP"] = "朝者运动方向快速闪现.\n*结束后将短暂隐形.\n*闪现后可再次释放二段跳."
+    kTranslateMessage["VORTEX"] = "漩涡"
+    kTranslateMessage["VORTEX_SHADOWSTEP"] = "漩涡"
+    kTranslateMessage["VORTEX_SHADOWSTEP_TOOLTIP"] = "重击前方释放短暂持续的漩涡.\n*吸收所有经过的弹道.\n*吸附临近单位并造成少量伤害."
     
     kTranslateMessage["DEVOUR"] = "吞噬"
     kTranslateMessage["ONOS_DEVOUR"] = "吞噬"
@@ -401,11 +404,16 @@ if kLocales then
 
     kLocales["VOKEX"] = "Vokex"
     kLocales["VOKEX_EGG"] = "Egg(Vokex)"
-    kLocales["VOKEX_TOOLTIP"] = "Medium and close range expert."
+    kLocales["VOKEX_TOOLTIP"] = "Assassin,Medium Range Harassment.\n*Use shadowstep to trick enemies.\n*Double jump for vertical movement.\n*use variant abilities to change the battlefield."
     kLocales["ACIDROCKET"] = "Acid Rocket"
     kLocales["ACIDROCKET_TOOLTIP"] = "Fire a long range projectile.\n*Splash acids on hit"
     kLocales["SHADOWSTEP"] = "Shadow Step"
-    kLocales["SHADOWSTEP_TOOLTIP"] = "Blink towards move direction.\n*Receives minor damage while blinking"
+    kLocales["SHADOWSTEP_TOOLTIP"] = "Blink towards move direction.\n*Receives minor damage while blinking.\n*Additional double jump after use."
+    kLocales["SHADOWSTEPSWIPE"] = "Chop"
+    kLocales["VORTEX"] = "Vortex"
+    kLocales["VORTEX_SHADOWSTEP"] = "Vortex"
+    kLocales["VORTEX_SHADOWSTEP_TOOLTIP"] = "Cast a short life vortex.\n*Blink out every passing projectiles.\n*Suckin nearby entities & deal minor damage."
+
     
     kLocales["DEVOUR"] = "Devour"
     kLocales["ONOS_DEVOUR"] = "Devour"

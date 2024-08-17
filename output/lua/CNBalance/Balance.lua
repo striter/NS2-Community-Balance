@@ -338,7 +338,7 @@ kOnosDevourTime = 40
 
 kUmbraBulletModifier = 0.8
 
-kDevourEnergyCost = 55 --50
+kDevourEnergyCost = 45 --50
 kDevourPunchDamage = 65 --100
 
 kTunnelUpgradeTime = 60
@@ -444,7 +444,7 @@ kHealthOnBlink = 0
 kVokexCost = 42
 kVokexUpgradeCost = 5
 
-kVokexShadowStepEnergyCost = 15
+kVokexShadowStepEnergyCost = 14
 kSwipeShadowStepDamage = 40
 kVokexGestateTime = 25
 kVokexEggCost = 80
@@ -458,7 +458,7 @@ kAcidRocketResearchTime = 40
 
 kAcidRocketVelocity = 32
 kAcidRocketEnergyCost = 10
-kAcidRocketRoundPerSecond = 2
+kAcidRocketRoundPerSecond = 2.4
 kAcidRocketBombDamageType = kDamageType.Corrode
 kAcidRocketBombDamage = 30
 kAcidRocketBombRadius = 0.3
@@ -466,6 +466,13 @@ kAcidRocketBombSplashRadius = 4.5
 kAcidRocketBombDotIntervall = 0.4
 kAcidRocketBombDuration = 2
 
+kVortexShadowStepResearchCost = 30
+kVortexShadowStepResearchTime = 90
+kVortexLifetime = 5 kVortexInitTime = 0.5
+kVortexRadius = 4
+kVortexEnergyCost = 55
+kVortexPlayerDamagePerSecond = 10 kVortexStructureDamagePerSecond = 75
+kVortexSuckinVelocityPerSecond = 35
 -- Onos
 kBoneShieldResearchCost = 20
 kBoneShieldResearchTime = 40
@@ -718,3 +725,5 @@ kTechRespawnTimeExtension =
 }
 
 kDOTPlayerDamageMaxLifeTime = 2
+
+kPushBackMass = 100

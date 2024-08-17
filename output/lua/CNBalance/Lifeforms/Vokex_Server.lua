@@ -30,9 +30,9 @@ function Vokex:GetTierOneTechId()
 end
 
 function Vokex:GetTierTwoTechId()
-    return kTechId.MetabolizeShadowStepHealth
+    return kTechId.AcidRocket
 end
 
 function Vokex:GetTierThreeTechId()
-    return kTechId.AcidRocket
+    return kTechId.VortexShadowStep
 end

@@ -378,18 +378,15 @@ function Prowler:ModifyVelocity(input, velocity, deltaTime)
         local hitTarget = followEntity      --Reel target
         if hitTarget then
             local isPlayer = hitTarget:isa("Player")
-            if isPlayer then -- or hitTarget:isa("Exo") then
-                local mass = hitTarget.GetMass and hitTarget:GetMass() or Player.kMass
-                if mass < 100 then
-                    local viewCoords = self:GetViewCoords()
-                    local reelDirection = (viewCoords.origin - followEntity:GetModelOrigin())
-                    if Math.DotProduct(-viewCoords.zAxis,reelDirection) > 0.2 then
-                        reelDirection = (viewCoords.origin + viewCoords.zAxis * 1) - hitTarget:GetOrigin()
-                    end
-                    reelDirection:Normalize()
-                    local selfVelocity = self:GetVelocity()
-                    ApplyPushback(hitTarget,0.5, selfVelocity * .5 + (reelDirection * kRappelReelContinuousSpeed))
+            if isPlayer then 
+                local viewCoords = self:GetViewCoords()
+                local reelDirection = (viewCoords.origin - followEntity:GetModelOrigin())
+                if Math.DotProduct(-viewCoords.zAxis,reelDirection) > 0.2 then
+                    reelDirection = (viewCoords.origin + viewCoords.zAxis * 1) - hitTarget:GetOrigin()
                 end
+                reelDirection:Normalize()
+                local selfVelocity = self:GetVelocity()
+                ApplyPushback(hitTarget,0.5, selfVelocity * .5 + (reelDirection * kRappelReelContinuousSpeed))
             end
 
             if GetAreEnemies(self,hitTarget) then

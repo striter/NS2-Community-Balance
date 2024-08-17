@@ -1074,6 +1074,16 @@ function BuildTechData()
     })
 
     table.insert(techData, {
+        [kTechDataId] = kTechId.VortexShadowStep,
+        [kTechDataCategory] = kTechId.Vokex,
+        [kTechDataMapName] = VortexShadowStep.kMapName,
+        [kTechDataCostKey] = kVortexShadowStepResearchCost,
+        [kTechDataResearchTimeKey] = kVortexShadowStepResearchTime,
+        [kTechDataDisplayName] = "VORTEX_SHADOWSTEP",
+        [kTechDataTooltipInfo] = "VORTEX_SHADOWSTEP_TOOLTIP",
+    })
+    
+    table.insert(techData, {
         [kTechDataId] = kTechId.HallucinateVokex,
         [kTechDataMapName] = Fade.kMapName,
         [kTechDataModel] = Vokex.kModelName,

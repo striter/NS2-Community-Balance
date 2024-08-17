@@ -32,6 +32,7 @@ function GetTexCoordsForTechId(techId)
         gTechIdPosition[kTechId.Rappel] = kDeathMessageIcon.Rappel
         gTechIdPosition[kTechId.SwipeShadowStep] = kDeathMessageIcon.Swipe
         gTechIdPosition[kTechId.MetabolizeShadowStep] = kDeathMessageIcon.Metabolize
+        gTechIdPosition[kTechId.VortexShadowStep] = kDeathMessageIcon.Vortex
         gTechIdPosition[kTechId.AcidRocket] = kDeathMessageIcon.AcidRocket
         gTechIdPosition[kTechId.ShadowStep] = kDeathMessageIcon.ShadowStep
 
@@ -218,6 +219,11 @@ function MarineMeleeBoxDamage(self,player,coords,range,damage)
 end
 
 function ApplyPushback(target, disableDuration, velocity)
+    local mass = target.GetMass and target:GetMass() or Player.kMass
+    if mass >= kPushBackMass then
+        return
+    end
+    
     target.stampedeVars = {
         disableDur = disableDuration,
         velocity = velocity
