@@ -11,7 +11,7 @@ Script.Load("lua/CNBalance/Weapons/Alien/ShadowStep.lua")
 
 class 'AcidRocket' (ShadowStep)
 
-AcidRocket.kMapName = "acid_rocket"
+AcidRocket.kMapName = "acidrocket"
 
 -- // part of the players velocity is use for the bomb
 local kPlayerVelocityFraction = 1

@@ -91,10 +91,19 @@ end
 
 local function CreateVortex(self, player)
 
+    local kRange = 1.9
+    local kOffset = 0.1
     local viewAngles = player:GetViewAngles()
     local viewCoords = viewAngles:GetCoords()
-    local startPoint = player:GetEyePos() + viewCoords.zAxis * 2.5
-    local vortex = CreateEntity( Vortex.kMapName, startPoint, player:GetTeamNumber() )
+    local startPoint = player:GetEyePos()
+    local endPoint = startPoint + viewCoords.zAxis * (kRange + kOffset)
+    
+    local trace = Shared.TraceCapsule(startPoint, endPoint, 0.3, 0, CollisionRep.Damage, PhysicsMask.Bullets, EntityFilterOneAndIsa(player, "Babbler"))
+    if trace.fraction ~= 1 then
+        endPoint = trace.endPoint - viewCoords.zAxis * kOffset
+    end
+    
+    local vortex = CreateEntity( Vortex.kMapName, endPoint, player:GetTeamNumber() )
     vortex:SetOwner(player)
     return vortex
 
@@ -105,15 +114,13 @@ function VortexShadowStep:DoAttack()
     self:TriggerEffects("stab_hit")
     self.stabbing = false
 
-    local player = self:GetParent()
-    if player then
-        if Server then
-
+    if Server then
+        local player = self:GetParent()
+        if player then
             if player:GetEnergy() >= self:GetEnergyCost() then
                 CreateVortex(self,  player)
                 player:DeductAbilityEnergy(self:GetEnergyCost())
             end
-
         end
     end
 end

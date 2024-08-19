@@ -484,9 +484,9 @@ end
 
 local classNameToTechId = {}
 classNameToTechId["SporeCloud"] = kTechId.Spores
+classNameToTechId["Vortex"] = kTechId.Vortex
 classNameToTechId["NerveGasCloud"] = kTechId.GasGrenade
 classNameToTechId["WhipBomb"] = kTechId.WhipBomb
-classNameToTechId["DotMarker"] = kTechId.BileBomb
 classNameToTechId["Shockwave"] = kTechId.Stomp
 
 function StatsUI_GetAttackerWeapon(attacker, doer)

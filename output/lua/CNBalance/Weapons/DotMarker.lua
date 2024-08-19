@@ -249,6 +249,18 @@ function DotMarker:GetIsAffectedByCrush()
     return self.affectedByCrush
 end
 
+function DotMarker:GetWeaponTechId()
+    local deathIconIndex = self:GetDeathIconIndex()
+
+    if deathIconIndex == kDeathMessageIcon.AcidRocket then
+        return kTechId.AcidRocket
+    elseif deathIconIndex == kDeathMessageIcon.AcidSpray then
+        return kTechId.AcidSpray
+    end
+    
+    return kTechId.BileBomb
+end
+
 function DotMarker:SetAttachToTarget(target, impactPoint)
 
     self.targetId = target:GetId()
