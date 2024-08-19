@@ -61,7 +61,8 @@ end
 function VortexShadowStep:OnPrimaryAttack(player)
     local hasEnergy = player:GetEnergy() >= self:GetEnergyCost()
     local cooledDown = (not self.nextAttackTime) or (Shared.GetTime() >= self.nextAttackTime)
-    if hasEnergy and cooledDown then
+    local shadowStepping = player:GetIsShadowStepping()
+    if not shadowStepping and hasEnergy and cooledDown then
         self.primaryAttacking = true
     else
         self.primaryAttacking = false

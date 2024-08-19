@@ -138,7 +138,8 @@ function GUIHiveStatus:Initialize()
     self.teamGorgeTable = self:InitializeLifeformCount( Vector( kStart + kGap * 2, yOffset, 0  ),4)
     self.teamLerkTable = self:InitializeLifeformCount( Vector( kStart + kGap * 3, yOffset, 0  ),3)
     self.teamFadeTable = self:InitializeLifeformCount( Vector( kStart + kGap * 4, yOffset, 0  ),2)
-    self.teamOnosTable = self:InitializeLifeformCount( Vector( kStart + kGap * 5, yOffset, 0  ),1)
+    self.teamVokexTable = self:InitializeLifeformCount( Vector( kStart + kGap * 5, yOffset, 0  ),7)
+    self.teamOnosTable = self:InitializeLifeformCount( Vector( kStart + kGap * 6, yOffset, 0  ),1)
 
     self:Reset()
 
@@ -171,12 +172,14 @@ function GUIHiveStatus:InitializeLifeformCount(position, iconIndex)
 end
 
 function GUIHiveStatus:UpdateLifeformCount(table,count)
-    local valid = count > 0
-    table.icon:SetColor(valid  and GUIHiveStatus.kTeamCountIconColor or GUIHiveStatus.kTeamCountZeroedIconColor)
+    table.icon:SetColor(count > 0  and GUIHiveStatus.kTeamCountIconColor or GUIHiveStatus.kTeamCountZeroedIconColor)
+
+    local valid = count > 1
     table.text:SetIsVisible(valid)
     if valid then
         table.text:SetText(string.format("%i",count))
     end
+    
 end
 
 function GUIHiveStatus:SetIsVisible(state)
@@ -206,6 +209,7 @@ function GUIHiveStatus:Uninitialize()
     self:UnitializeLifeformCount(self.teamFadeTable)
     self:UnitializeLifeformCount(self.teamOnosTable)
     self:UnitializeLifeformCount(self.teamProwlerTable)
+    self:UnitializeLifeformCount(self.teamVokexTable)
     
     if self.background then
         GUI.DestroyItem(self.background)
@@ -673,6 +677,7 @@ function GUIHiveStatus:Update( deltaTime )
     self:UpdateLifeformCount(self.teamFadeTable,self.teamInfoEnt.teamFadeCount)
     self:UpdateLifeformCount(self.teamOnosTable,self.teamInfoEnt.teamOnosCount)
     self:UpdateLifeformCount(self.teamProwlerTable,self.teamInfoEnt.teamProwlerCount)
+    self:UpdateLifeformCount(self.teamVokexTable,self.teamInfoEnt.teamVokexCount)
 
     if self.cachedHudDetail ~= newHudDetail then
 

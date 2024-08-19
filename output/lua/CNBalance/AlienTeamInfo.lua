@@ -19,7 +19,7 @@ class 'AlienTeamInfo' (TeamInfo)
 AlienTeamInfo.kMapName = "AlienTeamInfo"
 
 AlienTeamInfo.kLocationEntityTypes = { "Hive", "Spur", "Veil", "Shell", "Egg" }
-AlienTeamInfo.kLifeformEntityTypes = {"Skulk","Prowler","Fade","Onos","Gorge","Lerk"}
+AlienTeamInfo.kLifeformEntityTypes = {"Skulk","Prowler","Fade","Onos","Gorge","Lerk","Vokex"}
 
 
 local networkVars =
@@ -58,6 +58,7 @@ local networkVars =
     teamFadeCount = "integer (0 to 32)",
     teamOnosCount ="integer (0 to 32)",
     teamProwlerCount = "integer (0 to 32)",
+    teamVokexCount = "integer (0 to 32)",
     
     location1EggCount = "integer (0 to 50)", --6 bits ea
     location2EggCount = "integer (0 to 50)",
@@ -609,6 +610,7 @@ if Server then
         self.teamSkulkCount = 0
         self.teamGorgeCount = 0
         self.teamProwlerCount = 0
+        self.teamVokexCount = 0
         self.teamLerkCount = 0
         self.teamFadeCount = 0
         self.teamOnosCount = 0
@@ -628,6 +630,8 @@ if Server then
                 self.teamFadeCount = self.teamFadeCount + 1
             elseif entity:isa("Onos") and entity:GetIsAlive() then
                 self.teamOnosCount = self.teamOnosCount + 1
+            elseif entity:isa("Vokex") and entity:GetIsAlive() then
+                self.teamVokexCount = self.teamVokexCount + 1
             end
         end
         

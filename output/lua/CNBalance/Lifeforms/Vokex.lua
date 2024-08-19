@@ -51,8 +51,8 @@ local kJumpHeight = 1.4
 
 local kVokexScanDuration = 4
 
-local kShadowStepSpeed = 24 --40
-local kShadowStepSpeedBonusPerCelerity = 1
+local kShadowStepSpeed = 25 --40
+local kShadowStepSpeedBonusPerCelerity = 0.66
 Vokex.kShadowStepDuration = 0.2
 local kShadowStepCooldown = 0.4
 
@@ -343,12 +343,12 @@ end
 
 function Vokex:GetAirFriction()
 
-    local baseFriction = 0.17
 
     if self:GetIsShadowStepping() then
         return 0
     end
-    
+
+    local baseFriction = 0.17
     local timeSinceLastEthereal = Shared.GetTime() - Vokex.kShadowStepDuration - self.timeShadowStep
     if timeSinceLastEthereal < Vokex.kGroundFrictionPostBlinkDelay then
         local frac = timeSinceLastEthereal / Vokex.kGroundFrictionPostBlinkDelay
@@ -410,7 +410,7 @@ function Vokex:GetMovementSpecialTechId()
 end
 
 function Vokex:GetHasMovementSpecial()
-    return true
+    return self:GetHasOneHive()
 end
 
 function Vokex:GetMovementSpecialEnergyCost()
@@ -423,10 +423,6 @@ end
 
 function Vokex:TriggerShadowStep()
 
-    if not self:GetHasMovementSpecial() then
-        return
-    end
-    
     self.ethereal = true
     
     

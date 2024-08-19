@@ -441,7 +441,7 @@ kBlinkEnergyCost = 30 --32
 kHealthOnBlink = 0
 
 --Vokex
-kVokexCost = 42
+kVokexCost = 43
 kVokexUpgradeCost = 5
 
 kVokexShadowStepEnergyCost = 14
@@ -471,7 +471,7 @@ kVortexShadowStepResearchTime = 90
 kVortexLifetime = 5 kVortexInitTime = 0.5
 kVortexRadius = 4
 kVortexEnergyCost = 50
-kVortexPlayerDamagePerSecond = 4 kVortexStructureDamagePerSecond = 80
+kVortexPlayerDamagePerSecond = 6 kVortexStructureDamagePerSecond = 80
 kVortexSuckinVelocityPerSecond = 30
 
 kVortexMaxDamageEndurance = 10 kVortexPerPlayerDamageEnduranceCostPerSecond = 1 --kVortexProjectileEnduranceCost = 0

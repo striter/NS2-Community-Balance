@@ -1108,11 +1108,13 @@ local function GetIsRestricted(type)
 end
 
 local function GetIsDisabled(type)
-	if GetOwnsItem(kNS2PlusPlayTestItemId) then
-		return false
-	end
+	return false
 	
-	return IndexToAlienTechId(type) == kTechId.Vokex
+	--if GetOwnsItem(kNS2PlusPlayTestItemId) then
+	--	return false
+	--end
+
+	--return IndexToAlienTechId(type) == kTechId.Vokex
 end
 
 local function ResourceFetchingDisabled(self, type)

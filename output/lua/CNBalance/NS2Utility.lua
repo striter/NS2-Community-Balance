@@ -285,8 +285,9 @@ if Client then
         local reputationRequirement = kTechReputationByPass[techId]
         if not reputationRequirement then return false end
         local player = Client.GetLocalPlayer()
-        local skill = player:GetPlayerTeamSkill()
-        if skill > 2100 then return false end
+        --local skill = player:GetPlayerTeamSkill()
+        --if skill > 2100 then return false end
+        
         local reputation = Scoreboard_GetPlayerRecord(player:GetClientIndex()).reputation
         if not reputation then return false end
         
