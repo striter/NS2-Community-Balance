@@ -393,20 +393,16 @@ function Vokex:GetJumpHeight()
     return kJumpHeight
 end
 
-function Vokex:GetHasShadowStepAbility()
-    return self:GetHasTwoHives()
-end
-
 function Vokex:GetHasShadowStepCooldown()
     return self.timeShadowStep + kShadowStepCooldown > Shared.GetTime()
 end
 
 function Vokex:GetMovementSpecialTechId()
-    if self:GetCanMetabolizeHealth() then
-        return kTechId.MetabolizeHealth
-    else
+    --if self:GetCanMetabolizeHealth() then
+    --    return kTechId.MetabolizeHealth
+    --else
         return kTechId.MetabolizeEnergy
-    end
+    --end
 end
 
 function Vokex:GetHasMovementSpecial()
@@ -462,9 +458,9 @@ function Vokex:GetHasMetabolizeAnimationDelay()
     return self.timeMetabolize + kMetabolizeAnimationDelay > Shared.GetTime()
 end
 
-function Vokex:GetCanMetabolizeHealth()
-    return self:GetHasTwoHives()
-end
+--function Vokex:GetCanMetabolizeHealth()
+--    return GetHasTech(self,kTechId.MetabolizeHealth)
+--end
 
 function Vokex:OnProcessMove(input)
 
@@ -591,6 +587,10 @@ function Vokex:GetMovementSpecialCooldown()
     end
     
     return cooldown
+end
+
+function Vokex:GetAdrenalineEnergyRechargeRate()
+    return Vokex.kAdrenalineEnergyRecuperationRate
 end
 
 function Vokex:GetBaseCarapaceArmorBuff()

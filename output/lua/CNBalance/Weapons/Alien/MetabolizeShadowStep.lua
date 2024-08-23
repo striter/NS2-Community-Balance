@@ -114,15 +114,15 @@ function MetabolizeShadowStep:OnTag(tagName)
         if player then
             player:DeductAbilityEnergy(kMetabolizeEnergyCost)
             player:TriggerEffects("metabolize")
-            if player:GetCanMetabolizeHealth() then
-                local totalHealed = player:AddHealth(kMetabolizeHealthRegain, false, false, nil, self, true)
-                if Client and totalHealed > 0 then
-                    local GUIRegenerationFeedback = ClientUI.GetScript("GUIRegenerationFeedback")
-                    GUIRegenerationFeedback:TriggerRegenEffect()
-                    local cinematic = Client.CreateCinematic(RenderScene.Zone_ViewModel)
-                    cinematic:SetCinematic(kRegenerationViewCinematic)
-                end
-            end
+            --if player:GetCanMetabolizeHealth() then
+            --    local totalHealed = player:AddHealth(kMetabolizeHealthRegain, false, false, nil, self, true)
+            --    if Client and totalHealed > 0 then
+            --        local GUIRegenerationFeedback = ClientUI.GetScript("GUIRegenerationFeedback")
+            --        GUIRegenerationFeedback:TriggerRegenEffect()
+            --        local cinematic = Client.CreateCinematic(RenderScene.Zone_ViewModel)
+            --        cinematic:SetCinematic(kRegenerationViewCinematic)
+            --    end
+            --end
             player:AddEnergy(kMetabolizeEnergyRegain)
             self.lastPrimaryAttackTime = Shared.GetTime()
             self.primaryAttacking = false

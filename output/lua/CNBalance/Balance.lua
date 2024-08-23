@@ -599,12 +599,12 @@ kCombatBuilderDropCost = 5
 kCombatBuilderPointValue = 2
 
 kMarineSentryCost = 2
-kMarineSentryPersonalCost = 10
+kMarineSentryPersonalCost = 9
 kMarineSentryDamage = 3  kMarineSentryWeapon1Scalar = 1.11  kMarineSentryWeapon2Scalar = 1.22 kMarineSentryWeapon3Scalar = 1.33
 kMarineSentryBuildTime = 3
 
 kWeaponCacheCost = 3
-kWeaponCachePersonalCost = 15
+kWeaponCachePersonalCost = 12
 kWeaponCacheBuildTime = 6
 kWeaponCachePersonalCarries = 1
 kMarineSentryPersonalCarries = 2
