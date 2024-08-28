@@ -222,27 +222,6 @@ function Vokex:MovementModifierChanged(newMovementModifierState, input)
     end
 end
 
-function Vokex:HandleAttacks(input)
-    if not self:GetIsShadowStepping() then
-        
-
-        local viewCoords = self:GetViewCoords()
-        local movementDirection = viewCoords:TransformVector( input.move)
-
-        if movementDirection:GetLength() == 0 then
-            movementDirection = viewCoords.zAxis
-        end
-
-        movementDirection.y = 0
-        movementDirection:Normalize()
-
-        self.shadowStepDirection = movementDirection
-    end
-
-    Player.HandleAttacks(self,input)
-
-end
-
 function Vokex:OnProcessMove(input)
 
     Alien.OnProcessMove(self,input)
@@ -322,6 +301,13 @@ function Vokex:GetAcceleration()
     return 11
 end
 
+function Vokex:OverrideUpdateOnGround(onGround)
+    if self:GetIsShadowStepping() then
+        return false
+    end
+    return onGround
+end
+
 function Vokex:GetGroundFriction()
     
     if self:GetIsShadowStepping() then
@@ -360,7 +346,23 @@ end
 function Vokex:ModifyVelocity(input, velocity, deltaTime)
 
     if self:GetIsShadowStepping() then
-        --local wishDir = self.shadowStepDirection * kShadowStepSpeed
+        --velocity = self.shadowStepDirection
+        velocity:Add(self.shadowStepDirection)
+        velocity:Normalize()
+        velocity:Scale(kShadowStepSpeed)
+    else
+        local viewCoords = self:GetViewCoords()
+        local movementDirection = viewCoords:TransformVector( input.move)
+
+        if movementDirection:GetLength() == 0 then
+            movementDirection = viewCoords.zAxis
+        end
+
+        movementDirection.y = 0
+        movementDirection:Normalize()
+        movementDirection:Scale(kShadowStepSpeed)
+
+        self.shadowStepDirection = movementDirection
     end
 
 end
@@ -428,15 +430,11 @@ function Vokex:TriggerShadowStep()
 
         --local velocity = self:GetVelocity()
         self.hasDoubleJumped = false
-        local speed = kShadowStepSpeed + (GetHasCelerityUpgrade(self) and self:GetSpurLevel() * kShadowStepSpeedBonusPerCelerity or 0)
-        
-        self:SetVelocity( self.shadowStepDirection * speed * self:GetSlowSpeedModifier())
-        
         self.timeShadowStep = Shared.GetTime()
         self.shadowStepping = true
         
         self:TriggerEffects("shadow_step", {effecthostcoords = Coords.GetLookIn(self:GetOrigin(), self.shadowStepDirection)})
-        
+
         -- /*
         -- if Client and Client.GetLocalPlayer() == self then
         --     self:TriggerFirstPersonMiniBlinkEffect(direction)
