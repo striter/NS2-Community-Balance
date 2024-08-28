@@ -441,7 +441,7 @@ kBlinkEnergyCost = 30 --32
 kHealthOnBlink = 0
 
 --Vokex
-kVokexCost = 43
+kVokexCost = 42
 kVokexUpgradeCost = 5
 
 kVokexShadowStepEnergyCost = 14

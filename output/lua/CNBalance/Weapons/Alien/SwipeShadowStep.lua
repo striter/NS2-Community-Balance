@@ -64,7 +64,7 @@ end
 function SwipeShadowStep:OnPrimaryAttack(player)
     local hasEnergy = player:GetEnergy() >= self:GetEnergyCost()
     local cooledDown = (not self.nextAttackTime) or (Shared.GetTime() >= self.nextAttackTime)
-    local shadowStepping = player:GetIsShadowStepping()
+    local shadowStepping = false --player:GetIsShadowStepping()
     if not shadowStepping and hasEnergy and cooledDown then
         self.primaryAttacking = true
     else

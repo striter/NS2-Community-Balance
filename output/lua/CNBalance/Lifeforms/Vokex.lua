@@ -150,7 +150,6 @@ function Vokex:OnInitialized()
     
         self.blinkDissolve = 0
         
-        self:AddHelpWidget("GUIFadeShadowStepHelp", 2)
         self:AddHelpWidget("GUITunnelEntranceHelp", 1)
 
         InitMixin(self, RailgunTargetMixin)
