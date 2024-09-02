@@ -97,9 +97,9 @@ function PhaseGate:Phase(user)
 
         TransformPlayerCoordsForPhaseGate(user, self:GetCoords(), destinationCoords)
 
-        if user.DeductArmorWithAutoWeld then
-            user:DeductArmorWithAutoWeld(kMarinePhaseArmorDeduct)
-        end
+        --if user.DeductArmorWithAutoWeld then
+        --    user:DeductArmorWithAutoWeld(kMarinePhaseArmorDeduct)
+        --end
         
         user:SetOrigin(self.destinationEndpoint)
 

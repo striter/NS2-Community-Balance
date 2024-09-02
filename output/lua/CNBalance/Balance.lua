@@ -9,12 +9,12 @@ kResourceTowerResourceInterval = 6
 kTeamResourceWithoutTower = 0.5
 kMaxEfficiencyTowers = 3
 kTeamResourceEachTower = 1
-kPlayerResEachTower = 0.13 kPlayerResDeductionAboveLimit = 0.0025
+kPlayerResEachTower = 0.125 kPlayerResDeductionAboveLimit = 0.0025
 
 --Pres reward for aggressive playing (too many farmers?)
 kTechDataPersonalResOnKill = {
     --Marines
-    [kTechId.PowerPoint] = 0.8,
+    [kTechId.PowerPoint] = 1,
     [kTechId.MAC] = 0.3,    [kTechId.SentryBattery] = 4, [kTechId.Sentry] = 1, [kTechId.ARC] = 2.5,      --CPVE
     [kTechId.Extractor] = 3, [kTechId.PoweredExtractor] = 5,
     [kTechId.RoboticsFactory] = 3, [kTechId.ARCRoboticsFactory] = 5,
@@ -61,12 +61,12 @@ kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKi
     [kTechId.Drifter] = 1,
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.GorgeTunnel] = 3,
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
-    [kTechId.Skulk] = 2, [kTechId.Gorge] = 5,[kTechId.Prowler] = 8, [kTechId.Lerk] = 10, [kTechId.Fade] = 15, [kTechId.Onos] = 18,
+    [kTechId.Skulk] = 2, [kTechId.Gorge] = 5,[kTechId.Prowler] = 7, [kTechId.Lerk] = 9, [kTechId.Fade] = 14, [kTechId.Vokex] = 15,[kTechId.Onos] = 18,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
     [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20
 }
 kMilitaryProtocolPlayerResourcesPerKill = {
-    [kTechId.Skulk] = 1, [kTechId.Gorge] = 2, [kTechId.Prowler] = 3, [kTechId.Lerk] = 4, [kTechId.Fade] = 6, [kTechId.Onos] = 8,
+    [kTechId.Skulk] = 1, [kTechId.Gorge] = 2, [kTechId.Prowler] = 3, [kTechId.Lerk] = 4, [kTechId.Fade] = 6,[kTechId.Vokex] = 6.5, [kTechId.Onos] = 8,
 }
 
 kMarineRespawnTime = 9
