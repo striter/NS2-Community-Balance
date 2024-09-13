@@ -527,6 +527,27 @@ function BuildTechData()
         [kTechDataAllowConsumeDrop] = true,
     })
 
+
+    table.insert(techData,  {
+        [kTechDataId] = kTechId.BioformSuppressor,
+        [kTechDataGhostModelClass] = "MarineGhostModel",
+        [kTechDataRequiresPower] = true,
+        [kTechDataMapName] = BioformSuppressor.kMapName,
+        [kTechDataDisplayName] = "BIOFORM_SUPPRESSOR",
+        [kTechDataCostKey] = kBioformSuppressorCost,
+        [kTechDataBuildTime] = kBioformSuppressorBuildTime,
+        [kTechDataMaxHealth] = kBioformSuppressorHealth,
+        [kTechDataMaxArmor] = kBioformSuppressorArmor,
+        [kTechDataEngagementDistance] = kBioformSuppressorEngagementDistance,
+        [kTechDataModel] = BioformSuppressor.kModelName,
+        [kTechDataPointValue] = kBioformSuppressorPointValue,
+        [kTechDataHotkey] = Move.A,
+        [kTechDataNotOnInfestation] = kPreventMarineStructuresOnInfestation,
+        [kTechDataHint] = "BIOFORM_SUPPRESSOR_HINT",
+        [kTechDataTooltipInfo] = "BIOFORM_SUPPRESSOR_TOOLTIP",
+        [kTechDataObstacleRadius] = 5.0,
+    })
+    
     table.insert(techData,
             {
                 [kTechDataId] = kTechId.BuildMenu,

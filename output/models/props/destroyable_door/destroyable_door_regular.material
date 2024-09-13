@@ -1,0 +1,6 @@
+shader = "shaders/Model_emissive.surface_shader"
+albedoMap = "models/props/destroyable_door/destroyable_door_regular.dds"
+normalMap = "models/props/destroyable_door/destroyable_door_regular_normal.dds"
+emissiveMap = "models/props/destroyable_door/destroyable_door_regular_illum.dds"
+specularMap = "models/props/destroyable_door/destroyable_door_regular_spec.dds"
+surface = "metal"

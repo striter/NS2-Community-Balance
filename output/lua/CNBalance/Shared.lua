@@ -1,5 +1,6 @@
 --Script.Load("lua/CNBalance/Weapons/Marine/ImpactGrenade.lua")
 
+Script.Load("lua/Combat/BioformSuppressor.lua")
 Script.Load("lua/Combat/WeaponCache.lua")
 Script.Load("lua/Combat/MarineSentry.lua")
 

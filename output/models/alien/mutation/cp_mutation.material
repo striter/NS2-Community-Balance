@@ -1,0 +1,4 @@
+shader = "shaders/Model.surface_shader"
+albedoMap = "models/alien/mutation/cp_mutation.dds"
+specularMap = "models/alien/mutation/cp_mutation_spec.dds"
+normalMap = "models/alien/mutation/cp_mutation_norm.dds"

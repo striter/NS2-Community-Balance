@@ -246,3 +246,4 @@ kWelderSporeDamagePerSecond = 250 kFlamethrowerSporeDamagePerSecond = 1000
 --Combat
 kWeaponCacheHealth = 800    kWeaponCacheArmor = 150   kWeaponCachePointValue = 10
 kMarineSentryHealth = 500    kMarineSentryArmor = 50    kMarineSentryPointValue = 8
+kBioformSuppressorHealth = 1800 kBioformSuppressorArmor = 1800 kBioformSuppressorPointValue = 30

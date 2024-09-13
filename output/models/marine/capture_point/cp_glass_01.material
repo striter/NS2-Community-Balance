@@ -1,0 +1,5 @@
+shader 				= "models/marine/capture_point/cp_glass_01.surface_shader"
+albedoMap			= "models/marine/capture_point/cp_glass_01.dds"
+specularMap			= "models/marine/capture_point/cp_glass_01_spec.dds"
+normalMap 			= "models/marine/capture_point/cp_glass_01_norm.dds"
+

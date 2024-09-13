@@ -1,0 +1,6 @@
+shader = "models/marine/marine.surface_shader"
+albedoMap = "models/marine/capture_point/cp_diffuse.dds"
+normalMap = "models/marine/capture_point/cp_diffuse_norm.dds"
+emissiveMap = "models/marine/capture_point/cp_diffuse_illum.dds"
+specularMap = "models/marine/capture_point/cp_diffuse_spec.dds"
+surface = "metal"

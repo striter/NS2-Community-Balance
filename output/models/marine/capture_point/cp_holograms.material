@@ -1,0 +1,4 @@
+shader = "shaders/Emissive.surface_shader"
+albedoMap = "models/marine/capture_point_1/cp_holograms.dds"
+normalMap = "materials/dev/dev_normal.dds"
+emissiveMap = "models/marine/capture_point_1/cp_holograms.dds"

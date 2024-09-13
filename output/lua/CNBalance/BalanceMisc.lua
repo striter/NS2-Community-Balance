@@ -24,13 +24,17 @@ kHiveInfestationRadius = 20
 kInfestationRadius = 7.5    kInfestationPerBiomass = 0.4
 
 kPistolWeight = 0.0
-kRifleWeight = 0.13
-kHeavyRifleWeight = 0.25
-kHeavyMachineGunWeight = 0.2
-kCannonWeight = 0.23
+kRifleWeight = 0.12
+kHeavyRifleWeight = 0.2
+kHeavyMachineGunWeight = 0.18
+kCannonWeight = 0.2
 kGrenadeLauncherWeight = 0.15
 kFlamethrowerWeight = 0.14
 kShotgunWeight = 0.14
+kKnifeWeight = -0.01
+kSubMachineGunWeight = 0.08
+kLightMachineGunWeight = 0.13
+kRevolverWeight = 0
 
 kMaxInfantryPortalsPerCommandStation = 99
 kNumMines = 4

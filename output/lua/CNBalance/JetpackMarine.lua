@@ -69,8 +69,69 @@ function JetpackMarine:ModifyDamageTaken(damageTable, attacker, doer, damageType
         return
     end
 end
+
 --function JetpackMarine:OnWebbed()   --突然离世
 --    if not self:GetIsOnGround() then
 --        self:SetStun(kDisruptMarineTime)
 --    end
 --end
+
+local kFlySpeed = 9
+local kFlyAcceleration = 28
+function JetpackMarine:ModifyVelocity(input, velocity, deltaTime)
+
+    if self:GetIsJetpacking() then
+
+        local verticalAccel = 22 
+
+        if self:GetIsWebbed() then
+            verticalAccel = 5
+        elseif input.move:GetLength() == 0 then
+            verticalAccel = 26
+        end
+
+        self.onGround = false
+        local thrust = math.max(0, -velocity.y) / 6
+        velocity.y = math.min(5, velocity.y + verticalAccel * deltaTime * (1 + thrust * 2.5))
+
+    end
+
+    if not self.onGround then
+
+        -- do XZ acceleration
+        local prevXZSpeed = velocity:GetLengthXZ()
+        local maxSpeedTable = { maxSpeed = math.max(kFlySpeed - math.max(self:GetWeaponsWeight() - kRifleWeight , 0) * 33, prevXZSpeed) }       --multiplier per 0.01 weight above
+        self:ModifyMaxSpeed(maxSpeedTable)
+        local maxSpeed = maxSpeedTable.maxSpeed
+
+        if not self:GetIsJetpacking() then
+            maxSpeed = prevXZSpeed
+        end
+
+        local wishDir = self:GetViewCoords():TransformVector(input.move)
+        local acceleration = 0
+        wishDir.y = 0
+        wishDir:Normalize()
+
+        acceleration = kFlyAcceleration
+        acceleration = acceleration
+
+        velocity:Add(wishDir * acceleration * self:GetInventorySpeedScalar() * deltaTime)
+
+        if velocity:GetLengthXZ() > maxSpeed then
+
+            local yVel = velocity.y
+            velocity.y = 0
+            velocity:Normalize()
+            velocity:Scale(maxSpeed)
+            velocity.y = yVel
+
+        end
+
+        if self:GetIsJetpacking() then
+            velocity:Add(wishDir * kJetpackingAccel * deltaTime)
+        end
+
+    end
+
+end

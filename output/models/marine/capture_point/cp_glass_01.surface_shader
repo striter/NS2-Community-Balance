@@ -1,0 +1,38 @@
+<shader>
+	
+	<inputs>
+		<input name="albedoMap" 		type="texture" address="wrap" />
+		<input name="specularMap" 		type="texture" address="wrap" />
+		<input name="normalMap" 		type="texture" address="wrap" />		
+
+	</inputs>
+	
+	<code>
+	<![CDATA[
+		float3 DecodeNormal(const float4 texNormal)
+		{
+			float4 n = texNormal * 2 - 1;
+			//return float3(n.a, n.g, sqrt(1 - dot(n.ag, n.ag)) );
+			return n.xyz;
+		}
+		void MaterialShader(in Material_Input input, inout Material material)
+		{			
+			float4 specularGloss = tex2D(specularMap, input.texCoord);
+		
+			//this works
+			float4 albedo = tex2D(albedoMap, input.texCoord);
+			material.emissive = albedo.rgb * .15;
+			material.tsNormal 	= DecodeNormal( tex2D(normalMap, input.texCoord) );
+			//end working
+			
+
+//			material.specular	= specularGloss.rgb;
+//			material.gloss		= specularGloss.a;
+			
+			
+
+		}
+	]]>
+	</code>
+
+</shader>

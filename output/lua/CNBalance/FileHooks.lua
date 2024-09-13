@@ -56,6 +56,7 @@ ModLoader.SetupFileHook("lua/Weapons/DotMarker.lua", "lua/CNBalance/Weapons/DotM
 --Mixin
 
 ModLoader.SetupFileHook("lua/ClientLOSMixin.lua", "lua/CNBalance/Mixin/ClientLOSMixin.lua", "post" )
+ModLoader.SetupFileHook("lua/LOSMixin.lua", "lua/CNBalance/Mixin/LOSMixin.lua", "post" )
 ModLoader.SetupFileHook("lua/ScoringMixin.lua", "lua/CNBalance/Mixin/ScoringMixin.lua", "post" )
 ModLoader.SetupFileHook("lua/Weapons/BulletsMixin.lua", "lua/CNBalance/Mixin/BulletsMixin.lua", "post")
 ModLoader.SetupFileHook("lua/FireMixin.lua", "lua/CNBalance/Mixin/FireMixin.lua", "replace")

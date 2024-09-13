@@ -199,13 +199,11 @@ kRevolverDamageType = kDamageType.Normal
 kRevolverClipSize = 6
 kRevolverNumClips = 5
 kRevolverCost = 0
-kRevolverWeight = 0.01
 --
 
 --SubMachineGun
 kSubMachineGunClipSize = 42
 kSubMachineGunClipNum = 5
-kSubMachineGunWeight = 0.08
 kSubMachineGunDamage = 11
 kSubMachineGunDamageType = kDamageType.Normal
 kSubMachineGunCost = 0
@@ -217,7 +215,6 @@ kSubMachineGunPointValue = 0
 kRifleMeleeDamage = 10
 
 --Knife
-kKnifeWeight = -0.05
 kKnifeDamage = 20
 kKnifeRange = 1.3
 kKnifeCost = 0
@@ -230,7 +227,6 @@ kAxeDamageType = kDamageType.Structural
 --Light Machine Gun
 kLightMachineGunClipSize = 55
 kLightMachineGunClipNum = 4
-kLightMachineGunWeight = 0.11
 kLightMachineGunDamage = 10
 kLightMachineGunDamageType = kDamageType.Normal
 kLightMachineGunCost = 0
@@ -608,6 +604,10 @@ kWeaponCachePersonalCost = 12
 kWeaponCacheBuildTime = 6
 kWeaponCachePersonalCarries = 1
 kMarineSentryPersonalCarries = 2
+
+kBioformSuppressorCost = 50
+kBioformSuppressorEngagementDistance = 5
+kBioformSuppressorBuildTime = 60
 
 kMotionTrackInterval = 6
 kMotionTrackMinSpeed = 5

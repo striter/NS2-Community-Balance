@@ -4,12 +4,10 @@ debug.appendtoenum(kTechId, "MilitaryProtocol")
 debug.appendtoenum(kTechId, "MilitaryProtocolBroadCast")
 debug.appendtoenum(kTechId, "MotionTrack")
 
-
 debug.appendtoenum(kTechId, "StandardSupply")
 debug.appendtoenum(kTechId, "StandardStation")
 debug.appendtoenum(kTechId, "LightMachineGunUpgrade")
 debug.appendtoenum(kTechId, "DragonBreath")
-
 
 debug.appendtoenum(kTechId, "ElectronicSupply")
 debug.appendtoenum(kTechId, "ElectronicStation")
@@ -44,6 +42,7 @@ debug.appendtoenum(kTechId, "ExosuitProtoUpgrade")
 debug.appendtoenum(kTechId, "ExosuitPrototypeLab")
 debug.appendtoenum(kTechId, "CannonProtoUpgrade")
 debug.appendtoenum(kTechId, "CannonPrototypeLab")
+debug.appendtoenum(kTechId, "BioformSuppressor")
 
 --Weapons
 debug.appendtoenum(kTechId, "Knife")
