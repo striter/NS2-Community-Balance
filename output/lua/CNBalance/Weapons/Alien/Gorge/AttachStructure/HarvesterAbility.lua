@@ -9,7 +9,7 @@ function HarvesterAbility:GetDropRange()
 end
 
 function HarvesterAbility:GetEnergyCost()
-    return 40
+    return 25
 end
 
 function HarvesterAbility:GetDropStructureId()

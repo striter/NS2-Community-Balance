@@ -1033,6 +1033,9 @@ function MAC:OnUpdate(deltaTime)
             self.empDetectionTime = now
 
             if self:GetIsCorroded() then     --Reset trigger
+                if self.empBlast then
+                    TriggerEMPBlast(self)
+                end
                 self.empTriggeredTime =  now
             end
             

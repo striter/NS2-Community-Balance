@@ -9,7 +9,7 @@ function ShadeHiveAbility:GetDropRange()
 end
 
 function ShadeHiveAbility:GetEnergyCost()
-    return 80
+    return 50
 end
 
 function ShadeHiveAbility:GetDropStructureId()

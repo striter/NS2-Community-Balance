@@ -9,7 +9,7 @@ function CragHiveAbility:GetDropRange()
 end
 
 function CragHiveAbility:GetEnergyCost()
-    return 80
+    return 50
 end
 
 function CragHiveAbility:GetDropStructureId()

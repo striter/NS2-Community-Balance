@@ -9,7 +9,7 @@ function ShiftHiveAbility:GetDropRange()
 end
 
 function ShiftHiveAbility:GetEnergyCost()
-    return 80
+    return 50
 end
 
 function ShiftHiveAbility:GetDropStructureId()

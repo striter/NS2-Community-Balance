@@ -39,8 +39,11 @@ local function PerformDetection(self)
             if not detectable:isa("Alien")
                     or not GetHasCamouflageUpgrade(detectable) then
                 detectable:SetDetected(true)
+                if detectable:isa("Skulk") and self.SetParasited then
+                    self:SetParasited(detectable)
+                end
             end
-            
+
             if detectable.OnScan then
                 detectable:OnScan()
             end

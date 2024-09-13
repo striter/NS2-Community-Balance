@@ -84,9 +84,9 @@ kMineResearchTime  = 20
 kGrenadeTechResearchCost = 10   --10
 kGrenadeTechResearchTime = 20   --45
 
-kMineCost = 10
+kMineCost = 15
 kMineDamage = 135
-kDropMineCost = 7
+kDropMineCost = 12
 kDropMineCooldown = 0
 
 kShotgunTechResearchCost = 20
@@ -265,7 +265,7 @@ kMinigunDamage = 9
 kMinigunDamageType = kDamageType.Exosuit
 kRailgunDamage = 10
 kRailgunChargeDamage = 150
-kRailgunDamageType = kDamageType.Exosuit
+kRailgunDamageType = kDamageType.Structural
 
 kPulseGrenadeDamageRadius = 4
 kPulseGrenadeEnergyDamageRadius = 4
@@ -444,7 +444,7 @@ kHealthOnBlink = 0
 kVokexCost = 42
 kVokexUpgradeCost = 5
 
-kVokexShadowStepEnergyCost = 14
+kVokexShadowStepEnergyCost = 13
 kSwipeShadowStepDamage = 40
 kVokexGestateTime = 25
 kVokexEggCost = 80
@@ -464,7 +464,7 @@ kAcidRocketBombDamage = 30
 kAcidRocketBombRadius = 0.3
 kAcidRocketBombSplashRadius = 4.5
 kAcidRocketBombDotIntervall = 0.4
-kAcidRocketBombDuration = 2
+kAcidRocketBombDuration = 3
 
 kVortexShadowStepResearchCost = 30
 kVortexShadowStepResearchTime = 90

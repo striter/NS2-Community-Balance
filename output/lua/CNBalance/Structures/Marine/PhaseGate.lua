@@ -97,9 +97,6 @@ function PhaseGate:Phase(user)
 
         TransformPlayerCoordsForPhaseGate(user, self:GetCoords(), destinationCoords)
 
-        --if user.DeductArmorWithAutoWeld then
-        --    user:DeductArmorWithAutoWeld(kMarinePhaseArmorDeduct)
-        --end
         
         user:SetOrigin(self.destinationEndpoint)
 
@@ -110,16 +107,30 @@ function PhaseGate:Phase(user)
         if Server then
             
             local phaseTime = kBeaconInstantPhaseCooldown
+            local destinationPhaseGate,gateCount = GetDestinationGate(self)
+            if destinationPhaseGate  then
+                if destinationPhaseGate:GetIsCorroded() then
+                    if user.DeductArmorWithAutoWeld then
+                        user:DeductArmorWithAutoWeld(kMarinePhaseArmorDeduct)
+                        user:SetCorroded()
+                    end
 
+                    if user.SetCorroded then
+                        user:SetCorroded()
+                    end
+                end
+
+                self:TransferParasite(user)
+                user:TransferParasite(destinationPhaseGate)
+            end
+            
             local instantPhase = user.timeLastBeacon and Shared.GetTime() - user.timeLastBeacon <= kBeaconInstantPhaseDuration
             if not instantPhase then
-                local _,gateCount = GetDestinationGate(self)
                 gateCount = gateCount or 2
                 phaseTime = kPhaseCooldownBase + math.max( 0,gateCount - 2) * kPhaseCooldownPerGateUpEnd
             end
-            
+
             local playerAboveLimit = GetPlayersAboveLimit(self:GetTeamNumber())
-            
             self.cooldownNextPhase = phaseTime + playerAboveLimit * kPhaseCooldownPerPlayerAboveLimit
         end
         

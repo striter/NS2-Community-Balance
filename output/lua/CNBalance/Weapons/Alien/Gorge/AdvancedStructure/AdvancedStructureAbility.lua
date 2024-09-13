@@ -62,7 +62,7 @@ function AdvancedStructureAbility:RequiresInfestation()
 end
 
 function AdvancedStructureAbility:GetEnergyCost(player)
-    return 30
+    return 15
 end
 
 function AdvancedStructureAbility:GetDropRange()
