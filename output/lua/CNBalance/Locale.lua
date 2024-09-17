@@ -23,7 +23,14 @@ if kTranslateMessage then
     
     kTranslateMessage["MILITARY_PROTOCOL"] = "军用统筹协防"
     kTranslateMessage["MILITARY_PROTOCOL_TOOLTIP"] = "注意:请[谨慎签署]该协议.\n*协议无法取消,留意不可抗力.\n*指挥官将作为军需统筹者.\n+所有陆战队将统一着装.\n+陆战队获得军用级制式装备.\n+协防生物质将被转化为资源.\n+被动团队收入随研发增加.\n+个人资源主动收入增加.\n-个人资源被动收入停止."
+    
+    kTranslateMessage["BIOFORM_SUPPRESSOR"] = "生物质压制器"
+    kTranslateMessage["BIOFORM_SUPPRESSOR_HINT"] = "压制大范围内的生物质"
+    kTranslateMessage["BIOFORM_SUPPRESSOR_TOOLTIP"] = "提供生物压制协议.\n压制大范围内的生物质活性."
 
+    kTranslateMessage["BIOFORM_SUPPRESS_PROTOCOL"] = "生物质压制协议"
+    kTranslateMessage["BIOFORM_SUPPRESS_PROTOCOL_TOOLTIP"] = "对大范围内的生物质进行活性压制.\n需较长时间进行保护与部署."
+    
     kTranslateMessage["MOTION_TRACK"] = "动态侦测"
     kTranslateMessage["MOTION_TRACK_TOOLTIP"] = "每隔一段时间.\n揭露站点内的高速活跃生物."
 

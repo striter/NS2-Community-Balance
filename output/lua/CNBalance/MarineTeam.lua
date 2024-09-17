@@ -182,6 +182,9 @@ function MarineTeam:InitTechTree()
     self.techTree:AddBuyNode(kTechId.DualRailgunExosuit, kTechId.ExosuitPrototypeLab, kTechId.CannonPrototypeLab)
     self.techTree:AddTargetedActivation(kTechId.DropDualRailgunExosuit,     kTechId.ExosuitPrototypeLab, kTechId.CannonPrototypeLab)
     
+    self.techTree:AddBuildNode(kTechId.BioformSuppressor,kTechId.InfantryPortal)
+    self.techTree:AddUpgradeNode(kTechId.BioformSuppressProtocol,kTechId.BioformSuppressor)
+    
     -- Robotics factory menus
     self.techTree:AddMenu(kTechId.RoboticsFactoryARCUpgradesMenu)
     self.techTree:AddMenu(kTechId.RoboticsFactoryMACUpgradesMenu)

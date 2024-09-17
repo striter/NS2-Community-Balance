@@ -532,6 +532,7 @@ function BuildTechData()
         [kTechDataId] = kTechId.BioformSuppressor,
         [kTechDataGhostModelClass] = "MarineGhostModel",
         [kTechDataRequiresPower] = true,
+        [kTechDataIgnorePathingMesh] = true,
         [kTechDataMapName] = BioformSuppressor.kMapName,
         [kTechDataDisplayName] = "BIOFORM_SUPPRESSOR",
         [kTechDataCostKey] = kBioformSuppressorCost,
@@ -541,11 +542,22 @@ function BuildTechData()
         [kTechDataEngagementDistance] = kBioformSuppressorEngagementDistance,
         [kTechDataModel] = BioformSuppressor.kModelName,
         [kTechDataPointValue] = kBioformSuppressorPointValue,
-        [kTechDataHotkey] = Move.A,
+        [kTechDataSupply] = kBioformSuppressorSupply,
         [kTechDataNotOnInfestation] = kPreventMarineStructuresOnInfestation,
         [kTechDataHint] = "BIOFORM_SUPPRESSOR_HINT",
         [kTechDataTooltipInfo] = "BIOFORM_SUPPRESSOR_TOOLTIP",
-        [kTechDataObstacleRadius] = 5.0,
+        [kStructureAttachClass] = "ResourcePoint",
+        [kVisualRange] = BioformSuppressor.kRange,
+    })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.BioformSuppressProtocol,
+        [kTechDataCostKey] = kBioformSuppressProtocolCost,
+        [kTechDataResearchTimeKey] = kBioformSuppressProtocolTime,
+        [kTechDataDisplayName] = "BIOFORM_SUPPRESS_PROTOCOL",
+        [kTechDataTooltipInfo] = "BIOFORM_SUPPRESS_PROTOCOL_TOOLTIP",
+        [kTechDataResearchName] = "BIOFORM_SUPPRESS_PROTOCOL",
+        [kVisualRange] = BioformSuppressor.kRange
     })
     
     table.insert(techData,

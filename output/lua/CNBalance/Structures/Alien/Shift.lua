@@ -7,5 +7,5 @@ function Shift:OnCreate()
 end
 
 function Shift:GetHealthPerBioMass()
-    return kCragHealthPerBioMass
+    return kShiftHealthPerBioMass
 end

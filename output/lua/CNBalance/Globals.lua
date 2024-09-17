@@ -37,6 +37,8 @@ debug.appendtoenum(kDeathMessageIcon, "ShadowStep")
 
 debug.appendtoenum(kMinimapBlipType, "HeavyMarine")
 debug.appendtoenum(kMinimapBlipType, "DevouredPlayer")
+debug.appendtoenum(kMinimapBlipType, "BioformSuppressor")
+
 debug.appendtoenum(kMinimapBlipType, "Prowler")
 debug.appendtoenum(kMinimapBlipType, "Vokex")
 debug.appendtoenum(kMinimapBlipType, "WeaponCache")

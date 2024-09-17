@@ -9,7 +9,7 @@ kResourceTowerResourceInterval = 6
 kTeamResourceWithoutTower = 0.5
 kMaxEfficiencyTowers = 3
 kTeamResourceEachTower = 1
-kPlayerResEachTower = 0.125 kPlayerResDeductionAboveLimit = 0.0025
+kPlayerResEachTower = 0.135 kPlayerResDeductionAboveLimit = 0.005
 
 --Pres reward for aggressive playing (too many farmers?)
 kTechDataPersonalResOnKill = {
@@ -48,7 +48,7 @@ kTechDataTeamResOnKill = {
 kAssistMinimumDamageFraction = 0.35      --Avoid parasiter or babbler assists ,feels pretty weird
 kBountyScoreEachAssist = 1 kBountyScoreEachKill = 2 kMaxBountyScore = 512       --You can't kill 256 players in a row?
 kBountyClaimMinMarine = 5 kBountyClaimMinJetpack = 8 kBountyClaimMinExo = 12
-kBountyClaimMinSkulk = 5 kBountyClaimMinAlien = 8 kBountyClaimMinFade = 8 kBountyClaimMinOnos = 12
+kBountyClaimMinSkulk = 5 kBountyClaimMinAlien = 8 kBountyClaimMinFade = 10 kBountyClaimMinOnos = 12
 kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 20
 
 
@@ -84,7 +84,7 @@ kMineResearchTime  = 20
 kGrenadeTechResearchCost = 10   --10
 kGrenadeTechResearchTime = 20   --45
 
-kMineCost = 15
+kMineCost = 18
 kMineDamage = 135
 kDropMineCost = 12
 kDropMineCooldown = 0
@@ -606,8 +606,13 @@ kWeaponCachePersonalCarries = 1
 kMarineSentryPersonalCarries = 2
 
 kBioformSuppressorCost = 50
+kBioformSuppressorSupply = 120
 kBioformSuppressorEngagementDistance = 5
 kBioformSuppressorBuildTime = 60
+
+kBioformSuppressProtocolCost = 0
+kBioformSuppressProtocolTime = 30
+kBioformSuppressRange = 58
 
 kMotionTrackInterval = 6
 kMotionTrackMinSpeed = 5

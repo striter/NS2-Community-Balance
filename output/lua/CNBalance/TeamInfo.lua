@@ -50,8 +50,6 @@ AddMixinNetworkVars(TeamMixin, networkVars)
 
 TeamInfo.kRelevantTechIdsMarine =
 {
-    kTechId.MilitaryProtocol,
-    kTechId.MotionTrack,
     kTechId.ShotgunTech,
     kTechId.MinesTech,
     kTechId.CombatBuilderTech,
@@ -60,13 +58,6 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.AdvancedArmory,
     kTechId.AdvancedArmoryUpgrade,
 
-    kTechId.Weapons1,
-    kTechId.Weapons2,
-    kTechId.Weapons3,
-    kTechId.Armor1,
-    kTechId.Armor2,
-    kTechId.Armor3,
-
     kTechId.JetpackProtoUpgrade,
     kTechId.ExosuitProtoUpgrade,
     kTechId.CannonProtoUpgrade,
@@ -74,10 +65,20 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.ExosuitPrototypeLab,
     kTechId.CannonPrototypeLab,
 
-    kTechId.UpgradeRoboticsFactory,
+    kTechId.Weapons1,
+    kTechId.Weapons2,
+    kTechId.Weapons3,
+    kTechId.Armor1,
+    kTechId.Armor2,
+    kTechId.Armor3,
 
+    --kTechId.UpgradeRoboticsFactory,
+    kTechId.BioformSuppressProtocol,
+    
     kTechId.PhaseTech,
+    kTechId.MotionTrack,
 
+    kTechId.MilitaryProtocol,
     kTechId.StandardStation,
     kTechId.ExplosiveStation,
     kTechId.ElectronicStation,

@@ -14,6 +14,7 @@ function BuildClassToGrid()
 
     ClassToGrid["SporeMine"] = { 5, 8 }
     ClassToGrid["BabblerEgg"] = { 5, 8 }
+    ClassToGrid["BioformSuppressor"] = { 4 , 8 }
     
     ClassToGrid["Pheromone_Expand"] = { 3 , 9 }
     ClassToGrid["Pheromone_Threat"] = { 2 , 9 }

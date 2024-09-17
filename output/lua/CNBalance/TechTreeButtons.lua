@@ -30,6 +30,8 @@ kTechIdToMaterialOffset[kTechId.PoweredExtractorTech] = 211
 kTechIdToMaterialOffset[kTechId.PoweredExtractorUpgrade] = 211
 --kTechIdToMaterialOffset[kTechId.GrenadeLauncherAllyBlast] = 196
 --kTechIdToMaterialOffset[kTechId.GrenadeLauncherDetectionShot] = 197
+kTechIdToMaterialOffset[kTechId.BioformSuppressProtocol] = 118
+kTechIdToMaterialOffset[kTechId.BioformSuppressor] = 118
 
 kTechIdToMaterialOffset[kTechId.ArmorSupply] = 213
 kTechIdToMaterialOffset[kTechId.ArmorStation] = 213 

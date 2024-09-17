@@ -25,15 +25,20 @@ Script.Load("lua/PowerConsumerMixin.lua")
 Script.Load("lua/MapBlipMixin.lua")
 Script.Load("lua/InfestationTrackerMixin.lua")
 Script.Load("lua/ParasiteMixin.lua")
+Script.Load("lua/SupplyUserMixin.lua")
+Script.Load("lua/OwnerMixin.lua")
 
 class 'BioformSuppressor' (ScriptActor)
 BioformSuppressor.kMapName = "bioformsuppressor"
-
+BioformSuppressor.kRange = kBioformSuppressRange
 BioformSuppressor.kModelName = PrecacheAsset("models/marine/capture_point/cp_capturepoint_1.model")
 local kAnimationGraph = PrecacheAsset("models/marine/capture_point/cp_capturepoint_1.animation_graph")
+BioformSuppressor.kMutationCinematic = PrecacheAsset("cinematics/cp/cp_mutation.cinematic")
+BioformSuppressor.kSteamCinematic = PrecacheAsset("cinematics/cp/capture_point_steam001.cinematic")
 
 local networkVars =
 {
+    suppressing = "boolean",
 }
 
 AddMixinNetworkVars(BaseModelMixin, networkVars)
@@ -89,6 +94,10 @@ function BioformSuppressor:OnCreate()
 
     end
 
+    if Server then
+        InitMixin(self, OwnerMixin)
+    end
+    
     self:SetLagCompensated(false)
     self:SetPhysicsType(PhysicsType.Kinematic)
     self:SetPhysicsGroup(PhysicsGroup.BigStructuresGroup)
@@ -109,6 +118,7 @@ function BioformSuppressor:OnInitialized()
             InitMixin(self, MapBlipMixin)
         end
 
+        InitMixin(self, SupplyUserMixin)
         InitMixin(self, StaticTargetMixin)
         InitMixin(self, InfestationTrackerMixin)
 
@@ -131,27 +141,139 @@ end
 
 function BioformSuppressor:GetTechButtons(techId)
 
-    return { kTechId.Weapons1, kTechId.Weapons2, kTechId.Weapons3, kTechId.None,
-             kTechId.Armor1, kTechId.Armor2, kTechId.Armor3, kTechId.None }
+    local table = { kTechId.None,kTechId.None,kTechId.None, kTechId.None,
+                    kTechId.None,kTechId.None,kTechId.None, kTechId.None,
+                    kTechId.Cancel }      --Cancel at 9 to hide cancel button
 
+    if not self.suppressing then
+        table[1] = kTechId.BioformSuppressProtocol
+    end
+    
+    return table
+
+end
+
+function BioformSuppressor:GetCanRecycle()
+    return not self:GetIsBuilt()
+end
+
+function BioformSuppressor:GetIsSuppressing()
+    return GetIsUnitActive(self) and self.suppressing
+end
+
+function BioformSuppressor:OnPowerOff()
+    self.suppressing = false
+end
+
+function BioformSuppressor:OnResearchComplete(researchId)
+
+    if researchId == kTechId.BioformSuppressProtocol then
+        self.suppressing = true
+    end
+
+end
+
+if Server then
+
+    local kSuppressInterval = 2
+    local kDamagePerInterval = 50
+    function BioformSuppressor:OnUpdate()
+
+        local now = Shared.GetTime()
+        if self.timeNextSuppress and now < self.timeNextSuppress + kSuppressInterval then return end
+        self.timeNextSuppress = now
+
+        if GetIsUnitActive(self) then
+            self:SetIsParasited(true)
+            self:SetIsSighted(true)
+        end
+        
+        if not self.suppressing then return end
+        local electrifyMixin = GetEntitiesWithMixinForTeamWithinRange("Electrify", GetEnemyTeamNumber(self:GetTeamNumber()), self:GetOrigin(), BioformSuppressor.kRange)
+        for _, entity in pairs(electrifyMixin) do
+            if not entity:isa("Player") then
+                entity:SetElectrified(kSuppressInterval + 0.5)
+                entity:TakeDamage(kDamagePerInterval, self, self, nil, nil, kDamagePerInterval, 0, kDamageType.Normal, true)
+                if entity.SetIsSighted then
+                    entity:SetIsSighted(true)
+                end
+            end
+        end
+        
+    end
 end
 
 if Client then
 
-    function BioformSuppressor:OnTag(tagName)
-
-        PROFILE("BioformSuppressor:OnTag")
-
-
-    end
+    --function BioformSuppressor:OnTag(tagName)
+    --
+    --    PROFILE("BioformSuppressor:OnTag")
+    --
+    --
+    --end
+    
 
     function BioformSuppressor:OnUpdateAnimationInput(modelMixin)
 
         PROFILE("BioformSuppressor:OnUpdateAnimationInput")
 
         local active = GetIsUnitActive(self)
-        modelMixin:SetAnimationInput("captureRate", active and 100 or -1)
+        local scalar = self:GetResearchingId() ~= kTechId.None and self:GetResearchProgress() * 100 or 0
+        if self.suppressing then
+            scalar = 100
+        end
+        
+        modelMixin:SetAnimationInput("captureRate", active and scalar or -1)
 
+    end
+    
+    function BioformSuppressor:OnUpdate()
+
+        local active = GetIsUnitActive(self)
+        if active then
+            if not self.mutationCinematic then
+
+                self.mutationCinematic = Client.CreateCinematic(RenderScene.Zone_Default)
+                self.mutationCinematic:SetCinematic(BioformSuppressor.kMutationCinematic)
+                self.mutationCinematic:SetCoords(self:GetCoords())
+                self.mutationCinematic:SetRepeatStyle(Cinematic.Repeat_Endless)
+
+            end
+        else
+            if self.mutationCinematic then
+                Client.DestroyCinematic(self.mutationCinematic)
+                self.mutationCinematic = nil
+            end
+        end
+        
+        if self:GetIsSuppressing() then
+            if not self.steam1 then
+                self.steam1 = Client.CreateCinematic(RenderScene.Zone_Default)
+                self.steam1:SetCinematic(BioformSuppressor.kSteamCinematic)
+                self.steam1:SetCoords(self:GetCoords())
+                self.steam1:SetRepeatStyle(Cinematic.Repeat_Endless)
+            end
+        else
+            if self.steam1 then
+                Client.DestroyCinematic(self.steam1)
+                self.steam1 = nil
+            end
+        end
+        
+    end
+
+    function BioformSuppressor:OnDestroy()
+
+        ScriptActor.OnDestroy(self)
+        if self.mutationCinematic then
+            Client.DestroyCinematic(self.mutationCinematic)
+            self.mutationCinematic = nil
+        end
+
+        if self.steam1 then
+            Client.DestroyCinematic(self.steam1)
+            self.steam1 = nil
+        end
     end
     
     function BioformSuppressor:OnUpdateRender()
@@ -160,11 +282,6 @@ if Client then
 
 end
 
-function BioformSuppressor:OnDestroy()
-
-    ScriptActor.OnDestroy(self)
-
-end
 
 function BioformSuppressor:GetRequiresPower()
     return true

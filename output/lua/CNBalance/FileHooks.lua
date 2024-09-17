@@ -233,6 +233,7 @@ ModLoader.SetupFileHook("lua/AlienTunnelManager.lua", "lua/CNBalance/AlienTunnel
 
 --Structures
 ModLoader.SetupFileHook("lua/Hive.lua", "lua/CNBalance/Structures/Alien/Hive.lua", "replace")
+ModLoader.SetupFileHook("lua/Hive_Server.lua", "lua/CNBalance/Structures/Alien/Hive_Server.lua", "replace")
 ModLoader.SetupFileHook("lua/DrifterEgg.lua", "lua/CNBalance/Structures/Alien/DrifterEgg.lua", "post")
 ModLoader.SetupFileHook("lua/Drifter.lua", "lua/CNBalance/Structures/Alien/Drifter.lua", "post")
 ModLoader.SetupFileHook("lua/Pheromone.lua", "lua/CNBalance/Structures/Alien/Pheromone.lua", "replace")
@@ -249,5 +250,3 @@ ModLoader.SetupFileHook("lua/Whip.lua", "lua/CNBalance/Structures/Alien/Whip.lua
 ModLoader.SetupFileHook("lua/Harvester.lua", "lua/CNBalance/Structures/Alien/Harvester.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/Web.lua", "lua/CNBalance/Structures/Alien/Web.lua", "post")
 ModLoader.SetupFileHook("lua/Egg.lua", "lua/CNBalance/Structures/Alien/Egg.lua", "post")
-
-Shared.Message("[CN] Natural Selection 2.0 Mounted 2024.07.20")

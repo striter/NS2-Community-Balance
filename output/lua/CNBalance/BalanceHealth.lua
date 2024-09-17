@@ -40,9 +40,9 @@ kPowerPointHealth = 1450  kPowerPointArmor = 1000  kPowerPointPointValue = 10
 kPowerPointHealthPerPlayerAdd = 75  kPowerPointHealthAddOnTechPoint = 800
 
 --2400 1050
-kExtractorHealth = 2250 kExtractorArmor = 1050 kExtractorPointValue = 15
+kExtractorHealth = 2400 kExtractorArmor = 1050 kExtractorPointValue = 15
 kPoweredExtractorHealth = 2400 kPoweredExtractorArmor = 1500 kPoweredExtractorPointValue = 30
-kExtractorHealthPerPlayerAdd = 75
+kExtractorHealthPerPlayerAdd = -100
 
 --1525 500
 kInfantryPortalHealth = 1425  kInfantryPortalArmor = 500  kInfantryPortalPointValue = 10
@@ -187,8 +187,8 @@ kHiveHealth = 3600    kHiveArmor = 750 kMatureHiveHealth = 5000 kMatureHiveArmor
 kHiveHealthPerPlayerAdd = 200
 
 --2000 200 2300 320
-kHarvesterHealth = 1850 kHarvesterArmor = 200 kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 320  kHarvesterPointValue = 15
-kHarvesterHealthPerPlayerAdd = 75
+kHarvesterHealth = 2000 kHarvesterArmor = 200 kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 320  kHarvesterPointValue = 15
+kHarvesterHealthPerPlayerAdd = -100
 
 --1000 ---100    --1250 -200
 kTunnelEntranceHealth = 900  kTunnelEntranceArmor = 100 kMatureTunnelEntranceHealth = 1250 kMatureTunnelEntranceArmor = 200
