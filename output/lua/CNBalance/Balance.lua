@@ -420,7 +420,7 @@ kRappelRange = 25
 kAcidSprayResearchCost = 10
 kAcidSprayResearchTime = 60
 kAcidSprayEnergyCost = 24
-kAcidSprayDamage = 25  -- 3 missiles
+kAcidSprayDamage = 20  -- 3 missiles
 kAcidSprayDamageType = kDamageType.Corrode
 
 -- Fade
@@ -456,7 +456,7 @@ kAcidRocketVelocity = 32
 kAcidRocketEnergyCost = 10
 kAcidRocketRoundPerSecond = 2.4
 kAcidRocketBombDamageType = kDamageType.Corrode
-kAcidRocketBombDamage = 30
+kAcidRocketBombDamage = 28
 kAcidRocketBombRadius = 0.3
 kAcidRocketBombSplashRadius = 4.5
 kAcidRocketBombDotIntervall = 0.4
@@ -494,8 +494,6 @@ kStompFirstPDamage = 0  kStompDisruptTime = 3
 kStompSecondPDamage = 0 kStompSecondDisruptTime = 1.5
 kStompElseDamage = 0
 kStompRange = 12 
-
-
 
 kDisruptMarineTimeout = 4
 
@@ -642,7 +640,6 @@ kBabblerEggDamageType = kDamageType.Corrode
 kBabblerEggDamageDuration = 3
 kBabblerEggDamageRadius = 7
 kBabblerEggDotInterval = 0.4
-
 
 kBabblerPheromoneEnergyCost = 12
 kBabblerDamage = 8
