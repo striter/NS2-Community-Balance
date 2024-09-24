@@ -1,0 +1,6 @@
+shader = "models/marine/marine.surface_shader"
+albedoMap = "models/marine/exosuit/claw.dds"
+normalMap = "models/marine/exosuit/claw_normal.dds"
+specularMap = "models/marine/exosuit/claw_spec.dds"
+emissiveMap = "materials/dev/black.dds"
+surface = "metal"

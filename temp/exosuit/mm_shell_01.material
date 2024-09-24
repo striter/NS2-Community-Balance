@@ -1,0 +1,4 @@
+shader = "shaders/Model.surface_shader"
+albedoMap = "models/marine/exosuit/mm_shell_01.dds"
+normalMap = "models/marine/exosuit/mm_shell_01_normal.dds"
+specularMap = "models/marine/exosuit/mm_shell_01_spec.dds"

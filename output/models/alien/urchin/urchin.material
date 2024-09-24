@@ -1,4 +1,0 @@
-shader = "shaders/Model.surface_shader"
-albedoMap = "models/alien/urchin/urchin.dds"
-specularMap = "models/alien/urchin/urchin_spec.dds"
-normalMap = "models/alien/urchin/urchin_norm.dds"

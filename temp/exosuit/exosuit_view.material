@@ -1,0 +1,7 @@
+shader = "shaders/ExoView.surface_shader"
+albedoMap = "models/marine/exosuit/exosuit_view.dds"
+normalMap = "models/marine/exosuit/exosuit_view_normal.dds"
+emissiveMap = "models/marine/exosuit/exosuit_view_illum.dds"
+specularMap = "models/marine/exosuit/exosuit_view_spec.dds"
+lightMap = "models/marine/exosuit/exosuit_view_lightmap.dds"
+surface = "metal"

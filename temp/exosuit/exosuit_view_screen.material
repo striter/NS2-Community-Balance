@@ -1,0 +1,6 @@
+shader = "shaders/ExoScreen.surface_shader"
+albedoMap = "models/marine/exosuit/exosuit_view_screen.dds"
+normalMap = "materials/dev/dev_normal.dds"
+emissiveMap = "materials/dev/black.dds"
+specularMap = "materials/dev/black.dds"
+surface = "metal"

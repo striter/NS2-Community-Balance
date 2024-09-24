@@ -1,5 +1,0 @@
-shader = "models/Model.surface_shader"
-albedoMap = "models/props/shutter_door/shutter_door_frame.dds"
-specularMap = "models/props/shutter_door/shutter_door_frame.dds"
-normalMap = "models/props/shutter_door/shutter_door_frame_normal.dds"
-//emissiveMap = "models/props/shutter_door/shutter_door_frame.dds"

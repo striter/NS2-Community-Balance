@@ -1,0 +1,5 @@
+shader = "shaders/Model_emissive.surface_shader"
+albedoMap = "models/marine/taser/taser_view_01.dds"
+normalMap = "models/marine/taser/taser_view_01_normal.dds"
+emissiveMap = "models/marine/taser/taser_view_01_illum.dds"
+specularMap = "models/marine/taser/taser_view_01_spec.dds"

@@ -1,5 +1,0 @@
-shader = "shaders/marine.surface_shader"
-albedoMap = "models/marine/gauss_sentry/gauss_sentry.dds"
-specularMap = "models/marine/gauss_sentry/gauss_sentry_spec.dds"
-normalMap = "models/marine/gauss_sentry/gauss_sentry_normal.dds"
-emissiveMap = "models/marine/gauss_sentry/gauss_sentry_illum.dds"

@@ -1,0 +1,4 @@
+shader = "models/alien/alien.surface_shader"
+albedoMap = "models/alien/flower/flower.dds"
+normalMap = "models/alien/flower/flower_normal.dds"
+surface = "organic"
