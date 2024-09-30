@@ -36,7 +36,7 @@ kUpgradedCommandStationHealth = 1800 kUpgradedCommandStationArmor = 1800 kUpgrad
 kCommandStationHealthPerPlayerAdd = 100
 
 --2000   1000
-kPowerPointHealth = 1450  kPowerPointArmor = 1000  kPowerPointPointValue = 10
+kPowerPointHealth = 1250  kPowerPointArmor = 1000  kPowerPointPointValue = 10
 kPowerPointHealthPerPlayerAdd = 75  kPowerPointHealthAddOnTechPoint = 800
 
 --2400 1050
@@ -108,9 +108,9 @@ kMaxBiomassHealthMultiplyLevel = 8 --N-1
 
 kSkulkHealth = 73    kSkulkArmor = 10    kSkulkPointValue = 5  kSkulkHealthPerBioMass = 3 kSkulkHealthPerPlayerAboveLimit = 1
 kSkulkDamageReduction = {
-    ["Grenade"] = 0.7,
-    ["ImpactGrenade"] = 0.7,
-    ["PulseGrenade"] = 0.7,
+    ["Grenade"] = 0.8,
+    ["ImpactGrenade"] = 0.8,
+    ["PulseGrenade"] = 0.8,
     ["Cannon"] = 0.8,
     --["Shotgun"] = 0.88,
     --["Railgun"] = 0.9,
@@ -124,8 +124,8 @@ kGorgeDamageReduction = {
 
 kLerkHealth = 180    kLerkArmor = 30  kLerkPointValue = 15 kLerkHealthPerBioMass = 3
 kLerkDamageReduction = {
-    ["Grenade"] = 0.7,
-    ["ImpactGrenade"] = 0.7,
+    ["Grenade"] = 0.8,
+    ["ImpactGrenade"] = 0.8,
     --["Shotgun"] = 0.88,
     --["Railgun"] = 0.8,
     --["PulseGrenade"] = 0.75,
@@ -170,7 +170,7 @@ kProwlerDamageReduction = {
     --["Cannon"] = 0.9,
 }
 
-kVokexHealth = 260   kVokexArmor = 70   kVokexPointvalue = 25   kVokexHealthPerBioMass = 5
+kVokexHealth = 250   kVokexArmor = 70   kVokexPointvalue = 25   kVokexHealthPerBioMass = 5
 
 kParasitePlayerPointValue = 1
 

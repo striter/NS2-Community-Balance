@@ -56,7 +56,7 @@ kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyCl
 kMilitaryProtocolResearchCost = 0
 kMilitaryProtocolResearchTime = 12
 kMilitaryProtocolTResPerBountyClaim = 0.5
-kMilitaryProtocolResearchDurationMultiply = 1.2     --1.33?
+kMilitaryProtocolResearchDurationMultiply = 1     --1.33?
 kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKill above
     [kTechId.Drifter] = 1,
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.GorgeTunnel] = 3,
@@ -66,7 +66,7 @@ kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKi
     [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20
 }
 kMilitaryProtocolPlayerResourcesPerKill = {
-    [kTechId.Skulk] = 1, [kTechId.Gorge] = 2, [kTechId.Prowler] = 3, [kTechId.Lerk] = 4, [kTechId.Fade] = 6,[kTechId.Vokex] = 6.5, [kTechId.Onos] = 8,
+    [kTechId.Skulk] = 1, [kTechId.Gorge] = 2, [kTechId.Prowler] = 3, [kTechId.Lerk] = 3, [kTechId.Fade] = 5,[kTechId.Vokex] = 6, [kTechId.Onos] = 8,
 }
 
 kMarineRespawnTime = 9
@@ -456,7 +456,7 @@ kAcidRocketVelocity = 32
 kAcidRocketEnergyCost = 10
 kAcidRocketRoundPerSecond = 2.4
 kAcidRocketBombDamageType = kDamageType.Corrode
-kAcidRocketBombDamage = 28
+kAcidRocketBombDamage = 25
 kAcidRocketBombRadius = 0.3
 kAcidRocketBombSplashRadius = 4.5
 kAcidRocketBombDotIntervall = 0.4
@@ -464,7 +464,7 @@ kAcidRocketBombDuration = 3
 
 kVortexShadowStepResearchCost = 30
 kVortexShadowStepResearchTime = 90
-kVortexLifetime = 5 kVortexInitTime = 0.5
+kVortexLifetime = 6 kVortexInitTime = 0.5
 kVortexRadius = 4
 kVortexEnergyCost = 50
 kVortexPlayerDamagePerSecond = 6 kVortexStructureDamagePerSecond = 80
