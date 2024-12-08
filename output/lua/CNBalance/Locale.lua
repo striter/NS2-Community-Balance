@@ -4,6 +4,7 @@ if kTranslateMessage then
     kTranslateMessage["ABM_RANK"] = "需要信誉值达到[%s]"
     kTranslateMessage["ABM_DISABLED"] ="原型测试中"
 
+    kTranslateMessage["RESPAWN_EXTEND_TEAM0"] = "战局清理中"
     kTranslateMessage["GAME_LENGTH_TEAM1"] = "站点清理 [%i:%02i]"
     kTranslateMessage["RESPAWN_EXTEND_TEAM1"] = "增援耗时 [%i秒]"
     
@@ -232,6 +233,8 @@ if kLocales then
     kLocales["BUYMENU_ERROR_RANKREQUIRED"] = "Reputation Required(%s)"
     kLocales["ABM_RANK"] ="Reputation Required (%s)"
     kLocales["ABM_DISABLED"] ="Developing"
+
+    kLocales["RESPAWN_EXTEND_TEAM0"] = "Round Finishing"
     
     kLocales["GAME_LENGTH_TEAM1"] = "Cleaning:[%s:%s]"
     kLocales["RESPAWN_EXTEND_TEAM1"] = "Reinforce:[%is]"

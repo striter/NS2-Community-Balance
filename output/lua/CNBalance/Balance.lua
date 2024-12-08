@@ -9,7 +9,7 @@ kResourceTowerResourceInterval = 6
 kTeamResourceWithoutTower = 0.5
 kMaxEfficiencyTowers = 3
 kTeamResourceEachTower = 1
-kPlayerResEachTower = 0.135 kPlayerResDeductionAboveLimit = 0.005
+kPlayerResEachTower = 0.13 kPlayerResDeductionAboveLimit = 0.0025
 
 --Pres reward for aggressive playing (too many farmers?)
 kTechDataPersonalResOnKill = {
@@ -56,7 +56,7 @@ kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyCl
 kMilitaryProtocolResearchCost = 0
 kMilitaryProtocolResearchTime = 12
 kMilitaryProtocolTResPerBountyClaim = 0.5
-kMilitaryProtocolResearchDurationMultiply = 1     --1.33?
+kMilitaryProtocolResearchDurationMultiply = 1.2     --1.33?
 kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKill above
     [kTechId.Drifter] = 1,
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.GorgeTunnel] = 3,
@@ -552,7 +552,7 @@ kArmsLabCost = 15
 
 kWeapons1ResearchCost = 25 kWeapons1ResearchTime = 75
 kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 105
-kWeapons3ResearchCost = 45 kWeapons3ResearchTime = 135
+kWeapons3ResearchCost = 45 kWeapons3ResearchTime = 150
 
 kArmor1ResearchCost = 25 kArmor1ResearchTime = 75
 kArmor2ResearchCost = 35 kArmor2ResearchTime = 105

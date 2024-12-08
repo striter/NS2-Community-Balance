@@ -9,11 +9,6 @@ kTechReputationByPass = {
     [kTechId.Vokex] = 200,
 }
 
---Mediumize players KD Ratio by reduce taken damage with low KD, increase taken damage with high KD , combined with upper value lel
-kKDRatioEachDeath = 1 kKDRatioClaimOnAddKill = 1 kKDRatioClaimOnAddAssist = 0.25
-kKDRatioProtectionStep = 2 kKDRatioProtectionEachValue = 0.05
---kKDRatioBoostStep = 5 kKDRatioDamageIncreaseEachValue = 0.025
-
 --Gorge Ability
 kDropStructureEnergyCost = 15
 
