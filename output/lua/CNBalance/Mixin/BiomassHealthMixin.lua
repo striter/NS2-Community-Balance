@@ -58,7 +58,7 @@ if Server then
         if newBiomassHealth ~= self.biomMassHealth  then
             -- maxHealth is a integer
             local healthDelta = math.round(newBiomassHealth - self.biomassHealth)
-            self:AdjustMaxHealth(self:GetMaxHealth() + healthDelta)
+            self:AdjustMaxHealth(math.max(self:GetMaxHealth() + healthDelta,1))
             self.biomassHealth = newBiomassHealth
         end
     end

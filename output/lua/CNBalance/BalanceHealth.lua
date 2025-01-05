@@ -188,7 +188,7 @@ kHiveHealthPerPlayerAdd = 200
 
 --2000 200 2300 320
 kHarvesterHealth = 2200 kHarvesterArmor = 200 kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 320  kHarvesterPointValue = 15
-kHarvesterHealthPerPlayerAdd = -100
+kHarvesterHealthPerPlayerAdd = 75
 
 --1000 ---100    --1250 -200
 kTunnelEntranceHealth = 900  kTunnelEntranceArmor = 100 kMatureTunnelEntranceHealth = 1250 kMatureTunnelEntranceArmor = 200

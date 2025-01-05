@@ -252,19 +252,34 @@ function Mine:OnInitialized()
     end
 
     self:SetModel(Mine.kModelName)
+
+    --local coords =  self:GetCoords()
+    --local length = 2
+    --local trace = Shared.TraceRay(coords.origin + coords.zAxis * 0.1, coords.origin + coords.zAxis * length, CollisionRep.Default, PhysicsMask.Bullets,EntityFilterOneAndIsa(player, "Player"))
+    --DebugTraceRay(coords.origin + coords.zAxis * 0.1, coords.origin + coords.zAxis * length,PhysicsMask.Bullets)
+    --if trace.fraction == 1 then
+    --    Shared.Message("??")
+    --    self.movementPhysicsBody = Shared.CreatePhysicsSphereBody(true, 0.4, 0, coords )
+    --    self.movementPhysicsBody:SetCollisionEnabled(true)
+    --    self.movementPhysicsBody:SetGroup(PhysicsGroup.MediumStructuresGroup)
+    --    self.movementPhysicsBody:SetPhysicsType(CollisionObject.Kinematic)
+    --    self.movementPhysicsBody:SetEntity(self)
+    --end
 end
 
-if Server then
-
-    function Mine:OnDestroy()
-
+function Mine:OnDestroy()
+    ScriptActor.OnDestroy(self)
+    
+    if Server then
         self:StopSound(kWarmupSound)
-
-        ScriptActor.OnDestroy(self)
-
     end
 
+    --if self.movementPhysicsBody then
+    --    Shared.DestroyCollisionObject(self.physicsBody)
+    --    self.movementPhysicsBody = nil
+    --end
 end
+
 
 if Server then
     function Mine:Activate()
