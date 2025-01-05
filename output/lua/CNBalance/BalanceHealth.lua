@@ -33,11 +33,11 @@ kMineHealth = 30    kMineArmor = 9    kMinePointValue = 5
 --2000 -1800
 kCommandStationHealth = 1800    kCommandStationArmor = 1500    kCommandStationPointValue = 20
 kUpgradedCommandStationHealth = 1800 kUpgradedCommandStationArmor = 1800 kUpgradedCommandStationPointValue = 30
-kCommandStationHealthPerPlayerAdd = 100
+kCommandStationHealthPerPlayerAdd = 75
 
 --2000   1000
 kPowerPointHealth = 1250  kPowerPointArmor = 1000  kPowerPointPointValue = 10
-kPowerPointHealthPerPlayerAdd = 75  kPowerPointHealthAddOnTechPoint = 800
+kPowerPointHealthPerPlayerAdd = 0  kPowerPointHealthAddOnTechPoint = 800
 
 --2400 1050
 kExtractorHealth = 2600 kExtractorArmor = 1050 kExtractorPointValue = 15
@@ -150,9 +150,9 @@ kOnosBoneShieldDamageReduction = {
 }
 
 kOnosDamageReduction = {
-    ["Mine"] = 2,
     ["Sentry"] = 0.5,
     ["MarineSentry"] = 0.5,
+    ["Mine"] = 0.5,
     ["Shotgun"] = 0.92,
     --["Rifle"] = 0.92,
     --["SubMachineGun"] = 0.92,

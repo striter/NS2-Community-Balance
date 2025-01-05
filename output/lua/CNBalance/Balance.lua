@@ -132,7 +132,6 @@ kObservatoryCost = 10
 kPhaseGateCost = 15
 kPhaseTechResearchCost = 10
 
-
 -- Standard Supply
 kDragonBreathResearchCost = 30
 kDragonBreathResearchCost = 30
@@ -357,11 +356,11 @@ kTunnelRelocateCost = 5
 
 --Research with skill activation
 kResearchBioMassOneCost = 30
-kBioMassOneTime = 45
+kBioMassOneTime = 30
 kResearchBioMassTwoCost = 50
-kBioMassTwoTime = 60
+kBioMassTwoTime = 45
 kResearchBioMassThreeCost = 65
-kBioMassThreeTime = 90
+kBioMassThreeTime = 60
 
 --Recover
 kRecoverBioMassOneCost = 10
