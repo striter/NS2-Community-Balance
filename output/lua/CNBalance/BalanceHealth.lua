@@ -106,7 +106,7 @@ kExoDamageReduction = {
 kHealingClampMaxHPAmount = 0.12
 kMaxBiomassHealthMultiplyLevel = 8 --N-1
 
-kSkulkHealth = 73    kSkulkArmor = 10    kSkulkPointValue = 5  kSkulkHealthPerBioMass = 3 kSkulkHealthPerPlayerAboveLimit = 1
+kSkulkHealth = 72    kSkulkArmor = 10    kSkulkPointValue = 5  kSkulkHealthPerBioMass = 3 kSkulkHealthPerPlayerAboveLimit = 1.5
 kSkulkDamageReduction = {
     ["Grenade"] = 0.8,
     ["ImpactGrenade"] = 0.8,
@@ -188,7 +188,7 @@ kHiveHealthPerPlayerAdd = 200
 
 --2000 200 2300 320
 kHarvesterHealth = 2200 kHarvesterArmor = 200 kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 320  kHarvesterPointValue = 15
-kHarvesterHealthPerPlayerAdd = 75
+kHarvesterHealthPerPlayerAdd = 100
 
 --1000 ---100    --1250 -200
 kTunnelEntranceHealth = 900  kTunnelEntranceArmor = 100 kMatureTunnelEntranceHealth = 1250 kMatureTunnelEntranceArmor = 200

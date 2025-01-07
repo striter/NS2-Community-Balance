@@ -53,6 +53,7 @@ if Server then
         
         local levelMultiplier = math.Clamp( bioMassLevel - baseReduction,0,kMaxBiomassHealthMultiplyLevel)
         local newBiomassHealth = levelMultiplier * healthPerBiomass + playersAboveLimit * healthPerPlayerExceed
+        newBiomassHealth = math.floor(newBiomassHealth)
         newBiomassHealth = math.min(newBiomassHealth,3000)  --Clamp it due to hive max health greater than expected limit (?)
 
         if newBiomassHealth ~= self.biomMassHealth  then

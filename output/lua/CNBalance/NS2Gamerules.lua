@@ -4,6 +4,10 @@
          bountyActive = false,
          resourceEfficiency = false,
      }, true)
+
+     NS2Gamerules.kRecentRoundStatus = LoadConfigFile("NS2.0RoundStatus.json",{
+         
+     },true)
      
      local kRandomTencentage = 4
      
@@ -310,5 +314,27 @@
          self.team1:PlayPrivateTeamSound(_name)
          self.team2:PlayPrivateTeamSound(_name)
          self.spectatorTeam:PlayPrivateTeamSound(_name)
+     end
+     
+     local baseEndGame = NS2Gamerules.EndGame
+     function NS2Gamerules:EndGame(winningTeam, autoConceded)
+         baseEndGame(self,winningTeam,autoConceded)
+         local lastRoundData = CHUDGetLastRoundStats();
+         
+         if not lastRoundData then
+             Shared.Message("[NS2.0] ERROR Option 'savestats' not enabled ")
+             return
+         end
+         
+         
+         local roundLength = lastRoundData.RoundInfo.roundLength
+         local playerCount = #lastRoundData.PlayerStats
+         if roundLength < 300 or playerCount < 12 then return end
+         
+         table.insert(self.kRecentRoundStatus, 1,
+                 {time = os.time() ,winningTeam = lastRoundData.RoundInfo.winningTeam,length = roundLength,playerCount = playerCount }
+         )
+         self.kRecentRoundStatus[11] = nil
+         SaveConfigFile("NS2.0RoundStatus.json",self.kRecentRoundStatus)
      end
  end

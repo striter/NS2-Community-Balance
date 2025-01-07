@@ -56,17 +56,17 @@ kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyCl
 kMilitaryProtocolResearchCost = 0
 kMilitaryProtocolResearchTime = 12
 kMilitaryProtocolTResPerBountyClaim = 0.5
-kMilitaryProtocolResearchDurationMultiply = 1.33
+kMilitaryProtocolResearchDurationMultiply = 1.25
 kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKill above
     [kTechId.Drifter] = 1,
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.GorgeTunnel] = 3,
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
-    [kTechId.Skulk] = 2, [kTechId.Gorge] = 5,[kTechId.Prowler] = 7, [kTechId.Lerk] = 9, [kTechId.Fade] = 14, [kTechId.Vokex] = 15,[kTechId.Onos] = 18,
+    [kTechId.Skulk] = 2, [kTechId.Gorge] = 2,[kTechId.Prowler] = 2, [kTechId.Lerk] = 2, [kTechId.Fade] = 2, [kTechId.Vokex] = 2,[kTechId.Onos] = 2,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
     [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20
 }
 kMilitaryProtocolPlayerResourcesPerKill = {
-    [kTechId.Skulk] = 1, [kTechId.Gorge] = 2, [kTechId.Prowler] = 3, [kTechId.Lerk] = 3, [kTechId.Fade] = 5,[kTechId.Vokex] = 6, [kTechId.Onos] = 8,
+    [kTechId.Skulk] = 0.5, [kTechId.Gorge] = 1, [kTechId.Prowler] = 1, [kTechId.Lerk] = 2, [kTechId.Fade] = 2,[kTechId.Vokex] = 2, [kTechId.Onos] = 5,
 }
 
 kMarineRespawnTime = 9
@@ -383,10 +383,10 @@ kXenocideFuelTime = 120
 
 kXenocideEnergyCost = 30
 kXenocideDamageType = kDamageType.Structural
-kXenocideDamage = 150  kXenocideFuelDamage = 210 --200
-kXenocideRange = 8 kXenocideFuelRange = 12 -- 14
+kXenocideDamage = 150  kXenocideFuelDamage = 220 --200
+kXenocideRange = 9 kXenocideFuelRange = 14 -- 14
 kXenocideDamageScalarEmptyHealth = 0.2 kXenocideDamageHealthScalar = 1 - kXenocideDamageScalarEmptyHealth
-kXenocideSpawnReduction = 1 kXenocideFuelSpawnReduction = 0.7
+kXenocideSpawnReduction = 1 kXenocideFuelSpawnReduction = 0.6
 
 kBileBombResearchCost = 10
 kBileBombResearchTime = 40
