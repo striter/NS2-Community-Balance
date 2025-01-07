@@ -6,8 +6,19 @@
      }, true)
 
      NS2Gamerules.kRecentRoundStatus = LoadConfigFile("NS2.0RoundStatus.json",{
-         
      },true)
+     
+     function NS2Gamerules:GetRecentRoundAlienWins()
+         local kRecentRoundAliensWins = 0
+         for k,v in pairs(NS2Gamerules.kRecentRoundStatus) do
+             if v.winningTeam == kMarineTeamType then
+                 kRecentRoundAliensWins = kRecentRoundAliensWins - 1
+             elseif v.winningTeam == kAlienTeamType then
+                 kRecentRoundAliensWins = kRecentRoundAliensWins + 1
+             end
+         end
+         return kRecentRoundAliensWins
+     end
      
      local kRandomTencentage = 4
      
@@ -326,13 +337,17 @@
              return
          end
          
-         
          local roundLength = lastRoundData.RoundInfo.roundLength
-         local playerCount = #lastRoundData.PlayerStats
+         local playerCount = table.count(lastRoundData.PlayerStats)
          if roundLength < 300 or playerCount < 12 then return end
          
-         table.insert(self.kRecentRoundStatus, 1,
-                 {time = os.time() ,winningTeam = lastRoundData.RoundInfo.winningTeam,length = roundLength,playerCount = playerCount }
+         table.insert(self.kRecentRoundStatus, 1, {
+                time = os.time() ,
+                winningTeam = lastRoundData.RoundInfo.winningTeam,
+                map = lastRoundData.RoundInfo.mapName,
+                length = roundLength,
+                playerCount = playerCount,
+            }
          )
          self.kRecentRoundStatus[11] = nil
          SaveConfigFile("NS2.0RoundStatus.json",self.kRecentRoundStatus)

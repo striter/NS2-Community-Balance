@@ -45,8 +45,10 @@ if Server then
 
     function BiomassHealthMixin:UpdateHealthAmount(playersAboveLimit,bioMassLevel)
         
+        local recentWins = GetTeamInfoEntity(kAlienTeamType).recentWins
+        
         local healthPerBiomass = self.GetHealthPerBioMass and self:GetHealthPerBioMass() or 0
-        local healthPerPlayerExceed = self.GetHealthPerTeamExceed and self:GetHealthPerTeamExceed() or 0
+        local healthPerPlayerExceed = self.GetHealthPerTeamExceed and self:GetHealthPerTeamExceed(recentWins) or 0
         local baseReduction = self.GetBiomassBaseReduction and self:GetBiomassBaseReduction() or 1
         
         if healthPerBiomass == 0 and healthPerPlayerExceed == 0 then return end

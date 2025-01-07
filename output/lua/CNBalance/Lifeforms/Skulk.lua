@@ -12,8 +12,8 @@ function Skulk:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoi
 end
 
 
-function Skulk:GetHealthPerTeamExceed()
-    return kSkulkHealthPerPlayerAboveLimit
+function Skulk:GetHealthPerTeamExceed(recentWins)
+    return kSkulkHealthPerPlayerAboveLimit - kSkulkHealthPerPlayerLossMultiplier * recentWins
 end
 
 

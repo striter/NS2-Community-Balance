@@ -106,7 +106,8 @@ kExoDamageReduction = {
 kHealingClampMaxHPAmount = 0.12
 kMaxBiomassHealthMultiplyLevel = 8 --N-1
 
-kSkulkHealth = 72    kSkulkArmor = 10    kSkulkPointValue = 5  kSkulkHealthPerBioMass = 3 kSkulkHealthPerPlayerAboveLimit = 1.5
+kSkulkHealth = 72    kSkulkArmor = 10    kSkulkPointValue = 5  kSkulkHealthPerBioMass = 3 
+kSkulkHealthPerPlayerAboveLimit = 1.5 kSkulkHealthPerPlayerLossMultiplier = 0.25
 kSkulkDamageReduction = {
     ["Grenade"] = 0.8,
     ["ImpactGrenade"] = 0.8,
@@ -139,7 +140,8 @@ kFadeDamageReduction = {
 }
 
 --700 450 50
-kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 kOnosHealthPerPlayerAboveLimit = 10
+kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 
+kOnosHealthPerPlayerAboveLimit = 20 kOnosHealthPerPlayerLossMultiplier = 2.5
 kOnosBoneShieldDefaultReduction = 0.2
 kOnosBoneShieldDamageReduction = {
     --["HeavyMachineGun"] = 0.25,

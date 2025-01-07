@@ -26,6 +26,7 @@ local networkVars =
 {
     isOriginForm = "boolean",
     canEvolveOriginForm = "boolean",
+    recentWins = "integer",
     
     numHives = "integer (0 to 10)",
     eggCount = "integer (0 to 120)",
@@ -144,6 +145,7 @@ function AlienTeamInfo:OnCreate()
     self.shiftHiveBiomassPreserve = 0
     self.shadeHiveBiomassPreserve = 0
     self.cragHiveBiomassPreserve = 0
+    self.recentWins = 0
     
     self.veilLevel = 0
     self.spurLevel = 0
@@ -243,6 +245,8 @@ function AlienTeamInfo:OnInitialized()
             self.location4Id = tpLocations[4]
             self.location5Id = tpLocations[5]
         end
+        
+        self.recentWins = GetGamerules():GetRecentRoundAlienWins()
     end
     
     if Client then

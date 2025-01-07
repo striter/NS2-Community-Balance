@@ -58,8 +58,8 @@ function Onos:GetHasMovementSpecial()
     return true
 end
 
-function Onos:GetHealthPerTeamExceed()
-    return kOnosHealthPerPlayerAboveLimit
+function Onos:GetHealthPerTeamExceed(recentWins)
+    return kOnosHealthPerPlayerAboveLimit - recentWins * kOnosHealthPerPlayerLossMultiplier
 end
 
 if Server then
