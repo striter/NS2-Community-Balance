@@ -47,7 +47,7 @@ if Server then
         
         local recentWins = GetTeamInfoEntity(kAlienTeamType).recentWins
         
-        local healthPerBiomass = self.GetHealthPerBioMass and self:GetHealthPerBioMass() or 0
+        local healthPerBiomass = self.GetHealthPerBioMass and self:GetHealthPerBioMass(recentWins) or 0
         local healthPerPlayerExceed = self.GetHealthPerTeamExceed and self:GetHealthPerTeamExceed(recentWins) or 0
         local baseReduction = self.GetBiomassBaseReduction and self:GetBiomassBaseReduction() or 1
         

@@ -23,7 +23,7 @@ set {
     "Cannon",
 }
 
-local kFuelDeductPerHit = 1 / 150
+local kFuelDeductPerHit = 1 / 200
 function Onos:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
 
     local classname = doer:GetClassName()
@@ -37,8 +37,10 @@ function Onos:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoin
             local boneShield = self:GetActiveWeapon()
             local fuel = boneShield:GetFuel() - kFuelDeductPerHit
             boneShield:SetFuel(fuel)
-            if fuel <= 0 then
-                self:TriggerEffects("onos_shield_break")
+            if Server then
+                if fuel <= 0 then
+                    self:TriggerEffects("onos_shield_break")
+                end
             end
         end
         return

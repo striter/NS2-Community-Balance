@@ -66,8 +66,8 @@ function Fade:HandleButtons(input)
 end
 
 
-function Fade:GetHealthPerTeamExceed()
-    return kFadeHealthPerPlayerAboveLimit
+function Fade:GetHealthPerTeamExceed(recentWins)
+    return kFadeHealthPerPlayerAboveLimit - recentWins * kFadeHealthPerPlayerLossMultiplier
 end
 
 --function Fade:OnInterrupt()

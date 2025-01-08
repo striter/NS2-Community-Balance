@@ -243,10 +243,10 @@ kFlamethrowerDropCost = 15
 kFlamethrowerDropCooldown = 0
 
 kOnFireHealingScalar = 1
-kOnFireEnergyRecuperationScalar = 0.66
+kOnFireEnergyRecuperationScalar = 0.8
 
 kFirePlayerDOTDelay = 1
-kPlayerFireDOTPerSecond = 3
+kPlayerFireDOTPerSecond = 4
 kDragonBreathPlayerFireDamagePerStack = { 0.7 , 0.8 , 0.9 , 1 }  kFlameThrowerPlayerFireDamagePerStack = { 5 , 5 , 5 , 5 }
 kPlayerFireDamageMaxStack = { 12, 16, 20, 24 }
 
@@ -259,7 +259,7 @@ kStructureFireDamageMaxStack = { kStructureFireDOTPerSecond * 3 , kStructureFire
 kMinigunDamage = 9
 kMinigunDamageType = kDamageType.Exosuit
 kRailgunDamage = 10
-kRailgunChargeDamage = 150
+kRailgunChargeDamage = 154
 kRailgunDamageType = kDamageType.Structural
 
 kPulseGrenadeDamageRadius = 4

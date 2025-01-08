@@ -106,7 +106,8 @@ kExoDamageReduction = {
 kHealingClampMaxHPAmount = 0.12
 kMaxBiomassHealthMultiplyLevel = 8 --N-1
 
-kSkulkHealth = 72    kSkulkArmor = 10    kSkulkPointValue = 5  kSkulkHealthPerBioMass = 3 
+kSkulkHealth = 72  kSkulkHealthLossMultiplier = 1
+kSkulkArmor = 10    kSkulkPointValue = 5  kSkulkHealthPerBioMass = 3 
 kSkulkHealthPerPlayerAboveLimit = 1.5 kSkulkHealthPerPlayerLossMultiplier = 0.25
 kSkulkDamageReduction = {
     ["Grenade"] = 0.8,
@@ -121,6 +122,7 @@ kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7 kGorgeHealthPerBio
 kGorgeDamageReduction = {
     ["Sentry"] = 0.5,
     ["MarineSentry"] = 0.5,
+    ["Mine"] = 0.5,
 }
 
 kLerkHealth = 180    kLerkArmor = 30  kLerkPointValue = 15 kLerkHealthPerBioMass = 3
@@ -132,23 +134,23 @@ kLerkDamageReduction = {
     --["PulseGrenade"] = 0.75,
 }
 
-kFadeHealth = 280  kFadeArmor = 80  kFadePointValue = 20 kFadeHealthPerBioMass = 5 kFadeHealthPerPlayerAboveLimit = 0
+kFadeHealth = 280  kFadeArmor = 80  kFadePointValue = 20 kFadeHealthPerBioMass = 5
+kFadeHealthPerPlayerAboveLimit = 2 kFadeHealthPerPlayerLossMultiplier = 0.5
 kFadeDamageReduction = {
-    ["Mine"] = 1.25,
+    --["Mine"] = 1.25,
     --["MarineSentry"] = 1.1,
     --["HeavyMachineGun"] = 0.92,
 }
 
 --700 450 50
 kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 
-kOnosHealthPerPlayerAboveLimit = 20 kOnosHealthPerPlayerLossMultiplier = 2.5
+kOnosHealthPerPlayerAboveLimit = 15 kOnosHealthPerPlayerLossMultiplier = 2.5
 kOnosBoneShieldDefaultReduction = 0.2
 kOnosBoneShieldDamageReduction = {
     --["HeavyMachineGun"] = 0.25,
     --["Minigun"] = 0.3,
-    ["Cannon"] = 0.5,
-    ["Grenade"] = 0.5,
     ["Railgun"] = 0,
+    ["Cannon"] = 0,
 }
 
 kOnosDamageReduction = {
@@ -156,6 +158,7 @@ kOnosDamageReduction = {
     ["MarineSentry"] = 0.5,
     ["Mine"] = 0.5,
     ["Shotgun"] = 0.92,
+    ["Grenade"] = 0.5,
     --["Rifle"] = 0.92,
     --["SubMachineGun"] = 0.92,
     --["LightMachineGun"] = 0.92,
