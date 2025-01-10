@@ -180,8 +180,8 @@ function SporeMine:GetUseMaxRange()
     return SporeMine.kDropRange
 end
 
-function SporeMine:GetHealthPerBioMass()
-    return kSporeMineHealthPerBioMass
+function SporeMine:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kSporeMineHealthPerBioMass * techLevel
 end
 
 function SporeMine:GetReceivesStructuralDamage()

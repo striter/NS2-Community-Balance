@@ -7,8 +7,8 @@ function CommandStation:OnCreate()
     InitMixin(self, BiomassHealthMixin)
 end
 
-function CommandStation:GetHealthPerTeamExceed()
-    return kCommandStationHealthPerPlayerAdd
+function CommandStation:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kCommandStationHealthPerPlayerAdd * extraPlayers
 end
 
 Script.Load("lua/CNBalance/Mixin/SupplyProviderMixin.lua")

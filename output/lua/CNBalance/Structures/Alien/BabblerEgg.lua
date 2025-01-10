@@ -161,8 +161,8 @@ function BabblerEgg:GetMinimumAwakeTime()
     return 0
 end
 
-function BabblerEgg:GetHealthPerBioMass()
-    return kBabblerEggHealthPerBiomass
+function BabblerEgg:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kBabblerEggHealthPerBiomass * techLevel
 end
 
 function BabblerEgg:GetReceivesStructuralDamage()

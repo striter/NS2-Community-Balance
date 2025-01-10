@@ -6,8 +6,8 @@ function Observatory:OnCreate()
     InitMixin(self, BiomassHealthMixin)
 end
 
-function Observatory:GetHealthPerTeamExceed()
-    return kObservatoryHealthPerPlayerAdd
+function Observatory:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kObservatoryHealthPerPlayerAdd * extraPlayers
 end
 
 

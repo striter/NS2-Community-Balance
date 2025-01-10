@@ -6,6 +6,6 @@ function Harvester:OnCreate()
     InitMixin(self, BiomassHealthMixin)
 end
 
-function Harvester:GetHealthPerTeamExceed()
-    return kHarvesterHealthPerPlayerAdd
+function Harvester:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return extraPlayers * kHarvesterHealthPerPlayerAdd
 end

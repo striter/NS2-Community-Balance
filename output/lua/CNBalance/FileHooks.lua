@@ -244,6 +244,7 @@ ModLoader.SetupFileHook("lua/Hydra.lua", "lua/CNBalance/Structures/Alien/Hydra.l
 ModLoader.SetupFileHook("lua/Cyst_Server.lua", "lua/CNBalance/Structures/Alien/Cyst_Server.lua", "post")
 ModLoader.SetupFileHook("lua/Cyst.lua", "lua/CNBalance/Structures/Alien/Cyst.lua", "post")
 ModLoader.SetupFileHook("lua/Crag.lua", "lua/CNBalance/Structures/Alien/Crag.lua", "post")
+ModLoader.SetupFileHook("lua/Clog.lua", "lua/CNBalance/Structures/Alien/Clog.lua", "post")
 ModLoader.SetupFileHook("lua/Shift.lua", "lua/CNBalance/Structures/Alien/Shift.lua", "post")
 ModLoader.SetupFileHook("lua/Shade.lua", "lua/CNBalance/Structures/Alien/Shade.lua", "post")
 ModLoader.SetupFileHook("lua/Whip.lua", "lua/CNBalance/Structures/Alien/Whip.lua", "post")

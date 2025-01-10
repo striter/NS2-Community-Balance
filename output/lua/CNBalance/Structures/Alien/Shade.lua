@@ -12,8 +12,8 @@ function Shade:OnInitialized()
     self.timeLastInked = Shared.GetTime() - kShadeHiveInkCooldown
 end
 
-function Shade:GetHealthPerBioMass()
-    return kCragHealthPerBioMass
+function Shade:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kShadeHealthPerBioMass * techLevel
 end
 
 function Shade:GetTechButtons(techId)

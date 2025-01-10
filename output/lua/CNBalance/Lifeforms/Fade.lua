@@ -66,8 +66,8 @@ function Fade:HandleButtons(input)
 end
 
 
-function Fade:GetHealthPerTeamExceed(recentWins)
-    return kFadeHealthPerPlayerAboveLimit - recentWins * kFadeHealthPerPlayerLossMultiplier
+function Fade:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kFadeHealthPerBioMass * techLevel + recentWins * -5 + (2 + recentWins * -0.5) * extraPlayers 
 end
 
 --function Fade:OnInterrupt()

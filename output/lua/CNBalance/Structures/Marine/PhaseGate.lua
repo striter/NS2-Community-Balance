@@ -15,8 +15,8 @@ function PhaseGate:OnCreate()
     end
 end
 
-function PhaseGate:GetHealthPerTeamExceed()
-    return kPhaseGateHealthPerPlayerAdd
+function PhaseGate:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kPhaseGateHealthPerPlayerAdd * extraPlayers
 end
 
 

@@ -222,8 +222,8 @@ function Extractor:GetDeathIconIndex()
     return kDeathMessageIcon.EMPBlast
 end
 
-function Extractor:GetHealthPerTeamExceed()
-    return kExtractorHealthPerPlayerAdd
+function Extractor:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kExtractorHealthPerPlayerAdd * extraPlayers
 end
 
 Shared.LinkClassToMap("Extractor", Extractor.kMapName, networkVars)

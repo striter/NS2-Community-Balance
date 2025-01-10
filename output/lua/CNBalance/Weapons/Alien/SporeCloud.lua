@@ -306,12 +306,8 @@ function SporeCloud:OnUpdate(deltaTime)
 
 end
 
-function SporeCloud:GetHealthPerBioMass()
-    return kSporeCloudHealthPerBiomass
-end
-
-function SporeCloud:GetBiomassBaseReduction()
-    return 4
+function SporeCloud:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return math.max(techLevel - 4 , 0) * kSporeCloudHealthPerBiomass
 end
 
 if Server then

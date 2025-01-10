@@ -6,6 +6,6 @@ function Shift:OnCreate()
     InitMixin(self, BiomassHealthMixin)
 end
 
-function Shift:GetHealthPerBioMass()
-    return kShiftHealthPerBioMass
+function Shift:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kShiftHealthPerBioMass * techLevel
 end

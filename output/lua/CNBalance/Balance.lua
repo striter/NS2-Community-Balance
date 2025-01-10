@@ -1,4 +1,4 @@
-kMatchMinPlayers = 8
+kMatchMinPlayers = 10
 
 --Resources system starts here
 kShowDeathStatus = true
@@ -9,7 +9,7 @@ kResourceTowerResourceInterval = 6
 kTeamResourceWithoutTower = 0.5
 kMaxEfficiencyTowers = 3
 kTeamResourceEachTower = 1
-kPlayerResEachTower = 0.13 kPlayerResDeductionAboveLimit = 0.0025
+kPlayerResEachTower = 0.125 kPlayerResDeductionAboveLimit = 0
 
 --Pres reward for aggressive playing (too many farmers?)
 kTechDataPersonalResOnKill = {
@@ -56,7 +56,7 @@ kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyCl
 kMilitaryProtocolResearchCost = 0
 kMilitaryProtocolResearchTime = 12
 kMilitaryProtocolTResPerBountyClaim = 0.5
-kMilitaryProtocolResearchDurationMultiply = 1.25
+kMilitaryProtocolResearchDurationMultiply = 1.33
 kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKill above
     [kTechId.Drifter] = 1,
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.GorgeTunnel] = 3,
@@ -698,7 +698,7 @@ kOriginFormAdditionalTRes = 40
 kOriginFormInitialGorgePRes = 60
 kOriginFormExtraGorgePRes = 20
 kOriginFormTeamResourceFetchThreshold = 10
-kOriginFormTeamResScalarHiveCount = { 0.75 , 0.25 , 0.125 , 0.125 , 0.125 , 0.125,0.125}
+kOriginFormTeamResScalarHiveCount = { 1 , 0.75 , 0.5 , 0.25 , 0.125 , 0.125,0.125}
 
 kBiomassPerTower = {0,1,3,6}
 function GetOriginFormBiomassLevel(count)

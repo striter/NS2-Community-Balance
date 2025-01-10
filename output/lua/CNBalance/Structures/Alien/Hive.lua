@@ -721,8 +721,8 @@ if Server then
 
 end
 
-function Hive:GetHealthPerTeamExceed()
-    return kHiveHealthPerPlayerAdd
+function Hive:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kHiveHealthPerPlayerAdd * extraPlayers
 end
 
 

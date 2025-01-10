@@ -11,15 +11,9 @@ function Skulk:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoi
     end
 end
 
-function Skulk:GetHealthPerBioMass(recentWins)
-    return kSkulkHealth - recentWins * kSkulkHealthLossMultiplier
+function Skulk:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kSkulkHealthPerBioMass * techLevel + (1.5 - recentWins * 0.25) * extraPlayers - recentWins * 3
 end
-
-
-function Skulk:GetHealthPerTeamExceed(recentWins)
-    return kSkulkHealthPerPlayerAboveLimit - recentWins * kSkulkHealthPerPlayerLossMultiplier
-end
-
 
 local baseOnKill = Skulk.OnKill
 function Skulk:OnKill(attacker,doer,point, direction)

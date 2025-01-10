@@ -689,8 +689,8 @@ if Client then
 
 end
 
-function InfantryPortal:GetHealthPerTeamExceed()
-    return kInfantryPortalHealthPerPlayerAdd
+function InfantryPortal:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kInfantryPortalHealthPerPlayerAdd - extraPlayers
 end
 
 function InfantryPortal:GetTechButtons()

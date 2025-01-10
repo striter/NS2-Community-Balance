@@ -41,7 +41,7 @@ local function UpdatePlayerChanges(self)
     local ents = GetEntitiesWithMixinForTeam("BiomassHealth",self:GetTeamType())
     for i = 1, #ents do
         local ent = ents[i]
-        if (ent.GetHealthPerTeamExceed)  then
+        if (ent.GetExtraHealth)  then
             ent:UpdateHealthAmount(teamPlayers,0)
         end
     end

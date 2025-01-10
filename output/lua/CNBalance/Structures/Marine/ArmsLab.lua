@@ -6,6 +6,6 @@ function ArmsLab:OnCreate()
     InitMixin(self, BiomassHealthMixin)
 end
 
-function ArmsLab:GetHealthPerTeamExceed()
-    return kArmsLabHealthPerPlayerAdd
+function ArmsLab:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kArmsLabHealthPerPlayerAdd * extraPlayers
 end

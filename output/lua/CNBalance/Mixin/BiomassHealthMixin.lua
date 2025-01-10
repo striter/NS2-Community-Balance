@@ -15,7 +15,7 @@ BiomassHealthMixin.networkVars =
 
 BiomassHealthMixin.expectedCallbacks =
 {
-    GetHealthPerBioMass = "Return health gain per team's biomassMixin"
+    GetExtraHealth = "Return health gain per team's biomassMixin"
 }
 
 BiomassHealthMixin.expectedMixins = {
@@ -26,7 +26,7 @@ function BiomassHealthMixin:__initmixin()
     PROFILE("BiomassHealthMixin:__initmixin")
 
     if Server then
-        self.biomassHealth = 0
+        self.extraHealth = 0
     end
 end
 
@@ -34,40 +34,36 @@ if Server then
 
     function BiomassHealthMixin:OnTeamChange()
         local team = self:GetTeam()
-        local biomassLevel = 0
+        local _techLevel = 0
         local playerAboveLimit = 0
         if team then
-            biomassLevel = team.GetBioMassLevel and team:GetBioMassLevel() or 0
+            _techLevel = team.GetBioMassLevel and team:GetBioMassLevel() or 0
             playerAboveLimit = team.GetTeamType and GetPlayersAboveLimit(team:GetTeamType()) or 0
         end
-        self:UpdateHealthAmount(playerAboveLimit,biomassLevel)
+        self:UpdateHealthAmount(playerAboveLimit, _techLevel)
     end
 
-    function BiomassHealthMixin:UpdateHealthAmount(playersAboveLimit,bioMassLevel)
-        
-        local recentWins = GetTeamInfoEntity(kAlienTeamType).recentWins
-        
-        local healthPerBiomass = self.GetHealthPerBioMass and self:GetHealthPerBioMass(recentWins) or 0
-        local healthPerPlayerExceed = self.GetHealthPerTeamExceed and self:GetHealthPerTeamExceed(recentWins) or 0
-        local baseReduction = self.GetBiomassBaseReduction and self:GetBiomassBaseReduction() or 1
-        
-        if healthPerBiomass == 0 and healthPerPlayerExceed == 0 then return end
-        
-        local levelMultiplier = math.Clamp( bioMassLevel - baseReduction,0,kMaxBiomassHealthMultiplyLevel)
-        local newBiomassHealth = levelMultiplier * healthPerBiomass + playersAboveLimit * healthPerPlayerExceed
-        newBiomassHealth = math.floor(newBiomassHealth)
-        newBiomassHealth = math.min(newBiomassHealth,3000)  --Clamp it due to hive max health greater than expected limit (?)
+    function BiomassHealthMixin:UpdateHealthAmount(playersAboveLimit, _techLevel)
 
-        if newBiomassHealth ~= self.biomMassHealth  then
+        _techLevel = math.Clamp(_techLevel - 1,0,kMaxBiomassHealthMultiplyLevel)
+        local recentWins = GetTeamInfoEntity(kAlienTeamType).recentWins
+        local newExtraHealth = self.GetExtraHealth and self:GetExtraHealth(_techLevel,playersAboveLimit,recentWins) or 0
+        
+        if newExtraHealth == 0 then return end
+        
+        newExtraHealth = math.floor(newExtraHealth)
+        newExtraHealth = math.min(newExtraHealth,3000)  --Clamp it due to hive max health greater than expected limit (?)
+
+        if newExtraHealth ~= self.extraHealth  then
             -- maxHealth is a integer
-            local healthDelta = math.round(newBiomassHealth - self.biomassHealth)
+            local healthDelta = math.round(newExtraHealth - self.extraHealth)
             self:AdjustMaxHealth(math.max(self:GetMaxHealth() + healthDelta,1))
-            self.biomassHealth = newBiomassHealth
+            self.extraHealth = newExtraHealth
         end
     end
 
     function BiomassHealthMixin:GetAdditionalHealth()
-        return self.biomassHealth
+        return self.extraHealth
     end
     
 end

@@ -109,6 +109,6 @@ if Server then
     
 end
 
-function PowerPoint:GetHealthPerTeamExceed()
-    return kPowerPointHealthPerPlayerAdd
+function PowerPoint:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kPowerPointHealthPerPlayerAdd * extraPlayers
 end

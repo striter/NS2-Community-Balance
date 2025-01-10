@@ -974,9 +974,10 @@ if Server then
     function TunnelEntrance:GetIsActuallyConnected()
         return true
     end
-    
-    function TunnelEntrance:GetHealthPerTeamExceed()
-        return kTunnelEntranceHealthPerPlayerAdd
-    end
 end
+
+function TunnelEntrance:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kTunnelEntranceHealthPerPlayerAdd * extraPlayers
+end
+
 ---

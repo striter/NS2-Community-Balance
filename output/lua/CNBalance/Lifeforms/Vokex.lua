@@ -257,8 +257,8 @@ function Vokex:GetBaseHealth()
     return Vokex.kHealth
 end
 
-function Vokex:GetHealthPerBioMass()
-    return kVokexHealthPerBioMass
+function Vokex:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kVokexHealthPerBioMass * techLevel - recentWins * 5
 end
 
 function Vokex:GetCarapaceBonusPerBiomass()

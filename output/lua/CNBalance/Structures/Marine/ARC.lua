@@ -6,8 +6,8 @@ function ARC:OnCreate()
     InitMixin(self, BiomassHealthMixin)
 end
 
-function ARC:GetHealthPerTeamExceed()
-    return kARCHealthPerPlayerAdd
+function ARC:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kARCHealthPerPlayerAdd * extraPlayers
 end
 
 local baseValidateTargetPosition = ARC.ValidateTargetPosition

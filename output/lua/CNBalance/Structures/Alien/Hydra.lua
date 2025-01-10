@@ -44,3 +44,7 @@ function Hydra:OnCreate()
     end
 
 end
+
+function Hydra:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kHydraHealthPerBioMass * techLevel
+end

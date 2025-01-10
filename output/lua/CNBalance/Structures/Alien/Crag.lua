@@ -6,8 +6,8 @@ function Crag:OnCreate()
     InitMixin(self, BiomassHealthMixin)
 end
 
-function Crag:GetHealthPerBioMass()
-    return kCragHealthPerBioMass
+function Crag:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kCragHealthPerBioMass * techLevel
 end
 
 if Server then

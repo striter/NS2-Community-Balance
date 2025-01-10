@@ -8,8 +8,8 @@ function Whip:OnCreate()
     InitMixin(self, BiomassHealthMixin)
 end
 
-function Whip:GetHealthPerBioMass()
-    return kWhipHealthPerBioMass
+function Whip:GetExtraHealth(techLevel,extraPlayers,recentWins)
+    return kWhipHealthPerBioMass * techLevel
 end
 
 if Server then

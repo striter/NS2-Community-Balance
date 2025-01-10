@@ -421,9 +421,9 @@ function MarineTeam:OnResetComplete()
         local locationName = table.remove(locationsWithoutTechPoint)
         if i <= destroyCount then
             DestroyPowerForLocation(locationName, true)
-        elseif not table.icontains(resourceLocationNames,locationName) then
+        else
             local powerPoint = GetPowerPointForLocation(locationName)
-            if  powerPoint then
+            if powerPoint then
                 powerPoint:SetConstructionComplete()
             end
         end

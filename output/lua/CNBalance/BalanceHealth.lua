@@ -40,16 +40,16 @@ kPowerPointHealth = 1250  kPowerPointArmor = 1000  kPowerPointPointValue = 10
 kPowerPointHealthPerPlayerAdd = 0  kPowerPointHealthAddOnTechPoint = 800
 
 --2400 1050
-kExtractorHealth = 2600 kExtractorArmor = 1050 kExtractorPointValue = 15
+kExtractorHealth = 2400 kExtractorArmor = 1050 kExtractorPointValue = 15
 kPoweredExtractorHealth = 2400 kPoweredExtractorArmor = 1500 kPoweredExtractorPointValue = 30
 kExtractorHealthPerPlayerAdd = -100
 
 --1525 500
-kInfantryPortalHealth = 1425  kInfantryPortalArmor = 500  kInfantryPortalPointValue = 10
+kInfantryPortalHealth = 1525  kInfantryPortalArmor = 500  kInfantryPortalPointValue = 10
 kInfantryPortalHealthPerPlayerAdd = 50
 
 -- 1500  800  10
-kPhaseGateHealth = 1680  kPhaseGateArmor = 800    kPhaseGatePointValue = 10 
+kPhaseGateHealth = 1500  kPhaseGateArmor = 800    kPhaseGatePointValue = 10 
 kPhaseGateHealthPerPlayerAdd = 60
 
 --700 500
@@ -57,12 +57,12 @@ kObservatoryHealth = 600    kObservatoryArmor = 500    kObservatoryPointValue = 
 kObservatoryHealthPerPlayerAdd = 50
 
 --1650 500
-kArmsLabHealth = 1550    kArmsLabArmor = 500    kArmsLabPointValue = 15
+kArmsLabHealth = 1650    kArmsLabArmor = 500    kArmsLabPointValue = 15
 kArmsLabHealthPerPlayerAdd = 50
 
 --2600 400   -- 2600 0
-kARCHealth = 2480    kARCArmor = 400    kARCPointValue = 10 
-kARCDeployedHealth = 2480    kARCDeployedArmor = 0
+kARCHealth = 2600    kARCArmor = 400    kARCPointValue = 10 
+kARCDeployedHealth = 2600    kARCDeployedArmor = 0
 kARCHealthPerPlayerAdd = 60
 
 --2500 400
@@ -106,9 +106,7 @@ kExoDamageReduction = {
 kHealingClampMaxHPAmount = 0.12
 kMaxBiomassHealthMultiplyLevel = 8 --N-1
 
-kSkulkHealth = 72  kSkulkHealthLossMultiplier = 1
-kSkulkArmor = 10    kSkulkPointValue = 5  kSkulkHealthPerBioMass = 3 
-kSkulkHealthPerPlayerAboveLimit = 1.5 kSkulkHealthPerPlayerLossMultiplier = 0.25
+kSkulkHealth = 75 kSkulkArmor = 10    kSkulkPointValue = 5  kSkulkHealthPerBioMass = 3 
 kSkulkDamageReduction = {
     ["Grenade"] = 0.8,
     ["ImpactGrenade"] = 0.8,
@@ -118,7 +116,7 @@ kSkulkDamageReduction = {
     --["Railgun"] = 0.9,
 }
 
-kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7 kGorgeHealthPerBioMass = 3
+kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7 kGorgeHealthPerBioMass = 2
 kGorgeDamageReduction = {
     ["Sentry"] = 0.5,
     ["MarineSentry"] = 0.5,
@@ -135,7 +133,6 @@ kLerkDamageReduction = {
 }
 
 kFadeHealth = 280  kFadeArmor = 80  kFadePointValue = 20 kFadeHealthPerBioMass = 5
-kFadeHealthPerPlayerAboveLimit = 2 kFadeHealthPerPlayerLossMultiplier = 0.5
 kFadeDamageReduction = {
     --["Mine"] = 1.25,
     --["MarineSentry"] = 1.1,
@@ -144,7 +141,6 @@ kFadeDamageReduction = {
 
 --700 450 50
 kOnosHealth = 700    kOnosArmor = 450    kOnosPointValue = 30 kOnosHealtPerBioMass = 50 
-kOnosHealthPerPlayerAboveLimit = 15 kOnosHealthPerPlayerLossMultiplier = 2.5
 kOnosBoneShieldDefaultReduction = 0.2
 kOnosBoneShieldDamageReduction = {
     --["HeavyMachineGun"] = 0.25,
