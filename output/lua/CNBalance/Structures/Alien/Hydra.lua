@@ -1,4 +1,3 @@
-
 function Hydra:OnCreate()
 
     ScriptActor.OnCreate(self)
@@ -42,7 +41,6 @@ function Hydra:OnCreate()
 
         self:SetUpdates(true, kDefaultUpdateRate)
     end
-
 end
 
 function Hydra:GetExtraHealth(techLevel,extraPlayers,recentWins)

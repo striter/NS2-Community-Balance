@@ -510,7 +510,7 @@ function Prowler:GetBaseArmor()
 end
 
 function Prowler:GetExtraHealth(techLevel,extraPlayers,recentWins)
-    return kProwlerHealthPerBiomass * techLevel + extraPlayers * 1.5 + recentWins * -5
+    return kProwlerHealthPerBiomass * techLevel + extraPlayers * 1.5 - recentWins * 5
 end
 
 function Prowler:ModifyGravityForce(gravityTable)

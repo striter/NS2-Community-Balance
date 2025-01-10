@@ -16,7 +16,9 @@ function Lerk:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoin
 end
 
 function Lerk:GetExtraHealth(techLevel,extraPlayers,recentWins)
-    return kLerkHealthPerBioMass * techLevel + extraPlayers * (1.5 - recentWins * .25) - recentWins * 3
+    return techLevel * kLerkHealthPerBioMass 
+            + extraPlayers * (1.5 - recentWins * .25) 
+            - recentWins * 3
 end
 
 if Server then

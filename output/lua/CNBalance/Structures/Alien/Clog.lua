@@ -1,3 +1,3 @@
 function Clog:GetExtraHealth(techLevel,extraPlayers,recentWins)
-   return techLevel * kkClogHealthPerBioMass
+   return techLevel * kClogHealthPerBioMass
 end

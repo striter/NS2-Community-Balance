@@ -80,7 +80,9 @@ function Gorge:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoi
 end
 
 function Gorge:GetExtraHealth(techLevel,extraPlayers,recentWins)
-    return kGorgeHealthPerBioMass * techLevel + extraPlayers * 2.5 + recentWins * -5
+    return techLevel * kGorgeHealthPerBioMass 
+            + extraPlayers * 2.5 
+            + recentWins * -5
 end
 
 Shared.LinkClassToMap("Gorge", Gorge.kMapName, networkVars, true)

@@ -690,7 +690,7 @@ if Client then
 end
 
 function InfantryPortal:GetExtraHealth(techLevel,extraPlayers,recentWins)
-    return kInfantryPortalHealthPerPlayerAdd - extraPlayers
+    return kInfantryPortalHealthPerPlayerAdd * extraPlayers
 end
 
 function InfantryPortal:GetTechButtons()

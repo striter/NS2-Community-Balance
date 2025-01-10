@@ -67,7 +67,9 @@ end
 
 
 function Fade:GetExtraHealth(techLevel,extraPlayers,recentWins)
-    return kFadeHealthPerBioMass * techLevel + recentWins * -5 + (2 + recentWins * -0.5) * extraPlayers 
+    return techLevel * kFadeHealthPerBioMass
+            + extraPlayers * (2 - recentWins * 0.5)  
+            - recentWins * 5
 end
 
 --function Fade:OnInterrupt()
