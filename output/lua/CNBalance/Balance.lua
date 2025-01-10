@@ -384,7 +384,7 @@ kXenocideFuelTime = 120
 kXenocideEnergyCost = 30
 kXenocideDamageType = kDamageType.Structural
 kXenocideDamage = 150  kXenocideFuelDamage = 220 --200
-kXenocideRange = 9 kXenocideFuelRange = 14 -- 14
+kXenocideRange = 9 kXenocideFuelRange = 12 -- 14
 kXenocideDamageScalarEmptyHealth = 0.2 kXenocideDamageHealthScalar = 1 - kXenocideDamageScalarEmptyHealth
 kXenocideSpawnReduction = 1 kXenocideFuelSpawnReduction = 0.6
 
@@ -683,7 +683,7 @@ kOriginFormOnInfestationMinHealPerSecond = 10
 kGorgeAbilitiesCost = {
     [kTechId.Hydra] = 0, [kTechId.Clog] = 0, [kTechId.Web] = 0,[kTechId.SporeMine] = 0, [kTechId.BabblerEgg] = 3,
     [kTechId.Cyst] = 0.5,    [kTechId.Egg] = 1.5, [kTechId.Tunnel] = 4, [kTechId.TunnelExit] = 4,
-    [kTechId.Whip] = 8, [kTechId.Shift] = 12, [kTechId.Shade] = 12, [kTechId.Crag] = 12,
+    [kTechId.Whip] = 8, [kTechId.Shift] = 15, [kTechId.Shade] = 15, [kTechId.Crag] = 15,
     [kTechId.Harvester] = 8, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
                          [kTechId.Spur] = 12, [kTechId.Shell] = 12, [kTechId.Veil] = 12,
 }
@@ -698,7 +698,7 @@ kOriginFormAdditionalTRes = 40
 kOriginFormInitialGorgePRes = 60
 kOriginFormExtraGorgePRes = 20
 kOriginFormTeamResourceFetchThreshold = 10
-kOriginFormTeamResScalarHiveCount = { 1 , 0.75 , 0.5 , 0.25 , 0.125 , 0.125,0.125}
+kOriginFormTeamResScalarHiveCount = { 0.75 , 0.5 , 0.25 , 0.125 , 0.125 , 0.125,0.125}
 
 kBiomassPerTower = {0,1,3,6}
 function GetOriginFormBiomassLevel(count)

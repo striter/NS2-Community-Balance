@@ -116,7 +116,7 @@ kSkulkDamageReduction = {
     --["Railgun"] = 0.9,
 }
 
-kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7 kGorgeHealthPerBioMass = 2
+kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7 kGorgeHealthPerBioMass = 3
 kGorgeDamageReduction = {
     ["Sentry"] = 0.5,
     ["MarineSentry"] = 0.5,

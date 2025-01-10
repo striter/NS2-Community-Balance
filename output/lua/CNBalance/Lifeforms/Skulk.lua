@@ -13,7 +13,7 @@ end
 
 function Skulk:GetExtraHealth(techLevel,extraPlayers,recentWins)
     return techLevel * kSkulkHealthPerBioMass 
-            + (1.5 - recentWins * 0.25) * extraPlayers 
+            + 1.25 * extraPlayers 
             - recentWins * 3
 end
 
