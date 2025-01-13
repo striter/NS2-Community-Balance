@@ -33,3 +33,30 @@ function Observatory:TriggerDistressBeacon()
     return success, not success
 
 end
+
+
+function Observatory:GetPlayersToBeacon(toOrigin)
+
+    local players = {}
+    local playerIds = self:GetTeam():GetPlayerIds()
+    for playerId in playerIds:Iterate() do
+        local player = Shared.GetEntity(playerId)
+        -- Only beacon Marines (no Exo, Commander or TeamSpectator (dead player))
+        if player and player:isa("Marine") then
+
+            -- Don't respawn players that are already nearby.
+            -- Log("Player location id: %s", player:GetLocationId())
+            local inTheSameLocation = GetIsSameLocation(toOrigin, player:GetOrigin())
+            if not inTheSameLocation then
+                table.insert(players, player)
+                if player:GetIsParasited() then
+                    player:RemoveParasite()
+                end
+            end
+        end
+
+    end
+
+    return players
+
+end
