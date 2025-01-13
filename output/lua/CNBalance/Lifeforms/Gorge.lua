@@ -81,7 +81,7 @@ end
 
 function Gorge:GetExtraHealth(techLevel,extraPlayers,recentWins)
     return techLevel * kGorgeHealthPerBioMass 
-            --+ extraPlayers * 2.5 
+            + extraPlayers * math.max(3 - recentWins * 1,0)
             + recentWins * -5
 end
 

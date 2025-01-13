@@ -35,6 +35,26 @@ function Observatory:TriggerDistressBeacon()
 end
 
 
+-- Check if both origins are in the location (game wise, not mapping wise since a "location" is composed of several mapping "location" entities)
+local function GetIsSameLocation(CC_orig, player_orig)
+    local loc1 = GetLocationForPoint(CC_orig)
+    local loc2 = GetLocationForPoint(player_orig)
+
+    if loc1 and loc2 then
+        local location1_id = Shared.GetStringIndex(loc1:GetName())
+        local location2_id = Shared.GetStringIndex(loc2:GetName())
+
+        -- Log("Locations1: %s %s/%s", loc1, loc1:GetName(), location1_id)
+        -- Log("Locations2: %s %s/%s", loc2, loc2:GetName(), location2_id)
+        -- Log("Distance: %s", CC_orig:GetDistanceTo(player_orig))
+        if location1_id == location2_id then
+            return true
+        end
+    end
+
+    return false
+end
+
 function Observatory:GetPlayersToBeacon(toOrigin)
 
     local players = {}

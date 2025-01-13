@@ -75,19 +75,18 @@ if Server then
     function RequestHandleMixin:HandleManualAlert(techId)
 
         if self.kIgnoreRequest then return false end
-
-        local time = Shared.GetTime()
-        if techId == kTechId.MarineAlertNeedMedpack and time < self.timeLastPrimaryRequestHandle then
+        
+        if techId == kTechId.MarineAlertNeedMedpack then
             self:AddTimedCallback(self.MedSelf,kAlertHandleDelay)
             return true
         end
 
-        if techId == kTechId.MarineAlertNeedAmmo and time < self.timeLastAutoAmmoPack then
+        if techId == kTechId.MarineAlertNeedAmmo then
             self:AddTimedCallback(self.AmmoSelf,kAlertHandleDelay)
             return true
         end
 
-        if techId == kTechId.AlienAlertNeedMist and time < self.timeLastPrimaryRequestHandle then
+        if techId == kTechId.AlienAlertNeedMist then
             self:AddTimedCallback(self.MistSelf,kAlertHandleDelay)
             return true
         end

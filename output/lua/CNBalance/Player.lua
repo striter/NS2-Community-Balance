@@ -116,4 +116,11 @@ if Server then
 	--	return resReward
 	--
 	--end
+end
+
+
+local baseGetCanShootSeasonalObject = Player.GetCanShootSeasonalObject
+function Player:GetCanShootSeasonalObject()
+	if self:GetIsDestroyed() then return false end
+	return baseGetCanShootSeasonalObject(self)
 end 

@@ -35,8 +35,10 @@ function ARC:GetCanFireAtTargetActual(target, targetPoint, manuallyTargeted)
         return false
     end
 
-    if not target:GetIsSighted() and not GetIsTargetDetected(target) then
-        return false
+    if target.GetIsSighted then
+        if not target:GetIsSighted() and not GetIsTargetDetected(target) then
+            return false
+        end
     end
 
     local distToTarget = (target:GetOrigin() - self:GetOrigin()):GetLengthXZ()

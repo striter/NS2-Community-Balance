@@ -17,7 +17,7 @@ end
 
 function Lerk:GetExtraHealth(techLevel,extraPlayers,recentWins)
     return techLevel * kLerkHealthPerBioMass 
-            --+ extraPlayers * (1.5 - recentWins * .25) 
+            + extraPlayers * math.max(1.5 - recentWins * 0.5,0)
             - recentWins * 3
 end
 

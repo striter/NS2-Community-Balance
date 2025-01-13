@@ -510,8 +510,8 @@ function Prowler:GetBaseArmor()
 end
 
 function Prowler:GetExtraHealth(techLevel,extraPlayers,recentWins)
-    return kProwlerHealthPerBioMass * techLevel 
-            --+ extraPlayers * 1.5 
+    return kProwlerHealthPerBioMass * techLevel
+            + extraPlayers * math.max(1.5 - recentWins * 0.5,0)
             - recentWins * 5
 end
 
