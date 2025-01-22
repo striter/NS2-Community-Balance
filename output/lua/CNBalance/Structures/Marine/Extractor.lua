@@ -223,7 +223,7 @@ function Extractor:GetDeathIconIndex()
 end
 
 function Extractor:GetExtraHealth(techLevel,extraPlayers,recentWins)
-    return kExtractorHealthPerPlayerAdd * extraPlayers
+    return extraPlayers * Clamp(-75 -25 * recentWins,-150,150)
 end
 
 Shared.LinkClassToMap("Extractor", Extractor.kMapName, networkVars)

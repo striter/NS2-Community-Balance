@@ -166,7 +166,7 @@ function PlayingTeam:UpdateResTick()
 
         local pRes = finalResParam * pResEachRT
         local tRes = finalResParam * kTeamResourceEachTower
-        self:CollectTeamResources(tRes, pRes)
+        self:CollectTeamResources(tRes, pRes,rtActiveCount)
     end
 end
 

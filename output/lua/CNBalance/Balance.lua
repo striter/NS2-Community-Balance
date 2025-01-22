@@ -56,7 +56,7 @@ kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyCl
 kMilitaryProtocolResearchCost = 0
 kMilitaryProtocolResearchTime = 12
 kMilitaryProtocolTResPerBountyClaim = 0.5
-kMilitaryProtocolResearchDurationMultiply = 1.33
+kMilitaryProtocolResearchDurationMultiply = 1
 kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKill above
     [kTechId.Drifter] = 1,
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.GorgeTunnel] = 3,
@@ -287,9 +287,9 @@ kARCBuildTime = 5
 kMACCost = 4
 
 kSentryDamage = 4  kSentryWeapon1Scalar = 1.125 kSentryWeapon2Scalar = 1.25 kSentryWeapon3Scalar = 1.375
-kSentryCost = 4
+kSentryCost = 0
 kSentryBuildTime = 3
-kSentryBatteryCost = 12
+kSentryBatteryCost = 20
 kSentryBatteryBuildTime = 5
 
 kAdvancedArmoryUpgradeCost = 25

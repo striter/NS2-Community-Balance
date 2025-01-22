@@ -511,8 +511,8 @@ end
 
 function Prowler:GetExtraHealth(techLevel,extraPlayers,recentWins)
     return kProwlerHealthPerBioMass * techLevel
-            + extraPlayers * math.max(1.5 - recentWins * 0.5,0)
-            - recentWins * 5
+            + extraPlayers * Clamp(1.25 - recentWins * 0.25,0,2.5)
+            - recentWins * 3
 end
 
 function Prowler:ModifyGravityForce(gravityTable)

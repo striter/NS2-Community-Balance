@@ -284,9 +284,10 @@ function MarineTeam:CollectKillReward(_techId,_fraction)
     return 0
 end
 
-function MarineTeam:CollectTeamResources(teamRes,playerRes)
+function MarineTeam:CollectTeamResources(teamRes,playerRes,rtActiveCount)
     if self:IsMilitaryProtocol() then
         playerRes = 0   --No player res now
+        teamRes = rtActiveCount * kTeamResourceEachTower
     end
 
     PlayingTeam.CollectTeamResources(self,teamRes,playerRes)

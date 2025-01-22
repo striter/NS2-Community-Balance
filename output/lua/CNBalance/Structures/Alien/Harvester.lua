@@ -7,5 +7,5 @@ function Harvester:OnCreate()
 end
 
 function Harvester:GetExtraHealth(techLevel,extraPlayers,recentWins)
-    return extraPlayers * kHarvesterHealthPerPlayerAdd
+    return extraPlayers * Clamp(-50 -25 * recentWins,-150,150)
 end

@@ -126,13 +126,13 @@ function PhaseGate:Phase(user)
             
             local instantPhase = user.timeLastBeacon and Shared.GetTime() - user.timeLastBeacon <= kBeaconInstantPhaseDuration
             if not instantPhase then
+                local playerAboveLimit = GetPlayersAboveLimit(self:GetTeamNumber())
                 gateCount = gateCount or 2
                 phaseTime = kPhaseCooldownBase
                         + math.max( 0,gateCount - 2) * kPhaseCooldownPerGateUpEnd
                         + playerAboveLimit * kPhaseCooldownPerPlayerAboveLimit
             end
 
-            local playerAboveLimit = GetPlayersAboveLimit(self:GetTeamNumber())
             self.cooldownNextPhase = phaseTime
         end
         

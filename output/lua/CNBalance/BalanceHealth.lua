@@ -42,7 +42,6 @@ kPowerPointHealthPerPlayerAdd = 0  kPowerPointHealthAddOnTechPoint = 800
 --2400 1050
 kExtractorHealth = 2400 kExtractorArmor = 1050 kExtractorPointValue = 15
 kPoweredExtractorHealth = 2400 kPoweredExtractorArmor = 1500 kPoweredExtractorPointValue = 30
-kExtractorHealthPerPlayerAdd = -100
 
 --1525 500
 kInfantryPortalHealth = 1525  kInfantryPortalArmor = 500  kInfantryPortalPointValue = 10
@@ -69,7 +68,7 @@ kARCHealthPerPlayerAdd = 60
 kRoboticsFactoryHealth = 1500    kRoboticsFactoryArmor = 400    kRoboticsFactoryPointValue = 5
 kARCRoboticsFactoryHealth = 2500    kARCRoboticsFactoryArmor = 400    kARCRoboticsFactoryPointValue = 7
 
-kSentryBatteryHealth = 800    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5     --600 200
+kSentryBatteryHealth = 1200    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5     --600 200
 kSentryHealth = 400    kSentryArmor = 125    kSentryPointValue = 3      --500 125
 
 kPrototypeLabHealth = 2000    kPrototypeLabArmor = 500    kPrototypeLabPointValue = 10
@@ -189,7 +188,6 @@ kHiveHealthPerPlayerAdd = 200
 
 --2000 200 2300 320
 kHarvesterHealth = 2200 kHarvesterArmor = 200 kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 320  kHarvesterPointValue = 15
-kHarvesterHealthPerPlayerAdd = 100
 
 --1000 ---100    --1250 -200
 kTunnelEntranceHealth = 900  kTunnelEntranceArmor = 100 kMatureTunnelEntranceHealth = 1250 kMatureTunnelEntranceArmor = 200
