@@ -3,6 +3,7 @@
      NS2Gamerules.kBalanceConfig = LoadConfigFile("NS2.0Config.json", {
          bountyActive = false,
          resourceEfficiency = false,
+         recentWinsBalance = false,
      }, true)
 
      NS2Gamerules.kRecentRoundStatus = LoadConfigFile("NS2.0RoundStatus.json",{
@@ -10,11 +11,13 @@
      
      function NS2Gamerules:GetRecentRoundAlienWins()
          local kRecentRoundAliensWins = 0
-         for k,v in pairs(NS2Gamerules.kRecentRoundStatus) do
-             if v.winningTeam == kMarineTeamType then
-                 kRecentRoundAliensWins = kRecentRoundAliensWins - 1
-             elseif v.winningTeam == kAlienTeamType then
-                 kRecentRoundAliensWins = kRecentRoundAliensWins + 1
+         if NS2Gamerules.kBalanceConfig.recentWinsBalance then
+             for k,v in pairs(NS2Gamerules.kRecentRoundStatus) do
+                 if v.winningTeam == kMarineTeamType then
+                     kRecentRoundAliensWins = kRecentRoundAliensWins - 1
+                 elseif v.winningTeam == kAlienTeamType then
+                     kRecentRoundAliensWins = kRecentRoundAliensWins + 1
+                 end
              end
          end
          return kRecentRoundAliensWins
