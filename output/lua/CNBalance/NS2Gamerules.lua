@@ -1,12 +1,12 @@
  if Server then
 
-     NS2Gamerules.kBalanceConfig = LoadConfigFile("NS2.0Config.json", {
+     NS2Gamerules.kBalanceConfig = LoadConfigFile("Siege2.0Config.json", {
          bountyActive = false,
          resourceEfficiency = false,
          recentWinsBalance = false,
      }, true)
 
-     NS2Gamerules.kRecentRoundStatus = LoadConfigFile("NS2.0RoundStatus.json",{
+     NS2Gamerules.kRecentRoundStatus = LoadConfigFile("Siege2.0RoundStatus.json",{
      },true)
      
      function NS2Gamerules:GetRecentRoundAlienWins()
