@@ -687,36 +687,34 @@ if Server then
     local baseOnCreate = Hive.OnCreate
     function Hive:OnCreate()
         baseOnCreate(self)
-        self.spawnedDrifterID = Entity.invalidId
-        self.freeDrifterCheck = Shared.GetTime()
+        --self.spawnedDrifterID = Entity.invalidId
+        --self.freeDrifterCheck = Shared.GetTime()
     end
     
     local baseOnUpdate = Hive.OnUpdate
     function Hive:OnUpdate(deltaTime)
-        
         baseOnUpdate(self,deltaTime)
-
-        local time = Shared.GetTime()
-        if self.freeDrifterCheck and time - self.freeDrifterCheck < 1 then return end
-        self.freeDrifterCheck = time
-
-        if not GetGamerules():GetGameStarted() then return end
-        if not CouldUseACommander(self) then return end
-        if self:GetIsInCombat() then return end
-        if not GetIsUnitActive(self) then return end
-        
-        if self.spawnedDrifterID ~= Entity.invalidId then
-            local drifter = Shared.GetEntity(self.spawnedDrifterID)
-                if drifter == nil
-                    or (not drifter:isa("Drifter") and not drifter:isa("DrifterEgg") )
-                    or not drifter:GetIsAlive() then
-                self.spawnedDrifterID = Entity.invalidId
-            end
-        end
-        
-        if self.spawnedDrifterID == Entity.invalidId then
-            self.spawnedDrifterID = CreateDrifterEgg(self):GetId()
-        end
+        --local time = Shared.GetTime()
+        --if self.freeDrifterCheck and time - self.freeDrifterCheck < 1 then return end
+        --self.freeDrifterCheck = time
+        --
+        --if not GetGamerules():GetGameStarted() then return end
+        --if not CouldUseACommander(self) then return end
+        --if self:GetIsInCombat() then return end
+        --if not GetIsUnitActive(self) then return end
+        --
+        --if self.spawnedDrifterID ~= Entity.invalidId then
+        --    local drifter = Shared.GetEntity(self.spawnedDrifterID)
+        --        if drifter == nil
+        --            or (not drifter:isa("Drifter") and not drifter:isa("DrifterEgg") )
+        --            or not drifter:GetIsAlive() then
+        --        self.spawnedDrifterID = Entity.invalidId
+        --    end
+        --end
+        --
+        --if self.spawnedDrifterID == Entity.invalidId then
+        --    self.spawnedDrifterID = CreateDrifterEgg(self):GetId()
+        --end
     end
 
 end

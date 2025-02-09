@@ -120,7 +120,7 @@ kInfantryPortalSupply = 0
 kPhaseGateSupply = 10
 kSentriesPerBattery = 3
 
-kDrifterSupply = 0
+kDrifterSupply = 10
 kWhipSupply = 8
 kCragSupply = 20
 kShadeSupply = 20

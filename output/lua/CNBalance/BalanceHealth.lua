@@ -65,13 +65,16 @@ kARCDeployedHealth = 2600    kARCDeployedArmor = 0
 kARCHealthPerPlayerAdd = 60
 
 --2500 400
-kRoboticsFactoryHealth = 1500    kRoboticsFactoryArmor = 400    kRoboticsFactoryPointValue = 5
-kARCRoboticsFactoryHealth = 2500    kARCRoboticsFactoryArmor = 400    kARCRoboticsFactoryPointValue = 7
+kRoboticsFactoryHealth = 1200    kRoboticsFactoryArmor = 250    kRoboticsFactoryPointValue = 5
+kARCRoboticsFactoryHealth = 1500    kARCRoboticsFactoryArmor = 400    kARCRoboticsFactoryPointValue = 7
+
+kArmoryHealth = 1200    kArmoryArmor = 150    kArmoryPointValue = 5
+kAdvancedArmoryHealth = 2400    kAdvancedArmoryArmor = 500    kAdvancedArmoryPointValue = 10
 
 kSentryBatteryHealth = 1200    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5     --600 200
 kSentryHealth = 400    kSentryArmor = 125    kSentryPointValue = 3      --500 125
 
-kPrototypeLabHealth = 2000    kPrototypeLabArmor = 500    kPrototypeLabPointValue = 10
+kPrototypeLabHealth = 1800 kPrototypeLabArmor = 500    kPrototypeLabPointValue = 10
 kUpgradedPrototypeLabHealth = 2400 kUpgradedPrototypeLabArmor = 500 kUpgradedPrototypeLabPointValue = 20
 
 kExplosiveSelfDamage =
@@ -187,7 +190,7 @@ kHiveHealth = 3600    kHiveArmor = 750 kMatureHiveHealth = 5000 kMatureHiveArmor
 kHiveHealthPerPlayerAdd = 200
 
 --2000 200 2300 320
-kHarvesterHealth = 2200 kHarvesterArmor = 200 kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 320  kHarvesterPointValue = 15
+kHarvesterHealth = 2000 kHarvesterArmor = 200 kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 320  kHarvesterPointValue = 15
 
 --1000 ---100    --1250 -200
 kTunnelEntranceHealth = 900  kTunnelEntranceArmor = 100 kMatureTunnelEntranceHealth = 1250 kMatureTunnelEntranceArmor = 200

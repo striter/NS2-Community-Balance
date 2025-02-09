@@ -68,7 +68,6 @@ end
 
 function Fade:GetExtraHealth(techLevel,extraPlayers,recentWins)
     return techLevel * kFadeHealthPerBioMass
-            + extraPlayers * Clamp(2 - recentWins * 0.5,0,3)
             - recentWins * 5
 end
 

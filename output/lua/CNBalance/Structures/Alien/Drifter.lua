@@ -65,8 +65,8 @@ Drifter.kOrdered3DSoundName = PrecacheAsset("sound/NS2.fev/alien/drifter/ordered
 local kDrifterConstructSound = PrecacheAsset("sound/NS2.fev/alien/drifter/drift")
 local kDrifterMorphing = PrecacheAsset("sound/NS2.fev/alien/commander/drop_structure")
 
-Drifter.kMoveSpeed = 8      --11
-Drifter.kCelerityMoveSpeed = 10  --13
+Drifter.kMoveSpeed = 11      --11
+Drifter.kCelerityMoveSpeed = 13  --13
 
 Drifter.kHealth = kDrifterHealth
 Drifter.kArmor = kDrifterArmor

@@ -15,9 +15,9 @@ kPlayerResEachTower = 0.125 kPlayerResDeductionAboveLimit = 0
 kTechDataPersonalResOnKill = {
     --Marines
     [kTechId.PowerPoint] = 1,
-    [kTechId.MAC] = 0.3,    [kTechId.SentryBattery] = 4, [kTechId.Sentry] = 1, [kTechId.ARC] = 2.5,      --CPVE
-    [kTechId.Extractor] = 3, [kTechId.PoweredExtractor] = 5,
-    [kTechId.RoboticsFactory] = 3, [kTechId.ARCRoboticsFactory] = 5,
+    [kTechId.MAC] = 0.3,    [kTechId.SentryBattery] = 2, [kTechId.Sentry] = 0.5, [kTechId.ARC] = 1,      --CPVE
+    [kTechId.Extractor] = 2, [kTechId.PoweredExtractor] = 2,
+    [kTechId.RoboticsFactory] = 2, [kTechId.ARCRoboticsFactory] = 2,
     [kTechId.Armory] = 3,[kTechId.Observatory] = 3, [kTechId.PhaseGate] = 5,
     [kTechId.CommandStation] = 12, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [ kTechId.ElectronicStation ] = 15,
     [kTechId.Mine] = 0.3, [kTechId.InfantryPortal] = 2, [kTechId.MarineSentry] = 1,   --PPVE
@@ -52,7 +52,7 @@ kBountyClaimMinSkulk = 5 kBountyClaimMinAlien = 8 kBountyClaimMinFade = 10 kBoun
 kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 20
 
 
---Toy for marine commander (remove all marines passive income, harsh one)
+--Toy for marine commander (remove all marines passive income)
 kMilitaryProtocolResearchCost = 0
 kMilitaryProtocolResearchTime = 12
 kMilitaryProtocolTResPerBountyClaim = 0.5
@@ -63,16 +63,16 @@ kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKi
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
     [kTechId.Skulk] = 2, [kTechId.Gorge] = 2,[kTechId.Prowler] = 2, [kTechId.Lerk] = 2, [kTechId.Fade] = 2, [kTechId.Vokex] = 2,[kTechId.Onos] = 2,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
-    [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20
+    [kTechId.Hive] = 20, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20
 }
 kMilitaryProtocolPlayerResourcesPerKill = {
-    [kTechId.Skulk] = 0.5, [kTechId.Gorge] = 1, [kTechId.Prowler] = 1, [kTechId.Lerk] = 2, [kTechId.Fade] = 2,[kTechId.Vokex] = 2, [kTechId.Onos] = 5,
+    [kTechId.Skulk] = 0.8, [kTechId.Gorge] = 1.2, [kTechId.Prowler] = 1.5, [kTechId.Lerk] = 2, [kTechId.Fade] = 3,[kTechId.Vokex] = 3, [kTechId.Onos] = 5,
 }
 
 kMarineRespawnTime = 9
 kAlienSpawnTime = 10
 
-kEggGenerationRate = 11  --13
+kEggGenerationRate = 12  --13
 kAlienEggsPerHive = 2
 
 kWelderDropCost = 2
@@ -84,8 +84,8 @@ kMineResearchTime  = 20
 kGrenadeTechResearchCost = 10   --10
 kGrenadeTechResearchTime = 20   --45
 
-kMineCost = 18
-kMineDamage = 135
+kMineCost = 20
+kMineDamage = 130
 kDropMineCost = 12
 kDropMineCooldown = 0
 
@@ -333,8 +333,8 @@ kOnosDevourTime = 40
 
 kUmbraBulletModifier = 0.8
 
-kDevourEnergyCost = 45 --50
-kDevourPunchDamage = 65 --100
+kDevourEnergyCost = 30 --50
+kDevourPunchDamage = 50 --100
 
 kTunnelUpgradeTime = 60
 kShiftTunnelUpgradeCost = 25
@@ -519,7 +519,7 @@ kContaminationCost = 5
 kContaminationCooldown = 10
 kBoneWallCost = 3
 kRuptureCost = 1
-kDrifterCost = 6
+kDrifterCost = 5
 
 kHydraDamage = 15
 kHydraAttackDamageType = kDamageType.Normal

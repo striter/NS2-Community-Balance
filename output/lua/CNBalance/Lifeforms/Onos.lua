@@ -61,9 +61,8 @@ function Onos:GetHasMovementSpecial()
 end
 
 function Onos:GetExtraHealth(techLevel,extraPlayers,recentWins)
-    return techLevel * kOnosHealtPerBioMass 
-            + extraPlayers * Clamp(12.5 - recentWins * 2.5,0,15)
-            - recentWins * 25
+    return techLevel * kOnosHealtPerBioMass
+            + Clamp((extraPlayers - recentWins * 2) * 10,-50,200)
 end
 
 if Server then

@@ -259,7 +259,6 @@ end
 
 function Vokex:GetExtraHealth(techLevel,extraPlayers,recentWins)
     return kVokexHealthPerBioMass * techLevel
-            + extraPlayers * Clamp(2 - recentWins * 0.5,0,3)
             - recentWins * 5
 end
 

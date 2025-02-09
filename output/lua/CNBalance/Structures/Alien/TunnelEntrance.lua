@@ -977,7 +977,7 @@ if Server then
 end
 
 function TunnelEntrance:GetExtraHealth(techLevel,extraPlayers,recentWins)
-    return kTunnelEntranceHealthPerPlayerAdd * extraPlayers
+    return kTunnelEntranceHealthPerPlayerAdd * (extraPlayers - recentWins * 2)
 end
 
 ---

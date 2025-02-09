@@ -111,4 +111,5 @@ end
 
 function PowerPoint:GetExtraHealth(techLevel,extraPlayers,recentWins)
     return kPowerPointHealthPerPlayerAdd * extraPlayers
+        -recentWins * 100
 end
