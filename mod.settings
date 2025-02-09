@@ -1,47 +1,14 @@
-name        = "[CN] Natural Selection 2.0"
+name        = "[CN] Siege 2.0"
 source_dir  = "source"
 output_dir  = "output"
 description = [=[[h1]| What is this[/h1]
-- Natural Selection 2.0
-- Aimed 12v12 and further
-- Extension for original ns2 gamemode
-- Takes to bring more fun to the game.
+- Siege 2.0 which combined Natural Selection 2.0 and Siege++
+- being active developing and heavily tested(daily)
 
-[h1]| What it includes[/h1]
-- A bunch of gameplay tweaks.
-- A lot techs added.
-
-[h2] For Both Teams [/h2]
-- Res kill grants pRes
-- Overhauled power system.
-- Ragdoll exists longer(?)
-- Extend respawn time during late game(>20min).
-
-[h2] For Marines[/h2]
-- [Standard]&[Explosive] Tech branch.
-- [Nanoarmor]&[LifeSustain] Research.
-- MachineGun,Knife,SubmachineGun,Revolver
-- Cannnon
-- CombatBuilder to build utilities as marines.
-- Alt attack mod for [Shotgun]&[Grenade Launcher]
-
-[h2] For Aliens [/h2]
-- Remove cyst restriction for tunnel(still needs gorge).
-- [FastTunnel] research to travel distance faster.
-
-- Most unused [Traits] been boosted (includes cloak).
-- Prowler (Modifed) to reel enermy with his rappelsilk.
-- Rework gorges bilemine to babbler hive.
-- Pheromones will spawn a babbler on hit.
-- Onos devour (tweaked).
-- Xenocide with 8 biomass.
-
-[h1]| Further more[/h1]
-- Still being active developing and heavily tested(daily)
+[h1]| Further More[/h1]
 - About NS2CN: Active Developing Community from Asia.
 - Feel free to contact me if anything troubles
-- Original codes https://github.com/striter/NS2-Playground-Balance]=]
+- Original codes https://github.com/striter/NS2-Community-Balance/tree/Siege2.0]=]
 image       = "preview.jpg"
-tag_modtype = "Gameplay Tweak"
+tag_modtype = "Look and Feel"
 tag_support = "Must be run on Server"
-publish_id = 2733077552
