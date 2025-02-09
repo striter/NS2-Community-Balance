@@ -45,7 +45,7 @@ if Server then
 
     function BiomassHealthMixin:UpdateHealthAmount(playersAboveLimit, _techLevel)
 
-        _techLevel = math.Clamp(_techLevel - 1,0,kMaxBiomassHealthMultiplyLevel)
+        _techLevel = Clamp(_techLevel - 1,0,kMaxBiomassHealthMultiplyLevel)
         local recentWins = GetTeamInfoEntity(kAlienTeamType).recentWins
         local newExtraHealth = self.GetExtraHealth and self:GetExtraHealth(_techLevel,playersAboveLimit,recentWins) or 0
         

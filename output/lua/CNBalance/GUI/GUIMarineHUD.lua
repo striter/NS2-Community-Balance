@@ -134,12 +134,12 @@ function GUIMarineHUD:Update(deltaTime)
     if requestHandle then
         local time = Shared.GetTime()
         local color = kIconColors[kMarineTeamType]
-        local percentage = math.Clamp(1 - (player.timeLastPrimaryRequestHandle - time)/kAutoMedCooldown,0,1)
+        local percentage = Clamp(1 - (player.timeLastPrimaryRequestHandle - time)/kAutoMedCooldown,0,1)
         local medColor = color * (percentage * percentage)
         medColor.a = percentage >= 1 and 1 or 0.5
         self.autoMedPack:SetColor(medColor)
 
-        percentage = math.Clamp(1 - (player.timeLastAutoAmmoPack - time)/kAutoAmmoCooldown,0,1)
+        percentage = Clamp(1 - (player.timeLastAutoAmmoPack - time)/kAutoAmmoCooldown,0,1)
         local ammoColor = color * (percentage * percentage)
         ammoColor.a = percentage >= 1 and 1 or 0.5
         percentage = percentage * percentage
