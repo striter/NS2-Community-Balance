@@ -62,7 +62,7 @@ function GetRespawnTimeExtend(player,teamIndex, _gameLength)
     --_gameLength = _gameLength * 60
     local x = _gameLength
     --
-    local respawnParam =  math.Clamp(math.max(0,x - kEndGameBegin) / kEndGameTolerance,0,1)
+    local respawnParam =  Clamp(math.max(0,x - kEndGameBegin) / kEndGameTolerance,0,1)
     respawnParam = respawnParam * respawnParam
     local respawnExtension =  Lerp(0,20,respawnParam)
 

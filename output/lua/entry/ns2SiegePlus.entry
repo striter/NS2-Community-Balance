@@ -1,0 +1,7 @@
+modEntry = {
+	Client = "lua/sg_Client.lua",
+	Server = "lua/sg_Server.lua",
+	Shared = "lua/sg_Shared.lua",
+	FileHooks = "lua/sg_Filehook.lua",
+	Priority = -1
+}

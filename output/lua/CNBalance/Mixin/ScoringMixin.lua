@@ -32,7 +32,7 @@ if Server then
             damageScalar = damageScalar + scalar      --Receive Additional Damage And Die Please
         end
 
-        damageScalar = math.Clamp(damageScalar,0.2,5.0)        --Seems enough
+        damageScalar = Clamp(damageScalar,0.2,5.0)        --Seems enough
         damageTable.damage = damageTable.damage * damageScalar
     end
 

@@ -23,7 +23,7 @@
          return kRecentRoundAliensWins
      end
      
-     local kRandomTencentage = 4
+     local kRandomTencentage = 0
      
      function NS2Gamerules:RandomTechPoint(techPoints, teamNumber)
          local chosenIndex = math.random(1,#techPoints)

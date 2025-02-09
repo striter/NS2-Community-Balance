@@ -1,0 +1,17 @@
+<shader>
+	
+	<inputs>
+		<input name="albedoMap" type="texture" address="wrap" />
+	</inputs>
+	
+	<code>
+		void MaterialShader(in Material_Input input, inout Material material)
+		{
+			float2 texCoord = input.texCoord;
+			texCoord.x = texCoord.x / 150;
+			texCoord.y = texCoord.y / 112;
+			material.emissive = tex2D(albedoMap, texCoord).rgb;
+		}
+	</code>
+
+</shader>
