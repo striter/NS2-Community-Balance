@@ -42,7 +42,6 @@ ModLoader.SetupFileHook( "lua/Hive_Server.lua", "lua/sg_Hive_Server.lua" , "repl
 ModLoader.SetupFileHook( "lua/ConcedeSequence.lua", "lua/sg_ConcedeSequence.lua" , "replace" )
 
 -- enable commander bots
---ModLoader.SetupFileHook( "lua/VotingAddCommanderBots.lua", "lua/sg_VotingAddCommanderBots.lua" , "post" )
 --ModLoader.SetupFileHook( "lua/bots/BotUtils.lua", "lua/bots/sg_BotUtils.lua" , "post" )
 --ModLoader.SetupFileHook( "lua/bots/CommonActions.lua", "lua/bots/sg_CommonActions.lua" , "post" )
 --ModLoader.SetupFileHook( "lua/bots/CommanderBrain.lua", "lua/bots/sg_CommanderBrain.lua" , "post" )
