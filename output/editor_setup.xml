@@ -1,0 +1,1240 @@
+<editor>
+<classes>
+    <!-- start siege -->
+
+    <class name="breakable_door" placeable="true">
+        <help>Deprecated.</help>
+        <parent>logic_toggle_base</parent>
+        <model>
+            <file>model</file>
+            <scale>scale</scale>
+        </model>
+        <size>
+            <scale>scale</scale>
+        </size>
+        <parameter name="scale" type="vector" label="scale" default="1.0, 1.0, 1.0"/>
+        <parameter name="model" type="file" label="model" default="models/misc/door/door.model" filter="*.model"/>
+    </class>
+
+    <class name="frontdoor" placeable="true">
+        <parent>logic_toggle_base</parent>
+        <model>
+            <file>model</file>
+            <scale>scale</scale>
+        </model>
+        <size>
+            <scale>scale</scale>
+        </size>
+        <parameter name="scale" type="vector" label="scale" default="1.0, 1.0, 1.0"/>
+        <parameter name="model" type="file" label="model"
+                   default="models/props/eclipse/eclipse_wallmodse_02_door.model" filter="*.model"/>
+        <parameter name="shortenTimer" type="boolean" label="ShortenTimer"
+                   help="Shorts timer by random 50%-80%. By default 5-7min front timer with shortened timer enabled due to recent changes of having autobuild and such to get rid of long wait times"
+                   default="true"/>
+    </class>
+
+    <class name="siegedoor" placeable="true">
+        <parent>logic_toggle_base</parent>
+        <model>
+            <file>model</file>
+            <scale>scale</scale>
+        </model>
+        <size>
+            <scale>scale</scale>
+        </size>
+        <parameter name="scale" type="vector" label="scale" default="1.0, 1.0, 1.0"/>
+        <parameter name="model" type="file" label="model"
+                   default="models/props/eclipse/eclipse_wallmodse_02_door.model" filter="*.model"/>
+    </class>
+
+    <class name="sidedoor" placeable="true">
+        <parent>logic_toggle_base</parent>
+        <model>
+            <file>model</file>
+            <scale>scale</scale>
+        </model>
+        <size>
+            <scale>scale</scale>
+        </size>
+        <parameter name="scale" type="vector" label="scale" default="1.0, 1.0, 1.0"/>
+        <parameter name="model" type="file" label="model"
+                   default="models/props/eclipse/eclipse_wallmodse_02_door.model" filter="*.model"/>
+    </class>
+
+
+    <!-- Camera position -->
+    <class name="camera_origin" placeable="true">
+        <model>
+            <file>models/system/editor/camera_origin.model</file>
+        </model>
+
+        <parameter name="cameraName" type="string" label="Camera Name"
+                   help="Name of the camera to be referenced in LUA." default=""/>
+        <parameter name="fov" type="real" label="FOV" help="Field of view of the camera, in degrees.  90 is normal."
+                   default="90.0"/>
+    </class>
+
+    <!-- Target position -->
+    <class name="target_point">
+
+        <model>
+            <file>models/system/editor/waypoint.model</file>
+        </model>
+
+        <parameter name="targetName" type="string" label="Target Name"
+                   help="Name this position will be referred to as in LUA." default=""/>
+
+    </class>
+
+    <!-- Target vector -->
+    <class name="cheering_marine">
+        <model>
+            <file>models/marine/male/male.model</file>
+        </model>
+    </class>
+    <!-- start ns2siege+ -->
+	
+	<class name="ns2siege_funcdoor">
+        <model>
+			<file>model</file>
+			<scale>scale</scale>
+        </model>
+        <size>
+            <scale>scale</scale>
+        </size>		
+		<sphere>
+            <radius>protection</radius>
+		</sphere>
+
+        <parameter name="type" type="choice" label="Door Type" default="0">
+            <choice label="FrontDoor" value="0"/>
+            <choice label="SiegeDoor" value="1"/>
+        </parameter>
+        <parameter name="scale" type="vector" label="Scale" default="1.0, 1.0, 1.0"/>
+		<parameter name="model" type="file" label="Model" default="models/props/eclipse/eclipse_wallmodse_02_door.model" filter="*.model"/>
+		<parameter name="distance" type="real" label="Move Distance" help="How far the sg_func_door will move." default="10.0"/>
+		<parameter name="speed" type="real" label="Move Speed" help="How fast the sg_func_door will move." default="3.0"/>
+        <parameter name="direction" type="choice" label="Direction" default="0"
+                   help="Direction the movable will move after closing (place it in the map at its closed position). If you choose waypoint you have to place one func_train_waypoint and name it like the moveable.">
+            <choice label="Up" value="0"/>
+            <choice label="Down" value="1"/>
+            <choice label="Left" value="2"/>
+			<choice label="Right" value="3"/>
+			<choice label="Front" value="4"/>
+			<choice label="Back" value="5"/>
+        </parameter>
+		<parameter name="protection" type="distance" default="1.0" label="Protection Radius" help="Reserved for further use."/>
+		<parameter name="emitMessage" type="string" label="Emit message" help="The listening entity must respond to this message." default="" />
+	</class>
+	
+    <class name="ns2siege_funcmaid">
+        <model>
+            <file>models/system/editor/funcmaid.model</file>
+            <scale>scale</scale>
+        </model>
+		<size>
+            <scale>scale</scale>
+        </size>
+		
+        <parameter name="scale" type="vector" label="Scale" default="1.0, 1.0, 1.0" help=""/>        
+        <parameter name="name" label="Name" type="string" help="Name of maid trigger which can be referenced by other entities." />
+		<parameter name="type" type="choice" label="TimerType" default="0"
+                   help="The func_maid will stop killing entering entities when selected timer expires.">
+            <choice label="Front Door Opening Time" value="0"/>
+            <choice label="Siege Door Opening Time" value="1"/>
+            <choice label="Sudden Death Time" value="2"/>
+        </parameter>
+        <parameter name="listenMessage" type="string" label="Kill on message" help="Will kill all live entities when message is received." default="maid_kill"/>
+    </class>	
+	<!-- end ns2siege+ -->
+    
+    <!-- Ambient sound -->    
+    <class name="ambient_sound">
+        <help>Plays sound for a local player when entering specifies radius.</help>
+
+		<sound>
+            <file>eventName</file>
+			<volume>volume</volume>
+			<min_distance>minFalloff</min_distance>
+			<max_distance>maxFalloff</max_distance>
+			<pitch>pitch</pitch>
+			<rolloff>falloffType</rolloff>
+			<type>positioning</type>
+        </sound>    		
+	
+		<billboard>
+			<file>materials/editor/sound_billboard.material</file>
+		</billboard>
+
+        <parameter name="eventName" type="file" filter="sound" label="FMOD event name" default="" help="Sound to play when player enters radius."/>
+        
+        <sphere><radius>radius</radius></sphere>
+        <parameter name="radius" type="distance" label="Trigger radius" default="12.5" help="Players entering this sphere will have sound triggered for them."/>
+                
+        <sphere><radius>minFalloff</radius></sphere>
+        <parameter name="minFalloff" type="distance" label="Minimum falloff" default="5" help="Sound is played at full volume within this distance."/>
+
+        <sphere><radius>maxFalloff</radius></sphere>
+        <parameter name="maxFalloff" type="distance" label="Maximum falloff" default="12" help="Sound is decreased to inaudible at this distance (using linear or logarithmic falloff)."/>
+        
+        <parameter name="falloffType" type="choice" label="Falloff type" default="2">
+            <choice label="Logarithmic" value="1" help="minFalloff is where sound starts to attenuate from. maxFalloff is ignored. More realistic, not very game-friendly."/>
+            <choice label="Linear" value="2" help="Sound is full volume at minFalloff and becomes inaudible at maxFalloff."/>
+            <choice label="Custom" value="3" help="Sound uses custom falloff (defined in FMOD)."/>
+        </parameter>
+        
+        <parameter name="volume" type="real" label="Volume (0 to 1)" default=".5"/>
+        <parameter name="pitch" type="real" label="Pitch (+4 octaves to -4 octaves)" default="0.0"/>
+        
+        <parameter name="positioning" type="choice" label="Type" default="1" help="">
+            <choice label="World relative" value="1"/>
+            <choice label="Head relative" value="2"/>
+        </parameter>
+        
+        <parameter name="offOnExit" type="boolean" label="Turns off when player leaves radius" default="true"/>
+    
+        <parameter name="startsOn" type="boolean" label="Starts on" default="false"/>
+
+    </class>
+
+    <class name="nav_point">
+        <pathing>
+            <include/>
+            <file>models/misc/tech_point/tech_point.model</file>
+        </pathing>
+        <model>
+            <file>models/system/editor/gamerules.model</file>
+        </model>
+    </class>
+
+    <class name="ambient_sound_player">
+    
+        <parent>signal_listener</parent>
+        
+        <help>This signal listener will start nearby ambient_sounds when it receives the startsOnMessage.</help>
+        
+        <model>
+            <file>models/system/editor/ambient_sound.model</file>
+        </model>    
+        
+        <parameter name="startsOnMessage" type="string" label="Trigger message" default="play" help="Nearby ambient_sound entities will play when this message is received"/>
+        <sphere><radius>nearbyDistance</radius></sphere>
+        <parameter name="nearbyDistance" type="distance" label="Trigger distance" default="5" help="This entitity will search for ambient sounds within this distance."/>
+        
+    </class>
+    
+    <!-- Un-animated prop -->
+    <class name="prop_static"  placeable="false">
+        <model>
+            <file>model</file>
+            <scale>scale</scale>
+			<casts_shadows>castsShadows</casts_shadows>
+            <default_model>models/system/editor/team_location.model</default_model>
+            <static_collider>true</static_collider>
+            <static_visual>true</static_visual>
+        </model>
+        <size>
+            <scale>scale</scale>
+        </size>
+        <pathing>
+            <include>pathInclude</include>
+            <walkable>pathWalkable</walkable>
+            <file>model</file>
+        </pathing>
+        <parameter name="scale" type="vector" label="Scale" default="1.0, 1.0, 1.0"/>
+        <parameter name="model" type="file" label="Model" filter="*.model"/>
+		<parameter name="castsShadows" type="boolean" label="Casts Shadows" default="true"/>
+
+		<!-- Allow prop to be shown or not for commander -->
+		<parameter name="commAlpha" type="real" label="Commander Alpha" help="0-1. Doesn't collide if less than 1." default="1.0"/>
+
+		<!-- Allow prop to be excluded/included from the nav mesh generation -->
+		<parameter name="pathInclude" type="boolean" label="Pathing Include" help="On will include in NavMesh. Off excludes prop from nav mesh" default="true"/>
+        <parameter name="pathWalkable" type="boolean" label="Pathing Walkable" help="On will be walkable in NavMesh. Off makes prop not walkable in nav mesh" default="true"/>
+		<parameter name="collidable" type="boolean" label="Collidable" help="The prop can be collided with" default="true"/>
+		<parameter name="emissivePower" type="boolean" label="Emissive matches power" help="Matches emissiveness with the room power." default="true"/>
+              
+    </class>
+	
+    <class name="billboard"  placeable="false">
+		<billboard>
+			<file>material</file>
+			<size>size</size>
+		</billboard>
+        <parameter name="material" type="file" label="Material" filter="*.material" default="materials/editor/unknown_billboard.material"/>
+		<parameter name="size" type="vector" label="Size" default="1.0, 1.0, 1.0"/>
+    </class>
+	
+    <class name="decal" placeable="true">
+        <decal>
+            <file>material</file>
+            <extents>extents</extents>
+            <default_material>materials/dev/checkerboard.material</default_material>
+        </decal>
+		<box>
+            <extents>extents</extents>
+        </box>			
+        <parameter name="extents" type="vector" label="Extents" default="1.0, 1.0, 1.0"/>
+        <parameter name="material" type="file" label="Material" filter="*.material"/>
+    </class>	
+
+	<class name="reflection_probe" placeable="true">
+		<sphere>
+            <radius>distance</radius>
+        </sphere>		
+		<billboard>
+			<file>materials/editor/reflection_probe_billboard.material</file>
+		</billboard>    
+		<reflection_probe>
+			<radius>distance</radius>
+			<strength>strength</strength>
+		</reflection_probe>
+        <parameter name="distance" type="distance" label="Max Distance" help="Maximum distance the reflection probe will affect the scene" default="2.0"/>
+		<parameter name="strength" type="real" label="Strength" help="Intensity of the reflections. Recommended to be less than 0.5" default="0.5"/>
+    </class>	
+	
+    <!-- Base class for all lights -->
+    <class name="light_base" placeable="false">
+    
+        <parameter name="color" type="color" label="Color" default="1.0, 1.0, 1.0"/>
+        <parameter name="distance" type="distance" label="Max Distance" default="2.0"/>
+        <parameter name="intensity" type="real" label="Intensity" default="5.0"/>
+        <parameter name="ignorePowergrid" type="boolean" label="Ignore power grid" default="false"/>
+
+    </class>
+
+    <!-- Point light -->
+    <class name="light_point" placeable="false">
+        
+        <parent>light_base</parent>
+        
+        <point_light>
+            <color>color</color>
+            <radius>distance</radius>
+            <intensity>intensity</intensity>
+            <casts_shadows>casts_shadows</casts_shadows>
+			<shadow_fade_rate>shadow_fade_rate</shadow_fade_rate>
+			<specular>specular</specular>
+        </point_light>    
+        
+        <sphere>
+            <radius>distance</radius>
+        </sphere>
+
+		<billboard>
+			<file>materials/editor/pointlight_billboard.material</file>
+		</billboard>
+        
+        <parameter name="casts_shadows" type="boolean" label="Casts Shadows" default="false"/>
+		<parameter name="shadow_fade_rate" type="real" label="Shadow Fade Rate" default="0.25"/>
+		<parameter name="specular" type="boolean" label="Specular" default="false"/>
+		
+    </class>
+    
+    <!-- Spot light -->
+    <class name="light_spot" placeable="false">
+        
+        <parent>light_base</parent>
+        
+        <spot_light>
+            <color>color</color>
+            <radius>distance</radius>
+            <intensity>intensity</intensity>
+            <inner_angle>innerAngle</inner_angle>
+            <outer_angle>outerAngle</outer_angle>
+            <atmospheric_density>atmospheric_density</atmospheric_density>
+            <casts_shadows>casts_shadows</casts_shadows>
+			<shadow_fade_rate>shadow_fade_rate</shadow_fade_rate>
+			<specular>specular</specular>
+			<gobo_texture>gobo_texture</gobo_texture>
+        </spot_light>
+                
+        <cone_radius>
+            <radius>distance</radius>
+            <angle>outerAngle</angle>
+        </cone_radius>
+
+        <cone_angle>
+            <angle>innerAngle</angle>
+            <radius>distance</radius>
+        </cone_angle>
+        
+        <cone_angle>
+            <angle>outerAngle</angle>
+            <radius>distance</radius>
+        </cone_angle>        
+		
+		<billboard>
+			<file>materials/editor/spotlight_billboard.material</file>
+		</billboard>     
+		
+        <parameter name="innerAngle" type="angle" label="Inner Angle" default="30.0"/>
+        <parameter name="outerAngle" type="angle" label="Outer Angle" default="40.0"/>
+        <parameter name="atmospheric_density" type="real" label="Atmospheric Density" default="0.0"/>
+        <parameter name="casts_shadows" type="boolean" label="Casts Shadows" default="true"/>
+		<parameter name="shadow_fade_rate" type="real" label="Shadow Fade Rate" default="0.25"/>
+		<parameter name="specular" type="boolean" label="Specular" default="true"/>
+		<parameter name="gobo_texture" type="file" label="Gobo Texture" filter="*.dds" help="Texture map that is projected from the light."/>
+                        
+    </class>    
+
+    <!-- Ambient light -->
+    <class name="light_ambient" placeable="false">
+        
+        <parent>light_base</parent>
+        
+        <ambient_light>
+            <radius>distance</radius>
+            <intensity>intensity</intensity>
+            <color_dir_right>color_dir_right</color_dir_right>
+            <color_dir_left>color_dir_left</color_dir_left>
+            <color_dir_up>color_dir_up</color_dir_up>
+            <color_dir_down>color_dir_down</color_dir_down>
+            <color_dir_forward>color_dir_forward</color_dir_forward>
+            <color_dir_backward>color_dir_backward</color_dir_backward>
+        </ambient_light>    
+        
+        <sphere>
+            <radius>distance</radius>
+        </sphere>
+		
+		<billboard>
+			<file>materials/editor/light_billboard.material</file>
+		</billboard>     
+        
+        <parameter name="color_dir_right" type="color" label="Right Color" default="1.0, 1.0, 1.0"/>
+        <parameter name="color_dir_left" type="color" label="Left Color" default="1.0, 1.0, 1.0"/>
+        <parameter name="color_dir_up" type="color" label="Up Color" default="1.0, 1.0, 1.0"/>
+        <parameter name="color_dir_down" type="color" label="Down Color" default="1.0, 1.0, 1.0"/>
+        <parameter name="color_dir_forward" type="color" label="Forward Color" default="1.0, 1.0, 1.0"/>
+        <parameter name="color_dir_backward" type="color" label="Backward Color" default="1.0, 1.0, 1.0"/>
+    </class>
+
+    <!-- Base class for color grading -->
+    <class name="color_grading" placeable="false">
+
+        <color_grading>
+            <radius>distance</radius>
+            <balance>balance</balance>
+            <brightness>brightness</brightness>
+            <contrast>contrast</contrast>
+        </color_grading>	
+
+        <parameter name="balance" type="color" label="Color Balance" default="0.0, 0.0, 0.0"/>
+        <parameter name="distance" type="distance" label="Max Distance" default="2.0"/>
+        <parameter name="brightness" type="real" label="Brightness" default="0.0"/>
+        <parameter name="contrast" type="real" label="Contrast" default="0.0"/>
+
+		<billboard>
+			<file>materials/editor/color_billboard.material</file>
+		</billboard>
+
+        <sphere>
+            <radius>distance</radius>
+        </sphere>
+    </class>
+
+    <!-- Base spawn point -->
+    <class name="base_start" placeable="false">
+        <model>
+            <file>models/system/editor/player_spawn.model</file>
+        </model>            
+    </class>
+
+    <!-- Player spawn point -->
+    <class name="ready_room_start">
+        <parent>base_start</parent>
+        <model>
+            <file>models/system/editor/player_spawn.model</file>
+        </model>            
+    </class>
+	
+    <!-- Placeable structures -->
+    <class name="base_alien_structure" placeable="false">
+        <parameter name="startsBuilt" label="Starts Built" type="boolean" default="true" />
+		<parameter name="startsMature" label="Starts Mature" type="boolean" default="false" />
+        
+        <!-- Team number -->
+        <parameter name="teamNumber" type="choice" label="Team Number" default="2">
+            <choice label="World" value="0"/>
+            <choice label="Marine" value="1"/>
+            <choice label="Alien" value="2"/>
+        </parameter>
+		
+		<parameter name="onlyexplore" label="Only Explore" type="boolean" default="true" help="Only create this entity during explore/training mode"/>
+
+    </class>
+    
+    <!-- Placeable structures -->
+    <class name="base_structure" placeable="false">
+        <parameter name="startsBuilt" label="Starts Built" type="boolean" default="true" />
+        
+        <!-- Team number -->
+        <parameter name="teamNumber" type="choice" label="Team Number" default="1">
+            <choice label="World" value="0"/>
+            <choice label="Marine" value="1"/>
+            <choice label="Alien" value="2"/>
+        </parameter>
+		
+		<parameter name="onlyexplore" label="Only Explore" type="boolean" default="true" help="Only create this entity during explore/training mode"/>
+    </class>
+    
+    <class name="commandstation"> <parent>base_structure</parent><model><file>models/marine/command_station/command_station.model</file></model></class>
+	<class name="extractor"> <parent>base_structure</parent><model><file>models/marine/extractor/extractor.model</file></model></class>
+    <class name="infantryportal"> <parent>base_structure</parent><model><file>models/marine/infantry_portal/infantry_portal.model</file></model></class>
+    <class name="sentry"> <parent>base_structure</parent><model><file>models/marine/sentry/sentry.model</file></model></class>
+	<class name="powerpack"> <parent>base_structure</parent><model><file>models/marine/portable_node/portable_node.model</file></model></class>
+	<class name="prototypelab"> <parent>base_structure</parent><model><file>models/marine/prototype_lab/prototype_lab.model</file></model></class>
+	
+	<class name="armslab"> <parent>base_structure</parent><model><file>models/marine/arms_lab/arms_lab.model</file></model></class>
+    <class name="arc"> <parent>base_structure</parent><model><file>models/marine/arc/arc.model</file></model></class>
+	<class name="phasegate"> <parent>base_structure</parent><model><file>models/marine/phase_gate/phase_gate.model</file></model></class>
+    <class name="mine"> <parent>base_structure</parent><model><file>models/marine/mine/mine.model</file></model></class>
+
+	
+    <class name="harvester"> <parent>base_alien_structure</parent><model><file>models/alien/harvester/harvester.model</file></model></class>
+    <class name="hydra"> <parent>base_alien_structure</parent><model><file>models/alien/hydra/hydra.model</file></model></class>
+    <class name="clog"> <parent>base_alien_structure</parent><model><file>models/alien/gorge/clog.model</file></model></class>
+    <class name="crag"> <parent>base_alien_structure</parent><model><file>models/alien/crag/crag.model</file></model></class>
+    <class name="contamination"> <parent>base_alien_structure</parent><model><file>models/alien/contamination/contamination.model</file></model></class>
+	<class name="cyst"> <parent>base_alien_structure</parent><model><file>models/alien/cyst/cyst.model</file></model></class>
+    <class name="shift"> <parent>base_alien_structure</parent><model><file>models/alien/shift/shift.model</file></model></class>
+    <class name="shade"> <parent>base_alien_structure</parent><model><file>models/alien/shade/shade.model</file></model></class>
+	<class name="whip"> <parent>base_alien_structure</parent><model><file>models/alien/whip/whip.model</file></model></class>
+	<class name="egg"> <parent>base_alien_structure</parent><model><file>models/alien/egg/egg.model</file></model></class>
+	<class name="veil"> <parent>base_alien_structure</parent><model><file>models/alien/veil/veil.model</file></model></class>
+	<class name="shell"> <parent>base_alien_structure</parent><model><file>models/alien/shell/shell.model</file></model></class>
+	<class name="spur"> <parent>base_alien_structure</parent><model><file>models/alien/spur/spur.model</file></model></class>
+
+	<class name="armory"> <parent>base_structure</parent>
+	
+		<model><file>models/marine/armory/armory.model</file></model>
+        <parameter name="startsUpgraded" type="boolean" default="false" />
+		
+	</class>
+	
+	<class name="observatory"> <parent>base_structure</parent>
+		<model><file>models/marine/observatory/observatory.model</file></model>
+		<parameter name="phaseTechResearched" label="Start with phase tech researched" type="boolean" default="false" />		
+	</class>
+    
+	<class name="roboticsfactory"> 
+        <parent>base_structure</parent>
+        <model>
+            <file>models/marine/robotics_factory/robotics_factory.model</file>
+        </model>
+        <parameter name="arcFactory" label="ARC robotics factory" type="boolean" help="Start with ARC robotics factory upgrade" default="false" />		
+    </class>
+    
+	<class name="hive"> <parent>base_alien_structure</parent>
+		<model><file>models/alien/hive/hive.model</file></model>
+        <parameter name="hiveType" type="choice" label="Hive Type" default="0">
+            <choice label="Not Upgraded" value="0"/>
+            <choice label="Crag Hive" value="1"/>
+            <choice label="Shade Hive" value="2"/>
+			<choice label="Shift Hive" value="3"/>
+        </parameter>
+	</class>
+	
+	<class name="base_player" placeable="false">
+		<parameter name="onlyexplore" label="Only Explore" type="boolean" default="true" help="Only create this entity during explore/training mode"/>
+		<parameter name="name" label="Name" type="string" default="" />
+	</class>
+	
+	<class name="base_alien" placeable="false">
+		<parent>base_player</parent>
+        <!-- Team number -->
+        <parameter name="teamNumber" type="choice" label="Team Number" default="2">
+            <choice label="World" value="0"/>
+            <choice label="Marine" value="1"/>
+            <choice label="Alien" value="2"/>
+        </parameter>
+	</class>
+	
+	<class name="base_marine" placeable="false">
+	
+		<parent>base_player</parent>
+        <!-- Team number -->
+        <parameter name="teamNumber" type="choice" label="Team Number" default="1">
+            <choice label="World" value="0"/>
+            <choice label="Marine" value="1"/>
+            <choice label="Alien" value="2"/>
+        </parameter>
+	</class>
+	
+	<class name="marine"> <parent>base_marine</parent><model><file>models/marine/male/male_spawn.model</file></model></class>
+
+	<class name="exo">
+		<parent>base_marine</parent>
+		<model><file>models/marine/exosuit/exosuit_cm.model</file></model>
+        <parameter name="layout" type="choice" label="Layout" default="1">
+            <choice label="Claw Minigun" value="1"/>
+            <choice label="Dual Minigun" value="2"/>
+        </parameter>
+	</class>
+	
+	<class name="skulk"> <parent>base_alien</parent><model><file>models/alien/skulk/skulk.model</file></model></class>
+	<class name="gorge"> <parent>base_alien</parent><model><file>models/alien/gorge/gorge.model</file></model></class>
+	<class name="lerk"> <parent>base_alien</parent><model><file>models/alien/lerk/lerk.model</file></model></class>
+	<class name="fade"> <parent>base_alien</parent><model><file>models/alien/fade/fade.model</file></model></class>
+	<class name="onos"> <parent>base_alien</parent><model><file>models/alien/onos/onos.model</file></model></class>
+    
+    <class name="babbler"> <parent>base_alien</parent><model><file>models/alien/babbler/babbler.model</file></model></class>
+    
+    <!-- NS2 strategy gameplay rules -->
+    <class name="ns2_gamerules" label="Use core NS2 strategy gameplay">
+
+        <parent>gamerules</parent>
+		
+        <!--original settings:-->>
+		<!-- <parameter name="roundStartMusic" type="file" filter="sound" label="Round start music" help="Defines the music played when a round starts." default="sound/NS2.fev/round_start" />
+        <parameter name="FrontDoorTime" type="real" default="420.0" label="Front Door Opening Time" help="Siege+ time since round start to open front doors in seconds."/>
+        <parameter name="SiegeDoorTime" type="real" default="1200.0" label="Siege Door Opening Time" help="Siege+ time since round start to open siege doors in seconds."/>
+        <parameter name="SuddenDeathTime" type="real" default="1540.0" label="Sudden Death Time" help="Siege+ time since round start when CommanStation and Hive cannot be repaired in seconds."/>
+        <parameter name="RelevancyDistance" type="real" default="45.0" label="Relevancy Distance" help="The distance at which entities can be seen. Increasing this value can have a performance impact!"/>
+        <parameter name="StartingTeamRes" type="real" default="60.0" label="Starting Team Res" help="Starting team res. Default 60."/>
+        <parameter name="StartingPlayerRes" type="real" default="15.0" label="Starting Player Res" help="Starting player res. Default 15."/> -->
+
+        <parameter name="FrontDoorTime" type="real" default="180.0" label="Front Door Opening Time" help="Siege+ time since round start to open front doors in seconds."/>
+        <parameter name="SiegeDoorTime" type="real" default="1080.0" label="Siege Door Opening Time" help="Siege+ time since round start to open siege doors in seconds."/>
+        <parameter name="SuddenDeathTime" type="real" default="1380.0" label="Sudden Death Time" help="Siege+ time since round start when CommanStation and Hive cannot be repaired in seconds."/>
+        <parameter name="RelevancyDistance" type="real" default="45.0" label="Relevancy Distance" help="The distance at which entities can be seen. Increasing this value can have a performance impact!"/>
+        <parameter name="StartingTeamRes" type="real" default="180.0" label="Starting Team Res" help="Starting team res. Default 60."/>
+        <parameter name="StartingPlayerRes" type="real" default="85.0" label="Starting Player Res" help="Starting player res. Default 15."/>
+        
+        <model>
+            <file>models/system/editor/gamerules.model</file>
+        </model>
+
+    </class>
+
+    
+    <!-- Reverb control -->    
+    <class name="reverb">
+        <help>FMOD Reverb object. Place it to adjust the audio reverb qualities nearby. References reverb settings from FMOD Designer.</help>
+
+		<billboard>
+			<file>materials/editor/reverb_billboard.material</file>
+		</billboard>
+        
+        <sphere><radius>minRadius</radius></sphere>
+        <parameter name="minRadius" type="distance" label="Min Radius" default="5.0" help="At this distance from the point, the reverb settings are fully heard."/>        
+        
+        <sphere><radius>maxRadius</radius></sphere>
+        <parameter name="maxRadius" type="distance" label="Max Radius" default="20.0" help="At this distance from the point, the reverb settings are no longer heard."/>
+        
+        <parameter name="reverbType" type="choice" label="Type" default="1">
+            <choice label="Generic" value="1"/>
+            <choice label="Hallway" value="2"/>
+            <choice label="Vent" value="3"/>
+            <choice label="Medium Room" value="4"/>
+            <choice label="Large Room" value="5"/>
+            <choice label="Big Hallway" value="6"/>
+            <choice/>
+        </parameter>
+        
+    </class>
+
+    <class name="signal_emitter" placeable="false">
+    
+        <sphere><radius>signalRange</radius></sphere>
+        <parameter name="signalRange" type="distance" label="Emit radius" default="10" help="This is the maximum distance the signal will reach."/>
+        
+    </class>
+    
+    <class name="signal_listener" placeable="false">
+    
+        <parameter name="listenChannel" type="integer" label="Listen channel" help="Messages not on this channel will be ignored." default="0"/>
+        
+    </class>
+    
+    <class name="timed_emitter">
+    
+        <parent>signal_emitter</parent>
+        
+        <model>
+            <file>models/system/editor/sound_reverb.model</file>
+        </model> 
+        
+        <parameter name="emitTime" type="real" label="Emit time" help="Time in seconds until signal will be emitted." default="1"/>
+        <parameter name="emitOnce" type="boolean" label="Emit only once" help="Signal will continue to emit at the rate defined by time when false." default="true"/>
+        <parameter name="emitChannel" type="integer" label="Emit channel" help="Only entities listening on this channel will receive the message." default="0"/>
+        <parameter name="emitMessage" type="string" label="Emit message" help="The listening entity must respond to this message." default="" />
+        
+    </class>
+    
+    <class name="button_emitter">
+    
+        <parent>signal_emitter</parent>
+        
+        <model>
+            <file>models/system/editor/waypoint.model</file>
+        </model> 
+        
+        <parameter name="emitChannel" type="integer" label="Emit channel" help="Only entities listening on this channel will receive the message." default="0"/>
+        <parameter name="emitMessage" type="string" label="Emit message" help="The listening entity must respond to this message." default="" />
+        <parameter name="coolDownTime" type="real" label="Cooldown time" help="The amount of seconds to wait after the button is pressed until it can be pressed again." default="0" />
+        
+    </class>
+
+    <!-- Trigger -->
+    <class name="trigger" placeable="false">
+
+        <model>
+            <file>models/system/editor/location.model</file>
+            <scale>scale</scale>
+        </model>
+    
+        <!-- <cube><volume>volume</volume></cube>
+        <parameter name="volume" type="vector" label="volume" default="1.0, 1.0, 1.0" help="Effective area of trigger."/>-->
+        <size>
+            <scale>scale</scale>
+        </size>
+        <parameter name="scale" type="vector" label="Scale" default="1.0, 1.0, 1.0" help=""/>        
+        <parameter name="name" label="Name" type="string" help="Name of trigger which can be referenced by other entities" />
+
+    </class>
+	
+	<class name="worldtooltip">	
+	
+		<parameter name="tooltip" type="string" label="Tooltip" help="Displays a tooltip to the player when looking at it, active only in explore/training mode."/>
+		
+        <model>
+            <file>models/misc/attentionmark/attentionmark.model</file>
+        </model> 
+	
+	</class>
+
+    <!-- Ladder -->
+    <class name="ladder">
+        <model>
+            <file>models/system/editor/ladder.model</file>
+            <scale>scale</scale>
+        </model>
+        
+        <size>
+            <scale>scale</scale>
+        </size>
+        <parameter name="scale" type="vector" label="Scale" default="1.0, 1.0, 1.0" help=""/>        
+    </class>
+
+    <!-- Tell overview what area to render out and the game what area is playable for commander -->
+    <class name="minimap_extents">
+    
+	<parent>trigger</parent>
+    
+    <parameter name="useLegacyOverview" type="boolean" label="Legacy Overview Image" help="Maps blips (entity icons) in-game to the minimap using old, incorrect technique that matches up with pre-320 generated overview images." default="false"/>
+
+    </class>
+
+    <!-- Team join -->
+    <class name="team_join">
+
+        <model>
+            <file>models/system/editor/location.model</file>
+            <scale>scale</scale>
+        </model>
+        
+        <size>
+            <scale>scale</scale>
+        </size>
+        <parameter name="scale" type="vector" label="Scale" default="1.0, 1.0, 1.0"/>        
+        <parameter name="name" type="string" label="Name" help="Name of trigger which can be referenced by other entities" />
+        
+        <!-- Team number -->
+        <parameter name="teamNumber" type="choice" label="Team Number" default="1">
+            <choice label="Marine" value="1"/>
+            <choice label="Alien" value="2"/>
+            <choice label="Spectate" value="0"/>
+            <choice label="Random" value="3"/>
+        </parameter>
+
+    </class>
+    
+    <!-- Simple location -->
+    <class name="location" help="Enter name location which is shown to players" >
+
+	<parent>trigger</parent> 
+
+        <parameter name="showOnMinimap" type="boolean" label="Show On Minimap" help="Show location on minimap" default="true"/>
+
+    </class>
+
+    <!-- Kill trigger -->
+    <class name="death_trigger">
+    
+        <model>
+            <file>models/system/editor/death_trigger.model</file>
+            <scale>scale</scale>
+        </model>
+        
+        <size>
+            <scale>scale</scale>
+        </size>
+        <parameter name="scale" type="vector" label="Scale" default="1.0, 1.0, 1.0"/>        
+        <parameter name="name" type="string" label="Name" help="Name of trigger which can be referenced by other entities" />
+        
+        <parent>signal_listener</parent>
+        
+        <parameter name="enabled" type="boolean" label="Trigger enabled" help="Will not kill when disabled." default="true"/>
+        <parameter name="damageOverTime" type="real" label="Damage over time" help="If set to any value greater than 0, this amount of damage will be applied per second." default="0"/>
+        <parameter name="teamType" type="choice" label="Team to damage" help="Determines what team can take damage in this trigger" default="1">
+            <choice label="Both" value="1"/>
+            <choice label="Marine" value="2"/>
+            <choice label="Alien" value="3"/>
+        </parameter>
+        
+    </class>
+	
+    <class name="teleport_trigger">
+    
+        <model>
+            <file>models/system/editor/teleport_trigger.model</file>
+            <scale>scale</scale>
+        </model>
+        
+        <size>
+            <scale>scale</scale>
+        </size>
+        <parameter name="scale" type="vector" label="Scale" default="1.0, 1.0, 1.0"/>        
+        <parameter name="name" type="string" label="Name" help="Name of trigger which can be referenced by other entities" />
+        
+        <parameter name="teleportDestinationId" type="integer" label="Teleport Destination ID" help="Place a teleport_destination entity with the same ID used." default="0"/>
+        
+    </class>
+	
+    <class name="teleport_destination">
+    
+        <model>
+            <file>models/system/editor/waypoint.model</file>
+        </model> 
+        
+        <parameter name="teleportDestinationId" type="integer" label="Teleport Destination ID" help="Use same ID used for teleport_trigger to connect them." default="0"/>
+        
+    </class>
+    
+    <!-- IP attach range circle -->
+    <class name="ip_attach_range" placeable="true">
+
+        <model>
+            <file>models/misc/circle/circle.model</file>
+            <scale>scale</scale>
+        </model>
+
+        <size>
+            <scale>scale</scale>
+        </size>
+        <parameter name="scale" type="vector" label="Scale" default="19.6, 1.0, 19.6" help="Size of Infantry Portal attach range to command station"/> <!-- Currently 10 meters -->
+
+    </class>
+    
+    <!-- ARC range circle -->
+    <class name="arc_range_circle" placeable="true">
+
+        <model>
+            <file>models/misc/circle/circle.model</file>
+            <scale>scale</scale>
+        </model>
+
+        <size>
+            <scale>scale</scale>
+        </size>
+        <parameter name="scale" type="vector" label="Scale" default="51.6, 1.0, 51.6" help="Size of ARC range circle"/> <!-- Currently 10 meters -->
+
+    </class>
+    
+    <!-- Relevancy range circle -->
+    <class name="relevancy_range_circle" placeable="true">
+
+        <model>
+            <file>models/misc/circle/circle.model</file>
+            <scale>scale</scale>
+        </model>
+
+        <size>
+            <scale>scale</scale>
+        </size>
+        <parameter name="scale" type="vector" label="Scale" default="81.5, 1.0, 81.5" help="Size of max relevancy range circle"/> <!-- Currently 40 meters -->
+
+    </class>
+    
+        <!-- Relevancy range circle -->
+    <class name="egg_spawn_range_circle" placeable="true">
+
+        <model>
+            <file>models/misc/circle/circle_alien.model</file>
+            <scale>scale</scale>
+        </model>
+
+        <size>
+            <scale>scale</scale>
+        </size>
+        <parameter name="scale" type="vector" label="Scale" default="44.86, 1.0, 44.86" help="Size of egg auto spawn range from a hive"/> <!-- Currently 22 meters -->
+
+    </class>
+    
+    <class name="sound_effect">
+    
+        <parent>signal_listener</parent>
+        
+        <help>This sound effect can be used to play sounds based on messages received from other entities in the map.</help>
+        
+        <model>
+            <file>models/system/editor/ambient_sound.model</file>
+        </model>    
+        
+        <parameter name="eventName" type="file" filter="sound" label="FMOD event name" default="" help="Sound to play."/>
+        <parameter name="startsOnMessage" type="string" label="The sound effect will play when this message is received" default="play"/>
+        
+    </class>
+  
+    <!-- Tech point for building a Command Station or Hive -->
+    <class name="tech_point">
+    
+        <pathing>
+            <include></include>
+            <file>models/misc/tech_point/tech_point_editor.model</file>
+        </pathing>
+
+        <model>
+            <file>models/misc/tech_point/tech_point_editor.model</file>
+            <static_collider>true</static_collider>
+            <static_visual>true</static_visual>
+        </model>
+        
+        <parameter name="teamNumber" type="choice" label="Team Number" default="0">
+            <choice label="Either team random start" value="0"/>
+            <choice label="Marine-only random start" value="1"/>
+            <choice label="Alien-only random start" value="2"/>
+            <choice label="Don't use as random start" value="3"/>
+        </parameter>
+        
+        <parameter name="chooseWeight" label="Spawn weight" type="integer" help="Weight should be greater than 0, the higher the weight, the more likely this point will be chosen" default="1"/>
+		
+        <parameter name="exploreModeStart" type="choice" label="Explore Mode Start" default="0">
+            <choice label="Don't use" value="0"/>
+            <choice label="Marine start" value="1"/>
+            <choice label="Alien start" value="2"/>
+        </parameter>
+        
+        <parameter name="extendAmount" type="real" label="Arm extension" help="This controls how long the Hive arms are. The value must be between 0 and 1." default="0"/>
+        
+    </class>
+    
+    <!-- Tech point to be used in smaller rooms -->
+    <class name="tech_point_hole" placeable="false">
+        <model>
+            <file>models/misc/tech_point_hole/tech_point_hole.model</file>
+        </model>
+    </class>
+    
+    <class name="resource_point">
+        <model>
+            <file>models/misc/resource_nozzle/resource_nozzle_editor.model</file>
+        </model>
+    </class>
+    
+    <!--  -->
+    <class name="spawn_selection_override">
+    
+        <model>
+            <file>models/system/editor/spawn_select_override.model</file>
+        </model>
+        
+        <parameter name="alienSpawn" type="string" label="Alien spawn location" help="This is the location where the Alien team will spawn in this configuration." default=""/>
+        <parameter name="marineSpawn" type="string" label="Marine spawn location" help="This is the location where the Marine team will spawn in this configuration." default=""/>
+        
+    </class>
+
+    <class name="commander_camera">
+    <model>
+      <file>models/system/editor/commander_camera.model</file>
+    </model>
+    <parameter name="cameraHeight" type="distance" label="Camera height" default="10.0"/>'
+  </class>
+
+    <class name="door">
+        <model>
+            <file>models/misc/door/door.model</file>
+        </model>
+        <parameter name="weldTime" label="Weld time" type="real" help="Weld time in seconds" default="20.0"/>
+    	<parameter name="weldHealth" label="Weld health" type="real" help="Health to destroy after welded (1 to 2000)" default="250.0"/>
+        <parameter name="clean" label="Use clean version" type="boolean" help="Uses the alternate clean version of the door model" default="false"/>
+        
+    </class>
+    
+    <!-- Power grid -->
+    <class name="power_point" help="Place in location entity to affect structures and lights there">
+        <model>
+            <file>models/system/editor/power_node.model</file>
+        </model>
+		
+		<parameter name="startSocketed" label="Starts socketed" type="boolean" default="false" />
+        
+    </class>
+    
+  <!-- Cinematic entity -->
+  <class name="cinematic_base" placeable="false">
+
+	<cinematic>
+		<file>cinematicName</file>
+		<repeat_style>repeatStyle</repeat_style>
+	</cinematic>
+
+    <parameter name="cinematicName" type="file" label="Cinematic file" default="" filter="*.cinematic" help="Name of cinematic file (created with Cinematic Editor)"/>
+
+    <parameter name="repeatStyle" type="choice" label="Repeat Style" default="1">
+        <choice label="No Repeat" value="0"/>
+        <choice label="Loop" value="1"/>
+        <choice label="Endless" value="2"/>
+    </parameter>
+	
+	<parameter name="commanderInvisible" type="boolean" label="Commander Invisible" help="This cinematic will not be displayed for commanders if this value is true." default="false" />
+
+  </class>
+    
+  <class name="cinematic">
+    
+    <parent>cinematic_base</parent>
+    <parent>signal_listener</parent>
+    
+    <help>Adds a cinematic entity to the game world.</help>
+
+    <model>
+      <file>models/system/editor/cinematic.model</file>
+    </model>
+    
+    <parameter name="startsOnMessage" type="string" label="Play on message" help="The cinematic effect will play when this message is received" default=""/>
+
+  </class>
+  
+  <class name="sound_effect">
+    
+        <parent>signal_listener</parent>
+        
+        <help>This sound effect can be used to play sounds based on messages received from other entities in the map.</help>
+        
+        <model>
+            <file>models/system/editor/ambient_sound.model</file>
+        </model>   
+
+        <parameter name="eventName" type="file" filter="sound" label="FMOD event name" default="" help="Sound to play."/>
+        <parameter name="startsOnMessage" type="string" label="Play on message" help="The sound effect will play when this message is received" default="play"/>
+        
+    </class>
+
+    <!-- Animated prop -->
+    <class name="prop_dynamic"  placeable="true">
+    
+        <parent>signal_emitter</parent>
+        
+        <model>
+            <file>model</file>
+            <scale>scale</scale>
+            <default_model>models/system/editor/team_location.model</default_model>
+        </model>
+
+        <size>
+            <scale>scale</scale>
+        </size>
+
+        <pathing>
+            <include>pathInclude</include>
+            <walkable>pathWalkable</walkable>
+            <file>model</file>
+        </pathing>
+        
+        <parameter name="scale" type="vector" label="Scale" help="Does not currently work" default="1.0, 1.0, 1.0"/>
+        <parameter name="model" type="file" label="Model" filter="*.model"/>
+        <parameter name="animation" type="string" label="Animation" />
+        <parameter name="commAlpha" type="real" label="Commander Alpha" help="0-1. Doesn't collide if less than 1." default="1.0"/>
+		<parameter name="dynamic" type="boolean" label="Dynamic" help="Specifies whether bones are driven by physics simulation (synced with server) or physics model is updated by animation" default="false"/>
+        <parameter name="pathInclude" type="boolean" label="Pathing Include" help="On will include in NavMesh. Off excludes prop from nav mesh" default="false"/>
+        <parameter name="pathWalkable" type="boolean" label="Pathing Walkable" help="On will be walkable in NavMesh. Off makes prop not walkable in nav mesh" default="true"/>
+		<parameter name="collidable" type="boolean" label="Collidable" help="The prop can be collided with" default="true"/>
+        <parameter name="emitChannel" type="integer" label="Tag emit channel" help="All animation tags will be emitted as a signal on this channel." default="0"/>
+        
+    </class>
+    
+    <class name="prop_dynamic_animator">
+    
+        <parent>signal_listener</parent>
+        
+        <model>
+            <file>models/system/editor/sound_reverb.model</file>
+        </model> 
+        
+        <parameter name="listenMessage" type="string" label="Animate on message" help="Will activate when this message is received." default=""/>
+        <parameter name="inputName" type="string" label="Input name" help="Name of the animation input to affect." default=""/>
+        <parameter name="inputValue" type="string" label="Input Value" help="Input name will be set to this value." default=""/>
+        <sphere><radius>range</radius></sphere>
+        <parameter name="range" type="distance" label="Search radius" default="10" help="Only prop_dynamics within this range will be affected."/>
+    
+    </class>
+    
+    <!-- Skybox cinematic -->
+    <class name="skybox">
+
+	<cinematic>
+		<file>cinematicName</file>
+		<repeat_style>endless</repeat_style>
+		<render_zone>sky</render_zone>
+	</cinematic>
+
+    <parameter name="cinematicName" type="file" label="Cinematic file" default="" filter="*.cinematic" help="Name of cinematic file (created with Cinematic Editor)"/>
+
+    <help>Creates a skybox cinematic that's always centered around the viewer.</help>
+
+    <model>
+        <file>models/system/editor/skybox.model</file>
+    </model>
+
+    </class>
+  
+	<class name="target" placeable="true">
+		<model>
+		  <file>model</file>
+		</model>
+		<parameter name="model" type="file" label="Model" default="models/misc/target/target.model" filter="*.model"/>
+
+		<parameter name="teamNumber" type="choice" label="Team Number" default="3">
+			<choice label="Always take damage" value="0"/>
+			<choice label="Marine" value="1"/>
+			<choice label="Alien" value="2"/>        
+		</parameter>
+			
+		<parameter name="health" type="real" label="Health before dying" default="1.0"/>
+
+		<parameter name="deathSoundName" type="file" filter="sound" label="Kill sound" default="" help="Sound to play when killed."/>
+
+		<parameter name="spawnAnimation" type="string" label="Spawn animation" default="idle" help="Animation played when target is first spawned." />
+
+		<parameter name="popupAnimation" type="string" label="Popup animation" default="popup" help="Animation played when player is nearby." />
+
+		<parameter name="popupSoundName" type="file" filter="sound" label="Popup sound" default="" help="Sound to play when target pops up."/>
+
+		<parameter name="popupRadius" type="distance" label="Popup radius" default="10.0" help="Target plays popup animation when any player comes within this range."/>
+		<sphere>
+		   <radius>popupRadius</radius>
+		</sphere>
+		
+		<parameter name="popupDelay" type="real" label="Random delay before popping up" default="0.0"/>
+		
+</class>
+
+    <!-- Base class for fog controls -->
+  <class name="fog_controls" placeable="false">
+
+      <fog_controls>
+          <default_zone_scale>default_zone_scale</default_zone_scale>
+          <default_zone_color>default_zone_color</default_zone_color>
+
+          <view_zone_scale>view_zone_scale</view_zone_scale>
+          <view_zone_color>view_zone_color</view_zone_color>
+
+          <skybox_zone_scale>skybox_zone_scale</skybox_zone_scale>
+          <skybox_zone_color>skybox_zone_color</skybox_zone_color>
+      </fog_controls>	
+
+      <parameter name="default_zone_scale" type="real" label="Default Depth Scale" default="1000"/>
+      <parameter name="default_zone_color" type="color" label="Default Color" default="0.35, 0.4, 0.5"/>
+
+      <parameter name="view_zone_scale" type="real" label="View Model Depth Scale" default="1000"/>
+      <parameter name="view_zone_color" type="color" label="View Model Color" default="0.35, 0.4, 0.5"/>
+
+      <parameter name="skybox_zone_scale" type="real" label="Skybox Depth Scale" default="1000"/>
+      <parameter name="skybox_zone_color" type="color" label="Skybox Color" default="0.35, 0.4, 0.5"/>
+
+
+      <help>Allows tuning of fog values for different rendering zones.</help>
+
+      <model>
+        <file>models/system/editor/fogcontrols.model</file>
+      </model>
+  </class>
+  
+  <class name="fog_area_modifier" placeable="false">
+      <fog_controls>
+          <default_zone_scale>default_zone_scale</default_zone_scale>
+          <default_zone_color>default_zone_color</default_zone_color>
+
+          <view_zone_scale>view_zone_scale</view_zone_scale>
+          <view_zone_color>view_zone_color</view_zone_color>
+
+          <skybox_zone_scale>skybox_zone_scale</skybox_zone_scale>
+          <skybox_zone_color>skybox_zone_color</skybox_zone_color>
+      </fog_controls>	
+
+      <parameter name="default_zone_scale" type="real" label="Default Depth Scale" default="1000"/>
+      <parameter name="default_zone_color" type="color" label="Default Color" default="0.35, 0.4, 0.5"/>
+
+      <parameter name="view_zone_scale" type="real" label="View Model Depth Scale" default="1000"/>
+      <parameter name="view_zone_color" type="color" label="View Model Color" default="0.35, 0.4, 0.5"/>
+
+      <parameter name="skybox_zone_scale" type="real" label="Skybox Depth Scale" default="1000"/>
+      <parameter name="skybox_zone_color" type="color" label="Skybox Color" default="0.35, 0.4, 0.5"/>
+      
+      <sphere><radius>start_blend_radius</radius></sphere>
+      <parameter name="start_blend_radius" type="distance" label="Distance to start blending into these fog settings" default="10.0"/>
+      <sphere><radius>end_blend_radius</radius></sphere>
+      <parameter name="end_blend_radius" type="distance" label="Distance to finish blending into these fog settings" default="5.0"/>
+      
+      <help>Allows tuning of fog values for areas of the world.</help>
+      
+      <model>
+        <file>models/system/editor/fogcontrols.model</file>
+      </model>
+  </class>
+
+  <class name="pathing_settings" placeable="true">
+      <model>
+         <file>models/system/editor/pathing_settings.model</file>
+      </model>
+      <parameter name="option_cell_size" type="real" label="Cell Size" default="0.30"/>
+      <parameter name="option_cell_height" type="real" label="Cell Height" default="0.40"/>
+      <parameter name="option_agent_height" type="real" label="Agent Height" default="2.00"/>
+      <parameter name="option_agent_radius" type="real" label="Agent Radius" default="0.6"/>
+      <parameter name="option_agent_max_climb" type="real" label="Agent Max Climb" default="0.90"/>
+      <parameter name="option_agent_max_slope" type="real" label="Agent Max Slope" default="45.0"/>
+      <parameter name="option_region_min_size" type="real" label="Region Min Size" default="8"/>
+      <parameter name="option_region_merge_size" type="real" label="Region Merge Size" default="20"/>
+      <parameter name="option_edge_max_len" type="real" label="Edge Max Len" default="12.0"/>
+      <parameter name="option_verts_per_poly" type="real" label="Verts Per Poly" default="6.0"/>
+      <parameter name="option_detail_sample_dist" type="real" label="Detail Sample Distance" default="6.0"/>
+      <parameter name="option_detail_sample_max_error" type="real" label="Detail Sample Max Error" default="1.0"/>
+      <parameter name="option_tile_size" type="real" label="Tile Size" default="36.0"/>
+
+      <help>Allows tuning of pathing settings to help optimize pathing</help>
+  </class>
+
+</classes>
+
+<!-- These should map some hard-coded names in Spark and in Globals.lua -->
+<hole_checker>
+    <exclude_group>OcclusionGeometry</exclude_group>
+    <exclude_group>CommanderBuild</exclude_group>
+    <exclude_group>NonCollisionGeometry</exclude_group>
+</hole_checker>
+
+<reflection_probe_settings>
+
+    <exclude_layer>Pathing</exclude_layer>
+    <exclude_layer>OcclusionGeometry</exclude_layer>
+    <exclude_layer>CollisionGeometry</exclude_layer>
+    <exclude_layer>CommanderBuild</exclude_layer>
+    <exclude_layer>CommanderNoBuild</exclude_layer>
+    
+    <!-- Anything in this layer will be 'invisible' when reflections are built -->
+    <exclude_layer>ReflectionsInvisible</exclude_layer>
+
+    <exclude_group>OcclusionGeometry</exclude_group>
+    <exclude_group>CollisionGeometry</exclude_group>
+    <exclude_group>InvisibleGeometry</exclude_group>
+    <exclude_group>CommanderBuild</exclude_group>
+    <exclude_group>CommanderNoBuild</exclude_group>
+    <exclude_group>SeasonalFall</exclude_group>
+    <exclude_group>SeasonalWinter</exclude_group>
+
+</reflection_probe_settings>
+
+</editor>
