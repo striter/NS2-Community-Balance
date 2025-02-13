@@ -29,7 +29,11 @@ function NS2Gamerules:OnInitialized()
     kPlayingTeamInitialTeamRes = self.StartingTeamRes or kPlayingTeamInitialTeamRes
     kMarineInitialIndivRes = self.StartingPlayerRes or kMarineInitialIndivRes
     kAlienInitialIndivRes = self.StartingPlayerRes or kAlienInitialIndivRes
-	
+    
+    self.FrontDoorTime = self.FrontDoorTime or 180.0
+    self.SiegeDoorTime = self.SiegeDoorTime or 1080.0
+    self.SuddenDeathTime = self.SuddenDeathTime or 1380.0
+
 end
 
 if Server then
@@ -83,7 +87,23 @@ if Server then
         for _, door in ientitylist(Shared.GetEntitiesWithClassname("FuncDoor")) do
             door:BeginOpenDoor(doorType)
         end
-
+        
+        if doorType == kSiegeDoorType then
+            for _, door in ientitylist(Shared.GetEntitiesWithClassname("SiegeDoor")) do
+                door:BeginOpenDoor(doorType)
+            end
+        end
+        
+        if doorType == kFrontDoorType then
+            for _, door in ientitylist(Shared.GetEntitiesWithClassname("FrontDoor")) do
+                door:BeginOpenDoor(doorType)
+            end
+            
+            for _, door in ientitylist(Shared.GetEntitiesWithClassname("SideDoor")) do
+                door:BeginOpenDoor(doorType)
+            end
+        end
+        
         for _, player in ientitylist(Shared.GetEntitiesWithClassname("Player")) do
             if player:GetIsOnPlayingTeam() then
                 StartSoundEffectForPlayer(soundEffectType, player)
