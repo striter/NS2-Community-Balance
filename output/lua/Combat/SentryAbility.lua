@@ -110,9 +110,9 @@ end
 function SentryAbility:GetMaxStructures(player)
     local amount = 1
     
-    if GetIsTechUnlocked(player,kTechId.AdvancedWeaponry) then
-        amount = amount + 1        
-    end
+    --if GetIsTechUnlocked(player,kTechId.AdvancedWeaponry) then
+    --    amount = amount + 1        
+    --end
     if GetHasTech(player,kTechId.PrototypeLab) then
         amount = amount + 1
     end

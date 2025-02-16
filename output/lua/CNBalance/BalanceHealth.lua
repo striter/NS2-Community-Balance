@@ -65,16 +65,16 @@ kARCDeployedHealth = 2600    kARCDeployedArmor = 0
 kARCHealthPerPlayerAdd = 60
 
 --2500 400
-kRoboticsFactoryHealth = 1200    kRoboticsFactoryArmor = 250    kRoboticsFactoryPointValue = 5
+kRoboticsFactoryHealth = 1000    kRoboticsFactoryArmor = 250    kRoboticsFactoryPointValue = 5
 kARCRoboticsFactoryHealth = 1500    kARCRoboticsFactoryArmor = 400    kARCRoboticsFactoryPointValue = 7
 
-kArmoryHealth = 1200    kArmoryArmor = 150    kArmoryPointValue = 5
+kArmoryHealth = 1000    kArmoryArmor = 150    kArmoryPointValue = 5
 kAdvancedArmoryHealth = 2400    kAdvancedArmoryArmor = 500    kAdvancedArmoryPointValue = 10
 
 kSentryBatteryHealth = 1200    kSentryBatteryArmor = 200    kSentryBatteryPointValue = 5     --600 200
 kSentryHealth = 400    kSentryArmor = 125    kSentryPointValue = 3      --500 125
 
-kPrototypeLabHealth = 1800 kPrototypeLabArmor = 500    kPrototypeLabPointValue = 10
+kPrototypeLabHealth = 1500 kPrototypeLabArmor = 500    kPrototypeLabPointValue = 10
 kUpgradedPrototypeLabHealth = 2400 kUpgradedPrototypeLabArmor = 500 kUpgradedPrototypeLabPointValue = 20
 
 kExplosiveSelfDamage =

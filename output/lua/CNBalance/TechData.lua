@@ -523,6 +523,7 @@ function BuildTechData()
         [kTechDataObstacleRadius] = 0.25,
         [kTechDataAllowConsumeDrop] = true,
         [kTechDataCostKey] = kMarineSentryCost,
+        [kTechDataSupply] = kMarineSentrySupply,
         [kTechDataPersonalCostKey] = kMarineSentryPersonalCost,
         [kTechDataAllowConsumeDrop] = true,
     })

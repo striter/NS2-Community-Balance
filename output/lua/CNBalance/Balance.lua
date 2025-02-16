@@ -115,7 +115,7 @@ kHeavyMachineGunCost = 20
 kHeavyMachineGunDropCost = 15
 kHeavyMachineGunDropCooldown = 0
 
-kHeavyMachineGunDamage = 7.5  --8
+kHeavyMachineGunDamage = 7  --8
 kHeavyMachineGunDamageType = kDamageType.MachineGun
 kHeavyMachineGunClipSize = 150  --100
 kHeavyMachineGunClipNum = 3 --4
@@ -256,7 +256,7 @@ kDragonBreathStructureFireDamagePerStack = { kStructureFireDOTPerSecond / 100, k
 kFlamethrowerStructureDamagePerStack = { kStructureFireDOTPerSecond, kStructureFireDOTPerSecond, kStructureFireDOTPerSecond, kStructureFireDOTPerSecond }
 kStructureFireDamageMaxStack = { kStructureFireDOTPerSecond * 3 , kStructureFireDOTPerSecond * 4, kStructureFireDOTPerSecond * 5, kStructureFireDOTPerSecond * 6  }
 
-kMinigunDamage = 8.5
+kMinigunDamage = 8
 kMinigunDamageType = kDamageType.Exosuit
 kRailgunDamage = 10
 kRailgunChargeDamage = 154
@@ -266,6 +266,8 @@ kPulseGrenadeDamageRadius = 4
 kPulseGrenadeEnergyDamageRadius = 4
 kPulseGrenadeDamage = 90  --75
 kPulseGrenadeEnergyDamage = 35  --25
+
+kNerveGasDamagePerSecond = 20
 
 kClusterGrenadeDamageRadius = 10
 kClusterGrenadeDamage = 80
@@ -592,9 +594,10 @@ kCombatBuilderDropCost = 5
 kCombatBuilderPointValue = 2
 
 kMarineSentryCost = 2
-kMarineSentryPersonalCost = 9
+kMarineSentryPersonalCost = 15
 kMarineSentryDamage = 3  kMarineSentryWeapon1Scalar = 1.11  kMarineSentryWeapon2Scalar = 1.22 kMarineSentryWeapon3Scalar = 1.33
 kMarineSentryBuildTime = 3
+kMarineSentrySupply = 5
 
 kWeaponCacheCost = 3
 kWeaponCachePersonalCost = 12

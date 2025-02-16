@@ -40,6 +40,7 @@ Script.Load("lua/TargettingMixin.lua")
 Script.Load("lua/CombatMixin.lua")
 Script.Load("lua/CommanderGlowMixin.lua")
 Script.Load("lua/InfestationTrackerMixin.lua")
+Script.Load("lua/SupplyUserMixin.lua")
 Script.Load("lua/Combat/MarineStructureMixin.lua")
 
 local kSpinUpSoundName = PrecacheAsset("sound/NS2.fev/marine/structures/sentry_spin_up")
@@ -223,6 +224,7 @@ function MarineSentry:OnInitialized()
         
         -- TargetSelectors require the TargetCacheMixin for cleanup.
         InitMixin(self, TargetCacheMixin)
+        InitMixin(self, SupplyUserMixin)
         
         -- configure how targets are selected and validated
         self.targetSelector = TargetSelector():Init(
