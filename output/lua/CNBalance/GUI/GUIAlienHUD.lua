@@ -901,6 +901,7 @@ local function UpdateBabblerIndication(self, deltaTime)
 
 end
 
+local kErrorColor = Color(1, 0, 0, 1)
 function GUIAlienHUD:Update(deltaTime)
 
     PROFILE("GUIAlienHUD:Update")
@@ -957,6 +958,7 @@ function GUIAlienHUD:Update(deltaTime)
 
     if self.gameTime:GetIsVisible() then
         self.gameTime:SetText(PlayerUI_GetGameTimeString())
+        self.gameTime:SetColor(PlayerUI_DeadlockActivated() and kErrorColor or kAlienTeamColorFloat)
     end
 
     if self.teamResText:GetIsVisible() then

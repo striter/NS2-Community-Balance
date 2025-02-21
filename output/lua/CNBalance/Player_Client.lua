@@ -27,3 +27,22 @@ function PlayerUI_GetTeamRespawnInfo()
     return teamType, respawnCount
 
 end
+
+
+function PlayerUI_GetDeadlockTimeLeft()
+
+    local gameInfo = GetGameInfoEntity()
+    if not gameInfo then return 99999 end
+
+    local state = gameInfo:GetState()
+    if state ~= kGameState.PreGame and state ~= kGameState.Countdown then
+        if state ~= kGameState.Started then
+            return 99999
+        else
+            return math.floor(gameInfo:GetDeadlockTime() - Shared.GetTime())
+        end
+    end
+
+    return 99999
+
+end

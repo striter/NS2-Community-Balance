@@ -1,3 +1,15 @@
+kDeadlockInitialTime = 1800
+kDeadlockTimeExtend = {
+    ["CommandStation"] = 300,
+    ["PhaseGate"] = 60,
+    ["TunnelEntrance"] = 60,
+    ["ARC"] = 30,
+    ["Extractor"] = 30,
+    ["Harvester"] = 30,
+    ["HIVE"] = 300
+}
+kDeadlockVisibleTime = 120
+
 kTechReputationByPass = {
     [kTechId.CombatBuilder] = 50,
     [kTechId.SubMachineGun] = 70,

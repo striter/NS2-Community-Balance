@@ -7,6 +7,7 @@ ModLoader.SetupFileHook("lua/Shared.lua", "lua/CNBalance/Shared.lua", "post")
 ModLoader.SetupFileHook("lua/NS2Gamerules.lua", "lua/CNBalance/NS2Gamerules.lua", "post")
 ModLoader.SetupFileHook("lua/Globals.lua", "lua/CNBalance/Globals.lua", "post" )
 ModLoader.SetupFileHook("lua/Team.lua", "lua/CNBalance/Team.lua", "post")
+ModLoader.SetupFileHook("lua/GameInfo.lua", "lua/CNBalance/GameInfo.lua", "replace")
 
 ModLoader.SetupFileHook("lua/Entity.lua", "lua/CNBalance/Entity.lua", "post")
 ModLoader.SetupFileHook("lua/ScriptActor.lua", "lua/CNBalance/ScriptActor.lua", "post" )
@@ -33,6 +34,7 @@ ModLoader.SetupFileHook("lua/ReadyRoomEmbryo.lua", "lua/CNBalance/ReadyRoomEmbry
 ModLoader.SetupFileHook("lua/Scoreboard.lua", "lua/CNBalance/Scoreboard.lua", "post" )
 ModLoader.SetupFileHook("lua/ServerStats.lua", "lua/CNBalance/ServerStats.lua", "replace" )
 --GUI
+ModLoader.SetupFileHook("lua/Hud/HelpScreen/HelpScreenContent.lua", "lua/CNBalance/GUI/HelpScreenContent.lua", "post")
 ModLoader.SetupFileHook("lua/GUIMinimapFrame.lua", "lua/CNBalance/GUI/GUIMinimapFrame.lua", "post")
 ModLoader.SetupFileHook("lua/Hud2/topBar/GUIHudTopBarObjectClasses.lua", "lua/CNBalance/GUI/GUIHudTopBarObjectClasses.lua", "replace")
 ModLoader.SetupFileHook("lua/GUIMinimap.lua", "lua/CNBalance/GUI/GUIMinimap.lua", "replace" )
@@ -40,6 +42,7 @@ ModLoader.SetupFileHook("lua/GUIMinimapConnection.lua", "lua/CNBalance/GUI/GUIMi
 ModLoader.SetupFileHook("lua/GUIWorldText.lua", "lua/CNBalance/GUI/GUIWorldText.lua", "post" )
 ModLoader.SetupFileHook("lua/GUIUnitStatus.lua", "lua/CNBalance/GUI/GUIUnitStatus.lua", "replace" )
 ModLoader.SetupFileHook("lua/GUIScoreboard.lua", "lua/CNBalance/GUI/GUIScoreboard.lua", "post" )
+ModLoader.SetupFileHook("lua/TeamMessenger.lua", "lua/CNBalance/TeamMessenger.lua", "replace")
 
 
 --Effects

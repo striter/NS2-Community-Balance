@@ -120,6 +120,7 @@ function GUIMarineHUD:Reset()
     end
 end
 
+local kErrorColor = Color(1, 0, 0, 1)
 local baseUpdate = GUIMarineHUD.Update
 function GUIMarineHUD:Update(deltaTime)
     baseUpdate(self,deltaTime)
@@ -156,4 +157,8 @@ function GUIMarineHUD:Update(deltaTime)
         end
     end
 
+
+    if self.gameTime:GetIsVisible() then
+        self.gameTime:SetColor(PlayerUI_DeadlockActivated() and kErrorColor or kBrightColor)
+    end
 end

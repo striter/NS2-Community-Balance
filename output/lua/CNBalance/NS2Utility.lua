@@ -164,6 +164,9 @@ if Server then
     end
 end
 
+function PlayerUI_DeadlockActivated()
+    return PlayerUI_GetDeadlockTimeLeft() <= 0
+end
 
 function PlayerUI_GetGameTimeString()
 
@@ -180,10 +183,20 @@ function PlayerUI_GetGameTimeString()
     local teamIndex = player:GetTeamType()
 
     local appender = teamIndex == kTeam1Index and " " or "\n"
-    local gameTimeString = string.format(Locale.ResolveString(string.format("GAME_LENGTH_TEAM%i", teamIndex)), minutes, seconds)
+    local gameTimeString
+
+    local deadlockTime = PlayerUI_GetDeadlockTimeLeft()
+    if deadlockTime < kDeadlockVisibleTime then
+        if deadlockTime > 0 then
+            gameTimeString = string.format(appender .. Locale.ResolveString(string.format("DEADLOCK_UNTIL_TEAM%i", teamIndex)),deadlockTime)
+        else
+            gameTimeString = string.format(appender .. Locale.ResolveString(string.format("DEADLOCK_ACTIVATED_TEAM%i", teamIndex)),deadlockTime)
+        end
+    else
+        gameTimeString = string.format(Locale.ResolveString(string.format("GAME_LENGTH_TEAM%i", teamIndex)), minutes, seconds)
+    end
     
     local respawnDuration = 0
-
     if teamIndex == kMarineTeamType then
         respawnDuration = respawnDuration + kMarineRespawnTime
     elseif teamIndex == kAlienTeamType then
@@ -196,6 +209,7 @@ function PlayerUI_GetGameTimeString()
     if respawnDuration > 1 then 
         gameTimeString = gameTimeString .. string.format(appender.. Locale.ResolveString(string.format("RESPAWN_EXTEND_TEAM%i", teamIndex)),respawnDuration)
     end
+    
     
     return gameTimeString
 end

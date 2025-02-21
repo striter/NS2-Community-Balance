@@ -24,7 +24,6 @@
      end
      
      local kRandomTencentage = 3
-     
      function NS2Gamerules:RandomTechPoint(techPoints, teamNumber)
          local chosenIndex = math.random(1,#techPoints)
          local chosenTechPoint = techPoints[chosenIndex]
@@ -32,12 +31,94 @@
          return chosenTechPoint
      end
 
-     local baseSetGameState = NS2Gamerules.SetGameState
-     function NS2Gamerules:SetGameState(_state)
-         baseSetGameState(self,_state)
+     --local baseSetGameState = NS2Gamerules.SetGameState
+     function NS2Gamerules:SetGameState(state)
+         if state ~= self.gameState then
+
+             self.gameState = state
+             self.gameInfo:SetState(state)
+             self.timeGameStateChanged = Shared.GetTime()
+             self.timeSinceGameStateChanged = 0
+
+             if self.gameState == kGameState.Started then
+
+                 self.gameStartTime = Shared.GetTime()
+                 self.deadlockTime = Shared.GetTime() + kDeadlockInitialTime
+                 self.deadlockDamageInterval = 0
+                 self.deadlockBroadcastInterval = 0
+
+                 self.gameInfo:SetStartTime(self.gameStartTime)
+                 self.gameInfo:SetDeadlockTime(self.deadlockTime)
+
+                 SendTeamMessage(self.team1, kTeamMessageTypes.GameStarted)
+                 SendTeamMessage(self.team2, kTeamMessageTypes.GameStarted)
+
+             end
+
+             -- On end game, check for map switch conditions
+             if state == kGameState.Team1Won or state == kGameState.Team2Won then
+
+                 if MapCycle_TestCycleMap() then
+                     self.timeToCycleMap = Shared.GetTime() + kPauseToSocializeBeforeMapcycle
+                 else
+                     self.timeToCycleMap = nil
+                 end
+
+             end
+
+         end
+         
          self.team1:OnGameStateChanged(_state)
          self.team2:OnGameStateChanged(_state)
+
      end
+
+     local baseOnEntityKilled = NS2Gamerules.OnEntityKilled
+     function NS2Gamerules:OnEntityKilled(targetEntity, attacker, doer, point, direction)
+         baseOnEntityKilled(self,targetEntity, attacker, doer, point, direction)
+
+         if self.gameState ~= kGameState.Started then return end
+     
+         local extendTime = kDeadlockTimeExtend[targetEntity:GetClassName()]
+         if not extendTime then return end
+         
+         local now = Shared.GetTime()
+         if now + extendTime > self.deadlockTime then
+             self.deadlockTime = now + extendTime
+             self.gameInfo:SetDeadlockTime(self.deadlockTime)
+         end
+     end
+     
+    function NS2Gamerules:UpdateDeadlock(timePassed)
+    
+        if self.gameState ~= kGameState.Started then return end
+
+        local now = Shared.GetTime()
+        if now > self.deadlockTime then
+            local deadlockTimeElapsed = now - self.deadlockTime
+            local multiplier = math.pow(2,math.floor(deadlockTimeElapsed / 60) )
+            local kDamagePercentage = 0.005 * multiplier
+            if now > self.deadlockDamageInterval then
+                self.deadlockDamageInterval = now + 3
+                for k, target in pairs(GetEntitiesWithMixin("Construct")) do
+                    if target.TakeDamage then
+                        if not target.CanTakeDamage or target:CanTakeDamage() then
+                            local maxHealth = target:GetMaxHealth()
+                            local maxArmor = target:GetMaxArmor()
+                            local damage = (maxHealth + maxArmor * kHealthPointsPerArmor)
+                            target:TakeDamage(damage, nil, nil, nil, nil, maxArmor * kDamagePercentage, maxHealth * kDamagePercentage, kDamageType.Normal, true)
+                        end
+                    end
+                end
+            end
+
+            if now > self.deadlockBroadcastInterval then
+                self.deadlockBroadcastInterval = now + 60
+                SendTeamMessage(self.team1, kTeamMessageTypes.DeadlockActivated)
+                SendTeamMessage(self.team2, kTeamMessageTypes.DeadlockActivated)
+            end
+        end
+    end
      
      function NS2Gamerules:ResetGame()
 
@@ -269,6 +350,8 @@
          StatsUI_InitializeTeamStatsAndTechPoints(self)
      end
 
+     
+     
      function NS2Gamerules:OnUpdate(timePassed)
 
          PROFILE("NS2Gamerules:OnUpdate")
@@ -288,7 +371,7 @@
                  self:CheckGameEnd()
 
                  self:UpdateWarmUp()
-
+                 self:UpdateDeadlock(timePassed)
                  self:UpdatePregame(timePassed)
                  self:UpdateToReadyRoom()
                  self:UpdateMapCycle()

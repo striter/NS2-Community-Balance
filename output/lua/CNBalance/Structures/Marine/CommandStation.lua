@@ -20,6 +20,10 @@ function CommandStation:OnInitialized()
     end
 end
 
+function CommandStation:GetCanRecycleOverride()
+    return false
+end
+
 CommandStation.kUpgradeType = {
     kTechId.StandardSupply,kTechId.ExplosiveSupply,kTechId.ArmorSupply,kTechId.ElectronicSupply
 }
