@@ -383,7 +383,7 @@ kXenocideFuelTime = 120
 
 kXenocideEnergyCost = 30
 kXenocideDamageType = kDamageType.Structural
-kXenocideDamage = 150  kXenocideFuelDamage = 220 --200
+kXenocideDamage = 150  kXenocideFuelDamage = 200 --200
 kXenocideRange = 9 kXenocideFuelRange = 12 -- 14
 kXenocideDamageScalarEmptyHealth = 0.2 kXenocideDamageHealthScalar = 1 - kXenocideDamageScalarEmptyHealth
 kXenocideSpawnReduction = 1 kXenocideFuelSpawnReduction = 0.6

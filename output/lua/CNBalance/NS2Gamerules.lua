@@ -4,6 +4,7 @@
          bountyActive = false,
          resourceEfficiency = false,
          recentWinsBalance = false,
+         deadlockInitialTime = 1800
      }, true)
 
      NS2Gamerules.kRecentRoundStatus = LoadConfigFile("NS2.0RoundStatus.json",{
@@ -43,7 +44,7 @@
              if self.gameState == kGameState.Started then
 
                  self.gameStartTime = Shared.GetTime()
-                 self.deadlockTime = Shared.GetTime() + kDeadlockInitialTime
+                 self.deadlockTime = Shared.GetTime() + (NS2Gamerules.kBalanceConfig.deadlockInitialTime or 99999)
                  self.deadlockDamageInterval = 0
                  self.deadlockBroadcastInterval = 0
 
@@ -68,8 +69,8 @@
 
          end
          
-         self.team1:OnGameStateChanged(_state)
-         self.team2:OnGameStateChanged(_state)
+         self.team1:OnGameStateChanged(state)
+         self.team2:OnGameStateChanged(state)
 
      end
 
@@ -77,6 +78,7 @@
      function NS2Gamerules:OnEntityKilled(targetEntity, attacker, doer, point, direction)
          baseOnEntityKilled(self,targetEntity, attacker, doer, point, direction)
 
+         if attacker == nil then return end
          if self.gameState ~= kGameState.Started then return end
      
          local extendTime = kDeadlockTimeExtend[targetEntity:GetClassName()]
@@ -84,7 +86,7 @@
          
          local now = Shared.GetTime()
          if now + extendTime > self.deadlockTime then
-             self.deadlockTime = now + extendTime
+             self.deadlockTime = self.deadlockTime + extendTime
              self.gameInfo:SetDeadlockTime(self.deadlockTime)
          end
      end

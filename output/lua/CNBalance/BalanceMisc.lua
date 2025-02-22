@@ -1,12 +1,11 @@
-kDeadlockInitialTime = 1800
 kDeadlockTimeExtend = {
-    ["CommandStation"] = 300,
     ["PhaseGate"] = 60,
     ["TunnelEntrance"] = 60,
     ["ARC"] = 30,
     ["Extractor"] = 30,
     ["Harvester"] = 30,
-    ["HIVE"] = 300
+    ["CommandStation"] = 300,
+    ["Hive"] = 300, 
 }
 kDeadlockVisibleTime = 120
 
