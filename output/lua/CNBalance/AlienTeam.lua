@@ -1445,6 +1445,6 @@ function AlienTeam:OnOriginFormResourceFetch(_player)
     local chatMessage = string.format("<%s>从资源池获取了[%s]点资源.", _player:GetName(),finalPRes)
     local teamNumber = self:GetTeamNumber()
     for _, broadCastPlayer in pairs(GetEntitiesForTeam("Player", teamNumber)) do
-        Server.SendNetworkMessage(broadCastPlayer, "Chat", BuildChatMessage(true, "[原数族群]", -1, teamNumber, self:GetTeamType(), chatMessage), true)
+        Server.SendNetworkMessage(broadCastPlayer, "Chat", BuildChatMessage(true, "", -1, teamNumber, self:GetTeamType(), chatMessage), true)
     end
 end
