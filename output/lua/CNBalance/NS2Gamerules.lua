@@ -90,7 +90,9 @@
              self.gameInfo:SetDeadlockTime(self.deadlockTime)
          end
      end
-     
+
+     NS2Gamerules.kMarineDeadlockAlert = PrecacheAsset("sound/ns2plus.fev/comm/deadlock")
+     NS2Gamerules.kAlienDeadlockAlert = PrecacheAsset("sound/ns2plus.fev/khamm/deadlock")
     function NS2Gamerules:UpdateDeadlock(timePassed)
     
         if self.gameState ~= kGameState.Started then return end
@@ -118,6 +120,8 @@
                 self.deadlockBroadcastInterval = now + 60
                 SendTeamMessage(self.team1, kTeamMessageTypes.DeadlockActivated)
                 SendTeamMessage(self.team2, kTeamMessageTypes.DeadlockActivated)
+                self.team1:PlayPrivateTeamSound(NS2Gamerules.kMarineDeadlockAlert)
+                self.team2:PlayPrivateTeamSound(NS2Gamerules.kAlienDeadlockAlert)
             end
         end
     end
