@@ -62,6 +62,7 @@ MAC.kPassbyMACSoundName = PrecacheAsset("sound/NS2.fev/marine/structures/mac/pas
 MAC.kPassbyDrifterSoundName = PrecacheAsset("sound/NS2.fev/marine/structures/mac/passby_driffter")
 
 MAC.kUsedSoundName = PrecacheAsset("sound/NS2.fev/marine/structures/mac/use")
+MAC.kUsedSoundNameCN = PrecacheAsset("sound/ns2plus.fev/structures/mac_used")
 
 MAC.kElectrifiedThirdpersonMaterialName = "cinematics/vfx_materials/pulse_gre_elec.material"
 
@@ -392,7 +393,8 @@ function MAC:OnUse(player, elapsedTime, useSuccessTable)
                 --MACs either don't like or don't recognize their larger kin...picky little buggers, aren't they.
                 Server.PlayPrivateSound(player, MAC.kPassbyDrifterSoundName, self, 1.0, Vector(0, 0, 0))
             else
-                Server.PlayPrivateSound(player, MAC.kUsedSoundName, self, 1.0, Vector(0, 0, 0))
+                local r = math.random(0,1)
+                Server.PlayPrivateSound(player,r <= 0.5 and MAC.kUsedSoundNameCN or MAC.kUsedSoundName, self, 1.0, Vector(0, 0, 0))
             end
 
             self.timeOfLastUse = time
