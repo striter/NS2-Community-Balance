@@ -33,13 +33,18 @@ function PlayerUI_GetDeadlockTimeLeft()
 
     local gameInfo = GetGameInfoEntity()
     if not gameInfo then return 99999 end
+    local teamNumber = PlayerUI_GetTeamNumber()
+    if teamNumber ~= kTeam1Index and teamNumber ~= kTeam2Index then return 99999 end
 
     local state = gameInfo:GetState()
     if state ~= kGameState.PreGame and state ~= kGameState.Countdown then
         if state ~= kGameState.Started then
             return 99999
         else
-            return math.floor(gameInfo:GetDeadlockTime() - Shared.GetTime())
+            local teamInfo = GetTeamInfoEntity(teamNumber )
+            if teamInfo then
+                return math.floor(teamInfo.deadlockTime - Shared.GetTime())
+            end
         end
     end
 

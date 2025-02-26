@@ -1,11 +1,11 @@
 kDeadlockTimeExtend = {
-    ["PhaseGate"] = 60,
-    ["TunnelEntrance"] = 60,
-    ["ARC"] = 30,
-    ["Extractor"] = 30,
-    ["Harvester"] = 30,
-    ["CommandStation"] = 300,
-    ["Hive"] = 300, 
+    [kTechId.Extractor] = 30, [kTechId.PoweredExtractor] = 30,
+    [kTechId.PhaseGate] = 60,
+    [kTechId.CommandStation] = 180, [kTechId.StandardStation] = 240, [kTechId.ExplosiveStation] = 240, [kTechId.ArmorStation] = 240, [ kTechId.ElectronicStation ] = 240,
+
+    [kTechId.Harvester] = 30,
+    [kTechId.Tunnel] = 60, [kTechId.InfestedTunnel] = 60, [kTechId.GorgeTunnel] = 60,
+    [kTechId.Hive] = 180, [kTechId.ShiftHive] = 240, [kTechId.CragHive] = 240, [kTechId.ShadeHive] = 240,
 }
 kDeadlockVisibleTime = 120
 

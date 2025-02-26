@@ -21,6 +21,7 @@ class 'AlienTeam' (PlayingTeam)
 AlienTeam.kAutoHealInterval = 2
 AlienTeam.kStructureAutoHealInterval = 0.5
 AlienTeam.kAutoHealUpdateNum = 20 -- number of structures to update per autoheal update
+AlienTeam.kDeadlockAlert = PrecacheAsset("sound/ns2plus.fev/khamm/deadlock")
 
 AlienTeam.kInfestationUpdateRate = 2
 
@@ -1187,6 +1188,7 @@ end
 
 
 function AlienTeam:OnGameStateChanged(_state)
+    PlayingTeam.OnGameStateChanged(self,_state)
     if _state == kGameState.Countdown then
         if not self:GetHasCommander() then
             self.originTechNode:SetResearched(true)

@@ -27,7 +27,6 @@ local networkVars =
 	isDedicated = "boolean",
     serverIp = "string (16)",
     serverPort = "string (16)",
-    deadlockTime = "integer",
 
 
     --Skins are in this class instead of TeamInfo so it's propagated to all clients since
@@ -62,7 +61,6 @@ function GameInfo:OnCreate()
         self:SetState(kGameState.NotStarted)
 
         self.startTime = 0
-        self.deadlockTime = 0
         self.averagePlayerSkill = 0
         self.numClientsTotal = 0
         self.numPlayers = 0
@@ -107,10 +105,6 @@ end
 
 function GameInfo:GetStartTime()
     return self.startTime
-end
-
-function GameInfo:GetDeadlockTime()
-    return self.deadlockTime
 end
 
 function GameInfo:GetGameEnded()
@@ -303,10 +297,6 @@ if Server then
 
     function GameInfo:SetRookieMode(mode)
         self.rookieMode = mode
-    end
-
-    function GameInfo:SetDeadlockTime(time)
-        self.deadlockTime = time
     end
 
 end

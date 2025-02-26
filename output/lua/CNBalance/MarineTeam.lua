@@ -1,4 +1,5 @@
 
+MarineTeam.kDeadlockAlert = PrecacheAsset("sound/ns2plus.fev/comm/deadlock")
 function MarineTeam:InitTechTree()
 
     PlayingTeam.InitTechTree(self)
