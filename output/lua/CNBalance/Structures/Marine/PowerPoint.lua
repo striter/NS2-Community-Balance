@@ -1,6 +1,6 @@
 
 Script.Load("lua/BiomassHealthMixin.lua")
-
+PowerPoint.kIgnoreDeadlock = true
 local kAuxPowerBackupSound = PrecacheAsset("sound/NS2.fev/marine/power_node/backup")
 local baseOnCreate = PowerPoint.OnCreate
 function PowerPoint:OnCreate()

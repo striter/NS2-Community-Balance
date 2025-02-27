@@ -264,8 +264,8 @@ function PlayingTeam:UpdateDeadlock()
         local kDamagePercentage = 0.005 * multiplier
         if now > self.deadlockDamageInterval then
             self.deadlockDamageInterval = now + 3
-            for k, target in pairs(GetEntitiesWithMixin("Construct")) do
-                if target.TakeDamage then
+            for _, target in ipairs(GetEntitiesWithMixinForTeam("Construct", self:GetTeamNumber())) do
+                if not target.kIgnoreDeadlock and target.TakeDamage then
                     if not target.CanTakeDamage or target:CanTakeDamage() then
                         local maxHealth = target:GetMaxHealth()
                         local maxArmor = target:GetMaxArmor()

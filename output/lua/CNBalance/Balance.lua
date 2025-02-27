@@ -48,9 +48,8 @@ kTechDataTeamResOnKill = {
 kAssistMinimumDamageFraction = 0.35      --Avoid parasiter or babbler assists ,feels pretty weird
 kBountyScoreEachAssist = 1 kBountyScoreEachKill = 2 kMaxBountyScore = 512       --You can't kill 256 players in a row?
 kBountyClaimMinMarine = 5 kBountyClaimMinJetpack = 8 kBountyClaimMinExo = 12
-kBountyClaimMinSkulk = 5 kBountyClaimMinAlien = 8 kBountyClaimMinFade = 10 kBountyClaimMinOnos = 12
+kBountyClaimMinSkulk = 5 kBountyClaimMinAlien = 10 kBountyClaimMinFade = 13 kBountyClaimMinOnos = 15
 kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 20
-
 
 --Toy for marine commander (remove all marines passive income)
 kMilitaryProtocolResearchCost = 0
@@ -357,9 +356,9 @@ kTunnelRelocateCost = 5
 --Research with skill activation
 kResearchBioMassOneCost = 30
 kBioMassOneTime = 30
-kResearchBioMassTwoCost = 50
+kResearchBioMassTwoCost = 45
 kBioMassTwoTime = 45
-kResearchBioMassThreeCost = 65
+kResearchBioMassThreeCost = 60
 kBioMassThreeTime = 60
 
 --Recover
