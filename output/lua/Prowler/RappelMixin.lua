@@ -92,13 +92,6 @@ function RappelMixin:PerformSecondaryAttack(player)
                 if hitTarget:GetTeamNumber() ~= self:GetTeamNumber() then
                     self:DoDamage(kRappelDamage, hitTarget, impactPoint, direction, trace.surface, true, true)
                 end
-
-                if hitTarget:isa("Player") then -- or hitTarget:isa("Exo") then
-                    local reelDirection =  player:GetOrigin() - hitTarget:GetOrigin()
-                    reelDirection:Normalize()
-                    --local reelUpForce = 1.5
-                    ApplyPushback(hitTarget,0.2,reelDirection * kRappelReelInitialSpeed + Vector(0, 1, 0))
-                end
             else
                 self:DoDamage(kRappelDamage, nil, impactPoint, direction, trace.surface, true, true)
             end

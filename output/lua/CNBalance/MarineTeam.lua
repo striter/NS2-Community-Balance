@@ -265,9 +265,9 @@ function MarineTeam:IsMilitaryProtocol()
     return self.militaryProtocolTechNode:GetResearched()
 end
 
-function MarineTeam:OnTeamKill(_techId, _fraction, _bountyScore)
+function MarineTeam:OnTeamKill(_techId, _fraction)
 
-    local pRes = PlayingTeam.OnTeamKill(self, _techId,_fraction, _bountyScore)
+    local pRes = PlayingTeam.OnTeamKill(self, _techId,_fraction)
     if self:IsMilitaryProtocol() then
         local tRes = (kMilitaryProtocolTeamResourcesPerKill[_techId] or 0) * _fraction
         if tRes > 0 then

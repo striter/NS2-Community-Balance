@@ -74,15 +74,6 @@ if Server then
         AddBounty(self,kBountyScoreEachAssist)
     end
     
-    function ScoringMixin:ClaimBounty()
-        if self.bountyCurrentLife <= 0 then return 0 end
-        
-        local claim = math.min(self.bountyCurrentLife, math.floor(self.kBountyThreshold * kBountyClaimMultiplier))
-        self.bountyCurrentLife = self.bountyCurrentLife - claim
-        self.bountyCooldown = 0
-        return math.max(claim - self.kBountyThreshold,0)
-    end
-    
     function ScoringMixin:CheckBountyCooldown()
         if self.bountyCurrentLife <= 0 then 
             return true

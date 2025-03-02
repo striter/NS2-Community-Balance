@@ -363,7 +363,8 @@ function Prowler:GetIsRappelling( )
     return self.rappelling
 end
 
-local kContinuousReelInterval = 0.1
+local kContinuousReelDamageInterval = 0.1
+local kDisableVector = Vector(0,0,0)
 function Prowler:ModifyVelocity(input, velocity, deltaTime)
 
     if not self:GetIsRappelling() then return end
@@ -377,29 +378,33 @@ function Prowler:ModifyVelocity(input, velocity, deltaTime)
     if ignoreRappel then
         local hitTarget = followEntity      --Reel target
         if hitTarget then
-            local isPlayer = hitTarget:isa("Player")
-            if isPlayer then 
-                local viewCoords = self:GetViewCoords()
-                local reelDirection = (viewCoords.origin - followEntity:GetModelOrigin())
-                if Math.DotProduct(-viewCoords.zAxis,reelDirection) > 0.2 then
-                    reelDirection = (viewCoords.origin + viewCoords.zAxis * 1) - hitTarget:GetOrigin()
+            local targetIsPlayer = hitTarget:isa("Player")
+            if targetIsPlayer then
+                if now > (self.timeRappelStart + kRappelReelReactionTime) then
+                    local viewCoords = self:GetViewCoords()
+                    local reelDirection = (viewCoords.origin - followEntity:GetModelOrigin())
+                    if Math.DotProduct(-viewCoords.zAxis,reelDirection) > 0.2 then
+                        reelDirection = (viewCoords.origin + viewCoords.zAxis * 1) - hitTarget:GetOrigin()
+                    end
+                    reelDirection:Normalize()
+                    local selfVelocity = self:GetVelocity()
+                    ApplyPushback(hitTarget,0.5, selfVelocity * .5 + (reelDirection * kRappelReelContinuousSpeed))
+                else
+                    ApplyPushback(hitTarget,0.1, kDisableVector)
                 end
-                reelDirection:Normalize()
-                local selfVelocity = self:GetVelocity()
-                ApplyPushback(hitTarget,0.5, selfVelocity * .5 + (reelDirection * kRappelReelContinuousSpeed))
             end
 
             if GetAreEnemies(self,hitTarget) then
                 local energyCost = deltaTime * kRappelReelEnergyCost
                 self:DeductAbilityEnergy(energyCost)
-                if now > (self.timeRappelStart + kContinuousReelInterval) and now > (self.timeLastReel + kContinuousReelInterval) then
+                if now > (self.timeRappelStart + kContinuousReelDamageInterval) and now > (self.timeLastReel + kContinuousReelDamageInterval) then
                     self.timeLastReel = now
 
                     local endPoint = hitTarget:GetOrigin()
                     local volleyWeapon = self:GetWeapon(VolleyRappel.kMapName)
-                    if volleyWeapon then
-                        local damage = isPlayer and kRappelContinuousDamage or kRappelContinuousDamageAgainstStructure
-                        volleyWeapon:DoDamage(damage * kContinuousReelInterval, hitTarget, endPoint, self:GetViewCoords().zAxis, "organic", false)
+                    if volleyWeapon and now > (self.timeRappelStart + kRappelReelReactionTime) then
+                        local damage = targetIsPlayer and kRappelContinuousDamage or kRappelContinuousDamageAgainstStructure
+                        volleyWeapon:DoDamage(damage * kContinuousReelDamageInterval, hitTarget, endPoint, self:GetViewCoords().zAxis, "organic", false)
                     end
 
                     if HasMixin(hitTarget, "ParasiteAble" ) then
@@ -551,7 +556,7 @@ function Prowler:OnRappel(impactPoint, hitEntity)
         velocity:Scale(speed)
         self:SetVelocity(velocity)
         self.jumping = true
-        self:DisableGroundMove(0.15)
+        self:DisableGroundMove(0.1)
         self.wallWalking = false
     end
 
