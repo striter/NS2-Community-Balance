@@ -980,4 +980,13 @@ function TunnelEntrance:GetExtraHealth(techLevel,extraPlayers,recentWins)
     return kTunnelEntranceHealthPerPlayerAdd * (extraPlayers - recentWins * 2)
 end
 
+
+function TunnelEntrance:ConstructionTimeBonus()
+    local teamInfoEntity = GetTeamInfoEntity(self:GetTeamNumber())
+    if teamInfoEntity then
+        return teamInfoEntity.isOriginForm and 2 or 1
+    end
+    return 1
+end
+
 ---

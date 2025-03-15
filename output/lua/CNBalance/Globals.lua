@@ -55,16 +55,16 @@ function GetPlayersAboveLimit(team)
     return math.max(0,info.playerCount - kMatchMinPlayers)
 end
 
-local kEndGameBegin = 1200
-local kEndGameTolerance = 900
+--local kEndGameBegin = 1200
+--local kEndGameTolerance = 900
 
 function GetRespawnTimeExtend(player,teamIndex, _gameLength)
     --_gameLength = _gameLength * 60
     local x = _gameLength
     --
-    local respawnParam =  Clamp(math.max(0,x - kEndGameBegin) / kEndGameTolerance,0,1)
-    respawnParam = respawnParam * respawnParam
-    local respawnExtension =  Lerp(0,20,respawnParam)
+    --local respawnParam =  Clamp(math.max(0,x - kEndGameBegin) / kEndGameTolerance,0,1)
+    --respawnParam = respawnParam * respawnParam
+    local respawnExtension = 0  --Lerp(0,20,respawnParam)
 
     local teamExtension = math.max(GetPlayersAboveLimit(teamIndex) - 2,0) * 1 + 2
     for k,v in pairs(kTechRespawnTimeExtension) do

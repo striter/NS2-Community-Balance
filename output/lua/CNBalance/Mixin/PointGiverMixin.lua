@@ -34,6 +34,9 @@ if Server then
 
             local attackerTeam = attacker:GetTeam()
             if attackerTeam then
+                if selfIsPlayer then
+                    self:ClaimBounty()
+                end
                 pResReward = pResReward + attackerTeam:OnTeamKill(_techID, resRewardFraction)
             end
         end
