@@ -1,4 +1,4 @@
-Shotgun.kDamageFalloffReductionFactor = 0.5 -- 50% reduction
+Shotgun.kDamageFalloffReductionFactor = 1 -- 50% reduction
 Shotgun.kShotgunRings =
 {
     { pelletCount = 1, distance = 0.0000, pelletSize = 0.03, pelletDamage = 10, thetaOffset = 0},

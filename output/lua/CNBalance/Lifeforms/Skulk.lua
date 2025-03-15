@@ -25,10 +25,10 @@ function Skulk:OnKill(attacker,doer,point, direction)
         CreateEntity(EnzymeCloud.kMapName, self:GetOrigin(), self:GetTeamNumber())
     end
     
-    if not attacker or not attacker:isa("Player") then return end
-    if not HasMixin(attacker, "ParasiteAble") then return end
-
-    local dist = (self:GetOrigin() - attacker:GetOrigin()):GetLength()
-    if dist > 5 then return end
-    attacker:SetParasited(self)
+    --if not attacker or not attacker:isa("Player") then return end
+    --if not HasMixin(attacker, "ParasiteAble") then return end
+    --
+    --local dist = (self:GetOrigin() - attacker:GetOrigin()):GetLength()
+    --if dist > 5 then return end
+    --attacker:SetParasited(self)
 end

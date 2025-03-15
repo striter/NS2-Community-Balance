@@ -23,7 +23,7 @@ end
 
 if Server then
     
-    local kAlertHandleDelay = 0.75
+    local kAlertHandleDelay = 0.5
     function RequestHandleMixin:MedSelf()
         local time = Shared.GetTime()
         if time < self.timeLastPrimaryRequestHandle then return end
@@ -78,17 +78,17 @@ if Server then
         
         if techId == kTechId.MarineAlertNeedMedpack then
             self:AddTimedCallback(self.MedSelf,kAlertHandleDelay)
-            return true
+            --return true
         end
 
         if techId == kTechId.MarineAlertNeedAmmo then
             self:AddTimedCallback(self.AmmoSelf,kAlertHandleDelay)
-            return true
+            --return true
         end
 
         if techId == kTechId.AlienAlertNeedMist then
             self:AddTimedCallback(self.MistSelf,kAlertHandleDelay)
-            return true
+            --return true
         end
         
         return false

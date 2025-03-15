@@ -23,7 +23,7 @@ kJetpackHealth = 100    kJetpackArmor = 50   kJetpackArmorPerUpgradeLevel = 20  
 kExosuitHealth = 100    kExosuitArmor = 320  kExosuitArmorPerUpgradeLevel = 30  kExosuitMPArmor = 320 kExosuitMPArmorPerUpgradeLevel = 30
 kMarinePointValue = 5   kJetpackPointValue = 12   kExosuitPointValue = 20
 
-kMedpackHeal = 25   kMedpackRegen = 25
+kMedpackHeal = 40   kMedpackRegen = 10
 kMedpackHealWhenRegening = 25 kMedpackRegenWhenRegening = 25
 kMedpackPickupDelay = 0.55
 kMarineRegenerationHeal = 25 --Amount of hp per second

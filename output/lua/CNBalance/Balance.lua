@@ -10,6 +10,7 @@ kTeamResourceWithoutTower = 0.5
 kMaxEfficiencyTowers = 3
 kTeamResourceEachTower = 1
 kPlayerResEachTower = 0.125 kPlayerResDeductionAboveLimit = 0
+kSecondInitialInfantryPortalMinPlayerCount = 8
 
 --Pres reward for aggressive playing (too many farmers?)
 kTechDataPersonalResOnKill = {
@@ -295,14 +296,14 @@ kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 90
 kPrototypeLabCost = 25
 
-kCannonTechResearchCost = 20
-kCannonTechResearchTime = 120
+kCannonTechResearchCost = 15
+kCannonTechResearchTime = 75
 
 kJetpackTechResearchCost = 25
-kJetpackTechResearchTime = 120
+kJetpackTechResearchTime = 75
 
 kExosuitTechResearchCost = 20
-kExosuitTechResearchTime = 120
+kExosuitTechResearchTime = 75
 
 kRoboticsFactoryBuildTime = 8
 
