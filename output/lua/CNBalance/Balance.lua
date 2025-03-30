@@ -59,9 +59,9 @@ kMilitaryProtocolTResPerBountyClaim = 0.5
 kMilitaryProtocolResearchDurationMultiply = 1
 kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKill above
     [kTechId.Drifter] = 1,
-    [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.GorgeTunnel] = 3,
+    [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.GorgeTunnel] = 2,
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
-    [kTechId.Skulk] = 2, [kTechId.Gorge] = 2,[kTechId.Prowler] = 2, [kTechId.Lerk] = 2, [kTechId.Fade] = 2, [kTechId.Vokex] = 2,[kTechId.Onos] = 2,
+    [kTechId.Skulk] = 2, [kTechId.Gorge] = 2,[kTechId.Prowler] = 3, [kTechId.Lerk] = 3, [kTechId.Fade] = 4, [kTechId.Vokex] = 4,[kTechId.Onos] = 7,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
     [kTechId.Hive] = 20, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20
 }

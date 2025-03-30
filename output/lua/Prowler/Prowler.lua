@@ -567,6 +567,14 @@ function Prowler:OnRappel(impactPoint, hitEntity)
     self.timeLastReel = Shared.GetTime()
 end
 
+function Prowler:RappelFilter()
+    return function (_entity)
+        return _entity == self
+                or _entity:GetId() == self.rappelFollow
+                or (HasMixin(_entity, "Team") and _entity:GetTeamNumber() == self:GetTeamNumber())
+    end
+end
+
 local breakRappelTolerance = 0.2
 function Prowler:PostUpdateMove(input)
     if not self.rappelling then return end
@@ -585,7 +593,7 @@ function Prowler:PostUpdateMove(input)
     end
 
     local origin = self:GetModelOrigin()
-    local trace = Shared.TraceRay(origin, self.rappelPoint,  CollisionRep.Default, PhysicsMask.AllButPCsAndRagdolls, EntityFilterTwoAndIsa(self, followEntity, "Babbler"))
+    local trace = Shared.TraceRay(origin, self.rappelPoint,  CollisionRep.Default, PhysicsMask.AllButPCsAndRagdolls, self:RappelFilter())
     --local trace = Shared.TraceRay(origin, self.rappelPoint, CollisionRep.Move, PhysicsMask.AllButPCs, EntityFilterOneAndIsa(self, "Babbler"))
     if (self:GetOrigin() - self.rappelPoint):GetLength() > kRappelRange
             or trace.fraction ~= 1
