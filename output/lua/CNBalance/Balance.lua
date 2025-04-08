@@ -316,9 +316,9 @@ kCannonCost = 25
 kCannonDropCost = 18
 
 kCannonDamage = 25
+kCannonAoeDamage = 80
 kCannonAoeRadius = 2.5
 kCannonRateOfFire = 0.88
-kCannonAoeDamage = 80
 kCannonClipSize = 6
 kCannonPointValue = 15
 kCannonDamageType = kDamageType.Exosuit
@@ -414,7 +414,7 @@ kRappelResearchCost = 10
 kRappelResearchTime = 20
 kRappelEnergyCost = 15
 kRappelReelEnergyCost = 20
-kRappelRange = 25
+kRappelRange = 30
 
 kAcidSprayResearchCost = 10
 kAcidSprayResearchTime = 60
@@ -714,16 +714,18 @@ kTechRespawnTimeExtension =
 {
     --[kTechId.Armor1] = 0,[kTechId.Weapons1] = 0, [kTechId.Observatory] = 0,
     --[kTechId.MinesTech] = 0,[kTechId.ShotgunTech] = 0,
-    [kTechId.Armor2] = 1,[kTechId.Weapons2] = 1, [kTechId.Armor3] = 2, [kTechId.Weapons3] = 2,
-    [kTechId.PhaseGate] = 1, [kTechId.AdvancedArmory] = 1,
-    [kTechId.ExosuitPrototypeLab] = 2, [kTechId.JetpackPrototypeLab] = 2, [kTechId.CannonPrototypeLab] = 2,
-    [kTechId.DragonBreath] = 2, [kTechId.ArmorRegen] = 2,  [kTechId.MotionTrack] = 2, --[kTechId.MACEmpBlast] = 1,[kTechId.GrenadeLauncherUpgrade] = 1,
+    [kTechId.Armor2] = 3,[kTechId.Weapons2] = 3,
+    [kTechId.Armor3] = 5, [kTechId.Weapons3] = 5,
+    --[kTechId.PhaseGate] = 0, [kTechId.AdvancedArmory] = 0,
+    [kTechId.ExosuitPrototypeLab] = 2, [kTechId.JetpackPrototypeLab] = 2,-- [kTechId.CannonPrototypeLab] = 2,
+    --[kTechId.DragonBreath] = 2, [kTechId.ArmorRegen] = 2,  [kTechId.MotionTrack] = 2, --[kTechId.MACEmpBlast] = 1,[kTechId.GrenadeLauncherUpgrade] = 1,
     
     --[kTechId.BioMassOne] = 0, [kTechId.BioMassTwo] = 0, 
-    [kTechId.BioMassThree] = 1, [kTechId.BioMassFour] = 1, [kTechId.BioMassFive] = 1, [kTechId.BioMassSix] = 1,
-    [kTechId.TwoVeils] = 1,[kTechId.ThreeVeils] = 1,[kTechId.TwoShells] = 1,[kTechId.ThreeShells] = 1,[kTechId.TwoSpurs] = 1, [kTechId.ThreeSpurs] = 1,
-    [kTechId.BioMassSeven] = 2, [kTechId.BioMassEight] = 2,
-    [kTechId.BioMassNine] = 3, [kTechId.BioMassTen] = 3,
+    --[kTechId.BioMassThree] = 1, [kTechId.BioMassFour] = 1, 
+    [kTechId.BioMassFive] = 2, [kTechId.BioMassSix] = 2,
+    --[kTechId.TwoVeils] = 1,[kTechId.ThreeVeils] = 1,[kTechId.TwoShells] = 1,[kTechId.ThreeShells] = 1,[kTechId.TwoSpurs] = 1, [kTechId.ThreeSpurs] = 1,
+    [kTechId.BioMassSeven] = 3, [kTechId.BioMassEight] = 3,
+    [kTechId.BioMassNine] = 5, [kTechId.BioMassTen] = 5,
     --[kTechId.BioMassEleven] = 1, [kTechId.BioMassTwelve] = 1,
 }
 

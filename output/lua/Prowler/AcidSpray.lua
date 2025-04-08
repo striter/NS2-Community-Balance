@@ -8,6 +8,7 @@ class 'AcidSpray' (Ability)
 AcidSpray.kMapName = "acidspray"
 AcidSpray.kNumMissiles = 3
 AcidSpray.AttackSpeedMod = 2.66  -- 0.69second
+AcidSpray.kKeepCloakWhenSecondary = true
 local kAcidSpraySpread = Math.Radians(12) -- degrees
 
 local kAnimationGraph = PrecacheAsset("models/alien/prowler/prowler_view.animation_graph")
