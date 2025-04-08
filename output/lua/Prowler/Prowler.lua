@@ -400,12 +400,12 @@ function Prowler:ModifyVelocity(input, velocity, deltaTime)
                 if now > (self.timeRappelStart + kContinuousReelDamageInterval) and now > (self.timeLastReel + kContinuousReelDamageInterval) then
                     self.timeLastReel = now
 
-                    local endPoint = hitTarget:GetOrigin()
-                    local volleyWeapon = self:GetWeapon(VolleyRappel.kMapName)
-                    if volleyWeapon and now > (self.timeRappelStart + kRappelReelReactionTime) then
-                        local damage = targetIsPlayer and kRappelContinuousDamage or kRappelContinuousDamageAgainstStructure
-                        volleyWeapon:DoDamage(damage * kContinuousReelDamageInterval, hitTarget, endPoint, self:GetViewCoords().zAxis, "organic", false)
-                    end
+                    --local endPoint = hitTarget:GetOrigin()
+                    --local volleyWeapon = self:GetWeapon(VolleyRappel.kMapName)
+                    --if volleyWeapon and now > (self.timeRappelStart + kRappelReelReactionTime) then
+                    --    local damage = targetIsPlayer and kRappelContinuousDamage or kRappelContinuousDamageAgainstStructure
+                    --    volleyWeapon:DoDamage(damage * kContinuousReelDamageInterval, hitTarget, endPoint, self:GetViewCoords().zAxis, "organic", false)
+                    --end
 
                     if HasMixin(hitTarget, "ParasiteAble" ) then
                         hitTarget:SetParasited( self, 3 )

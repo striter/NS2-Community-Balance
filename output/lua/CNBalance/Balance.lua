@@ -355,11 +355,11 @@ kTunnelEntranceCost = 7
 kTunnelRelocateCost = 5
 
 --Research with skill activation
-kResearchBioMassOneCost = 30
+kResearchBioMassOneCost = 25
 kBioMassOneTime = 30
-kResearchBioMassTwoCost = 45
+kResearchBioMassTwoCost = 35
 kBioMassTwoTime = 45
-kResearchBioMassThreeCost = 60
+kResearchBioMassThreeCost = 45
 kBioMassThreeTime = 60
 
 --Recover
@@ -412,8 +412,8 @@ kRappelDamage = 10 kRappelContinuousDamage = 5 kRappelContinuousDamageAgainstStr
 kRappelReelReactionTime = 0.8 kRappelReelContinuousSpeed = 8
 kRappelResearchCost = 10
 kRappelResearchTime = 20
-kRappelEnergyCost = 15
-kRappelReelEnergyCost = 20
+kRappelEnergyCost = 12
+kRappelReelEnergyCost = 15
 kRappelRange = 30
 
 kAcidSprayResearchCost = 10
