@@ -25,7 +25,8 @@ class 'Prowler' (Alien)
 Prowler.kMapName = "prowler"
 
 Prowler.kMaxSpeed = 6.6 -- skulk is 7.25
-Prowler.kMaxSneakySpeed = 4.6 -- skulk is 7.25
+Prowler.kMaxSneakySpeed = 4.6
+Prowler.kReelingSpeed = 2.5
 Prowler.kMaxRappelSpeed = 12.15
 
 Prowler.kWalkBackwardSpeedScalar = 1.0 --0.9
@@ -374,7 +375,8 @@ function Prowler:ModifyVelocity(input, velocity, deltaTime)
     local origin = self:GetModelOrigin()
     --local speed = velocity:GetLength()
     local followEntity = Shared.GetEntity(self.rappelFollow)
-    local ignoreRappel = self:GetIsWallWalking() or self:GetCrouching() or self.movementModiferState
+    local reelable = self:GetIsWallWalking() or self:GetIsOnGround()
+    local ignoreRappel = reelable and (self:GetCrouching() or self.movementModiferState)
     if ignoreRappel then
         local hitTarget = followEntity      --Reel target
         if hitTarget then
@@ -387,10 +389,15 @@ function Prowler:ModifyVelocity(input, velocity, deltaTime)
                         reelDirection = (viewCoords.origin + viewCoords.zAxis * 1) - hitTarget:GetOrigin()
                     end
                     reelDirection:Normalize()
-                    local selfVelocity = self:GetVelocity()
-                    ApplyPushback(hitTarget,0.5, selfVelocity * .5 + (reelDirection * kRappelReelContinuousSpeed))
+                    
+                    ApplyPushback(hitTarget,0.5, self:GetVelocity() * .2 + (reelDirection * kRappelReelContinuousSpeed))
                 else
                     ApplyPushback(hitTarget,0.1, kDisableVector)
+                end
+                
+                if velocity:GetLength() > Prowler.kReelingSpeed then
+                    velocity:Normalize()
+                    velocity:Scale(Prowler.kReelingSpeed)
                 end
             end
 
@@ -422,6 +429,7 @@ function Prowler:ModifyVelocity(input, velocity, deltaTime)
             end
         end
 
+        
         return
     end
 
@@ -453,8 +461,6 @@ function Prowler:ModifyVelocity(input, velocity, deltaTime)
     --verticalForce = verticalForce + 30 * Clamp(self:GetViewAngles():GetCoords().zAxis.y * 2, -1, 1) - velocity.y * 3
     velocity.y = math.min(velocity.y + verticalForce * deltaTime, maxYSpeed)
 
-    local maxSpeedTable = { maxSpeed = Prowler.kMaxRappelSpeed }
-    self:ModifyMaxSpeed(maxSpeedTable, input)
 
     local pullDirection = Vector(self.rappelPoint.x - origin.x, 0, self.rappelPoint.z - origin.z) --self:GetViewCoords():TransformVector(input.move)
     pullDirection.y = 0

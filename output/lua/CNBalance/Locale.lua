@@ -205,11 +205,7 @@ if kTranslateMessage then
     
     kTranslateMessage["DEVOUR"] = "吞噬"
     kTranslateMessage["ONOS_DEVOUR"] = "吞噬"
-    kTranslateMessage["ONOS_DEVOUR_TOOLTIP"] = "*Onos将陆战队员吞进肚子.\n*吞噬单位将无法使用武器\n-消化过程将遇到抵抗。"
-
-    kTranslateMessage["STATUS_DEVOURED"] = "消化中"
-    kTranslateMessage["ONOS_DEVOUR"] = "吞噬"
-    kTranslateMessage["ONOS_DEVOUR_TOOLTIP"] = "*Onos将陆战队员吞进肚子.\n*吞噬单位将无法使用武器\n-消化过程将遇到抵抗。"
+    kTranslateMessage["ONOS_DEVOUR_TOOLTIP"] = "将陆战队员吞进肚子.\n*吞噬单位后无法使用骨盾.\n-消化过程将遇到抵抗.\n-额外的重量将减缓移动速度."
 
     kTranslateMessage["SHIFT_TUNNEL"] = "快速虫洞"
     kTranslateMessage["SHIFT_TUNNEL_TOOLTIP"] = "*虫洞使用者不再需要长途跋涉."
@@ -231,6 +227,33 @@ if kTranslateMessage then
 
     kTranslateMessage["MARK_THREAT"] = "到此集合"
     kTranslateMessage["PHEROMONE_THREAT_TOOLTIP"] = "通知全队:集合至该点.\n*范围玩家持续获得资源."
+    
+    kTranslateMessage["HELP_SCREEN_DEVOUR"] = "吞噬"
+    kTranslateMessage["HELP_SCREEN_DEVOUR_DESCRIPTION"] = "尝试吞噬前方的陆战队员，命中后将他装到你的肚子里并持续消化！期间无法使用骨盾并且额外的重量将导致减速。也许会遭遇顽强抵抗，但总比子弹来的好。"
+    
+    kTranslateMessage["HELP_SCREEN_VOLLEY"] = "齐射"
+    kTranslateMessage["HELP_SCREEN_VOLLEY_DESCRIPTION"] = "对前方进行一轮刺网齐射，试试击落那些在天上飞的讨厌鬼，让他们落地成为其他人的美餐。"
+    kTranslateMessage["HELP_SCREEN_RAPPEL"] = "结绳"
+    kTranslateMessage["HELP_SCREEN_RAPPEL_DESCRIPTION"] = "向目标点结绳。并拖拽自己成为空中飞蛛，或选择在墙上高速移动。"
+
+    kTranslateMessage["HELP_SCREEN_REEL"] = "拖拽"
+    kTranslateMessage["HELP_SCREEN_REEL_DESCRIPTION"] = "将目标拖拽到你眼前，至于他的死活就交给你的队友了。"
+    kTranslateMessage["HELP_SCREEN_PROWLER_WEB"] = "织网"
+    kTranslateMessage["HELP_SCREEN_PROWLER_WEB_DESCRIPTION"] = "会结网才是好蜘蛛，粘住那些不长眼的苍蝇。"
+    kTranslateMessage["HELP_SCREEN_ACIDSPRAY"] = "酸液投掷"
+    kTranslateMessage["HELP_SCREEN_ACIDSPRAY_DESCRIPTION"] = "投掷一串酸液，曲线弹道，虫见虫爱。"
+    kTranslateMessage["HELP_SCREEN_SHADOWSTEP"] = "暗影步"
+    kTranslateMessage["HELP_SCREEN_SHADOWSTEP_DESCRIPTION"] = "向移动方向快速突进，并不需要拿脸看，当心撞墙！"
+    kTranslateMessage["HELP_SCREEN_SHADOWSTEP_JUMP"] = "暗影跳"
+    kTranslateMessage["HELP_SCREEN_SHADOWSTEP_JUMP_DESCRIPTION"] = "左脚踩右脚，螺旋升天。"
+    kTranslateMessage["HELP_SCREEN_ACIDROCKET"] = "酸液飞弹"
+    kTranslateMessage["HELP_SCREEN_ACIDROCKET_DESCRIPTION"] = "向前方发射一枚直线弹道酸液飞弹，就算对面在十万八千里都能够射中，更适合打那些固定建筑。"
+    kTranslateMessage["HELP_SCREEN_VORTEX"] = "黑洞"
+    kTranslateMessage["HELP_SCREEN_VORTEX_DESCRIPTION"] = "释放一个小型单位无法挣脱的黑洞，能够吸收经过的所有弹道物体，当心别吸到你的队友了！"
+    
+    
+    
+    
 end
 
 if kLocales then
@@ -438,11 +461,7 @@ if kLocales then
     
     kLocales["DEVOUR"] = "Devour"
     kLocales["ONOS_DEVOUR"] = "Devour"
-    kLocales["ONOS_DEVOUR_TOOLTIP"] = "*Onos can devour marines.\n-Will gain resistance when digesting。"
-
-    kLocales["STATUS_DEVOURED"] = "Digesting"
-    kLocales["ONOS_DEVOUR"] = "Devour"
-    kLocales["ONOS_DEVOUR_TOOLTIP"] = "*Onos can devour marines.\n-Will gain resistance when digesting。"
+    kLocales["ONOS_DEVOUR_TOOLTIP"] = "Devour marines.\n-Will gain resistance when digesting.\n-Cannot use bone shield while digesting.\n-More weights means slower move speed."
 
     kLocales["SHIFT_TUNNEL"] = "Tunnel Muscle"
     kLocales["SHIFT_TUNNEL_TOOLTIP"] = "*No more travelling for tunnel users."

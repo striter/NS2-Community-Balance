@@ -333,8 +333,8 @@ kOnosDevourTime = 40
 
 kUmbraBulletModifier = 0.8
 
-kDevourEnergyCost = 30 --50
-kDevourPunchDamage = 50 --100
+kDevourEnergyCost = 45 kDevourMissedEnergyCost = 15
+kDevourPunchDamage = 30 --100
 
 kTunnelUpgradeTime = 60
 kShiftTunnelUpgradeCost = 25
