@@ -62,7 +62,7 @@ end
 
 function Onos:GetExtraHealth(techLevel,extraPlayers,recentWins)
     return techLevel * kOnosHealtPerBioMass
-            + Clamp((extraPlayers - recentWins * 2) * 15,-50,250)
+            + Clamp((extraPlayers - recentWins * 2) * 20,-100,300)
 end
 
 if Server then

@@ -489,7 +489,7 @@ kBoneShieldMaxDuration = 10
 kStompEnergyCost = 40
 kStompDamageType = kDamageType.Structural
 kStompDamage = 60
-kStompFirstPDamage = 0  kStompDisruptTime = 3
+kStompFirstPDamage = 40  kStompDisruptTime = 3
 kStompSecondPDamage = 0 kStompSecondDisruptTime = 1.5
 kStompElseDamage = 0
 kStompRange = 12 
