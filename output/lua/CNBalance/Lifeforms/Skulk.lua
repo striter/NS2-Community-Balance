@@ -13,7 +13,7 @@ end
 
 function Skulk:GetExtraHealth(techLevel,extraPlayers,recentWins)
     return techLevel * kSkulkHealthPerBioMass 
-            + Clamp((extraPlayers - recentWins * 2) * 1.25,-5,25)
+            + Clamp((extraPlayers - recentWins * 2) * 1.5,-5,25)
 end
 
 local baseOnKill = Skulk.OnKill
