@@ -490,8 +490,8 @@ kStompEnergyCost = 40
 kStompDamageType = kDamageType.Structural
 kStompDamage = 60
 kStompFirstPDamage = 40  kStompDisruptTime = 3
-kStompSecondPDamage = 0 kStompSecondDisruptTime = 1.5
-kStompElseDamage = 0
+kStompSecondPDamage = 20 kStompSecondDisruptTime = 1.5
+kStompElseDamage = 10
 kStompRange = 12 
 
 kDisruptMarineTimeout = 4
