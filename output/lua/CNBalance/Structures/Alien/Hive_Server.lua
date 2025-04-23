@@ -464,6 +464,16 @@ function Hive:OnUpdate(deltaTime)
 
 end
 
+--function Hive:OriginFormBiomass()
+--    local desireTechNode
+--    
+--    local team = self:GetTeam()
+--    local techNode = team:GetTechTree():GetTechNode(kTechId.Armor1)
+--    self:SetResearching(techNode, commander)
+--    techNode:SetResearching()
+--    commander:GetTechTree():SetTechNodeChanged(techNode, "researching")
+--end
+
 function Hive:OnKill(attacker, doer, point, direction)
 
     CommandStructure.OnKill(self, attacker, doer, point, direction)

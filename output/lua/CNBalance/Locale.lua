@@ -150,6 +150,10 @@ if kTranslateMessage then
     kTranslateMessage["RESEARCH_GRENADES_TITLE"]="投掷物升级"
     kTranslateMessage["CLUSTERGRENADE_BUYDESCRIPTION"]="陆战队士兵常用的投掷物.\n*对建筑物有高额的伤害.\n*升级后将对建筑有产生额外子雷."
 
+    kTranslateMessage["GAS_GRENADE"]="气体手雷"
+    kTranslateMessage["GASGRENADE_BUYDESCRIPTION"]="陆战队士兵常用的投掷物.\n*对敌方单位造成护甲伤害.\n*缓慢回复范围内的己方单位血量."
+    
+    
     kTranslateMessage["BUYMENU_RESTRICTION"] = "%i(过多持有)"
     
     kTranslateMessage["BUILD_ABILITY"]="建造者"
@@ -205,6 +209,7 @@ if kTranslateMessage then
     
     kTranslateMessage["DEVOUR"] = "吞噬"
     kTranslateMessage["ONOS_DEVOUR"] = "吞噬"
+    kTranslateMessage["STATUS_DEVOURED"] = "消化中"
     kTranslateMessage["ONOS_DEVOUR_TOOLTIP"] = "将陆战队员吞进肚子.\n*吞噬单位后无法使用骨盾.\n-消化过程将遇到抵抗.\n-额外的重量将减缓移动速度."
 
     kTranslateMessage["SHIFT_TUNNEL"] = "快速虫洞"
@@ -400,6 +405,8 @@ if kLocales then
     kLocales["RESEARCH_GRENADES"]="Throwables Upgarde"
     kLocales["GRENADES_TOOLTIP"]="+Unlock new grenade types.\nMarines throw grenades faster."
     kLocales["RESEARCH_GRENADES_TITLE"]="Grenade Upgrade"
+    kLocales["GAS_GRENADE"]="Gas Grenade"
+    kLocales["GASGRENADE_BUYDESCRIPTION"]="*Deal armor damage to enemies.\n*Regen health for team member within range."
 
     kLocales["BUILD_ABILITY"]="Builder"
     kLocales["BUILD_ABILITY_TOOLTIP"]="Place frontline structures.\n*Hydra(Range damage dealer)\n*Clog(Damage receiver)\n*Babbler Egg(Attack nearby enemies)\n*Web(Slow target)"

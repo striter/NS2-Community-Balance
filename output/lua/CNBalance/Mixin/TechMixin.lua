@@ -26,6 +26,7 @@ function TechMixin:UpgradeToTechId(newTechId)
             local newMaxHealth  = LookupTechData(newTechId, kTechDataMaxHealth ,baseMaxHealth)
             if self.GetAdditionalHealth then
                 newMaxHealth = newMaxHealth +  self:GetAdditionalHealth()
+                newMaxHealth = math.max(newMaxHealth,200)
             end
             
             self:SetMaxHealth(newMaxHealth)   --To Avoid problems

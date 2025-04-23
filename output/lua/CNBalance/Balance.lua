@@ -275,6 +275,10 @@ kClusterFragmentDamageRadius = 6
 kClusterFragmentDamage = 20
 kClusterGrenadeFragmentDamageType = kDamageType.ClusterFlameFragment
 
+kNerveGasDamagePerSecond = 50 kNerveGasRegenPerSecond = 10
+kNerveGasDamageType = kDamageType.NerveGas
+kNerveGasCloudRadius = 7
+
 kInfantryPortalBuildTime = 7
 kInfantryPortalCost = 15
 
