@@ -57,7 +57,7 @@ if Server then
         if newExtraHealth ~= self.extraHealth  then
             -- maxHealth is a integer
             local healthDelta = math.round(newExtraHealth - self.extraHealth)
-            self:AdjustMaxHealth(math.max(self:GetMaxHealth() + healthDelta,200))
+            self:AdjustMaxHealth(math.max(self:GetMaxHealth() + healthDelta,1))
             self.extraHealth = newExtraHealth
         end
     end
