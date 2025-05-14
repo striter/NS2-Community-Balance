@@ -1,6 +1,5 @@
 Script.Load("lua/BiomassHealthMixin.lua")
 
-
 local baseOnCreate = CommandStation.OnCreate
 function CommandStation:OnCreate()
     baseOnCreate(self)
@@ -18,10 +17,6 @@ function CommandStation:OnInitialized()
     if Server then
         InitMixin(self, SupplyProviderMixin)
     end
-end
-
-function CommandStation:GetCanRecycleOverride()
-    return false
 end
 
 CommandStation.kUpgradeType = {

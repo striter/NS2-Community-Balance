@@ -123,7 +123,7 @@ kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
 kHeavyMachineGunSpread = Math.Radians(5)  --4
 
-kCommandStationCost = 20
+kCommandStationCost = 15
 kCommandStationUpgradeCost = 10
 kCommandStationUpgradeTime = 30
 kUpgradedCommandStationCost = kCommandStationCost + kCommandStationUpgradeCost
@@ -690,7 +690,7 @@ kGorgeAbilitiesCost = {
     [kTechId.Harvester] = 8, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
                          [kTechId.Spur] = 12, [kTechId.Shell] = 12, [kTechId.Veil] = 12,
 }
-kGorgeStructureScorePerRes = 0.4
+kGorgeStructureScorePerRes = 0.3
 kOriginPersonalResourcesPerKill = {
     [kTechId.Marine] = 2, [kTechId.JetpackMarine] = 3, [kTechId.Exo] = 4, [kTechId.Exosuit] = 2,
 }

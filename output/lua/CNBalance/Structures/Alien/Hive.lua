@@ -445,7 +445,6 @@ ShiftHive.kMapName = Hive.kMapName
 --Shared.LinkClassToMap("ShiftHive", ShiftHive.kMapName, { })
 
 Script.Load("lua/CNBalance/Mixin/SupplyProviderMixin.lua")
-local baseOnInitialized = Hive.OnInitialized
 function Hive:OnInitialized()
 
     InitMixin(self, InfestationMixin)
@@ -647,6 +646,15 @@ if Server then
             self.biomassResearchFraction = self:GetResearchProgress()
         end
 
+    end
+    
+    local baseOnInitialized = Hive.OnInitialized
+    function Hive:OnInitialized()
+        baseOnInitialized(self)
+        local team = self:GetTeam()
+        if team then
+            team:OnDeadlockExtend(self:GetTechId())
+        end
     end
     
     local baseOnKill = Hive.OnKill

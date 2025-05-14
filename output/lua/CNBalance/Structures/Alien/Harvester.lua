@@ -6,6 +6,17 @@ function Harvester:OnCreate()
     InitMixin(self, BiomassHealthMixin)
 end
 
+if Server then
+    local baseOninitialized = Harvester.OnInitialized
+    function Harvester:OnInitialized()
+        baseOninitialized(self)
+        local team = self:GetTeam()
+        if team then
+            team:OnDeadlockExtend(self:GetTechId())
+        end
+    end
+end
+
 function Harvester:GetExtraHealth(techLevel,extraPlayers,recentWins)
     return 75 * (extraPlayers - recentWins * 2)
 end

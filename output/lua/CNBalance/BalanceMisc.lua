@@ -1,15 +1,15 @@
 kDeadlockTimeExtend = {
-    [kTechId.PowerPoint] = 30,
-    [kTechId.Extractor] = 30, [kTechId.PoweredExtractor] = 30,
+    [kTechId.Extractor] = 60, [kTechId.PoweredExtractor] = 60,
     [kTechId.PhaseGate] = 60,
-    [kTechId.CommandStation] = 180, [kTechId.StandardStation] = 240, [kTechId.ExplosiveStation] = 240, [kTechId.ArmorStation] = 240, [ kTechId.ElectronicStation ] = 240,
-
+    [kTechId.CommandStation] = 90, [kTechId.StandardStation] = 120, [kTechId.ExplosiveStation] = 120, [kTechId.ArmorStation] = 120, [ kTechId.ElectronicStation ] = 120,
+    [kTechId.ARC] = 30,
+    
     [kTechId.Harvester] = 60,
     [kTechId.Tunnel] = 60, [kTechId.InfestedTunnel] = 60, [kTechId.GorgeTunnel] = 60,
-    [kTechId.Hive] = 180, [kTechId.ShiftHive] = 240, [kTechId.CragHive] = 240, [kTechId.ShadeHive] = 240,
+    [kTechId.Hive] = 150, [kTechId.ShiftHive] = 180, [kTechId.CragHive] = 180, [kTechId.ShadeHive] = 180,
 }
-kDeadlockVisibleTime = 120
 
+kDeadlockVisibleTime = 120
 kTechReputationByPass = {
     [kTechId.CombatBuilder] = 50,
     [kTechId.SubMachineGun] = 70,
@@ -26,7 +26,7 @@ kDropStructureEnergyCost = 15
 
 -- kInitialMACs = 1
 -- kInitialDrifters = 1
-kMaxTunnelCount = {1,3,4,4,4,4,4,4,4,4}
+kMaxTunnelCount = {2,3,4,4,4,4,4,4,4,4}
 kHiveInfestationRadius = 20
 kInfestationRadius = 7.5    kInfestationPerBiomass = 0.4
 

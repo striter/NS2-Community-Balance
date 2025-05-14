@@ -78,7 +78,7 @@ if Client then
     function DropTeamStructureAbility:GetAvailableStructureTechIds()
         local originform = GetHasTech(self,kTechId.OriginForm)
         if not originform then
-            return { kTechId.Cyst ,kTechId.Egg }
+            return { kTechId.Cyst ,kTechId.Egg , kTechId.Whip ,kTechId.Harvester }
         end
         
         if not self.menu then

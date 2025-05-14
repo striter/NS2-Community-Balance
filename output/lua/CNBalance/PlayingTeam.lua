@@ -92,7 +92,7 @@ function PlayingTeam:Update()
 end
 
 function PlayingTeam:OnTeamKill(techID, _fraction)
-    self:OnDeadlockKill(techID)
+    self:OnDeadlockExtend(techID)
     local tResReward = kTechDataTeamResOnKill[techID]
     if tResReward then
         self:AddTeamResources(tResReward * _fraction,true)      --Treat this as income
@@ -238,7 +238,7 @@ function PlayingTeam:OnGameStateChanged(_state)
     end
 end
 
-function PlayingTeam:OnDeadlockKill(techID)
+function PlayingTeam:OnDeadlockExtend(techID)
     local gameStarted = GetGamerules():GetGameStarted()
     if not gameStarted then return end
     
