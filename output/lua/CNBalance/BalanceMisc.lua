@@ -6,7 +6,7 @@ kDeadlockTimeExtend = {
     
     [kTechId.Harvester] = 60,
     [kTechId.Tunnel] = 60, [kTechId.InfestedTunnel] = 60, [kTechId.GorgeTunnel] = 60,
-    [kTechId.Hive] = 150, [kTechId.ShiftHive] = 180, [kTechId.CragHive] = 180, [kTechId.ShadeHive] = 180,
+    [kTechId.Hive] = 120, [kTechId.ShiftHive] = 150, [kTechId.CragHive] = 150, [kTechId.ShadeHive] = 150,
 }
 
 kDeadlockVisibleTime = 120

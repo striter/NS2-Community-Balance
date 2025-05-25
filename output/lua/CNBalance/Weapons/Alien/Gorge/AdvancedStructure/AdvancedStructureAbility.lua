@@ -28,7 +28,7 @@ function AdvancedStructureAbility:GetIsPositionValid(position, player, normal, l
     end
     
     local upwardFraction = normal:DotProduct(kUpVector)
-    local side = self:GetStructurePlaceSide()
+    local side = self:GetStructurePlaceSide(player)
     if side == AdvancedStructureAbility.kStructurePlaceSide.All then
         return true
     elseif side == AdvancedStructureAbility.kStructurePlaceSide.Upward then
@@ -62,7 +62,7 @@ function AdvancedStructureAbility:RequiresInfestation()
 end
 
 function AdvancedStructureAbility:GetEnergyCost(player)
-    return 15
+    return 25
 end
 
 function AdvancedStructureAbility:GetDropRange()
