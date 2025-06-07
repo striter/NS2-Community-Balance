@@ -315,39 +315,6 @@ local function CouldUseACommander(self)
     return true
 end
 
-if Server then
-    --local kMaximizeBiomassResearchId = {
-    --    [kTechId.ShiftHive] = kTechId.ShiftTunnel,
-    --    [kTechId.CragHive] = kTechId.CragTunnel,
-    --    [kTechId.ShadeHive] = kTechId.ShadeTunnel,
-    --}
-
-    local kHiveBiomassSource = {
-        [kTechId.ShiftHive] = "Shift",
-        [kTechId.CragHive] = "Crag",
-        [kTechId.ShadeHive] = "Shade",
-    }
-
-    function Hive:UpdateBiomassLevel(team)
-        if not team:IsOriginForm() then return end
-        local techId = self:GetTechId()
-        local biomassSourceName = kHiveBiomassSource[techId]
-        if not biomassSourceName then return end
-        local newBiomassLevel = self:GetIsBuilt() and GetOriginFormBiomassLevel(#GetEntitiesAliveForTeam(biomassSourceName,self:GetTeamNumber())) or 0
-
-        if self.bioMassLevel == newBiomassLevel then return end
-        self.bioMassLevel = newBiomassLevel
-        team:SetBioMassPreserve(techId,self.bioMassLevel)
-        --if self.bioMassLevel == 4 then
-        --    local techId = kMaximizeBiomassResearchId[techId]
-        --    local techTree = team:GetTechTree()
-        --    local researchNode = techTree:GetTechNode(techId)                
-        --    researchNode:SetResearched(true)
-        --    techTree:QueueOnResearchComplete(techId, self)
-        --end
-    end
-    
-end
 
 function Hive:ConstructionTimeBonus()
     local teamInfoEntity = GetTeamInfoEntity(self:GetTeamNumber())
@@ -470,6 +437,7 @@ function Hive:OnInitialized()
         if Server then
             InitMixin(self, SupplyProviderMixin)
         end
+        self.timeLastOriginformBiomassCheck = Shared.GetTime()
     elseif Client then
 
         InitMixin(self, UnitStatusMixin)

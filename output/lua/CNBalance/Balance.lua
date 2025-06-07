@@ -557,8 +557,8 @@ kWeapons1ResearchCost = 25 kWeapons1ResearchTime = 75
 kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 105
 kWeapons3ResearchCost = 45 kWeapons3ResearchTime = 150
 
-kArmor1ResearchCost = 25 kArmor1ResearchTime = 75
-kArmor2ResearchCost = 35 kArmor2ResearchTime = 105
+kArmor1ResearchCost = 25 kArmor1ResearchTime = 90
+kArmor2ResearchCost = 35 kArmor2ResearchTime = 120
 kArmor3ResearchCost = 45 kArmor3ResearchTime = 135
 
 kAdvancedMarineSupportResearchCost = 20
@@ -688,7 +688,7 @@ kGorgeAbilitiesCost = {
     [kTechId.Cyst] = 0.5,  [kTechId.Egg] = 2, [kTechId.Tunnel] = 6, [kTechId.TunnelExit] = 2,
     [kTechId.Whip] = 8, [kTechId.Shift] = 15, [kTechId.Shade] = 15, [kTechId.Crag] = 15,
     [kTechId.Harvester] = 8, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
-                         [kTechId.Spur] = 12, [kTechId.Shell] = 12, [kTechId.Veil] = 12,
+                         [kTechId.Spur] = 15, [kTechId.Shell] = 15, [kTechId.Veil] = 15,
 }
 kGorgeStructureScorePerRes = 0.3
 kOriginPersonalResourcesPerKill = {

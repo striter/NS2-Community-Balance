@@ -25,6 +25,93 @@ function Shotgun:GetMaxClips()
     return kShotGunClipNum
 end
 
+function Shotgun:FirePrimary(player)
+
+    local viewAngles = player:GetViewAngles()
+    viewAngles.roll = NetworkRandom() * math.pi * 2
+
+    local shootCoords = viewAngles:GetCoords()
+
+    -- Filter ourself out of the trace so that we don't hit ourselves.
+    local filter = EntityFilterTwo(player, self)
+    local range = self:GetRange()
+
+    -- Ensure spread vectors are up-to-date. Disabled for production
+    -- Shotgun._RecalculateSpreadVectors()
+
+    local numberBullets = self:GetBulletsPerShot()
+    if GetHasTech(self,kTechId.Weapons3) or GetHasTech(self,kTechId.Weapons2) then
+        self:TriggerEffects("shotgun_attack_sound_max")
+    else
+        self:TriggerEffects("shotgun_attack_sound")
+    end
+    self:TriggerEffects("shotgun_attack")
+
+    for bullet = 1, math.min(numberBullets, #self.kSpreadVectors) do
+
+        if not self.kSpreadVectors[bullet] then
+            break
+        end
+
+        local spreadVector = self.kSpreadVectors[bullet].vector
+        local pelletSize = self.kSpreadVectors[bullet].size
+        local spreadDamage = self.kSpreadVectors[bullet].damage
+
+        local spreadDirection = shootCoords:TransformVector(spreadVector)
+
+        local startPoint = player:GetEyePos() + shootCoords.xAxis * spreadVector.x * self.kStartOffset + shootCoords.yAxis * spreadVector.y * self.kStartOffset
+
+        local endPoint = player:GetEyePos() + spreadDirection * range
+
+        local targets, trace, hitPoints = GetBulletTargets(startPoint, endPoint, spreadDirection, pelletSize, filter)
+
+        HandleHitregAnalysis(player, startPoint, endPoint, trace)
+
+        local direction = (trace.endPoint - startPoint):GetUnit()
+        local hitOffset = direction * kHitEffectOffset
+        local impactPoint = trace.endPoint - hitOffset
+        local effectFrequency = self:GetTracerEffectFrequency()
+        local showTracer = bullet % effectFrequency == 0
+
+        local numTargets = #targets
+
+        if numTargets == 0 then
+            self:ApplyBulletGameplayEffects(player, nil, impactPoint, direction, 0, trace.surface, showTracer)
+        end
+
+        if Client and showTracer then
+            TriggerFirstPersonTracer(self, impactPoint)
+        end
+
+        for i = 1, numTargets do
+
+            local target = targets[i]
+            local hitPoint = hitPoints[i]
+
+            local thisTargetDamage = spreadDamage
+
+            -- Apply a damage falloff for shotgun damage.
+            if self.kDamageFalloffReductionFactor ~= 1 then
+                local distance = (hitPoint - startPoint):GetLength()
+                local falloffFactor = Clamp((distance - self.kDamageFalloffStart) / (self.kDamageFalloffEnd - self.kDamageFalloffStart), 0, 1)
+                local nearDamage = thisTargetDamage
+                local farDamage = thisTargetDamage * self.kDamageFalloffReductionFactor
+                thisTargetDamage = nearDamage * (1.0 - falloffFactor) + farDamage * falloffFactor
+            end
+
+            self:ApplyBulletGameplayEffects(player, target, hitPoint - hitOffset, direction, thisTargetDamage, "", showTracer and i == numTargets)
+
+            local client = Server and player:GetClient() or Client
+            if not Shared.GetIsRunningPrediction() and client.hitRegEnabled then
+                RegisterHitEvent(player, bullet, startPoint, trace, thisTargetDamage)
+            end
+
+        end
+
+    end
+
+end
+
 --local kSecondaryTracerName = PrecacheAsset("cinematics/marine/railgun/tracer_small.cinematic")
 --local kSecondaryTracerResidueName = PrecacheAsset("cinematics/marine/railgun/tracer_residue_small.cinematic")
 --local kMuzzleEffectName = PrecacheAsset("cinematics/marine/shotgun/muzzle_flash.cinematic")
@@ -108,3 +195,4 @@ end
 --        FireSecondary(self,player)
 --    end
 --end
+

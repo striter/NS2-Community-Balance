@@ -256,8 +256,6 @@ function AlienTeam:UpdateBioMassLevel()
 
         if entity:GetIsAlive() then
 
-            entity:UpdateBiomassLevel(self)
-            
             local currentBioMass = entity:GetBioMassLevel(isOriginForm)
             --local techId = entity:GetTechId()
             newBiomass = newBiomass + currentBioMass

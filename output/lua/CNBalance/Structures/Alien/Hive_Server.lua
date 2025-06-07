@@ -437,6 +437,68 @@ function Hive:OnEntityChange(oldId, newId)
 
 end
 
+
+if Server then
+    --local kMaximizeBiomassResearchId = {
+    --    [kTechId.ShiftHive] = kTechId.ShiftTunnel,
+    --    [kTechId.CragHive] = kTechId.CragTunnel,
+    --    [kTechId.ShadeHive] = kTechId.ShadeTunnel,
+    --}
+
+    local kOriginformBiomassSource = {
+        [kTechId.ShiftHive] = "Shift",
+        [kTechId.CragHive] = "Crag",
+        [kTechId.ShadeHive] = "Shade",
+    }
+    
+    local kOriginformBiomassResearch = {
+        --[1] = kTechId.ResearchBioMassOne,
+        [2] = kTechId.ResearchBioMassOne,
+        [3] = kTechId.ResearchBioMassTwo,
+        [4] = kTechId.ResearchBioMassThree,
+    }
+
+    
+    function Hive:UpdateBiomassLevel()
+        local now = Shared.GetTime()
+        if not self.timeLastOriginformBiomassCheck or now - self.timeLastOriginformBiomassCheck < 1 then return end
+        self.timeLastOriginformBiomassCheck = now
+        
+        local team = self:GetTeam()
+        if not team:IsOriginForm() then return end
+        if not self:GetIsBuilt() then return end
+        if self:GetIsResearching() then return end
+        
+        local techId = self:GetTechId()
+        local biomassSourceName = kOriginformBiomassSource[techId]
+        if not biomassSourceName then return end
+        local newBiomassLevel = GetOriginFormBiomassLevel(#GetEntitiesAliveForTeam(biomassSourceName,self:GetTeamNumber())) or 0
+        
+        if newBiomassLevel <= self.bioMassLevel then 
+            self.bioMassLevel = newBiomassLevel
+            return
+        end
+        
+        local targetBiomassResearch = kOriginformBiomassResearch[newBiomassLevel]
+        if not targetBiomassResearch then return end
+        local commander = team:GetCommander() or table.random(team:GetPlayers())
+        if not commander then return end
+        
+        local techNode = team:GetTechTree():GetTechNode(targetBiomassResearch)
+        self:SetResearching(techNode, commander)
+        techNode:SetResearching()
+        team:GetTechTree():SetTechNodeChanged(techNode, "researching")
+        --if self.bioMassLevel == 4 then
+        --    local techId = kMaximizeBiomassResearchId[techId]
+        --    local techTree = team:GetTechTree()
+        --    local researchNode = techTree:GetTechNode(techId)                
+        --    researchNode:SetResearched(true)
+        --    techTree:QueueOnResearchComplete(techId, self)
+        --end
+    end
+
+end
+
 function Hive:OnUpdate(deltaTime)
 
     PROFILE("Hive:OnUpdate")
@@ -449,8 +511,9 @@ function Hive:OnUpdate(deltaTime)
 
     CheckLowHealth(self)
 
-    if not self:GetIsAlive() then
-
+    if self:GetIsAlive() then
+        self:UpdateBiomassLevel()
+    else
         local destructionAllowedTable = { allowed = true }
         if self.GetDestructionAllowed then
             self:GetDestructionAllowed(destructionAllowedTable)
@@ -459,20 +522,8 @@ function Hive:OnUpdate(deltaTime)
         if destructionAllowedTable.allowed then
             DestroyEntity(self)
         end
-
     end
-
 end
-
---function Hive:OriginFormBiomass()
---    local desireTechNode
---    
---    local team = self:GetTeam()
---    local techNode = team:GetTechTree():GetTechNode(kTechId.Armor1)
---    self:SetResearching(techNode, commander)
---    techNode:SetResearching()
---    commander:GetTechTree():SetTechNodeChanged(techNode, "researching")
---end
 
 function Hive:OnKill(attacker, doer, point, direction)
 
