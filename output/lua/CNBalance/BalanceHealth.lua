@@ -193,8 +193,8 @@ kHiveHealthPerPlayerAdd = 200
 kHarvesterHealth = 2000 kHarvesterArmor = 200 kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 320  kHarvesterPointValue = 15
 
 --1000 ---100    --1250 -200
-kTunnelEntranceHealth = 900  kTunnelEntranceArmor = 100 kMatureTunnelEntranceHealth = 1250 kMatureTunnelEntranceArmor = 200
-kTunnelEntranceHealthPerPlayerAdd = 50 kCragTunnelArmorAdditive = 400 kTunnelEntrancePointValue = 5
+kTunnelEntranceHealth = 1000  kTunnelEntranceArmor = 100 kMatureTunnelEntranceHealth = 1250 kMatureTunnelEntranceArmor = 200
+kTunnelEntranceHealthPerPlayerAdd = 75 kCragTunnelArmorAdditive = 400 kTunnelEntrancePointValue = 5
 
 --These stuff is required but , won't called due to its matured when infested
 kMatureInfestedTunnelEntranceHealth = kMatureTunnelEntranceHealth    kMatureInfestedTunnelEntranceArmor = kMatureTunnelEntranceArmor

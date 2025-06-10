@@ -18,5 +18,5 @@ if Server then
 end
 
 function Harvester:GetExtraHealth(techLevel,extraPlayers,recentWins)
-    return 75 * (extraPlayers - recentWins * 2)
+    return 100 * (extraPlayers - recentWins * 2)
 end
