@@ -151,7 +151,6 @@ if kTranslateMessage then
     kTranslateMessage["GAS_GRENADE"]="气体手雷"
     kTranslateMessage["GASGRENADE_BUYDESCRIPTION"]="陆战队士兵常用的投掷物.\n*对敌方单位造成护甲伤害.\n*缓慢回复范围内的己方单位血量."
     
-    
     kTranslateMessage["BUYMENU_RESTRICTION"] = "%i(过多持有)"
     
     kTranslateMessage["BUILD_ABILITY"]="建造者"

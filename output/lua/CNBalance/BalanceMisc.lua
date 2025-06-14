@@ -45,8 +45,11 @@ kRevolverWeight = 0
 
 kMaxInfantryPortalsPerCommandStation = 99
 kNumMines = 4
-kGrenadeLauncherPlayersAlert = 5
-kFlameThrowerPlayersAlert = 3
+
+kGrenadeLauncherPlayersAlert = 0.15
+kFlameThrowerPlayersAlert = 0.15
+kCannonPlayersAlert = 0.15
+kRailgunPlayersAlert = 0.15
 
 kFlameThrowerEntityBurnReward = 1
 kFlameThrowerEntityBurnRewardInterval = kFlameThrowerEntityBurnReward * 3

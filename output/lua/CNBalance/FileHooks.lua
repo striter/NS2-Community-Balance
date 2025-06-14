@@ -187,6 +187,8 @@ ModLoader.SetupFileHook("lua/GUIAlienHUD.lua", "lua/CNBalance/GUI/GUIAlienHUD.lu
 ModLoader.SetupFileHook("lua/GUIHiveStatus.lua", "lua/CNBalance/GUI/GUIHiveStatus.lua", "replace")
 
 ModLoader.SetupFileHook( "lua/CommAbilities/Alien/HallucinationCloud.lua", "lua/CNBalance/HallucinationCloud.lua", "post" )
+ModLoader.SetupFileHook( "lua/CommAbilities/Alien/BoneWall.lua", "lua/CNBalance/Structures/Alien/BoneWall.lua", "post" )
+
 ModLoader.SetupFileHook( "lua/AlienHallucination.lua", "lua/CNBalance/AlienHallucination.lua", "post" )
 ModLoader.SetupFileHook( "lua/Hallucination.lua", "lua/CNBalance/Hallucination.lua", "replace" )
 

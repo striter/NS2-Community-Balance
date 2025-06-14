@@ -301,10 +301,10 @@ kAdvancedArmoryResearchTime = 90
 kPrototypeLabCost = 25
 
 kCannonTechResearchCost = 15
-kCannonTechResearchTime = 75
+kCannonTechResearchTime = 60
 
 kJetpackTechResearchCost = 25
-kJetpackTechResearchTime = 75
+kJetpackTechResearchTime = 90
 
 kExosuitTechResearchCost = 20
 kExosuitTechResearchTime = 75
@@ -551,10 +551,10 @@ kObservatoryScanCost = 4
 kScanCooldown = 5
 kObservatoryDistressBeaconCost = 10
 
-kArmsLabCost = 15
+kArmsLabCost = 20
 
 kWeapons1ResearchCost = 25 kWeapons1ResearchTime = 75
-kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 105
+kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 120
 kWeapons3ResearchCost = 45 kWeapons3ResearchTime = 150
 
 kArmor1ResearchCost = 25 kArmor1ResearchTime = 90

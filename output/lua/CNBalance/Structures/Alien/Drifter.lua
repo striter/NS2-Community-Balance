@@ -769,6 +769,15 @@ local function ScanForNearbyEnemy(self)
 
 end
 
+--local function ParasiteNearbyEnemy(self)
+--
+--    self.lastDetectedTime = self.lastDetectedTime or 0
+--    if self.lastDetectedTime + kDetectInterval < Shared.GetTime() then
+--        self.lastDetectedTime = Shared.GetTime()
+--        for k,v in pairs(GetEntitiesWithMixinWithinRange("Parasite",))
+--    end
+--end
+
 function Drifter:PerformAction(techNode)
 
     if techNode:GetTechId() == kTechId.FollowAlien then

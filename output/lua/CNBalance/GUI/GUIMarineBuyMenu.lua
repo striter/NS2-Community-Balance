@@ -1412,7 +1412,8 @@ function GUIMarineBuyMenu:_UpdateRealTimeElements(buttonTable, techId, techAvail
         local numUsers = teamInfo[netVarName]
         assert(numUsers, string.format("Netvar %s does not exist in MarineTeamInfo!", netVarName))
         local hasPlayers = numUsers > 0
-        local tooManyPlayers = buttonTable.PlayersRestriction and numUsers >= buttonTable.PlayersRestriction
+        
+        local tooManyPlayers = hasPlayers and buttonTable.PlayersRestriction and numUsers >= math.floor(teamInfo:GetPlayerCount() * buttonTable.PlayersRestriction) 
         local color = ConditionalValue(hasPlayers,ConditionalValue(tooManyPlayers,self.kTeamTextColor_TooManyPlayers, self.kTeamTextColor_HasPlayers), self.kTeamTextColor_None)
         teamText:SetColor(color)
         teamText:SetText(tooManyPlayers and string.format(Locale.ResolveString("BUYMENU_RESTRICTION"),numUsers)

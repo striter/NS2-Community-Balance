@@ -686,6 +686,19 @@ function BuildTechData()
         [kTechDataModel] = Cannon.kModelName,
         [kTechDataDamageType] = kCannonDamageType,
         [kTechDataCostKey] = kCannonCost,
+        [kTechDataPlayersRestrictionKey] = kCannonPlayersAlert,
+    } )
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.DualRailgunExosuit,
+        [kTechIDShowEnables] = false,
+        [kTechDataDisplayName] = "DUALRAILGUN_EXOSUIT",
+        [kTechDataMapName] = "exo",
+        [kTechDataCostKey] = kDualRailgunExosuitCost,
+        [kTechDataHotkey] = Move.E,
+        [kTechDataTooltipInfo] = "DUALRAILGUN_EXOSUIT_TECH_TOOLTIP",
+        [kTechDataSpawnHeightOffset] = kCommanderEquipmentDropSpawnHeight,
+        [kTechDataPlayersRestrictionKey] = kRailgunPlayersAlert,
     } )
 
     table.insert(techData,{
