@@ -373,7 +373,7 @@
          end
          
          local roundLength = lastRoundData.RoundInfo.roundLength
-         local playerCount = table.count(lastRoundData.PlayerStats)
+         local playerCount = table.countkeys(lastRoundData.PlayerStats)
          if roundLength < 300 or playerCount < 12 then return end
          
          table.insert(self.kRecentRoundStatus, 1, {
