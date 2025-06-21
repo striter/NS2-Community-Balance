@@ -413,7 +413,7 @@ kVolleyEnergyCost = 7.0 --7.0
 kVolleyWebTime = 1.5
 
 kRappelDamage = 10 kRappelContinuousDamage = 5 kRappelContinuousDamageAgainstStructure = 80
-kRappelReelReactionTime = 0.8 kRappelReelContinuousSpeed = 8
+kRappelReelReactionTime = 0.7 kRappelReelContinuousSpeed = 8
 kRappelResearchCost = 10
 kRappelResearchTime = 20
 kRappelEnergyCost = 12
@@ -522,8 +522,15 @@ kVeilCost = 15
 kContaminationCost = 5
 kContaminationCooldown = 10
 kBoneWallCost = 3
-kRuptureCost = 1
 kDrifterCost = 5
+
+
+kRuptureCost = 2
+kRuptureCooldown = 4
+kRuptureParasiteTime = 22
+kRuptureBurstTime = 1.25 --Time before rupture "pops"
+kRuptureEffectTime = 3
+kRuptureEffectRadius = 8.7
 
 kHydraDamage = 15
 kHydraAttackDamageType = kDamageType.Normal
@@ -657,6 +664,8 @@ kBabblerEggHatchInterval = 3
 kBabblerEggHatchRadius = 22
 
 kDrifterHatchTime = 12
+kDrifterParasiteTime = 12
+kDrifterParasiteRange = 5
 --
 kMarkerCost = 0 kMarkerCooldown = 5 
 kRallyCost = 0 kRallyCooldown = 30
