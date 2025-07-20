@@ -66,7 +66,7 @@ function VolleyRappel:OnCreate()
     InitMixin(self, BulletsMixin)
     
     self.primaryAttacking = false
-    
+    self.timeDrawCooldown = 0    
     --[[if Client then
         Print("AS: ")
         Print(ToString(kAttackDuration))
@@ -166,15 +166,23 @@ function VolleyRappel:OnPrimaryAttackEnd()
     self.primaryAttacking = false
     
 end
+
+
+function VolleyRappel:OnDraw(player, previousWeaponMapName)
+    Ability.OnDraw(self, player, previousWeaponMapName)
+    if previousWeaponMapName == ProwlerStructureAbility.kMapName then
+        self.timeDrawCooldown = Shared.GetTime() + 0.3
+    end
+end
+
 function VolleyRappel:OnUpdateAnimationInput(modelMixin)
 
     PROFILE("VolleyRappel:OnUpdateAnimationInput")
     
     modelMixin:SetAnimationInput("ability", "bite")
     
-    local activityString = (self.primaryAttacking and "primary") or "none"
+    local activityString = (self.primaryAttacking and Shared.GetTime() > self.timeDrawCooldown) and "primary" or "none"
     modelMixin:SetAnimationInput("activity", activityString)    
-    
 end
 
 function VolleyRappel:OnTag(tagName)
