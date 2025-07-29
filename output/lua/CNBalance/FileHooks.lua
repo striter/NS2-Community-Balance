@@ -41,7 +41,6 @@ ModLoader.SetupFileHook("lua/GUIMinimap.lua", "lua/CNBalance/GUI/GUIMinimap.lua"
 ModLoader.SetupFileHook("lua/GUIMinimapConnection.lua", "lua/CNBalance/GUI/GUIMinimapConnection.lua", "replace" )
 ModLoader.SetupFileHook("lua/GUIWorldText.lua", "lua/CNBalance/GUI/GUIWorldText.lua", "post" )
 ModLoader.SetupFileHook("lua/GUIUnitStatus.lua", "lua/CNBalance/GUI/GUIUnitStatus.lua", "replace" )
-ModLoader.SetupFileHook("lua/GUIScoreboard.lua", "lua/CNBalance/GUI/GUIScoreboard.lua", "post" )
 ModLoader.SetupFileHook("lua/TeamMessenger.lua", "lua/CNBalance/TeamMessenger.lua", "replace")
 
 
@@ -171,6 +170,7 @@ ModLoader.SetupFileHook("lua/MarineVariantMixin.lua","lua/CNBalance/MarineVarian
 ModLoader.SetupFileHook("lua/ExoVariantMixin.lua","lua/CNBalance/ExoVariantMixin.lua","post")
 ModLoader.SetupFileHook("lua/RifleVariantMixin.lua","lua/CNBalance/RifleVariantMixin.lua","post")
 
+ModLoader.SetupFileHook("lua/GUICommanderButtons.lua", "lua/CNBalance/GUI/GUICommanderButtons.lua", "post" )
 ModLoader.SetupFileHook("lua/GUIInsight_PlayerHealthbars.lua", "lua/CNBalance/GUI/GUIInsight_PlayerHealthbars.lua", "post")
 --------------------
 

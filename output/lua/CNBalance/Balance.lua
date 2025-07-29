@@ -696,9 +696,10 @@ kGorgeAbilitiesCost = {
     [kTechId.Hydra] = 0, [kTechId.Clog] = 0, [kTechId.Web] = 0,[kTechId.SporeMine] = 0, [kTechId.BabblerEgg] = 3,
     [kTechId.Cyst] = 0.5,  [kTechId.Egg] = 2, [kTechId.Tunnel] = 6, [kTechId.TunnelExit] = 2,
     [kTechId.Whip] = 8, [kTechId.Shift] = 15, [kTechId.Shade] = 15, [kTechId.Crag] = 15,
+    [kTechId.Spur] = 12, [kTechId.Shell] = 12, [kTechId.Veil] = 12,
     [kTechId.Harvester] = 8, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
-                         [kTechId.Spur] = 15, [kTechId.Shell] = 15, [kTechId.Veil] = 15,
 }
+
 kGorgeStructureScorePerRes = 0.3
 kOriginPersonalResourcesPerKill = {
     [kTechId.Marine] = 2, [kTechId.JetpackMarine] = 3, [kTechId.Exo] = 4, [kTechId.Exosuit] = 2,

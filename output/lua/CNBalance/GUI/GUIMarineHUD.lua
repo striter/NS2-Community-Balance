@@ -100,6 +100,13 @@ function GUIMarineHUD:Initialize()
     end
 end
 
+local baseUninitialize = GUIMarineHUD.Uninitialize
+function GUIMarineHUD:Uninitialize()
+    self.teamCountElements = nil
+
+    baseUninitialize(self)
+end
+
 local baseReset = GUIMarineHUD.Reset
 function GUIMarineHUD:Reset()
     baseReset(self)

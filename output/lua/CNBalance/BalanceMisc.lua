@@ -3,6 +3,7 @@ kDeadlockTimeExtend = {
     [kTechId.PhaseGate] = 60,
     [kTechId.CommandStation] = 90, [kTechId.StandardStation] = 120, [kTechId.ExplosiveStation] = 120, [kTechId.ArmorStation] = 120, [ kTechId.ElectronicStation ] = 120,
     [kTechId.ARC] = 30,
+    [kTechId.ARCDeploy] = 3,
     
     [kTechId.Harvester] = 60,
     --[kTechId.Tunnel] = 60, [kTechId.InfestedTunnel] = 60, [kTechId.GorgeTunnel] = 60,
