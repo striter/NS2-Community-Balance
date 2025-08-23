@@ -25,6 +25,8 @@ kTechReputationByPass = {
 
 --Gorge Ability
 kDropStructureEnergyCost = 15
+kBellySlideCost = 20
+kBellySlideImpactCost = 20
 
 -- kInitialMACs = 1
 -- kInitialDrifters = 1
