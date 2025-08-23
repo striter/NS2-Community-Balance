@@ -44,7 +44,8 @@ function JetpackMarine:GetArmorAmount(armorLevels)
 
     end
 
-    return hasMP and (kMPJetpackMarineArmor + armorLevels * kMPJetpackArmorPerUpgradeLevel  ) or (kJetpackArmor + armorLevels *kJetpackArmorPerUpgradeLevel)
+    return hasMP and (kMPJetpackMarineArmor + armorLevels * kMPJetpackArmorPerUpgradeLevel  ) 
+    or (kJetpackArmor + armorLevels *kJetpackArmorPerUpgradeLevel)
 
 end
 

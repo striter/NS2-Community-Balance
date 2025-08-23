@@ -19,14 +19,14 @@
 --3    820    12         14          11          10
 
 kMarineHealth = 100    kMarineArmor = 30    kArmorPerUpgradeLevel = 20          kNanoMarineArmor = 35    kNanoArmorPerUpgradeLevel = 20
-kJetpackHealth = 100    kJetpackArmor = 50   kJetpackArmorPerUpgradeLevel = 20  kMPJetpackMarineArmor = 45   kMPJetpackArmorPerUpgradeLevel = 25  
+kJetpackHealth = 100    balanc = 50   kJetpackArmorPerUpgradeLevel = 20  kMPJetpackMarineArmor = 50   kMPJetpackArmorPerUpgradeLevel = 20  
 kExosuitHealth = 100    kExosuitArmor = 320  kExosuitArmorPerUpgradeLevel = 30  kExosuitMPArmor = 320 kExosuitMPArmorPerUpgradeLevel = 30
 kMarinePointValue = 5   kJetpackPointValue = 12   kExosuitPointValue = 20
 
 kMedpackHeal = 40   kMedpackRegen = 10
 kMedpackHealWhenRegening = 25 kMedpackRegenWhenRegening = 25
-kMedpackPickupDelay = 0.55
-kMarineRegenerationHeal = 25 --Amount of hp per second
+kMedpackPickupDelay = 0.45
+kMarineRegenerationHeal = 20 --Amount of hp per second
 
 kMineHealth = 30    kMineArmor = 9    kMinePointValue = 5
 
@@ -206,8 +206,8 @@ kMinMatureCystHealth = 200 kMinCystScalingDistance = 48 kMaxCystScalingDistance 
 
 kClogHealth = 250  kClogArmor = 0  kClogHealthPerBioMass = 10 kClogPointValue = 0
 
-kHydraHealth = 125    kHydraArmor = 10  kHydraHealthPerBioMass = 20   kHydraPointValue = 1
-kMatureHydraHealth = 160   kMatureHydraArmor = 20  kMatureHydraPointValue = 0
+kHydraHealth = 150    kHydraArmor = 10  kHydraHealthPerBioMass = 20   kHydraPointValue = 1
+kMatureHydraHealth = 200   kMatureHydraArmor = 20  kMatureHydraPointValue = 0
 
 kSporeMineHealth = 50 kSporeMineArmor = 0 kSporeMineHealthPerBioMass = 12 kSporeMinePointValue = 1
 kMatureSporeMineHealth = 120 kMatureSporeMineArmor = 0

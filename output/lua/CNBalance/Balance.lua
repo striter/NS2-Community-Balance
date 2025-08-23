@@ -61,7 +61,7 @@ kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKi
     [kTechId.Drifter] = 1,
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.GorgeTunnel] = 2,
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
-    [kTechId.Skulk] = 2, [kTechId.Gorge] = 2,[kTechId.Prowler] = 3, [kTechId.Lerk] = 3, [kTechId.Fade] = 4, [kTechId.Vokex] = 4,[kTechId.Onos] = 7,
+    [kTechId.Skulk] = 2, [kTechId.Gorge] = 2,[kTechId.Prowler] = 3, [kTechId.Lerk] = 3, [kTechId.Fade] = 5, [kTechId.Vokex] = 5,[kTechId.Onos] = 8,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
     [kTechId.Hive] = 20, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20
 }
@@ -79,10 +79,10 @@ kWelderDropCost = 2
 kWelderDropCooldown = 0
 
 kMineResearchCost  = 10
-kMineResearchTime  = 20
+kMineResearchTime  = 45
 
 kGrenadeTechResearchCost = 10   --10
-kGrenadeTechResearchTime = 20   --45
+kGrenadeTechResearchTime = 45   --45
 
 kMineCost = 20
 kMineDamage = 130
@@ -256,8 +256,8 @@ kDragonBreathStructureFireDamagePerStack = { kStructureFireDOTPerSecond / 100, k
 kFlamethrowerStructureDamagePerStack = { kStructureFireDOTPerSecond, kStructureFireDOTPerSecond, kStructureFireDOTPerSecond, kStructureFireDOTPerSecond }
 kStructureFireDamageMaxStack = { kStructureFireDOTPerSecond * 3 , kStructureFireDOTPerSecond * 4, kStructureFireDOTPerSecond * 5, kStructureFireDOTPerSecond * 6  }
 
-kMinigunDamage = 8.5
-kMinigunDamageType = kDamageType.Exosuit
+kMinigunDamage = 9
+kMinigunDamageType = kDamageType.Normal
 kRailgunDamage = 10
 kRailgunChargeDamage = 154
 kRailgunDamageType = kDamageType.Structural
@@ -558,7 +558,7 @@ kObservatoryScanCost = 4
 kScanCooldown = 5
 kObservatoryDistressBeaconCost = 10
 
-kArmsLabCost = 20
+kArmsLabCost = 15
 
 kWeapons1ResearchCost = 25 kWeapons1ResearchTime = 75
 kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 120
@@ -608,7 +608,7 @@ kMarineSentryDamage = 3  kMarineSentryWeapon1Scalar = 1.11  kMarineSentryWeapon2
 kMarineSentryBuildTime = 3
 
 kWeaponCacheCost = 3
-kWeaponCachePersonalCost = 12
+kWeaponCachePersonalCost = 10
 kWeaponCacheBuildTime = 6
 kWeaponCachePersonalCarries = 1
 kMarineSentryPersonalCarries = 2
@@ -622,8 +622,8 @@ kBioformSuppressProtocolCost = 0
 kBioformSuppressProtocolTime = 30
 kBioformSuppressRange = 58
 
-kMotionTrackInterval = 6
-kMotionTrackMinSpeed = 5
+kMotionTrackInterval = 10
+kMotionTrackMinSpeed = 6
 kMotionTrackResearchCost = 35
 kMotionTrackResearchTime = 90
 
