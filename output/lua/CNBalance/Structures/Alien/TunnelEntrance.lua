@@ -38,6 +38,7 @@ Script.Load("lua/ObstacleMixin.lua")
 Script.Load("lua/InfestationMixin.lua")
 Script.Load("lua/AlienTunnelVariantMixin.lua")
 Script.Load("lua/BiomassHealthMixin.lua")
+Script.Load("lua/RailgunTargetMixin.lua")
 
 
 Script.Load("lua/Tunnel.lua")
@@ -134,6 +135,7 @@ function TunnelEntrance:OnCreate()
         self.isPlayingConnectedEffects = false
 
     elseif Client then
+        InitMixin(self, RailgunTargetMixin)
         InitMixin(self, CommanderGlowMixin)
     end
 
