@@ -35,15 +35,23 @@ function RailgunTargetMixin:SetRailgunTarget()
 end
 
 
-RailgunTargetMixin.kRailgunTargetLookup = {
-    ["Onos"] = kEquipmentOutlineColor.Red,
-    ["Fade"] = kEquipmentOutlineColor.Red,
-    ["Vokex"] = kEquipmentOutlineColor.Red,
-    ["Lerk"] = kEquipmentOutlineColor.Yellow,
-    ["Skulk"] = kEquipmentOutlineColor.Yellow,
-    ["Prowler"] = kEquipmentOutlineColor.Yellow,
-    ["Gorge"] = kEquipmentOutlineColor.Fuchsia,
-}
+
+
+local function GetTargetOutline(weaponClass)
+    if not RailgunTargetMixin.kRailgunTargetLookup then
+        RailgunTargetMixin.kRailgunTargetLookup = {
+            ["Onos"] = kEquipmentOutlineColor.Red,
+            ["Fade"] = kEquipmentOutlineColor.Red,
+            ["Vokex"] = kEquipmentOutlineColor.Red,
+            ["Lerk"] = kEquipmentOutlineColor.Yellow,
+            ["Skulk"] = kEquipmentOutlineColor.Yellow,
+            ["Prowler"] = kEquipmentOutlineColor.Yellow,
+            ["Gorge"] = kEquipmentOutlineColor.Fuchsia,
+        }
+    end
+    
+    return RailgunTargetMixin.kRailgunTargetLookup[weaponClass]
+end
 
 function RailgunTargetMixin:OnUpdate(deltaTime)
     PROFILE("RailgunTargetMixin:OnUpdate")
@@ -55,7 +63,7 @@ function RailgunTargetMixin:OnUpdate(deltaTime)
     if self.isRailgunTarget ~= isTarget and model then
     
         if isTarget then
-            EquipmentOutline_AddModel(model,RailgunTargetMixin.kRailgunTargetLookup[self:GetClassName()] or kEquipmentOutlineColor.TSFBlue)
+            EquipmentOutline_AddModel(model,GetTargetOutline(self:GetClassName()) or kEquipmentOutlineColor.TSFBlue)
         else
             EquipmentOutline_RemoveModel(model)
         end
