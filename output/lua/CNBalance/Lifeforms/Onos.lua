@@ -23,7 +23,7 @@ set {
     "Cannon",
 }
 
-local kFuelDeductPerHit = 1 / 150
+local kFuelDeductPerHit = 1 / 125
 function Onos:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
 
     local classname = doer:GetClassName()

@@ -268,7 +268,7 @@ kPulseGrenadeDamage = 90  --75
 kPulseGrenadeEnergyDamage = 35  --25
 
 kClusterGrenadeDamageRadius = 10
-kClusterGrenadeDamage = 80
+kClusterGrenadeDamage = 72
 kClusterGrenadeDamageType = kDamageType.ClusterFlame
 
 kClusterFragmentDamageRadius = 6
@@ -377,7 +377,7 @@ kRecoverBioMassThreeTime = 25
 --Skulk
 kParasiteEnergyCost = 30
 kAdrenalineParasiteEnergyCost = 17.5
-kParasiteDamageType = kDamageType.Normal
+kParasiteDamageType = kDamageType.Exosuit
 
 kXenocideResearchCost = 20
 kXenocideResearchTime = 60
@@ -389,7 +389,7 @@ kXenocideEnergyCost = 30
 kXenocideDamageType = kDamageType.Structural
 kXenocideDamage = 150  kXenocideFuelDamage = 200 --200
 kXenocideRange = 9 kXenocideFuelRange = 12 -- 14
-kXenocideDamageScalarEmptyHealth = 0.2 kXenocideDamageHealthScalar = 1 - kXenocideDamageScalarEmptyHealth
+kXenocideDamageScalarEmptyHealth = 0.1 kXenocideDamageHealthScalar = 1 - kXenocideDamageScalarEmptyHealth
 kXenocideSpawnReduction = 1 kXenocideFuelSpawnReduction = 0.6
 
 kBileBombResearchCost = 10
@@ -410,7 +410,7 @@ kVolleySpread = Math.Radians(3)
 kProwlerDamagePerPellet = 8 -- there are 6 pellets
 kVolleyRappelDamageType = kDamageType.Normal
 kVolleyEnergyCost = 7.0 --7.0
-kVolleyWebTime = 1.5
+kVolleyWebTime = 2
 
 kRappelDamage = 10 kRappelContinuousDamage = 5 kRappelContinuousDamageAgainstStructure = 80
 kRappelReelReactionTime = 0.7 kRappelReelContinuousSpeed = 8

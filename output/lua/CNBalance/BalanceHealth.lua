@@ -19,7 +19,7 @@
 --3    820    12         14          11          10
 
 kMarineHealth = 100    kMarineArmor = 30    kArmorPerUpgradeLevel = 20          kNanoMarineArmor = 35    kNanoArmorPerUpgradeLevel = 20
-kJetpackHealth = 100    balanc = 50   kJetpackArmorPerUpgradeLevel = 20  kMPJetpackMarineArmor = 50   kMPJetpackArmorPerUpgradeLevel = 20  
+kJetpackHealth = 100    kJetpackArmor = 50   kJetpackArmorPerUpgradeLevel = 20  kMPJetpackMarineArmor = 50   kMPJetpackArmorPerUpgradeLevel = 20  
 kExosuitHealth = 100    kExosuitArmor = 320  kExosuitArmorPerUpgradeLevel = 30  kExosuitMPArmor = 320 kExosuitMPArmorPerUpgradeLevel = 30
 kMarinePointValue = 5   kJetpackPointValue = 12   kExosuitPointValue = 20
 
@@ -118,7 +118,7 @@ kSkulkDamageReduction = {
     --["Railgun"] = 0.9,
 }
 
-kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7 kGorgeHealthPerBioMass = 3
+kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7 kGorgeHealthPerBioMass = 5
 kGorgeDamageReduction = {
     ["Sentry"] = 0.5,
     ["MarineSentry"] = 0.5,
@@ -248,4 +248,5 @@ kWelderSporeDamagePerSecond = 250 kFlamethrowerSporeDamagePerSecond = 1000
 --Combat
 kWeaponCacheHealth = 800    kWeaponCacheArmor = 150   kWeaponCachePointValue = 10
 kMarineSentryHealth = 500    kMarineSentryArmor = 50    kMarineSentryPointValue = 8
+
 kBioformSuppressorHealth = 1800 kBioformSuppressorArmor = 1800 kBioformSuppressorPointValue = 30
