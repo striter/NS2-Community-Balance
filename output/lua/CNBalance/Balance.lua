@@ -560,12 +560,12 @@ kObservatoryDistressBeaconCost = 10
 
 kArmsLabCost = 15
 
-kWeapons1ResearchCost = 25 kWeapons1ResearchTime = 75
-kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 120
+kWeapons1ResearchCost = 25 kWeapons1ResearchTime = 105
+kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 135
 kWeapons3ResearchCost = 45 kWeapons3ResearchTime = 150
 
-kArmor1ResearchCost = 25 kArmor1ResearchTime = 90
-kArmor2ResearchCost = 35 kArmor2ResearchTime = 120
+kArmor1ResearchCost = 25 kArmor1ResearchTime = 120
+kArmor2ResearchCost = 35 kArmor2ResearchTime = 150
 kArmor3ResearchCost = 45 kArmor3ResearchTime = 135
 
 kAdvancedMarineSupportResearchCost = 20

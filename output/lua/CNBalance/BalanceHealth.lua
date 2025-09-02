@@ -204,7 +204,7 @@ kCystHealth = 125    kCystArmor = 1
 kMatureCystHealth = 400    kMatureCystArmor = 1    kCystPointValue = 1
 kMinMatureCystHealth = 200 kMinCystScalingDistance = 48 kMaxCystScalingDistance = 168
 
-kClogHealth = 250  kClogArmor = 0  kClogHealthPerBioMass = 10 kClogPointValue = 0
+kClogHealth = 280  kClogArmor = 0  kClogHealthPerBioMass = 10 kClogPointValue = 0
 
 kHydraHealth = 150    kHydraArmor = 10  kHydraHealthPerBioMass = 20   kHydraPointValue = 1
 kMatureHydraHealth = 200   kMatureHydraArmor = 20  kMatureHydraPointValue = 0
