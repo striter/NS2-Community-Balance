@@ -204,9 +204,9 @@ kCystHealth = 125    kCystArmor = 1
 kMatureCystHealth = 400    kMatureCystArmor = 1    kCystPointValue = 1
 kMinMatureCystHealth = 200 kMinCystScalingDistance = 48 kMaxCystScalingDistance = 168
 
-kClogHealth = 280  kClogArmor = 0  kClogHealthPerBioMass = 10 kClogPointValue = 0
+kClogHealth = 320  kClogArmor = 0  kClogHealthPerBioMass = 10 kClogPointValue = 0
 
-kHydraHealth = 150    kHydraArmor = 10  kHydraHealthPerBioMass = 20   kHydraPointValue = 1
+kHydraHealth = 180    kHydraArmor = 10  kHydraHealthPerBioMass = 20   kHydraPointValue = 1
 kMatureHydraHealth = 200   kMatureHydraArmor = 20  kMatureHydraPointValue = 0
 
 kSporeMineHealth = 50 kSporeMineArmor = 0 kSporeMineHealthPerBioMass = 12 kSporeMinePointValue = 1
@@ -218,7 +218,7 @@ kMatureBabblerEggHealth = 200 kMatureBabblerEggArmor = 0
 kBabblerHealth = 12    kBabblerArmor = 0    kBabblerPointValue = 0
 kBabblerDefaultLifeTime = 5 kBabblerEggHatchLifetime = 30 kBabblerPheromoneHatchLifeTime = 8
 
-kBoneWallHealth = 200 kBoneWallArmor = 200    kBoneWallHealthPerBioMass = 75 kBoneWallExtraHealthPerPlayer = 25
+kBoneWallHealth = 500 kBoneWallArmor = 200    kBoneWallHealthPerBioMass = 75 kBoneWallExtraHealthPerPlayer = 25
 kContaminationHealth = 1450 kContaminationArmor = 0    kContaminationPointValue = 2
 
 kWhipHealth = 650    kWhipArmor = 175    kWhipPointValue = 6

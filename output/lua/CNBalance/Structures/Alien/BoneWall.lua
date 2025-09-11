@@ -24,3 +24,8 @@ function BoneWall:OnInitialized()
     self:SetPhysicsType(PhysicsType.Kinematic)
 
 end
+
+
+function BoneWall:GetReceivesStructuralDamage()
+    return false
+end
