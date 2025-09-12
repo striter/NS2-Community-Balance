@@ -30,7 +30,12 @@ function Team:PutPlayerInRespawnQueue(player)
             local gameLength = Shared.GetTime() - GetGamerules():GetGameStartTime()
             extraTime = extraTime + GetRespawnTimeExtend(player,self:GetTeamType(),gameLength)
         end
-
+        
+        local team = player:GetTeam()
+        if team and team.GetRespawnTimeExtend then
+            extraTime = extraTime + team:GetRespawnTimeExtend()
+        end
+        
         if player.spawnReductionTime then
             extraTime = extraTime * player.spawnReductionTime
             player.spawnReductionTime = nil
