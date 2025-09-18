@@ -17,7 +17,7 @@ local isAlienRespawning = false
 local isRespawning = false
 local function OnSetIsRespawning(message)
     isRespawning = message.isRespawning
-    isAlienRespawning = isRespawning and PlayerUI_GetTeamType() == kTeam2Index
+    isAlienRespawning = isRespawning
 end
 Client.HookNetworkMessage("SetIsRespawning", OnSetIsRespawning)
 

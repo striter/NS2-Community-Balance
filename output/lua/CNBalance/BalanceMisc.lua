@@ -135,8 +135,8 @@ kARCSupply = 20
 kSentrySupply = 0
 kSentryBatterySupply = 35
 kRoboticsFactorySupply = 10
-kInfantryPortalSupply = 0
-kPhaseGateSupply = 10
+kInfantryPortalSupply = 10
+kPhaseGateSupply = 0
 kSentriesPerBattery = 3
 
 kDrifterSupply = 10

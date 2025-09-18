@@ -589,3 +589,108 @@ function MarineTeam:OnEntityChange(oldEntityId, newEntityId)
     self:UpdateClientOwnedStructures(oldEntityId)
 
 end
+
+
+local baseUpdate = MarineTeam.Update
+function MarineTeam:Update(timePassed)
+    baseUpdate(self,timePassed)
+    self:UpdateSpectators()
+end
+
+MarineTeam.OnRespawnQueueChanged = nil
+
+function MarineTeam:GetCriticalPosition()
+
+    -- get position of enemy team, ignore commanders
+    local numPositions = 0
+    local teamPosition = Vector(0, 0, 0)
+
+    for _, player in ipairs( GetEntitiesForTeam("Player", GetEnemyTeamNumber(self:GetTeamNumber())) ) do
+
+        if player:isa("Alien")  and player:GetIsAlive() then
+
+            numPositions = numPositions + 1
+            teamPosition = teamPosition + player:GetOrigin()
+
+        end
+
+    end
+
+    if numPositions > 0 then
+        return teamPosition / numPositions
+    end
+
+end
+
+function MarineTeam:UpdateSpectators()
+
+    if not GetWarmupActive() then
+        if self.timeLastSpectatorUpdate == nil then
+            self.timeLastSpectatorUpdate = Shared.GetTime() - 1
+        end
+    
+        if self.timeLastSpectatorUpdate + 1 <= Shared.GetTime() then
+    
+            local marineSpectators = self:GetSortedRespawnQueue()
+            local enemyTeamPosition = self:GetCriticalPosition()
+    
+            for i = 1, #marineSpectators do
+    
+                Shared.Message("?")
+                local marineSpectator = marineSpectators[i]
+                -- Do not spawn players waiting in the auto team balance queue.
+                if marineSpectator:isa("MarineSpectator") and not marineSpectator:GetIsWaitingForTeamBalance() then
+    
+                    -- Consider min death time.
+                    if not marineSpectator:GetIsRespawning() and marineSpectator:GetRespawnQueueEntryTime() < Shared.GetTime() then
+
+                        Shared.Message("??")
+                        local success = self:AssignPlayerToInfantryPortal(marineSpectator, enemyTeamPosition)
+    
+                        -- We have no eggs currently, makes no sense to check for every spectator now.
+                        if not success then
+                            break
+                        end
+    
+                    end
+    
+                end
+    
+            end
+    
+            self.timeLastSpectatorUpdate = Shared.GetTime()
+    
+        end
+    end
+
+end
+
+function MarineTeam:AssignPlayerToInfantryPortal(player,enemyTeamPosition)
+
+    local success = false
+
+    local spawnPoint = player:GetDesiredSpawnPoint()
+
+    if not spawnPoint then
+        spawnPoint = enemyTeamPosition or player:GetOrigin()
+    end
+
+    local ips = GetEntitiesForTeam("InfantryPortal", self:GetTeamNumber())
+    Shared.SortEntitiesByDistance(spawnPoint, ips)
+
+    Shared.Message("???")
+    for _, current in ipairs(ips) do
+
+        if current:GetIsBuilt() and current:GetIsPowered() and not current:GetIsRespawning() then
+
+            Shared.Message("????")
+            current:SetQueuedPlayer(player)
+            success = true
+            break
+        end
+
+    end
+
+    return success
+
+end 

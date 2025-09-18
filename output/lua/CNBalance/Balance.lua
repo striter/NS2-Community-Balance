@@ -123,7 +123,7 @@ kHeavyMachineGunRange = 100
 kHeavyMachineGunSecondaryRange = 1.1
 kHeavyMachineGunSpread = Math.Radians(5)  --4
 
-kCommandStationCost = 15
+kCommandStationCost = 20
 kCommandStationUpgradeCost = 10
 kCommandStationUpgradeTime = 30
 kUpgradedCommandStationCost = kCommandStationCost + kCommandStationUpgradeCost

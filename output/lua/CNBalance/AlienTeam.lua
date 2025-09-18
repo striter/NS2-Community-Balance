@@ -1355,16 +1355,6 @@ function AlienTeam:OnEvolved(techId)
 
 end
 
-local function OnSetDesiredSpawnPoint(client, message)
-
-    local player = client:GetControllingPlayer()
-    if player then
-        player.desiredSpawnPoint = message.desiredSpawnPoint
-    end
-
-end
-Server.HookNetworkMessage("SetDesiredSpawnPoint", OnSetDesiredSpawnPoint)
-
 function AlienTeam:GetTotalInRespawnQueue()
 
     local numPlayers = 0

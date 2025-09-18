@@ -85,3 +85,13 @@ function Team:GetOldestQueuedPlayer()
     end
     
 end
+
+local function OnSetDesiredSpawnPoint(client, message)
+
+    local player = client:GetControllingPlayer()
+    if player then
+        player.desiredSpawnPoint = message.desiredSpawnPoint
+    end
+
+end
+Server.HookNetworkMessage("SetDesiredSpawnPoint", OnSetDesiredSpawnPoint)
