@@ -297,7 +297,7 @@ kSentryBatteryCost = 20
 kSentryBatteryBuildTime = 5
 
 kAdvancedArmoryUpgradeCost = 25
-kAdvancedArmoryResearchTime = 120
+kAdvancedArmoryResearchTime = 105
 kPrototypeLabCost = 25
 
 kCannonTechResearchCost = 15
@@ -524,7 +524,6 @@ kContaminationCooldown = 10
 kBoneWallCost = 3
 kDrifterCost = 5
 
-
 kRuptureCost = 2
 kRuptureCooldown = 4
 kRuptureParasiteTime = 22
@@ -560,13 +559,13 @@ kObservatoryDistressBeaconCost = 10
 
 kArmsLabCost = 20
 
-kWeapons1ResearchCost = 20 kWeapons1ResearchTime = 120
-kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 135
+kWeapons1ResearchCost = 20 kWeapons1ResearchTime = 90
+kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 105
 kWeapons3ResearchCost = 45 kWeapons3ResearchTime = 150
 
-kArmor1ResearchCost = 25 kArmor1ResearchTime = 120
-kArmor2ResearchCost = 35 kArmor2ResearchTime = 150
-kArmor3ResearchCost = 40 kArmor3ResearchTime = 135
+kArmor1ResearchCost = 25 kArmor1ResearchTime = 105
+kArmor2ResearchCost = 35 kArmor2ResearchTime = 120
+kArmor3ResearchCost = 40 kArmor3ResearchTime = 120
 
 kAdvancedMarineSupportResearchCost = 20
 kAdvancedMarineSupportResearchTime = 90

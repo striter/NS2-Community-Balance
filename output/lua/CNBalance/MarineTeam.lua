@@ -636,7 +636,6 @@ function MarineTeam:UpdateSpectators()
     
             for i = 1, #marineSpectators do
     
-                Shared.Message("?")
                 local marineSpectator = marineSpectators[i]
                 -- Do not spawn players waiting in the auto team balance queue.
                 if marineSpectator:isa("MarineSpectator") and not marineSpectator:GetIsWaitingForTeamBalance() then
@@ -644,7 +643,6 @@ function MarineTeam:UpdateSpectators()
                     -- Consider min death time.
                     if not marineSpectator:GetIsRespawning() and marineSpectator:GetRespawnQueueEntryTime() < Shared.GetTime() then
 
-                        Shared.Message("??")
                         local success = self:AssignPlayerToInfantryPortal(marineSpectator, enemyTeamPosition)
     
                         -- We have no eggs currently, makes no sense to check for every spectator now.
@@ -678,12 +676,10 @@ function MarineTeam:AssignPlayerToInfantryPortal(player,enemyTeamPosition)
     local ips = GetEntitiesForTeam("InfantryPortal", self:GetTeamNumber())
     Shared.SortEntitiesByDistance(spawnPoint, ips)
 
-    Shared.Message("???")
     for _, current in ipairs(ips) do
 
         if current:GetIsBuilt() and current:GetIsPowered() and not current:GetIsRespawning() then
 
-            Shared.Message("????")
             current:SetQueuedPlayer(player)
             success = true
             break
