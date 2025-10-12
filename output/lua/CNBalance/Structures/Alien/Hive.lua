@@ -635,6 +635,13 @@ if Server then
             researchNode:ClearResearching()
             techTree:SetTechNodeChanged(researchNode, string.format("researchProgress = %.2f", 0))
         end
+
+        local amount = LookupTechData(techId, kTechDataCostKey, 0)
+        if amount > 0 then
+            local team = self:GetTeam()
+            team:AddTeamResources(math.floor(amount / 2))
+        end
+        
         baseOnKill(self,attacker, doer, point, direction)
     end
     

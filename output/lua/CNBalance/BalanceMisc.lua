@@ -135,7 +135,7 @@ kARCSupply = 20
 kSentrySupply = 0
 kSentryBatterySupply = 35
 kRoboticsFactorySupply = 10
-kInfantryPortalSupply = 10
+kInfantryPortalSupply = 0
 kPhaseGateSupply = 0
 kSentriesPerBattery = 3
 
@@ -159,6 +159,8 @@ kLifeRegenMaxCap = 0.8 kLifeSustainMaxCap = 1
 kLifeRegenHPS = 4   kLifeSustainHPS = 10
 kJetpackLifeRegenHPS = 6   kJetpackLifeSustainHPS = 12
 
+kOnFireHealingScalar = 0.5
+kOnFireEnergyRecuperationScalar = 1
 
 kAutoMedCooldown = 6    kAutoMedPRes = 0.8
 kAutoAmmoCooldown = 40  kAutoAmmoPRes = 1.5

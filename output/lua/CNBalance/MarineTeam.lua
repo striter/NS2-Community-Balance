@@ -689,4 +689,29 @@ function MarineTeam:AssignPlayerToInfantryPortal(player,enemyTeamPosition)
 
     return success
 
-end 
+end
+
+function MarineTeam:GetHasAbilityToRespawn()
+
+    local ipCount = 0
+    local ips = GetEntitiesForTeam("InfantryPortal", self:GetTeamNumber())
+    for k,v in pairs(ips) do
+        if GetIsUnitActive(v) then
+            ipCount = ipCount + 1
+        end
+    end
+
+    local ccs = GetEntitiesForTeam("CommandStation", self:GetTeamNumber())
+    return ipCount > 0 or table.icount(ccs) > 0
+
+end
+function MarineTeam:GetHasTeamLost()
+    local activePlayers = self:GetHasActivePlayers()
+    local abilityToRespawn = self:GetHasAbilityToRespawn()
+    if (not activePlayers and not abilityToRespawn)
+            or (self:GetNumPlayers() == 0)
+            or  self:GetHasConceded() then
+        return true
+    end
+    return false
+end
