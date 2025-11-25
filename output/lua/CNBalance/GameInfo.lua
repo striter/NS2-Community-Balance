@@ -28,6 +28,7 @@ local networkVars =
     serverIp = "string (16)",
     serverPort = "string (16)",
 
+    marineDeadlockTime = "time",
 
     --Skins are in this class instead of TeamInfo so it's propagated to all clients since
     --the Team entities are only propagated to their respective team's clients.
@@ -105,6 +106,10 @@ end
 
 function GameInfo:GetStartTime()
     return self.startTime
+end
+
+function GameInfo:GetMarineDeadlockTime()
+    return self.marineDeadlockTime
 end
 
 function GameInfo:GetGameEnded()
@@ -271,6 +276,10 @@ if Server then
 
     function GameInfo:SetStartTime(startTime)
         self.startTime = startTime
+    end
+
+    function GameInfo:SetMarineDeadlockTime(time)
+        self.marineDeadlockTime = time
     end
     
     function GameInfo:SetState(state)

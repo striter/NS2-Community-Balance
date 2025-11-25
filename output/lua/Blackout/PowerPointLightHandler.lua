@@ -30,11 +30,11 @@
 
 local kMinCommanderLightIntensityScalar = 0.3
 
-local kOffTime = 12
+local kOffTime = 2
 local kLowPowerCycleTime = 1
 local kLowPowerMinIntensity = 0.4
 local kDamagedCycleTime = 0.8
-local kDamagedMinIntensity = 0.7
+local kDamagedMinIntensity = 0.4
 local kAuxPowerMinIntensity = 0
 local kAuxPowerMinCommanderIntensity = 0.5
 
@@ -267,6 +267,23 @@ function BaseLightWorker:RestoreColor(renderLight)
 
 end
 
+function BaseLightWorker:LerpColor(renderLight,color,t)
+
+    renderLight:SetColor(LerpColor(renderLight.originalColor,color,t))
+
+    if renderLight:GetType() == RenderLight.Type_AmbientVolume then
+
+        renderLight:SetDirectionalColor(RenderLight.Direction_Right,    LerpColor(renderLight.originalRight,color,t))
+        renderLight:SetDirectionalColor(RenderLight.Direction_Left,     LerpColor(renderLight.originalLeft,color,t))
+        renderLight:SetDirectionalColor(RenderLight.Direction_Up,       LerpColor(renderLight.originalUp,color,t))
+        renderLight:SetDirectionalColor(RenderLight.Direction_Down,     LerpColor(renderLight.originalDown,color,t))
+        renderLight:SetDirectionalColor(RenderLight.Direction_Forward,  LerpColor(renderLight.originalForward,color,t))
+        renderLight:SetDirectionalColor(RenderLight.Direction_Backward, LerpColor(renderLight.originalBackward,color,t))
+
+    end
+
+end
+
 --
 -- handles kLightMode.Normal
 --
@@ -291,6 +308,16 @@ function NormalLightWorker:Run()
     local time = Shared.GetTime()
     local timePassed = time - timeOfChange
 
+    local deadlockScalar = self.deadlockScalar or 0
+    local gameInfo = GetGameInfoEntity(kTeam1Index)
+    if gameInfo then
+        local deadLockTime = gameInfo and gameInfo:GetMarineDeadlockTime() or 99999
+        deadlockScalar =  deadLockTime > 0 and Lerp(deadlockScalar, Shared.GetTime() > deadLockTime and 1 or 0,0.05) or 0
+    else
+        deadlockScalar = 0
+    end
+    self.deadlockScalar = deadlockScalar
+
     if self.activeProbes then
 
         local startFullLightTime = PowerPoint.kMinFullLightDelay
@@ -300,13 +327,13 @@ function NormalLightWorker:Run()
         if timePassed < startFullLightTime then
             -- we don't change lights or color during this period
         else
-            probeTint = Color(1, 1, 1, 1)
+            probeTint = lightColor
             self.activeProbes = false
         end
 
         if probeTint then
             for _, probe in ipairs(self.handler.probeTable) do
-                probe:SetTint( Color(1, 1, 1, 1) )
+                probe:SetTint(lightColor)
             end
         end
 
@@ -327,6 +354,8 @@ function NormalLightWorker:Run()
         local startFullLightTime = PowerPoint.kMinFullLightDelay + PowerPoint.kMaxFullLightDelay * randomValue
         -- time when full lightning is achieved
         local fullFullLightTime = startFullLightTime + PowerPoint.kFullPowerOnTime
+        local t = timePassed - startFullLightTime
+        local scalar = math.sin(( t / PowerPoint.kFullPowerOnTime  ) * math.pi / 2)
 
         if timePassed < startFullLightTime then
             -- we don't change lights or color during this period
@@ -334,8 +363,6 @@ function NormalLightWorker:Run()
         elseif timePassed < fullFullLightTime then
 
             -- the period when lights start to come on, possibly with a little flickering
-            local t = timePassed - startFullLightTime
-            local scalar = math.sin(( t / PowerPoint.kFullPowerOnTime  ) * math.pi / 2)
             intensity = renderLight.originalIntensity * scalar
 
             if renderLight.flickering == nil and intensity < renderLight:GetIntensity() then
@@ -354,14 +381,14 @@ function NormalLightWorker:Run()
             intensity = renderLight.originalIntensity
 
             self:RestoreColor(renderLight)
-
-            -- remove this light from processing
-            self.activeLights:Remove(renderLight)
         end
 
+        if(deadlockScalar > 0.01) then
+            self:LerpColor(renderLight,PowerPoint.kDisabledColor,deadlockScalar)
+            intensity = intensity * self:CheckFlicker(renderLight,PowerPoint.kFullFlickerChance,scalar)
+        end
         -- color are only changed once during the full-power-on
-        SetLight(renderLight, intensity, nil)
-
+        SetLight(renderLight, intensity, lightColor)
     end
 end
 
@@ -469,41 +496,10 @@ function NoPowerLightWorker:Run()
     local time = Shared.GetTime()
     local timePassed = time - timeOfChange
 
-    local probeTint
-
-    if self.activeProbes then
-        if timePassed < kOffTime then
-            probeTint = Color(0, 0, 0, 1)
-        --elseif timePassed < kOffTime + PowerPoint.kAuxPowerCycleTime then
-        --
-        --    -- Fade red in smoothly. t will stay at zero during the individual delay time
-        --    local t = timePassed - kOffTime
-        --    -- angle goes from zero to 90 degres in one kAuxPowerCycleTime
-        --    local angleRad = (t / PowerPoint.kAuxPowerCycleTime) * math.pi / 2
-        --    -- and scalar goes 0->1
-        --    local scalar = math.sin(angleRad)
-        --
-        --    probeTint = Color(
-        --            --PowerPoint.kDisabledColor.r * scalar,
-        --            --PowerPoint.kDisabledColor.g * scalar,
-        --            --PowerPoint.kDisabledColor.b * scalar,
-        --            scalar,scalar,scalar,
-        --            1)
-
-        else
-
-            -- It's possible the player wasn't close enough to the room, and thus the probes never
-            -- changed to the no power state.  Do one last update to ensure they're up-to-date.
-            probeTint = Color(
-                    --PowerPoint.kDisabledColor.r,
-                    --PowerPoint.kDisabledColor.g,
-                    --PowerPoint.kDisabledColor.b, 
-                    0,0,0,
-                    1)
-
-            self.activeProbes = false
-        end
-    end
+    local scalar = math.Clamp((kOffTime - timePassed ) / kOffTime,0,1)
+    local probeTint = Color(
+            scalar,scalar,scalar,
+            1)
 
     if probeTint then
         for _, probe in ipairs(self.handler.probeTable) do
@@ -515,14 +511,6 @@ function NoPowerLightWorker:Run()
 
     for renderLight in self.activeLights:Iterate() do
 
-        local randomValue = renderLight.randomValue
-        -- aux light starting to come on
-        local startAuxLightTime = kOffTime + randomValue * PowerPoint.kMaxAuxLightDelay
-        -- ... fully on
-        local fullAuxLightTime = startAuxLightTime + PowerPoint.kAuxPowerCycleTime
-
-        local intensity
-        --local color
 
         local showCommanderLight = false
 
@@ -531,38 +519,14 @@ function NoPowerLightWorker:Run()
             showCommanderLight = true
         end
 
-        if timePassed < startAuxLightTime then
-
-            if showCommanderLight then
-                intensity = renderLight.originalIntensity * kMinCommanderLightIntensityScalar
-            else
-                intensity = 0
-            end
-
-        --elseif timePassed < fullAuxLightTime then
-        --
-        --    -- Fade red in smoothly. t will stay at zero during the individual delay time
-        --    local t = timePassed - startAuxLightTime
-        --    -- angle goes from zero to 90 degres in one kAuxPowerCycleTime
-        --    local angleRad = (t / PowerPoint.kAuxPowerCycleTime) * math.pi / 2
-        --    -- and scalar goes 0->1
-        --    local scalar = math.sin(angleRad)
-        --
-        --    if showCommanderLight then
-        --        scalar = math.max(kMinCommanderLightIntensityScalar, scalar)
-        --    end
-        --
-        --    intensity = scalar * renderLight.originalIntensity
-        --
-        --    intensity = intensity * self:CheckFlicker(renderLight, PowerPoint.kAuxFlickerChance, scalar)
-        --
-        --    --if showCommanderLight then
-        --    --    color = PowerPoint.kDisabledCommanderColor
-        --    --else
-        --    --    color = PowerPoint.kDisabledColor
-        --    --end
-
+        local intensity
+        if showCommanderLight then
+            intensity = renderLight.originalIntensity * Lerp(1,kMinCommanderLightIntensityScalar,scalar)
         else
+            intensity = scalar
+        end
+        
+        if timePassed >= kOffTime then
 
             -- Deactivate from initial state
             self.activeLights:Remove(renderLight)
