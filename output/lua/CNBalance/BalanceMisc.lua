@@ -150,14 +150,14 @@ kMarinePhaseArmorDeduct = 20
 kMarineArmorDeductRegen = 20
 
 kMarineNanoArmorPerSecond = 4
-kJetpackMarineArmorPerSecond = 3
-kJetpackMarineNanoArmorPerSecond = 6
+kJetpackMarineArmorPerSecond = 2
+kJetpackMarineNanoArmorPerSecond = 4
 kExoArmorPerSecond = 8
-kExoNanoArmorPerSecond = 15
+kExoNanoArmorPerSecond = 12
 --& Lifesustain
 kLifeRegenMaxCap = 0.8 kLifeSustainMaxCap = 1
 kLifeRegenHPS = 4   kLifeSustainHPS = 10
-kJetpackLifeRegenHPS = 6   kJetpackLifeSustainHPS = 12
+kJetpackLifeRegenHPS = 4   kJetpackLifeSustainHPS = 10
 
 kOnFireHealingScalar = 0.5
 kOnFireEnergyRecuperationScalar = 1

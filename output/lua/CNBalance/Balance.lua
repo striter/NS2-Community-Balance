@@ -301,7 +301,7 @@ kCannonTechResearchCost = 15
 kCannonTechResearchTime = 60
 
 kJetpackTechResearchCost = 25
-kJetpackTechResearchTime = 105
+kJetpackTechResearchTime = 120
 
 kExosuitTechResearchCost = 20
 kExosuitTechResearchTime = 90
