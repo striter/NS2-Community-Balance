@@ -1,7 +1,7 @@
 Script.Load("lua/BiomassHealthMixin.lua")
 
 local kPhaseCooldownBase = 0.8
-local kPhaseCooldownPerPlayerAboveLimit = 0.1
+local kPhaseCooldownPerPlayerAboveLimit = 0.125
 local kPhaseCooldownPerGate = 0.5
 local kBeaconInstantPhaseDuration = 15
 local kBeaconInstantPhaseCooldown = 0.5

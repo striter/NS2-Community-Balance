@@ -84,6 +84,8 @@ kMineResearchTime  = 45
 kGrenadeTechResearchCost = 10   --10
 kGrenadeTechResearchTime = 45   --45
 
+kMaxARCs = 6
+
 kMineCost = 20
 kMineDamage = 130
 kDropMineCost = 12
@@ -287,7 +289,7 @@ kARCCost = 15
 kARCBuildTime = 5
 kMACCost = 4
 
-kSentryDamage = 4  kSentryWeapon1Scalar = 1.125 kSentryWeapon2Scalar = 1.25 kSentryWeapon3Scalar = 1.375
+kSentryDamage = 4 kSentryWeapon1Scalar = 1.125 kSentryWeapon2Scalar = 1.25 kSentryWeapon3Scalar = 1.375
 kSentryCost = 0
 kSentryBuildTime = 3
 kSentryBatteryCost = 20
@@ -467,7 +469,7 @@ kVortexShadowStepResearchTime = 90
 kVortexLifetime = 6 kVortexInitTime = 0.5
 kVortexRadius = 4
 kVortexEnergyCost = 50
-kVortexPlayerDamagePerSecond = 6 kVortexStructureDamagePerSecond = 80
+kVortexPlayerDamagePerSecond = 10 kVortexStructureDamagePerSecond = 80
 kVortexSuckinVelocityPerSecond = 30
 
 kVortexMaxDamageEndurance = 10 kVortexPerPlayerDamageEnduranceCostPerSecond = 1 --kVortexProjectileEnduranceCost = 0
@@ -490,8 +492,8 @@ kBoneShieldMaxDuration = 10
 kStompEnergyCost = 40
 kStompDamageType = kDamageType.Structural
 kStompDamage = 60
-kStompFirstPDamage = 40  kStompDisruptTime = 3
-kStompSecondPDamage = 20 kStompSecondDisruptTime = 1.5
+kStompFirstPDamage = 60  kStompDisruptTime = 3
+kStompSecondPDamage = 20 kStompSecondDisruptTime = 0
 kStompElseDamage = 10
 kStompRange = 12 
 
@@ -556,12 +558,12 @@ kObservatoryDistressBeaconCost = 10
 
 kArmsLabCost = 20
 
-kWeapons1ResearchCost = 20 kWeapons1ResearchTime = 90
-kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 105
-kWeapons3ResearchCost = 45 kWeapons3ResearchTime = 135
+kWeapons1ResearchCost = 20 kWeapons1ResearchTime = 75
+kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 90
+kWeapons3ResearchCost = 45 kWeapons3ResearchTime = 120
 
-kArmor1ResearchCost = 25 kArmor1ResearchTime = 90
-kArmor2ResearchCost = 35 kArmor2ResearchTime = 120
+kArmor1ResearchCost = 25 kArmor1ResearchTime = 105
+kArmor2ResearchCost = 35 kArmor2ResearchTime = 135
 kArmor3ResearchCost = 40 kArmor3ResearchTime = 120
 
 kAdvancedMarineSupportResearchCost = 20
@@ -618,7 +620,7 @@ kBioformSuppressProtocolCost = 0
 kBioformSuppressProtocolTime = 30
 kBioformSuppressRange = 58
 
-kMotionTrackInterval = 10
+kMotionTrackInterval = 12
 kMotionTrackMinSpeed = 6
 kMotionTrackResearchCost = 35
 kMotionTrackResearchTime = 90

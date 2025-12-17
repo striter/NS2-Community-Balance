@@ -130,13 +130,13 @@ kSupplyEachTechPoint = 40
 
 kMACSupply = 0
 kArmorySupply = 10
-kObservatorySupply = 25
-kARCSupply = 20
+kObservatorySupply = 35
+kARCSupply = 0
+kSentryBatterySupply = 30
 kSentrySupply = 0
-kSentryBatterySupply = 35
-kRoboticsFactorySupply = 10
+kRoboticsFactorySupply = 0
 kInfantryPortalSupply = 0
-kPhaseGateSupply = 0
+kPhaseGateSupply = 15
 kSentriesPerBattery = 3
 
 kDrifterSupply = 10
@@ -149,15 +149,15 @@ kShiftSupply = 20
 kMarinePhaseArmorDeduct = 20
 kMarineArmorDeductRegen = 20
 
-kMarineNanoArmorPerSecond = 4
-kJetpackMarineArmorPerSecond = 2
-kJetpackMarineNanoArmorPerSecond = 4
+kMarineNanoArmorPerSecond = 3
+kJetpackMarineArmorPerSecond = 0
+kJetpackMarineNanoArmorPerSecond = 3
 kExoArmorPerSecond = 8
 kExoNanoArmorPerSecond = 12
 --& Lifesustain
 kLifeRegenMaxCap = 0.8 kLifeSustainMaxCap = 1
-kLifeRegenHPS = 4   kLifeSustainHPS = 10
-kJetpackLifeRegenHPS = 4   kJetpackLifeSustainHPS = 10
+kLifeRegenHPS = 3   kLifeSustainHPS = 5
+kJetpackLifeRegenHPS = 3   kJetpackLifeSustainHPS = 5
 
 kOnFireHealingScalar = 0.5
 kOnFireEnergyRecuperationScalar = 1
