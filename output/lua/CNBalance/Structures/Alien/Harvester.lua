@@ -1,5 +1,7 @@
 Script.Load("lua/BiomassHealthMixin.lua")
 
+Harvester.kIgnoreDeadlock = true
+
 local baseOnCreate = Harvester.OnCreate
 function Harvester:OnCreate()
     baseOnCreate(self)

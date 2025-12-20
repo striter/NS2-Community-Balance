@@ -1,17 +1,16 @@
 kDeadlockTimeExtend = {
-    [kTechId.Extractor] = 60, [kTechId.PoweredExtractor] = 60,
+    [kTechId.Extractor] = 30, [kTechId.PoweredExtractor] = 45,
     [kTechId.PhaseGate] = 60,
     [kTechId.CommandStation] = 90, [kTechId.StandardStation] = 120, [kTechId.ExplosiveStation] = 120, [kTechId.ArmorStation] = 120, [ kTechId.ElectronicStation ] = 120,
     [kTechId.ARC] = 30,
     [kTechId.ARCDeploy] = 3,
     
-    [kTechId.Harvester] = 60,
+    [kTechId.Harvester] = 90,
     --[kTechId.Tunnel] = 60, [kTechId.InfestedTunnel] = 60, [kTechId.GorgeTunnel] = 60,
     [kTechId.Spur] = 30,[kTechId.Shell] = 30,[kTechId.Veil] = 30,
-    [kTechId.Hive] = 120, [kTechId.ShiftHive] = 150, [kTechId.CragHive] = 150, [kTechId.ShadeHive] = 150,
+    [kTechId.Hive] = 150, [kTechId.ShiftHive] = 150, [kTechId.CragHive] = 150, [kTechId.ShadeHive] = 150,
 }
 
-kDeadlockVisibleTime = 120
 kTechReputationByPass = {
     [kTechId.CombatBuilder] = 50,
     [kTechId.SubMachineGun] = 70,
@@ -129,7 +128,7 @@ kStartSupply = 120
 kSupplyEachTechPoint = 40
 
 kMACSupply = 0
-kArmorySupply = 10
+kArmorySupply = 15
 kObservatorySupply = 35
 kARCSupply = 0
 kSentryBatterySupply = 30
@@ -137,10 +136,11 @@ kSentrySupply = 0
 kRoboticsFactorySupply = 0
 kInfantryPortalSupply = 0
 kPhaseGateSupply = 15
+
 kSentriesPerBattery = 3
 
-kDrifterSupply = 10
-kWhipSupply = 8
+kDrifterSupply = 5
+kWhipSupply = 5
 kCragSupply = 20
 kShadeSupply = 20
 kShiftSupply = 20

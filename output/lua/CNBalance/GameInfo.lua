@@ -29,6 +29,7 @@ local networkVars =
     serverPort = "string (16)",
 
     marineDeadlockTime = "time",
+    alienDeadlockTime = "time",
 
     --Skins are in this class instead of TeamInfo so it's propagated to all clients since
     --the Team entities are only propagated to their respective team's clients.
@@ -62,6 +63,8 @@ function GameInfo:OnCreate()
         self:SetState(kGameState.NotStarted)
 
         self.startTime = 0
+        self.marineDeadlockTime = 0
+        self.alienDeadlockTime = 0
         self.averagePlayerSkill = 0
         self.numClientsTotal = 0
         self.numPlayers = 0
@@ -110,6 +113,14 @@ end
 
 function GameInfo:GetMarineDeadlockTime()
     return self.marineDeadlockTime
+end
+
+function GameInfo:IsAlienDeadlocking()
+    return self.alienDeadlockTime < Shared.GetTime()
+end
+
+function GameInfo:GetAlienDeadlockTime()
+    return self.alienDeadlockTime
 end
 
 function GameInfo:GetGameEnded()
@@ -280,6 +291,10 @@ if Server then
 
     function GameInfo:SetMarineDeadlockTime(time)
         self.marineDeadlockTime = time
+    end
+    
+    function GameInfo:SetAlienDeadlockTime(time)
+        self.alienDeadlockTime = time
     end
     
     function GameInfo:SetState(state)

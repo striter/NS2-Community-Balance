@@ -186,11 +186,16 @@ function PlayerUI_GetGameTimeString()
     local gameTimeString
 
     local deadlockTime = PlayerUI_GetDeadlockTimeLeft()
-    if deadlockTime < kDeadlockVisibleTime then
-        if deadlockTime > 0 then
-            gameTimeString = string.format(appender .. Locale.ResolveString(string.format("DEADLOCK_UNTIL_TEAM%i", teamIndex)),deadlockTime)
+    if deadlockTime < 180 then
+        local sign = deadlockTime > 0 and 1 or -1
+        deadlockTime = deadlockTime * sign
+        local deadlockSeconds = math.floor(deadlockTime % 60)
+        local deadlockMinutes = math.floor(deadlockTime / 60)
+        
+        if sign > 0 then
+            gameTimeString = string.format(appender .. Locale.ResolveString(string.format("DEADLOCK_UNTIL_TEAM%i", teamIndex)),minutes,seconds,deadlockMinutes,deadlockSeconds)
         else
-            gameTimeString = string.format(appender .. Locale.ResolveString(string.format("DEADLOCK_ACTIVATED_TEAM%i", teamIndex)),-deadlockTime)
+            gameTimeString = string.format(appender .. Locale.ResolveString(string.format("DEADLOCK_ACTIVATED_TEAM%i", teamIndex)),minutes,seconds,deadlockMinutes,deadlockSeconds)
         end
     else
         gameTimeString = string.format(Locale.ResolveString(string.format("GAME_LENGTH_TEAM%i", teamIndex)), minutes, seconds)

@@ -359,7 +359,7 @@ function NormalLightWorker:Run()
 
         if timePassed < startFullLightTime then
             -- we don't change lights or color during this period
-
+            
         elseif timePassed < fullFullLightTime then
 
             -- the period when lights start to come on, possibly with a little flickering
@@ -383,7 +383,7 @@ function NormalLightWorker:Run()
             self:RestoreColor(renderLight)
         end
 
-        if(deadlockScalar > 0.01) then
+        if intensity and (deadlockScalar > 0.01) then
             self:LerpColor(renderLight,PowerPoint.kDisabledColor,deadlockScalar)
             intensity = intensity * self:CheckFlicker(renderLight,PowerPoint.kFullFlickerChance,scalar)
         end

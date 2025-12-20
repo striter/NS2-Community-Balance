@@ -35,6 +35,7 @@ Script.Load("lua/BiomassHealthMixin.lua")
 class 'Extractor' (ResourceTower)
 
 Extractor.kMapName = "extractor"
+Extractor.kIgnoreDeadlock = true
 
 Extractor.kModelName = PrecacheAsset("models/marine/extractor/extractor.model")
 

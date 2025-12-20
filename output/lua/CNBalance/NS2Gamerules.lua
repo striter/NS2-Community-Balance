@@ -346,6 +346,7 @@
                  self:UpdateNumPlayersForScoreboard()
 
                  self.gameInfo:SetMarineDeadlockTime(self.team1.deadlockTime)
+                 self.gameInfo:SetAlienDeadlockTime(self.team2.deadlockTime)
                  if Shared.GetThunderdomeEnabled() then
                      GetThunderdomeRules():CheckForAutoConcede(self)
                  end

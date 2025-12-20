@@ -258,7 +258,7 @@ function PlayingTeam:UpdateDeadlock()
         local multiplier = math.pow(2,math.floor(deadlockTimeElapsed / 60) )
         local kDamagePercentage = 0.005 * multiplier
         if now > self.deadlockDamageInterval then
-            self.deadlockDamageInterval = now + 3
+            self.deadlockDamageInterval = now + 5
             for _, target in ipairs(GetEntitiesWithMixinForTeam("Construct", self:GetTeamNumber())) do
                 if not target.kIgnoreDeadlock and target.TakeDamage then
                     if not target.CanTakeDamage or target:CanTakeDamage() then

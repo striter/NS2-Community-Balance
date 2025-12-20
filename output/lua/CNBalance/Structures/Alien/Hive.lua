@@ -59,6 +59,7 @@ kResearchToHiveType =
 }
 
 Hive.kMapName = "hive"
+Hive.kIgnoreDeadlock = true
 
 PrecacheAsset("cinematics/vfx_materials/hive_frag.surface_shader")
 

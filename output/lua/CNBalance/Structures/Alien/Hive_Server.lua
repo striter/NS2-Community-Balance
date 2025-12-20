@@ -513,6 +513,13 @@ function Hive:OnUpdate(deltaTime)
 
     if self:GetIsAlive() then
         self:UpdateBiomassLevel()
+        local gameInfo = GetGameInfoEntity()
+        if gameInfo and gameInfo:IsAlienDeadlocking() then
+            self:SetDesiredInfestationRadius(0)
+        else
+            self:SetDesiredInfestationRadius(self:GetInfestationMaxRadius())
+        end
+        
     else
         local destructionAllowedTable = { allowed = true }
         if self.GetDestructionAllowed then
