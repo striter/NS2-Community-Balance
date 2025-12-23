@@ -117,7 +117,7 @@ kHeavyMachineGunCost = 20
 kHeavyMachineGunDropCost = 15
 kHeavyMachineGunDropCooldown = 0
 
-kHeavyMachineGunDamage = 7.5  --8
+kHeavyMachineGunDamage = 8  --8
 kHeavyMachineGunDamageType = kDamageType.MachineGun
 kHeavyMachineGunClipSize = 150  --100
 kHeavyMachineGunClipNum = 3 --4
@@ -255,7 +255,7 @@ kDragonBreathStructureFireDamagePerStack = { kStructureFireDOTPerSecond / 100, k
 kFlamethrowerStructureDamagePerStack = { kStructureFireDOTPerSecond, kStructureFireDOTPerSecond, kStructureFireDOTPerSecond, kStructureFireDOTPerSecond }
 kStructureFireDamageMaxStack = { kStructureFireDOTPerSecond * 3 , kStructureFireDOTPerSecond * 4, kStructureFireDOTPerSecond * 5, kStructureFireDOTPerSecond * 6  }
 
-kMinigunDamage = 9
+kMinigunDamage = 10
 kMinigunDamageType = kDamageType.Normal
 kRailgunDamage = 10
 kRailgunChargeDamage = 154
@@ -296,14 +296,14 @@ kSentryBatteryCost = 20
 kSentryBatteryBuildTime = 5
 
 kAdvancedArmoryUpgradeCost = 25
-kAdvancedArmoryResearchTime = 105
+kAdvancedArmoryResearchTime = 90
 kPrototypeLabCost = 25
 
 kCannonTechResearchCost = 15
 kCannonTechResearchTime = 60
 
 kJetpackTechResearchCost = 25
-kJetpackTechResearchTime = 120
+kJetpackTechResearchTime = 90
 
 kExosuitTechResearchCost = 20
 kExosuitTechResearchTime = 90
@@ -552,7 +552,7 @@ kWhipSlapDamage = 50
 kWhipBombardDamage = 45
 kWhipBombardDamageType = kDamageType.Structural
 
-kObservatoryScanCost = 4
+kObservatoryScanCost = 3
 kScanCooldown = 5
 kObservatoryDistressBeaconCost = 10
 
@@ -562,8 +562,8 @@ kWeapons1ResearchCost = 20 kWeapons1ResearchTime = 75
 kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 90
 kWeapons3ResearchCost = 45 kWeapons3ResearchTime = 120
 
-kArmor1ResearchCost = 25 kArmor1ResearchTime = 105
-kArmor2ResearchCost = 35 kArmor2ResearchTime = 135
+kArmor1ResearchCost = 25 kArmor1ResearchTime = 75
+kArmor2ResearchCost = 35 kArmor2ResearchTime = 90
 kArmor3ResearchCost = 40 kArmor3ResearchTime = 120
 
 kAdvancedMarineSupportResearchCost = 20
@@ -726,10 +726,10 @@ kTechRespawnTimeExtension =
 {
     --[kTechId.Armor1] = 0,[kTechId.Weapons1] = 0, [kTechId.Observatory] = 0,
     --[kTechId.MinesTech] = 0,[kTechId.ShotgunTech] = 0,
-    [kTechId.Armor2] = 3,[kTechId.Weapons2] = 3,
-    [kTechId.Armor3] = 5, [kTechId.Weapons3] = 5,
+    [kTechId.Armor2] = 2, [kTechId.Weapons2] = 2,
+    [kTechId.Armor3] = 4, [kTechId.Weapons3] = 4,
     --[kTechId.PhaseGate] = 0, [kTechId.AdvancedArmory] = 0,
-    [kTechId.ExosuitPrototypeLab] = 2, [kTechId.JetpackPrototypeLab] = 2,-- [kTechId.CannonPrototypeLab] = 2,
+    [kTechId.ExosuitPrototypeLab] = 3, [kTechId.JetpackPrototypeLab] = 3,-- [kTechId.CannonPrototypeLab] = 2,
     --[kTechId.DragonBreath] = 2, [kTechId.ArmorRegen] = 2,  [kTechId.MotionTrack] = 2, --[kTechId.MACEmpBlast] = 1,[kTechId.GrenadeLauncherUpgrade] = 1,
     
     --[kTechId.BioMassOne] = 0, [kTechId.BioMassTwo] = 0, 
@@ -737,7 +737,7 @@ kTechRespawnTimeExtension =
     [kTechId.BioMassFive] = 2, [kTechId.BioMassSix] = 2,
     --[kTechId.TwoVeils] = 1,[kTechId.ThreeVeils] = 1,[kTechId.TwoShells] = 1,[kTechId.ThreeShells] = 1,[kTechId.TwoSpurs] = 1, [kTechId.ThreeSpurs] = 1,
     [kTechId.BioMassSeven] = 3, [kTechId.BioMassEight] = 3,
-    [kTechId.BioMassNine] = 5, [kTechId.BioMassTen] = 5,
+    [kTechId.BioMassNine] = 4, [kTechId.BioMassTen] = 4,
     --[kTechId.BioMassEleven] = 1, [kTechId.BioMassTwelve] = 1,
 }
 

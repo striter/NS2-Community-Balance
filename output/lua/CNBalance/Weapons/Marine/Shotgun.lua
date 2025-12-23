@@ -1,6 +1,6 @@
 Shotgun.kDamageFalloffReductionFactor = 0.5 -- 50% reduction
-Shotgun.kDamageFalloffStart = 8 -- in meters, full damage closer than this.
-Shotgun.kDamageFalloffEnd = 15 -- in meters, minimum damage further than this, gradient between start/end.
+Shotgun.kDamageFalloffStart = 10 -- in meters, full damage closer than this.
+Shotgun.kDamageFalloffEnd = 20 -- in meters, minimum damage further than this, gradient between start/end.
 Shotgun.kShotgunRings =
 {
     { pelletCount = 1, distance = 0.0000, pelletSize = 0.03, pelletDamage = 10, thetaOffset = 0},

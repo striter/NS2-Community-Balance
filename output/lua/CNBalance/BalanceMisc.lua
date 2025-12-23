@@ -12,12 +12,16 @@ kDeadlockTimeExtend = {
 }
 
 kTechReputationByPass = {
-    [kTechId.CombatBuilder] = 50,
-    [kTechId.SubMachineGun] = 70,
-    [kTechId.Revolver] = 80,
-    [kTechId.Knife] = 90, 
+    [kTechId.Flamethrower] = 55,
+    [kTechId.GrenadeLauncher] = 55,
+    [kTechId.CombatBuilder] = 60,
+    [kTechId.SubMachineGun] = 80,
+    [kTechId.Revolver] = 90,
+    [kTechId.Knife] = 100, 
     [kTechId.Cannon] = 150,
     
+    [kTechId.Gorge] = 50,
+    [kTechId.Lerk] = 60,
     [kTechId.Prowler] = 100,
     [kTechId.Vokex] = 200,
 }
