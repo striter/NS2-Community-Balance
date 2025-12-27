@@ -1,4 +1,4 @@
-name        = "[CN] Natural Selection 2.0"
+name        = "[EN] Natural Selection 2.0"
 source_dir  = "source"
 output_dir  = "output"
 description = [=[[h1]| What is this[/h1]
@@ -40,8 +40,10 @@ description = [=[[h1]| What is this[/h1]
 - Still being active developing and heavily tested(daily)
 - About NS2CN: Active Developing Community from Asia.
 - Feel free to contact me if anything troubles
-- Original codes https://github.com/striter/NS2-Playground-Balance]=]
+- Original codes https://github.com/striter/NS2-Playground-Balance
+
+With many thanks to StriteR. and Rusty for help regarding the conversion of NS2.0 and server provision respectively.
+I, Joshua-Boo-Boos, very much appreciate your help.]=]
 image       = "preview.jpg"
 tag_modtype = "Gameplay Tweak"
 tag_support = "Must be run on Server"
-publish_id = 2733077552
