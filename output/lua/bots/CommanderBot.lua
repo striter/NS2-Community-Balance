@@ -54,7 +54,7 @@ end
 --  Override
 ------------------------------------------
 function CommanderBot:GetNamePrefix()
-    return "[指挥] "
+    return "[C] "
 end
 
 ------------------------------------------
