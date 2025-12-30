@@ -484,3 +484,11 @@ kLocales["BIOMASS_RECOVER_TOOLTIP"] = "Upgrade biomass level with lowerer cost."
 
 kLocales["MARK_THREAT"] = "Rally Point"
 kLocales["PHEROMONE_THREAT_TOOLTIP"] = "Setup the rally point.\n*Players within range gain pres reward continuously"
+
+kTranslateMessage["MATURITY_STATUS"]="成熟度:%.f%%"
+kTranslateMessage["RESOURCES_ALIEN"] = "进化因子"
+kTranslateMessage["RESOURCES_MARINE"] = "军需补给点"
+
+kLocales["MATURITY_STATUS"]="Maturity:%.f%%"
+kLocales["RESOURCES_ALIEN"] = "Evolve Matter"
+kLocales["RESOURCES_MARINE"] = "Supply Point"
