@@ -469,6 +469,7 @@ kLocales["VORTEX_SHADOWSTEP_TOOLTIP"] = "Cast a short life vortex.\n*Blink out e
 kLocales["DEVOUR"] = "Devour"
 kLocales["ONOS_DEVOUR"] = "Devour"
 kLocales["ONOS_DEVOUR_TOOLTIP"] = "Devour marines.\n-Will gain resistance when digesting.\n-Cannot use bone shield while digesting.\n-More weights means slower move speed."
+kLocales["STATUS_DEVOURED"] = "Digesting"
 
 kLocales["SHIFT_TUNNEL"] = "Tunnel Muscle"
 kLocales["SHIFT_TUNNEL_TOOLTIP"] = "*No more travelling for tunnel users."
