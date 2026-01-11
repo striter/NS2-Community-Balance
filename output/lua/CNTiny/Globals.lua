@@ -1,0 +1,1 @@
+debug.appendtoenum(kSpectatorMode,"Tinyman")

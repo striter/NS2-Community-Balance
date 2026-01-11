@@ -252,10 +252,11 @@ if kTranslateMessage then
     kTranslateMessage["HELP_SCREEN_ACIDROCKET_DESCRIPTION"] = "向前方发射一枚直线弹道酸液飞弹，就算对面在十万八千里都能够射中，更适合打那些固定建筑。"
     kTranslateMessage["HELP_SCREEN_VORTEX"] = "黑洞"
     kTranslateMessage["HELP_SCREEN_VORTEX_DESCRIPTION"] = "释放一个小型单位无法挣脱的黑洞，能够吸收经过的所有弹道物体，当心别吸到你的队友了！"
-    
-    
-    
-    
+
+    kTranslateMessage["RESOURCES_ALIEN"] = "进化因子"
+    kTranslateMessage["RESOURCES_MARINE"] = "军需补给点"
+    kTranslateMessage["VOTE_RANDOM_SCALE"]="全体玩家 - [随机大小]"
+    kTranslateMessage["VOTE_RANDOM_SCALE_QUERY"]="给所有人随机大小?"
 end
 
 if kLocales then
@@ -460,11 +461,11 @@ if kLocales then
     kLocales["VORTEX_SHADOWSTEP"] = "Vortex"
     kLocales["VORTEX_SHADOWSTEP_TOOLTIP"] = "Cast a short life vortex.\n*Blink out every passing projectiles.\n*Suckin nearby entities & deal minor damage."
 
-    
     kLocales["DEVOUR"] = "Devour"
     kLocales["ONOS_DEVOUR"] = "Devour"
     kLocales["ONOS_DEVOUR_TOOLTIP"] = "Devour marines.\n-Will gain resistance when digesting.\n-Cannot use bone shield while digesting.\n-More weights means slower move speed."
-
+    kLocales["STATUS_DEVOURED"] = "Digesting"
+    
     kLocales["SHIFT_TUNNEL"] = "Tunnel Muscle"
     kLocales["SHIFT_TUNNEL_TOOLTIP"] = "*No more travelling for tunnel users."
     kLocales["CRAG_TUNNEL"] = "Tunnel Shells"
@@ -479,4 +480,9 @@ if kLocales then
 
     kLocales["MARK_THREAT"] = "Rally Point"
     kLocales["PHEROMONE_THREAT_TOOLTIP"] = "Setup the rally point.\n*Players within range gain pres reward continuously"
+
+    kLocales["RESOURCES_ALIEN"] = "Evolve Matter"
+    kLocales["RESOURCES_MARINE"] = "Supply Point"
+    kLocales["VOTE_RANDOM_SCALE"]="Vote random scale"
+    kLocales["VOTE_RANDOM_SCALE_QUERY"]="Dispatch everyone random scale?"
 end
