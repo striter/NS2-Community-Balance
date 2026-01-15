@@ -25,16 +25,8 @@ function Team:PutPlayerInRespawnQueue(player)
             extraTime = math.max(0, player.spawnBlockTime - Shared.GetTime())
         end
         
-        --Extent the respawn time to prevent "bie bie le"
-        if self.GetTeamType then
-            local gameLength = Shared.GetTime() - GetGamerules():GetGameStartTime()
-            extraTime = extraTime + GetRespawnTimeExtend(player,self:GetTeamType(),gameLength)
-        end
-        
-        local team = player:GetTeam()
-        if team and team.GetRespawnTimeExtend then
-            extraTime = extraTime + team:GetRespawnTimeExtend()
-        end
+        -- REMOVED: All respawn time scaling based on game length, player count, tech, and IPs
+        -- Respawn times are now constant at base values (kMarineRespawnTime/kAlienSpawnTime)
         
         if player.spawnReductionTime then
             extraTime = extraTime * player.spawnReductionTime

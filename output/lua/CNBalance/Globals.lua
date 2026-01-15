@@ -55,28 +55,9 @@ function GetPlayersAboveLimit(team)
     return math.max(0,info.playerCount - kMatchMinPlayers)
 end
 
---local kEndGameBegin = 1200
---local kEndGameTolerance = 900
-
+-- MODIFIED: Function now returns 0 to disable all respawn time scaling
+-- Respawn times will always be the base values (kMarineRespawnTime = 9, kAlienSpawnTime = 10)
 function GetRespawnTimeExtend(player,teamIndex, _gameLength)
-    --_gameLength = _gameLength * 60
-    local x = _gameLength
-    --
-    --local respawnParam =  Clamp(math.max(0,x - kEndGameBegin) / kEndGameTolerance,0,1)
-    --respawnParam = respawnParam * respawnParam
-    local respawnExtension = 0  --Lerp(0,20,respawnParam)
-
-    local teamExtension = math.max(GetPlayersAboveLimit(teamIndex) - 2,0) * 1 + 2
-    for k,v in pairs(kTechRespawnTimeExtension) do
-        if GetHasTech(player,k) then
-            teamExtension = teamExtension + v
-        end
-    end
-
-    local info = GetTeamInfoEntity(teamIndex)
-    if info and info.numInfantryPortals then 
-        teamExtension = teamExtension + math.max(info.numInfantryPortals - 2,0) * 1
-    end
-    
-    return respawnExtension + teamExtension
+    -- All scaling removed - return 0 for constant respawn times
+    return 0
 end
