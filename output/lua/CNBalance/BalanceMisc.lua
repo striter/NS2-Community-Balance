@@ -137,7 +137,7 @@ kObservatorySupply = 35
 kARCSupply = 0
 kSentryBatterySupply = 30
 kSentrySupply = 0
-kRoboticsFactorySupply = 15
+kRoboticsFactorySupply = 0
 kInfantryPortalSupply = 0
 kPhaseGateSupply = 15
 
