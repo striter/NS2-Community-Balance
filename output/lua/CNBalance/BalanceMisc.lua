@@ -51,7 +51,7 @@ kLightMachineGunWeight = 0.13
 kRevolverWeight = 0
 
 kMaxInfantryPortalsPerCommandStation = 99
-kNumMines = 4
+kNumMines = 1 -- Was 4 mines for 20 p-res
 
 kGrenadeLauncherPlayersAlert = 0.15
 kFlameThrowerPlayersAlert = 0.15

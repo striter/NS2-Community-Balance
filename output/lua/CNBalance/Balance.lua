@@ -86,9 +86,9 @@ kGrenadeTechResearchTime = 45   --45
 
 kMaxARCs = 6
 
-kMineCost = 20
+kMineCost = 5 -- Was 20 p-res for 4 mines
 kMineDamage = 130
-kDropMineCost = 12
+kDropMineCost = 3 -- Was 12 for 4 mines? Therefore 3 each
 kDropMineCooldown = 0
 
 kShotgunTechResearchCost = 20
