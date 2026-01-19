@@ -43,6 +43,7 @@ local networkVars =
 {
     entranceDropped = "private boolean",
     exitDropped = "private boolean",
+    whipsDropped = "private integer (0 to 10)",
 }
 
 DropTeamStructureAbility.kMapName = "drop_team_structure_ability"
@@ -140,6 +141,10 @@ function DropTeamStructureAbility:GetNumStructuresBuilt(techId)
         return self.exitDropped and 1 or 0
     end
 
+    if techId == kTechId.Whip then
+        return self.whipsDropped or 0
+    end
+
     -- unlimited
     return -1
 end
@@ -155,6 +160,7 @@ function DropTeamStructureAbility:ProcessMoveOnWeapon(input)
             local team = player:GetTeam()
             self.entranceDropped = team:GetNumDroppedGorgeStructures(player, kTechId.Tunnel) > 0
             self.exitDropped = team:GetNumDroppedGorgeStructures(player, kTechId.TunnelExit) > 0
+            self.whipsDropped = team:GetNumDroppedGorgeStructures(player, kTechId.Whip)
         end
 
     end
@@ -170,6 +176,10 @@ function DropTeamStructureAbility:GetNumStructuresCanDrop(techId,biomassLevel)
 
     if techId == kTechId.TunnelExit then
         return TunnelExitAbility.GetMaxStructures(nil,biomassLevel)
+    end
+
+    if techId == kTechId.Whip then
+        return 3
     end
 
     -- unlimited
