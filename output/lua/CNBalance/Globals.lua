@@ -66,7 +66,7 @@ function GetRespawnTimeExtend(player,teamIndex, _gameLength)
     --respawnParam = respawnParam * respawnParam
     local respawnExtension = 0  --Lerp(0,20,respawnParam)
 
-    local teamExtension = math.max(GetPlayersAboveLimit(teamIndex) - 2,0) * 1 + 2
+    local teamExtension = math.max( GetPlayersAboveLimit(teamIndex) , 0 ) * 1
     for k,v in pairs(kTechRespawnTimeExtension) do
         if GetHasTech(player,k) then
             teamExtension = teamExtension + v

@@ -1,7 +1,6 @@
 
 ModLoader.SetupFileHook( "lua/Globals.lua", "lua/CNTiny/Globals.lua", "post")
 ModLoader.SetupFileHook( "lua/ServerAdminCommands.lua", "lua/CNTiny/ServerAdminCommands.lua", "post" )
-ModLoader.SetupFileHook( "lua/WallMovementMixin.lua", "lua/CNTiny/WallMovementMixin.lua", "post" )
 ModLoader.SetupFileHook( "lua/CrouchMoveMixin.lua", "lua/CNTiny/CrouchMoveMixin.lua", "post" )
 ModLoader.SetupFileHook( "lua/MarineVariantMixin.lua", "lua/CNTiny/MarineVariantMixin.lua", "post" )
 

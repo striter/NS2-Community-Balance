@@ -726,18 +726,18 @@ kTechRespawnTimeExtension =
 {
     --[kTechId.Armor1] = 0,[kTechId.Weapons1] = 0, [kTechId.Observatory] = 0,
     --[kTechId.MinesTech] = 0,[kTechId.ShotgunTech] = 0,
-    [kTechId.Armor2] = 2, [kTechId.Weapons2] = 2,
-    [kTechId.Armor3] = 4, [kTechId.Weapons3] = 4,
+    [kTechId.Armor2] = 1, [kTechId.Weapons2] = 1,
+    [kTechId.Armor3] = 2, [kTechId.Weapons3] = 2,
     --[kTechId.PhaseGate] = 0, [kTechId.AdvancedArmory] = 0,
-    [kTechId.ExosuitPrototypeLab] = 3, [kTechId.JetpackPrototypeLab] = 3,-- [kTechId.CannonPrototypeLab] = 2,
+    [kTechId.ExosuitPrototypeLab] = 2, [kTechId.JetpackPrototypeLab] = 2,-- [kTechId.CannonPrototypeLab] = 2,
     --[kTechId.DragonBreath] = 2, [kTechId.ArmorRegen] = 2,  [kTechId.MotionTrack] = 2, --[kTechId.MACEmpBlast] = 1,[kTechId.GrenadeLauncherUpgrade] = 1,
     
     --[kTechId.BioMassOne] = 0, [kTechId.BioMassTwo] = 0, 
     --[kTechId.BioMassThree] = 1, [kTechId.BioMassFour] = 1, 
-    [kTechId.BioMassFive] = 2, [kTechId.BioMassSix] = 2,
+    [kTechId.BioMassFive] = 1, [kTechId.BioMassSix] = 1,
     --[kTechId.TwoVeils] = 1,[kTechId.ThreeVeils] = 1,[kTechId.TwoShells] = 1,[kTechId.ThreeShells] = 1,[kTechId.TwoSpurs] = 1, [kTechId.ThreeSpurs] = 1,
-    [kTechId.BioMassSeven] = 3, [kTechId.BioMassEight] = 3,
-    [kTechId.BioMassNine] = 4, [kTechId.BioMassTen] = 4,
+    [kTechId.BioMassSeven] = 2, [kTechId.BioMassEight] = 2,
+    [kTechId.BioMassNine] = 2, [kTechId.BioMassTen] = 2,
     --[kTechId.BioMassEleven] = 1, [kTechId.BioMassTwelve] = 1,
 }
 
