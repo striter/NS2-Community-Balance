@@ -9,7 +9,7 @@ kResourceTowerResourceInterval = 6
 kTeamResourceWithoutTower = 0.5
 kMaxEfficiencyTowers = 3
 kTeamResourceEachTower = 1
-kPlayerResEachTower = 0.125 kPlayerResDeductionAboveLimit = 0
+kPlayerResEachTower = 0.125 kPlayerResDeductionAboveLimit = 0.0025
 kSecondInitialInfantryPortalMinPlayerCount = 8
 
 --Pres reward for aggressive playing (too many farmers?)

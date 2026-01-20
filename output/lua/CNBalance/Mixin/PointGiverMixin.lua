@@ -17,12 +17,12 @@ if Server then
 
         local _techID = self:GetTechId()
         local resRewardFraction = 1
-        --if selfIsPlayer and Shine then
-        --    local npEnabled, np = Shine:IsExtensionEnabled( "newcomerprotection" )
-        --    if npEnabled then
-        --        resRewardFraction = 1 - np:GetRefundPercent(self)
-        --    end
-        --end
+        if selfIsPlayer and Shine then
+            local npEnabled, np = Shine:IsExtensionEnabled( "newcomerprotection" )
+            if npEnabled then
+                resRewardFraction = 1 - np:GetRefundPercent(self)
+            end
+        end
         
         local pResReward = (kTechDataPersonalResOnKill[_techID] or 0)* resRewardFraction
         --Shared.Message(EnumToString(kTechId, _techID) .. " " .. tostring(pResReward))
