@@ -9,6 +9,11 @@ end
 function WhipAbility:OverrideInfestationCheck(_trace)
     return true
 end
+
+function WhipAbility:GetMaxStructures(biomass)
+    return 3
+end
+
 function WhipAbility:GetStructurePlaceSide(player)
     return GetHasTech(player,kTechId.OriginForm)
             and AdvancedStructureAbility.kStructurePlaceSide.All
