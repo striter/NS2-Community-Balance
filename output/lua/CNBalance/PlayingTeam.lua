@@ -254,9 +254,37 @@ end
 function PlayingTeam:UpdateDeadlock()
     local now = Shared.GetTime()
     if now > self.deadlockTime then
-        local deadlockTimeElapsed = now - self.deadlockTime
-        local multiplier = math.pow(2,math.floor(deadlockTimeElapsed / 60) )
-        local kDamagePercentage = 0.005 * multiplier
+        -- Count human players on both teams (ignore bots, spectators, ready room)
+        local humanPlayerCount = 0
+        local gamerules = GetGamerules()
+        if gamerules then
+            local team1 = gamerules:GetTeam(kTeam1Index)
+            local team2 = gamerules:GetTeam(kTeam2Index)
+            
+            if team1 then
+                for _, player in ipairs(team1:GetPlayers()) do
+                    if player and not player:GetIsVirtual() then
+                        humanPlayerCount = humanPlayerCount + 1
+                    end
+                end
+            end
+            
+            if team2 then
+                for _, player in ipairs(team2:GetPlayers()) do
+                    if player and not player:GetIsVirtual() then
+                        humanPlayerCount = humanPlayerCount + 1
+                    end
+                end
+            end
+        end
+        
+        -- Only apply deadlock damage if there are 10 or more human players
+        if humanPlayerCount < 10 then
+            return
+        end
+        
+        -- Fixed 2% damage per tick instead of exponential scaling
+        local kDamagePercentage = 0.02
         if now > self.deadlockDamageInterval then
             self.deadlockDamageInterval = now + 5
             for _, target in ipairs(GetEntitiesWithMixinForTeam("Construct", self:GetTeamNumber())) do
