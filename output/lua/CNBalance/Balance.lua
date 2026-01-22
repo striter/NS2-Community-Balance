@@ -310,7 +310,7 @@ kExosuitTechResearchTime = 90
 
 kRoboticsFactoryBuildTime = 8
 
-kJetpackCost = 25
+kJetpackCost = 18 -- Was 25 (CN server = 25)
 kJetpackDropCost = 18
 kJetpackDropCooldown = 0
 
