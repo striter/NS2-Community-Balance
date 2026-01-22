@@ -311,7 +311,7 @@ kExosuitTechResearchTime = 90
 kRoboticsFactoryBuildTime = 8
 
 kJetpackCost = 18 -- Was 25 (CN server = 25)
-kJetpackDropCost = 18
+kJetpackDropCost = 15 -- Was 18 (CN server = 18)
 kJetpackDropCooldown = 0
 
 --Cannon
