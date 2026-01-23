@@ -310,8 +310,8 @@ kExosuitTechResearchTime = 90
 
 kRoboticsFactoryBuildTime = 8
 
-kJetpackCost = 18 -- Was 25 (CN server = 25)
-kJetpackDropCost = 15 -- Was 18 (CN server = 18)
+kJetpackCost = 25
+kJetpackDropCost = 18
 kJetpackDropCooldown = 0
 
 --Cannon
@@ -601,7 +601,7 @@ kCombatBuilderDropCost = 5
 kCombatBuilderPointValue = 2
 
 kMarineSentryCost = 2
-kMarineSentryPersonalCost = 9
+kMarineSentryPersonalCost = 7
 kMarineSentryDamage = 3  kMarineSentryWeapon1Scalar = 1.11  kMarineSentryWeapon2Scalar = 1.22 kMarineSentryWeapon3Scalar = 1.33
 kMarineSentryBuildTime = 3
 
