@@ -63,7 +63,7 @@ function CommandStation:GetTechButtons()
         techButtons[4] = kTechId.MinesUpgrade
     end
     
-    techButtons[5] = kTechId.MilitaryProtocol
+    -- techButtons[5] = kTechId.MilitaryProtocol -- Disabled for now - No more Military Protocol
     
     return techButtons
 end
