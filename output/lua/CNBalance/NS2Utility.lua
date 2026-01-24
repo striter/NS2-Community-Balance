@@ -255,7 +255,9 @@ function ApplyPushback(target, disableDuration, velocity)
         if self.stampedeVars.disableDur > 0 then
             self:DisableGroundMove(self.stampedeVars.disableDur)
         end
-        self:SetVelocity(self.stampedeVars.velocity)
+        if self.SetVelocity then
+            self:SetVelocity(self.stampedeVars.velocity)
+        end
         self.stampedeVars = nil
     end, 0 )
 end
