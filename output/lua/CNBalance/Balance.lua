@@ -595,13 +595,15 @@ kNanoShieldCooldown = 5
 kNanoShieldDamageReductionDamage = 0.68
 
 kWelderPointValue = 1
+kSelfWeldAmount = 5
+kPlayerArmorWeldRate = 30
 
 kCombatBuilderCost = 3
 kCombatBuilderDropCost = 5
 kCombatBuilderPointValue = 2
 
 kMarineSentryCost = 2
-kMarineSentryPersonalCost = 9
+kMarineSentryPersonalCost = 7
 kMarineSentryDamage = 3  kMarineSentryWeapon1Scalar = 1.11  kMarineSentryWeapon2Scalar = 1.22 kMarineSentryWeapon3Scalar = 1.33
 kMarineSentryBuildTime = 3
 
