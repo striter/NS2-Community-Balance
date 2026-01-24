@@ -1,0 +1,1 @@
+ModLoader.SetupFileHook("lua/bots/BotUtils.lua", "lua/ENFixes/BotUtils.lua", "post")
