@@ -156,7 +156,7 @@ kMACEmpBlastDetectRadius = kPowerSurgeEMPDamageRadius
 kMACEmpBlastTriggerInterval = 5
 
 kExtractorCost = 10
-kPoweredExtractorCost = 30
+kPoweredExtractorCost = 20
 
 kPoweredExtractorResearchCost = nil--10
 kPoweredExtractorResearchTime = nil--60
@@ -297,15 +297,15 @@ kSentryBatteryBuildTime = 5
 
 kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 90
-kPrototypeLabCost = 25
+kPrototypeLabCost = 20
 
 kCannonTechResearchCost = 15
 kCannonTechResearchTime = 60
 
-kJetpackTechResearchCost = 25
-kJetpackTechResearchTime = 90
+kJetpackTechResearchCost = 30
+kJetpackTechResearchTime = 105
 
-kExosuitTechResearchCost = 20
+kExosuitTechResearchCost = 25
 kExosuitTechResearchTime = 90
 
 kRoboticsFactoryBuildTime = 8
@@ -562,8 +562,8 @@ kWeapons1ResearchCost = 20 kWeapons1ResearchTime = 75
 kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 90
 kWeapons3ResearchCost = 45 kWeapons3ResearchTime = 120
 
-kArmor1ResearchCost = 25 kArmor1ResearchTime = 75
-kArmor2ResearchCost = 35 kArmor2ResearchTime = 90
+kArmor1ResearchCost = 25 kArmor1ResearchTime = 90
+kArmor2ResearchCost = 35 kArmor2ResearchTime = 105
 kArmor3ResearchCost = 40 kArmor3ResearchTime = 120
 
 kAdvancedMarineSupportResearchCost = 20
