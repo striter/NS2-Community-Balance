@@ -189,7 +189,7 @@ function Mine:CheckEntityExplodesMine(entity)
         return false
     end
 
-    if not (entity:isa("Player") or entity:isa("Whip") or entity:isa("Babbler")) then
+    if not entity:isa("Player") or entity:isa("Whip") or entity:isa("Babbler") then
         return false
     end
 

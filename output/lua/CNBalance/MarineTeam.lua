@@ -265,14 +265,39 @@ function MarineTeam:IsMilitaryProtocol()
     return self.militaryProtocolTechNode:GetResearched()
 end
 
-function MarineTeam:OnTeamKill(_techId, _fraction)
+kHiveTechIdTable = {
+    kTechId.Hive,
+    kTechId.ShiftHive,
+    kTechId.CragHive,
+    kTechId.ShadeHive,
+}
 
-    local pRes = PlayingTeam.OnTeamKill(self, _techId,_fraction)
+function MarineTeam:OnTeamKill(_target,doer,_techId, _fraction)
+
+    local pRes = PlayingTeam.OnTeamKill(self,_target,doer, _techId,_fraction)
     if self:IsMilitaryProtocol() then
         local tRes = (kMilitaryProtocolTeamResourcesPerKill[_techId] or 0) * _fraction
         if tRes > 0 then
             self:AddTeamResources(tRes)  
         end
+    end
+
+    if table.contains(kHiveTechIdTable,_techId)  and self:GetNumCapturedTechPoints() == 0 then
+        local techPoint =  _target:GetAttached()
+
+        if techPoint then
+            techPoint:ClearAttached()
+            _target:ClearAttached()
+
+            local commandStructure = techPoint:SpawnCommandStructure(self:GetTeamNumber())
+            assert(commandStructure ~= nil)
+            commandStructure:Construct(5,doer)
+
+            local techPointCoords = techPoint:GetCoords()
+            techPointCoords.origin = commandStructure:GetOrigin()
+            commandStructure:SetCoords(techPointCoords)
+        end
+        
     end
     
     return pRes

@@ -37,7 +37,7 @@ if Server then
                 if selfIsPlayer then
                     self:ClaimBounty()
                 end
-                pResReward = pResReward + attackerTeam:OnTeamKill(_techID, resRewardFraction)
+                pResReward = pResReward + attackerTeam:OnTeamKill(self,doer,_techID, resRewardFraction)
             end
         end
 

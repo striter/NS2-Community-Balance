@@ -91,9 +91,9 @@ function PlayingTeam:Update()
     end
 end
 
-function PlayingTeam:OnTeamKill(techID, _fraction)
-    self:OnDeadlockExtend(techID)
-    local tResReward = kTechDataTeamResOnKill[techID]
+function PlayingTeam:OnTeamKill(_target,_doer, _techId, _fraction)
+    self:OnDeadlockExtend(_techId)
+    local tResReward = kTechDataTeamResOnKill[_techId]
     if tResReward then
         self:AddTeamResources(tResReward * _fraction,true)      --Treat this as income
     end
