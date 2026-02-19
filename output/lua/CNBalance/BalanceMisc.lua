@@ -24,6 +24,11 @@ kTechReputationByPass = {
     [kTechId.Lerk] = 60,
     [kTechId.Prowler] = 100,
     [kTechId.Vokex] = 200,
+    [kTechId.OriginFormResourceFetch] = 120,
+}
+
+kTechIdMemberLevelByPass = {
+    [kTechId.Condense] = 2   
 }
 
 --Gorge Ability

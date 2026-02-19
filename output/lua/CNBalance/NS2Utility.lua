@@ -250,7 +250,12 @@ function ApplyPushback(target, disableDuration, velocity)
     }
 
     target:AddTimedCallback(function(self)
-        if not self.stampedeVars then return end
+        if not self.SetVelocity 
+            or not self.stampedeVars
+        then
+            self.stampedeVars = nil
+            return 
+        end
 
         if self.stampedeVars.disableDur > 0 then
             self:DisableGroundMove(self.stampedeVars.disableDur)
@@ -301,16 +306,24 @@ end
 
 if Client then
     
-    function GetTechRestricted(techId)
+    function GetTechReputationRequired(techId)
         local reputationRequirement = kTechReputationByPass[techId]
-        if not reputationRequirement then return false end
+        if not reputationRequirement then return false,0 end
         local player = Client.GetLocalPlayer()
-        --local skill = player:GetPlayerTeamSkill()
-        --if skill > 2100 then return false end
         
         local reputation = Scoreboard_GetPlayerRecord(player:GetClientIndex()).reputation
         if not reputation then return false end
         
         return reputation < reputationRequirement, reputationRequirement
     end 
+    
+    function GetTechMemberLevelRequired(techId)
+
+        local memberLevelRequirement = kTechIdMemberLevelByPass[techId]
+        if not memberLevelRequirement then return false,0 end
+        local player = Client.GetLocalPlayer()
+
+        local memberLevel = Scoreboard_GetPlayerRecord(player:GetClientIndex()).memberLevel
+        return memberLevel < memberLevelRequirement , memberLevelRequirement
+    end
 end

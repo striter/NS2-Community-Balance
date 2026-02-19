@@ -1,12 +1,5 @@
 if Client then
 
-    local baseOnInitialized = SoundEffect.OnInitialized
-    function SoundEffect:OnInitialized()
-        baseOnInitialized(self)
-        local assetName = Shared.GetSoundName(self.assetIndex)
-        self.balanceVoice = string.find(assetName, "ns2plus.fev") ~= nil
-    end
-
     local function CustomBalanceVoice(self)
         if not self.balanceVoice then
             return
@@ -21,23 +14,31 @@ if Client then
         end
     end
 
-    local baseOnUpdate = SoundEffect.OnUpdate
-    function SoundEffect:OnUpdate(deltaTime)
-        baseOnUpdate(self)
+    local baseOnInitialized = SoundEffect.OnInitialized
+    function SoundEffect:OnInitialized()
+        baseOnInitialized(self)
+        local assetName = Shared.GetSoundName(self.assetIndex)
+        self.balanceVoice = string.find(assetName, "ns2plus.fev") ~= nil
         CustomBalanceVoice(self)
     end
 
-    local baseOnProcessMove = SoundEffect.OnProcessMove
-    function SoundEffect:OnProcessMove()
-        baseOnProcessMove(self)
-        CustomBalanceVoice(self)
-    end
-
-    local baseOnProcessSpectate = SoundEffect.OnProcessSpectate
-    function SoundEffect:OnProcessSpectate()
-        baseOnProcessSpectate(self)
-        CustomBalanceVoice(self)
-    end
+    --local baseOnUpdate = SoundEffect.OnUpdate
+    --function SoundEffect:OnUpdate(deltaTime)
+    --    baseOnUpdate(self)
+    --    CustomBalanceVoice(self)
+    --end
+    --
+    --local baseOnProcessMove = SoundEffect.OnProcessMove
+    --function SoundEffect:OnProcessMove()
+    --    baseOnProcessMove(self)
+    --    CustomBalanceVoice(self)
+    --end
+    --
+    --local baseOnProcessSpectate = SoundEffect.OnProcessSpectate
+    --function SoundEffect:OnProcessSpectate()
+    --    baseOnProcessSpectate(self)
+    --    CustomBalanceVoice(self)
+    --end
 
     -- Effects
     local function GetVolume(soundEffectName,volume)

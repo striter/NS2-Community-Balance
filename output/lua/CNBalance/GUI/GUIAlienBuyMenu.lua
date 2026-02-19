@@ -250,7 +250,7 @@ function GUIAlienBuyMenu:_InitializeSlots()
 	end
 
 	if GetHasTech(Client.GetLocalPlayer(), kTechId.OriginForm) then
-		local angle = math.pi * 1
+		local angle = math.pi * -0.1
 		CreateSlot(self, kTechId.OriginForm)
 		self.slots[4].Graphic:SetPosition( Vector( math.cos(angle) * distance - GUIAlienBuyMenu.kSlotSize * .5, math.sin(angle) * distance - GUIAlienBuyMenu.kSlotSize * .5, 0) )
 		self.slots[4].Angle = angle
@@ -1103,8 +1103,38 @@ local function GetNumberOfSelectedUpgrades(self)
 
 end
 
-local function GetIsRestricted(type)
-	return GetTechRestricted(IndexToAlienTechId(type))
+local function GetReputationRestricted(self,type)
+
+    local restricted,maxRequirement = GetTechReputationRequired(IndexToAlienTechId(type))
+    for i, currentButton in ipairs(self.upgradeButtons) do
+
+        if currentButton.Selected  then
+            local reputationRestricted,requirement = GetTechReputationRequired(currentButton.TechId)
+            if reputationRestricted then
+                maxRequirement = math.max(maxRequirement,requirement);
+                restricted = true
+            end
+        end
+    end
+
+    return restricted,maxRequirement
+end
+
+local function GetMemberLevelRestricted(self,type)
+
+    local restricted,maxRequirement = GetTechMemberLevelRequired(IndexToAlienTechId(type))
+    for i, currentButton in ipairs(self.upgradeButtons) do
+
+        if currentButton.Selected  then
+            local reputationRestricted,requirement = GetTechMemberLevelRequired(currentButton.TechId)
+            if reputationRestricted then
+                maxRequirement = math.max(maxRequirement,requirement);
+                restricted = true
+            end
+        end
+    end
+
+    return restricted,maxRequirement
 end
 
 local function GetIsDisabled(type)
@@ -1169,19 +1199,23 @@ local function UpdateEvolveButton(self)
 	local hasGameStarted = PlayerUI_GetHasGameStarted()
 	local evolveText = Locale.ResolveString("ABM_GAME_NOT_STARTED")
 	local evolveCost
-	local restricted, requirement = GetIsRestricted(self.selectedAlienType)
+	local reputationRestriction, reputationRequirement = GetReputationRestricted(self,self.selectedAlienType)
+    local memberLevelRestriction, memberLevelRequirement = GetMemberLevelRestricted(self,self.selectedAlienType)
 
 	local resourceFetchValid, fetchingKey = ResourceFetchingDisabled(self,self.selectedAlienType)
 	
 	if GetIsDisabled(self.selectedAlienType) then
 		evolveButtonTextureCoords = GUIAlienBuyMenu.kEvolveButtonNeedResourcesTextureCoordinates
 		evolveText = Locale.ResolveString("ABM_DISABLED")
+    elseif memberLevelRestriction then
+        evolveButtonTextureCoords = GUIAlienBuyMenu.kEvolveButtonNeedResourcesTextureCoordinates
+        evolveText = string.format(Locale.ResolveString("ABM_MEMBER_LEVEL"), memberLevelRequirement)
+    elseif reputationRestriction then
+        evolveButtonTextureCoords = GUIAlienBuyMenu.kEvolveButtonNeedResourcesTextureCoordinates
+        evolveText = string.format(Locale.ResolveString("ABM_REPUTATION"), reputationRequirement)
 	elseif resourceFetchValid then
 		evolveButtonTextureCoords = GUIAlienBuyMenu.kEvolveButtonNeedResourcesTextureCoordinates
 		evolveText = Locale.ResolveString(fetchingKey)
-	elseif restricted then
-		evolveButtonTextureCoords = GUIAlienBuyMenu.kEvolveButtonNeedResourcesTextureCoordinates
-		evolveText = string.format(Locale.ResolveString("ABM_RANK"), requirement)
 	elseif hasGameStarted then
 
 		evolveText = Locale.ResolveString("ABM_SELECT_UPGRADES")
@@ -1380,9 +1414,9 @@ function GUIAlienBuyMenu:_UpdateAlienButtons()
 		-- Don't bother updating anything else unless it is visible.
 		if buttonIsVisible then
 
-			local restricted = GetIsRestricted(alienButton.TypeData.Index)
+			local reputationDisbaled = GetReputationRestricted(self,alienButton.TypeData.Index)
 			local isCurrentAlien = AlienBuy_GetCurrentAlien() == alienButton.TypeData.Index
-			if restricted or GetIsDisabled(alienButton.TypeData.Index) or ResourceFetchingDisabled(self,alienButton.TypeData.Index) then
+			if reputationDisbaled or GetIsDisabled(alienButton.TypeData.Index) or ResourceFetchingDisabled(self,alienButton.TypeData.Index) then
 				alienButton.Button:SetColor(GUIAlienBuyMenu.kDisabledColor)
 			elseif researched and (isCurrentAlien or self:_GetCanAffordAlienType(alienButton.TypeData.Index)) then
 				alienButton.Button:SetColor(GUIAlienBuyMenu.kEnabledColor)
@@ -1432,6 +1466,13 @@ function GUIAlienBuyMenu:_UpdateUpgrades(deltaTime)
 
 	local categoryHasSelected = {}
 
+    local isGorge = self.selectedAlienType == AlienTechIdToIndex(kTechId.Gorge)
+    for k, slot in ipairs(self.slots) do
+        if slot.Category == kTechId.OriginForm then
+            slot.Graphic:SetVisible(isGorge)
+        end
+    end
+    
 	for i, currentButton in ipairs(self.upgradeButtons) do
 
 		local useColor = kDefaultColor
@@ -1452,6 +1493,7 @@ function GUIAlienBuyMenu:_UpdateUpgrades(deltaTime)
 		end
 
 		currentButton.Icon:SetColor(useColor)
+        
 
 		if currentButton.Selected then
 			categoryHasSelected[ currentButton.Category ] = true
@@ -1460,17 +1502,21 @@ function GUIAlienBuyMenu:_UpdateUpgrades(deltaTime)
 			currentButton.Icon:SetPosition(currentButton.UnselectedPosition)
 		end
 
-		if self:_GetIsMouseOver(currentButton.Icon) then
+        local visible = currentButton.Category ~= kTechId.OriginForm or isGorge
+        currentButton.Icon:SetVisible(visible)
+        if visible then
+            if self:_GetIsMouseOver(currentButton.Icon) then
 
-			local currentUpgradeInfoText = GetDisplayNameForTechId(currentButton.TechId)
-			local tooltipText = GetTooltipInfoText(currentButton.TechId)
+                local currentUpgradeInfoText = GetDisplayNameForTechId(currentButton.TechId)
+                local tooltipText = GetTooltipInfoText(currentButton.TechId)
 
-			--local health = LookupTechData(currentButton.TechId, kTechDataMaxHealth)
-			--local armor = LookupTechData(currentButton.TechId, kTechDataMaxArmor)
+                --local health = LookupTechData(currentButton.TechId, kTechDataMaxHealth)
+                --local armor = LookupTechData(currentButton.TechId, kTechDataMaxArmor)
 
-			self:_ShowMouseOverInfo(currentUpgradeInfoText, tooltipText, GetUpgradeCostForLifeForm(Client.GetLocalPlayer(), self.selectedAlienType, currentButton.TechId))
+                self:_ShowMouseOverInfo(currentUpgradeInfoText, tooltipText, GetUpgradeCostForLifeForm(Client.GetLocalPlayer(), self.selectedAlienType, currentButton.TechId))
 
-		end
+            end
+        end
 
 	end
 
@@ -1626,8 +1672,9 @@ function GUIAlienBuyMenu:SendKeyEvent(key, down)
 
 			-- Check if the evolve button was selected.
 			local allowedToEvolve = GetCanAffordAlienTypeAndUpgrades(self, self.selectedAlienType) and PlayerUI_GetHasGameStarted()
-			allowedToEvolve = allowedToEvolve and GetAlienOrUpgradeSelected(self)
-			allowedToEvolve = allowedToEvolve and not GetIsRestricted(self.selectedAlienType)
+			allowedToEvolve = allowedToEvolve and GetAlienOrUpgradeSelected(self) 
+			allowedToEvolve = allowedToEvolve and not GetReputationRestricted(self,self.selectedAlienType)
+            allowedToEvolve = allowedToEvolve and not GetMemberLevelRestricted(self,self.selectedAlienType)
 			allowedToEvolve = allowedToEvolve and not GetIsDisabled(self.selectedAlienType)
 			allowedToEvolve = allowedToEvolve and not ResourceFetchingDisabled(self,self.selectedAlienType)
 			
@@ -1737,7 +1784,7 @@ function GUIAlienBuyMenu:_HandleUpgradeClicked(mouseX, mouseY)
 		local allowedToUnselect = currentButton.Selected
 		local allowedToPuchase = not currentButton.Selected and self:GetCanSelect(currentButton)
 
-		if (allowedToUnselect or allowedToPuchase) and self:_GetIsMouseOver(currentButton.Icon) then
+		if (allowedToUnselect or allowedToPuchase) and self:_GetIsMouseOver(currentButton.Icon) and currentButton.Icon:GetIsVisible() then
 
 			-- Deselect or Select current button
 			ToggleButton( self, currentButton )

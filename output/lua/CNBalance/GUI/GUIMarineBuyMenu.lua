@@ -325,7 +325,7 @@ local kTechIdStats =
 }
 
 local function GetIsRestricted(techId)
-    return GetTechRestricted(techId)
+    return GetTechReputationRequired(techId)
 end
 
 local function GetStatsForTechId(techId)

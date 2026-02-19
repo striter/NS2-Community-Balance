@@ -9,7 +9,7 @@ local networkVars =
 }
 
 -- Make sure to keep damage vs. structures less then Skulk
-SwipeShadowStep.kSwipeEnergyCost = kSwipeEnergyCost
+SwipeShadowStep.kSwipeEnergyCost = kSwipeShadowStepEnergyCost
 SwipeShadowStep.kDamage = kSwipeShadowStepDamage
 SwipeShadowStep.kRange = 1.6
 

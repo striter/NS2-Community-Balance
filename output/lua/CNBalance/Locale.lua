@@ -1,7 +1,8 @@
 
 if kTranslateMessage then
     kTranslateMessage["BUYMENU_ERROR_RANKREQUIRED"] = "信誉值需达到[%s]"
-    kTranslateMessage["ABM_RANK"] = "需要信誉值达到[%s]"
+    kTranslateMessage["ABM_REPUTATION"] = "需要信誉值达到[%s]"
+    kTranslateMessage["ABM_MEMBER_LEVEL"] = "需要昌吉社工等级[%s]"
     kTranslateMessage["ABM_DISABLED"] ="原型测试中"
 
     kTranslateMessage["RESPAWN_EXTEND_TEAM0"] = "战局清理中"
@@ -161,8 +162,11 @@ if kTranslateMessage then
     kTranslateMessage["ORIGIN_FORM_PASSIVE"]="原始族群"
     kTranslateMessage["ORIGIN_FORM_PASSIVE_TOOLTIP"]="当场内母巢获得属性升级后.\n可选择演化为原始族群."
 
-    kTranslateMessage["ORIGIN_FORM_RESOURCE_FETCH"]="资源池获取"
+    kTranslateMessage["ORIGIN_FORM_RESOURCE_FETCH"]="资源池同步"
     kTranslateMessage["ORIGIN_FORM_RESOURCE_FETCH_TOOLTIP"]="获取团队资源以用于建造.\n使部分团队资源转为个人资源.\n*在资源不足的情况下无法使用/失效."
+
+    kTranslateMessage["CONDENSE"]="坍缩"
+    kTranslateMessage["CONDENSE_TOOLTIP"]="*获得更小的体型.\n-略微降低移动速率."
     kTranslateMessage["ABM_GORGE"] ="仅[Gorge]可用"
     kTranslateMessage["ABM_RESOURCE_LOW"] ="资源不足以同步"
 
@@ -262,7 +266,8 @@ end
 if kLocales then
     
     kLocales["BUYMENU_ERROR_RANKREQUIRED"] = "Reputation Required(%s)"
-    kLocales["ABM_RANK"] ="Reputation Required (%s)"
+    kLocales["ABM_REPUTATION"] ="Reputation Required (%s)"
+    kLocales["ABM_MEMBER_LEVEL"] = "SI Level Required[%s]"
     kLocales["ABM_DISABLED"] ="Developing"
 
     kLocales["RESPAWN_EXTEND_TEAM0"] = "Round Finishing"
@@ -418,6 +423,8 @@ if kLocales then
     
     kLocales["ORIGIN_FORM_RESOURCE_FETCH"]="Biomass Fetch"
     kLocales["ORIGIN_FORM_RESOURCE_FETCH_TOOLTIP"]="Convert team resources into personal.\nGets personal resource once upgraded.\n*Disabled when team resources low."
+    kLocales["CONDENSE"]="Condense"
+    kLocales["CONDENSE_TOOLTIP"]="*Became smaller than usual.\n-Slower movement."
     kLocales["ABM_GORGE"] ="Only [Gorge] Available"
     kLocales["ABM_RESOURCE_LOW"] ="Team Resources Low"
     

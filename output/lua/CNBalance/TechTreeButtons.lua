@@ -86,7 +86,8 @@ kTechIdToMaterialOffset[kTechId.ShiftHiveBiomassPreserve] = 2
 kTechIdToMaterialOffset[kTechId.ShadeHiveBiomassPreserve] = 2
 kTechIdToMaterialOffset[kTechId.CragHiveBiomassPreserve] = 2
 
-kTechIdToMaterialOffset[kTechId.Devour] = 109 
+kTechIdToMaterialOffset[kTechId.Devour] = 109
+kTechIdToMaterialOffset[kTechId.Condense] = 67
 
 kTechIdToMaterialOffset[kTechId.WeaponCache] = 1
 kTechIdToMaterialOffset[kTechId.MarineSentry] = 5

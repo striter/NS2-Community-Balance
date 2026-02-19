@@ -6,5 +6,5 @@ end
 
 
 function Onos:GetCrouchShrinkAmount()
-    return 0.4 * self.scale
+    return 0.4 * self:GetPlayerScale()
 end

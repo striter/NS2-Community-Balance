@@ -36,6 +36,7 @@ ModLoader.SetupFileHook("lua/ServerStats.lua", "lua/CNBalance/ServerStats.lua", 
 --GUI
 ModLoader.SetupFileHook("lua/Hud/HelpScreen/HelpScreenContent.lua", "lua/CNBalance/GUI/HelpScreenContent.lua", "post")
 ModLoader.SetupFileHook("lua/GUIMinimapFrame.lua", "lua/CNBalance/GUI/GUIMinimapFrame.lua", "post")
+ModLoader.SetupFileHook("lua/GUIUpgradeChamberDisplay.lua", "lua/CNBalance/GUI/GUIUpgradeChamberDisplay.lua", "replace")
 ModLoader.SetupFileHook("lua/Hud2/topBar/GUIHudTopBarObjectClasses.lua", "lua/CNBalance/GUI/GUIHudTopBarObjectClasses.lua", "replace")
 ModLoader.SetupFileHook("lua/GUIMinimap.lua", "lua/CNBalance/GUI/GUIMinimap.lua", "replace" )
 ModLoader.SetupFileHook("lua/GUIMinimapConnection.lua", "lua/CNBalance/GUI/GUIMinimapConnection.lua", "replace" )
@@ -200,6 +201,7 @@ ModLoader.SetupFileHook("lua/AlienUpgradeManager.lua", "lua/CNBalance/AlienUpgra
 
 ModLoader.SetupFileHook("lua/Alien.lua", "lua/CNBalance/Alien.lua", "post")
 ModLoader.SetupFileHook("lua/Alien_Server.lua", "lua/CNBalance/Alien_Server.lua", "post")
+ModLoader.SetupFileHook("lua/Alien_Upgrade.lua", "lua/CNBalance/Alien_Upgrade.lua", "replace")
 ModLoader.SetupFileHook("lua/Skulk.lua", "lua/CNBalance/Lifeforms/Skulk.lua", "post")
 ModLoader.SetupFileHook("lua/Gorge.lua", "lua/Prowler/Prowler.lua", "post")     --Hack
 ModLoader.SetupFileHook("lua/Fade.lua", "lua/CNBalance/Lifeforms/Vokex.lua", "post")     --Hack

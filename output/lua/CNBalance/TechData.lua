@@ -1170,6 +1170,14 @@ function BuildTechData()
     })
 
     table.insert(techData, {
+        [kTechDataId] = kTechId.Condense,
+        [kTechDataCategory] = kTechId.ShiftHive,
+        [kTechDataDisplayName] = "CONDENSE",
+        [kTechDataTooltipInfo] = "CONDENSE_TOOLTIP",
+        [kTechDataCostKey] = kCelerityCost,
+    })
+
+    table.insert(techData, {
         [kTechDataId] = kTechId.OriginFormResourceFetch,
         [kTechDataCategory] = kTechId.OriginForm,
         [kTechDataDisplayName] = "ORIGIN_FORM_RESOURCE_FETCH",

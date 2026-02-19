@@ -68,6 +68,7 @@ debug.appendtoenum(kTechId, "HeavyMarine")
 debug.appendtoenum(kTechId, "OriginForm")
 debug.appendtoenum(kTechId, "OriginFormPassive")
 debug.appendtoenum(kTechId, "OriginFormResourceFetch")
+debug.appendtoenum(kTechId, "Condense")
 
 debug.appendtoenum(kTechId, "ShiftTunnel")
 debug.appendtoenum(kTechId, "CragTunnel")

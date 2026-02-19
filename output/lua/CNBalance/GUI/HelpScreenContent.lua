@@ -149,7 +149,7 @@ function HelpScreen_InitializeContent()
         theme = "alien",
         useLocale = true,
     })
-    HelpScreen_AddContent({
+    HelpScreen_ReplaceContent({
         name = "Metabolize",
         title = "HELP_SCREEN_METABOLIZE",
         --requirementFunction = function()
@@ -161,7 +161,7 @@ function HelpScreen_InitializeContent()
         actions = {
             { "MovementModifier", },
         },
-        classNames = {"Vokex"},
+        classNames = {"Vokex","Fade"},
         theme = "alien",
         useLocale = true,
     })

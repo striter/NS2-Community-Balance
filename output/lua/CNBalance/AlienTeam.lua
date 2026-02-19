@@ -1032,6 +1032,7 @@ function AlienTeam:InitTechTree()
     self.techTree:AddBuyNode(kTechId.Crush, kTechId.Spur, kTechId.None, kTechId.AllAliens)
     self.techTree:AddBuyNode(kTechId.Celerity, kTechId.Spur, kTechId.None, kTechId.AllAliens)
     self.techTree:AddBuyNode(kTechId.Adrenaline, kTechId.Spur, kTechId.None, kTechId.AllAliens)
+    self.techTree:AddBuyNode(kTechId.Condense, kTechId.Spur, kTechId.None, kTechId.AllAliens)
 
     -- Crag
     self.techTree:AddPassive(kTechId.CragHeal)
@@ -1329,7 +1330,7 @@ local kUpgradeStructureTable =
         name = "Spur",
         techId = kTechId.Spur,
         upgrades = {
-            kTechId.Crush, kTechId.Celerity, kTechId.Adrenaline
+            kTechId.Crush, kTechId.Celerity, kTechId.Adrenaline,kTechId.Condense
         }
     }
 }
