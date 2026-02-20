@@ -1460,7 +1460,7 @@ end
 
 local kDefaultColor = Color(kIconColors[kAlienTeamType])
 local kNotAvailableColor = Color(0.0, 0.0, 0.0, 1)
-local kNotAllowedColor = Color(1, 0,0,1)
+local kNotAllowedColor = Color(213/255.0, 216/255.0,220/255.0,0.5)
 local kPurchasedColor = Color(1, 0.6, 0, 1)
 
 function GUIAlienBuyMenu:_UpdateUpgrades(deltaTime)
@@ -1480,6 +1480,8 @@ function GUIAlienBuyMenu:_UpdateUpgrades(deltaTime)
 
 		if currentButton.Purchased then
 			useColor = kPurchasedColor
+        elseif GetTechReputationRequired(currentButton.TechId) or GetTechMemberLevelRequired(currentButton.TechId) then
+            useColor = kNotAllowedColor
 
 		elseif not AlienBuy_GetTechAvailable(currentButton.TechId) then
 			useColor = kNotAvailableColor
