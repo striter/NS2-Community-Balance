@@ -25,6 +25,10 @@ kTechReputationByPass = {
     [kTechId.Prowler] = 100,
     [kTechId.Vokex] = 200,
     [kTechId.OriginFormResourceFetch] = 120,
+    
+    [kTechId.Focus] = 150,
+    [kTechId.Vampirism] = 150,
+    [kTechId.Crush] = 150,
 }
 
 kTechIdMemberLevelByPass = {
