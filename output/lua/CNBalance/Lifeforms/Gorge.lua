@@ -65,7 +65,7 @@ function Gorge:UpdateGorgeSliding(input)
         self.startedSliding = true
 
         if Server then
-            if (GetHasSilenceUpgrade(self) and self:GetVeilLevel() == 0) or not GetHasSilenceUpgrade(self) then
+            if (GetHasSilenceUpgrade(self) and self:GetSpurLevel() == 0) or not GetHasSilenceUpgrade(self) then
                 self.slideLoopSound:Start()
             end
         end

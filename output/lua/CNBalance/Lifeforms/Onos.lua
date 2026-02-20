@@ -125,6 +125,24 @@ function Onos:GetMaxSpeed(possible)
 
 end
 
+function Onos:TriggerCharge(move)
+
+    if not self.charging and self:GetHasMovementSpecial() and self.timeLastChargeEnd + Onos.kChargeDelay < Shared.GetTime()
+            and self:GetIsOnGround() and not self:GetCrouching() and not self:GetIsBoneShieldActive() then
+
+        self.charging = true
+        self.timeLastCharge = Shared.GetTime()
+
+        if Server and (GetHasSilenceUpgrade(self) and self:GetSpurLevel() == 0) or not GetHasSilenceUpgrade(self) then
+            self:TriggerEffects("onos_charge")
+        end
+
+        self:TriggerUncloak()
+
+    end
+
+end
+
 function Onos:ModifyCelerityBonus( celerityBonus )
 
     if self:GetIsBoneShieldActive()
@@ -141,9 +159,12 @@ end
 function Onos:UpdateRumbleSound()
 
     if Client then
-
         local rumbleSound = Shared.GetEntity(self.rumbleSoundId)
         local speed = self:GetCrouching() and 0 or self:GetSpeedScalar()
+        local spurLevel = self:GetSpurLevel()
+        if GetHasSilenceUpgrade(self) and spurLevel > 0 then
+            speed = spurLevel == 3 and 0 or speed / (4 - spurLevel)
+        end
         if rumbleSound then
             rumbleSound:SetParameter("speed",speed , 1)
         end

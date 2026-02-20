@@ -11,8 +11,12 @@ end
 function Alien:GetCondensedScale()
     local hasCondense = self:GetHasUpgrade(kTechId.Condense)
     if hasCondense then
-        return 1 - 0.08 * self:GetSpurLevel()
+        return 1 - self:GetCondenseScalePerLevel() * self:GetShellLevel()
     end
     
     return 1
 end
+
+function Alien:GetCondenseScalePerLevel()
+    return 0.08
+end 
