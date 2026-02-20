@@ -28,7 +28,8 @@ kTechReputationByPass = {
 }
 
 kTechIdMemberLevelByPass = {
-    [kTechId.Condense] = 2   
+    [kTechId.Condense] = 2,
+    [kTechId.Silence] = 2,
 }
 
 --Gorge Ability

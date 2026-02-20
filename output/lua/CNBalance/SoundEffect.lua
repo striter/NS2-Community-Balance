@@ -2,6 +2,7 @@ if Client then
 
     local function CustomBalanceVoice(self)
         if not self.balanceVoice then
+            self.balanceVoice = nil
             return
         end
         if self.playing and self.soundEffectInstance then
@@ -19,14 +20,13 @@ if Client then
         baseOnInitialized(self)
         local assetName = Shared.GetSoundName(self.assetIndex)
         self.balanceVoice = string.find(assetName, "ns2plus.fev") ~= nil
-        CustomBalanceVoice(self)
     end
 
-    --local baseOnUpdate = SoundEffect.OnUpdate
-    --function SoundEffect:OnUpdate(deltaTime)
-    --    baseOnUpdate(self)
-    --    CustomBalanceVoice(self)
-    --end
+    local baseOnUpdate = SoundEffect.OnUpdate
+    function SoundEffect:OnUpdate(deltaTime)
+        baseOnUpdate(self)
+        CustomBalanceVoice(self)
+    end
     --
     --local baseOnProcessMove = SoundEffect.OnProcessMove
     --function SoundEffect:OnProcessMove()

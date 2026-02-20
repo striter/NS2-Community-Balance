@@ -167,6 +167,8 @@ if kTranslateMessage then
 
     kTranslateMessage["CONDENSE"]="坍缩"
     kTranslateMessage["CONDENSE_TOOLTIP"]="*获得更小的体型.\n-略微降低移动速率."
+    kTranslateMessage["SILENCE"]="无声"
+    kTranslateMessage["SILENCE_TOOLTIP"]="*降低行动发出的声音."
     kTranslateMessage["ABM_GORGE"] ="仅[Gorge]可用"
     kTranslateMessage["ABM_RESOURCE_LOW"] ="资源不足以同步"
 
@@ -425,6 +427,8 @@ if kLocales then
     kLocales["ORIGIN_FORM_RESOURCE_FETCH_TOOLTIP"]="Convert team resources into personal.\nGets personal resource once upgraded.\n*Disabled when team resources low."
     kLocales["CONDENSE"]="Condense"
     kLocales["CONDENSE_TOOLTIP"]="*Became smaller than usual.\n-Slower movement."
+    kLocales["SILENCE"]="Silence"
+    kLocales["SILENCE_TOOLTIP"]="*Reduce sounds caused by movement."
     kLocales["ABM_GORGE"] ="Only [Gorge] Available"
     kLocales["ABM_RESOURCE_LOW"] ="Team Resources Low"
     

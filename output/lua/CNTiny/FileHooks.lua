@@ -4,7 +4,6 @@ ModLoader.SetupFileHook( "lua/ServerAdminCommands.lua", "lua/CNTiny/ServerAdminC
 ModLoader.SetupFileHook( "lua/CrouchMoveMixin.lua", "lua/CNTiny/CrouchMoveMixin.lua", "post" )
 ModLoader.SetupFileHook( "lua/MarineVariantMixin.lua", "lua/CNTiny/MarineVariantMixin.lua", "post" )
 
-Shared.Message("???")
 ModLoader.SetupFileHook( "lua/Player.lua", "lua/CNTiny/Player.lua", "post" )
 ModLoader.SetupFileHook( "lua/Alien.lua", "lua/CNTiny/Alien.lua", "post" )
 ModLoader.SetupFileHook( "lua/ReadyRoomPlayer.lua", "lua/CNTiny/ReadyRoomPlayer.lua", "post" )

@@ -275,10 +275,11 @@ function Vokex:GetViewModelName()
 end
 
 function Vokex:OnJump()
-
     if not self:GetIsOnGround() then
         self.hasDoubleJumped = true
         self:TriggerEffects("blink_out", {effecthostcoords = Coords.GetTranslation(self:GetOrigin())})
+    else
+        self:TriggerEffects("jump", {surface = self:GetMaterialBelowPlayer()})
     end
 end
 

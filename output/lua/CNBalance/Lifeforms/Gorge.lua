@@ -52,6 +52,52 @@ if Server then
 
 end
 
+-- Handle transitions between starting-sliding, sliding, and ending-sliding
+function Gorge:UpdateGorgeSliding(input)
+
+    PROFILE("Gorge:UpdateGorgeSliding")
+
+    local slidingDesired = self:GetIsSlidingDesired(input)
+    if slidingDesired and not self.sliding and self.timeSlideEnd + Gorge.kSlideCoolDown < Shared.GetTime()
+            and self:GetIsOnGround() and self:GetEnergy() >= kBellySlideCost then
+
+        self.sliding = true
+        self.startedSliding = true
+
+        if Server then
+            if (GetHasSilenceUpgrade(self) and self:GetVeilLevel() == 0) or not GetHasSilenceUpgrade(self) then
+                self.slideLoopSound:Start()
+            end
+        end
+
+        self:DeductAbilityEnergy(kBellySlideCost)
+        self:PrimaryAttackEnd()
+        self:SecondaryAttackEnd()
+
+    end
+
+    if not slidingDesired and self.sliding then
+
+        self.sliding = false
+
+        if Server then
+            self.slideLoopSound:Stop()
+        end
+
+        self.timeSlideEnd = Shared.GetTime()
+
+    end
+
+    -- Have Gorge lean into turns depending on input. He leans more at higher rates of speed.
+    if self:GetIsBellySliding() then
+
+        local desiredBellyYaw = 2 * (-input.move.x / self.kSlidingMoveInputScalar) * (self:GetVelocity():GetLength() / self:GetMaxSpeed())
+        self.bellyYaw = Slerp(self.bellyYaw, desiredBellyYaw, input.time * Gorge.kLeanSpeed)
+
+    end
+
+end
+
 
 if Client then
 

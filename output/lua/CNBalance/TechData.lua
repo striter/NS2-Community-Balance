@@ -1171,9 +1171,17 @@ function BuildTechData()
 
     table.insert(techData, {
         [kTechDataId] = kTechId.Condense,
-        [kTechDataCategory] = kTechId.ShiftHive,
+        [kTechDataCategory] = kTechId.CragHive,
         [kTechDataDisplayName] = "CONDENSE",
         [kTechDataTooltipInfo] = "CONDENSE_TOOLTIP",
+        [kTechDataCostKey] = kCelerityCost,
+    })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.Silence,
+        [kTechDataCategory] = kTechId.ShiftHive,
+        [kTechDataDisplayName] = "SILENCE",
+        [kTechDataTooltipInfo] = "SILENCE_TOOLTIP",
         [kTechDataCostKey] = kCelerityCost,
     })
 

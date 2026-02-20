@@ -116,7 +116,7 @@ function GetHasAdrenalineUpgrade(callingEntity)
 end
 
 function GetHasSilenceUpgrade(callingEntity)
-    return false
+    return HasUpgrade(callingEntity, kTechId.Silence)
 end
 
 function GetHasCamouflageUpgrade(callingEntity)

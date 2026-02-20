@@ -644,12 +644,13 @@ function GUIAlienBuyMenu:_InitializeUpgradeButtons()
 
 		local upgrades = AlienUI_GetUpgradesForCategory(self.slots[i].Category)
 		local offsetAngle = self.slots[i].Angle
-		local anglePerUpgrade = #upgrades == 1 and 0 or math.pi * 0.25 / 3
+		local anglePerUpgrade = #upgrades == 1 and 0 or math.pi * 0.08
+        local extraOffset = (#upgrades - 1) /2 * anglePerUpgrade
 		local category = self.slots[i].Category
 
 		for upgradeIndex = 1, #upgrades do
 
-			local angle = offsetAngle + anglePerUpgrade * (upgradeIndex-1) - anglePerUpgrade
+			local angle = offsetAngle + anglePerUpgrade * (upgradeIndex-1) - extraOffset
 			local techId = upgrades[upgradeIndex]
 
 			-- Every upgrade has an icon.
