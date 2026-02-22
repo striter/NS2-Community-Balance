@@ -55,6 +55,7 @@ local kShadowStepSpeed = 25 --40
 local kShadowStepSpeedBonusPerCelerity = 0.66
 Vokex.kShadowStepDuration = 0.2
 local kShadowStepCooldown = 0.4
+local kShadowStepAdrenalineCooldown = 0.52
 
 local kMaxSpeed = 7.2
 
@@ -397,7 +398,8 @@ function Vokex:GetJumpHeight()
 end
 
 function Vokex:GetHasShadowStepCooldown()
-    return self.timeShadowStep + kShadowStepCooldown > Shared.GetTime()
+    local cooldown =  self.hasAdrenalineUpgrade and kShadowStepAdrenalineCooldown or kShadowStepCooldown
+    return self.timeShadowStep + cooldown > Shared.GetTime()
 end
 
 function Vokex:GetMovementSpecialTechId()

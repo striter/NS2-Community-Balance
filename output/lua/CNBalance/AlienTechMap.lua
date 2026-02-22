@@ -92,7 +92,7 @@ kAlienTechMap =
     { kTechId.CystCelerity, 3, 3 }, { kTechId.CystCamouflage, 6, 3 }, { kTechId.CystCarapace, 9, 3 },
     { kTechId.DrifterCelerity, 5, 3 },  { kTechId.DrifterCamouflage, 8, 3 }, { kTechId.DrifterRegeneration, 11, 3 },
 
-    { kTechId.Adrenaline, 2, 5 },
+    { kTechId.Silence, 2, 5 },
     { kTechId.Crush, 3, 5 },
     { kTechId.Celerity, 4, 5 },
     { kTechId.Adrenaline, 5, 5 },
@@ -164,9 +164,9 @@ kAlienLines =
     GetLinePositionForTechMap(kAlienTechMap, kTechId.Veil, kTechId.Camouflage),
     GetLinePositionForTechMap(kAlienTechMap, kTechId.Camouflage, kTechId.Aura),
 
+    GetLinePositionForTechMap(kAlienTechMap, kTechId.Silence, kTechId.Crush),
     GetLinePositionForTechMap(kAlienTechMap, kTechId.Celerity, kTechId.Crush),
     GetLinePositionForTechMap(kAlienTechMap, kTechId.Spur, kTechId.Celerity),
     GetLinePositionForTechMap(kAlienTechMap, kTechId.Celerity, kTechId.Adrenaline),
-    GetLinePositionForTechMap(kAlienTechMap, kTechId.Adrenaline, kTechId.Silence),
 
 }

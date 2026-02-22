@@ -265,7 +265,7 @@ function MarineTeam:IsMilitaryProtocol()
     return self.militaryProtocolTechNode:GetResearched()
 end
 
-kHiveTechIdTable = {
+local kHiveTechIdTable = {
     kTechId.Hive,
     kTechId.ShiftHive,
     kTechId.CragHive,
