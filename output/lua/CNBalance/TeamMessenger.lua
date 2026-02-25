@@ -13,7 +13,7 @@ local kTeamMessages = { }
 kTeamMessages[kTeamMessageTypes.GameStarted] = { text = { [kMarineTeamType] = "MARINE_TEAM_GAME_STARTED", [kAlienTeamType] = "ALIEN_TEAM_GAME_STARTED" } }
 
 -- This function will generate the string to display based on a location Id.
-local locationStringGen = function(locationId, messageString) return string.format(Locale.ResolveString(messageString), CNResolveLocation and CNResolveLocation( Shared.GetString(locationId)) or Shared.GetString(locationId)) end
+local locationStringGen = function(locationId, messageString) return string.format(Locale.ResolveString(messageString), Locale.ResolveLocation and Locale.ResolveLocation( Shared.GetString(locationId)) or Shared.GetString(locationId)) end
 
 -- Thos function will generate the string to display based on a research Id.
 local researchStringGen = function(researchId, messageString) return string.format(Locale.ResolveString(messageString), GetDisplayNameForTechId(researchId)) end

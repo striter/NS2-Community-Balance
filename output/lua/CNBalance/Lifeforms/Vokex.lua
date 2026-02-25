@@ -26,7 +26,6 @@ Vokex.kMapName = "vokex"
 Vokex.kModelName = PrecacheAsset("models/alien/fade/vokex.model")
 local kVokexAnimationGraph = PrecacheAsset("models/alien/fade/fade.animation_graph")
 local kViewModelName = PrecacheAsset("models/alien/fade/fade_albino_view.model")
-local kViewAnimationGraphName = PrecacheAsset("models/alien/vokex/vokex_view.model")
 Vokex.kBountyThreshold = kBountyClaimMinFade
 
 PrecacheAsset("models/alien/fade/fade.surface_shader")

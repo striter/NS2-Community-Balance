@@ -6,12 +6,12 @@ debug.appendtoenum(kTechId, "MotionTrack")
 
 debug.appendtoenum(kTechId, "StandardSupply")
 debug.appendtoenum(kTechId, "StandardStation")
-debug.appendtoenum(kTechId, "LightMachineGunUpgrade")
 debug.appendtoenum(kTechId, "DragonBreath")
 
 debug.appendtoenum(kTechId, "ElectronicSupply")
 debug.appendtoenum(kTechId, "ElectronicStation")
 debug.appendtoenum(kTechId, "MACEMPBlast")
+debug.appendtoenum(kTechId, "NanoBot")
 debug.appendtoenum(kTechId, "PoweredExtractorTech")
 debug.appendtoenum(kTechId, "PoweredExtractorUpgrade")
 debug.appendtoenum(kTechId, "PoweredExtractor")
@@ -51,6 +51,12 @@ debug.appendtoenum(kTechId, "SubMachineGun")
 debug.appendtoenum(kTechId, "Revolver")
 debug.appendtoenum(kTechId, "LightMachineGun")
 debug.appendtoenum(kTechId, "LightMachineGunAcquire")
+
+--Upgrades
+debug.appendtoenum(kTechId, "LightMachineGunUpgrade")
+debug.appendtoenum(kTechId, "CombatVest")
+debug.appendtoenum(kTechId, "ArmorPlate")
+debug.appendtoenum(kTechId, "LaserAttachment")
 
 debug.appendtoenum(kTechId, "CombatBuilder")
 debug.appendtoenum(kTechId, "DropCombatBuilder")
