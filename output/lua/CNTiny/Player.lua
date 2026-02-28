@@ -57,7 +57,7 @@ end
 
 local baseGetMaxSpeed =  Player.GetMaxSpeed
 function Player:GetMaxSpeed(possible)
-    return baseGetMaxSpeed(self,possible)  * GTinySpeedMultiplier(self)
+    return baseGetMaxSpeed(self,possible)  * ScaledBasedSpeedMultiplier(self)
 end
 
 -- local baseModifyGravityForce = Player.ModifyGravityForce

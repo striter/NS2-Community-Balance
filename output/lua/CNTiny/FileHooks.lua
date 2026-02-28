@@ -21,6 +21,3 @@ ModLoader.SetupFileHook( "lua/Onos.lua", "lua/CNTiny/Onos.lua", "post" )
 ModLoader.SetupFileHook( "lua/Prowler/Prowler.lua", "lua/CNTiny/Prowler.lua", "post" )
 
 ModLoader.SetupFileHook( "lua/Voting.lua", "lua/CNTiny/Voting.lua", "post" )
-function GTinySpeedMultiplier(player)
-    return 0.8  + player:GetPlayerScale() * 0.2
-end
