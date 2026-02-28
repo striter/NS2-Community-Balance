@@ -6,5 +6,5 @@ end
 
 local baseGetMaxSpeed = Marine.GetMaxSpeed
 function Marine:GetMaxSpeed(possible)
-    return baseGetMaxSpeed(self,possible) * ScaledBasedSpeedMultiplier(self)
+    return baseGetMaxSpeed(self,possible) * self:ScaledBasedSpeedMultiplier()
 end

@@ -57,7 +57,7 @@ end
 
 local baseGetMaxSpeed =  Player.GetMaxSpeed
 function Player:GetMaxSpeed(possible)
-    return baseGetMaxSpeed(self,possible)  * ScaledBasedSpeedMultiplier(self)
+    return baseGetMaxSpeed(self,possible)  * self:ScaledBasedSpeedMultiplier()
 end
 
 -- local baseModifyGravityForce = Player.ModifyGravityForce
@@ -73,4 +73,8 @@ end
 local kCrouchShrinkAmount = 0.7
 function Player:GetCrouchShrinkAmount()
     return kCrouchShrinkAmount * self:GetPlayerScale()
+end
+
+function Player:ScaledBasedSpeedMultiplier()
+    return 0.8  + self:GetPlayerScale() * 0.2
 end

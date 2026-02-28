@@ -1,16 +1,16 @@
 
 local baseGetMaxSpeed = Skulk.GetMaxSpeed
 function Skulk:GetMaxSpeed(possible)
-    return baseGetMaxSpeed(self,possible) * ScaledBasedSpeedMultiplier(self)
+    return baseGetMaxSpeed(self,possible) * self:ScaledBasedSpeedMultiplier()
 end
 
 
 local baseGetMaxWallJumpSpeed = Skulk.GetMaxWallJumpSpeed
 function Skulk:GetMaxWallJumpSpeed()
-    return baseGetMaxWallJumpSpeed(self) * ScaledBasedSpeedMultiplier(self)
+    return baseGetMaxWallJumpSpeed(self) * self:ScaledBasedSpeedMultiplier()
 end
 
 local baseGetMaxBunnyHopSpeed = Skulk.GetMaxBunnyHopSpeed
 function Skulk:GetMaxBunnyHopSpeed()
-    return baseGetMaxBunnyHopSpeed(self) * ScaledBasedSpeedMultiplier(self)
+    return baseGetMaxBunnyHopSpeed(self) * self:ScaledBasedSpeedMultiplier()
 end
