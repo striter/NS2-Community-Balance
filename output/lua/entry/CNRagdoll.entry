@@ -1,5 +1,0 @@
-
-modEntry = {
-    FileHooks = "lua/Ragdoll/FileHooks.lua",
-    Priority = 500
-}

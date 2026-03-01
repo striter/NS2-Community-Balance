@@ -1,4 +1,0 @@
-modEntry = {
-    FileHooks = "lua/CNTiny/FileHooks.lua",
-    Priority = 500
-}

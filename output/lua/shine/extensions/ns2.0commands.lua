@@ -9,11 +9,10 @@ function Plugin:Initialise()
 end
 
 function Plugin:CreateCommands()
-    --Admin comamnds
 	local function AdminScalePlayer( _client, _target, scale )
         local player = _target:GetControllingPlayer()
-        if not player or not player.SetScale then return end
-        player:SetScale(scale)
+        if not player or not player.SetPlayerScale then return end
+        player:SetPlayerScale(scale)
         Shine:AdminPrint( nil, "%s set %s scale to %s", true,  Shine.GetClientInfo( _client ), Shine.GetClientInfo( target ), scale )
 	end
 
@@ -25,8 +24,8 @@ function Plugin:CreateCommands()
     local function AdminSetAllScale( _client, scale )
         for client in Shine.IterateClients() do
             local player = client:GetControllingPlayer()
-            if not player.SetScale then return end
-            player:SetScale(scale)
+            if not player.SetPlayerScale then return end
+            player:SetPlayerScale(scale)
 		end
 
         Shine:AdminPrint( nil, "%s set all scale to %s", true,  Shine.GetClientInfo( _client ), scale )

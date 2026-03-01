@@ -259,3 +259,13 @@ ModLoader.SetupFileHook("lua/Whip.lua", "lua/CNBalance/Structures/Alien/Whip.lua
 ModLoader.SetupFileHook("lua/Harvester.lua", "lua/CNBalance/Structures/Alien/Harvester.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/Web.lua", "lua/CNBalance/Structures/Alien/Web.lua", "post")
 ModLoader.SetupFileHook("lua/Egg.lua", "lua/CNBalance/Structures/Alien/Egg.lua", "post")
+
+
+ModLoader.SetupFileHook( "lua/ServerAdminCommands.lua", "lua/CNBalance/ServerAdminCommands.lua", "post" )
+ModLoader.SetupFileHook( "lua/Voting.lua", "lua/CNBalance/Voting.lua", "post" )
+ModLoader.SetupFileHook( "lua/ReadyRoomPlayer.lua", "lua/CNBalance/ReadyRoomPlayer.lua", "post" )
+
+
+--Ragdoll
+ModLoader.SetupFileHook("lua/DissolveMixin.lua", "lua/CNBalance/Mixin/DissolveMixin.lua", "post" )
+ModLoader.SetupFileHook("lua/RagdollMixin.lua", "lua/CNBalance/Mixin/RagdollMixin.lua", "replace" )

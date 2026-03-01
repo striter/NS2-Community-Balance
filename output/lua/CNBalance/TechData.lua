@@ -1169,13 +1169,13 @@ function BuildTechData()
         [kTechDataResearchName] = "ORIGIN_FORM_PASSIVE",
     })
 
-    --table.insert(techData, {
-    --    [kTechDataId] = kTechId.Condense,
-    --    [kTechDataCategory] = kTechId.CragHive,
-    --    [kTechDataDisplayName] = "CONDENSE",
-    --    [kTechDataTooltipInfo] = "CONDENSE_TOOLTIP",
-    --    [kTechDataCostKey] = kCelerityCost,
-    --})
+    table.insert(techData, {
+        [kTechDataId] = kTechId.Condense,
+        [kTechDataCategory] = kTechId.CragHive,
+        [kTechDataDisplayName] = "CONDENSE",
+        [kTechDataTooltipInfo] = "CONDENSE_TOOLTIP",
+        [kTechDataCostKey] = kCelerityCost,
+    })
 
     table.insert(techData, {
         [kTechDataId] = kTechId.Silence,

@@ -1,5 +1,13 @@
 Alien.kBountyThreshold = kBountyClaimMinAlien
 
+Shared.LinkClassToMap("Alien", Alien.kMapName, {condenseScale = "float (0.1 to 2 by 0.01)"}, true)
+
+local baseOnCreate = Alien.OnCreate
+function Alien:OnCreate()
+    self.condenseScale = 1
+    baseOnCreate(self)
+end
+
 function Alien:GetPlayerStatusDesc()
 
     local status = kPlayerStatus.Void
@@ -94,7 +102,26 @@ end
 
              self:UpdateAutoHeal()
              self:UpdateSilenceLevel()
+             self:UpdateCondenseLevel()
          end
 
      end
+
+     function Alien:UpdateCondenseLevel()
+         self.condenseScale = 1
+         if GetHasCondenseUpgrade(self) then
+             self.condenseScale =  1 - self:GetCondenseScalePerLevel() * self:GetShellLevel()
+         else
+             self.silenceLevel = 0
+         end
+     end
+
+     function Alien:GetCondenseScalePerLevel()
+         return 0.08
+     end
+
  end
+
+function Alien:GetPlayerScale()
+    return Player.GetPlayerScale(self) * self.condenseScale
+end

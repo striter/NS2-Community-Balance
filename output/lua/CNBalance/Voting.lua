@@ -20,12 +20,11 @@ end
 
 if Server then
     SetVoteSuccessfulCallback("VoteRandomScale", 1, function( msg )
-        if not Player.SetScale then
-            return
-        end
         for _, player in ientitylist(Shared.GetEntitiesWithClassname("Player")) do
-            local random = 0.25 + math.random() * 1.5
-            player:SetScale(random)
+            if player.SetPlayerScale then
+                local random = 0.25 + math.random() * 1.5
+                player:SetPlayerScale(random)
+            end
         end
     end)
 end
