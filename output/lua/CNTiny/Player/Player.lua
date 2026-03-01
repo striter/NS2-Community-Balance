@@ -1,25 +1,19 @@
 
-Shared.LinkClassToMap("Player", Player.kMapName, {playerScale = "float (0 to 4 by 0.02)"}, true)
+Script.Load("lua/CNBooting/ModPanelActionFinderMixin.lua")
+
+Shared.LinkClassToMap("Player", Player.kMapName, {scale = "float (0 to 4 by 0.02)"}, true)
 
 local oldOnCreate = Player.OnCreate
 function Player:OnCreate()
     oldOnCreate(self)
-    self.playerScale = 1
+    self.scale = 1
+    InitMixin(self, ReadyRoomPlayerActionFinderMixin)
 end
 
 local baseOnInitialized = Player.OnInitialized
 function Player:OnInitialized()
     baseOnInitialized(self)
-    self.playerScale = 1
-end
-
-function Player:GetPlayerScale()
-    return self.playerScale
-end
-
-function Player:SetPlayerScale(_scale)
-    self.playerScale = _scale
-    self:UpdateControllerFromEntity()
+    self.scale = 1
 end
 
 function Player:GetCanDieOverride()     --Just die Anyway
@@ -29,35 +23,32 @@ end
 
 function Player:OnAdjustModelCoords(modelCoords)
     local coords = modelCoords
-    local scale = self:GetPlayerScale()
-    coords.xAxis = coords.xAxis * scale
-    coords.yAxis = coords.yAxis * scale
-    coords.zAxis = coords.zAxis * scale
+    coords.xAxis = coords.xAxis * self.scale
+    coords.yAxis = coords.yAxis * self.scale
+    coords.zAxis = coords.zAxis * self.scale
     return coords
 end
 
 local baseGetTraceCapsule = Player.GetTraceCapsule
 function Player:GetTraceCapsule()
     local height,radius = baseGetTraceCapsule(self)
-    local scale = self:GetPlayerScale()
-    height = height * scale
-    radius = radius * scale
+    height = height * self.scale
+    radius = radius * self.scale
     return height,radius
 end
 
 local baseGetControllerSize = Player.GetControllerSize
 function Player:GetControllerSize()
-    local scale = self:GetPlayerScale()
     local height,radius = baseGetControllerSize(self)
-    height = height * scale
-    radius = radius * scale
+    height = height * self.scale
+    radius = radius * self.scale
     return height,radius
 end
 
 
 local baseGetMaxSpeed =  Player.GetMaxSpeed
 function Player:GetMaxSpeed(possible)
-    return baseGetMaxSpeed(self,possible)  * self:ScaledBasedSpeedMultiplier()
+    return baseGetMaxSpeed(self,possible)  * GTinySpeedMultiplier(self)
 end
 
 -- local baseModifyGravityForce = Player.ModifyGravityForce
@@ -67,14 +58,16 @@ end
 -- end
 
 function Player:OnPostUpdateCamera(deltaTime)
-    self:SetViewOffsetHeight(self:GetMaxViewOffsetHeight() * self:GetPlayerScale())
+    self:SetViewOffsetHeight(self:GetMaxViewOffsetHeight() * self.scale)
 end
+
+function Player:SetScale(_scale)
+    self.scale = _scale
+    self:UpdateControllerFromEntity()
+end
+
 
 local kCrouchShrinkAmount = 0.7
 function Player:GetCrouchShrinkAmount()
-    return kCrouchShrinkAmount * self:GetPlayerScale()
-end
-
-function Player:ScaledBasedSpeedMultiplier()
-    return 0.8  + self:GetPlayerScale() * 0.2
+    return kCrouchShrinkAmount * self.scale
 end

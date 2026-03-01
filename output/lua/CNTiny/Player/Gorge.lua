@@ -1,5 +1,5 @@
 
 local baseGetMaxSpeed = Gorge.GetMaxSpeed
 function Gorge:GetMaxSpeed(possible)
-    return baseGetMaxSpeed(self,possible) * self:ScaledBasedSpeedMultiplier()
+    return baseGetMaxSpeed(self,possible) * GTinySpeedMultiplier(self)
 end

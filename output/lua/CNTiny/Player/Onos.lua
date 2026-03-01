@@ -1,10 +1,10 @@
 
 local baseGetMaxSpeed = Onos.GetMaxSpeed
 function Onos:GetMaxSpeed(possible)
-    return baseGetMaxSpeed(self,possible) * self:ScaledBasedSpeedMultiplier()
+    return baseGetMaxSpeed(self,possible) * GTinySpeedMultiplier(self)
 end
 
 
 function Onos:GetCrouchShrinkAmount()
-    return 0.4 * self:GetPlayerScale()
+    return 0.4 * self.scale
 end

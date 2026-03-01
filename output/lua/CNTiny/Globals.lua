@@ -1,1 +1,1 @@
---debug.appendtoenum(kSpectatorMode,"Tinyman")
+debug.appendtoenum(kSpectatorMode,"Tinyman")

@@ -42,14 +42,14 @@ function ReadyRoomPlayer:HandleButtons(input)
         self.scalePressed=false
     end
     
-    if self.playerScale == self.estimateScale then
+    if self.scale == self.estimateScale then
         return
     end
 
-    local backward = self.playerScale > self.estimateScale
+    local backward = self.scale > self.estimateScale
     local delta = backward and -4 or 4
-    local deltedScale = self.playerScale + delta * input.time
+    local deltedScale = self.scale + delta * input.time
     local desireScale = backward and math.max(deltedScale,self.estimateScale) or math.min(deltedScale,self.estimateScale)
     
-    Player.SetPlayerScale(self,desireScale)
+    Player.SetScale(self,desireScale)
 end
