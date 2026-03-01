@@ -640,7 +640,7 @@ if Server then
         local amount = LookupTechData(techId, kTechDataCostKey, 0)
         if amount > 0 then
             local team = self:GetTeam()
-            team:AddTeamResources(math.floor(amount / 2))
+            team:AddTeamResources(amount)
         end
         
         baseOnKill(self,attacker, doer, point, direction)
