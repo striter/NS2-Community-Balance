@@ -885,9 +885,5 @@ if Client then
     end
 end
 
-local baseGetMaxSpeed = Prowler.GetMaxSpeed
-function Prowler:GetMaxSpeed(possible)
-    return baseGetMaxSpeed(self,possible) * self:ScaledBasedSpeedMultiplier()
-end
 
 Shared.LinkClassToMap("Prowler", Prowler.kMapName, networkVars, true)

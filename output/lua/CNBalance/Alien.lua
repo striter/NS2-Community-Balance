@@ -1,13 +1,5 @@
 Alien.kBountyThreshold = kBountyClaimMinAlien
 
-Shared.LinkClassToMap("Alien", Alien.kMapName, {condenseScale = "float (0.1 to 2 by 0.01)"}, true)
-
-local baseOnCreate = Alien.OnCreate
-function Alien:OnCreate()
-    self.condenseScale = 1
-    baseOnCreate(self)
-end
-
 function Alien:GetPlayerStatusDesc()
 
     local status = kPlayerStatus.Void
@@ -75,6 +67,12 @@ end
         
 --     end
 
+     local baseOnCreate = Alien.OnCreate
+     function Alien:OnCreate()
+         self.condenseScale = 1
+         baseOnCreate(self)
+     end
+
      function Alien:OnProcessMove(input)
          PROFILE("Alien:OnProcessMove")
 
@@ -88,6 +86,9 @@ end
              self.hatched = false
          end
 
+         if GetIsUnitActive(self) then
+             self:UpdateCondenseLevel()
+         end
          Player.OnProcessMove(self, input)
 
          -- In rare cases, Player.OnProcessMove() above may cause this entity to be destroyed.
@@ -102,26 +103,22 @@ end
 
              self:UpdateAutoHeal()
              self:UpdateSilenceLevel()
-             self:UpdateCondenseLevel()
          end
-
      end
 
      function Alien:UpdateCondenseLevel()
-         self.condenseScale = 1
          if GetHasCondenseUpgrade(self) then
              self.condenseScale =  1 - self:GetCondenseScalePerLevel() * self:GetShellLevel()
          else
-             self.silenceLevel = 0
+             self.condenseScale = 1
          end
+     end
+
+     function Alien:GetPlayerScale(deltaTime)
+         return Player.GetPlayerScale(self,deltaTime) * self.condenseScale
      end
 
      function Alien:GetCondenseScalePerLevel()
          return 0.08
      end
-
  end
-
-function Alien:GetPlayerScale()
-    return Player.GetPlayerScale(self) * self.condenseScale
-end
