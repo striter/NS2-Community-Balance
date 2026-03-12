@@ -299,8 +299,8 @@ kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 90
 kPrototypeLabCost = 20
 
-kCannonTechResearchCost = 15
-kCannonTechResearchTime = 60
+kCannonTechResearchCost = 20
+kCannonTechResearchTime = 90
 
 kJetpackTechResearchCost = 30
 kJetpackTechResearchTime = 105
