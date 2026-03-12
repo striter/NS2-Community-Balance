@@ -343,7 +343,7 @@ local function GetBuildTargetPriority(target)
 end
 
 
-local function PerformAttackEntity( eyePos, bestTarget, lastSeenPos, bot, brain, move )
+local function PerformAttackEntity(eyePos, bestTarget, lastSeenPos, bot, brain, move)
     assert(bestTarget)
 
     local targetPos = bestTarget:GetOrigin()
@@ -353,8 +353,13 @@ local function PerformAttackEntity( eyePos, bestTarget, lastSeenPos, bot, brain,
     local player = bot:GetPlayer()
     local playerPos = player:GetOrigin()
 
+    -- Initialisiere die Variable für die Zeit der letzten Babbler-Attacke, falls sie noch nicht existiert
+    if player.timeOfLastBabblerAttack == nil then
+        player.timeOfLastBabblerAttack = 0
+    end
+
     local isDodgeable = bestTarget:isa("Player") or bestTarget:isa("MAC")
-    local hasClearShot = distance <= 30.0 and bot:GetBotCanSeeTarget( bestTarget )      --FIXME Reduce/refactor this LOS check
+    local hasClearShot = distance <= 30.0 and bot:GetBotCanSeeTarget(bestTarget)  -- FIXME Reduce/refactor this LOS check
     if hasClearShot then
         bot.lastFoughtEnemy = time
     end
@@ -364,98 +369,121 @@ local function PerformAttackEntity( eyePos, bestTarget, lastSeenPos, bot, brain,
     if distance > 30 then
         PerformMove(eyePos, targetPos, bot, brain, move)
     else
-
-        local aimPos = hasClearShot and GetBestAimPoint( bestTarget ) or (lastSeenPos + Vector(0,0.25,0))
-        --local aimPosPlusVel = aimPos + (bestTarget.GetVelocity and bestTarget:GetVelocity() or 0) * math.min(distance,1) / math.min(player:GetMaxSpeed(),5) * 3
+        local aimPos = hasClearShot and GetBestAimPoint(bestTarget) or (lastSeenPos + Vector(0, 0.25, 0))
+        -- local aimPosPlusVel = aimPos + (bestTarget.GetVelocity and bestTarget:GetVelocity() or 0) * math.min(distance,1) / math.min(player:GetMaxSpeed(),5) * 3
 
         if player:GetIsUnderFire() then
             shouldStrafe = true
         end
 
         if distance <= 20 and distance > 16 and hasClearShot then
-        --keep distance if possible
-
-            bot:GetMotion():SetDesiredMoveTarget( nil )
-            shouldStrafe = math.random() < 0.7 --orginal < 0.5
+            -- keep distance if possible
+            bot:GetMotion():SetDesiredMoveTarget(nil)
+            shouldStrafe = math.random() < 0.7 -- original < 0.5
 
         elseif distance < 15 and distance > 5 and hasClearShot then
-
-            local backDir = player:GetCoords().zAxis * -1   --FIXME incorrect
+            local backDir = player:GetCoords().zAxis * -1  -- FIXME incorrect
             local backPos = (player:GetOrigin():GetUnit() + backDir) * 1.5
 
             bot:GetMotion():SetDesiredMoveDirection(backPos)
             shouldStrafe = false
-
         end
 
-        if distance <= 20 and hasClearShot then     --TODO Change to local glob?
+        if distance <= 20 and hasClearShot then  -- TODO Change to local glob?
             doFire = true
         end
 
-        doFire = doFire and bot.aim and bot.aim:UpdateAim(bestTarget, aimPos, kBotAccWeaponGroup.Spit)  --aimPosPlusVel
-        
-        if doFire then
+        doFire = doFire and bot.aim and bot.aim:UpdateAim(bestTarget, aimPos, kBotAccWeaponGroup.Spit)  -- aimPosPlusVel
 
+        if doFire then
             player:SetActiveWeapon(SpitSpray.kMapName)
-            move.commands = AddMoveCommand( move.commands, Move.PrimaryAttack )
+            move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
 
             if shouldStrafe then
-
                 if math.random() < 0.25 and player.timeOfLastJump == nil or player.timeOfLastJump + 1.5 > Shared.GetTime() then
                     bot.timeOfLastJump = time
-                    move.commands = AddMoveCommand( move.commands, Move.Jump )
+                    move.commands = AddMoveCommand(move.commands, Move.Jump)
                 end
 
-                local strafeTarget = (eyePos - aimPos):CrossProduct(Vector(0,1,0))  --aimPosPlusVel
+                local strafeTarget = (eyePos - aimPos):CrossProduct(Vector(0, 1, 0))  -- aimPosPlusVel
                 strafeTarget:Normalize()
-                
-                -- numbers chosen arbitrarily to give some appearance of random juking
-                --strafeTarget = strafeTarget * ConditionalValue( math.sin(time * 3.5 ) + math.sin(time * 2.2 ) > 0 , -1, 1)
-                strafeTarget = strafeTarget * ConditionalValue( math.sin(time * 1.5 ) + math.sin(time * 1.1 ) > 0 , -1.25, 1.25)
 
-                if strafeTarget:GetLengthSquared() > 0 and hasClearShot and player:GetIsInCombat() then 
+                -- Zahlen willkürlich gewählt, um ein zufälliges Ausweichen zu simulieren
+                strafeTarget = strafeTarget * ConditionalValue(math.sin(time * 1.5) + math.sin(time * 1.1) > 0, -1.25, 1.25)
 
-                    bot:GetMotion():SetDesiredMoveDirection( strafeTarget )
-                    bot:GetMotion():SetDesiredViewTarget( aimPos )  --aimPosPlusVel
-                    player:SetActiveWeapon(BabblerAbility.kMapName)
-                    move.commands = AddMoveCommand( move.commands, Move.PrimaryAttack )
+                if strafeTarget:GetLengthSquared() > 0 and hasClearShot and player:GetIsInCombat() then
+                    bot:GetMotion():SetDesiredMoveDirection(strafeTarget)
+                    bot:GetMotion():SetDesiredViewTarget(aimPos)  -- aimPosPlusVel
+
+                    -- Überprüfe, ob die Babbler-Attacke nur alle 10 Sekunden ausgeführt werden kann
+                    if not player.timeOfLastBabblerAttack or player.timeOfLastBabblerAttack + 10 < time then
+                        player.timeOfLastBabblerAttack = time
+                        player:SetActiveWeapon(BabblerAbility.kMapName)
+                        move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
+                    end
 
                     if not player.timeOfLastJump or (player.timeOfLastJump + 2 > time and player.timeOfLastJump + 8 < time) then
                         player.timeOfLastJump = time
                         move.commands = AddMoveCommand(move.commands, Move.Jump)
                     end
-
                 end
-
             end
-
         end
-
     end
-
 end
 
-
-local function PerformAttack( eyePos, mem, bot, brain, move )
-
-    assert( mem )
+local function PerformAttack(eyePos, mem, bot, brain, move)
+    assert(mem)
 
     local target = Shared.GetEntity(mem.entId)
+    local player = bot:GetPlayer()
+    local client = player.GetClient and player:GetClient()
+    local isSelfBot = client and client:GetIsVirtual()
 
     if target ~= nil then
-        PerformAttackEntity( eyePos, target, mem.lastSeenPos, bot, brain, move )
-                 --local chatMsg =  bot:SendTeamMessage( "Spit and bile on humanity! " .. target:GetMapName() .. " in " .. target:GetLocationName() )
-            --bot:SendTeamMessage(chatMsg, 60)
+
+        --------------------------------------------------------------------
+        -- Angriff ausführen
+        --------------------------------------------------------------------
+        PerformAttackEntity(eyePos, target, mem.lastSeenPos, bot, brain, move)
+
+        --------------------------------------------------------------------
+        -- Gemeinsames Alien-Memo (kein Spam)
+        --------------------------------------------------------------------
+        if isSelfBot and target:GetTeamNumber() ~= bot:GetTeamNumber() then
+
+            local location = target:GetLocationName()
+            local now = Shared.GetTime()
+
+            -- Letzte Meldung für diese Location (geteilt von ALLEN Aliens)
+            local lastReport = gLastAlienReports[location] or 0
+
+            -- Nur melden, wenn seit 60 Sekunden nichts kam
+            if now - lastReport > 60 then
+
+                local chatMsg = bot:SendTeamMessage(
+                    "Spit and bile on humanity! " ..
+                    target:GetMapName() .. " in " .. location
+                )
+
+                bot:SendTeamMessage(chatMsg, 60)
+
+                -- Zeitstempel aktualisieren
+                gLastAlienReports[location] = now
+            end
+        end
+        --------------------------------------------------------------------
+
     else
-        -- mem is too far to be relevant, so move towards it
+        --------------------------------------------------------------------
+        -- Ziel zu weit weg ? zum letzten bekannten Ort bewegen
+        --------------------------------------------------------------------
         bot:GetMotion():SetDesiredViewTarget(nil)
         bot:GetMotion():SetDesiredMoveTarget(mem.lastSeenPos)
     end
     
     brain.teamBrain:AssignBotToMemory(bot, mem)
-
 end
-
 
 local function PerformSendBabblers( eyePos, target, bot, brain, move )
 end
@@ -517,11 +545,29 @@ local function BombardAttack( eyePos, mem, bot, brain, move )
             doBomb = false
         end
         
-        if doBomb and canSeeTarget then
-        --Note: for things like jump+tiny-delay+bile-attack combos...we need complex action (e.g. sequence of key presses over X time ...key-patterns, etc. ...yeesh)
-            move.commands = AddMoveCommand( move.commands, Move.PrimaryAttack )
+if doBomb and canSeeTarget then
+    -- Note: for things like jump+tiny-delay+bile-attack combos...we need complex action (e.g. sequence of key presses over X time ...key-patterns, etc. ...yeesh)
+    if target:isa("Marine") then
+        if target:GetHealthScalar() < 0.5 and (not bot.lastBombTime or (time - bot.lastBombTime >= 5)) then
+            if not bot.bileCount or bot.bileCount < 2 then
+                move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
+                bot.bileCount = (bot.bileCount or 0) + 1
+                bot.lastBombTime = time
+            else
+                if not bot.bileCooldownTime or (time - bot.bileCooldownTime >= 5) then
+                    bot.bileCount = 0
+                    bot.bileCooldownTime = time
+                end
+            end
+        else
+            bot:GetPlayer():SetActiveWeapon(SpitSpray.kMapName, true)
+            bot:GetMotion():SetDesiredViewTarget( target:GetOrigin() )
+            move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
         end
-
+    else
+        move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
+    end
+end
         if targDist < kIdealBombardDist and canSeeTarget then
 
             if math.random() < 0.9 then
@@ -538,6 +584,7 @@ local function BombardAttack( eyePos, mem, bot, brain, move )
 
             bot:GetPlayer():SetActiveWeapon(SpitSpray.kMapName, true)   --just to make sure we're ready to fight
             bot:GetMotion():SetDesiredMoveTarget( target:GetOrigin() )
+            bot:GetMotion():SetDesiredViewTarget( target:GetOrigin() )
             shouldStrafe = false
 
         end
@@ -568,35 +615,69 @@ local function BombardAttack( eyePos, mem, bot, brain, move )
 
 end
 
-local function PerformHealSpray( gorge, healTarget, bot, brain, move )
+local lastBabblerAttackTime = 0 -- Initialisieren auf 0, damit der erste Angriff sofort möglich ist
+local babblerCooldown = 0 -- 10 Sekunden Cooldown
 
+local function PerformBabblerSupport(gorge, eyePos, target, bot, move)
+    local targetPos = target:GetOrigin()
+    local eyePos = GetEntityEyePos(gorge)
+    local distance = eyePos:GetDistance(targetPos)
+    local currentTime = Shared.GetTime()
+    local doFire = false
+
+    -- Überprüfen, ob das Ziel im Fadenkreuz ist und in Reichweite
+    if distance <= 1.5 and bot:GetBotCanSeeTarget(target) then
+        local aimPos = GetBestAimPoint(target)
+        local aimPosPlusVel = aimPos + (target.GetVelocity and target:GetVelocity() or 0) * math.min(distance, 1) / math.min(gorge:GetMaxSpeed(), 5) * 3
+
+        bot:GetMotion():SetDesiredViewTarget(aimPosPlusVel)
+        doFire = true
+    end
+
+    -- Überprüfen, ob der Cooldown abgelaufen ist
+    if doFire and (currentTime - lastBabblerAttackTime) >= babblerCooldown then
+        local player = bot:GetPlayer()
+        player:SetActiveWeapon(BabblerAbility.kMapName)
+        move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
+        lastBabblerAttackTime = currentTime
+    end
+end
+
+local function PerformHealSpray(gorge, healTarget, bot, brain, move)
     local targetPos = healTarget:GetOrigin()
     local eyePos = GetEntityEyePos(gorge)
     local doHeal = false
-    local distance = eyePos:GetDistance( targetPos )
-    local canSeeTarget = bot:GetBotCanSeeTarget( healTarget )
+    local distance = eyePos:GetDistance(targetPos)
+    local canSeeTarget = bot:GetBotCanSeeTarget(healTarget)
+    local player = bot:GetPlayer()
+    local currentTime = Shared.GetTime()
 
-    --nudge a tiny bit closer to ensure it hits
+    -- nudge a tiny bit closer to ensure it hits
     if distance < kHealsprayRadius - 0.15 and canSeeTarget then
         doHeal = true
-        local idealHealSpot = GetIdealHealingPosition( gorge, healTarget )
-        bot:GetMotion():SetDesiredMoveTarget( idealHealSpot )
+        local idealHealSpot = GetIdealHealingPosition(gorge, healTarget)
+        bot:GetMotion():SetDesiredMoveTarget(idealHealSpot)
     else
         PerformMove(eyePos, targetPos, bot, brain, move)
     end
 
-    local aimPos = GetBestAimPoint( healTarget )
-    local aimPosPlusVel = aimPos + (healTarget.GetVelocity and healTarget:GetVelocity() or 0) * math.min(distance,1) / math.min(gorge:GetMaxSpeed(),5) * 3
-    --local healAim = Vector(0, 0.15, 0) + aimPosPlusVel --offset so we're not healing floors
+    local aimPos = GetBestAimPoint(healTarget)
+    local aimPosPlusVel = aimPos + (healTarget.GetVelocity and healTarget:GetVelocity() or 0) * math.min(distance, 1) / math.min(gorge:GetMaxSpeed(), 5) * 3
 
     doHeal = doHeal and bot.aim and bot.aim:UpdateAim(healTarget, aimPosPlusVel, kBotAccWeaponGroup.Spit)
 
     if doHeal then
-        --bot:GetMotion():SetDesiredMoveTarget(nil)
-        bot:GetMotion():SetDesiredViewTarget( aimPosPlusVel )
-        move.commands = AddMoveCommand( move.commands, Move.SecondaryAttack )
+        bot:GetMotion():SetDesiredViewTarget(aimPosPlusVel)
+        move.commands = AddMoveCommand(move.commands, Move.SecondaryAttack)
     end
 
+    -- Prioritize targets based on health and position
+    if (healTarget:isa("Skulk") or healTarget:isa("Lerk") or healTarget:isa("Fade") or healTarget:isa("Onos")) and distance <= 10 and healTarget.GetHealthScalar and healTarget:GetHealthScalar() <= 1.0  then
+        if currentTime - lastBabblerAttackTime >= babblerCooldown then
+            PerformBabblerSupport(gorge, eyePos, healTarget, bot, move)
+            bot:SendTeamMessage("Catch my Babblers if you can, " .. healTarget:GetName(), 70)
+        end
+    end
 end
 
 local kExecEvolveAction = function(move, bot, brain, gorge, action)
@@ -737,7 +818,7 @@ local kExecBuildAction = function(move, bot, brain, gorge, action)
             --Handle moving TO objective, and special movement along the way
             PerformMove( gorge:GetOrigin(), targetPos, bot, brain, move )
         end
-        --bot:SendTeamMessage("I'll build the " .. target:GetMapName() .. " in " .. target:GetLocationName(), 120)
+        bot:SendTeamMessage("I'll build the " .. target:GetMapName() .. " in " .. target:GetLocationName(), 120)
 
     end
 end
@@ -992,8 +1073,8 @@ kGorgeBrainActions =
 
             local targHpScaler = healTarget:GetHealthScalar()
             local numOthers = brain.teamBrain:GetNumOthersAssignedToEntity( gorge, healTarget:GetId() )
-
-            if numOthers == nil or numOthers < 1 and targHpScaler < 1.08 then --orginal targHpScaler < 0.85
+            
+            if numOthers == nil or numOthers < 1 and targHpScaler < 1.0 or (healTarget:isa("Hive") and numOthers < 2 and targHpScaler < 0.98) then --orginal targHpScaler < 0.85
 
                 local numOnSelf = brain.teamBrain:GetNumOthersAssignedToEntity( gorge, gorge:GetId() )
                 --Check that healTarget is not healing us, otherwise when in combat, Gorges will be stuck(logically) and just try to tank all damange(dumb)
@@ -1020,10 +1101,10 @@ kGorgeBrainActions =
                     weight = weight - (targHpScaler * 1.25)
 
                     --TODO change to reference table (ClassName dip)    
-                    if targClass == "Hive" and targHpScaler < 0.6 then
+                    if targClass == "Hive" and targHpScaler < 1 then
                         weight = weight * 1.3
 
-                    elseif targClass == "Hive" and targHpScaler < 0.25 then
+                    elseif targClass == "Hive" and targHpScaler < 1 then
                         weight = weight * 25
                         
                     elseif targClass == "Onos" then
@@ -1047,6 +1128,10 @@ kGorgeBrainActions =
                     
                     if healTarget.isOnFire == true then 
                         weight = weight + 0.25
+                    end
+     -- Überprüfen, ob das Ziel ein Babbler oder eine Clog ist und die Heilung überspringen
+    if healTarget:isa("Babbler") or healTarget:isa("Clog") then
+        return kNilAction
                     end
 
                 end
@@ -1318,6 +1403,117 @@ kGorgeBrainActions =
         }
 
     end,    --RETREATING
+    
+    --Hive muss seperat gehandelt werden, weil sonst oft kein Gorge richtig handelt...   
+        function(bot, brain, move, gorge)
+    PROFILE("GorgeBrain_Data:repairHive")
+    
+    local name = "repairHive"
+    local sdb = brain:GetSenses()
+    local weight = 1.0
+    
+    -- Hole die Daten des nächsten Hives, der repariert werden muss
+    local hiveData = sdb:Get("nearestHiveToHeal")
+    local hiveDist = hiveData and hiveData.distance or 200
+    local hive = hiveData and hiveData.hive or nil
+    local gorge = bot:GetPlayer()
+    
+    if hive and hive:GetHealthScalar() < 1.0 then 
+        brain.teamBrain:UnassignBot(bot)
+        
+        local touchDist = GetDistanceToTouch(gorge:GetEyePos(), hive)
+        
+        if touchDist > 2.5 then
+            --Print("Moving to hive")
+            bot:GetMotion():SetDesiredViewTarget(nil)
+            bot:GetMotion():SetDesiredMoveTarget(hive:GetEngagementPoint())
+            weight = weight + 222
+        else
+            --Print("Healing hive")
+            bot:GetMotion():SetDesiredViewTarget(hive:GetEngagementPoint())
+            bot:GetMotion():SetDesiredMoveTarget(nil)
+        end
+    end
+    
+    return {
+        name = name, 
+        weight = weight,
+        fastUpdate = true,
+        hive = hive,
+        hiveDist = hiveDist,
+        perform = kExecRetreatAction
+    }
+end, -- HEAL ALL DAMAGES ON HIVES
+    
+function(bot, brain, move, gorge)
+    PROFILE("GorgeBrain_Data:nearestStructureToHeal")
+    
+    local name = "nearestStructureToHeal"
+    local sdb = brain:GetSenses()
+    local weight = 1.0
+    
+    -- Hole die Daten der nächsten Struktur, die repariert werden muss
+    local structureData = sdb:Get("nearestStructureToHeal")
+    local structureDist = structureData and structureData.distance or 200
+    local structure = structureData and structureData.structure or nil
+    local gorge = bot:GetPlayer()
+    
+    if structure and structure:GetHealthScalar() < 1.0 then 
+        local numOthers = brain.teamBrain:GetNumOthersAssignedToEntity(gorge, structure:GetId())   
+        
+        if numOthers == nil or numOthers < 1 then
+            brain.teamBrain:UnassignBot(bot)
+            
+            local touchDist = GetDistanceToTouch(gorge:GetEyePos(), structure)
+            
+            if touchDist > 2.5 then
+                bot:GetMotion():SetDesiredViewTarget(nil)
+                bot:GetMotion():SetDesiredMoveTarget(structure:GetEngagementPoint())
+                
+                -- Debug-Ausgabe
+                --Print("Moving to structure: " .. structure:GetClassName() .. " at distance: " .. touchDist)
+                
+                -- Gewichtung basierend auf dem Strukturtyp
+                local structureType = structure:GetClassName()
+                if structureType == "Hive" then
+                    weight = weight + 222
+                elseif structureType == "Harvester" then
+                    weight = weight + 2.5
+                elseif structureType == "Shade" then
+                    weight = weight + 3.0
+                elseif structureType == "Whip" then
+                    weight = weight + 4.0
+                elseif structureType == "Shift" then
+                    weight = weight + 4.5
+                elseif structureType == "TunnelEntrance" or structureType == "TunnelExit" then
+                    weight = weight + 5.0
+                elseif structureType == "Crag" then
+                    weight = weight + 5.5
+                elseif structureType == "Veil" or structureType == "Spur" or structureType == "Shell" then
+                    weight = weight + 6.0
+                end
+            else
+                bot:GetMotion():SetDesiredViewTarget(structure:GetEngagementPoint())
+                bot:GetMotion():SetDesiredMoveTarget(nil)
+                
+                -- Debug-Ausgabe
+                --Print("Healing structure: " .. structure:GetClassName())
+            end
+        else
+            weight = 0.0
+        end
+    end
+    
+    return {
+        name = name, 
+        weight = weight,
+        fastUpdate = true,
+        structure = structure,
+        structureDist = structureDist,
+        perform = kExecBuildAction
+    }
+end, --HEAL ALIEN STRUCTURES
+
 
     function(bot, brain, gorge)
         PROFILE("GorgeBrain - Build")
@@ -1338,7 +1534,7 @@ kGorgeBrainActions =
 				local isAssigned = brain.teamBrain:GetIsAssignedToEntity( gorge, targetId )
                 local numOthers = brain.teamBrain:GetNumOthersAssignedToEntity( gorge, targetId )
 
-                if target:isa("Cyst") and not target:CanBeBuilt() then
+                if target:isa("Cyst") and not target:CanBeBuilt() or target:GetHealthScalar() >= 0.98 then
                 --don't waste time on unconnected cysts
                     weight = 0
 
@@ -1456,14 +1652,14 @@ function CreateGorgeBrainSenses()
             function( mem )                    
                 local ent = Shared.GetEntity( mem.entId )
                 
-                --Entferne die Zeilen, die Marines und PowerPoints ausschlieï¿½en.
+                --Entferne die Zeilen, die Marines und PowerPoints ausschließen.
                 if HasMixin(ent, "Corrode") then
                 --if HasMixin(ent, "Corrode") then
                     local isAlive = HasMixin(ent, "Live") and ent:GetIsAlive()
                     local isEnemy = HasMixin(ent, "Team") and ent:GetTeamNumber() ~= team                    
                     
                     if HasMixin(ent, "Construct") then
-                        --Passe die Zeile an, die die Konstruktion berï¿½cksichtigt
+                        --Passe die Zeile an, die die Konstruktion berücksichtigt
                         --return isAlive and isEnemy and ent:GetIsBuilt()    
                         return isAlive and isEnemy and ent:GetIsBuilt()
                     end
@@ -1601,6 +1797,92 @@ function CreateGorgeBrainSenses()
             }
         end)
         
+   s:Add("nearestHiveToHeal", function(db, gorge)
+    local player = db.bot:GetPlayer()
+    local playerPos = player:GetOrigin()
+    local hives = GetEntitiesForTeam("Hive", gorge:GetTeamNumber())
+    local lowHealthHives = {}
+
+    -- Sammle alle Hives, die gebaut und am Leben sind, aber weniger als 100% Gesundheit haben
+    for _, hive in ipairs(hives) do
+        if hive:GetIsBuilt() and hive:GetIsAlive() and hive:GetHealthScalar() < 1.00 then
+            table.insert(lowHealthHives, hive)
+        end
+    end
+
+    -- Sortiere die Hives nach Entfernung vom Spieler
+    Shared.SortEntitiesByDistance(playerPos, lowHealthHives)
+
+    -- Finde den nächsten Hive
+    local nearestHive = lowHealthHives[1]
+
+    -- Berechne die Entfernung zum nächsten Hive
+    local dist = nearestHive and select(2, GetTunnelDistanceForAlien(gorge, nearestHive)) or nil
+
+    return {
+        hive = nearestHive,
+        distance = dist
+    }
+end)--]]
+
+s:Add("nearestStructureToHeal", function(db, gorge)
+    local player = db.bot:GetPlayer()
+    local playerPos = player:GetOrigin()
+    local teamNumber = gorge:GetTeamNumber()
+    
+    -- Liste der Gebäudetypen, die geheilt werden sollen
+    local structureTypes = {"Harvester", "Crag", "Shade", "Shift", "Whip", "TunnelEntrance", "TunnelExit", "Veil", "Spur", "Shell", "Hive"}
+    local lowHealthStructures = {}
+    
+    -- Sammle alle Strukturen, die gebaut und am Leben sind, aber weniger als 100% Gesundheit haben
+    for _, structureType in ipairs(structureTypes) do
+        local structures = GetEntitiesForTeam(structureType, teamNumber)
+        for _, structure in ipairs(structures) do
+            if structure then
+                if (structureType == "TunnelEntrance" or structureType == "TunnelExit" or structureType == "Hive") then
+                    -- Spezielle Behandlung für Tunnel und Hive
+                    if structure.GetIsAlive and structure:GetIsAlive() and structure:GetHealthScalar() < 1.00 then
+                        table.insert(lowHealthStructures, structure)
+                    else
+                        --[[ Debug-Ausgabe für Strukturen ohne GetIsAlive
+                        if not structure.GetIsAlive then
+                            Print("GetIsAlive method is missing for structure type: " .. structureType)
+                        end--]]
+                    end
+                else
+                    if structure.GetIsBuilt and structure:GetIsBuilt() and structure:GetIsAlive() and structure:GetHealthScalar() < 1.00 then
+                        table.insert(lowHealthStructures, structure)
+                    else
+                        --[[ Debug-Ausgabe für Strukturen ohne GetIsBuilt oder GetIsAlive
+                        if not structure.GetIsBuilt then
+                            Print("GetIsBuilt method is missing for structure type: " .. structureType)
+                        elseif not structure.GetIsAlive then
+                            Print("GetIsAlive method is missing for structure type: " .. structureType)
+                        end--]]
+                    end
+                end
+            --[[else
+                -- Debug-Ausgabe für nicht erkannte Strukturen
+                Print("Structure is nil for type: " .. structureType)--]]
+            end
+        end
+    end
+    
+    -- Sortiere die Strukturen nach Entfernung vom Spieler
+    Shared.SortEntitiesByDistance(playerPos, lowHealthStructures)
+    
+    -- Finde die nächste Struktur
+    local nearestStructure = lowHealthStructures[1]
+    
+    -- Berechne die Entfernung zur nächsten Struktur
+    local dist = nearestStructure and select(2, GetTunnelDistanceForAlien(gorge, nearestStructure)) or nil
+    
+    return {
+        structure = nearestStructure,
+        distance = dist
+    }
+end)
+          
     s:Add("nearestHealable", function(db, gorge)
 
         local gorgePos = gorge:GetOrigin()

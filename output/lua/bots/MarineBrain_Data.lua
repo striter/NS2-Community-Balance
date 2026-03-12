@@ -15,7 +15,8 @@ local kMarineEvalImmediateThreatTime = 1.0
 local kDefaultMarineEnagementRange = 10
 local kMarineOnGuardChaseThreatTime = 0.8
 local kMarinePressureEnemyThreshold = 0.7
-
+local kMarineBrainNearbyEnemyThreshold = 25
+local kMarineBrainNearbyFriendlyThreshold = 25
 ------------------------------------------
 --  Data includes values, but also functions.
 --  We put them in this file so we can easily hotload it and iterate live.
@@ -31,6 +32,7 @@ local function PerformMove( marinePos, targetPos, bot, brain, move, isUseMove, s
     PROFILE("MarineBrain - PerformMove")
 
     local marine = bot:GetPlayer()
+
     local teamBrain = brain.teamBrain
     local dist, gate = GetPhaseDistanceForMarine( bot:GetPlayer(), targetPos, brain.lastGateId )
 
@@ -172,6 +174,134 @@ local function PerformMove( marinePos, targetPos, bot, brain, move, isUseMove, s
 
 end
 
+function IsTechPointIncomplete(tp, teamNumber)
+
+    local startName = GetTeamBrain(teamNumber).initialTechPointLoc
+    local attached = tp:GetAttached()
+
+    -- Feindliche Geb�ude blockieren den TP
+    if attached then
+        if attached:isa("Hive") then
+            return false
+        end
+
+        if attached:isa("CommandStation") and attached:GetTeamNumber() ~= teamNumber then
+            return false
+        end
+    end
+
+    -- Start-TP: nur frei oder eigene CC erlaubt
+    if tp:GetLocationName() == startName then
+        if attached and attached:isa("CommandStation") then
+            return false
+        end
+        return true
+    end
+
+    -- Freier TP (kein Geb�ude drauf)
+    if not attached then
+        return true
+    end
+
+    -- Eigene CC drauf ? pr�fen ob PG/Obs fehlen
+    if attached:isa("CommandStation") and attached:GetTeamNumber() == teamNumber then
+
+        local origin = tp:GetOrigin()
+
+        -- Phase Gate fehlt?
+        local pg = GetEntitiesForTeamWithinRange("PhaseGate", teamNumber, origin, 25)
+        if #pg == 0 then
+            return true
+        end
+
+        -- Observatory-Logik
+        local allObs = GetEntitiesForTeam("Observatory", teamNumber)
+
+        -- Wenn 3 Observatories existieren ? NIE wieder eins verlangen
+        if #allObs >= 3 then
+            return false
+        end
+
+        -- Wenn weniger als 3 existieren ? pr�fen, ob dieser TP eins braucht
+        local obs = GetEntitiesForTeamWithinRange("Observatory", teamNumber, origin, 25)
+        if #obs == 0 then
+            return true
+        end
+
+        return false
+    end
+
+    return false
+end
+
+local function ArcHasActiveOrder(arc)
+    if not arc or not arc.GetHasOrder then
+        return false
+    end
+
+    if not arc:GetHasOrder() then
+        return false
+    end
+
+    if arc.GetOrders then
+        local orders = arc:GetOrders()
+        if orders and #orders > 0 then
+            local order = orders[1]
+            if order.move_target then
+                return true
+            end
+        end
+    end
+
+    return true
+end
+
+local function ArcIsDefended(arc)
+    if not IsValid(arc) then return false end
+
+    local team = arc:GetTeamNumber()
+    local players = GetEntitiesForTeam("Player", team)
+
+    for _, p in ipairs(players) do
+        
+        -- Commander hat keine Orders ? �berspringen
+        if p:isa("MarineCommander") then
+            goto continue_player
+        end
+
+        -- Manche Entities haben keine GetCurrentOrder Methode
+        if not p.GetCurrentOrder then
+            goto continue_player
+        end
+
+        local order = p:GetCurrentOrder()
+        if order and order:GetType() == kTechId.Defend then
+
+            -- Manche Orders nutzen GetParam(), andere GetTargetId()
+            local targetId = order.GetParam and order:GetParam() or order:GetTargetId()
+
+            if targetId == arc:GetId() then
+                return true
+            end
+        end
+
+        ::continue_player::
+    end
+
+    return false
+end
+
+local function PlayerHasWelderInInventory(player)
+    if player.GetWeapons then
+        for _, w in ipairs(player:GetWeapons()) do
+            if w:GetMapName() == Welder.kMapName then
+                return true
+            end
+        end
+    end
+    return false
+end
+
 local function SwitchToPrimary(marine)
     local primaryWeapon = marine:GetWeaponInHUDSlot(1)
     if primaryWeapon then
@@ -295,7 +425,13 @@ local function PerformAttackStructure( eyePos, target, lastSeenPos, bot, brain, 
         hasClearShot = bot:GetBotCanSeeTarget( target )
     end
 
-    if weaponType == GrenadeLauncher.kMapName or weaponType == ClusterGrenadeThrower.kMapName  then
+    -- NEUE LOGIK: Shotgun soll nah ran (= 4)
+    if weaponType == Shotgun.kMapName and dist > 4 then
+        PerformMove( eyePos, aimPos, bot, brain, move )
+        return -- erst n�her ran, dann feuern
+    end
+
+    if weaponType == GrenadeLauncher.kMapName then
         dist = math.max(0, dist - (HasMixin(target, "Extents") and target:GetExtents():GetLengthXZ() or 0))
     end
 
@@ -364,6 +500,130 @@ local function PerformAttackStructure( eyePos, target, lastSeenPos, bot, brain, 
 
 end
 
+local function PredictGLImpact(startPos, target, projSpeed, gravity)
+
+    if not target then
+        return startPos   -- failsafe, niemals nil
+    end
+
+    local targetPos = target.GetEngagementPoint and target:GetEngagementPoint() or target:GetOrigin()
+    local targetVel = target.GetVelocity and target:GetVelocity() or Vector(0,0,0)
+
+    -- Richtung zum Ziel
+    local toTarget = targetPos - startPos
+
+    -- horizontale Distanz
+    local distXZ = toTarget:GetLengthXZ()
+    if distXZ < 0.001 then distXZ = 0.001 end  -- failsafe
+
+    -- Flugzeit horizontal
+    local t = distXZ / projSpeed
+
+    -- Zielbewegung ber�cksichtigen
+    local predicted = targetPos + targetVel * t
+
+    -- Schwerkraft ber�cksichtigen
+    predicted.y = predicted.y + 0.5 * gravity * t * t
+
+    --------------------------------------------------------------------
+    -- HINDERNIS-ERKENNUNG (Line-of-Sight Check)
+    --------------------------------------------------------------------
+    local trace = Shared.TraceRay(
+        startPos,
+        predicted,
+        CollisionRep.Default,
+        PhysicsMask.All,
+        EntityFilterAll()
+    )
+
+    -- Wenn etwas im Weg ist ? predicted NICHT benutzen
+    if trace.fraction < 1 then
+        -- Hindernis erkannt ? Bot soll NICHT direkt schie�en
+        -- Wir geben einfach die letzte freie Position zur�ck
+        return trace.endPoint
+    end
+    --------------------------------------------------------------------
+
+    return predicted
+end
+
+local function IsShockwaveIncoming(player)
+    -- Radius anpassen, z.B. 20�25
+    local radius = 17
+    local origin = player:GetOrigin()
+
+    -- WICHTIG: "Shockwave" und Team-ID anpassen, falls im Code anders
+    local waves = GetEntitiesWithinRange("Shockwave", origin, radius)
+
+    if waves and #waves > 0 then
+        return true
+    end
+
+    return false
+end
+
+local function IsEnemyAroundCorner(player, target, bot)
+
+    -- Nur Spieler k�nnen "um die Ecke lauern"
+    if not target:isa("Player") then
+        return false
+    end
+
+    local eyePos = player:GetEyePos()
+    local targetPos = target:GetOrigin()
+
+    -- Kein direkter Sichtkontakt + nah dran = sehr wahrscheinlich hinter Ecke
+    if not bot:GetBotCanSeeTarget(target) then
+        local dist = (eyePos - targetPos):GetLength()
+        if dist < 10 then
+            return true
+        end
+    end
+
+    return false
+end
+
+local function IsFriendlyBlocking(player, target)
+    local trace = Shared.TraceRay(
+        player:GetEyePos(),
+        target:GetOrigin(),
+        CollisionRep.Move,
+        PhysicsMask.All,
+        EntityFilterAll()
+    )
+
+    if trace and trace.entity and trace.entity:isa("Marine") and trace.entity ~= player then
+        return true
+    end
+
+    return false
+end
+
+local function ShouldReload(player, sdb)
+    local weapon = player:GetActiveWeapon()
+    if not weapon or not weapon:isa("ClipWeapon") then
+        return false
+    end
+
+    local clip = weapon:GetClip()
+    local maxClip = weapon:GetClipSize()
+
+    -- Distanz zum gef�hrlichsten Gegner
+    local threat = sdb:Get("biggestLifeformThreat")
+    local threatDist = threat and threat.distance or 999
+
+    -- 1) Magazin leer ? IMMER reload
+    if clip == 0 then
+        return true
+    end
+
+    -- 2) Wenig Munition + Gegner weit weg ? reload
+    if clip <= math.floor(maxClip * 0.25) and threatDist > 12 then
+        return true
+    end
+
+    return false
+end
 
 local kApproachDistOffset = 1.2
 local kApproachDistancesPadChecks = 
@@ -377,278 +637,414 @@ local kApproachDistancesPadChecks =
 local function PerformAttackEntity( eyePos, target, lastSeenPos, bot, brain, move )
     PROFILE("MarineBrain - PerformAttackEntity")
 
-    assert(target ~= nil )
+    assert(target ~= nil)
 
     local player = bot:GetPlayer()
     local time = Shared.GetTime()
-    
-    local sighted 
-    if not target.GetIsSighted then
-        -- Print("attack target has no GetIsSighted: %s", target:GetClassName() )
-        sighted = true
-    else
-        sighted = target:GetIsSighted()
-    end
-    
-    local aimPos = sighted and GetBestAimPoint( target ) or (lastSeenPos + Vector(0,0.1,0))
-    local dist = GetDistanceToTouch( eyePos, target )
+    local sdb = brain:GetSenses()
+
+    local sighted = (not target.GetIsSighted) or target:GetIsSighted()
+    local aimPos = sighted and GetBestAimPoint(target) or (lastSeenPos + Vector(0,0.1,0))
+    local dist = GetDistanceToTouch(eyePos, target)
+
     local doFire = false
     local shouldStrafe = false
     local isDodgeable = target:isa("Player") or target:isa("Babbler")
-        
-    --local aimPosPlusVel = aimPos + (target.GetVelocity and target:GetVelocity() or 0) * math.min(dist,1) / math.min(player:GetMaxSpeed(),5) * 3
 
-    -- Avoid doing expensive vis check if we are too far
+    ----------------------------------------------------
+    -- Sichtlinie pr�fen
+    ----------------------------------------------------
     local hasClearShot = false
     if dist < 32.5 then
-        hasClearShot = bot:GetBotCanSeeTarget( target )
+        hasClearShot = bot:GetBotCanSeeTarget(target)
     end
 
     local activeWepIdealRange = GetEffectiveRangeForWeapon(player)
-
-    local approachRange = activeWepIdealRange
     if brain.lastAttackApproachRange == -1 then
-    --reset to "default"
-        brain.lastAttackApproachRange = activeWepIdealRange * 0.5  --treat as radius
+        brain.lastAttackApproachRange = activeWepIdealRange * 0.5
     end
 
-    if not hasClearShot then 
+----------------------------------------------------
+-- Cornererkennung + Team-Mut-Logik
+----------------------------------------------------
+local enemyAroundCorner = IsEnemyAroundCorner(player, target, bot)
+local numFriendlies = sdb:Get("nearbyFriendlies")
 
-        if dist > brain.lastAttackApproachRange then
-            PerformMove( eyePos, aimPos, bot, brain, move )
+-- Wenn genug Freunde da sind ? NICHT warten ? direkt angreifen
+local enoughSupport = numFriendlies >= 3
 
-        else
-                    
-            local pathIdx = bot:GetMotion():GetPathIndex()
-            local pathPoints = bot:GetMotion():GetPath()
-            
-            if pathPoints ~= nil and #pathPoints > 0 then
-                local mOrg = player:GetOrigin()
-                local steps = 9
-                if steps + pathIdx > #pathPoints then
-                --auto-clamp so we don't need to deal with nil
-                    steps = #pathPoints
-                end
-                
-                local tick = 1
-                local lookAheadDelta = {}
-                local curApproachDist = brain.lastAttackApproachRange
-                --backwards, so we're starting from the target
+if enemyAroundCorner and not enoughSupport and not player:GetIsUnderFire() then
+    -- Corner-Warte-Timer starten
+    if not brain.cornerWaitStart then
+        brain.cornerWaitStart = time
+    end
+else
+    -- Reset wenn genug Support oder Gegner nicht mehr um die Ecke
+    brain.cornerWaitStart = nil
+end
 
-            --FIXME/TODO What this needs to do is form an arc, angle (interior of arc facing target)
-            --around near-end path points. Thus, strafing in semi-circles towards a valid attack angle...as is, below still just closes range.
-            ----Worth noting, the same method could be reused, but inverted to strafe AWAY from  close-range attackers
-                for i = #pathPoints - 1, (#pathPoints - (steps + 1)), -1 do   --don't use end point, for obvious reasons
+----------------------------------------------------
+-- Gemeinsame Corner-Logik (nur wenn wenig Support)
+----------------------------------------------------
+if enemyAroundCorner and not enoughSupport and brain.cornerWaitStart and (time - brain.cornerWaitStart) < 15 then
 
-                    local pd = pathPoints[i]
+    bot:GetMotion():SetDesiredMoveTarget(nil)
+    bot:GetMotion():SetDesiredMoveDirection(Vector(0,0,0))
+    bot:GetMotion():SetDesiredViewTarget(aimPos)
+    doFire = false
+
+    local location = target:GetLocationName()
+    local now = Shared.GetTime()
+    local lastReport = gLastMarineReports[location] or 0
+
+    if now - lastReport > 45 then
+        if math.random() < 0.35 then
+            CreateVoiceMessage(player, kVoiceId.MarineRequestOrder)
+        end
+
+        local chatMsg = bot:SendTeamMessage("Careful, something is lurking in " .. location)
+        bot:SendTeamMessage(chatMsg, 60)
+
+        gLastMarineReports[location] = now
+    end
+    ----------------------------------------------------
+    -- Abstand halten: 9�15 m Deadzone
+    ----------------------------------------------------
+
+    -- Zu nah ? zur�ck
+    if dist < 9 then
+        local backDir = (player:GetOrigin() - target:GetOrigin())
+        backDir.y = 0
+        backDir:Normalize()
+
+        local retreatPos = player:GetOrigin() + backDir * 10
+
+        bot:GetMotion():SetDesiredMoveTarget(retreatPos)
+        bot:GetMotion():SetDesiredMoveDirection(backDir)
+        bot:GetMotion():SetDesiredViewTarget(aimPos)
+        return move
+    end
+
+    -- Zu weit ? vor
+    if dist > 15 then
+        local forwardDir = (target:GetOrigin() - player:GetOrigin())
+        forwardDir.y = 0
+        forwardDir:Normalize()
+
+        local approachPos = player:GetOrigin() + forwardDir * (dist - 10)
+
+        bot:GetMotion():SetDesiredMoveTarget(approachPos)
+        bot:GetMotion():SetDesiredMoveDirection(forwardDir)
+        bot:GetMotion():SetDesiredViewTarget(aimPos)
+        return move
+    end
+
+    -- Perfekte Distanz ? stehen bleiben (Wackeln verhindern)
+    if dist >= 9 and dist <= 12 then
+        bot:GetMotion():SetDesiredMoveTarget(nil)
+        bot:GetMotion():SetDesiredMoveDirection(Vector(0,0,0))
+        bot:GetMotion():SetDesiredViewTarget(aimPos)
+        doFire = false
+        return move
+        end
+    end
+
+    ----------------------------------------------------
+    -- GRENADE LAUNCHER LOGIK (nur wenn Gegner sichtbar)
+    ----------------------------------------------------
+    local weapon = player:GetActiveWeapon()
+    local enemyVisible = bot:GetBotCanSeeTarget(target)
+
+    if weapon and weapon:GetMapName() == GrenadeLauncher.kMapName and enemyVisible then
+
+        local glAimPos = PredictGLImpact(eyePos, target, 25, -9.81)
+        bot:GetMotion():SetDesiredViewTarget(glAimPos)
+
+        if dist < 3 then
+            return move
+        end
+
+        if player:isa("JetpackMarine") and dist < 8 then
+            move.commands = AddMoveCommand(move.commands, Move.Jump)
+
+            local back = (player:GetOrigin() - target:GetOrigin())
+            back.y = 0
+            back:Normalize()
+
+            local side = back:CrossProduct(Vector(0,1,0))
+            side:Normalize()
+
+            local sinVal = math.sin(time * 2.5)
+            local moveDir = back + side * sinVal * 0.4
+            moveDir:Normalize()
+
+            bot:GetMotion():SetDesiredMoveDirection(moveDir)
+
+            local canFire = bot.aim:UpdateAim(target, glAimPos, kBotAccWeaponGroup.Bullets)
+            if canFire then
+                move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
+                brain.lastShootingTime = time
+            end
+
+            return move
+        end
+
+        if dist < 15 then
+            local back = (player:GetOrigin() - target:GetOrigin())
+            back.y = 0
+            back:Normalize()
+
+            local side = back:CrossProduct(Vector(0,1,0))
+            side:Normalize()
+
+            local sinVal = math.sin(time * 2.5)
+            local moveDir = back + side * sinVal * 0.4
+            moveDir:Normalize()
+
+            bot:GetMotion():SetDesiredMoveDirection(moveDir)
+
+            local canFire = bot.aim:UpdateAim(target, glAimPos, kBotAccWeaponGroup.Bullets)
+            if canFire then
+                move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
+                brain.lastShootingTime = time
+            end
+
+            return move
+        end
+
+        bot:GetMotion():SetDesiredMoveDirection(Vector(0,0,0))
+
+        local canFire = bot.aim:UpdateAim(target, glAimPos, kBotAccWeaponGroup.Bullets)
+        if canFire then
+            move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
+            brain.lastShootingTime = time
+        end
+
+        return move
+    end
+
+    ----------------------------------------------------
+    -- Normale Marine-Logik (wenn kein GL)
+    ----------------------------------------------------
+    local newMoveTarg = nil
+local lookAheadDelta = {}
+local pathIdx = bot:GetMotion():GetPathIndex()
+local pathPoints = bot:GetMotion():GetPath()
+local mOrg = player:GetOrigin()
+
+if not hasClearShot then 
+    if dist > brain.lastAttackApproachRange then
+        PerformMove(eyePos, aimPos, bot, brain, move)
+    else
+
+        -- ? FIXED: Sicherer Zugriff auf PathPoints
+        if pathPoints ~= nil and #pathPoints > 2 then
+
+            local maxSteps = math.min(9, #pathPoints - 1)
+            local startIndex = #pathPoints - 1
+            local endIndex = math.max(1, startIndex - maxSteps)
+
+            local curApproachDist = brain.lastAttackApproachRange
+
+            for i = startIndex, endIndex, -1 do
+                local pd = pathPoints[i]
+                if pd then
                     local ptD = (pd - aimPos):GetLength()
-
                     if ptD < curApproachDist and ptD > curApproachDist * 0.5 then
-                    --we're inside out ideal range, make this our approach point
                         newMoveTarg = pd
                         break
                     end
-
-                    curApproachDist = math.floor(curApproachDist * 0.9)
-            
-                    tick = tick + 1
-                    if tick >= steps then
-                        break
-                    end
-
                 end
 
-                brain.lastAttackApproachRange = curApproachDist
+                curApproachDist = math.floor(curApproachDist * 0.9)
             end
 
-            newMoveTarg = Pathing.FindRandomPointAroundCircle( newMoveTarg == nil and aimPos or newMoveTarg, brain.lastAttackApproachRange, 1.5 )
-
-            --FIXME Marine needs to understand if target is approaching or leaving (heading vec, compared to ours)
-
-            bot:GetMotion():SetDesiredViewTarget( aimPos )
-            bot:GetMotion():SetDesiredMoveTarget( newMoveTarg )
-            --shouldStrafe = true
-            
-            doFire = false
-
+            brain.lastAttackApproachRange = curApproachDist
         end
 
-    else
-    --LOS, by deduction, try to find ideal spot
+        newMoveTarg = Pathing.FindRandomPointAroundCircle(
+            newMoveTarg == nil and aimPos or newMoveTarg,
+            brain.lastAttackApproachRange,
+            1.5
+        )
+
+        bot:GetMotion():SetDesiredViewTarget(aimPos)
+        bot:GetMotion():SetDesiredMoveTarget(newMoveTarg)
+        doFire = false
+    end
+
+else
 
         bot.lastSeenEnemy = time
 
-        local dir = GetNormalizedVectorXY( target:GetOrigin() - player:GetOrigin() )
+        local dir = GetNormalizedVectorXY(target:GetOrigin() - player:GetOrigin())
         local dot = target.GetVelocity and GetNormalizedVectorXZ(target:GetVelocity()):DotProduct(dir) or 0
 
         if dist <= 40 and dist > activeWepIdealRange and dot > 0.5 then
-            bot:GetMotion():SetDesiredMoveTarget( nil ) --halt and let them come to us
-
+            bot:GetMotion():SetDesiredMoveTarget(nil)
         elseif dist > activeWepIdealRange then
-
             shouldStrafe = true
             doFire = true
-
         elseif dist > 6.5 then
-
             if isDodgeable then
-                bot:GetMotion():SetDesiredMoveTarget( nil )
-                bot:GetMotion():SetDesiredMoveDirection( player:GetViewCoords().zAxis * -1 )
+                bot:GetMotion():SetDesiredMoveTarget(nil)
+                bot:GetMotion():SetDesiredMoveDirection(player:GetViewCoords().zAxis * -1)
                 shouldStrafe = true
             end
-
             doFire = true
-
         else
             shouldStrafe = true
             doFire = true
-            bot:GetMotion():SetDesiredViewTarget( aimPos )
+            bot:GetMotion():SetDesiredViewTarget(aimPos)
         end
-        
-        local noAimClasses = { "Clog", "Babbler", "Cyst" } -- "Drifter"
-        if doFire and table.icontains(noAimClasses, target:GetClassName()) and hasClearShot then
-        -- this is a hack because there's a bug somewhere...
-            doFire = true
-            shouldStrafe = false    --doing so just mucks up the aim
-            aimPos = target:GetEngagementPoint()
-            bot:GetMotion():SetDesiredViewTarget( aimPos )
 
-            --stop moving and kill
-            bot:GetMotion():SetDesiredMoveTarget( nil )
-            bot:GetMotion():SetDesiredMoveDirection( nil )
+        local noAimClasses = { "Clog", "Babbler", "Cyst" }
+        if doFire and table.icontains(noAimClasses, target:GetClassName()) and hasClearShot then
+            doFire = true
+            shouldStrafe = false
+            aimPos = target:GetEngagementPoint()
+            bot:GetMotion():SetDesiredViewTarget(aimPos)
+            bot:GetMotion():SetDesiredMoveTarget(nil)
+            bot:GetMotion():SetDesiredMoveDirection(nil)
         else
             doFire = doFire and bot.aim:UpdateAim(target, aimPos, kBotAccWeaponGroup.Bullets)
+        end
+    end
 
+   --------------------------------------------------------------------
+    -- DODGING-LOGIK
+    --------------------------------------------------------------------
+    local retreating = false
+    local dodgeActive = false
+    local dodgeEndTime = 0
+
+    local stompIncoming = IsShockwaveIncoming(player)
+
+    if dist < 2.5 and (not brain.lastJumpDodge or brain.lastJumpDodge + 2 < time) then
+        brain.lastJumpDodge = Shared.GetTime()
+        move.commands = AddMoveCommand(move.commands, Move.Jump)
+        dodgeActive = true
+        dodgeEndTime = time + 0.25
+    end
+
+    if stompIncoming and dist >= 4.5 and 
+       (not brain.lastShockwaveJump or brain.lastShockwaveJump + 0.7 < time) then
+
+        brain.lastShockwaveJump = Shared.GetTime()
+
+        if player:isa("JetpackMarine") then
+            if player:GetFuel() > 0.1 then
+                move.commands = AddMoveCommand(move.commands, Move.Jump)
+            end
+        else
+            move.commands = AddMoveCommand(move.commands, Move.Jump)
         end
 
-        local weapon = player:GetActiveWeapon()
+        dodgeActive = true
+        dodgeEndTime = time + 0.15
+    end
 
-        if weapon and weapon:GetMapName() == GrenadeLauncher.kMapName then
+    if dodgeActive and time < dodgeEndTime then
+        if not player:isa("JetpackMarine") then
+            bot:GetMotion():SetDesiredMoveDirection(Vector(0,0,0))
+        end
+    end
 
-            -- fall back if we have a grenade launcher and we'd blow ourselves up
-            if dist < 5.5 then
-                doFire = false
-                shouldStrafe = false
+    if not (dodgeActive and time < dodgeEndTime) then
 
-                bot:GetMotion():SetDesiredMoveTarget( nil )
-                bot:GetMotion():SetDesiredMoveDirection(player:GetViewCoords().zAxis * -1)
+        if player:isa("JetpackMarine") then
+
+            if dist < 4.5 then
+                move.commands = AddMoveCommand(move.commands, Move.Jump)
+                bot:GetMotion():SetDesiredMoveDirection(-(aimPos - eyePos))
             end
 
-        end
+            if shouldStrafe then
+                local strafeTarget = (eyePos - aimPos):CrossProduct(Vector(0,1,0))
+                strafeTarget:Normalize()
+                strafeTarget = strafeTarget *
+                    ConditionalValue(math.sin(time * 2.2) + math.sin(time * 3.75) > 0, -1, 1)
 
-    end
+                bot:GetMotion():SetDesiredMoveDirection(strafeTarget)
 
-    local retreating = false
-    --[[
-    --FIXME Why is this here? This should NOT be done this way.....it's bloat in this context. We should return out and halt current acitons, not duplicate another action
-
-    local retreating = false
-    local sdb = brain:GetSenses()
-    local minFraction = math.min( player:GetHealthFraction(), sdb:Get("ammoFraction") )
-    local armory = sdb:Get("nearestArmory").armory
-
-    -- retreat! Ignore previous move order, but keep our aim
-    if armory and minFraction < 0.3 and isDodgeable then
-        local touchDist = GetDistanceToTouch( eyePos, armory )
-        if touchDist > 0.5 then
-            PerformMove(player:GetOrigin(), armory:GetEngagementPoint(), bot, brain, move)
-        else
-            -- sit and wait to heal, ammo, etc. 
-            brain.retreatTargetId = nil
-            bot:GetMotion():SetDesiredViewTarget( armory:GetEngagementPoint() )
-            bot:GetMotion():SetDesiredMoveTarget( nil )
-            doFire = false
-        end
-
-        retreating = true
-    end
-    --]]
-
-    if shouldStrafe then
-    -- good distance, or panic mode. strafe with some regularity, but somewhat random
-
-        local strafeTarget = (eyePos - aimPos):CrossProduct(Vector(0,1,0))
-        strafeTarget:Normalize()
-        
-        -- numbers chosen arbitrarily to give some appearance of random juking
-        strafeTarget = strafeTarget * ConditionalValue( math.sin(time * 2.2 ) + math.sin(time * 3.75 ) > 0 , -1, 1)
-        --BOT-TODO Above needs to be a LOT more reactive/dynamic (e.g. look at target's velocity, etc.)
-        
-        if strafeTarget:GetLengthSquared() > 0 then
-
-            bot:GetMotion():SetDesiredMoveDirection(strafeTarget)
-
-            if player:isa("JetpackMarine") then     --TODO Revie/Revise
-
-                if (player:GetFuel() > 0.3 or not player:GetIsOnGround()) then
-                    if not brain.lastJumpDodge or brain.lastJumpDodge + 2 < time or dist < 9.0 then
-                        brain.lastJumpDodge = Shared.GetTime()
-                        move.commands = AddMoveCommand(move.commands, Move.Jump)
-                    end
-                end
-
-            else
-
-                --Don't randomly jump when enemy is 15+ meters away
-                if dist < 6 and brain.lastJumpDodge + 2 < time then
-                    brain.lastJumpDodge = Shared.GetTime()
+                if player:GetFuel() > 0.25 then
                     move.commands = AddMoveCommand(move.commands, Move.Jump)
                 end
-
             end
 
-        end
+        else
+            if shouldStrafe then
+                local strafeTarget = (eyePos - aimPos):CrossProduct(Vector(0,1,0))
+                strafeTarget:Normalize()
+                strafeTarget = strafeTarget *
+                    ConditionalValue(math.sin(time * 2.2) + math.sin(time * 3.75) > 0, -1, 1)
 
+                bot:GetMotion():SetDesiredMoveDirection(strafeTarget)
+
+                if dist > 2.5 and dist < 12.0 then
+                    bot:GetMotion():SetDesiredMoveDirection(-(aimPos - eyePos))
+                end
+            end
+        end
     end
 
+    ----------------------------------------------------
+    -- Shooting
+    ----------------------------------------------------
     if doFire then
-    
-        move.commands = AddMoveCommand( move.commands, Move.PrimaryAttack )
+        move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
         bot.lastAimPos = aimPos
-        brain.lastShootingTime = Shared.GetTime()
-        
-        if (not bot.lastHostilesTime or bot.lastHostilesTime < Shared.GetTime() - 45) and isDodgeable then
-            CreateVoiceMessage( player, kVoiceId.MarineHostiles )
-            local chatMsg =  bot:SendTeamMessage( "Enemy contact! " .. target:GetMapName() .. " in " .. target:GetLocationName() )
-            bot:SendTeamMessage(chatMsg, 60)
-            bot.lastHostilesTime = Shared.GetTime()
-        end
-        
+        brain.lastShootingTime = time
+
+   
+    local location = target:GetLocationName()
+    local now = Shared.GetTime()
+
+    -- Letzte Meldung f�r diese Location (geteilt von ALLEN Marines)
+    local lastReport = gLastMarineReports[location] or 0
+
+    -- Nur melden, wenn seit 45 Sekunden nichts kam
+    if now - lastReport > 45 then
+
+        CreateVoiceMessage(player, kVoiceId.MarineHostiles)
+
+        local chatMsg = bot:SendTeamMessage(
+            "Enemy contact! " .. target:GetMapName() .. " in " .. location
+        )
+
+        bot:SendTeamMessage(chatMsg, 60)
+
+        -- Zeitstempel aktualisieren (f�r ALLE Marines g�ltig)
+        gLastMarineReports[location] = now
+    end
+
     else
-    
-        if (brain.lastShootingTime and brain.lastShootingTime > Shared.GetTime() - 0.5) then
-            -- blindfire at same old spot
+        if brain.lastShootingTime and brain.lastShootingTime > time - 0.5 then
             if bot.lastAimPos then
-                bot:GetMotion():SetDesiredViewTarget( bot.lastAimPos  )
-                move.commands = AddMoveCommand( move.commands, Move.PrimaryAttack )
+                bot:GetMotion():SetDesiredViewTarget(bot.lastAimPos)
+                move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
             end
-            
-        elseif not retreating and dist < 15.0  then
-            if not bot.lastAimCheatTime or bot.lastAimCheatTime + 0.5 < Shared.GetTime() then
-                bot.lastAimCheatTime = Shared.GetTime()
+        elseif dist < 15.0 then
+            if not bot.lastAimCheatTime or bot.lastAimCheatTime + 0.5 < time then
+                bot.lastAimCheatTime = time
                 bot.lastAimPos = aimPos
             end
-
             if bot.lastAimPos then
                 bot:GetMotion():SetDesiredViewTarget(bot.lastAimPos)
             end
         else
             bot.lastAimPos = nil
         end
-
     end
 
-    -- Draw a red line to show what we are trying to attack
+    ----------------------------------------------------
+    -- Debug
+    ----------------------------------------------------
     if gBotDebug:Get("debugall") or brain.debug then
-
-        if doFire then
-            DebugLine( eyePos, aimPos, 0.0,   1,0,0,1, true)
-        else
-            DebugLine( eyePos, aimPos, 0.0,   1,0.5,0,1, true)
-        end
-
+        DebugLine(eyePos, aimPos, 0.0, doFire and 1 or 1, doFire and 0 or 0.5, 0, 1, true)
     end
-    
+
+    return move
 end
 
 local function PerformAttack( eyePos, mem, bot, brain, move ) 
@@ -817,7 +1213,7 @@ local function HasGoodWeapon(marine)
     local primaryWep = marine:GetWeaponInHUDSlot(1)
     if not primaryWep then return false end
 
-    local goodWeps = {'Shotgun','HeavyMachineGun','Flamethrower','GrenadeLauncher','Cannon'}
+    local goodWeps = {'Shotgun','HeavyMachineGun','Flamethrower','GrenadeLauncher'}
     return table.icontains( goodWeps, primaryWep:GetClassName() )
     --[[
     return 
@@ -866,6 +1262,9 @@ local kMarineBrainObjectiveActionTypesOrderScale = 100
 --then these take precendence. Thus, granting a "planning/decision" step, and then a "reaction" step for Marine bots.
 local kMarineBrainObjectiveTypes = enum({
     "FollowOrders",
+    "GuardARC",
+    "AwaitEarlyResPlacement",
+    "FollowBuddyGL",
     "RespondToThreat",
     "TakeTerritory",
     "HealByNearestArmory",
@@ -885,7 +1284,6 @@ local kMarineBrainObjectiveTypes = enum({
     "BuyMines",
     "GuardNearestHuman",
     "GuardNearestExo",
-    "AwaitEarlyResPlacement",
 })
 
 local MarineObjectiveWeights = MakeBotActionWeights(kMarineBrainObjectiveTypes, kMarineBrainObjectiveActionTypesOrderScale)
@@ -986,17 +1384,45 @@ local kValidateHealByNearestArmory = function( bot, brain, marine, action )
     return true
 end
 
-local kValidateRetreat = function( bot, brain, marine, action )
+kValidateRetreat = function(bot, brain, marine, action)
     local sdb = brain:GetSenses()
     local ammoFrac = sdb:Get("ammoFraction")
+    local armorFrac = marine:GetArmorScalar()
+    local fuel = marine:isa("JetpackMarine") and marine:GetFuel() or 1.0
+    local nearbyFriendlies = sdb:Get("nearbyFriendlies") or 0
+    local nearbyEnemies = sdb:Get("nearbyEnemies") or 0
+    local armoryGoal = sdb:Get("nearestArmory")
+    local armory = armoryGoal and armoryGoal.armory
+    local armoryDist = armoryGoal and armoryGoal.distance or math.huge
 
-    -- even if healed most of the way, need to ensure we're rearmed
-    if not marine:GetIsUnderFire() and (marine:GetHealthFraction() <= 0.6 or ammoFrac < 0.4) then
+    -- Retreat nur wenn Armory in Reichweite (< 100 Units)
+    if not IsValid(armory) or armoryDist > 200 then
+        return false
+    end
+
+    -- Basisbedingungen
+    if marine:GetHealthFraction() <= 0.5 or ammoFrac < 0.5 or armorFrac < 0.4 then
         return true
     end
 
-    if not IsValid(action.armory) then
-        return false
+    -- Jetpack-Modifikator
+    if marine:isa("JetpackMarine") then
+        if fuel < 0.2 then
+            return true
+        end
+        local weapon = marine:GetActiveWeapon()
+        if weapon and (weapon:GetMapName() == Shotgun.kMapName or
+                       weapon:GetMapName() == Flamethrower.kMapName or
+                       weapon:GetMapName() == HeavyMachineGun.kMapName) then
+            if marine:GetHealthFraction() < 0.4 or armorFrac < 0.3 then
+                return true
+            end
+        end
+    end
+
+    -- Team-Modifikator
+    if nearbyFriendlies < 2 and nearbyEnemies >= 2 then
+        return true
     end
 
     return false
@@ -1135,19 +1561,145 @@ local kValidateGuardNearestHuman = function( bot, brain, marine, action )
     return true
 end
 
+local kValidateFollowBuddyGL = function(bot, brain, marine, action)
+
+    local buddy = action.target
+    if not IsValid(buddy) or (buddy.GetIsAlive and not buddy:GetIsAlive()) then
+        brain.teamBrain:UnassignPlayer(marine)
+        return false
+    end
+
+    -- Buddy muss exklusiv diesem GL-Bot geh�ren
+    local assigned = brain.teamBrain:GetNumOthersAssignedToEntity(marine, buddy:GetId())
+    if assigned >= 1 then
+        brain.teamBrain:UnassignPlayer(marine)
+        return false
+    end
+
+    -- Distanz pr�fen
+    local dist = marine:GetOrigin():GetDistance(buddy:GetOrigin())
+    if dist > 30 then
+        brain.teamBrain:UnassignPlayer(marine)
+        return false
+    end
+
+    return true
+end
+
+local kValidateGuardARC = function(bot, brain, marine, action)
+    local arc = action.target
+    if not IsValid(arc) then
+        brain:ResetGuardState()
+        return false
+    end
+
+    if not arc:GetIsAlive() then
+        brain:ResetGuardState()
+        return false
+    end
+
+    -- ARC darf NICHT im Defend-Modus sein
+    if ArcIsDefended(arc) then
+        brain:ResetGuardState()
+        return false
+    end
+
+    -- ARC muss eine aktive Order haben
+    if not ArcHasActiveOrder(arc) then
+        brain:ResetGuardState()
+        return false
+    end
+
+    -- Marine braucht etwas Ammo
+    if brain:GetSenses():Get("ammoFraction") <= 0.05 then
+        return false
+    end
+
+    -- Distanz pr�fen
+    local dist = GetPhaseDistanceForMarine(marine, arc, brain.lastGateId)
+    if dist > 50 then
+        brain:ResetGuardState()
+        return false
+    end
+
+    -- Nur EIN Marine pro ARC
+    local numOthers = brain.teamBrain:GetNumOthersAssignedToEntity(marine, arc:GetId())
+    if numOthers >= 1 then
+        brain:ResetGuardState()
+        return false
+    end
+
+    -- H�henunterschied pr�fen
+    local dy = math.abs(marine:GetOrigin().y - arc:GetOrigin().y)
+    if dy > 10 then
+        return false
+    end
+
+    return true
+end
+
 local kValidateFollowOrders = function( bot, brain, marine, action )
 
     return IsValid(action.order)
 end
 
-local kValidateAwaitEarlyResDrop = function( bot, brain, marine, action )
+local kValidateAwaitEarlyResDrop = function(bot, brain, marine, action)
     local roundMinutesPassed = GetGameMinutesPassed()
     if roundMinutesPassed > action.limit then
         return false
     end
 
-    if action.resNode and action.resNode:GetAttached() then
-        return false
+    local node = action.resNode
+
+    ------------------------------------------------------------
+    -- 1) RT fertig? Dann abbrechen
+    ------------------------------------------------------------
+    if node:isa("ResourcePoint") then
+        if node:GetAttached() then
+            return false
+        end
+    end
+
+    ------------------------------------------------------------
+    -- 2) TP fertig? Dann abbrechen
+    ------------------------------------------------------------
+    if node:isa("TechPoint") then
+        if not IsTechPointIncomplete(node, marine:GetTeamNumber()) then
+            return false
+        end
+    end
+
+    ------------------------------------------------------------
+    -- 3) Double-Res-Point-Erweiterung
+    --    (Harvester-Check nur hier!)
+    ------------------------------------------------------------
+    if action.doublePair then
+        local rp1 = action.doublePair[1]
+        local rp2 = action.doublePair[2]
+
+        if rp1 and rp2 then
+
+            -- Harvester-Check nur f�r Double-Res
+            for _, rp in ipairs(action.doublePair) do
+                local harvesters = GetEntitiesForTeamWithinRange("Harvester",kAlienTeamType, rp:GetOrigin(), 2 )
+                if #harvesters > 0 then
+                    return false
+                end
+            end
+
+            local rp1Done = rp1:GetAttached() ~= nil
+            local rp2Done = rp2:GetAttached() ~= nil
+
+            -- Wenn beide fertig ? abbrechen
+            if rp1Done and rp2Done then
+                return false
+            end
+
+            -- Wenn dieser Node fertig ? abbrechen
+            if node:GetAttached() then
+                return false
+            end
+        end
     end
 
     return true
@@ -1567,6 +2119,44 @@ local kExecGuardNearestHuman = function(move, bot, brain, marine, action)
 
 end
 
+local kExecGuardARC = function(move, bot, brain, marine, action)
+    PROFILE("MarineBrain - ExecGuardARC")
+
+    local arc = action.target
+    if not arc or not IsValid(arc) or not arc:GetIsAlive() then
+        return
+    end
+
+    -- WICHTIG: Exklusivit�t aktivieren
+    local arcId = arc:GetId()
+    if not brain.teamBrain:GetIsAssignedToEntity(marine, arcId) then
+        brain.teamBrain:UnassignPlayer(marine)
+        brain.teamBrain:AssignPlayerToEntity(marine, arcId)
+    end
+
+    local marineOrg = marine:GetOrigin()
+    local arcOrg = arc:GetOrigin()
+
+    local targDist = (arcOrg - marineOrg):GetLength()
+
+    local desiredDist = 4.5
+    local desiredDistMin = 2.5
+
+    local relV = marine:GetVelocity():GetLength()
+    local gs_T = Vector()
+    VectorCopy(marineOrg, gs_T)
+    VectorSetLength(gs_T, desiredDist)
+
+    local gs_Fn = -gs_K * ((targDist - desiredDist) * (gs_T / targDist)) - (gs_B * relV)
+    local gs_F = gs_Fn:GetLengthSquared()
+
+    if targDist > desiredDist or gs_F > gs_MoveThreshold then
+        PerformMove(marineOrg, arcOrg, bot, brain, move, false, false)
+    else
+        bot:GetMotion():SetDesiredMoveTarget(nil)
+    end
+end
+
 local kExecGotoCommPing = function(move, bot, brain, marine, action)
     PROFILE("MarineBrain - ExecGotoCommPing")
 
@@ -1612,20 +2202,42 @@ local kExecBuildStructure = function(move, bot, brain, marine, action)
         return kPlayerObjectiveComplete
     end
 
-    brain.teamBrain:AssignPlayerToEntity( marine, action.key )
+    brain.teamBrain:AssignPlayerToEntity(marine, action.key)
 
-    PerformMove( marine:GetOrigin(), target:GetOrigin(), bot, brain, move )
+    PerformMove(marine:GetOrigin(), target:GetOrigin(), bot, brain, move)
 
-    --BOT-TODO Improve, this is too generic/dry (no, not "Beige-Flavor text", but something better that this)
-    --BOT-FIXME Need to properly format the names ...some MapName value has _ instead if spaces, and all are lowercased
-    local chatMsg = ( "I'll build the " .. target:GetMapName() .. " in " .. target:GetLocationName() )
+    --------------------------------------------------------------------
+    -- Gemeinsames Marine-Memo (kein Spam, nur 1 Bot meldet)
+    --------------------------------------------------------------------
+    local player = bot:GetPlayer()
+    local client = player.GetClient and player:GetClient()
+    local isSelfBot = client and client:GetIsVirtual()
 
-    bot:SendTeamMessage(chatMsg, 120)
+    if isSelfBot then
+        local location = target:GetLocationName()
+        local now = Shared.GetTime()
+
+        -- Letzte Meldung f�r diese Location
+        local lastReport = gLastMarineReports[location] or 0
+
+        -- Nur melden, wenn seit 120 Sekunden nichts kam
+        if now - lastReport > 120 then
+
+            local chatMsg = bot:SendTeamMessage(
+                "I'll build the " .. target:GetMapName() .. " in " .. location
+            )
+
+            bot:SendTeamMessage(chatMsg, 120)
+
+            -- Zeitstempel aktualisieren
+            gLastMarineReports[location] = now
+        end
+    end
+    --------------------------------------------------------------------
 
     if marine:GetOrigin():GetDistance(target:GetOrigin()) < 5 then
         return kPlayerObjectiveComplete
     end
-
 end
 
 local kExecBuyTechId = function(move, bot, brain, marine, action)
@@ -1667,37 +2279,53 @@ local kExecBuyTechId = function(move, bot, brain, marine, action)
 
 end
 
+
 local kExecAwaitEarlyResPlacement = function(move, bot, brain, marine, action)
     PROFILE("MarineBrain - ExecAwaitEarlyResPlacement")
 
-    local awaitableResNode = action.resNode
+    local node = action.resNode
+    local nodeId = node:GetId()
 
-    brain.teamBrain:AssignPlayerToEntity( marine, awaitableResNode:GetId() )
+    -- ORIGINAL: TeamBrain assignment
+    brain.teamBrain:AssignPlayerToEntity(marine, nodeId)
 
-    if GetBotWalkDistance(marine, awaitableResNode) < 6 then
+    -- Warten in Formation
+    if GetBotWalkDistance(marine, node) < 6 then
 
-        bot:GetMotion():SetDesiredMoveTarget( nil )
+        bot:GetMotion():SetDesiredMoveTarget(nil)
 
         local time = Shared.GetTime()
 
-        if brain.lastCommanderRequestTime + brain.kCommanderRequestRateTime < time then
-            if math.random(0,1) < 0.5 then
-                CreateVoiceMessage( marine, kVoiceId.MarineRequestStructure )
-                brain.lastCommanderRequestTime = time + math.random(0.25, 1.5) --cheese, but adds variance
+        -- Commander Request
+        local location = node:GetLocationName() or "unknown"
+        local now = Shared.GetTime()
+        local lastReport = gLastMarineReports[location] or 0
+
+        -- Nur melden, wenn seit 45 Sekunden nichts kam
+        if now - lastReport > 45 and brain.lastCommanderRequestTime + brain.kCommanderRequestRateTime < now then
+            if math.random() < 0.5 then
+                CreateVoiceMessage(marine, kVoiceId.MarineRequestStructure)
+
+                local chatMsg = bot:SendTeamMessage( "Requesting structure at " .. node:GetMapName() .. " in " .. location )
+
+                bot:SendTeamMessage(chatMsg, 60)
+
+                gLastMarineReports[location] = now
+                brain.lastCommanderRequestTime = now + math.random(0.25, 1.5)
             end
         end
 
+        -- Blickrichtung
         if action.threatGatewayPos then
-            -- Look at where we most expect hostiles to enter from
-            LookAroundAtTarget( bot, marine, action.threatGatewayPos )
-        else -- fallback, should never be taken
-            LookAroundRandomly( bot, marine )
+            LookAroundAtTarget(bot, marine, action.threatGatewayPos)
+        else
+            LookAroundRandomly(bot, marine)
         end
 
     else
-        PerformMove( marine:GetOrigin() , awaitableResNode:GetOrigin(), bot, brain, move)
+        -- Hinlaufen
+        PerformMove(marine:GetOrigin(), node:GetOrigin(), bot, brain, move)
     end
-
 end
 
 local kExecPressureNaturals = function(move, bot, brain, marine, action)
@@ -1786,7 +2414,7 @@ kMarineBrainObjectiveActions =
             validate = kValidateFollowOrders,
             perform = kExecFollowOrder
         }
-    end, -- FOLLOW ORDERS (Attack/Build/Move)
+    end, -- FOLLOW ORDERS (Attack/Build/Move)    
 
     function(bot, brain, marine)
         PROFILE("MarineBrain - RespondToThreats")
@@ -1928,50 +2556,76 @@ kMarineBrainObjectiveActions =
         }
     end, -- HEAL AT NEARBY ARMORY
 
-    function(bot, brain, marine)
-        PROFILE("MarineBrain - Retreat")
-        -- Log("MarineBrain - Retreat")
+function(bot, brain, marine)
+    PROFILE("MarineBrain - Retreat")
+    -- Log("MarineBrain - Retreat")
 
-        local name = kMarineBrainObjectiveTypes[kMarineBrainObjectiveTypes.Retreat]
-        local sdb = brain:GetSenses()
-        local weight = 0
-        local armoryGoal = sdb:Get("nearestArmory")
-        local armory
-        local armoryDist
-        local ammoFrac = sdb:Get("ammoFraction")
-        
-        if armoryGoal.armory ~= nil then
+    local name = kMarineBrainObjectiveTypes[kMarineBrainObjectiveTypes.Retreat]
+    local sdb = brain:GetSenses()
+    local weight = 0
+    local armoryGoal = sdb:Get("nearestArmory")
+    local armory
+    local armoryDist
+    local ammoFrac = sdb:Get("ammoFraction")
+    local armorFrac = marine:GetArmorScalar()
+    local fuel = marine:isa("JetpackMarine") and marine:GetFuel() or 1.0
+    local nearbyFriendlies = sdb:Get("nearbyFriendlies") or 0
+    local nearbyEnemies = sdb:Get("nearbyEnemies") or 0
 
-            local minFraction = math.min( marine:GetHealthFraction(), ammoFrac )
-            armory = armoryGoal.armory
-            armoryDist = armoryGoal.distance
+    if armoryGoal.armory ~= nil then
+        local minFraction = math.min(marine:GetHealthFraction(), ammoFrac)
+        armory = armoryGoal.armory
+        armoryDist = armoryGoal.distance
 
-            if armoryDist < 2.0 and minFraction < 0.8 then
-            -- If we are pretty close to the armory, stay with it a bit longer to encourage full-healing, etc.
-            -- so pretend our situation is more dire than it is
-                minFraction = minFraction / 3.0
-            end
-
-            if not marine:GetIsUnderFire() and minFraction <= 0.2 then
-                weight = GetMarineObjectiveBaselineWeight( kMarineBrainObjectiveTypes.Retreat )
-
-            elseif ammoFrac == 0 then
-            --we're bingo ammo, always retreat
-                weight = GetMarineObjectiveBaselineWeight( kMarineBrainObjectiveTypes.Retreat )
-
-            end
-
+        -- Wenn sehr nah an der Armory, Situation k�nstlich versch�rfen, um Heilung/Ammo zu erzwingen
+        if armoryDist < 2.0 and minFraction < 0.8 then
+            minFraction = minFraction / 3.0
         end
 
-        return 
-        { 
-            name = name, 
-            weight = weight,
-            armory = armory,
-            validate = kValidateRetreat,
-            perform = kExecRetreat
-        }
-    end, -- RETREAT
+        -- Basisbedingungen: HP/Ammo
+        if not marine:GetIsUnderFire() and minFraction <= 0.2 then
+            weight = GetMarineObjectiveBaselineWeight(kMarineBrainObjectiveTypes.Retreat)
+        elseif ammoFrac == 0 then
+            weight = GetMarineObjectiveBaselineWeight(kMarineBrainObjectiveTypes.Retreat)
+        end
+
+        -- Erweiterung: Armor
+        if armorFrac < 0.25 then
+            weight = math.max(weight, GetMarineObjectiveBaselineWeight(kMarineBrainObjectiveTypes.Retreat))
+        end
+
+        -- Erweiterung: Jetpack Fuel
+        if marine:isa("JetpackMarine") and fuel < 0.2 then
+            weight = math.max(weight, GetMarineObjectiveBaselineWeight(kMarineBrainObjectiveTypes.Retreat))
+        end
+
+        -- Erweiterung: High-Value JP Waffen (SG/FT/HMG)
+        local weapon = marine:GetActiveWeapon()
+        if marine:isa("JetpackMarine") and weapon and (
+            weapon:GetMapName() == Shotgun.kMapName or
+            weapon:GetMapName() == Flamethrower.kMapName or
+            weapon:GetMapName() == HeavyMachineGun.kMapName
+        ) then
+            if marine:GetHealthFraction() < 0.4 or armorFrac < 0.3 then
+                weight = math.max(weight, GetMarineObjectiveBaselineWeight(kMarineBrainObjectiveTypes.Retreat))
+            end
+        end
+
+        -- Erweiterung: Team vs Gegner
+        if nearbyFriendlies < 2 and nearbyEnemies >= 2 then
+            weight = math.max(weight, GetMarineObjectiveBaselineWeight(kMarineBrainObjectiveTypes.Retreat))
+        end
+    end
+
+    return 
+    { 
+        name = name, 
+        weight = weight,
+        armory = armory,
+        validate = kValidateRetreat,
+        perform = kExecRetreat
+    }
+end, -- RETREAT
 
     function( bot, brain, marine )
         PROFILE("MarineBrain - GotoCommPing")
@@ -2045,16 +2699,16 @@ kMarineBrainObjectiveActions =
                 table.sort( nearStructuresDamaged, 
                     function(a, b) 
                         return
-                            GetBotWalkDistance(marine,Shared.GetEntity(a.entId) or a.pos)
+                            GetBotWalkDistance(Shared.GetEntity(a.entId) or a.pos, marine)
                             <
-                            GetBotWalkDistance(marine,Shared.GetEntity(b.entId) or b.pos)
+                            GetBotWalkDistance(Shared.GetEntity(b.entId) or b.pos, marine)
                     end
                 )
 
                 local defendTargetEntId = nearStructuresDamaged[1].entId
                 defendTarget = Shared.GetEntity(defendTargetEntId)
 
-                if defendTarget and defendTarget.GetHealthScalar then
+                if defendTarget then
 
                     local tNow = Shared.GetTime()
                     local applyWeight = false
@@ -2260,7 +2914,7 @@ kMarineBrainObjectiveActions =
 
         local techTree = GetTechTree(marine:GetTeamNumber())
 
-        if not techTree:GetIsTechAvailable(kTechId.DualMinigunExosuit) then
+        if not techTree:GetHasTech(kTechId.ExosuitTech, true) then
             return kNilAction
         end
 
@@ -2281,6 +2935,7 @@ kMarineBrainObjectiveActions =
 
         local shouldBuyExo = totalExosAllowed > 0 and
             totalExosAllowed > 0 and
+            sdb:Get("welder") and
             not marine:isa("JetpackMarine") and
             not HasGoodWeapon(marine) and
             resources >= LookupTechData(kTechId.DualMinigunExosuit, kTechDataCostKey) and
@@ -2291,7 +2946,7 @@ kMarineBrainObjectiveActions =
         end
 
         local buyId = kTechId.DualMinigunExosuit
-        if totalRailgunsAllowed > 0 and techTree:GetIsTechAvailable(kTechId.DualRailgunExosuit) and math.random() > 0.5 then
+        if totalRailgunsAllowed > 0 and math.random() > 0.5 then
             buyId = kTechId.DualRailgunExosuit -- Don't need many railguns, miniguns much more useful
         end
 
@@ -2374,22 +3029,22 @@ kMarineBrainObjectiveActions =
             local armoryGoal = sdb:Get("nearbyArmory")
             local armory = armoryGoal and armoryGoal.armory or nil
             targetArmory = armory
-            --local isAdvArmory = targetArmory ~= nil and targetArmory:isa("AdvancedArmory") or false
-            --
-            --local wantAdvancedWeapon = brain.activeWeaponPurchaseTechId ~= kTechId.Shotgun 
-            --
-            --if wantAdvancedWeapon and not isAdvArmory then
-            ----Only update if needed
-            --    local advArmoryGoal = sdb:Get("nearbyAdvancedArmory")
-            --    if advArmoryGoal and advArmoryGoal.armory then
-            --        targetArmory = advArmoryGoal.armory
-            --    else
-            --    --Adv armory doesn't exist, or was destroyed, bail-out on this action
-            --        wantNewWeapon = false
-            --        targetArmory = nil
-            --        weight = 0
-            --    end
-            --end
+            local isAdvArmory = targetArmory ~= nil and targetArmory:isa("AdvancedArmory") or false
+
+            --local wantAdvancedWeapon = brain.activeWeaponPurchaseTechId ~= kTechId.Shotgun -- Dieser Befehl sorgt nur daf�r, dass die Bots nur die Schrotflinte im aktvien Spiel kaufen.
+
+            if wantAdvancedWeapon and not isAdvArmory then
+            --Only update if needed
+                local advArmoryGoal = sdb:Get("nearbyAdvancedArmory")
+                if advArmoryGoal and advArmoryGoal.armory then
+                    targetArmory = advArmoryGoal.armory
+                else
+                --Adv armory doesn't exist, or was destroyed, bail-out on this action
+                    wantNewWeapon = false
+                    targetArmory = nil
+                    weight = 0
+                end
+            end
 
             if targetArmory then
                 weight = GetMarineObjectiveBaselineWeight( kMarineBrainObjectiveTypes.BuyWeapons )
@@ -2405,7 +3060,6 @@ kMarineBrainObjectiveActions =
                 kTechId.Shotgun,
                 kTechId.Flamethrower,
                 kTechId.GrenadeLauncher,
-                kTechId.Cannon,
             })
 
             local weaponTechs = 
@@ -2414,14 +3068,13 @@ kMarineBrainObjectiveActions =
                 [kTechId.Flamethrower] = kTechId.AdvancedWeaponry,
                 [kTechId.GrenadeLauncher] = kTechId.AdvancedWeaponry,
                 [kTechId.HeavyMachineGun] = kTechId.AdvancedWeaponry,
-                [kTechId.Cannon] = kTechId.PrototypeLab,
             }
 
             local hasAnyOptions = false
             local techTree = GetTechTree(marine:GetTeamNumber())    --BOT-TODO This kind of thing could be cached in TeamBrain when Tech-Unlock message is triggered
             if techTree then
                 for _, weaponTechId in ipairs(weapons) do
-                    if techTree:GetIsTechAvailable(weaponTechs[weaponTechId], true) then
+                    if techTree:GetHasTech(weaponTechs[weaponTechId], true) then
                         availableWeapons[#availableWeapons + 1] = weaponTechId
                         availableWeapons[weaponTechId] = true
                         hasAnyOptions = true
@@ -2518,7 +3171,7 @@ kMarineBrainObjectiveActions =
         
         local techTree = GetTechTree(marine:GetTeamNumber())
         
-        if proto and protoDist and not marine:isa("JetpackMarine") and techTree:GetIsTechAvailable(kTechId.JetpackTech, true) and resources >= LookupTechData(kTechId.Jetpack, kTechDataCostKey) then
+        if proto and protoDist and not marine:isa("JetpackMarine") and techTree:GetHasTech(kTechId.JetpackTech, true) and resources >= LookupTechData(kTechId.Jetpack, kTechDataCostKey) then
             weight = GetMarineObjectiveBaselineWeight( kMarineBrainObjectiveTypes.BuyJetpack )
                     
             if bot.wantsJetpack then
@@ -2678,66 +3331,242 @@ end, -- BUY HandGrenades
             perform = kExecGuardNearestHuman
         }
     end, -- GUARD EXO (MAINTAIN DIST, RANDOM LOOK AROUND)
+    
+function(bot, brain, marine)
+    PROFILE("MarineBrain - FollowBuddyGL")
 
-    function(bot, brain, marine)
-        --[[
-        This action is only applicable when exploring, and move near a Res Node in the early game.
-        The idea behind it is for Marines to build their naturals faster, instead of skipping past.
-        --]]
-        PROFILE("MarineBrain  -  AwaitEarlyResPlacement")
+    local name = kMarineBrainObjectiveTypes[kMarineBrainObjectiveTypes.FollowBuddyGL]
+    local sdb = brain:GetSenses()
+    local teamBrain = GetTeamBrain(marine:GetTeamNumber())
 
-        local name, weight = MarineObjectiveWeights:Get(kMarineBrainObjectiveTypes.AwaitEarlyResPlacement)
+    -- Nur GL-Marines
+    local weapon = marine:GetActiveWeapon() or marine:GetWeaponInHUDSlot(1)
+    if not (weapon and weapon.GetMapName and weapon:GetMapName() == GrenadeLauncher.kMapName) then
+        return { name = name, weight = 0 }
+    end
 
-        local awaitableResNode
-        local threatGatewayPos
+    -- Nur ein GL-Bot gleichzeitig
+    if teamBrain:GetNumOtherBotsWithGoal(bot, name) >= 1 then
+        return { name = name, weight = 0 }
+    end
 
-        local roundMinutesPassed = GetGameMinutesPassed() --returns decimal values (e.g. 63 second == 1.05), so use math.random to add minor variance
-        local teamBrain = GetTeamBrain(marine:GetTeamNumber())
-        local enemyTeamLoc = GetTeamBrain(GetEnemyTeamNumber(teamBrain.teamNumber)).initialTechPointLoc
+    -- Buddy holen
+    local buddyData = sdb:Get("nearestBuddyForGL")
+    local buddy = buddyData and buddyData.player
+    local dist = buddyData and buddyData.distance or 999
 
-        local limit = kMarineAwaitEarlyResDropLimit + math.random(0.01, 0.15)
+    if buddy and dist < 30 then
+        local buddyId = buddy:GetId()
 
-        if roundMinutesPassed <= limit then
-        --keep this behavior only to early-game
+        -- Pr�fen ob Buddy schon vergeben ist
+        if teamBrain:GetNumOthersAssignedToEntity(bot, buddyId) == 0 then
 
-            local naturals = GetLocationGraph():GetNaturalRtsForTechpoint(teamBrain.initialTechPointLoc)
-            local resNodes = GetEntities( "ResourcePoint" )
-
-            for i = 1, #resNodes do
-
-                local resNode = resNodes[i]
-                local location = resNode:GetLocationName()
-                local numOthers = teamBrain:GetNumOthersAssignedToEntity(marine, resNode:GetId())
-
-                --Skip our starting techpoint and don't wait for nodes with structures attached (assume this or other bots will be assigned BuildStructure)
-                if naturals and naturals:Contains(location) and not resNode:GetAttached() and numOthers == 0 then
-
-                    --Determine which gateway hostiles would be most likely to enter this location from
-                    threatGatewayPos = GetThreatGatewayForLocation(location, enemyTeamLoc)
-                    awaitableResNode = resNode
-                        break
-
-                    end
-
-                end
-
-            end
-
-        if not awaitableResNode then
-            return kNilAction
+            return {
+                name       = name,
+                weight     = GetMarineObjectiveBaselineWeight(kMarineBrainObjectiveTypes.FollowBuddyGL),
+                fastUpdate = true,
+                target     = buddy,
+                validate   = kValidateFollowBuddyGL,
+                perform    = kExecGuardNearestHuman
+            }
         end
+    end
 
-        return
-        {
-            name = name,
-            weight = weight,
-            resNode = awaitableResNode,
-            threatGatewayPos = threatGatewayPos,
-            limit = limit,
-            validate = kValidateAwaitEarlyResDrop,
-            perform = kExecAwaitEarlyResPlacement
-        }
-    end,  --AWAIT BUILDING PLACEMENT
+    return { name = name, weight = 0 }
+end, -- GL BUDDY (MAINTAIN DIST, RANDOM LOOK AROUND)
+
+function(bot, brain, marine)
+    PROFILE("MarineBrain - GuardARC")
+
+    local name = kMarineBrainObjectiveTypes[kMarineBrainObjectiveTypes.GuardARC]
+    local sdb = brain:GetSenses()
+    local teamBrain = brain.teamBrain
+    local weight = 0
+
+    local arcs = sdb:Get("teamARCs")
+    if not arcs or #arcs == 0 then
+        return { name = name, weight = 0 }
+    end
+
+    local bestArc = nil
+    local bestDist = math.huge
+    local marinePos = marine:GetOrigin()
+
+    for _, arc in ipairs(arcs) do
+        if IsValid(arc) and arc:GetIsAlive()
+        and not ArcIsDefended(arc)
+        and ArcHasActiveOrder(arc) then
+
+            local dist = (arc:GetOrigin() - marinePos):GetLength()
+            if dist < bestDist then
+                bestArc = arc
+                bestDist = dist
+            end
+        end
+    end
+
+    if not bestArc or bestDist > 50 then
+        return { name = name, weight = 0 }
+    end
+
+    local arcId = bestArc:GetId()
+    local numOthers = teamBrain:GetNumOthersAssignedToEntity(marine, arcId)
+
+    if numOthers == 0 then
+        weight = GetMarineObjectiveBaselineWeight(kMarineBrainObjectiveTypes.GuardARC)
+    end
+
+    return {
+        name       = name,
+        weight     = weight,
+        fastUpdate = true,
+        target     = bestArc,
+        validate   = kValidateGuardARC,
+        perform    = kExecGuardARC
+    }
+end, --GUARD ARC
+
+function(bot, brain, marine)
+    PROFILE("MarineBrain  -  AwaitEarlyResPlacement")
+
+    local name, weight = MarineObjectiveWeights:Get(kMarineBrainObjectiveTypes.AwaitEarlyResPlacement)
+
+    local awaitableResNode
+    local threatGatewayPos
+
+    local roundMinutesPassed = GetGameMinutesPassed()
+    local teamBrain = GetTeamBrain(marine:GetTeamNumber())
+    local enemyTeamLoc = GetTeamBrain(GetEnemyTeamNumber(teamBrain.teamNumber)).initialTechPointLoc
+
+    local limit = kMarineAwaitEarlyResDropLimit + math.random(0.01, 0.15)
+
+    ------------------------------------------------------------
+    -- 1) RT-Suche (Original)
+    ------------------------------------------------------------
+    if roundMinutesPassed <= limit then
+
+        local naturals = GetLocationGraph():GetNaturalRtsForTechpoint(teamBrain.initialTechPointLoc)
+        local resNodes = GetEntities("ResourcePoint")
+
+        for i = 1, #resNodes do
+
+            local resNode = resNodes[i]
+            local location = resNode:GetLocationName()
+
+            local numOthers = teamBrain:GetNumOthersAssignedToEntity(marine, resNode:GetId())
+
+            if naturals
+            and naturals:Contains(location)
+            and not resNode:GetAttached()
+            and numOthers == 0 then
+
+                threatGatewayPos = GetThreatGatewayForLocation(location, enemyTeamLoc)
+                awaitableResNode = resNode
+                break
+            end
+        end
+    end
+
+    ------------------------------------------------------------
+    -- 2) TP-Suche (Erweiterung)
+    ------------------------------------------------------------
+    if not awaitableResNode then
+
+        local techPoints = GetEntities("TechPoint")
+
+        for i = 1, #techPoints do
+            local tp = techPoints[i]
+
+            if IsTechPointIncomplete(tp, marine:GetTeamNumber()) then
+
+                local numOthers = teamBrain:GetNumOthersAssignedToEntity(marine, tp:GetId())
+
+                if numOthers < 2 then
+                    threatGatewayPos = GetThreatGatewayForLocation(tp:GetLocationName(), enemyTeamLoc)
+                    awaitableResNode = tp
+                    break
+                end
+            end
+        end
+    end
+    
+    ------------------------------------------------------------
+-- 2b) Double-Res-Point-Suche (ohne Senses)
+------------------------------------------------------------
+if not awaitableResNode then
+
+    local resNodes = GetEntities("ResourcePoint")
+    local locationMap = {}
+
+    -- Gruppieren nach Location
+    for i = 1, #resNodes do
+        local rp = resNodes[i]
+        local loc = rp:GetLocationName()
+
+        if loc then
+            locationMap[loc] = locationMap[loc] or {}
+            table.insert(locationMap[loc], rp)
+        end
+    end
+
+    -- Paare finden
+    for loc, list in pairs(locationMap) do
+        if #list > 1 then
+
+            -- Pr�fe alle Paare
+            for i = 1, #list - 1 do
+                for j = i + 1, #list do
+
+                    local rp1 = list[i]
+                    local rp2 = list[j]
+
+                    -- Beide m�ssen frei sein
+                    if not rp1:GetAttached() and not rp2:GetAttached() then
+
+                        -- Pro Node max. 1 Marine
+                        local assigned1 = teamBrain:GetNumOthersAssignedToEntity(marine, rp1:GetId())
+                        local assigned2 = teamBrain:GetNumOthersAssignedToEntity(marine, rp2:GetId())
+
+                        if assigned1 == 0 then
+                            awaitableResNode = rp1
+                            threatGatewayPos = GetThreatGatewayForLocation(loc, enemyTeamLoc)
+                            actionDoublePair = { rp1, rp2 }
+                            break
+                        elseif assigned2 == 0 then
+                            awaitableResNode = rp2
+                            threatGatewayPos = GetThreatGatewayForLocation(loc, enemyTeamLoc)
+                            actionDoublePair = { rp1, rp2 }
+                            break
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+
+    ------------------------------------------------------------
+    -- 3) Kein Ziel ? kein Action
+    ------------------------------------------------------------
+    if not awaitableResNode then
+        return kNilAction
+    end
+
+    ------------------------------------------------------------
+    -- 4) Action zur�ckgeben
+    ------------------------------------------------------------
+    return {
+        name = name,
+        weight = weight,
+        resNode = awaitableResNode,
+        threatGatewayPos = threatGatewayPos,
+        limit = limit,
+        doublePair = actionDoublePair, --TEST 
+        validate = kValidateAwaitEarlyResDrop,
+        perform = kExecAwaitEarlyResPlacement
+    }
+end,  --AWAIT BUILDING PLACEMENT
 
     function(bot, brain, marine)
 
@@ -2874,26 +3703,38 @@ local kExecAttackLifeforms = function(move, bot, brain, marine, action)
         brain.teamBrain:UnassignPlayer(marine)
 
         local target = Shared.GetEntity(threat.memory.entId)
+        local sdb = brain:GetSenses()
         local dist = GetDistanceToTouch(marine, target)
         local primaryWeapon = marine:GetWeaponInHUDSlot(1)
         local handGrenade = marine:GetWeaponInHUDSlot(5)
-        local numOthers = brain.teamBrain:GetNumOthersAssignedToEntity( marine, target:GetId() )
         local invWelder = marine:GetWeapon(Welder.kMapName)
-
-        if primaryWeapon and primaryWeapon:GetMapName() == GrenadeLauncher.kMapName and dist < 3.0 or primaryWeapon and primaryWeapon:GetMapName() == Flamethrower.kMapName and dist > 8.0 or primaryWeapon and primaryWeapon:GetMapName() == Shotgun.kMapName and dist > 10 then
+        local numFriendlies = brain:GetSenses():Get("nearbyFriendlies")
+        
+        local targetAimPoint = GetBestAimPoint(target)
+    
+        if primaryWeapon and primaryWeapon:GetMapName() == GrenadeLauncher.kMapName and dist < 3.0 
+            or primaryWeapon and primaryWeapon:GetMapName() == Flamethrower.kMapName and dist > 7.0 
+            or primaryWeapon and primaryWeapon:GetMapName() == Shotgun.kMapName and dist > 12 then
             -- Switch to our pistol and fight as a last-ditch effort
             SwitchToPistol(marine)
-        elseif sdb:Get("clipFraction") > 0.0 or (target.GetHealthFraction and target:GetHealthFraction() > 0.7 and sdb:Get("ammoFraction") > 0 ) or (numOthers >= 3 and sdb:Get("pistolClipFraction") == 0 ) then
-            SwitchToPrimary(marine)
-        else   
-        if invWelder ~= nil and (dist <= 1.5 and target:GetHealthFraction() <= 0.15 ) or (dist <= 1.5 and sdb:Get("clipFraction") == 0  and numOthers <= 1 and sdb:Get("pistolClipFraction") == 0 ) or (dist <= 1.5 and sdb:Get("ammoFraction") == 0 and sdb:Get("pistolAmmoFraction") == 0 ) then --not marine:isa("JetpackMarine") then -- Vielleicht besser wenn Jetmarines kein Nahkampf verwenden?
-            SwitchToWelder(marine)
+        elseif sdb:Get("clipFraction") > 0.0 
+        or (target.GetHealthFraction and target:GetHealthFraction() > 0.7 and sdb:Get("ammoFraction") > 0 ) 
+        or (numFriendlies >= 4 and sdb:Get("pistolClipFraction") == 0 ) then
+            SwitchToPrimary(marine)           
+            -- Bedingung f�r Munition pr�fen und zu Nahkampf wechseln
+        elseif 
+              dist <= 1.5 and sdb:Get("pistolClipFraction") == 0 then   
+            --dist <= 1.5 and target:GetHealthFraction() <= 0.15 or sdb:Get("pistolClipFraction") == 0 then 
+            --or dist <= 1.5 and sdb:Get("clipFraction") == 0 or dist <= 1.5 and sdb:Get("pistolClipFraction") == 0 
+            --or dist <= 1.5 and sdb:Get("ammoFraction") == 0 or sdb:Get("pistolAmmoFraction") == 0  
+            --or dist <= 1.5 and sdb:Get("clipFraction") == 0 and sdb:Get("pistolClipFraction") == 0 then 
+             SwitchToMelee(marine)
+             bot:GetMotion():SetDesiredViewTarget(targetAimPoint)
         else
-        if handGrenade ~= nil and dist >= 1.5 and dist < 20 then
+            if handGrenade ~= nil and dist > 5.0 and dist < 20 then
             SwitchToHandGrenade(marine)
         else
             SwitchToPistol(marine)
-            end
          end
       end  
         brain.teamBrain:AssignPlayerToEntity( marine, threat.memory.entId )
@@ -2936,22 +3777,40 @@ local kExecAttackStructures = function(move, bot, brain, marine, action)
     local target = Shared.GetEntity(memory.entId)
 
     brain.teamBrain:UnassignPlayer(marine)
-    brain.teamBrain:AssignPlayerToEntity( marine, memory.entId )
+    brain.teamBrain:AssignPlayerToEntity(marine, memory.entId)
 
     if sdb:Get("ammoFraction") > 0 then
         SwitchToPrimary(marine)
     else
-
         if target:GetHealthScalar() <= 0.15 and sdb:Get("ammoFraction") == 0 then
-        --just try to kill asap
             SwitchToPistol(marine)
         end
     end
 
-    PerformAttackStructure( marine:GetEyePos(), target, memory.lastSeenPos, bot, brain, move )
-      local chatMsg =  bot:SendTeamMessage( "Structural threat! " .. target:GetMapName() .. " in " .. target:GetLocationName() )
-            bot:SendTeamMessage(chatMsg, 60)
+    PerformAttackStructure(marine:GetEyePos(), target, memory.lastSeenPos, bot, brain, move)
 
+    --------------------------------------------------------------------
+    -- Struktur-Meldung (nur 1 Bot, nur 1x pro Struktur)
+    --------------------------------------------------------------------
+    local key = target:GetId()
+    local now = Shared.GetTime()
+
+    -- Wurde diese Struktur schon gemeldet?
+    local lastReport = gLastMarineReports[key] or 0
+
+    -- Wenn schon gemeldet ? nie wieder melden
+    if lastReport == -1 then
+        return
+    end
+
+    -- Meldung senden
+    local chatMsg = bot:SendTeamMessage(
+        "Structural threat! " .. target:GetMapName() .. " in " .. target:GetLocationName()
+    )
+    bot:SendTeamMessage(chatMsg, 60)
+
+    -- Struktur dauerhaft als gemeldet markieren
+    gLastMarineReports[key] = -1
 end
 
 local kExecAttackBabblers = function(move, bot, brain, marine, action)
@@ -3020,7 +3879,7 @@ local kExecFindMedpack = function(move, bot, brain, marine, action)
 end
 
 local kExecFindAmmopack = function(move, bot, brain, marine, action)
-    PROFILE("MarineBrain - ExecFindMedpack")
+    PROFILE("MarineBrain - kExecFindAmmopack")
     if action.bestPack then
         PerformMove( marine:GetOrigin(), action.bestPack:GetOrigin(), bot, brain, move )
     end
@@ -3049,24 +3908,24 @@ local kExecClearCysts = function(move, bot, brain, marine, action)
     local cyst = action.cyst.entity
     assert(cyst ~= nil)
 
-    --[[
-    BOT-FIXME Switching to welder results in Marine just micro-circling the cyst origin and never being able to attack, for some reason.
+    local aimPos = cyst:GetOrigin() -- Get the position of the Cyst
+    local distanceToCyst = (marine:GetOrigin() - aimPos):GetLength()
 
-    local invWelder = marine:GetWeapon(Welder.kMapName)
-    if invWelder then
-        SwitchToWelder(marine)
+    -- Wenn die Entfernung zur Cyste gr��er als 2.0 ist, bewege dich zur Cyste
+    -- Der Bot sollte sich beim Angriff immer bewegen, dass sollte vor miss Treffern mit dem Welder sch�tzen...
+    if distanceToCyst > 1.5 then
+        bot:GetMotion():SetDesiredMoveTarget(aimPos)
     else
-        SwitchToPrimary(marine)
+        -- Wenn die Entfernung zur Cyste kleiner oder gleich 2.0 ist, wechsle zu Nahkampf und greife an
+        SwitchToMelee(marine)
+
+        -- Zielen und angreifen, wenn die Cyste noch lebt
+        if cyst:GetIsAlive() then
+            bot:GetMotion():SetDesiredViewTarget(aimPos) -- Aim at the Cyst
+            PerformAttackStructure(marine:GetEyePos(), cyst, cyst:GetOrigin(), bot, brain, move)
+            move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
+        end
     end
-    --]]
-
-    SwitchToPrimary(marine)
-
-    --Note: Cysts are a special-aim case, so BotAim just points directly at their origin (otherwise, it'll miss them)
-    if cyst:GetIsAlive() then
-        PerformAttackStructure( marine:GetEyePos(), cyst, cyst:GetOrigin(), bot, brain, move )
-    end
-
 end
 
 local kExecBuildNearbyStructure = function(move, bot, brain, marine, action)
@@ -3089,18 +3948,89 @@ local kExecBuildNearbyStructure = function(move, bot, brain, marine, action)
 
 end
 
+
 local kExecWeldNearest = function(move, bot, brain, marine, action)
     PROFILE("MarineBrain - ExecWeldNearest")
 
     local weldTarget = action.weldTarget
+    if not weldTarget then return end
 
-    brain.lastWeldTargetId = weldTarget:GetId()
-    brain.teamBrain:UnassignPlayer(marine)
-    brain.teamBrain:AssignPlayerToEntity( marine, weldTarget:GetId() )
+    local marineWeapon = marine.GetActiveWeapon and marine:GetActiveWeapon() or nil
+    local targetWeapon = weldTarget.GetActiveWeapon and weldTarget:GetActiveWeapon() or nil
 
+    local marineHasWelder = marineWeapon and marineWeapon:GetMapName() == Welder.kMapName
+    local targetHasWelder = targetWeapon and targetWeapon:GetMapName() == Welder.kMapName
+
+    local bothNeedWeld =
+        marine:GetArmorScalar() < 1 and
+        (weldTarget.GetArmorScalar and weldTarget:GetArmorScalar() < 1)
+
+    -- SPEZIALFALL: gegenseitiges Welden
+    if bothNeedWeld and marineHasWelder and targetHasWelder then
+        local dist = marine:GetOrigin():GetDistance(weldTarget:GetOrigin())
+
+        if dist > 2.0 then
+            PerformMove(marine:GetOrigin(), weldTarget:GetOrigin(), bot, brain, move, false)
+        else
+            bot:GetMotion():SetDesiredMoveTarget(nil)
+            SwitchToWelder(marine)
+            PerformWeld(marine, weldTarget, bot, brain, move)
+        end
+
+        return
+    end
+
+    -- Self-Weld
+    if weldTarget == marine or (weldTarget.GetId and marine.GetId and weldTarget:GetId() == marine:GetId()) then
+        SwitchToWelder(marine)
+        PerformWeld(marine, weldTarget, bot, brain, move)
+        return
+    end
+
+    -- TeamBrain
+    if weldTarget.GetId then
+        brain.lastWeldTargetId = weldTarget:GetId()
+        brain.teamBrain:UnassignPlayer(marine)
+        brain.teamBrain:AssignPlayerToEntity(marine, weldTarget:GetId())
+    end
+
+    -- Ziel ist Spieler mit Welder
+    local invWelder = marine:GetWeapon(Welder.kMapName)
+    
+    if targetHasWelder and marine:GetArmorScalar() < 1 then
+
+        -- Angriff deaktivieren, damit er NICHT schie�t
+        move.primaryAttack = false
+        move.secondaryAttack = false
+
+        local client = weldTarget.GetClient and weldTarget:GetClient() or nil
+        local isBot = client and client.GetIsVirtual and client:GetIsVirtual() or false
+
+        if client and not isBot then
+            bot:SendTeamMessage("I need some welds, " .. weldTarget:GetName() .. "!", 70)
+        --Welde aktiv mit wenn m�glich  
+            if invWelder ~= nil then            
+            SwitchToWelder(marine)
+        end
+    end
+        local dist = marine:GetOrigin():GetDistance(weldTarget:GetOrigin())
+
+        if dist > 2.0 then
+            PerformMove(marine:GetOrigin(), weldTarget:GetOrigin(), bot, brain, move, false)
+        else
+            bot:GetMotion():SetDesiredMoveTarget(nil)
+        end
+
+        return
+    end
+
+
+    -- Normalfall
     SwitchToWelder(marine)
-    PerformWeld( marine, weldTarget, bot, brain , move )
+    PerformWeld(marine, weldTarget, bot, brain, move)
 end
+
+
 
 local kExecMountExosuit = function(move, bot, brain, marine, action)
     PROFILE("MarineBrain - ExecMountExosuit")
@@ -3120,8 +4050,6 @@ local kExecMountExosuit = function(move, bot, brain, marine, action)
         end
     end
 end
-
-
 
 local kMarineBrainActionTypesOrderScale = 10
 
@@ -3144,8 +4072,11 @@ local kMarineBrainActionTypes = enum({
     "ReloadPistol",
     "FindMedpack",
     "FindAmmopack",
+    "PickupDroppedMines",
     "PickupDroppedJetpacks",
     "PickupDroppedWeapons",
+    "PickupDroppedWelder",
+    "PickupDroppedMine",
     --TODO Add action that just cycles weapon from self-primary (to reset its despawn time)? -- Filter this by Veteran persona?
 
 --Building/Team Actions--
@@ -3286,7 +4217,7 @@ kMarineBrainActions =
             perform = kExecAttackStructures
         }
     end, -- ATTACK BIGGEST STRUCTURE THREAT
-
+    
     function(bot, brain, marine)
 
         PROFILE("MarineBrain - AttackBabblers")
@@ -3467,41 +4398,187 @@ kMarineBrainActions =
         }
     end, -- FIND MEDPACK
 
-    function(bot, brain, marine)
-        PROFILE("MarineBrain - FindAmmopack")
+  function(bot, brain, marine)
+    PROFILE("MarineBrain - FindAmmopack")
 
-        local name = kMarineBrainActionTypes[kMarineBrainActionTypes.FindAmmopack]
-        local weight = 0.0
-        local pos = marine:GetOrigin()
-        local s = brain:GetSenses()
-        local weapon = marine:GetActiveWeapon()
-        local weaponAmmoFrac = s:Get("ammoFraction")
-        local bestPack
-        local bestDist
-        
-        --Only check if we have ammo-based weapon, and we might need it
-        if weapon ~= nil and weapon:isa("ClipWeapon") and weaponAmmoFrac < 1 then
+    local name = kMarineBrainActionTypes[kMarineBrainActionTypes.FindAmmopack]
+    local weight = 0.0
+    local pos = marine:GetOrigin()
+    local s = brain:GetSenses()
+    local weapon = marine:GetActiveWeapon()
+    local weaponAmmoFrac = s:Get("ammoFraction")
 
-            local packs = GetEntitiesWithinRange( "AmmoPack", pos, 10 )
+    local bestPack
+    local bestDist
 
-            -- Don't go for dropped weapon mags, causes deadlock issues
-            local IsPackForWeapon = Lambda [=[args pack; not pack:isa("WeaponAmmoPack")]=]
+    -- Nur wenn Waffe Ammo nutzt und nicht voll ist
+    if weapon ~= nil and weapon:isa("ClipWeapon") and weaponAmmoFrac < 1 then
 
-            bestDist, bestPack = GetNearestFiltered( marine, packs, IsPackForWeapon )
+        -- Alle AmmoPack-Typen sammeln
+        local packs = {}
 
-            if bestPack ~= nil then
-                weight = GetMarineActionBaselineWeight( kMarineBrainActionTypes.FindAmmopack )
+        local function AddEntities(classname)
+            local found = GetEntitiesWithinRange(classname, pos, 12)
+            for i = 1, #found do
+                table.insert(packs, found[i])
             end
         end
 
-        return 
-        { 
-            name = name, 
-            weight = weight,
-            bestPack = bestPack,
-            perform = kExecFindAmmopack
-        }
-    end, -- FIND AMMOPACK (Also specific weapon ones)
+        AddEntities("AmmoPack")
+        AddEntities("WeaponAmmoPack")
+        AddEntities("RifleAmmo")
+        AddEntities("ShotgunAmmo")
+        AddEntities("FlamethrowerAmmo")
+        AddEntities("GrenadeLauncherAmmo")
+        AddEntities("HeavyMachineGunAmmo")
+
+local function IsPackForWeapon(pack)
+
+    local model = pack:GetModelName()
+    local weapon = marine:GetActiveWeapon()
+    if not weapon then return false end
+
+    -- Universelle AmmoPack
+    if model == AmmoPack.kModelName or model == AmmoPack.kModelNameWinter then
+        return true
+    end
+
+    -- Rifle
+    if model == RifleAmmo.kModelName and weapon:GetClassName() == "Rifle" then
+        return true
+    end
+
+    -- Shotgun
+    if model == ShotgunAmmo.kModelName and weapon:GetClassName() == "Shotgun" then
+        return true
+    end
+
+    -- Flamethrower
+    if model == FlamethrowerAmmo.kModelName and weapon:GetClassName() == "Flamethrower" then
+        return true
+    end
+
+    -- GL
+    if model == GrenadeLauncherAmmo.kModelName and weapon:GetClassName() == "GrenadeLauncher" then
+        return true
+    end
+
+    -- HMG
+    if model == HeavyMachineGunAmmo.kModelName and weapon:GetClassName() == "HeavyMachineGun" then
+        return true
+    end
+
+    return false
+end
+
+        -- N�chstes g�ltiges Pack finden
+        bestDist, bestPack = GetNearestFiltered(marine, packs, IsPackForWeapon)
+
+        if bestPack ~= nil then
+            weight = GetMarineActionBaselineWeight(kMarineBrainActionTypes.FindAmmopack)
+        end
+    end
+
+    return 
+    { 
+        name = name, 
+        weight = weight,
+        bestPack = bestPack,
+        perform = kExecFindAmmopack
+    }
+end, -- FIND AMMOPACK "AT LAST" (Also specific weapon ones)
+
+function(bot, brain, marine)
+
+    PROFILE("MarineBrain - PickupDroppedMine")
+    local name = kMarineBrainActionTypes[kMarineBrainActionTypes.PickupDroppedMine]
+
+    local weight = 0.0
+
+    -- Suche nach gedroppten Minen im Umkreis von 12
+    local mines = GetEntitiesWithinRange("LayMines", marine:GetOrigin(), 12, true)
+
+    -- Falls der Marine bereits Minen hat, nichts tun
+    if marine:GetWeapon(LayMines.kMapName) then
+        mines = {}
+    end
+
+    -- N�chste Mine bestimmen
+    local bestDist, bestMine = GetNearestFiltered(marine:GetOrigin(), mines)
+
+    -- Gewichtung: nur wenn eine Mine existiert
+    if bestMine ~= nil then
+        weight = EvalLPF(bestDist, {
+            {0.0 , 2.0},
+            {3.0 , 2.0},
+            {5.0 , 1.0},
+            {20.0, 0.0}
+        })
+    end
+
+    return {
+        name = name,
+        weight = weight,
+
+        perform = function(move)
+            if bestMine ~= nil then
+                PerformMove(marine:GetOrigin(), bestMine:GetOrigin(), bot, brain, move)
+                bot:GetMotion():SetDesiredViewTarget(bestMine:GetOrigin())
+
+                if bestDist < 1.0 then
+                    SwitchToPrimary(marine)
+                    move.commands = AddMoveCommand(move.commands, Move.Use)
+                end
+            end
+        end
+    }
+end, -- PICKUP DROPPED MINE
+
+function(bot, brain, marine)
+
+    PROFILE("MarineBrain - PickupDroppedWelder")
+    local name = kMarineBrainActionTypes[kMarineBrainActionTypes.PickupDroppedWelder]
+
+    local weight = 0.0
+
+    -- Suche nach gedroppten Weldern im Umkreis von 12
+    local welders = GetEntitiesWithinRange("Welder", marine:GetOrigin(), 12, true)
+
+    -- Falls der Marine bereits einen Welder hat, nichts tun
+    if marine:GetWeapon(Welder.kMapName) then
+        welders = {}
+    end
+
+    -- N�chsten Welder bestimmen
+    local bestDist, bestWelder = GetNearestFiltered(marine:GetOrigin(), welders)
+
+    -- Gewichtung: nur wenn ein Welder existiert
+    if bestWelder ~= nil then
+        weight = EvalLPF(bestDist, {
+            {0.0 , 2.0},
+            {3.0 , 2.0},
+            {5.0 , 1.0},
+            {20.0, 0.0}
+        })
+    end
+
+    return {
+        name = name,
+        weight = weight,
+
+        perform = function(move)
+            if bestWelder ~= nil then
+                PerformMove(marine:GetOrigin(), bestWelder:GetOrigin(), bot, brain, move)
+                bot:GetMotion():SetDesiredViewTarget(bestWelder:GetOrigin())
+
+                if bestDist < 1.0 then
+                    SwitchToPrimary(marine)
+                    move.commands = AddMoveCommand(move.commands, Move.Use)
+                end
+            end
+        end
+    }
+end, --PICKUP DROPPED WELDER
     
      function(bot, brain, marine)
 
@@ -3544,50 +4621,55 @@ kMarineBrainActions =
                 end }
     end, --PICKUP DROPPED JETPACKS
  
-    function(bot, brain, marine)
+function(bot, brain, marine)
 
-        PROFILE("MarineBrain - PickupDroppedWeapons")
-        local name = kMarineBrainActionTypes[kMarineBrainActionTypes.PickupDroppedWeapons]
-        local weight = 0.0
-        local haveGoodWeapon = HasGoodWeapon(marine)
+    PROFILE("MarineBrain - PickupDroppedWeapons")
+    local name = kMarineBrainActionTypes[kMarineBrainActionTypes.PickupDroppedWeapons]
+    local weight = 0.0
+    local s = brain:GetSenses()
+    local haveGoodWeapon = HasGoodWeapon(marine)
+    local numFriendlies = brain:GetSenses():Get("nearbyFriendlies")
+    local numEnemies = brain:GetSenses():Get("nearbyEnemies")
+    local threat = s:Get("biggestLifeformThreat")
 
-		-- don't use GetEntitiesWithinRangeAreVisible due to thrashing
-        local srcWeapons = GetEntitiesWithinRange( "ClipWeapon", marine:GetOrigin(), 20 )
-        local weapons = {}
+    -- don't use GetEntitiesWithinRangeAreVisible due to thrashing
+    local srcWeapons = GetEntitiesWithinRange("ClipWeapon", marine:GetOrigin(), 20)
+    local weapons = {}
 
-        for i = 1, #srcWeapons do
-            local ent = srcWeapons[i]
+    for i = 1, #srcWeapons do
+        local ent = srcWeapons[i]
 
-            -- ignore weapons owned by someone already
-            local className = ent:GetClassName()
-            if ent:GetParent() == nil then
-                if className == "Shotgun" or
-                    className == "GrenadeLauncher" or
-                    className == "HeavyMachineGun" or
-                    className == "Flamethrower" or
-                    className == "Cannon"
-                then
+        -- ignore weapons owned by someone already
+        local className = ent:GetClassName()
+        if ent:GetParent() == nil then
+            if className == "Shotgun" or
+                className == "GrenadeLauncher" or
+                className == "HeavyMachineGun" or
+                className == "Flamethrower" then
 
-                    weapons[#weapons + 1] = ent
-                end
+                weapons[#weapons + 1] = ent
             end
         end
+    end
 
-        local bestDist, bestGun = GetNearestFiltered(marine, weapons)
+    local bestDist, bestGun = GetNearestFiltered(marine, weapons)
 
-        if not haveGoodWeapon and bestGun ~= nil then
-            weight = GetMarineActionBaselineWeight( kMarineBrainActionTypes.PickupDroppedWeapons )
+    if not haveGoodWeapon and bestGun ~= nil then
+        weight = GetMarineActionBaselineWeight(kMarineBrainActionTypes.PickupDroppedWeapons)
+        -- Falls mehrere Freunde und wenig Feinde, dann versuch die Waffe zu bekommen
+        if numFriendlies >= 3 and numEnemies <= 1 or (threat == nil or threat.distance >= 15) then
+            weight = weight + 222
         end
+    end
 
-        return
-        {
-            name = name, 
-            weight = weight,
-            bestGun = bestGun,
-            bestDist = bestDist,
-            perform = kExecPickupDroppedWeapons
-        }
-    end, --PICKUP DROPPED WEAPONS--]]
+    return {
+        name = name,
+        weight = weight,
+        bestGun = bestGun,
+        bestDist = bestDist,
+        perform = kExecPickupDroppedWeapons
+    }
+end, --PICKUP DROPPED WEAPONS--]]
 
     function(bot, brain, marine)
         PROFILE("MarineBrain - ClearCysts")
@@ -3665,10 +4747,18 @@ kMarineBrainActions =
                     buildTarget = power
                 end
 
-            end
+            end         
 
             weight = GetMarineActionBaselineWeight( kMarineBrainActionTypes.BuildNearbyStructure )
             buildLocation = loc
+            
+            local threat
+            
+            threat = sdb:Get("biggestLifeformThreat")        
+            
+            if threat ~= nil and threat.distance >= 10 and not marine:GetIsUnderFire() then
+            weight = weight + 218
+            end
 
         end
 
@@ -3684,40 +4774,171 @@ kMarineBrainActions =
 
     end,
 
-    function(bot, brain, marine)
-        PROFILE("MarineBrain - WeldNearest")
+function(bot, brain, marine)
+    PROFILE("MarineBrain - WeldNearest")
 
-        local name = kMarineBrainActionTypes[kMarineBrainActionTypes.WeldNearest]
-        local sdb = brain:GetSenses()
-        local weight = 0
-        local weldTarget = nil
+    local name = kMarineBrainActionTypes[kMarineBrainActionTypes.WeldNearest]
+    local sdb = brain:GetSenses()
 
-        if bot:GetPlayerOrder() then
-            return kNilAction
+    local weight = 0
+    local weldTarget = nil
+
+    ------------------------------------------------------------------
+    -- Wenn wir gerade einen direkten Order haben, keine eigene Weld-Action
+    ------------------------------------------------------------------
+    if bot:GetPlayerOrder() then
+        return kNilAction
+    end
+
+    local threat = sdb:Get("biggestLifeformThreat")
+
+    local function IsThreatClose(thr, radius)
+        return thr ~= nil and thr.distance ~= nil and thr.distance <= radius
+    end
+
+    local inDanger = IsThreatClose(threat, 10) or marine:GetIsUnderFire()
+------------------------------------------------------------------
+-- Voice Weld Request: Armor < 0.5, aber nur wenn Welder in der N�he
+------------------------------------------------------------------
+
+    local WELD_REQUEST_COOLDOWN = 10
+    local WELDER_SEARCH_RANGE = 20
+
+    local function HasNearbyWelder(marine)
+        local players = GetEntitiesForTeamWithinRange("Player", marine:GetTeamNumber(), marine:GetOrigin(), WELDER_SEARCH_RANGE)
+
+        for _, p in ipairs(players) do
+            if p ~= marine and PlayerHasWelderInInventory(p) then
+                return true
+            end
         end
 
-        if sdb:Get("welder") ~= nil then
+        return false
+    end
 
-            weldTarget = sdb:Get("nearbyWeldable")
+    if marine:GetArmorScalar() < 0.5 and HasNearbyWelder(marine) then
+        if brain.lastWeldVoiceTime == nil 
+           or Shared.GetTime() - brain.lastWeldVoiceTime > WELD_REQUEST_COOLDOWN then
 
-            -- Continue welding
-            if weldTarget ~= nil and weldTarget:GetArmorScalar() < 0.9999 then
-                weight = GetMarineActionBaselineWeight( kMarineBrainActionTypes.WeldNearest )
-            else
-            -- clear our "last welded target" once we stop
-                brain.lastWeldTargetId = nil
+            CreateVoiceMessage(marine, kVoiceId.RequestWeld)
+            brain.lastWeldVoiceTime = Shared.GetTime()
+        end
+    end
+    ------------------------------------------------------------------
+    -- Wenn wir selbst keinen Welder haben und Armor < 1 ? Attack blockieren
+    -- (dieses Flag muss man in der Attack-Action ber�cksichtigen)
+    ------------------------------------------------------------------
+    if marine:GetArmorScalar() < 1 and sdb:Get("welder") == nil then
+        brain.attackBlockedBecauseLowArmor = true
+    else
+        brain.attackBlockedBecauseLowArmor = false
+    end
+
+    ------------------------------------------------------------------
+    -- Teil 1: Wir haben einen Welder ? normales Weld-Ziel aus den Senses
+    ------------------------------------------------------------------
+    if sdb:Get("welder") ~= nil then
+        weldTarget = sdb:Get("nearbyWeldable")
+
+        -- Sicherstellen, dass das Ziel weldbar ist und Armor < 1 hat
+        if weldTarget ~= nil and weldTarget.GetArmorScalar and weldTarget:GetArmorScalar() < 0.9999 then
+
+            weight = GetMarineActionBaselineWeight(kMarineBrainActionTypes.WeldNearest)
+
+            -- Exo/Exosuit bevorzugen
+            if weldTarget:isa("Exo") or weldTarget:isa("Exosuit") then
+                weight = weight * 2
             end
 
-        end
+            local noGoodWeapon = not HasGoodWeapon(marine)
 
-        return
-        {
-            name = name,
-            weight = weight,
-            weldTarget = weldTarget,
-            perform = kExecWeldNearest
-        }
-    end, -- WELD NEAREST WELDABLE TARGET
+            -- Exo-Sonderfall: auch im Kampf bleiben, solange Gegner nicht direkt dran ist
+            local exoSafe =
+                (weldTarget:isa("Exo")     and (threat == nil or threat.distance >= 2)) or
+                (weldTarget:isa("Exosuit") and (threat == nil or threat.distance >= 8))
+
+            if noGoodWeapon and exoSafe then
+                weight = weight + 200
+
+                local numOthers = nil
+                if weldTarget.GetId then
+                    numOthers = brain.teamBrain:GetNumOthersAssignedToEntity(marine, weldTarget:GetId())
+                end
+
+                if numOthers == nil or numOthers < 1 then
+                    weight = weight + 100
+                else
+                    weight = 0
+                end
+
+                -- Exo-Sonderfall �berschreibt Danger-Check
+                inDanger = false
+            else
+                if inDanger then
+                    weight = 0
+                end
+            end
+        else
+            brain.lastWeldTargetId = nil
+        end
+    end
+
+    ------------------------------------------------------------------
+    -- Teil 2: Wir haben KEINEN Welder, Armor < 1, nicht in Gefahr
+    -- ? aktiven Spieler mit Welder in der N�he suchen, der uns weldet.
+    ------------------------------------------------------------------
+    if weldTarget == nil
+       and marine:GetArmorScalar() < 1
+       and not inDanger then
+
+        local nearbyPlayers = GetEntitiesForTeamWithinRange("Player", marine:GetTeamNumber(), marine:GetOrigin(), 25)
+
+        for _, player in ipairs(nearbyPlayers) do
+            -- Niemals sich selbst als Ziel w�hlen
+            if player ~= marine then
+                -- Hier ist GetActiveWeapon sicher, da "Player"-Klasse
+                local weapon = player.GetActiveWeapon and player:GetActiveWeapon() or nil
+
+                if weapon and weapon:GetMapName() == Welder.kMapName then
+                    -- Spieler mit Welder gefunden ? wir wollen zu dem hin
+                    weldTarget = player
+                    weight = 1
+                    break
+                end
+            end
+        end
+    end
+
+    ------------------------------------------------------------------
+    -- Teil 3: Spezialfall:
+    -- Beide brauchen Weld (Armor < 1) UND beide haben Welder
+    -- ? gegenseitiges Welden sehr hoch priorisieren
+    ------------------------------------------------------------------
+    if weldTarget ~= nil
+       and weldTarget.GetArmorScalar
+       and weldTarget:GetArmorScalar() < 1
+       and marine:GetArmorScalar() < 1 then
+
+        local marineHasWelder = sdb:Get("welder") ~= nil
+
+        local targetWeapon = weldTarget.GetActiveWeapon and weldTarget:GetActiveWeapon() or nil
+        local targetHasWelder = targetWeapon and targetWeapon:GetMapName() == Welder.kMapName
+
+        if marineHasWelder and targetHasWelder then
+            weight = 500  -- sehr hoch, damit diese Situation bevorzugt wird
+        end
+    end
+
+    ------------------------------------------------------------------
+    -- R�ckgabe der Aktion
+    ------------------------------------------------------------------
+    return {
+        name      = name,
+        weight    = weight,
+        weldTarget = weldTarget,
+        perform   = kExecWeldNearest
+    }
+end, -- WELD NEAREST WELDABLE TARGET
 
     --BOT-TODO Add Buy HandGrenades and/or Mine(s)
     
@@ -3733,11 +4954,11 @@ kMarineBrainActions =
         local weight = 0
         
         --Only jump in Exosuits that are "Safe" (ownership expired), or we already own
-        if exo and not HasGoodWeapon(marine) and (exo:GetOwner() == nil or exo:GetOwner() == marine:GetId() ) and exoDist <= 25 then
+        if exo and not HasGoodWeapon(marine) and exoDist <= 25 then --and (exo:GetOwner() == nil or exo:GetOwner() == marine:GetId() ) and exoDist <= 25 then -- orginal: Hinderte den Bot nur daran seinen eigenen Exo weiter zu nutzen.
             weight = GetMarineActionBaselineWeight( kMarineBrainActionTypes.MountExosuit ) --orginal
 
             if exoDist <= 8 then
-              weight = weight + 222 -- to get the marine in a good order to conquer empty exos on the map... doesnt matter how much enemys in range (only AR-soldier/Advanced give cover)...
+              weight = weight + 239 -- to get the marine in a good order to conquer empty exos on the map... doesnt matter how much enemys in range (only AR-soldier/Advanced give cover)...
         end
      end
         
@@ -3779,10 +5000,10 @@ local function EvalActiveUrgenciesTable(numOthers)
     {
         [kMinimapBlipType.Onos] =       numOthers >= 4 and 0.1 or 7.0,
         [kMinimapBlipType.Fade] =       numOthers >= 3 and 0.1 or 6.0,
-        [kMinimapBlipType.Vokex] =       numOthers >= 3 and 0.1 or 6.0,
+        [kMinimapBlipType.Vokex] =      numOthers >= 3 and 0.1 or 6.0,
         [kMinimapBlipType.Lerk] =       numOthers >= 2 and 0.1 or 5.0,
-        [kMinimapBlipType.Prowler] =    numOthers >= 2 and 0.1 or 4.0,
         [kMinimapBlipType.Skulk] =      numOthers >= 2 and 0.1 or 4.0,
+        [kMinimapBlipType.Prowler] =    numOthers >= 2 and 0.1 or 4.0,
         [kMinimapBlipType.Gorge] =      numOthers >= 2 and 0.1 or 3.0,
         [kMinimapBlipType.Whip] =       numOthers >= 2 and 0.1 or 3.0,
         [kMinimapBlipType.Hydra] =      numOthers >= 2 and 0.1 or 2.0,
@@ -3808,8 +5029,10 @@ local urgentResponders =
 {
     [kMinimapBlipType.Onos]  = 4,
     [kMinimapBlipType.Fade]  = 3,
+    [kMinimapBlipType.Vokex]  = 3,
     [kMinimapBlipType.Lerk]  = 2,
     [kMinimapBlipType.Skulk] = 2,
+    [kMinimapBlipType.Prowler]  = 2,
     [kMinimapBlipType.Gorge] = 2,
     [kMinimapBlipType.Whip]  = 2,
 }
@@ -4032,6 +5255,118 @@ function CreateMarineBrainSenses()
 
     local s = BrainSenses()
     s:Initialize()
+    
+s:Add("nearbyFriendlies",
+    function(db, marine)
+        local teamBrain = GetTeamBrain(marine:GetTeamNumber())
+        local roomMemories = teamBrain:GetMemoriesAtLocation(marine:GetLocationName(), marine:GetTeamNumber())
+        local marinePos = marine:GetOrigin()
+        local numFriendlies = 0
+
+        for _, mem in ipairs(roomMemories) do
+            if mem.btype == kMinimapBlipType.Marine
+                or mem.btype == kMinimapBlipType.JetpackMarine
+                or mem.btype == kMinimapBlipType.Exo
+            then
+                local dist = marinePos:GetDistance(mem.lastSeenPos)
+                if dist <= kMarineBrainNearbyFriendlyThreshold then
+                    numFriendlies = numFriendlies + 1
+                end
+            end
+        end
+
+        return numFriendlies
+    end)
+
+        
+        s:Add("nearbyEnemies",
+    function(db, marine)
+        local teamBrain = GetTeamBrain(marine:GetTeamNumber())
+        local enemyTeam = GetEnemyTeamNumber(marine:GetTeamNumber())
+        local marinePos = marine:GetOrigin()
+        local numEnemies = 0
+        local bestMem = nil
+
+        for _, mem in teamBrain:IterMemoriesNearLocation(marine:GetLocationName(), enemyTeam) do
+            local isActiveThreat = mem.btype == kMinimapBlipType.Skulk
+                or mem.btype == kMinimapBlipType.Lerk
+                or mem.btype == kMinimapBlipType.Fade
+                or mem.btype == kMinimapBlipType.Onos
+                or mem.btype == kMinimapBlipType.Whip
+
+                if isActiveThreat then
+                local dist = marinePos:GetDistance(mem.lastSeenPos)
+
+                if dist <= kMarineBrainNearbyEnemyThreshold then
+                    numEnemies = numEnemies + 1
+                end
+            end
+        end
+
+        return numEnemies
+    end)
+    
+    s:Add("teamARCs", function(db)
+    local team = db.bot:GetTeamNumber()
+    return GetEntitiesAliveForTeam("ARC", team)
+end)
+    
+    s:Add("mainTechPoint", function(db)
+    local startName = db.bot.brain:GetStartingTechPoint()
+    if not startName then return nil end
+
+    local techPoints = GetEntities("TechPoint")
+    for _, tp in ipairs(techPoints) do
+        if tp:GetLocationName() == startName then
+            return tp
+        end
+    end
+
+    return nil
+end)
+    
+    s:Add("allTechPoints", function(db)
+    return GetEntities("TechPoint")
+end)
+
+s:Add("availableTechPoints", function(db)
+    local tps = db:Get("allTechPoints")
+    local result = {}
+
+    for _, tp in ipairs(tps) do
+        local attached = tp:GetAttached()
+        if not attached or attached:isa("CommandStation") then
+            table.insert(result, tp)
+        end
+    end
+
+    return result
+end)
+
+s:Add("incompleteTechPoints", function(db)
+    local tps = db:Get("availableTechPoints")
+    local result = {}
+    local team = db.bot:GetTeamNumber()
+
+    for _, tp in ipairs(tps) do
+        if IsTechPointIncomplete(tp, team) then
+            table.insert(result, tp)
+        end
+    end
+
+    return result
+end)
+
+s:Add("techPointToTake", function(db)
+    local tps = db:Get("incompleteTechPoints")
+    local marine = db.bot:GetPlayer()
+
+    local dist, best = GetMinTableEntry(tps, function(tp)
+        return GetBotWalkDistance(marine, tp)
+    end)
+
+    return best
+end)
 
     s:Add("clipFraction", 
         function(db, marine)
@@ -4165,7 +5500,7 @@ function CreateMarineBrainSenses()
             else
                 return nil
             end
-        end)
+        end) 
 
     s:Add("biggestStructureThreat", 
         function(db, marine)
@@ -4177,8 +5512,6 @@ function CreateMarineBrainSenses()
                     local shouldIgnore = (mem.btype >= kMinimapBlipType.Skulk and mem.btype <= kMinimapBlipType.Gorge)
                         or mem.btype == kMinimapBlipType.Infestation
                         or mem.btype == kMinimapBlipType.InfestationDying
-                        or mem.btype == kMinimapBlipType.Prowler
-                        or mem.btype == kMinimapBlipType.Vokex
 
                     if shouldIgnore then
                         return nil
@@ -4373,6 +5706,71 @@ function CreateMarineBrainSenses()
                 distance = dist
             }
         end)
+        
+s:Add("nearestBuddyForGL",
+    function(db)
+
+        local bot = db.bot
+        local marine = bot:GetPlayer()
+        if not marine then return nil end
+
+        local teamNumber = marine:GetTeamNumber()
+        local players = GetEntitiesForTeam("Player", teamNumber)
+        
+        -- Wenn der Bot selbst kein GL ist, liefere nil zur�ck
+        local weapon = marine:GetActiveWeapon() or marine:GetWeaponInHUDSlot(1)
+        if not (weapon and weapon.GetMapName and weapon:GetMapName() == GrenadeLauncher.kMapName) then
+        return nil
+        end
+
+
+        local dist, targetBuddy = GetMinTableEntry(players,
+            function(p)
+                if not p then return nil end
+
+                -- Muss lebendig sein
+                if not p:GetIsAlive() then return nil end
+
+                -- Kein Commander
+                if p:isa("Commander") then return nil end
+
+                -- GL-Tr�ger d�rfen NICHT Buddy sein
+                for _, weapon in ipairs(p:GetWeapons()) do
+                    if weapon.GetMapName and weapon:GetMapName() == GrenadeLauncher.kMapName then
+                        return nil
+                    end
+                end
+
+                -- Nur Spieler/Bots mit AR/SG/FT/HMG
+                local hasValidWeapon = false
+                for _, weapon in ipairs(p:GetWeapons()) do
+                    if weapon.GetMapName then
+                        local mapName = weapon:GetMapName()
+                        if  mapName == Rifle.kMapName or
+                            mapName == Shotgun.kMapName or
+                            mapName == Flamethrower.kMapName or
+                            mapName == HeavyMachineGun.kMapName then
+                            hasValidWeapon = true
+                            break
+                        end
+                    end
+                end
+
+                if not hasValidWeapon then
+                    return nil
+                end
+
+                -- Distanz berechnen
+                return GetBotWalkDistance(marine, p)
+            end
+        )
+
+        return {
+            player = targetBuddy,
+            distance = dist
+        }
+        
+    end)
             
     s:Add("nearestProto", 
         function(db, marine)
@@ -4425,8 +5823,36 @@ function CreateMarineBrainSenses()
             }
 
         end)
+        
+        
+        s:Add("nearestExosuit", function(db)
 
-    s:Add("nearestExosuit", 
+            local marine = db.bot:GetPlayer()
+            local exos = GetEntitiesForTeam( "Exosuit", marine:GetTeamNumber())
+
+            local dist, exo = GetMinTableEntry( exos,
+                function(exo)
+                    assert( exo ~= nil )
+                    if exo:GetIsValidRecipient(marine) and exo:GetHealthScalar() > 0.8 then
+                        local dist,_ = GetPhaseDistanceForMarine( marine, exo:GetOrigin(), db.bot.brain.lastGateId )
+
+                        -- Weigh our previous nearest a bit better, to prevent thrashing
+                        if exo:GetId() == db.lastNearestExoId then
+                            return dist * 0.9
+                        else
+                            return dist
+                        end
+                    end
+                end)
+
+            if exo ~= nil then db.lastNearestExoId = exo:GetId() end
+            return {exo = exo, distance = dist}
+
+            end)
+        
+        
+
+    --[[s:Add("nearestExosuit", 
         function(db, marine)
 
             local exos = GetEntitiesForTeam( "Exosuit", marine:GetTeamNumber())
@@ -4456,7 +5882,7 @@ function CreateMarineBrainSenses()
                 distance = dist
             }
 
-        end)
+        end)--]]
 
     s:Add("nearestPower", function(db, marine)
 
@@ -4481,9 +5907,23 @@ function CreateMarineBrainSenses()
             end
 
             return {entity = bestPower, distance = bestDist}
-            end)
+            end)          
 
-    s:Add("nearbyWeldable", function(db, marine)
+--[Vereinfachte Version wo auch Exosuits geweldet werden k�nnen.
+s:Add("nearbyWeldable", function(db, marine)
+    local targets = GetEntitiesWithMixinForTeamWithinRange("Weldable", marine:GetTeamNumber(), marine:GetOrigin(), 20.0)
+    local dist, nearestTarget = GetMinTableEntry(targets, function(target)
+        assert(target ~= nil)
+        if target ~= marine and target:GetCanBeWelded(marine) and (not target.GetIsBuilt or target:GetIsBuilt()) then
+            return marine:GetOrigin():GetDistance(target:GetOrigin())
+        end
+    end)
+
+    return nearestTarget
+end)--]] 
+
+
+    --[[s:Add("nearbyWeldable", function(db, marine)
 
         local teamBrain = GetTeamBrain(marine:GetTeamNumber())
 
@@ -4519,7 +5959,7 @@ function CreateMarineBrainSenses()
 
         return bestWeldable
 
-    end)
+    end)--]]
             
     s:Add("nearestBuildable",
         function(db, marine)

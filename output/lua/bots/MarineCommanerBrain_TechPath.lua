@@ -18,15 +18,18 @@ local kMaxSimultaneousResearch = 2
 
 local kBuildTechIdToSenseMap =
 {
-    [kTechId.ArmsLab]            = "mainArmsLab"           ,
-    [kTechId.Armory]             = "mainArmory"            ,
-    [kTechId.Observatory]        = "mainObservatory"       ,
-    [kTechId.PhaseGate]          = "mainPhaseGate"         ,
-    [kTechId.AdvancedArmory]     = "mainAdvancedArmory"    ,
-    [kTechId.PrototypeLab]       = "mainPrototypeLab"      ,
-    [kTechId.JetpackPrototypeLab]       = "mainJetpackLab"      ,
-    [kTechId.ExosuitPrototypeLab]       = "mainExosuitLab"      ,
-    [kTechId.StandardStation]       = "mainStandardStation"      ,
+    [kTechId.ArmsLab] = "mainArmsLab",
+    [kTechId.Armory] = "mainArmory",
+    [kTechId.Observatory] = "mainObservatory",
+    [kTechId.PhaseGate] = "mainPhaseGate",
+    [kTechId.AdvancedArmory] = "mainAdvancedArmory",
+    [kTechId.PrototypeLab] = "mainPrototypeLab",
+    [kTechId.RoboticsFactory] = "mainRoboticsFactory",
+    [kTechId.ARCRoboticsFactory] = "mainARCRoboticsFactory",
+    [kTechId.JetpackPrototypeLab]  = "mainJetpackLab",
+    [kTechId.ExosuitPrototypeLab] = "mainExosuitLab",
+    [kTechId.CannonPrototypeLab] = "mainCannonLab",
+    [kTechId.StandardStation] = "mainStandardStation",
     --[kTechId.RoboticsFactory]    = "hasRoboticsFactoryInBase"   ,
     --[kTechId.ARCRoboticsFactory] = "hasARCRoboticsFactoryInBase",
 }
@@ -38,52 +41,39 @@ local kBuildTechIdToSenseMap =
 -- Therefore, we need to make sure that we have the structures available when upgrading
 --
 -- IMPORTANT: Make sure all the tech is properly supported all the way through! (Will not check prereqs, etc)
-local kMarineCommanderTechPath =
-{
-    -- Tier 1 (Early Game)
-    {
+
+local kMarineCommanderTechPath = {
+    { -- Mandatory AL and A1 in the early game to prevent two-bite kills.
         kTechId.ArmsLab,
-        kTechId.Armor1,
-        kTechId.Weapons1,
-        kTechId.Armory,
-        kTechId.GrenadeTech,
+        kTechId.Armor1
     },
-
-    -- Tier 2
-    {
-        -- Phase Tech
-        kTechId.Observatory,
-        kTechId.PhaseTech,
-
-        kTechId.PhaseGate,
-        kTechId.MinesTech,
+    { -- Prefer A2 before W1 if there is enough tres.
         kTechId.Armor2,
+        kTechId.Weapons1
     },
-
-    -- Tier 3
     {
-        -- Auxillary stuff
-        kTechId.ShotgunTech,
+        kTechId.Armory,
+        kTechId.Observatory,
+        kTechId.PhaseTech
+    },
+    { -- Default path assuming the marine team isn't locked in spawn.
+        kTechId.MinesTech,
+        kTechId.GrenadeTech,
         kTechId.Weapons2,
+        kTechId.ShotgunTech,
+        kTechId.RoboticsFactory,
+        kTechId.PhaseGate -- Built earlier by an override if necessary.
     },
-    -- Tier 4
-    {
-        kTechId.AdvancedArmoryUpgrade, -- Flamethrower, GL, HMG all unlocked by this upgrade
-        kTechId.PrototypeLab,
-    },
-
-    -- Tier 5
-    {
-        --kTechId.ExosuitTech,
-        kTechId.JetpackProtoUpgrade,
+    { -- Late game.
+        kTechId.AdvancedArmoryUpgrade,
         kTechId.Weapons3,
+        kTechId.PrototypeLab,
+        kTechId.ExosuitProtoUpgrade,
         kTechId.Armor3,
-
-        -- Till comm could really research standard supply?
-        --kTechId.StandardSupply,
-        --kTechId.DragonBreath,
-        --kTechId.MotionTrack,
-    },
+        kTechId.UpgradeRoboticsFactory,
+        kTechId.StandardSupply,
+        kTechId.DragonBreath,
+    }
 }
 
 local kTechTestReroutes =
@@ -91,7 +81,9 @@ local kTechTestReroutes =
     [kTechId.AdvancedArmoryUpgrade] = kTechId.AdvancedArmory,
     [kTechId.JetpackProtoUpgrade] = kTechId.JetpackPrototypeLab,
     [kTechId.ExosuitProtoUpgrade] = kTechId.ExosuitPrototypeLab,
+    [kTechId.CannonProtoUpgrade] = kTechId.CannonPrototypeLab,
     [kTechId.StandardSupply] = kTechId.StandardStation,
+    [kTechId.UpgradeRoboticsFactory] = kTechId.ARCRoboticsFactory
 }
 
 local kMarineTechPathOverrides =

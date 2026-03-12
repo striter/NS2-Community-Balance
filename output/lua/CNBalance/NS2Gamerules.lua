@@ -389,4 +389,33 @@
          self.kRecentRoundStatus[11] = nil
          SaveConfigFile("NS2.0RoundStatus.json",self.kRecentRoundStatus)
      end
+
+
+     function NS2Gamerules:OnCommanderLogin(commandStructure, newCommander)
+         local teamInfo = GetTeamInfoEntity(commandStructure:GetTeamNumber())
+
+         if teamInfo:GetLastCommIsBot() then
+             for i = 1, #gServerBots do
+                 local bot = gServerBots[i]
+                 if bot then
+                     local player = bot:GetPlayer()
+                     if player
+                             and player:isa("Commander")
+                             and player:GetTeamNumber() == commandStructure:GetTeamNumber()
+                     then
+                         bot:Disconnect()
+                         break
+                     end
+                 end
+             end
+         end
+
+         if not self.gameInfo:GetRookieMode() and not Shared.GetCheatsEnabled() and
+                 Server.IsDedicated() and not self.botTraining and newCommander:GetIsRookie() then
+
+             Server.SendNetworkMessage(nil, "CommanderLoginError", {}, true)
+         end
+
+         return not commandStructure:GetTeam():GetHasCommander()
+     end
  end

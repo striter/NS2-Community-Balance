@@ -17,6 +17,7 @@ local kAlienComActionTypes = enum({
     -- Reactionary Actions (Under attack, etc)
     "SpawnEggs", -- TODO: Needs review
     "BoneWall",
+    "exo_bonewall",
     "ShadeInk",
     "CystRupture",
 
@@ -51,6 +52,8 @@ local kAlienComActionTypes = enum({
     "BuildCrag",
     "BuildShade",
     "BuildWhip",
+    "BuildDoubleResTunnel",
+    "BuildShadeDoubleRes",
 
     "Idle",
 
@@ -126,8 +129,8 @@ local function RuptureEnemyFilter(memory)
     local ent = Shared.GetEntity(memory.entId)
     return ent and ent:isa("Player") and not ent:GetIsParasited()
 end
-
---[[local function CreateBuildNearHiveAction( techId, className, numToBuild, weightIfNotEnough )
+--[[
+local function CreateBuildNearHiveAction( techId, className, numToBuild, weightIfNotEnough )
 
     return CreateBuildStructureAction(
             techId, className,
@@ -164,7 +167,7 @@ local function CreateBuildNearHiveActionWithReqHiveNum( techId, className, numTo
         return action
     end
 end
-]]
+--]]
 
 local kExecAlienCommanderResearchUpgrade = function(move, bot, brain, com, action)
     PROFILE("AlienCommanderBrain_Data:research_upgrade - PERFORM")
@@ -228,6 +231,111 @@ local kExecTechId = function(move, bot, brain, com, action)
     end
 end
 
+local function IsTunnelAlreadyInLocation(location, teamNum)
+    local tunnels = GetEntitiesForTeam("TunnelEntrance", teamNum)
+    for _, tunnel in ipairs(tunnels) do
+        if (tunnel:GetOrigin() - location):GetLength() < 50 then  -- Erhöhte Distanz auf 50
+            return true
+        end
+    end
+    return false
+end
+
+local tunnelTechIds = {
+   --kTechId.BuildTunnelEntryOne,
+    kTechId.BuildTunnelExitOne,
+    --kTechId.BuildTunnelEntryTwo,
+    kTechId.BuildTunnelExitTwo,
+    --kTechId.BuildTunnelEntryThree,
+    kTechId.BuildTunnelExitThree,
+    --kTechId.BuildTunnelEntryFour,
+    kTechId.BuildTunnelExitFour,
+}
+
+local kExecBuildDoubleResTunnel = function(move, bot, brain, com, action)
+    local resPoint1 = action.resPoint1
+    local resPoint2 = action.resPoint2
+    local tunnelTechId = action.techId
+
+    if resPoint1 and resPoint2 then
+        local pos1 = resPoint1:GetOrigin() + Vector(math.random(-5, 5), 0, math.random(-5, 5))
+        local pos2 = resPoint2:GetOrigin() + Vector(math.random(-5, 5), 0, math.random(-5, 5))
+
+        --Print("Versuche Tunnel zu bauen an Positionen: ", pos1, pos2, "mit TechId: ", tunnelTechId)
+
+        if not IsTunnelAlreadyInLocation(pos1, com:GetTeamNumber()) then
+            if brain:ExecuteTechId(com, tunnelTechId, pos1, com) then
+                --Print("Tunnel bei ResPoint1 gedroppt: " .. tostring(pos1))
+                return -- Stoppe die Ausführung nach dem erfolgreichen Bau eines Tunnels
+            --else
+                --Print("Fehler beim Droppen des Tunnels bei ResPoint1")
+            end
+        --else
+            --Print("Tunnel bereits bei ResPoint1 vorhanden")
+        end
+
+        if not IsTunnelAlreadyInLocation(pos2, com:GetTeamNumber()) then
+            if brain:ExecuteTechId(com, tunnelTechId, pos2, com) then
+                --Print("Tunnel bei ResPoint2 gedroppt: " .. tostring(pos2))
+                return -- Stoppe die Ausführung nach dem erfolgreichen Bau eines Tunnels
+            --else
+                --Print("Fehler beim Droppen des Tunnels bei ResPoint2")
+            end
+        --else
+            --Print("Tunnel bereits bei ResPoint2 vorhanden")
+        end
+    --else
+        --Print("Keine gültigen ResPoints gefunden")
+    end
+end
+
+local function IsShadeAlreadyInLocation(location, teamNum)
+    local shades = GetEntitiesForTeam("Shade", teamNum)
+    for _, shade in ipairs(shades) do
+        if (shade:GetOrigin() - location):GetLength() < 50 then
+            return true
+        end
+    end
+    return false
+end
+
+local kExecBuildShadeDoubleRes = function(move, bot, brain, com, action)
+    local resPoint1 = action.resPoint1
+    local resPoint2 = action.resPoint2
+    local shadeTechId = action.techId
+
+    if resPoint1 and resPoint2 then
+        local pos1 = resPoint1:GetOrigin() + Vector(math.random(-5, 5), 0, math.random(-5, 5))
+        local pos2 = resPoint2:GetOrigin() + Vector(math.random(-5, 5), 0, math.random(-5, 5))
+
+        --Print("Versuche Shade zu bauen an Positionen: ", pos1, pos2, "mit TechId: ", shadeTechId)
+
+        if not IsShadeAlreadyInLocation(pos1, com:GetTeamNumber()) then
+            if brain:ExecuteTechId(com, shadeTechId, pos1, com) then
+                --Print("Shade bei ResPoint1 gedroppt: " .. tostring(pos1))
+                return -- Stoppe die Ausführung nach dem erfolgreichen Bau eines Shades
+            --else
+                --Print("Fehler beim Droppen des Shades bei ResPoint1")
+            end
+        --else
+            --Print("Shade bereits bei ResPoint1 vorhanden")
+        end
+
+        if not IsShadeAlreadyInLocation(pos2, com:GetTeamNumber()) then
+            if brain:ExecuteTechId(com, shadeTechId, pos2, com) then
+                --Print("Shade bei ResPoint2 gedroppt: " .. tostring(pos2))
+                return -- Stoppe die Ausführung nach dem erfolgreichen Bau eines Shades
+            --else
+                --Print("Fehler beim Droppen des Shades bei ResPoint2")
+            end
+        --else
+            --Print("Shade bereits bei ResPoint2 vorhanden")
+        end
+    --else
+        --Print("Keine gültigen ResPoints gefunden")
+    end
+end
+
 local kExecBonewall = function(move, bot, brain, com, action)
     if action.bonewallTarget then
 
@@ -239,6 +347,18 @@ local kExecBonewall = function(move, bot, brain, com, action)
         brain:ExecuteTechId( com, kTechId.BoneWall, bonewallPos, com )
         brain.bonewallDelay = math.random(0.5, 2)
     end
+end
+
+local kExecExoBonewall = function(move, bot, brain, com, action)
+
+    if not action.exo then
+        return
+    end
+
+    local pos = action.exoPos or action.exo:GetOrigin()
+    local bonewallPos = Pathing.GetClosestPoint(pos)
+
+    brain:ExecuteTechId(com, kTechId.BoneWall, bonewallPos, com)
 end
 
 local kExecDropHive = function(move, bot, brain, com, action)
@@ -350,6 +470,183 @@ kAlienComBrainActions =     --BOT-TODO ALL below actions need to be reviewed and
         }
 
     end, -- Build Crag
+    
+function(bot, brain, com)
+    PROFILE("AlienCommanderBrain_Data:BuildDoubleResTunnel")
+
+    local name = kAlienComActionTypes[kAlienComActionTypes.BuildDoubleResTunnel]
+    local comTeamNum = com:GetTeamNumber()
+    local senses = brain:GetSenses()
+    local doables = senses:Get("doableTechIds")
+    local allTunnelEntrances = senses:Get("allTunnelEntrances") -- Hier holen wir die bestehenden Tunnel
+    local weight = 0
+
+    for _, tunnelTechId in ipairs(tunnelTechIds) do
+        if doables[tunnelTechId] then
+            local doubleResPoints = senses:Get("doubleResPoints")
+
+            for i = 1, #doubleResPoints do
+                local resPair = doubleResPoints[i]
+                local resPoint1 = resPair[1]
+                local resPoint2 = resPair[2]
+                local locationName1 = resPoint1:GetLocationName()
+                local locationName2 = resPoint2:GetLocationName()
+
+                --Print("Überprüfe ResPoints: ", locationName1, locationName2)
+
+                if brain:GetDelayPassedForStructureRedrop(locationName1) and brain:GetDelayPassedForStructureRedrop(locationName2) and
+                   brain:GetIsSafeToDropInLocation(locationName1, comTeamNum, senses:Get("isEarlyGame")) and brain:GetIsSafeToDropInLocation(locationName2, comTeamNum, senses:Get("isEarlyGame")) then
+
+                    -- Überprüfen, ob bereits ein Tunnel in der Nähe ist
+                    local tunnelExists = false
+                    for _, tunnel in ipairs(allTunnelEntrances) do
+                        if tunnel:GetLocationName() == locationName1 or tunnel:GetLocationName() == locationName2 then
+                            tunnelExists = true
+                            break
+                        end
+                    end
+
+                    if not tunnelExists then
+                        weight = GetAlienComBaselineWeight(kAlienComActionTypes.BuildDoubleResTunnel)
+                        --Print("Building Double Res Tunnel: resPoint1 = " .. locationName1 .. ", resPoint2 = " .. locationName2)
+                        return {
+                            name = name,
+                            weight = weight,
+                            resPoint1 = resPoint1,
+                            resPoint2 = resPoint2,
+                            techId = tunnelTechId,
+                            perform = kExecBuildDoubleResTunnel
+                        }
+                    end
+                end
+            end
+
+            local safeTechPointNoTunnel = senses:Get("safeTechPointNoTunnel")
+            if safeTechPointNoTunnel then
+                local safeTPName = safeTechPointNoTunnel:GetLocationName()
+                --Print("Überprüfe SafeTechPoint: ", safeTPName)
+                if brain:GetDelayPassedForStructureRedrop(safeTPName) and
+                   brain:GetIsSafeToDropInLocation(safeTPName, comTeamNum, senses:Get("isEarlyGame")) then
+
+                    -- Überprüfen, ob bereits ein Tunnel in der Nähe ist
+                    local tunnelExists = false
+                    for _, tunnel in ipairs(allTunnelEntrances) do
+                        if tunnel:GetLocationName() == safeTPName then
+                            tunnelExists = true
+                            break
+                        end
+                    end
+
+                    if not tunnelExists then
+                        weight = GetAlienComBaselineWeight(kAlienComActionTypes.BuildDoubleResTunnel)
+                        --Print("Building Single Res Tunnel at safe Tech Point: " .. safeTPName)
+                        return {
+                            name = name,
+                            weight = weight,
+                            resPoint1 = safeTechPointNoTunnel,
+                            resPoint2 = nil,
+                            techId = tunnelTechId,
+                            perform = kExecBuildDoubleResTunnel
+                        }
+                    end
+                end
+            end
+
+            -- Überprüfe unconnected Tunnel für Hives
+            local unConnectedTunnelEntrance = senses:Get("unConnectedTunnelEntrance")
+            if unConnectedTunnelEntrance then
+                local mainHive = senses:Get("mainHive")
+                if mainHive and brain:GetDelayPassedForStructureRedrop(mainHive:GetLocationName()) and 
+                   brain:GetIsSafeToDropInLocation(mainHive:GetLocationName(), comTeamNum, senses:Get("isEarlyGame")) then
+
+                    -- Überprüfen, ob bereits ein Tunnel in der Nähe ist
+                    local tunnelExists = false
+                    for _, tunnel in ipairs(allTunnelEntrances) do
+                        if tunnel:GetLocationName() == mainHive:GetLocationName() then
+                            tunnelExists = true
+                            break
+                        end
+                    end
+
+                    if not tunnelExists then
+                        weight = GetAlienComBaselineWeight(kAlienComActionTypes.BuildDoubleResTunnel)
+                        --Print("Building Tunnel at main Hive: " .. mainHive:GetLocationName())
+                        return {
+                            name = name,
+                            weight = weight,
+                            resPoint1 = mainHive,
+                            resPoint2 = nil,
+                            techId = tunnelTechId,
+                            perform = kExecBuildDoubleResTunnel
+                        }
+                    end
+                end
+            end
+        else
+            --Print("TechId nicht verfügbar für Tunnel: " .. tostring(tunnelTechId))
+        end
+    end
+
+    return {
+        name = name,
+        weight = weight,
+        resPoint1 = nil,
+        resPoint2 = nil,
+        techId = nil,
+        perform = nil
+    }
+end, --BUILD DOUBLE RES TUNNEL
+
+function(bot, brain, com)
+    PROFILE("AlienCommanderBrain_Data:BuildShadeDoubleRes")
+
+    local name = kAlienComActionTypes[kAlienComActionTypes.BuildShadeDoubleRes]
+    local comTeamNum = com:GetTeamNumber()
+    local senses = brain:GetSenses()
+    local doables = senses:Get("doableTechIds")
+    local weight = 0
+
+    if doables[kTechId.Shade] then
+        local doubleResPoints = senses:Get("doubleResNoShade")
+
+        for i = 1, #doubleResPoints do
+            local resPair = doubleResPoints[i]
+            local resPoint1 = resPair[1]
+            local resPoint2 = resPair[2]
+            local locationName1 = resPoint1:GetLocationName()
+            local locationName2 = resPoint2:GetLocationName()
+
+            --Print("Überprüfe ResPoints: ", locationName1, locationName2)
+
+            if brain:GetDelayPassedForStructureRedrop(locationName1) and brain:GetDelayPassedForStructureRedrop(locationName2) and
+               brain:GetIsSafeToDropInLocation(locationName1, comTeamNum, senses:Get("isEarlyGame")) and 
+               brain:GetIsSafeToDropInLocation(locationName2, comTeamNum, senses:Get("isEarlyGame")) then
+
+                weight = GetAlienComBaselineWeight(kAlienComActionTypes.BuildShadeDoubleRes)
+                --Print("Building Double Res Shade: resPoint1 = " .. locationName1 .. ", resPoint2 = " .. locationName2)
+                return {
+                    name = name,
+                    weight = weight,
+                    resPoint1 = resPoint1,
+                    resPoint2 = resPoint2,
+                    techId = kTechId.Shade,
+                    perform = kExecBuildShadeDoubleRes
+                }
+            end
+        end
+    else
+        --Print("TechId nicht verfügbar für Shade: " .. tostring(kTechId.Shade))
+    end
+
+    return {
+        name = name,
+        weight = weight,
+        resPoint1 = nil,
+        resPoint2 = nil,
+        techId = nil,
+        perform = nil
+    }
+end, --BUILD DOUBLE RES SHADE
 
     function(bot, brain, com)
 
@@ -399,59 +696,55 @@ kAlienComBrainActions =     --BOT-TODO ALL below actions need to be reviewed and
 
     end, -- Build Shade
 
-    function(bot, brain, com)
+function(bot, brain, com)
+    local name = kAlienComActionTypes[kAlienComActionTypes.BuildWhip]
+    local comTeamNum = com:GetTeamNumber()
+    local senses = brain:GetSenses()
+    local doables = senses:Get("doableTechIds")
+    local weight = 0
 
-        local name = kAlienComActionTypes[kAlienComActionTypes.BuildWhip]
-        local comTeamNum = com:GetTeamNumber()
-        local senses = brain:GetSenses()
-        local doables = senses:Get("doableTechIds")
-        local weight = 0
+    local isEarlyGame = senses:Get("isEarlyGame")
+    local techPoints = senses:Get("techPoints") -- Anzahl der TechPoints ermitteln
+    local numTechPoints = #techPoints -- Anzahl der TechPoints als Zahl
 
-        local isEarlyGame = senses:Get("isEarlyGame")
+    local buildPos
+    local kMaxWhips = (numTechPoints == 4) and 3 or 1 -- Erlaube bis zu 3 Whips auf 4er TP-Karten und 1 Whip auf 5er TP-Karten
+    local kMinHivesForWhips = 2
 
-        local buildPos
-        local kMaxWhips = 1 -- Anywhere
-        local kMinHivesForWhips = 2
+    if doables[kTechId.Whip] and not isEarlyGame and
+            #senses:Get("hives") >= kMinHivesForWhips and
+            #senses:Get("whips") < kMaxWhips and
+            senses:Get("biomassLevel") >= kBiomassMinForPvE and
+            brain:GetTimeSinceLastDroppedStructure("PVE") > kPVEDropInterval then
 
-        if doables[kTechId.Whip] and not isEarlyGame and
-                #senses:Get("hives") >= kMinHivesForWhips and
-                #senses:Get("whips") < kMaxWhips and
-                senses:Get("biomassLevel") >= kBiomassMinForPvE and
-                brain:GetTimeSinceLastDroppedStructure("PVE") > kPVEDropInterval then
+        local locationsWithHive = senses:Get("hivesAndLocations")
+        for i = 1, #locationsWithHive do
+            local hive = locationsWithHive[i][1]
+            local locationId = locationsWithHive[i][2]
+            local locationName = Shared.GetString(locationId)
+            local whipsInLocation = GetEntitiesAliveForTeamByLocation("Whip", comTeamNum, locationId)
+            if #whipsInLocation <= 0 and
+                    brain:GetDelayPassedForStructureRedrop(locationName) and
+                    brain:GetIsSafeToDropInLocation(locationName, com:GetTeamNumber(), senses:Get("isEarlyGame")) then
 
-            local locationsWithHive = senses:Get("hivesAndLocations")
-            for i = 1, #locationsWithHive do
-                local hive = locationsWithHive[i][1]
-                local locationId = locationsWithHive[i][2]
-                local locationName = Shared.GetString(locationId)
-                local whipsInLocation = GetEntitiesAliveForTeamByLocation("Whip", comTeamNum, locationId)
-                if #whipsInLocation <= 0 and
-                        brain:GetDelayPassedForStructureRedrop(locationName) and
-                        brain:GetIsSafeToDropInLocation(locationName, com:GetTeamNumber(), senses:Get("isEarlyGame"))then
-
-                    buildPos = GetRandomBuildPosition( kTechId.Whip, hive:GetOrigin(), kHiveBuildDist )
-                    if buildPos then
-                        weight = GetAlienComBaselineWeight(kAlienComActionTypes.BuildWhip)
-                        break
-                    end
-
+                buildPos = GetRandomBuildPosition(kTechId.Whip, hive:GetOrigin(), kHiveBuildDist)
+                if buildPos then
+                    weight = GetAlienComBaselineWeight(kAlienComActionTypes.BuildWhip)
+                    break
                 end
-
             end
-
         end
+    end
 
-        return
-        {
-            name = name,
-            weight = weight,
-            targetPos = buildPos,
-            techId = kTechId.Whip,
-            unit = com,
-            perform = kExecTechId,
-        }
-
-    end, -- Build Whip
+    return {
+        name = name,
+        weight = weight,
+        targetPos = buildPos,
+        techId = kTechId.Whip,
+        unit = com,
+        perform = kExecTechId,
+    }
+end, -- Build Whip
 
     function(bot, brain, com)
 
@@ -774,6 +1067,42 @@ kAlienComBrainActions =     --BOT-TODO ALL below actions need to be reviewed and
         }
 
     end, -- Bone Wall
+    
+    function(bot, brain, com)
+    PROFILE("AlienCommanderBrain:exo_bonewall")
+
+    local name = "exo_bonewall"
+    local kBonewallTechId = kTechId.BoneWall
+
+    local senses = brain:GetSenses()
+    local doableTechIds = senses:Get("doableTechIds")
+    local weight = 0
+
+    local exo = nil
+    local exoPos = nil
+
+    local canBonewall = doableTechIds[kBonewallTechId]
+    local hasEnoughTres = com:GetTeamResources() > kBoneWallCost
+
+    if canBonewall and hasEnoughTres then
+
+        -- EXO in Hive-Nähe?
+        local hiveThreat = senses:Get("exoNearHive")
+        if hiveThreat and hiveThreat.exoEntity then
+            exo = hiveThreat.exoEntity
+            exoPos = hiveThreat.exoPos
+            weight = GetAlienComBaselineWeight(kAlienComActionTypes.BoneWall) + 200
+        end
+    end
+
+    return {
+        name   = name,
+        weight = weight,
+        exo    = exo,
+        exoPos = exoPos,
+        perform = kExecExoBonewall
+    }
+end, --CATCH EXO WITH BONEWALL TO SAVE EGGS
 
     function(bot, brain, com)
         PROFILE("AlienCommanderBrain_Data:shade_ink")
@@ -1087,7 +1416,7 @@ kAlienComBrainActions =     --BOT-TODO ALL below actions need to be reviewed and
 
     end, -- Cyst
 
-    function(bot, brain, com)
+  function(bot, brain, com)
         return 
         { 
             name = "idle", 
@@ -1100,6 +1429,7 @@ kAlienComBrainActions =     --BOT-TODO ALL below actions need to be reviewed and
                 end
         }
     end, -- Idle
+
 
     function(bot, brain, com)
         local name = "eggs"
@@ -1187,7 +1517,7 @@ kAlienComBrainActions =     --BOT-TODO ALL below actions need to be reviewed and
                 
                 --[[
                 McG: Remove this because it should only be based on memories, not straight search. Also, should NOT be done at ALL
-                for lower-skill servers.
+                for lower-skill servers.--]]
 
                 for _,rp in ientitylist(Shared.GetEntitiesWithClassname("ResourcePoint")) do
 
@@ -1197,7 +1527,7 @@ kAlienComBrainActions =     --BOT-TODO ALL below actions need to be reviewed and
                     end
 
                 end
-                --]]
+                --]] 
             end
             
             -- run away!
@@ -1263,7 +1593,8 @@ kAlienComBrainActions =     --BOT-TODO ALL below actions need to be reviewed and
                 brain.isDroppingHive = false
 
             else -- Do nothing else until we drop that hive, this way we guarantee we have enough res while avoiding cancellactions, etc
-                weight = GetAlienComBaselineWeight(kAlienComActionTypes.WaitForHiveDrop)
+                weight = GetAlienComBaselineWeight(kAlienComActionTypes.WaitForHiveDrop) -- Orginal / Commander kann mit der Zeit nichts mehr Bauen...
+                --weight = GetAlienComBaselineWeight(kAlienComActionTypes.BuildHive_TooMuchTRes) --Fix einfach aber wirksam (der Commander kann immer bauen)
             end
 
         elseif doables[kTechId.Hive] and

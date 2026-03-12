@@ -27,7 +27,7 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["BOUNTY"] = "站点悬赏"
     
     Locale.kTranslateMessage["MILITARY_PROTOCOL"] = "军用统筹协防"
-    Locale.kTranslateMessage["MILITARY_PROTOCOL_TOOLTIP"] = "注意:请[谨慎签署]该协议.\n*协议无法取消,留意不可抗力.\n*指挥官将作为军需统筹者.\n+所有陆战队将统一着装.\n+陆战队获得军用级制式装备.\n+协防生物质将被转化为资源.\n+被动团队收入随研发增加.\n+个人资源主动收入增加.\n-个人资源被动收入停止."
+    Locale.kTranslateMessage["MILITARY_PROTOCOL_TOOLTIP"] = "注意:请[谨慎签署]该协议.\n*协议无法取消,留意不可抗力.\n*指挥官将作为军需统筹者.\n+协防生物质将被转化为资源.\n+军需补给点获取与清理贡献相关."
     
     Locale.kTranslateMessage["BIOFORM_SUPPRESSOR"] = "生物质压制器"
     Locale.kTranslateMessage["BIOFORM_SUPPRESSOR_HINT"] = "压制大范围内的生物质"
@@ -296,7 +296,7 @@ if Locale.kLocales then
 
     Locale.kLocales["MILITARY_PROTOCOL"] = "Military Protocol"
     Locale.kLocales["MILITARY_PROTOCOL_ENABLED"] = "Military Protocol Enabled, Unable to access offensive equipment in personal."
-    Locale.kLocales["MILITARY_PROTOCOL_TOOLTIP"] = "Caution before you assign.\nYou will be the only weapon&equipment dispatcher.\n*Marines now wears uniforms.\n+Marines gets better standard equipments.\n+Biomass harvest(kills) grants team resource.\n+Marines' positive resources gain increased.\n-Marines' passive resources stopped.\n-Marines can't buy offensives themself."
+    Locale.kLocales["MILITARY_PROTOCOL_TOOLTIP"] = "Caution before you assign.\nYou will be the only weapon&equipment dispatcher.\n+Biomass harvest(kills) grants team resource.\n+Marines' positive credit gain increased.\n-Marines' passive resources stopped."
 
     Locale.kLocales["MOTION_TRACK"] = "Motion Track"
     Locale.kLocales["MOTION_TRACK_TOOLTIP"] = "Track Active Kharra Each Time Interval."
