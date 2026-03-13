@@ -5017,9 +5017,11 @@ local activeUrgencies =
     {
         [kMinimapBlipType.Onos] =    7.0,
         [kMinimapBlipType.Fade] =    6.0,
+        [kMinimapBlipType.Vokex] =    6.0,
         [kMinimapBlipType.Lerk] =    5.0,
         [kMinimapBlipType.Skulk] =   4.0,
         [kMinimapBlipType.Gorge] =   3.0,
+        [kMinimapBlipType.Prowler] =   3.0,
         [kMinimapBlipType.Whip] =    3.0,
         [kMinimapBlipType.Hydra] =   2.0,
         [kMinimapBlipType.Drifter] = 1.0,
@@ -5291,6 +5293,8 @@ s:Add("nearbyFriendlies",
             local isActiveThreat = mem.btype == kMinimapBlipType.Skulk
                 or mem.btype == kMinimapBlipType.Lerk
                 or mem.btype == kMinimapBlipType.Fade
+                or mem.btype == kMinimapBlipType.Prowler
+                or mem.btype == kMinimapBlipType.Vokex
                 or mem.btype == kMinimapBlipType.Onos
                 or mem.btype == kMinimapBlipType.Whip
 
@@ -5510,6 +5514,8 @@ end)
 
                     -- Don't even consider players for structure threat
                     local shouldIgnore = (mem.btype >= kMinimapBlipType.Skulk and mem.btype <= kMinimapBlipType.Gorge)
+                            or mem.btype == kMinimapBlipType.Vokex
+                            or mem.btype == kMinimapBlipType.Prowler
                         or mem.btype == kMinimapBlipType.Infestation
                         or mem.btype == kMinimapBlipType.InfestationDying
 

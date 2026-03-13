@@ -45,7 +45,9 @@ Bishop.lib.constants.kClassNameToTechId = {
   ["Gorge"] = kTechId.Gorge,
   ["Lerk"] = kTechId.Lerk,
   ["Onos"] = kTechId.Onos,
-  ["Skulk"] = kTechId.Skulk
+  ["Skulk"] = kTechId.Skulk,
+  ["Prowler"] = kTechId.Prowler,
+  ["Vokex"] = kTechId.Vokex
 }
 
 ---@class Action
