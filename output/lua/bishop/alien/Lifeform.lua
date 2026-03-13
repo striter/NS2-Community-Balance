@@ -32,6 +32,8 @@ local kAlienPriority = {    -- Take tickets in this order from top to bottom.
   kTechId.Fade,
   kTechId.Gorge,
   kTechId.Lerk,
+    kTechId.Vokex,
+    kTechId.Prowler,
   kTechId.Skulk
 }
 local kLifeformUpgrades = { -- Only consider these upgrades for each lifeform.
@@ -45,6 +47,11 @@ local kLifeformUpgrades = { -- Only consider these upgrades for each lifeform.
     {kTechId.Aura, kTechId.Focus},
     {kTechId.Celerity, kTechId.Adrenaline, kTechId.Crush}
   },
+  [kTechId.Prowler] = {
+      {kTechId.Carapace, kTechId.Regeneration},
+      {kTechId.Aura, kTechId.Focus},
+      {kTechId.Celerity, kTechId.Adrenaline, kTechId.Crush}
+  },
   [kTechId.Lerk] = {
     {kTechId.Regeneration},
     {kTechId.Aura, kTechId.Camouflage},
@@ -54,6 +61,11 @@ local kLifeformUpgrades = { -- Only consider these upgrades for each lifeform.
     {kTechId.Carapace, kTechId.Vampirism},
     {kTechId.Focus},
     {kTechId.Celerity, kTechId.Adrenaline}
+  },
+  [kTechId.Vokex] = {
+      {kTechId.Carapace, kTechId.Vampirism},
+      {kTechId.Focus},
+      {kTechId.Celerity, kTechId.Adrenaline}
   },
   [kTechId.Onos] = {
     {kTechId.Carapace, kTechId.Vampirism},
@@ -74,7 +86,9 @@ local kLifeformTable = {
   ["Gorge"] = kTechId.Gorge,
   ["Lerk"] = kTechId.Lerk,
   ["Fade"] = kTechId.Fade,
-  ["Onos"] = kTechId.Onos
+  ["Onos"] = kTechId.Onos,
+  ["Vokex"] = kTechId.Vokex,
+  ["Prowler"] = kTechId.Prowler
 }
 local kTechId = kTechId
 
@@ -188,7 +202,9 @@ function Bishop.alien.lifeform.GetRequiredLifeform(pres, nosteal)
     [kTechId.Gorge] = DesiredGorges(teamSize),
     [kTechId.Lerk] = DesiredLerks(teamSize),
     [kTechId.Fade] = DesiredFades(teamSize),
-    [kTechId.Onos] = DesiredOnos(teamSize)
+    [kTechId.Onos] = DesiredOnos(teamSize),
+    [kTechId.Vokex] = DesiredFades(teamSize),
+    [kTechId.Prowler] = DesiredGorges(teamSize)
   }
 
   local aliens = GetEntitiesAliveForTeam("Player", kAlienTeamType)

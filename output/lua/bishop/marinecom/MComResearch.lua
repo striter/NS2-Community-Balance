@@ -11,6 +11,12 @@ local function GetTechPathVariable(name)
   return value
 end
 
+local function SetTechPathVariable(name, value)
+    local result = Shine.SetUpValue(GetMarineComNextTechStep, name, value,
+            true)
+    assert(result)
+end
+
 --------------------------------------------------------------------------------
 -- Replace research override types.
 --------------------------------------------------------------------------------
