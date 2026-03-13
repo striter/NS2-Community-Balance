@@ -443,7 +443,7 @@ kVokexCost = 42
 kVokexUpgradeCost = 5
 
 kSwipeShadowStepEnergyCost = 8
-kVokexShadowStepEnergyCost = 14
+kVokexShadowStepEnergyCost = 13
 kSwipeShadowStepDamage = 40
 kVokexGestateTime = 25
 kVokexEggCost = 80
