@@ -352,9 +352,15 @@ function PlayerBot:_LazilyInitBrain()
         elseif player:isa("Fade") then
             self.brain = FadeBrain()
 
+        elseif player:isa ("Vokex") then
+            self.brain = FadeBrain()
+
         elseif player:isa("Onos") then
             self.brain = OnosBrain()
 
+        elseif player:isa("Prowler") then
+            self.brain = GorgeBrain()
+            
         elseif player:isa("Exo") then   --FIXME Need to distinguish Minigun v Railgun
 
             local weaponHolder = player:GetActiveWeapon()

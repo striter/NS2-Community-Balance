@@ -67,6 +67,7 @@ kTechIdToMaterialOffset[kTechId.Rappel] = 205
 kTechIdToMaterialOffset[kTechId.AcidSpray] = 206
 kTechIdToMaterialOffset[kTechId.ProwlerStructureAbility] = 102
 
+kTechIdToMaterialOffset[kTechId.Vokex] = 160
 kTechIdToMaterialOffset[kTechId.ShadowStep] = 160
 kTechIdToMaterialOffset[kTechId.AcidRocket] = 209
 kTechIdToMaterialOffset[kTechId.MetabolizeShadowStep] = 169

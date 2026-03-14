@@ -57,8 +57,7 @@ function PlayerBot:_LazilyInitBrain()
     if player then
       local teamNumber = player:GetTeamNumber()
       self.brain:GetSenses():SetTeamNumber(teamNumber)
-      self.brain:GetSenses():SetParentSenses(
-        GetTeamBrain(teamNumber):GetSenses())
+      self.brain:GetSenses():SetParentSenses(GetTeamBrain(teamNumber):GetSenses())
     end
   end
 end
