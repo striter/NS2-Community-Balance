@@ -203,8 +203,8 @@ function Bishop.alien.lifeform.GetRequiredLifeform(pres, nosteal)
     [kTechId.Lerk] = DesiredLerks(teamSize),
     [kTechId.Fade] = DesiredFades(teamSize),
     [kTechId.Onos] = DesiredOnos(teamSize),
-    --[kTechId.Vokex] = DesiredFades(teamSize),
-    --[kTechId.Prowler] = DesiredGorges(teamSize)
+    [kTechId.Vokex] = DesiredFades(teamSize),
+    [kTechId.Prowler] = DesiredGorges(teamSize)
   }
 
   local aliens = GetEntitiesAliveForTeam("Player", kAlienTeamType)
