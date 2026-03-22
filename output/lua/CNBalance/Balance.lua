@@ -216,10 +216,10 @@ kSubMachineGunPointValue = 0
 kRifleMeleeDamage = 10
 
 --Knife
-kKnifeDamage = 20
+kKnifeDamage = 30
 kKnifeRange = 1.3
 kKnifeCost = 0
-kKnifeDamageType = kDamageType.Structural
+kKnifeDamageType = kDamageType.Light
 --
 
 kAxeDamage = 25

@@ -107,7 +107,7 @@ if Locale.kTranslateMessage then
     
     Locale.kTranslateMessage["WELDER_BUYDESCRIPTION"]="制式维修工具.\n*修复陆战队护甲以及机甲.\n*修复建筑以及电力节点,加速建造建筑.\n*对菌毯造成高额伤害,可以灼烧孢子云."
     Locale.kTranslateMessage["KNIFE"]="步战刀"
-    Locale.kTranslateMessage["KNIFE_BUYDESCRIPTION"]="制式步战刀.\n+最快的移动速度.\n+对建筑双倍伤害,无需弹药.\n-近距离搏斗."
+    Locale.kTranslateMessage["KNIFE_BUYDESCRIPTION"]="制式步战刀.\n+最快的移动速度.\n+从无甲单位身上切下一大块肉.\n-近距离搏斗.\n-对披甲单无法造成有效杀伤."
     Locale.kTranslateMessage["REVOLVER"]="左轮"
     Locale.kTranslateMessage["STATUS_REVOLVER"]="左轮"
     Locale.kTranslateMessage["REVOLVER_BUYDESCRIPTION"]="制式左轮手枪.\n+连射足以摧毁一切小型单位.\n-较低的载弹量."
