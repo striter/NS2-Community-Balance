@@ -91,7 +91,7 @@ local function PerformAttackEntity(eyePos, target, targetPos, bot, brain, move)
 
   local accGroup = distance < kBiteRange and kBotAccWeaponGroup.LerkBite or
     kBotAccWeaponGroup.LerkSpikes
-  attack = attack and bot.aim:UpdateAim(target, aimPos, accGroup)
+  attack = attack and bot.aim and bot.aim:UpdateAim(target, aimPos, accGroup)
 
   if attack then
     bot:GetPlayer():SetActiveWeapon(LerkBite.kMapName)

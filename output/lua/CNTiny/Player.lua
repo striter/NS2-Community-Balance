@@ -3,6 +3,8 @@ Script.Load("lua/CNBooting/ModPanelActionFinderMixin.lua")
 
 Shared.LinkClassToMap("Player", Player.kMapName, {scale = "float (0.1 to 4 by 0.01)"}, true)
 
+Player.kScaleDeltaPerSecond = 0.1
+
 local oldOnCreate = Player.OnCreate
 function Player:OnCreate()
     self.scale = 1
@@ -27,7 +29,7 @@ if Server then
         
         if newScale ~= self.scale then
             local backward = self.scale > newScale
-            local delta = (backward and -1 or 1) * 0.1
+            local delta = (backward and -1 or 1) * self.kScaleDeltaPerSecond
             local deltaScale = self.scale + delta * input.time
             local desireScale = backward and math.max(deltaScale,newScale) or math.min(deltaScale,newScale)
 

@@ -9,6 +9,7 @@ ModLoader.SetupFileHook( "lua/Marine.lua", "lua/CNTiny/Marine.lua", "post" )
 ModLoader.SetupFileHook( "lua/Exo.lua", "lua/CNTiny/Exo.lua", "post" )
 ModLoader.SetupFileHook( "lua/JetpackMarine.lua", "lua/CNTiny/JetpackMarine.lua", "post" )
 
+ModLoader.SetupFileHook( "lua/Embryo.lua", "lua/CNTiny/Embryo.lua", "post" )
 ModLoader.SetupFileHook( "lua/Skulk.lua", "lua/CNTiny/Skulk.lua", "post" )
 ModLoader.SetupFileHook( "lua/Gorge.lua", "lua/CNTiny/Gorge.lua", "post" )
 ModLoader.SetupFileHook( "lua/Lerk.lua", "lua/CNTiny/Lerk.lua", "post" )
