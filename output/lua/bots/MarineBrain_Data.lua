@@ -1836,6 +1836,7 @@ local kExecRetreat = function(move, bot, brain, marine, action)
     PROFILE("MarineBrain - ExecRetreat")
 
     local armory = action.armory
+    if not armory then return kPlayerObjectiveComplete end
 
     -- we are retreating, unassign ourselves from anything else, e.g. attack targets
 

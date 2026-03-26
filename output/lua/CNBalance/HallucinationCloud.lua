@@ -34,7 +34,8 @@ end
 if Server then
     
     local kHallucinationClassNameMap = debug.getupvaluex(HallucinationCloud.Perform, "kHallucinationClassNameMap")
-    kHallucinationClassNameMap[Prowler.kMapName] = ProwlerHallucination.kMapName    
+    kHallucinationClassNameMap[Prowler.kMapName] = SkulkHallucination.kMapName
+    kHallucinationClassNameMap[Fade.kMapName] = FadeHallucination.kMapName
 
 end
 
