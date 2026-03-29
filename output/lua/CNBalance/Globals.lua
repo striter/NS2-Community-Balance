@@ -75,7 +75,7 @@ function GetRespawnTimeExtend(player,teamIndex, _gameLength)
 
     local info = GetTeamInfoEntity(teamIndex)
     if info and info.numInfantryPortals then 
-        teamExtension = teamExtension + math.max(info.numInfantryPortals - 2,0) * 1
+        teamExtension = teamExtension + math.max(info.numInfantryPortals - 2,0) * -1
     end
     
     return respawnExtension + teamExtension

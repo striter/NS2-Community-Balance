@@ -3022,7 +3022,7 @@ end, -- RETREAT
         local canAffordWeaponTechId = nil
         local roundTimeMinutes = GetGameMinutesPassed()
 
-        local hasBoughtDesiredWeapon = primaryWep and primaryWep:GetTechId() == brain.activeWeaponPurchaseTechId
+        local hasBoughtDesiredWeapon = false-- primaryWep and primaryWep:GetTechId() == brain.activeWeaponPurchaseTechId
 
         if not hasBoughtDesiredWeapon and brain.activeWeaponPurchaseTechId ~= nil then
         --Update Armory position / target only (done in case of Recycle / Destroyed)
@@ -3032,7 +3032,7 @@ end, -- RETREAT
             targetArmory = armory
             local isAdvArmory = targetArmory ~= nil and targetArmory:isa("AdvancedArmory") or false
 
-            --local wantAdvancedWeapon = brain.activeWeaponPurchaseTechId ~= kTechId.Shotgun -- Dieser Befehl sorgt nur daf�r, dass die Bots nur die Schrotflinte im aktvien Spiel kaufen.
+            local wantAdvancedWeapon = brain.activeWeaponPurchaseTechId ~= kTechId.Shotgun -- Dieser Befehl sorgt nur daf�r, dass die Bots nur die Schrotflinte im aktvien Spiel kaufen.
 
             if wantAdvancedWeapon and not isAdvArmory then
             --Only update if needed
@@ -3066,9 +3066,9 @@ end, -- RETREAT
             local weaponTechs = 
             {
                 [kTechId.Shotgun] = kTechId.ShotgunTech,
-                [kTechId.Flamethrower] = kTechId.AdvancedWeaponry,
-                [kTechId.GrenadeLauncher] = kTechId.AdvancedWeaponry,
-                [kTechId.HeavyMachineGun] = kTechId.AdvancedWeaponry,
+                [kTechId.Flamethrower] = kTechId.AdvancedArmory,
+                [kTechId.GrenadeLauncher] = kTechId.AdvancedArmory,
+                [kTechId.HeavyMachineGun] = kTechId.AdvancedArmory,
             }
 
             local hasAnyOptions = false
