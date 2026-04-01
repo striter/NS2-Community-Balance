@@ -86,7 +86,7 @@ kGrenadeTechResearchTime = 45   --45
 
 kMaxARCs = 6
 
-kMineCost = 20
+kMineCost = 18
 kMineDamage = 130
 kDropMineCost = 12
 kDropMineCooldown = 0
@@ -226,12 +226,12 @@ kAxeDamage = 25
 kAxeDamageType = kDamageType.Structural
 
 --Light Machine Gun
-kLightMachineGunClipSize = 55
+kLightMachineGunClipSize = 50 
 kLightMachineGunClipNum = 4
-kLightMachineGunDamage = 10
+kLightMachineGunDamage = 10.8
 kLightMachineGunDamageType = kDamageType.Normal
 kLightMachineGunCost = 0
-kLightMachineGunAcquireCost = 30
+kLightMachineGunAcquireCost = 25
 kLightMachineGunPointValue = 0
 
 --Heavy Marine
