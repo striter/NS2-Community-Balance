@@ -134,6 +134,13 @@ function BuildTechData()
     })
 
     table.insert(techData, {
+        [kTechDataId] = kTechId.ClusterFlame,
+        [kTechDataDisplayName] = "CLUSTER_FLAME_UPGRADE",
+        [kTechDataTooltipInfo] = "CLUSTER_FLAME_UPGRADE",
+        [kTechDataResearchName] = "CLUSTER_FLAME_UPGRADE",
+    })
+
+    table.insert(techData, {
         [kTechDataId] = kTechId.ArmorRegen,
         [kTechDataCostKey] = kNanoArmorResearchCost,
         [kTechDataResearchTimeKey] = kNanoArmorResearchTime,

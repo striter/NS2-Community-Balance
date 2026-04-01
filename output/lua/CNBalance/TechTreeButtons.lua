@@ -20,6 +20,7 @@ kTechIdToMaterialOffset[kTechId.ExplosiveSupply] = 214
 kTechIdToMaterialOffset[kTechId.ExplosiveStation] = 214
 kTechIdToMaterialOffset[kTechId.MinesUpgrade] = 194
 kTechIdToMaterialOffset[kTechId.MineDeploy] = 221
+kTechIdToMaterialOffset[kTechId.ClusterFlame] = 224
 
 kTechIdToMaterialOffset[kTechId.ElectronicSupply] = 200
 kTechIdToMaterialOffset[kTechId.ElectronicStation] = 200

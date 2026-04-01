@@ -66,6 +66,8 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["EXPLOSIVE_STATION_HINT"] = "陆战队基地(可燃物研发基地)"
     Locale.kTranslateMessage["MINES_UPGRADE"]="地雷遮光涂层"
     Locale.kTranslateMessage["MINES_UPGRADE_TOOLTIP"]="*降低地雷对卡拉异形的可见性."
+    Locale.kTranslateMessage["CLUSTER_FLAME"]="集束爆燃装药"
+    Locale.kTranslateMessage["CLUSTER_FLAME_TOOLTIP"]="*集束雷将额外产生燃烧效果."
     Locale.kTranslateMessage["MINE_DEPLOY"]="部署地雷"
     Locale.kTranslateMessage["MINE_DEPLOY_TOOLTIP"]="部署一个立刻启用的地雷."
     --Locale.kTranslateMessage["GRENADE_LAUNCHER_DETECTION_SHOT"] = "智能引信 (副攻击)"
@@ -147,7 +149,7 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["RESEARCH_GRENADES"]="投掷物升级"
     Locale.kTranslateMessage["GRENADES_TOOLTIP"]="+并解锁额外的手雷类型.\n*陆战队将更快的投掷手雷."
     Locale.kTranslateMessage["RESEARCH_GRENADES_TITLE"]="投掷物升级"
-    Locale.kTranslateMessage["CLUSTERGRENADE_BUYDESCRIPTION"]="陆战队士兵常用的投掷物.\n*对建筑物有高额的伤害.\n*升级后将对建筑有产生额外子雷."
+    Locale.kTranslateMessage["CLUSTERGRENADE_BUYDESCRIPTION"]="陆战队士兵常用的投掷物.\n*对建筑物有高额的伤害.\n*[投掷物升级]产生额外子雷."
 
     Locale.kTranslateMessage["GAS_GRENADE"]="气体手雷"
     Locale.kTranslateMessage["GASGRENADE_BUYDESCRIPTION"]="陆战队士兵常用的投掷物.\n*对敌方单位造成护甲伤害.\n*缓慢回复范围内的己方单位血量."
@@ -309,6 +311,8 @@ if Locale.kLocales then
     Locale.kLocales["LIGHTMACHINEGUN_UPGRADE_TOOLTIP"]="*Upgrade marine's main weapon to <Machine gune>\n*Higher damage.\n*More accurate."
     Locale.kLocales["MINES_UPGRADE"]="Mine coating"
     Locale.kLocales["MINES_UPGRADE_TOOLTIP"]="*Reduce mines' visibility for kharaa."
+    Locale.kLocales["CLUSTER_FLAME"]="Cluster Flame"
+    Locale.kLocales["CLUSTER_FLAME_TOOLTIP"]="*Cluster grenade bust out flames."
     Locale.kLocales["DRAGON_BREATH"] = "Dragon breath"
     Locale.kLocales["DRAGON_BREATH_TOOLTIP"] = "*Bullets will ignite enemies."
 

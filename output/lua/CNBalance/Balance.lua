@@ -320,7 +320,7 @@ kCannonDropCost = 18
 
 kCannonDamage = 25
 kCannonAoeDamage = 80
-kCannonAoeRadius = 2.5
+kCannonAoeRadius = 2
 kCannonRateOfFire = 0.88
 kCannonClipSize = 6
 kCannonPointValue = 15

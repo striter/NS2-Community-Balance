@@ -1363,6 +1363,10 @@ function GUIMarineBuyMenu:_SetDetailsSectionTechId(techId, techCost)
 
     -- Update the "special" stuff.
     local techSpecial = kTechIdInfo[techId].Special
+    if techId == kTechId.ClusterGrenade and MarineBuy_GetHas(kTechId.ExplosiveStation) then
+        techSpecial = kSpecial.Burn
+    end
+    
     if techSpecial then
 
         local specialDefinition = kSpecialDefinitions[techSpecial]
