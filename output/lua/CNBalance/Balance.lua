@@ -134,6 +134,8 @@ kObservatoryCost = 10
 kPhaseGateCost = 15
 kPhaseTechResearchCost = 10
 
+kPhaseTechResearchTime = 75
+
 -- Standard Supply
 kDragonBreathResearchCost = 30
 kDragonBreathResearchCost = 30
@@ -354,8 +356,8 @@ kFadeEggCost = 70
 kOnosCost = 62
 kOnosEggCost = 100
 
-kTunnelEntranceCost = 7
-kTunnelRelocateCost = 5
+kTunnelEntranceCost = 6
+kTunnelRelocateCost = 4
 
 --Research with skill activation
 kResearchBioMassOneCost = 30
@@ -695,7 +697,7 @@ kOnInfestationMinHealPerSecond = 10
 
 kGorgeAbilitiesCost = {
     [kTechId.Hydra] = 0, [kTechId.Clog] = 0, [kTechId.Web] = 0,[kTechId.SporeMine] = 0, [kTechId.BabblerEgg] = 3,
-    [kTechId.Cyst] = 0.5,  [kTechId.Egg] = 2, [kTechId.Tunnel] = 6, [kTechId.TunnelExit] = 2,
+    [kTechId.Cyst] = 0.5,  [kTechId.Egg] = 2, [kTechId.Tunnel] = 5, [kTechId.TunnelExit] = 3,
     [kTechId.Whip] = 8, [kTechId.Shift] = 15, [kTechId.Shade] = 15, [kTechId.Crag] = 15,
     [kTechId.Spur] = 12, [kTechId.Shell] = 12, [kTechId.Veil] = 12,
     [kTechId.Harvester] = 8, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
@@ -732,11 +734,11 @@ kTechRespawnTimeExtension =
     [kTechId.Armor2] = 1, [kTechId.Weapons2] = 1,
     [kTechId.Armor3] = 2, [kTechId.Weapons3] = 2,
     --[kTechId.PhaseGate] = 0, [kTechId.AdvancedArmory] = 0,
-    [kTechId.ExosuitPrototypeLab] = 2, [kTechId.JetpackPrototypeLab] = 2,-- [kTechId.CannonPrototypeLab] = 2,
+    [kTechId.ExosuitPrototypeLab] = 2, [kTechId.JetpackPrototypeLab] = 2, [kTechId.CannonPrototypeLab] = 2,
     --[kTechId.DragonBreath] = 2, [kTechId.ArmorRegen] = 2,  [kTechId.MotionTrack] = 2, --[kTechId.MACEmpBlast] = 1,[kTechId.GrenadeLauncherUpgrade] = 1,
     
     --[kTechId.BioMassOne] = 0, [kTechId.BioMassTwo] = 0, 
-    --[kTechId.BioMassThree] = 1, [kTechId.BioMassFour] = 1, 
+    [kTechId.BioMassThree] = 1, [kTechId.BioMassFour] = 1, 
     [kTechId.BioMassFive] = 1, [kTechId.BioMassSix] = 1,
     --[kTechId.TwoVeils] = 1,[kTechId.ThreeVeils] = 1,[kTechId.TwoShells] = 1,[kTechId.ThreeShells] = 1,[kTechId.TwoSpurs] = 1, [kTechId.ThreeSpurs] = 1,
     [kTechId.BioMassSeven] = 2, [kTechId.BioMassEight] = 2,
