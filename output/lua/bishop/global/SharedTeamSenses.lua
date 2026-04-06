@@ -13,8 +13,9 @@ local kMinimapBlipType = kMinimapBlipType
 ---@param mem TeamBrain.Memory
 local function IsMemoryTypePassive(mem)
   local type = mem.btype
-  return not ((type >= kMinimapBlipType.Marine
-    and type <= kMinimapBlipType.Gorge) or type == kMinimapBlipType.Sentry
+  return not ((type >= kMinimapBlipType.Marine and type <= kMinimapBlipType.Gorge) 
+    or type == kMinimapBlipType.Sentry
+    or type == kMinimapBlipType.Prowler or type == kMinimapBlipType.Vokex
     or type == kMinimapBlipType.Whip or type == kMinimapBlipType.Hydra
     or type == kMinimapBlipType.Drifter)
 end
@@ -36,6 +37,8 @@ end
 local function IsMemoryTypeUnit(mem)
   local type = mem.btype
   return (type >= kMinimapBlipType.Marine and type <= kMinimapBlipType.Gorge)
+    or type == kMinimapBlipType.Prowler
+    or type == kMinimapBlipType.Vokex
     or (type >= kMinimapBlipType.ARC and type <= kMinimapBlipType.MAC)
 end
 
