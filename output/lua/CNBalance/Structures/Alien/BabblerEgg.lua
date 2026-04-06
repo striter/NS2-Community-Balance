@@ -41,6 +41,7 @@ class 'BabblerEgg' (ScriptActor)
 BabblerEgg.kMapName = "babbleregg"
 BabblerEgg.kDropRange = 6.5
 
+BabblerEgg.kPheromoneHatchOffset = 0.3
 BabblerEgg.kModelName = PrecacheAsset("models/alien/babbler/babbler_egg.model")
 BabblerEgg.kModelNameShadow = PrecacheAsset("models/alien/babbler/babbler_egg_shadow.model")
 local kBabblerEggModelVariants =
@@ -62,7 +63,8 @@ PrecacheAsset("sound/NS2.fev/alien/babbler/hatch")
 local networkVars =
 {
     ownerId = "entityid",
-    variant = "enum kBabblerEggVariants"
+    variant = "enum kBabblerEggVariants",
+    pheromoneHatchCooldown = "time",
 }
 
 AddMixinNetworkVars(BaseModelMixin, networkVars)
@@ -147,6 +149,7 @@ function BabblerEgg:OnInitialized()
         self.delayedSkinUpdate = false
 
     end
+    self.pheromoneHatchCooldown = Shared.GetTime() - self.kPheromoneHatchOffset
 
     self:SetPhysicsGroup(PhysicsGroup.SmallStructuresGroup)
     InitMixin(self, IdleMixin)
@@ -193,6 +196,19 @@ end
 
 function BabblerEgg:GetUseMaxRange()
     return BabblerEgg.kDropRange
+end
+
+function BabblerEgg:OnAdjustModelCoords(modelCoords)
+    local coords = modelCoords
+    if self.pheromoneHatchCooldown then
+        local timeNormalized = Clamp((self.pheromoneHatchCooldown - Shared.GetTime())/self.kPheromoneHatchOffset,0,1)
+        local scale = 1 + timeNormalized * 0.3
+        coords.xAxis = coords.xAxis * scale
+        coords.yAxis = coords.yAxis * scale
+        coords.zAxis = coords.zAxis * scale
+    end
+
+    return coords
 end
 
 if Server then
@@ -265,6 +281,15 @@ if Server then
         -- end
     end
 
+    function BabblerEgg:PheromoneHatch()
+        if Shared.GetTime() > self.pheromoneHatchCooldown then
+            self.pheromoneHatchCooldown = Shared.GetTime() + self.kPheromoneHatchOffset
+            self:TryBabblerHatch()
+            return true
+        end
+        return false
+    end
+
     function BabblerEgg:TryBabblerHatch()
         local owner = self:GetOwner()
         if not owner then
@@ -295,7 +320,7 @@ if Server then
 
         return self:GetIsAlive()
     end
-    
+
     function BabblerEgg:OnConstructionComplete()
         self:AddTimedCallback(BabblerEgg.TryBabblerHatch, kBabblerEggHatchInterval)
     end

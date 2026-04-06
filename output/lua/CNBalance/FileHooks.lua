@@ -230,7 +230,7 @@ ModLoader.SetupFileHook("lua/Weapons/Alien/ClogAbility.lua", "lua/CNBalance/Weap
 ModLoader.SetupFileHook("lua/Weapons/Alien/BabblerEggAbility.lua", "lua/CNBalance/Weapons/Alien/Gorge/BabblerEggAbility.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/WebsAbility.lua", "lua/CNBalance/Weapons/Alien/Gorge/WebsAbility.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/SporeCloud.lua", "lua/CNBalance/Weapons/Alien/SporeCloud.lua", "replace")
-ModLoader.SetupFileHook("lua/Weapons/Alien/BabblerPheromone.lua", "lua/CNBalance/Weapons/Alien/Gorge/BabblerPheromone.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Alien/BabblerPheromone.lua", "lua/CNBalance/Weapons/Alien/Gorge/BabblerPheromone.lua", "replace")
 ModLoader.SetupFileHook("lua/Weapons/Alien/DropStructureAbility.lua", "lua/CNBalance/Weapons/Alien/Gorge/DropStructureAbility.lua", "replace")
 ModLoader.SetupFileHook("lua/GUIGorgeBuildMenu.lua", "lua/CNBalance/Weapons/Alien/Gorge/GUIGorgeBuildMenu.lua", "replace")
 

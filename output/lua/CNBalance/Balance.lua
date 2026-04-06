@@ -9,7 +9,7 @@ kResourceTowerResourceInterval = 6
 kTeamResourceWithoutTower = 0.5
 kMaxEfficiencyTowers = 3
 kTeamResourceEachTower = 1
-kPlayerResEachTower = 0.125 kPlayerResDeductionAboveLimit = 0.0025
+kPlayerResEachTower = 0.125 kPlayerResDeductionAboveLimit = 0 --0.0025
 kSecondInitialInfantryPortalMinPlayerCount = 8
 
 --Pres reward for aggressive playing (too many farmers?)
@@ -56,7 +56,7 @@ kBountyCooldown = 20 kBountyClaimMultiplier = 2
 kMilitaryProtocolResearchCost = 0
 kMilitaryProtocolResearchTime = 12
 kMilitaryProtocolTResPerBountyClaim = 0.5
-kMilitaryProtocolResearchDurationMultiply = 1
+kMilitaryProtocolResearchDurationMultiply = 1.2
 kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKill above
     [kTechId.Drifter] = 1,
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.GorgeTunnel] = 2,
@@ -664,7 +664,7 @@ kBabblerCost = 0
 --Hatch
 kBabblerExplodeAmount = 6
 kBabblerEggHatchInterval = 3
-kBabblerEggHatchRadius = 22
+kBabblerEggHatchRadius = 27
 
 kDrifterHatchTime = 12
 kDrifterParasiteTime = 12
