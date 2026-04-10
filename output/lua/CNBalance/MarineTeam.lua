@@ -321,7 +321,12 @@ function MarineTeam:CollectTeamResources(teamRes,playerRes,rtActiveCount)
 end
 
 function MarineTeam:GetResearchTimeFactor()
-    return self:IsMilitaryProtocol() and kMilitaryProtocolResearchDurationMultiply or 1
+    if not self:IsMilitaryProtocol() then return 1 end
+    
+    local factor = 1
+    local extraPlayerCount = (GetPlayersAboveLimit(self:GetTeamNumber()))
+    factor = factor + extraPlayerCount * kMilitaryProtocolResearchDurationPerExtraPlayer
+    return factor
 end
 
 function MarineTeam:ShouldHandleManualAlert()            --He can handle it himself
