@@ -18,9 +18,13 @@ if Server then
         local _techID = self:GetTechId()
         local resRewardFraction = 1
         if selfIsPlayer and Shine then
-            local npEnabled, np = Shine:IsExtensionEnabled( "newcomerprotection" )
-            if npEnabled then
-                resRewardFraction = 1 - np:GetRefundPercent(self)
+            if self:GetIsVirtual() then
+                resRewardFraction = 0.5
+            else
+                local npEnabled, np = Shine:IsExtensionEnabled( "newcomerprotection" )
+                if npEnabled then
+                    resRewardFraction = 1 - np:GetRefundPercent(self)
+                end
             end
         end
         
