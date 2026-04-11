@@ -496,7 +496,7 @@ function NoPowerLightWorker:Run()
     local time = Shared.GetTime()
     local timePassed = time - timeOfChange
 
-    local scalar = math.Clamp((kOffTime - timePassed ) / kOffTime,0,1)
+    local scalar = Clamp((kOffTime - timePassed ) / kOffTime,0,1)
     local probeTint = Color(
             scalar,scalar,scalar,
             1)

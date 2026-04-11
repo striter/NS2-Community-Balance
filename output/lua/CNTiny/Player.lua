@@ -1,6 +1,4 @@
 
-Script.Load("lua/CNBooting/ModPanelActionFinderMixin.lua")
-
 Shared.LinkClassToMap("Player", Player.kMapName, {scale = "float (0.1 to 4 by 0.01)"}, true)
 
 Player.kScaleDeltaPerSecond = 0.1

@@ -129,7 +129,7 @@ if Locale.kTranslateMessage then
 
     Locale.kTranslateMessage["COMBATBUILDER"]="工程套件"
     Locale.kTranslateMessage["COMBATBUILDER_TOOLTIP"]="给予陆战队员基础建筑建造."
-    Locale.kTranslateMessage["COMBATBUILDER_BUYDESCRIPTION"]="给予基础建筑建造.\n*建造补给站以获取弹药.\n*建造机枪塔攻击范围内敌方单位."
+    Locale.kTranslateMessage["COMBATBUILDER_BUYDESCRIPTION"]="给予基础建筑建造.\n*建造补给站以获取弹药,投掷物与地雷.\n*建造机枪塔攻击范围内敌方单位."
 
     Locale.kTranslateMessage["WEAPON_CACHE"]="补给站"
     Locale.kTranslateMessage["WEAPON_CACHE_HINT"]="回复弹药与生命值"
@@ -146,6 +146,7 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["DUAL_RAILGUN_TOOLTIP"]="双臂都安装了 |磁轨炮| 的原型单兵机甲.\n*蓄力造成大量穿透伤害.\n*远距离对点打击.\n*对骨盾造成全额伤害."
 
     Locale.kTranslateMessage["BUYMENU_GROUPLABEL_GRENADES"]="投掷物"
+    Locale.kTranslateMessage["BUYMENU_GROUPLABEL_WEAPONCACHE"] = "补给站"
     Locale.kTranslateMessage["RESEARCH_GRENADES"]="投掷物升级"
     Locale.kTranslateMessage["GRENADES_TOOLTIP"]="+并解锁额外的手雷类型.\n*陆战队将更快的投掷手雷."
     Locale.kTranslateMessage["RESEARCH_GRENADES_TITLE"]="投掷物升级"
@@ -409,6 +410,7 @@ if Locale.kLocales then
     Locale.kLocales["DUAL_RAILGUN_TOOLTIP"]="Dual-weld | Railgun | Exosuit.\n*Deals burst damage after charge up."
     
     Locale.kLocales["BUYMENU_GROUPLABEL_GRENADES"]="Throwables"
+    Locale.kLocales["BUYMENU_GROUPLABEL_WEAPONCACHE"]="Supply Depot"
     Locale.kLocales["RESEARCH_GRENADES"]="Throwables Upgarde"
     Locale.kLocales["GRENADES_TOOLTIP"]="+Unlock new grenade types.\nMarines throw grenades faster."
     Locale.kLocales["RESEARCH_GRENADES_TITLE"]="Grenade Upgrade"

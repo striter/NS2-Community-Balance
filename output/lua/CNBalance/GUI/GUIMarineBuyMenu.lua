@@ -770,6 +770,8 @@ function GUIMarineBuyMenu:SetHostStructure(hostStructure)
 
     if self.hostStructure:isa("Armory") then
         self:CreateArmoryUI()
+    elseif self.hostStructure:isa("WeaponCache") then
+        self:CreateWeaponCacheUI()
     elseif self.hostStructure:isa("PrototypeLab") then
         self:CreatePrototypeLabUI()
     else
@@ -840,6 +842,54 @@ function GUIMarineBuyMenu:CreatePrototypeLabUI(isVeteran)
     groupLabel:SetTextAlignmentX(GUIItem.Align_Min)
     groupLabel:SetTextAlignmentY(GUIItem.Align_Min)
     groupLabel:SetText(Locale.ResolveString("BUYMENU_GROUPLABEL_SPECIAL"))
+    groupLabel:SetOptionFlag(GUIItem.CorrectScaling)
+    GUIMakeFontScale(groupLabel, "kAgencyFB", 24)
+
+    local rightSideStartPos = Vector(580, 38, 0)
+    self:_CreateRightSide(rightSideStartPos)
+end
+
+function GUIMarineBuyMenu:CreateWeaponCacheUI()
+
+    self.defaultTechId = kTechId.GasGrenade
+
+    self.background = self:CreateAnimatedGraphicItem()
+    self.background:SetTexture(self.kPrototypeLabBackgroundTexture)
+    self.background:SetSizeFromTexture()
+    self.background:SetIsScaling(false)
+    self.background:SetAnchor(GUIItem.Middle, GUIItem.Center)
+    self.background:SetHotSpot(Vector(0.5, 0.5, 0))
+    self.background:SetScale(self.customScaleVector)
+    self.background:SetOptionFlag(GUIItem.CorrectScaling)
+    self.background:SetLayer(kGUILayerMarineBuyMenu)
+
+    local buttonGroupX = 97
+    local buttonGroupY = 149
+
+    local buttonPositions = kWeaponGroupButtonPositions[self.kButtonGroupFrame_Labeled_x4]
+
+    local buttonGroup = self:CreateAnimatedGraphicItem()
+    buttonGroup:AddAsChildTo(self.background)
+    buttonGroup:SetIsScaling(false)
+    buttonGroup:SetPosition(Vector(buttonGroupX, buttonGroupY, 0))
+    buttonGroup:SetTexture(self.kButtonGroupFrame_Labeled_x4)
+    buttonGroup:SetSizeFromTexture()
+    buttonGroup:SetOptionFlag(GUIItem.CorrectScaling)
+    self:_InitializeWeaponGroup(buttonGroup, buttonPositions, {
+        kTechId.GasGrenade,
+        kTechId.ClusterGrenade,
+        kTechId.PulseGrenade,
+        kTechId.LayMines
+    })
+
+    local groupLabel = self:CreateAnimatedTextItem()
+    groupLabel:SetIsScaling(false)
+    groupLabel:AddAsChildTo(buttonGroup)
+    groupLabel:SetPosition(Vector(330, -1, 0))
+    groupLabel:SetAnchor(GUIItem.Left, GUIItem.Top)
+    groupLabel:SetTextAlignmentX(GUIItem.Align_Min)
+    groupLabel:SetTextAlignmentY(GUIItem.Align_Min)
+    groupLabel:SetText(Locale.ResolveString("BUYMENU_GROUPLABEL_WEAPONCACHE"))
     groupLabel:SetOptionFlag(GUIItem.CorrectScaling)
     GUIMakeFontScale(groupLabel, "kAgencyFB", 24)
 
@@ -1167,7 +1217,7 @@ function GUIMarineBuyMenu:_CreateRightSide(startPos,bigPicOffset)
     y = y + 85
     
     local bigPicturesTexture = self.kArmoryBigPicturesTexture
-    if self.hostStructure:isa("PrototypeLab") then
+    if self.hostStructure:isa("PrototypeLab") or self.hostStructure:isa("PrototypeLab") then
         bigPicturesTexture = self.kPrototypeLabBigPicturesTexture
     end
 
@@ -1208,7 +1258,7 @@ function GUIMarineBuyMenu:_CreateRightSide(startPos,bigPicOffset)
 
     local buttonGroupX = 97
     local buttonGroupY = 149 + 373 + 20
-    if self.hostStructure:isa("PrototypeLab") then
+    if self.hostStructure:isa("PrototypeLab") or self.hostStructure:isa("WeaponCache") then
 
         self.specialFrame:AddAsChildTo(self.background)
         self.specialFrame:SetPosition(Vector(buttonGroupX, buttonGroupY + 118, 0)) --magic
@@ -1232,7 +1282,7 @@ function GUIMarineBuyMenu:_CreateRightSide(startPos,bigPicOffset)
     local maxSpecials = 0
     if self.hostStructure:isa("Armory") then
         maxSpecials = 2
-    elseif self.hostStructure:isa("PrototypeLab") then
+    elseif self.hostStructure:isa("PrototypeLab") or self.hostStructure:isa("WeaponCache") then
         maxSpecials = 5
     end
 

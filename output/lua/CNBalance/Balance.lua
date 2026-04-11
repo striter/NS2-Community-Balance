@@ -86,7 +86,7 @@ kGrenadeTechResearchTime = 45   --45
 
 kMaxARCs = 6
 
-kMineCost = 18
+kMineCost = 10
 kMineDamage = 130
 kDropMineCost = 12
 kDropMineCooldown = 0
@@ -322,7 +322,7 @@ kCannonDropCost = 18
 
 kCannonDamage = 25
 kCannonAoeDamage = 80
-kCannonAoeRadius = 2
+kCannonAoeRadius = 2.5
 kCannonRateOfFire = 0.88
 kCannonClipSize = 6
 kCannonPointValue = 15

@@ -327,3 +327,35 @@ if Client then
         return memberLevel < memberLevelRequirement , memberLevelRequirement
     end
 end
+
+
+function GetIsCloseToMenuStructure(player)
+
+    local ptlabs = GetEntitiesForTeamWithinRange("PrototypeLab", player:GetTeamNumber(), player:GetOrigin(), PrototypeLab.kResupplyUseRange)
+    local armories = GetEntitiesForTeamWithinRange("Armory", player:GetTeamNumber(), player:GetOrigin(), Armory.kResupplyUseRange)
+    local weaponCaches = GetEntitiesForTeamWithinRange("WeaponCache", player:GetTeamNumber(), player:GetOrigin(), WeaponCache.kResupplyUseRange)
+    
+    return (ptlabs and #ptlabs > 0) or (armories and #armories > 0) or (weaponCaches and #weaponCaches > 0)
+
+end
+
+
+function GetPlayerCanUseEntity(player, target)
+
+    local useSuccessTable = { useSuccess = false }
+
+    if target.GetCanBeUsedNew then
+        useSuccessTable.useSuccess = true -- ... that dont seem right ... but theres alot of dependence on this... :T
+        target:GetCanBeUsedNew(player, useSuccessTable)
+    elseif target.GetCanBeUsed then
+        useSuccessTable.useSuccess = true -- ... that dont seem right ... but theres alot of dependence on this... :T
+        target:GetCanBeUsed(player, useSuccessTable)
+    end
+
+
+    --Print("GetPlayerCanUseEntity(%s, %s) returns %s", ToString(player), ToString(target), ToString(useSuccessTable.useSuccess))
+
+    -- really need to move this functionality into two mixin (when for user, one for useable)
+    return useSuccessTable.useSuccess or (target.GetCanAlwaysBeUsed and target:GetCanAlwaysBeUsed())
+
+end
