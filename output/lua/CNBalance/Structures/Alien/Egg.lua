@@ -1,3 +1,39 @@
+function Egg.BuildUpgradeStructureTable()
+    local kUpgrades = {}
+    local kStructures = {}
+
+    -- don't autoselect focus
+    local filter = {
+        [kTechId.Focus] = true,
+        [kTechId.Crush] = true,
+        [kTechId.Silence] = true,
+        [kTechId.Crush] = true,
+        [kTechId.Vampirism] = true,
+    }
+
+    local kUpgradeStructureTable = AlienTeam.GetUpgradeStructureTable()
+    for i = 1, #kUpgradeStructureTable do
+        local entry = kUpgradeStructureTable[i]
+        local techId = entry.techId
+        table.insert(kStructures, techId)
+
+        local upgradeTable = {}
+        local upgrades = entry.upgrades
+        for i = 1, #upgrades do
+            local upgrade = upgrades[i]
+            kUpgrades[upgrade] = techId
+            if not filter[upgrade] then
+                table.insert(upgradeTable, upgrade)
+            end
+        end
+
+        kUpgrades[techId] = upgradeTable
+
+    end
+
+    Egg.kUpgrades = kUpgrades
+    Egg.kStructures = kStructures
+end
 
 -- Grab player out of respawn queue unless player passed in (for test framework)
 function Egg:SpawnPlayer(player)

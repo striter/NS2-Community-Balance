@@ -1084,9 +1084,9 @@ Very quick HACK to add role-limiting for Aliens
 --HACK for Aliens ONLY atm ...but should add one for Marines, maybe?
 kAlienTeamRoleLimits = {}   --TODO, turn to %, based on 12p games, but scale up to Xp
 kAlienTeamRoleLimits[kTechId.Gorge] = 2
-kAlienTeamRoleLimits[kTechId.Lerk] = 4
-kAlienTeamRoleLimits[kTechId.Fade] = 4
-kAlienTeamRoleLimits[kTechId.Onos] = 4 --orginal 3
+kAlienTeamRoleLimits[kTechId.Lerk] = 2
+kAlienTeamRoleLimits[kTechId.Fade] = 2
+kAlienTeamRoleLimits[kTechId.Onos] = 3
 function TeamBrain:GetIsRoleAllowed(newRole)
     --[[
     if GetWarmupActive() then
@@ -1112,6 +1112,10 @@ function TeamBrain:GetRoleCount(role)
     return self.teamRoles[role] or 0
 end
 
+function TeamBrain:ReportBotRole(role)
+    self.teamRoles[role] = self.teamRoles[role] ~= nil and self.teamRoles[role] + 1 or 1
+    Print("Role " .. EnumToString(kTechId, role) .. " reported. Count: " .. self.teamRoles[role])
+end
 
 ------------------------------------------
 --  Events from bots

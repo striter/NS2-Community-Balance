@@ -26,7 +26,6 @@ Vokex.kMapName = "vokex"
 Vokex.kModelName = PrecacheAsset("models/alien/fade/vokex.model")
 local kVokexAnimationGraph = PrecacheAsset("models/alien/fade/fade.animation_graph")
 local kViewModelName = PrecacheAsset("models/alien/fade/fade_albino_view.model")
-local kViewAnimationGraphName = PrecacheAsset("models/alien/vokex/vokex_view.model")
 Vokex.kBountyThreshold = kBountyClaimMinFade
 
 PrecacheAsset("models/alien/fade/fade.surface_shader")
@@ -55,6 +54,7 @@ local kShadowStepSpeed = 25 --40
 local kShadowStepSpeedBonusPerCelerity = 0.66
 Vokex.kShadowStepDuration = 0.2
 local kShadowStepCooldown = 0.4
+local kShadowStepAdrenalineCooldown = 0.52
 
 local kMaxSpeed = 7.2
 
@@ -275,10 +275,11 @@ function Vokex:GetViewModelName()
 end
 
 function Vokex:OnJump()
-
     if not self:GetIsOnGround() then
         self.hasDoubleJumped = true
         self:TriggerEffects("blink_out", {effecthostcoords = Coords.GetTranslation(self:GetOrigin())})
+    else
+        self:TriggerEffects("jump", {surface = self:GetMaterialBelowPlayer()})
     end
 end
 
@@ -396,7 +397,8 @@ function Vokex:GetJumpHeight()
 end
 
 function Vokex:GetHasShadowStepCooldown()
-    return self.timeShadowStep + kShadowStepCooldown > Shared.GetTime()
+    local cooldown =  self.hasAdrenalineUpgrade and kShadowStepAdrenalineCooldown or kShadowStepCooldown
+    return self.timeShadowStep + cooldown > Shared.GetTime()
 end
 
 function Vokex:GetMovementSpecialTechId()
@@ -624,6 +626,10 @@ function Vokex:OnUpdateAnimationInput(modelMixin)
     end
     modelMixin:SetAnimationInput("attack_speed_view", attackSpeed)
 
+end
+
+function Vokex:GetCondenseScalePerLevel()
+    return 0.06
 end
 
 Shared.LinkClassToMap("Vokex", Vokex.kMapName, networkVars, true)

@@ -24,6 +24,7 @@ kMaxTotalTeamResources = 100000
 kMaxTotalPersonalResources = 100000
 local networkVars =
 {
+    deadlockTime = "integer",
     teamResources =  "float (0 to " .. kMaxTeamResources .. " by 0.1 [ 4 ])",
     totalTeamResources = "float (0 to " .. kMaxTotalTeamResources .. " by 1 [ 1 ])",
     personalResources = "float (0 to " .. kMaxTotalPersonalResources .. " by 0.1) [ 4 ]",
@@ -196,6 +197,7 @@ if Server then
 
     function TeamInfo:Reset()
 
+        self.deadlockTime = 0
         self.teamResources = 0
         self.personalResources = 0
         self.numResourceTowers = 0
@@ -291,6 +293,7 @@ function TeamInfo:UpdateInfo()
     if self.team then
 
         self:SetTeamNumber(self.team:GetTeamNumber())
+        self.deadlockTime = self.team.deadlockTime
         self.teamResources = self.team:GetTeamResources()
         self.playerCount = Clamp(self.team:GetNumPlayers(), 0, 31)
         self.totalTeamResources = self.team:GetTotalTeamResources()

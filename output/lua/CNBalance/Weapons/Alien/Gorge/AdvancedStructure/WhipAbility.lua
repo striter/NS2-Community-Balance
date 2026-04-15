@@ -9,6 +9,8 @@ end
 function WhipAbility:OverrideInfestationCheck(_trace)
     return true
 end
-function WhipAbility:GetStructurePlaceSide()
-    return AdvancedStructureAbility.kStructurePlaceSide.All
+function WhipAbility:GetStructurePlaceSide(player)
+    return GetHasTech(player,kTechId.OriginForm)
+            and AdvancedStructureAbility.kStructurePlaceSide.All
+            or AdvancedStructureAbility.kStructurePlaceSide.Upward
 end

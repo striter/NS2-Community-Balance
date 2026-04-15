@@ -9,6 +9,7 @@ local kSkulkPressureEnemyThreshold = 0.7
 local kSkulkEarlyRetreatThreshold = 2.0
 
 local kSkulkDodgeOscillation = 2.8
+local kSkulkBrainNearbyEnemyThreshold = 16
 
 local kSkulkPheromoneWeights = {
     [kTechId.ThreatMarker] = 5.0,
@@ -252,29 +253,20 @@ end
 
 local function PerformAttackEntity( eyePos, bestTarget, lastSeenPos, bot, brain, move )
     PROFILE("SkulkBrain - PerformAttackEntity")
-
     assert( bestTarget )
-    local player = bot:GetPlayer()
 
-    local sighted = false
-    if not HasMixin(bestTarget, "LOS") then
-        -- Print("attack target has no GetIsSighted: %s", bestTarget:GetClassName() )
-        sighted = true
-    else
-        sighted = bestTarget:GetIsSighted()
-    end
-    
+    local player = bot:GetPlayer()
+    local sighted = not HasMixin(bestTarget, "LOS") or bestTarget:GetIsSighted()
     local aimPos = sighted and GetBestAimPoint( bestTarget ) or (lastSeenPos + Vector(0,0.5,0))
+
     local doFire = false
     local distance = GetDistanceToTouch(eyePos, bestTarget)
     local time = Shared.GetTime()
     local isUsingTargetAsCover = false
     local coverPos
-    
+
     local vel = bestTarget.GetVelocity and bestTarget:GetVelocity()
     local aimPosPlusVel = aimPos
-
-    -- Only use target's velocity if target is moving at speed and not backpedaling
     if vel and vel:GetLength() > 4.0 then
         aimPosPlusVel = aimPos + vel * math.min(distance,1) / math.min(player:GetMaxSpeed(),5) * 3
     end
@@ -286,59 +278,80 @@ local function PerformAttackEntity( eyePos, bestTarget, lastSeenPos, bot, brain,
     end
 
     local skulkBiteRange = 1.4
-    
     if distance < skulkBiteRange then
         doFire = true
-        --bot:SendTeamMessage("Enemy contact!", 60)
     end
-    
-    local hasMoved = false
-    
+
+    local numFriendlies = brain:GetSenses():Get("nearbyFriendlies")
+    local numEnemies = brain:GetSenses():Get("nearbyEnemies")
+    local eHP = player:GetHealthScalar()
+    local waitTime = 3 -- Wartezeit auf 3 Sekunden reduzieren
+    local currentTime = Shared.GetTime()
+
+    if brain.lastMoveTime == nil then
+        brain.lastMoveTime = currentTime
+    end
+
+    local function setBotToCover()
+        if not sighted and not bot:GetBotCanSeeTarget(bestTarget) and isDodgeable and not player:GetIsUnderFire() then
+            bot:GetMotion():SetDesiredMoveTarget(nil)
+            bot:GetMotion():SetDesiredViewTarget(aimPos)
+            brain.lastMoveTime = currentTime
+        end
+    end
+
+    local function performAttackMove()
+        if (numFriendlies >= 2 or numEnemies <= 1) and (sighted and bot:GetBotCanSeeTarget(bestTarget)
+            or not isDodgeable or player:GetIsUnderFire() or player:GetIsDetected()) then
+            PerformMove(eyePos, aimPos, bot, brain, move)
+            bot:GetMotion():SetDesiredViewTarget(aimPos)
+            brain.lastMoveTime = currentTime
+        end
+    end
+
+    if currentTime - brain.lastMoveTime > waitTime then
+        PerformMove(eyePos, aimPosPlusVel, bot, brain, move)
+        brain.lastMoveTime = currentTime
+    end
+
+    local nearestThreat = bot.brain:GetSenses():Get("nearestThreat")
+    local nearestThreatDistance = nearestThreat.distance
+    if nearestThreatDistance and nearestThreatDistance <= 8 then
+        performAttackMove()
+    end
+
     if doFire then
-        
         player:SetActiveWeapon(BiteLeap.kMapName)
         if isDodgeable then
-             -- Attacking a player or babbler
-            --local viewTarget = aimPos + Vector( math.random(), math.random(), math.random() ) * 0.3
-
             local xenoWeapon = player:GetWeapon(XenocideLeap.kMapName)
-
             local doXeno = xenoWeapon ~= nil
             if doXeno then
                 if not xenoWeapon:GetIsXenociding() then
                     doXeno = brain:GetSenses():Get("hasXenoTargets")
                 end
             end
-
             if doXeno then
                 player:SetActiveWeapon(XenocideLeap.kMapName)
-                move.commands = AddMoveCommand( move.commands, Move.PrimaryAttack )
+                move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
             elseif bot.aim then
                 if bot.aim:UpdateAim(bestTarget, aimPos, kBotAccWeaponGroup.BiteLeap) then
-					move.commands = AddMoveCommand( move.commands, Move.PrimaryAttack )
-				end
-			else
-				move.commands = AddMoveCommand( move.commands, Move.PrimaryAttack )
+                    move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
+                end
+            else
+                move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
             end
-            
         else
-            -- Attacking a structure
-            if distance < 0.9 then  --TODO Read Skulk bite-range from balance data
-
-                bot:GetMotion():SetDesiredViewTarget( aimPos )
-
-                -- Take cover behind our structure target if necessary
+            if distance < 0.9 then
+                bot:GetMotion():SetDesiredViewTarget(aimPos)
                 local nearestThreat = brain:GetSenses():Get("nearestThreat")
-
                 if (nearestThreat.distance and nearestThreat.distance < 25) or player:GetIsUnderFire() then
                     coverPos = GetBestCoverPosition(bot, player, bestTarget)
                     isUsingTargetAsCover = coverPos ~= nil
-                else -- Otherwise just stay still
+                else
                     bot:GetMotion():SetDesiredMoveTarget(nil)
                 end
-
             end
-			move.commands = AddMoveCommand( move.commands, Move.PrimaryAttack )
+            move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
         end
     else
         if hasClearShot and bot.aim then
@@ -348,86 +361,69 @@ local function PerformAttackEntity( eyePos, bestTarget, lastSeenPos, bot, brain,
             end
             if player:GetEnergy() > 60 and bot.lastSeenEnemy + 1 < Shared.GetTime() then
                 player:SetActiveWeapon(Parasite.kMapName, true)
-                move.commands = AddMoveCommand( move.commands, Move.PrimaryAttack )
+                move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
             end
-        else -- sneaky
+        else
             bot.lastSeenEnemy = nil
-            local isNotDetected =  not (player:GetIsDetected() or player:GetIsSighted())
-            if isNotDetected and bot.sneakyAbility and distance < 20.0 and distance > 4.0 and isDodgeable and
-                (not bot.lastFoughtEnemy or bot.lastFoughtEnemy + 10 < time) and not sighted then
-                
-                --bot:SendTeamMessage("I can hear enemys are near!", 60) --fï¿½r mehr Spielgefï¿½hl/Spaï¿½
-                move.commands = AddMoveCommand( move.commands, Move.MovementModifier )
+            local isNotDetected = not (player:GetIsDetected() or player:GetIsSighted())
+            if isNotDetected and bot.sneakyAbility and distance < 20.0 and distance > 4.0 and isDodgeable
+                and (not bot.lastFoughtEnemy or bot.lastFoughtEnemy + 10 < time) and not sighted then
+                move.commands = AddMoveCommand(move.commands, Move.MovementModifier)
             end
-            
-            
-            PerformMove( eyePos, aimPos, bot, brain, move )
-            hasMoved = true --???
+            PerformMove(eyePos, aimPos, bot, brain, move)
         end
     end
-    
-    
-    -- move at a player until we see them, then start pretending we're human and dodging
+
     if not hasClearShot or not bot:GetMotion().desiredViewTarget then
         PerformMove(eyePos, aimPos, bot, brain, move)
     elseif isDodgeable then
-
-        -- Dirty hack: add "skulk dodging" if we're in LOS but not within bite range
         local sin = math.sin(Shared.GetTime() * kSkulkDodgeOscillation)
         local dir = (aimPosPlusVel - eyePos):GetUnit():CrossProduct(Vector(0, 1, 0))
         dir:Normalize()
         dir:Scale(sin * Clamp(distance / 2.5, 3.0, 7.0))
-
-        -- Don't use the offset point if it is not on the same "connected pathing" as the target
-        -- use a distance heuristic, if the offset is closer than the player's dist to pathing then assume it's on a different chunk of pathing
-        -- fixes issues with trying to path "below" overhangs
         local playerPoint = Pathing.GetClosestPoint(aimPos) - aimPos
         local offsetPoint = Pathing.GetClosestPoint(aimPosPlusVel + dir) - aimPos
-
         if distance > 5 and (playerPoint:GetLength() * 1.5) < offsetPoint:GetLength() then
-
             PerformMove(eyePos, aimPosPlusVel + dir, bot, brain, move)
         else
-        PerformMove(eyePos, aimPosPlusVel, bot, brain, move)
+            PerformMove(eyePos, aimPosPlusVel, bot, brain, move)
         end
-
     elseif isUsingTargetAsCover then
         PerformMove(eyePos, coverPos, bot, brain, move)
     end
-    
-        if bot.timeOfJump ~= nil and Shared.GetTime() - bot.timeOfJump < 0.5 then
+
+    if bot.timeOfJump ~= nil and Shared.GetTime() - bot.timeOfJump < 1.0 then
         if bot.jumpOffset == nil then
-            local botToTarget = GetNormalizedVectorXZ(marinePos - eyePos)
+            local botToTarget = GetNormalizedVectorXZ(aimPos - eyePos)
             local sideVector = botToTarget:CrossProduct(Vector(0, 1, 0))
-            
-            -- Zufï¿½llige Auswahl des Seitenvektors
             if math.random() < 0.5 then
-                bot.jumpOffset = botToTarget + sideVector
+                bot.jumpOffset = sideVector
             else
-                bot.jumpOffset = botToTarget - sideVector
+                bot.jumpOffset = -sideVector
             end
-            
-            -- Zufï¿½llige Verzï¿½gerung vor der nï¿½chsten Aktion
-            bot.nextActionTime = Shared.GetTime() + math.random() * 0.5
-            
-            -- Setzen des gewï¿½nschten Blickziels des Bots
             bot:GetMotion():SetDesiredViewTarget(bestTarget:GetEngagementPoint())
         end
-        
-        -- Zufï¿½llige Bewegungsrichtung nach dem Sprung
-        if bot.nextActionTime ~= nil and Shared.GetTime() >= bot.nextActionTime then
+        if bot.nextActionTime == nil or Shared.GetTime() - bot.nextActionTime > 1.0 then
+            bot.nextActionTime = Shared.GetTime() + 1.0
             local randomDirection = Vector(math.random() - 0.5, 0, math.random() - 0.5):GetUnit()
             bot:GetMotion():SetDesiredMoveDirection(randomDirection)
         end
     end
+
+    -- Adding new logic to ensure aggressive behavior with allies
+    if numFriendlies >= 2 then
+        performAttackMove()
+    elseif not sighted and not bot:GetBotCanSeeTarget(bestTarget) then
+        setBotToCover()
+    end
 end
-    
+
     --[[Testkativierung
     if bot.timeOfJump ~= nil and Shared.GetTime() - bot.timeOfJump < 0.5 then
         
         if bot.jumpOffset == nil then
             
-            local botToTarget = GetNormalizedVectorXZ(marinePos - eyePos)
+            local botToTarget = GetNormalizedVectorXZ(aimPos - eyePos)
             local sideVector = botToTarget:CrossProduct(Vector(0, 1, 0))                
             if math.random() < 0.5 then
                 bot.jumpOffset = botToTarget + sideVector
@@ -442,27 +438,53 @@ end
     end    
     --]]
     
-local function PerformAttack( eyePos, mem, bot, brain, move )
-
-    assert( mem )
+local function PerformAttack(eyePos, mem, bot, brain, move)
+    assert(mem)
 
     local target = Shared.GetEntity(mem.entId)
+    local player = bot:GetPlayer()
+    local client = player.GetClient and player:GetClient()
+    local isSelfBot = client and client:GetIsVirtual()
 
     if target ~= nil then
 
-        if not target:isa("Player") or GetDistanceToTouch(  eyePos, target ) < 15 then
+        if not target:isa("Player") or GetDistanceToTouch(eyePos, target) < 15 then
             brain.teamBrain:UnassignBot(bot)
             brain.teamBrain:AssignBotToMemory(bot, mem)
-             --local chatMsg =  bot:SendTeamMessage( "Leap and bite all mankind! " .. target:GetMapName() .. " in " .. target:GetLocationName() )
-            --bot:SendTeamMessage(chatMsg, 60)
+
+            --------------------------------------------------------------------
+            -- Gemeinsames Alien-Memo (kein Spam, alle Aliens teilen es)
+            --------------------------------------------------------------------
+            if isSelfBot and target:GetTeamNumber() ~= bot:GetTeamNumber() then
+
+                local location = target:GetLocationName()
+                local now = Shared.GetTime()
+
+                -- Letzte Meldung für diese Location (geteilt von ALLEN Aliens)
+                local lastReport = gLastAlienReports[location] or 0
+
+                -- Nur melden, wenn seit 60 Sekunden nichts kam
+                if now - lastReport > 60 then
+
+                    local chatMsg = bot:SendTeamMessage(
+                        "Leap and bite all mankind! " ..
+                        target:GetMapName() .. " in " .. location
+                    )
+
+                    bot:SendTeamMessage(chatMsg, 60)
+
+                    -- Zeitstempel aktualisieren
+                    gLastAlienReports[location] = now
+                end
+            end
+            --------------------------------------------------------------------
         end
-        
-        PerformAttackEntity( eyePos, target, mem.lastSeenPos, bot, brain, move )
+
+        PerformAttackEntity(eyePos, target, mem.lastSeenPos, bot, brain, move)
 
     else
         assert(false)
     end
-
 end
 
 ------------------------------------------
@@ -752,7 +774,7 @@ kSkulkBrainObjectives =
         --     healthFraction = healthFraction / 4.0
         -- end
 
-        if not hive or healthFraction > 0.4 or GetGameMinutesPassed() > kSkulkEarlyRetreatThreshold then
+        if not hive or healthFraction > 0.4 then -- or GetGameMinutesPassed() > kSkulkEarlyRetreatThreshold then
             return kNilAction
         end
 
@@ -937,6 +959,27 @@ local kExecAttackAction = function(move, bot, brain, skulk, action)
     PerformAttack(skulk:GetEyePos(), action.bestMem, bot, brain, move)
 end
 
+local kExecDestroyExosuit = function(move, bot, brain, skulk, action)
+    PROFILE("SkulkBrain_Data:destroyExosuit")
+
+    local exo = action.exo.entity
+    assert(exo ~= nil)
+
+    local aimPos = exo:GetOrigin() -- Get the position of the Exo
+    local distanceToExo = (skulk:GetOrigin() - aimPos):GetLength()
+
+    -- Wenn die Entfernung zum Exo größer als 1.4 ist, bewege dich zum Exo
+    if distanceToExo > 1.4 then
+        bot:GetMotion():SetDesiredMoveTarget(aimPos)
+    end
+
+    -- Zielen und angreifen, wenn der Exo noch lebt und der Skulk in Reichweite ist
+    if  distanceToExo <= 1.4 then
+        bot:GetMotion():SetDesiredViewTarget(aimPos) -- Aim at the Exo
+        move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
+    end
+end
+
 ------------------------------------------
 --  Each want function should return the fuzzy weight,
 -- along with a closure to perform the action
@@ -972,6 +1015,36 @@ kSkulkBrainActions =
         during the early game, peak->parasite->duck/retreat, sort of thing. Otherwise, skulk bots will just be
         target practice for any Marine players.
     --]]
+    
+            function(bot, brain, skulk)
+        PROFILE("SkulkBrain_Data:destroyExosuit")
+        -- Log("SkulkBrain - destroyExosuit")
+
+        local name = "destroyExosuit"
+        local sdb = brain:GetSenses()
+        local weight = 0
+
+        local exo = sdb:Get("destroyExosuit")
+
+        --[[ Don't build structures if we've been given an order or we're "on a mission"
+        if HasHighPriorityTask(bot, brain) then
+            return kNilAction
+        end--]]
+
+        if exo.entity then
+            weight = weight + 1
+        end
+
+        return 
+        {
+            name = name,
+            weight = weight,
+            fastUpdate = true,
+            exo = exo,
+            perform = kExecDestroyExosuit
+        }
+
+    end, -- DESTROY EXOSUIT
 
     ------------------------------------------
     -- Attack
@@ -1036,6 +1109,69 @@ function CreateSkulkBrainSenses()
 
     local s = BrainSenses()
     s:Initialize()
+    
+        s:Add("destroyExosuit", function(db, skulk)
+
+            local skulkPos = skulk:GetOrigin()
+            local exos = GetEntitiesWithinRange("Exosuit", skulkPos, 25)
+
+            local dist, exo = GetMinTableEntry( exos, function(exo)
+                if exo:GetIsSighted() then
+                    return GetBotWalkDistance(skulk, exo)
+                end
+                return nil
+                end)
+
+            return {entity = exo, distance = dist}
+            end)
+    
+    s:Add("nearbyFriendlies",
+        function(db, skulk)
+            local teamBrain = GetTeamBrain(skulk:GetTeamNumber())
+            local roomMemories = teamBrain:GetMemoriesAtLocation(skulk:GetLocationName(), skulk:GetTeamNumber())
+
+            local numFriendlies = 0
+            local numEnemies = 0
+
+            for _, mem in ipairs(roomMemories) do
+                if mem.btype == kMinimapBlipType.Lerk
+                    or mem.btype == kMinimapBlipType.Skulk
+                    or mem.btype == kMinimapBlipType.Fade
+                    or mem.btype == kMinimapBlipType.Onos
+                then
+                    numFriendlies = numFriendlies + 1
+                end
+            end
+
+            return numFriendlies
+        end)
+              
+s:Add("nearbyEnemies",
+    function(db, skulk)
+        local teamBrain = GetTeamBrain(skulk:GetTeamNumber())
+        local enemyTeam = GetEnemyTeamNumber(skulk:GetTeamNumber())
+        local skulkPos = skulk:GetOrigin()
+        local numEnemies = 0
+        local bestMem = nil
+
+        for _, mem in teamBrain:IterMemoriesNearLocation(skulk:GetLocationName(), enemyTeam) do
+            local isActiveThreat = mem.btype == kMinimapBlipType.Marine
+                or mem.btype == kMinimapBlipType.JetpackMarine
+                or mem.btype == kMinimapBlipType.Exo
+                or mem.btype == kMinimapBlipType.Sentry
+
+                if isActiveThreat then
+                local dist = skulkPos:GetDistance(mem.lastSeenPos)
+
+                if dist <= kSkulkBrainNearbyEnemyThreshold then
+                    numEnemies = numEnemies + 1
+                end
+            end
+        end
+
+        return numEnemies
+    end)
+
 
     s:Add("allThreats", function(db, skulk)
             local team = skulk:GetTeamNumber()

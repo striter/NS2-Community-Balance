@@ -72,6 +72,7 @@ function PlayingTeam:Update()
     self:UpdateTechTree()
 
     self:UpdateVotes()
+    
 
     local gameStarted = GetGamerules():GetGameStarted()
     local warmupActive = GetWarmupActive()
@@ -85,19 +86,18 @@ function PlayingTeam:Update()
 
     end
 
+    if gameStarted then
+        self:UpdateDeadlock()
+    end
 end
 
-function PlayingTeam:OnTeamKill(techID, _fraction, _bountyScore)
-    local tResReward = kTechDataTeamResOnKill[techID]
+function PlayingTeam:OnTeamKill(_target,_doer, _techId, _fraction)
+    self:OnDeadlockExtend(_techId)
+    local tResReward = kTechDataTeamResOnKill[_techId]
     if tResReward then
         self:AddTeamResources(tResReward * _fraction,true)      --Treat this as income
     end
-    local pResReward = 0
-    if _bountyScore > 0 then
-        local pResClaimPerBounty = (self:GetTeamType() == kAlienTeamType and kPResPerBountyClaimAsAlien or kPResPerBountyClaimAsMarine)
-        pResReward = _bountyScore * pResClaimPerBounty
-    end
-    return pResReward
+    return 0
 end
 
 function PlayingTeam:AddTeamResources(amount, isIncome)
@@ -231,7 +231,52 @@ local function extGetIsResearchRelevant(techId)
 end
 
 function PlayingTeam:OnGameStateChanged(_state)
+    if _state == kGameState.Started then
+        self.deadlockTime = Shared.GetTime() + (NS2Gamerules.kBalanceConfig.deadlockInitialTime or 99999)
+        self.deadlockDamageInterval = 0
+        self.deadlockBroadcastInterval = 0
+    end
+end
+
+function PlayingTeam:OnDeadlockExtend(techID)
+    local gameStarted = GetGamerules():GetGameStarted()
+    if not gameStarted then return end
     
+    local extendTime = kDeadlockTimeExtend[techID]
+    if not extendTime then return end
+
+    local now = Shared.GetTime()
+    if now + extendTime > self.deadlockTime then
+        self.deadlockTime = self.deadlockTime + extendTime
+    end
+end
+
+function PlayingTeam:UpdateDeadlock()
+    local now = Shared.GetTime()
+    if now > self.deadlockTime then
+        local deadlockTimeElapsed = now - self.deadlockTime
+        local multiplier = math.pow(2,math.floor(deadlockTimeElapsed / 60) )
+        local kDamagePercentage = 0.005 * multiplier
+        if now > self.deadlockDamageInterval then
+            self.deadlockDamageInterval = now + 5
+            for _, target in ipairs(GetEntitiesWithMixinForTeam("Construct", self:GetTeamNumber())) do
+                if not target.kIgnoreDeadlock and target.TakeDamage then
+                    if not target.CanTakeDamage or target:CanTakeDamage() then
+                        local maxHealth = target:GetMaxHealth()
+                        local maxArmor = target:GetMaxArmor()
+                        local damage = (maxHealth + maxArmor * kHealthPointsPerArmor)
+                        target:TakeDamage(damage, nil, nil, nil, nil, maxArmor * kDamagePercentage, maxHealth * kDamagePercentage, kDamageType.Normal, true)
+                    end
+                end
+            end
+        end
+
+        if now > self.deadlockBroadcastInterval then
+            self.deadlockBroadcastInterval = now + 60
+            SendTeamMessage(self, kTeamMessageTypes.DeadlockActivated)
+            self:PlayPrivateTeamSound(self.kDeadlockAlert)
+        end
+    end
 end
 
 debug.setupvaluex(PlayingTeam.OnResearchComplete, "GetIsResearchRelevant", extGetIsResearchRelevant)

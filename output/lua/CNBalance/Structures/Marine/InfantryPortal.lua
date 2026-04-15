@@ -251,8 +251,6 @@ end
 
 local function InfantryPortalUpdate(self)
 
-    self:FillQueueIfFree()
-    
     if GetIsUnitActive(self) then
         
         local remainingSpawnTime = self:GetSpawnTime()
@@ -355,44 +353,6 @@ end
 
 function InfantryPortal:GetRequiresPower()
     return true
-end
-
-local function QueueWaitingPlayer(self)
-
-    if self:GetIsAlive() and self.queuedPlayerId == Entity.invalidId then
-
-        -- Remove player from team spawn queue and add here
-        local team = self:GetTeam()
-        local playerToSpawn = team:GetOldestQueuedPlayer()
-
-        if playerToSpawn ~= nil then
-            
-            playerToSpawn:SetIsRespawning(true)
-            team:RemovePlayerFromRespawnQueue(playerToSpawn)
-            self.queuedPlayerId = playerToSpawn:GetId()
-            if HasMixin(playerToSpawn, "MarineVariant") then
-                self.queuedPlayerModel = playerToSpawn:GetVariantModel()
-            end
-            self.queuedPlayerStartTime = Shared.GetTime()
-
-            self:StartSpinning()
-            
-            SendPlayersMessage({ playerToSpawn }, kTeamMessageTypes.Spawning)
-            
-            if Server then
-                
-                if playerToSpawn.SetSpectatorMode then
-                    playerToSpawn:SetSpectatorMode(kSpectatorMode.Following)
-                end
-                
-                playerToSpawn:SetFollowTarget(self)
-
-            end
-            
-        end
-        
-    end
-
 end
 
 function InfantryPortal:GetReceivesStructuralDamage()
@@ -521,12 +481,41 @@ end
 
 if Server then
 
-    function InfantryPortal:FillQueueIfFree()
+    function InfantryPortal:GetIsRespawning()
+        return self.queuedPlayerId ~= Entity.invalidId
+    end
+    
+    function InfantryPortal:SetQueuedPlayer(playerToSpawn)
 
-        if not GetWarmupActive() and GetIsUnitActive(self) then
-        
-            if self.queuedPlayerId == Entity.invalidId then
-                QueueWaitingPlayer(self)
+        assert(self.queuedPlayerId == Entity.invalidId)
+        if GetIsUnitActive(self) then
+
+            -- Remove player from team spawn queue and add here
+            local team = self:GetTeam()
+            if playerToSpawn ~= nil then
+    
+                playerToSpawn:SetIsRespawning(true)
+                team:RemovePlayerFromRespawnQueue(playerToSpawn)
+                self.queuedPlayerId = playerToSpawn:GetId()
+                if HasMixin(playerToSpawn, "MarineVariant") then
+                    self.queuedPlayerModel = playerToSpawn:GetVariantModel()
+                end
+                self.queuedPlayerStartTime = Shared.GetTime()
+    
+                self:StartSpinning()
+    
+                SendPlayersMessage({ playerToSpawn }, kTeamMessageTypes.Spawning)
+    
+                if Server then
+    
+                    if playerToSpawn.SetSpectatorMode then
+                        playerToSpawn:SetSpectatorMode(kSpectatorMode.Following)
+                    end
+    
+                    playerToSpawn:SetFollowTarget(self)
+    
+                end
+    
             end
             
         end

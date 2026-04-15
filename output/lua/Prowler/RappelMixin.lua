@@ -86,22 +86,15 @@ function RappelMixin:PerformSecondaryAttack(player)
         if trace.fraction < 1 then
             local hitTarget = trace.entity
             local direction = GetNormalizedVector(trace.endPoint - startPoint)
-            local impactPoint = trace.endPoint - direction * kHitEffectOffset
+            --local impactPoint = trace.endPoint - direction * kHitEffectOffset
 
-            if hitTarget and HasMixin(hitTarget, "Team")  then
-                if hitTarget:GetTeamNumber() ~= self:GetTeamNumber() then
-                    self:DoDamage(kRappelDamage, hitTarget, impactPoint, direction, trace.surface, true, true)
-                end
-
-                if hitTarget:isa("Player") then -- or hitTarget:isa("Exo") then
-                    local reelDirection =  player:GetOrigin() - hitTarget:GetOrigin()
-                    reelDirection:Normalize()
-                    --local reelUpForce = 1.5
-                    ApplyPushback(hitTarget,0.2,reelDirection * kRappelReelInitialSpeed + Vector(0, 1, 0))
-                end
-            else
-                self:DoDamage(kRappelDamage, nil, impactPoint, direction, trace.surface, true, true)
-            end
+            --if hitTarget and HasMixin(hitTarget, "Team")  then
+            --    if hitTarget:GetTeamNumber() ~= self:GetTeamNumber() then
+            --        self:DoDamage(kRappelDamage, hitTarget, impactPoint, direction, trace.surface, true, true)
+            --    end
+            --else
+            --    self:DoDamage(kRappelDamage, nil, impactPoint, direction, trace.surface, true, true)
+            --end
 
             self.rappelling = true
             player:DeductAbilityEnergy(kRappelEnergyCost)

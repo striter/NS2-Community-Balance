@@ -100,6 +100,59 @@ if Server then
         
         return result
     end
+
+
+    local function GetHostSupportsTechId(forPlayer, host, techId)
+
+        if Shared.GetCheatsEnabled() then
+            return true
+        end
+
+        local techFound = false
+
+        if host.GetItemList then
+
+            for _, supportedTechId in ipairs(host:GetItemList(forPlayer)) do
+
+                if supportedTechId == techId then
+
+                    techFound = true
+                    break
+
+                end
+
+            end
+
+        end
+
+        return techFound
+
+    end
+
+    function GetHostStructureFor(entity, techId)
+
+        local hostStructures = {}
+        table.copy(GetEntitiesForTeamWithinRange("Armory", entity:GetTeamNumber(), entity:GetOrigin(), Armory.kResupplyUseRange), hostStructures, true)
+        table.copy(GetEntitiesForTeamWithinRange("PrototypeLab", entity:GetTeamNumber(), entity:GetOrigin(), PrototypeLab.kResupplyUseRange), hostStructures, true)
+        table.copy(GetEntitiesForTeamWithinRange("WeaponCache", entity:GetTeamNumber(), entity:GetOrigin(), WeaponCache.kResupplyUseRange), hostStructures, true)
+
+        if table.icount(hostStructures) > 0 then
+
+            for _, host in ipairs(hostStructures) do
+
+                -- check at first if the structure is hostign the techId:
+                if GetHostSupportsTechId(entity,host, techId) then
+                    return host
+                end
+
+            end
+
+        end
+
+        return nil
+
+    end
+
 end
 
 if Server then

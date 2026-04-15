@@ -20,6 +20,7 @@ kTechIdToMaterialOffset[kTechId.ExplosiveSupply] = 214
 kTechIdToMaterialOffset[kTechId.ExplosiveStation] = 214
 kTechIdToMaterialOffset[kTechId.MinesUpgrade] = 194
 kTechIdToMaterialOffset[kTechId.MineDeploy] = 221
+kTechIdToMaterialOffset[kTechId.ClusterFlame] = 224
 
 kTechIdToMaterialOffset[kTechId.ElectronicSupply] = 200
 kTechIdToMaterialOffset[kTechId.ElectronicStation] = 200
@@ -67,6 +68,7 @@ kTechIdToMaterialOffset[kTechId.Rappel] = 205
 kTechIdToMaterialOffset[kTechId.AcidSpray] = 206
 kTechIdToMaterialOffset[kTechId.ProwlerStructureAbility] = 102
 
+kTechIdToMaterialOffset[kTechId.Vokex] = 160
 kTechIdToMaterialOffset[kTechId.ShadowStep] = 160
 kTechIdToMaterialOffset[kTechId.AcidRocket] = 209
 kTechIdToMaterialOffset[kTechId.MetabolizeShadowStep] = 169
@@ -86,7 +88,9 @@ kTechIdToMaterialOffset[kTechId.ShiftHiveBiomassPreserve] = 2
 kTechIdToMaterialOffset[kTechId.ShadeHiveBiomassPreserve] = 2
 kTechIdToMaterialOffset[kTechId.CragHiveBiomassPreserve] = 2
 
-kTechIdToMaterialOffset[kTechId.Devour] = 109 
+kTechIdToMaterialOffset[kTechId.Devour] = 109
+kTechIdToMaterialOffset[kTechId.Condense] = 223
+kTechIdToMaterialOffset[kTechId.Silence] = 65
 
 kTechIdToMaterialOffset[kTechId.WeaponCache] = 1
 kTechIdToMaterialOffset[kTechId.MarineSentry] = 5

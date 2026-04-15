@@ -17,7 +17,6 @@ local kAttackRadius = 0.8
 local kAttackOriginDistance = 1.7
 local kAttackRange = 2 --1.7
 local kDevourUpdateRate = 0.183 --0.15
---local kMissedEnergyCost = 15
 
 local networkVars =
 {
@@ -201,7 +200,7 @@ function Devour:Attack(player)
     if self.eatingPlayerId == 0 then     
         --Devour Attack
         didHit, target, impactPoint = AttackMeleeCapsule(self, player, Devour.kInitialDamage, kAttackRange, nil, false, EntityFilterOneAndIsa(player, "Babbler")) -- AttackMeleeCapsule(self, player, 0, kAttackRange)
-        local energyCost = kDevourEnergyCost --self:GetEnergyCost() --kMissedEnergyCost
+        local energyCost = kDevourMissedEnergyCost
         
         self.timeDevourEnd = Shared.GetTime() + Devour.kAttackAnimationLength
         
@@ -211,6 +210,7 @@ function Devour:Attack(player)
                 if GetAreEnemies(self,target) then
                     self.eatingPlayerId = target:GetId()
                     self.timeDevourEnd = Shared.GetTime() + Devour.kEatCoolDown
+                    energyCost = kDevourEnergyCost
                     
                     if Server then
                         self:DevourPlayer(target)                  
@@ -219,8 +219,6 @@ function Devour:Attack(player)
                 end
             end
         end
-    
-        energyCost = kDevourEnergyCost --self:GetEnergyCost()
         player:DeductAbilityEnergy(energyCost)        
         
     end

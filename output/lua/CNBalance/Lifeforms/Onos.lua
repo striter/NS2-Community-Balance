@@ -23,7 +23,7 @@ set {
     "Cannon",
 }
 
---local kFuelDeductPerHit = 1 / 200
+local kFuelDeductPerHit = 1 / 125
 function Onos:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoint) -- dud
 
     local classname = doer:GetClassName()
@@ -34,14 +34,14 @@ function Onos:ModifyDamageTaken(damageTable, attacker, doer, damageType, hitPoin
             damageTable.damage = damageTable.damage * reduction
             self:TriggerEffects("boneshield_blocked", { effecthostcoords = Coords.GetTranslation(hitPoint) } )
 
-            --local boneShield = self:GetActiveWeapon()
-            --local fuel = boneShield:GetFuel() - kFuelDeductPerHit
-            --boneShield:SetFuel(fuel)
-            --if Server then
-            --    if fuel <= 0 then
-            --        self:TriggerEffects("onos_shield_break")
-            --    end
-            --end
+            local boneShield = self:GetActiveWeapon()
+            local fuel = boneShield:GetFuel() - kFuelDeductPerHit
+            boneShield:SetFuel(fuel)
+            if Server then
+                if fuel <= 0 then
+                    self:TriggerEffects("onos_shield_break")
+                end
+            end
         end
         return
     end
@@ -62,7 +62,7 @@ end
 
 function Onos:GetExtraHealth(techLevel,extraPlayers,recentWins)
     return techLevel * kOnosHealtPerBioMass
-            + Clamp((extraPlayers - recentWins * 2) * 10,-50,200)
+            + Clamp((extraPlayers - recentWins * 2) * 20,-150,300)
 end
 
 if Server then
@@ -125,6 +125,24 @@ function Onos:GetMaxSpeed(possible)
 
 end
 
+function Onos:TriggerCharge(move)
+
+    if not self.charging and self:GetHasMovementSpecial() and self.timeLastChargeEnd + Onos.kChargeDelay < Shared.GetTime()
+            and self:GetIsOnGround() and not self:GetCrouching() and not self:GetIsBoneShieldActive() then
+
+        self.charging = true
+        self.timeLastCharge = Shared.GetTime()
+
+        if Server and (GetHasSilenceUpgrade(self) and self:GetSpurLevel() == 0) or not GetHasSilenceUpgrade(self) then
+            self:TriggerEffects("onos_charge")
+        end
+
+        self:TriggerUncloak()
+
+    end
+
+end
+
 function Onos:ModifyCelerityBonus( celerityBonus )
 
     if self:GetIsBoneShieldActive()
@@ -141,9 +159,12 @@ end
 function Onos:UpdateRumbleSound()
 
     if Client then
-
         local rumbleSound = Shared.GetEntity(self.rumbleSoundId)
         local speed = self:GetCrouching() and 0 or self:GetSpeedScalar()
+        local spurLevel = self:GetSpurLevel()
+        if GetHasSilenceUpgrade(self) and spurLevel > 0 then
+            speed = spurLevel == 3 and 0 or speed / (4 - spurLevel)
+        end
         if rumbleSound then
             rumbleSound:SetParameter("speed",speed , 1)
         end

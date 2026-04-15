@@ -33,7 +33,8 @@ function Alien:GetPlayerStatusDesc()
     return status
 end
 
--- if Server then
+
+ if Server then
 --     -- ThirdPerson Codes
 --     local function ThirdPerson(self)
 --         if HasMixin(self, "CameraHolder") then
@@ -65,4 +66,59 @@ end
 --             end
         
 --     end
--- end
+
+     local baseOnCreate = Alien.OnCreate
+     function Alien:OnCreate()
+         self.condenseScale = 1
+         baseOnCreate(self)
+     end
+
+     function Alien:OnProcessMove(input)
+         PROFILE("Alien:OnProcessMove")
+
+         self.hasAdrenalineUpgrade = GetHasAdrenalineUpgrade(self)
+
+         -- Update energy (server)
+         self:GetEnergy()
+
+         -- need to clear this value or spectators would see the hatch effect every time they cycle through players
+         if self.hatched and self.creationTime + 3 < Shared.GetTime() then
+             self.hatched = false
+         end
+
+         if GetIsUnitActive(self) then
+             self:UpdateCondenseLevel()
+         end
+         Player.OnProcessMove(self, input)
+
+         -- In rare cases, Player.OnProcessMove() above may cause this entity to be destroyed.
+         -- The below code assumes the player is not destroyed.
+         if not self:GetIsDestroyed() then
+
+             -- Calculate two and three hives so abilities for abilities
+             UpdateAbilityAvailability(self, self:GetTierOneTechId(), self:GetTierTwoTechId(), self:GetTierThreeTechId())
+
+             self.enzymed = self.timeWhenEnzymeExpires > Shared.GetTime()
+             self.electrified = self.timeElectrifyEnds > Shared.GetTime()
+
+             self:UpdateAutoHeal()
+             self:UpdateSilenceLevel()
+         end
+     end
+
+     function Alien:UpdateCondenseLevel()
+         if GetHasCondenseUpgrade(self) then
+             self.condenseScale =  1 - self:GetCondenseScalePerLevel() * self:GetShellLevel()
+         else
+             self.condenseScale = 1
+         end
+     end
+
+     function Alien:GetPlayerScale(deltaTime)
+         return Player.GetPlayerScale(self,deltaTime) * self.condenseScale
+     end
+
+     function Alien:GetCondenseScalePerLevel()
+         return 0.08
+     end
+ end

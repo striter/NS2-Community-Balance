@@ -134,6 +134,13 @@ function BuildTechData()
     })
 
     table.insert(techData, {
+        [kTechDataId] = kTechId.ClusterFlame,
+        [kTechDataDisplayName] = "CLUSTER_FLAME_UPGRADE",
+        [kTechDataTooltipInfo] = "CLUSTER_FLAME_UPGRADE",
+        [kTechDataResearchName] = "CLUSTER_FLAME_UPGRADE",
+    })
+
+    table.insert(techData, {
         [kTechDataId] = kTechId.ArmorRegen,
         [kTechDataCostKey] = kNanoArmorResearchCost,
         [kTechDataResearchTimeKey] = kNanoArmorResearchTime,
@@ -300,9 +307,9 @@ function BuildTechData()
         [kTechDataMaxHealth] = kInfantryPortalHealth,
         [kTechDataMaxArmor] = kInfantryPortalArmor,
         [kTechDataModel] = InfantryPortal.kModelName,
-        [kStructureBuildNearClass] = "CommandStation",
-        [kStructureAttachId] = {kTechId.CommandStation,kTechId.StandardStation,kTechId.ArmorStation,kTechId.ExplosiveStation,kTechId.ElectronicStation},        --For Stations
-        [kStructureAttachRange] = kInfantryPortalAttachRange,
+        --[kStructureBuildNearClass] = "CommandStation",
+        --[kStructureAttachId] = {kTechId.CommandStation,kTechId.StandardStation,kTechId.ArmorStation,kTechId.ExplosiveStation,kTechId.ElectronicStation},        --For Stations
+        --[kStructureAttachRange] = kInfantryPortalAttachRange,
         [kTechDataEngagementDistance] = kInfantryPortalEngagementDistance,
         [kTechDataHotkey] = Move.P,
         [kTechDataNotOnInfestation] = kPreventMarineStructuresOnInfestation,
@@ -687,6 +694,19 @@ function BuildTechData()
         [kTechDataModel] = Cannon.kModelName,
         [kTechDataDamageType] = kCannonDamageType,
         [kTechDataCostKey] = kCannonCost,
+        [kTechDataPlayersRestrictionKey] = kCannonPlayersAlert,
+    } )
+
+    table.insert(techData,{
+        [kTechDataId] = kTechId.DualRailgunExosuit,
+        [kTechIDShowEnables] = false,
+        [kTechDataDisplayName] = "DUALRAILGUN_EXOSUIT",
+        [kTechDataMapName] = "exo",
+        [kTechDataCostKey] = kDualRailgunExosuitCost,
+        [kTechDataHotkey] = Move.E,
+        [kTechDataTooltipInfo] = "DUALRAILGUN_EXOSUIT_TECH_TOOLTIP",
+        [kTechDataSpawnHeightOffset] = kCommanderEquipmentDropSpawnHeight,
+        [kTechDataPlayersRestrictionKey] = kRailgunPlayersAlert,
     } )
 
     table.insert(techData,{
@@ -1155,6 +1175,22 @@ function BuildTechData()
         [kTechDataDisplayName] = "ORIGIN_FORM_PASSIVE",
         [kTechDataTooltipInfo] = "ORIGIN_FORM_PASSIVE_TOOLTIP",
         [kTechDataResearchName] = "ORIGIN_FORM_PASSIVE",
+    })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.Condense,
+        [kTechDataCategory] = kTechId.CragHive,
+        [kTechDataDisplayName] = "CONDENSE",
+        [kTechDataTooltipInfo] = "CONDENSE_TOOLTIP",
+        [kTechDataCostKey] = kCelerityCost,
+    })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.Silence,
+        [kTechDataCategory] = kTechId.ShiftHive,
+        [kTechDataDisplayName] = "SILENCE",
+        [kTechDataTooltipInfo] = "SILENCE_TOOLTIP",
+        [kTechDataCostKey] = kCelerityCost,
     })
 
     table.insert(techData, {

@@ -1,20 +1,49 @@
+kDeadlockTimeExtend = {
+    [kTechId.Extractor] = 30, [kTechId.PoweredExtractor] = 45,
+    [kTechId.PhaseGate] = 60,
+    [kTechId.CommandStation] = 90, [kTechId.StandardStation] = 120, [kTechId.ExplosiveStation] = 120, [kTechId.ArmorStation] = 120, [ kTechId.ElectronicStation ] = 120,
+    [kTechId.ARC] = 30,
+    [kTechId.ARCDeploy] = 3,
+    
+    [kTechId.Harvester] = 90,
+    --[kTechId.Tunnel] = 60, [kTechId.InfestedTunnel] = 60, [kTechId.GorgeTunnel] = 60,
+    [kTechId.Spur] = 30,[kTechId.Shell] = 30,[kTechId.Veil] = 30,
+    [kTechId.Hive] = 150, [kTechId.ShiftHive] = 150, [kTechId.CragHive] = 150, [kTechId.ShadeHive] = 150,
+}
+
 kTechReputationByPass = {
-    [kTechId.CombatBuilder] = 50,
-    [kTechId.SubMachineGun] = 70,
-    [kTechId.Revolver] = 80,
-    [kTechId.Knife] = 90, 
+    [kTechId.Flamethrower] = 55,
+    [kTechId.GrenadeLauncher] = 55,
+    [kTechId.CombatBuilder] = 60,
+    [kTechId.SubMachineGun] = 80,
+    [kTechId.Revolver] = 90,
+    [kTechId.Knife] = 100, 
     [kTechId.Cannon] = 150,
     
+    [kTechId.Gorge] = 50,
+    [kTechId.Lerk] = 60,
     [kTechId.Prowler] = 100,
     [kTechId.Vokex] = 200,
+    [kTechId.OriginFormResourceFetch] = 120,
+    
+    [kTechId.Focus] = 150,
+    [kTechId.Vampirism] = 150,
+    [kTechId.Crush] = 150,
+}
+
+kTechIdMemberLevelByPass = {
+    [kTechId.Condense] = 2,
+    [kTechId.Silence] = 2,
 }
 
 --Gorge Ability
 kDropStructureEnergyCost = 15
+kBellySlideCost = 20
+kBellySlideImpactCost = 20
 
 -- kInitialMACs = 1
 -- kInitialDrifters = 1
-kMaxTunnelCount = {1,3,4,4,4,4,4,4,4,4}
+kMaxTunnelCount = {2,3,4,4,4,4,4,4,4,4}
 kHiveInfestationRadius = 20
 kInfestationRadius = 7.5    kInfestationPerBiomass = 0.4
 
@@ -32,9 +61,12 @@ kLightMachineGunWeight = 0.13
 kRevolverWeight = 0
 
 kMaxInfantryPortalsPerCommandStation = 99
-kNumMines = 4
-kGrenadeLauncherPlayersAlert = 5
-kFlameThrowerPlayersAlert = 3
+kNumMines = 2
+
+kGrenadeLauncherPlayersAlert = 0.15
+kFlameThrowerPlayersAlert = 0.15
+kCannonPlayersAlert = 0.15
+kRailgunPlayersAlert = 0.15
 
 kFlameThrowerEntityBurnReward = 1
 kFlameThrowerEntityBurnRewardInterval = kFlameThrowerEntityBurnReward * 3
@@ -110,18 +142,19 @@ kStartSupply = 120
 kSupplyEachTechPoint = 40
 
 kMACSupply = 0
-kArmorySupply = 10
-kObservatorySupply = 25
-kARCSupply = 20
+kArmorySupply = 15
+kObservatorySupply = 35
+kARCSupply = 0
+kSentryBatterySupply = 30
 kSentrySupply = 0
-kSentryBatterySupply = 35
-kRoboticsFactorySupply = 10
+kRoboticsFactorySupply = 0
 kInfantryPortalSupply = 0
-kPhaseGateSupply = 10
+kPhaseGateSupply = 15
+
 kSentriesPerBattery = 3
 
-kDrifterSupply = 10
-kWhipSupply = 8
+kDrifterSupply = 5
+kWhipSupply = 5
 kCragSupply = 20
 kShadeSupply = 20
 kShiftSupply = 20
@@ -130,19 +163,21 @@ kShiftSupply = 20
 kMarinePhaseArmorDeduct = 20
 kMarineArmorDeductRegen = 20
 
-kMarineNanoArmorPerSecond = 4
-kJetpackMarineArmorPerSecond = 3
-kJetpackMarineNanoArmorPerSecond = 6
+kMarineNanoArmorPerSecond = 3
+kJetpackMarineArmorPerSecond = 0
+kJetpackMarineNanoArmorPerSecond = 3
 kExoArmorPerSecond = 8
-kExoNanoArmorPerSecond = 15
+kExoNanoArmorPerSecond = 12
 --& Lifesustain
 kLifeRegenMaxCap = 0.8 kLifeSustainMaxCap = 1
-kLifeRegenHPS = 4   kLifeSustainHPS = 10
-kJetpackLifeRegenHPS = 6   kJetpackLifeSustainHPS = 12
+kLifeRegenHPS = 3   kLifeSustainHPS = 5
+kJetpackLifeRegenHPS = 3   kJetpackLifeSustainHPS = 5
 
+kOnFireHealingScalar = 0.5
+kOnFireEnergyRecuperationScalar = 1
 
-kAutoMedCooldown = 6    kAutoMedPRes = 0.8
-kAutoAmmoCooldown = 40  kAutoAmmoPRes = 1.5
+kAutoMedCooldown = 6    kAutoMedPRes = 0.5
+kAutoAmmoCooldown = 40  kAutoAmmoPRes = 1
 
 kAutoMistPRes = 1.5 kAutoMistCooldown = 30
 

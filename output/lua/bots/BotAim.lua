@@ -21,7 +21,7 @@ BotAim.panicDistSquared = 0.0 * 0.0  --orginal 2.0 * 2.0
 BotAim.kTrackingInterval = 0 -- How often to update where we should be aiming. If too high, 1st person spectating will look nauseating.
 
 -- The least amount of accuracy allowed.
-BotAim.kMinimumAccuracy = 15 --orginal 12
+BotAim.kMinimumAccuracy = 12 --orginal 12
 BotAim.kMaximumAccuracy = 100
 
 BotAim.kAimDebuffAngleDiff = math.rad(120)
@@ -33,11 +33,11 @@ BotAim.kTargetAcquisitionDelayMin = 0.185
 BotAim.kTargetAcquisitionDelayMax = 0.325
 
 -- Lose x percent of accuracy per meter target is from us.
-BotAim.kDistanceDebuffPerMeter = 0.25 -- -10% max (40 meters)
+BotAim.kDistanceDebuffPerMeter = 0.15 --orginal 0.25 -- -10% max (40 meters)
 
 -- How long it should wait before staring to hit or miss target.
 -- Essentially the update rate for changing between "Missing" and "hitting" a target.
-BotAim.kMinAccuracyTime = 0.125
+BotAim.kMinAccuracyTime = 0.125 --orginal 0.125
 
 -- Accuracy thresholds by weapon group
 -- Each weapon group holds a table of tiered accuracy percents
@@ -46,26 +46,33 @@ BotAim.kMinAccuracyTime = 0.125
 -- Use BotAim:GetAccuracyGoal to get the correct accuracy value
 BotAim.kAccuracies =
 {   
-    [kBotAccWeaponGroup.Bullets] = { 14.5, 16.5, 21, 25, 28.5, 34, 38.5 },
+    [kBotAccWeaponGroup.Bullets] = { 14.5, 16.5, 21, 25, 28.5, 34, 38.5 },--orginal
+    --[kBotAccWeaponGroup.Bullets] = { 18.5, 20.5, 23, 26, 29.5, 34, 38.5 }, --zug gut????
 
     -- These guys should be stonker
-    [kBotAccWeaponGroup.ExoMinigun] = { 23, 25, 28, 30, 35, 39, 43 },
-    [kBotAccWeaponGroup.ExoRailgun] = { 25, 28, 30, 32, 35, 39, 43 },
+    [kBotAccWeaponGroup.ExoMinigun] = { 25, 28, 32, 36, 40, 45, 50 },  --orginal{ 23, 25, 28, 30, 35, 39, 43 },
+    [kBotAccWeaponGroup.ExoRailgun] = { 30, 35, 40, 45, 50, 55, 60 }, --orignal{ 25, 28, 30, 32, 35, 39, 43 },
 
     -- Similar to "bullets", but caps off in higher tiers
-    [kBotAccWeaponGroup.LerkSpikes] = { 14.5, 16.5, 21, 25, 28.5, 28.5, 28.5 },
+    --[kBotAccWeaponGroup.LerkSpikes] = { 14.5, 16.5, 21, 25, 28.5, 28.5, 28.5 },--orginal
+    [kBotAccWeaponGroup.LerkSpikes] = { 20, 24.5, 29, 32, 35, 38, 42 },
 
-    [kBotAccWeaponGroup.Spit] = { 13.5, 15, 18.5, 21.1, 25.1, 31.1, 41.1 },
-    
+    --[kBotAccWeaponGroup.Spit] = { 13.5, 15, 18.5, 21.1, 25.1, 31.1, 41.1 },--orginal
+    [kBotAccWeaponGroup.Spit] = { 20, 25, 29, 34, 39, 44, 50 },
+      
     --TODO Add Fade and Onos weapons
 
-    [kBotAccWeaponGroup.Melee] = { 25, 28, 32, 38, 42, 48, 55 },
+    --[kBotAccWeaponGroup.Melee] = --{ 25, 28, 32, 38, 42, 48, 55 },--orginal
+    [kBotAccWeaponGroup.Melee] = { 31, 35, 38, 41, 44, 54, 61 },
 
-    [kBotAccWeaponGroup.Swipe] = { 28, 32, 38, 42, 48, 55, 62 },
+    --[kBotAccWeaponGroup.Swipe] = { 28, 32, 38, 42, 48, 55, 62 },--orginal
+    [kBotAccWeaponGroup.Swipe] = { 42, 52, 64, 71, 79, 85, 92 },
 
-    [kBotAccWeaponGroup.BiteLeap] = { 11, 13, 15, 18.5, 25, 32, 45 },
+    --[kBotAccWeaponGroup.BiteLeap] = { 11, 13, 15, 18.5, 25, 32, 45 },orginal
+    [kBotAccWeaponGroup.BiteLeap] = { 15, 18.5, 25, 32, 45, 50, 55 },
 
-    [kBotAccWeaponGroup.LerkBite] = { 15, 20, 25, 30, 35, 40, 60 },
+    --[kBotAccWeaponGroup.LerkBite] = { 15, 20, 25, 30, 35, 40, 60 },--orginal
+    [kBotAccWeaponGroup.LerkBite] = { 25, 29, 35, 40, 50, 60, 75 }
 
     -- [kBotAccWeaponGroup.Parasite]
 
@@ -117,13 +124,13 @@ BotAim.kMissDirections =
 -- Map of classnames -> speed modifiers for bot movements
 BotAim.kBotTurnSpeeds =
 {
-    ["Default"] = 1.5,
-    ["Marine"] = 1.5,
-    ["JetpackMarine"] = 1.7,
-    ["Exo"] = 1.5,
-    ["Skulk"] = 1.6,
+    ["Default"] = 1.8,
+    ["Marine"] = 1.8,
+    ["JetpackMarine"] = 2.1,
+    ["Exo"] = 3.8,
+    ["Skulk"] = 1.9,
     ["Gorge"] = 1.5,
-    ["Lerk"] = 2.0,
+    ["Lerk"] = 2.5,
     ["Fade"] = 2.3,
     ["Onos"] = 1.5, -- extra hinzugefügt
 }
@@ -146,7 +153,7 @@ function BotAim:Initialize(owner)
     self.targetFirstPosTime = 0
     self.aimDebuffEndTime = 0
     self.aimDebuffType = kAimDebuffState.None
-    self.aimTurnRate = 1.0
+    self.aimTurnRate = 3.5 --orginal 1.0
 
     -- Target Acquisition Delay
     self.targetAcqEndTime = 0
@@ -160,7 +167,7 @@ function BotAim:Initialize(owner)
 
     local player = self.owner:GetPlayer()
     if player then
-        self.viewAngle = GetClassDefaultFov(player:GetClassName())
+        self.viewAngle = GetClassDefaultFov(player:GetClassName())  --idee von bing um pov zu veringern / self.viewAngle = math.rad(30)
     end
     
 end
@@ -172,7 +179,7 @@ function BotAim:Clear()
     self.targetFirstPosTime = 0
     self.aimDebuffEndTime = 0
     self.aimDebuffType = kAimDebuffState.None
-    self.aimTurnRate = 1.0
+    self.aimTurnRate = 1.5 --orginal 1.0
 
     self.targetAcqEndTime = 0
 
@@ -294,7 +301,7 @@ function BotAim_UpdateAim(self, target, targetAimPoint, weaponGroup)
     if player and player.GetIsInCombat and player:GetIsInCombat() then
         self.aimTurnRate = BotAim.kBotTurnSpeeds[className]
     else
-        self.aimTurnRate = 1.0
+        self.aimTurnRate = 1.5 --orginal 1.0
     end
 
     self.lastTrackTime = now

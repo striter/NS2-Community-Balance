@@ -2,12 +2,12 @@
 local kDebugNotifications = false
 local function GetResearchTime(techNode)
     local researchTime = techNode.time
-    if GetHasTech(Client.GetLocalPlayer(),kTechId.MilitaryProtocol) then
-        researchTime = researchTime * kMilitaryProtocolResearchDurationMultiply
+    local player = Client.GetLocalPlayer()
+    if GetHasTech(player,kTechId.MilitaryProtocol) then
+        researchTime = researchTime * (1 + GetPlayersAboveLimit(player:GetTeamNumber()) * kMilitaryProtocolResearchDurationPerExtraPlayer)
     end
     return researchTime
 end
-
 
 function GUIEvent:GetTimeLeftForResearch(techId, entityId)
 

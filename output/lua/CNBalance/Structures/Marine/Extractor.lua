@@ -35,6 +35,7 @@ Script.Load("lua/BiomassHealthMixin.lua")
 class 'Extractor' (ResourceTower)
 
 Extractor.kMapName = "extractor"
+Extractor.kIgnoreDeadlock = true
 
 Extractor.kModelName = PrecacheAsset("models/marine/extractor/extractor.model")
 
@@ -223,7 +224,7 @@ function Extractor:GetDeathIconIndex()
 end
 
 function Extractor:GetExtraHealth(techLevel,extraPlayers,recentWins)
-    return 75 * (-extraPlayers - recentWins * 2)
+    return 50 * (extraPlayers - recentWins * 3)
 end
 
 Shared.LinkClassToMap("Extractor", Extractor.kMapName, networkVars)

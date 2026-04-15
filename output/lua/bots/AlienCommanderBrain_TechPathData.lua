@@ -18,38 +18,35 @@ local kMaxConcurrentTechSteps = 2
 -- Table of research order of Alien Commander Bot.
 -- Each group of things in a "tier" can be randomized to provide variance,
 -- but they're already ordered in terms of biomass requirements
+
 local kAlienCommanderTechPath =
 {
 
     -- Tier 1
     {
-        kTechId.Leap, -- Bio 4
         kTechId.MetabolizeEnergy, -- Bio 3
-        kTechId.BileBomb, -- Bio 2
-        kTechId.Spores, -- Bio 4
-        kTechId.Devour,
     },
 
     -- Tier 2
     {
-        kTechId.Umbra, -- Bio 6
+        kTechId.Leap, -- Bio 4
+        kTechId.BileBomb, -- Bio 2
+        kTechId.Spores, -- Bio 6
         kTechId.MetabolizeHealth, -- Bio 5
-        kTechId.ShiftTunnel, --Bio 5
         kTechId.BoneShield, -- Bio 6
+        kTechId.Umbra, -- Bio 6
     },
 
     -- Tier 3
     {
-        kTechId.AcidSpray,
-        kTechId.Stomp,
-        kTechId.Stab,
-        kTechId.Xenocide,
+        kTechId.Stomp, -- Bio 8
+        kTechId.Stab, -- Bio 7
+        kTechId.Xenocide, -- Bio 9
     },
 
     -- Tier 4
     {
-        kTechId.Contamination,
-        kTechId.XenocideFuel,
+        kTechId.Contamination, -- Bio 12, Not a research node, but this should nudge ComBot to get biomass 12
     }
 
 }
@@ -129,12 +126,14 @@ function GetHasTechForTechPathForAliens(brain, com, techId)
             result = kHasTechResult.InProgressOrUnbuilt
         end
 
-    elseif techType == kTechType.Build then
+    elseif techType == kTechType.Build or techType == kTechType.Activation then
 
         -- AlienTeamInfo:GetBioMassLevel
         -- AlienTeamInfo:GetInProgressBiomassLevel
 
-        if techNode:GetHasTech() then
+        local hasTech =  techType == kTechType.Build and techNode:GetHasTech() or techNode:GetAvailable()
+        
+        if hasTech then
             result = kHasTechResult.HasTech
         else -- For build nodes, they will automatically unlock when their pre-reqs are done (all biomass atm)
 

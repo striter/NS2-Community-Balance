@@ -1,5 +1,6 @@
 Script.Load("lua/BiomassHealthMixin.lua")
 
+CommandStation.kIgnoreDeadlock = true
 
 local baseOnCreate = CommandStation.OnCreate
 function CommandStation:OnCreate()

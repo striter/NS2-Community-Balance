@@ -33,6 +33,10 @@ function MarineSpectator:OnInitialized()
 end
 
 if Server then
+    function MarineSpectator:GetDesiredSpawnPoint()
+        return self.desiredSpawnPoint
+    end
+    
     local onCopyPlayerDataFrom = MarineSpectator.CopyPlayerDataFrom
     function MarineSpectator:CopyPlayerDataFrom( player )
         onCopyPlayerDataFrom(self,player)

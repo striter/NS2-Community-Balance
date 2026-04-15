@@ -19,14 +19,14 @@
 --3    820    12         14          11          10
 
 kMarineHealth = 100    kMarineArmor = 30    kArmorPerUpgradeLevel = 20          kNanoMarineArmor = 35    kNanoArmorPerUpgradeLevel = 20
-kJetpackHealth = 100    kJetpackArmor = 50   kJetpackArmorPerUpgradeLevel = 20  kMPJetpackMarineArmor = 45   kMPJetpackArmorPerUpgradeLevel = 25  
+kJetpackHealth = 100    kJetpackArmor = 50   kJetpackArmorPerUpgradeLevel = 20  kMPJetpackMarineArmor = 50   kMPJetpackArmorPerUpgradeLevel = 20  
 kExosuitHealth = 100    kExosuitArmor = 320  kExosuitArmorPerUpgradeLevel = 30  kExosuitMPArmor = 320 kExosuitMPArmorPerUpgradeLevel = 30
 kMarinePointValue = 5   kJetpackPointValue = 12   kExosuitPointValue = 20
 
-kMedpackHeal = 25   kMedpackRegen = 25
+kMedpackHeal = 40   kMedpackRegen = 10
 kMedpackHealWhenRegening = 25 kMedpackRegenWhenRegening = 25
-kMedpackPickupDelay = 0.55
-kMarineRegenerationHeal = 25 --Amount of hp per second
+kMedpackPickupDelay = 0.45
+kMarineRegenerationHeal = 20 --Amount of hp per second
 
 kMineHealth = 30    kMineArmor = 9    kMinePointValue = 5
 
@@ -118,7 +118,7 @@ kSkulkDamageReduction = {
     --["Railgun"] = 0.9,
 }
 
-kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7 kGorgeHealthPerBioMass = 3
+kGorgeHealth = 180   kGorgeArmor = 50    kGorgePointValue = 7 kGorgeHealthPerBioMass = 5
 kGorgeDamageReduction = {
     ["Sentry"] = 0.5,
     ["MarineSentry"] = 0.5,
@@ -177,7 +177,7 @@ kVokexHealth = 250   kVokexArmor = 70   kVokexPointvalue = 25   kVokexHealthPerB
 
 kParasitePlayerPointValue = 1
 
-kSkulkBaseCarapaceUpgradeAmount = 9    kSkulkCarapaceArmorPerBiomass = 1
+kSkulkBaseCarapaceUpgradeAmount = 10    kSkulkCarapaceArmorPerBiomass = 1
 kGorgeBaseCarapaceUpgradeAmount = 25    kGorgeCarapaceArmorPerBiomass = 1.25
 kProwlerBaseCarapaceUpgradeAmount = 10  kProwlerCarapaceArmorPerBiomass = 1.25 --kProwlerArmorFullyUpgradedAmount = 28
 kLerkBaseCarapaceUpgradeAmount  = 25    kLerkCarapaceArmorPerBiomass  = 1.25
@@ -193,8 +193,8 @@ kHiveHealthPerPlayerAdd = 200
 kHarvesterHealth = 2000 kHarvesterArmor = 200 kMatureHarvesterHealth = 2300 kMatureHarvesterArmor = 320  kHarvesterPointValue = 15
 
 --1000 ---100    --1250 -200
-kTunnelEntranceHealth = 900  kTunnelEntranceArmor = 100 kMatureTunnelEntranceHealth = 1250 kMatureTunnelEntranceArmor = 200
-kTunnelEntranceHealthPerPlayerAdd = 50 kCragTunnelArmorAdditive = 400 kTunnelEntrancePointValue = 5
+kTunnelEntranceHealth = 1000  kTunnelEntranceArmor = 100 kMatureTunnelEntranceHealth = 1250 kMatureTunnelEntranceArmor = 200
+kTunnelEntranceHealthPerPlayerAdd = 75 kCragTunnelArmorAdditive = 400 kTunnelEntrancePointValue = 5
 
 --These stuff is required but , won't called due to its matured when infested
 kMatureInfestedTunnelEntranceHealth = kMatureTunnelEntranceHealth    kMatureInfestedTunnelEntranceArmor = kMatureTunnelEntranceArmor
@@ -204,10 +204,10 @@ kCystHealth = 125    kCystArmor = 1
 kMatureCystHealth = 400    kMatureCystArmor = 1    kCystPointValue = 1
 kMinMatureCystHealth = 200 kMinCystScalingDistance = 48 kMaxCystScalingDistance = 168
 
-kClogHealth = 250  kClogArmor = 0  kClogHealthPerBioMass = 10 kClogPointValue = 0
+kClogHealth = 320  kClogArmor = 0  kClogHealthPerBioMass = 10 kClogPointValue = 0
 
-kHydraHealth = 100    kHydraArmor = 10  kHydraHealthPerBioMass = 20   kHydraPointValue = 1
-kMatureHydraHealth = 130   kMatureHydraArmor = 20  kMatureHydraPointValue = 0
+kHydraHealth = 180    kHydraArmor = 10  kHydraHealthPerBioMass = 20   kHydraPointValue = 1
+kMatureHydraHealth = 200   kMatureHydraArmor = 20  kMatureHydraPointValue = 0
 
 kSporeMineHealth = 50 kSporeMineArmor = 0 kSporeMineHealthPerBioMass = 12 kSporeMinePointValue = 1
 kMatureSporeMineHealth = 120 kMatureSporeMineArmor = 0
@@ -218,7 +218,7 @@ kMatureBabblerEggHealth = 200 kMatureBabblerEggArmor = 0
 kBabblerHealth = 12    kBabblerArmor = 0    kBabblerPointValue = 0
 kBabblerDefaultLifeTime = 5 kBabblerEggHatchLifetime = 30 kBabblerPheromoneHatchLifeTime = 8
 
-kBoneWallHealth = 100 kBoneWallArmor = 200    kBoneWallHealthPerBioMass = 75
+kBoneWallHealth = 500 kBoneWallArmor = 200    kBoneWallHealthPerBioMass = 75 kBoneWallExtraHealthPerPlayer = 25
 kContaminationHealth = 1450 kContaminationArmor = 0    kContaminationPointValue = 2
 
 kWhipHealth = 650    kWhipArmor = 175    kWhipPointValue = 6
@@ -248,4 +248,5 @@ kWelderSporeDamagePerSecond = 250 kFlamethrowerSporeDamagePerSecond = 1000
 --Combat
 kWeaponCacheHealth = 800    kWeaponCacheArmor = 150   kWeaponCachePointValue = 10
 kMarineSentryHealth = 500    kMarineSentryArmor = 50    kMarineSentryPointValue = 8
+
 kBioformSuppressorHealth = 1800 kBioformSuppressorArmor = 1800 kBioformSuppressorPointValue = 30

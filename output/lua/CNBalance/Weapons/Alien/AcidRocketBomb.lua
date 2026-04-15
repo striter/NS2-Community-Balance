@@ -108,6 +108,7 @@ if Server then
         dotMarker:SetDotMarkerType(DotMarker.kType.Static)
         dotMarker:SetTargetEffectName("bilebomb_hit")
         dotMarker:SetDeathIconIndex(kDeathMessageIcon.AcidRocket)
+        dotMarker:SetIsAffectedByCrush(true)
         dotMarker:SetOwner(self:GetOwner())
         dotMarker:SetFallOffFunc(NoFalloff)
 

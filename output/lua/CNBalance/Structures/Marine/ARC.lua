@@ -49,3 +49,17 @@ function ARC:GetCanFireAtTargetActual(target, targetPoint, manuallyTargeted)
     return true
 
 end
+
+if Server then
+    local basePerformAttack = ARC.PerformAttack
+    function ARC:PerformAttack()
+        basePerformAttack(self)
+
+
+        local team = self:GetTeam()
+        if team then
+            team:OnDeadlockExtend(kTechId.ARCDeploy)
+        end
+    end
+    
+end 

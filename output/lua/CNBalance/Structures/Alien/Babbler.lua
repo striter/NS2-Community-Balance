@@ -884,7 +884,7 @@ if Server then
 
             local moveVel
             local canReach = GetCanReachTarget(self, target)
-            local babblerBall = not canReach and self:GetBabblerBall()
+            local babblerBall = nil --not canReach and self:GetBabblerBall()
 
             if canReach then
 

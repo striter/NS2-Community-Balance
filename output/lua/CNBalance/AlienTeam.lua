@@ -21,6 +21,7 @@ class 'AlienTeam' (PlayingTeam)
 AlienTeam.kAutoHealInterval = 2
 AlienTeam.kStructureAutoHealInterval = 0.5
 AlienTeam.kAutoHealUpdateNum = 20 -- number of structures to update per autoheal update
+AlienTeam.kDeadlockAlert = PrecacheAsset("sound/ns2plus.fev/khamm/deadlock")
 
 AlienTeam.kInfestationUpdateRate = 2
 
@@ -255,8 +256,6 @@ function AlienTeam:UpdateBioMassLevel()
 
         if entity:GetIsAlive() then
 
-            entity:UpdateBiomassLevel(self)
-            
             local currentBioMass = entity:GetBioMassLevel(isOriginForm)
             --local techId = entity:GetTechId()
             newBiomass = newBiomass + currentBioMass
@@ -817,17 +816,17 @@ function AlienTeam:UpdateTeamAutoHeal()
                 if requiresInfestation then
                     local reduceHealth = not isOnInfestation
 
-                    if self:IsOriginForm() then
-                        reduceHealth = false
+                    --if self:IsOriginForm() then
+                        --reduceHealth = false
                         if isOnInfestation then
                             if not entity.GetIsInCombat or not entity:GetIsInCombat() then
-                                local healPerSecond = entity:GetMaxHealth() * kOriginFormOnInfestationHealPercentPerSecond
-                                healPerSecond = math.max(healPerSecond, kOriginFormOnInfestationMinHealPerSecond)
+                                local healPerSecond = entity:GetMaxHealth() * kOnInfestationHealPercentPerSecond
+                                healPerSecond = math.max(healPerSecond, kOnInfestationMinHealPerSecond)
                                 local heal = healPerSecond * deltaTime
                                 entity:AddHealth(heal, false, false, false, nil, true)
                             end
                         end
-                    end
+                    --end
                     
                     if reduceHealth then                         -- Take damage!
 
@@ -1025,6 +1024,7 @@ function AlienTeam:InitTechTree()
     self.techTree:AddBuyNode(kTechId.Vampirism, kTechId.Shell, kTechId.None, kTechId.AllAliens)
     self.techTree:AddBuyNode(kTechId.Carapace, kTechId.Shell, kTechId.None, kTechId.AllAliens)
     self.techTree:AddBuyNode(kTechId.Regeneration, kTechId.Shell, kTechId.None, kTechId.AllAliens)
+    self.techTree:AddBuyNode(kTechId.Condense, kTechId.Shell, kTechId.None, kTechId.AllAliens)
 
     self.techTree:AddBuyNode(kTechId.Focus, kTechId.Veil, kTechId.None, kTechId.AllAliens)
     self.techTree:AddBuyNode(kTechId.Aura, kTechId.Veil, kTechId.None, kTechId.AllAliens)
@@ -1033,6 +1033,7 @@ function AlienTeam:InitTechTree()
     self.techTree:AddBuyNode(kTechId.Crush, kTechId.Spur, kTechId.None, kTechId.AllAliens)
     self.techTree:AddBuyNode(kTechId.Celerity, kTechId.Spur, kTechId.None, kTechId.AllAliens)
     self.techTree:AddBuyNode(kTechId.Adrenaline, kTechId.Spur, kTechId.None, kTechId.AllAliens)
+    self.techTree:AddBuyNode(kTechId.Silence, kTechId.Spur, kTechId.None, kTechId.AllAliens)
 
     -- Crag
     self.techTree:AddPassive(kTechId.CragHeal)
@@ -1187,6 +1188,7 @@ end
 
 
 function AlienTeam:OnGameStateChanged(_state)
+    PlayingTeam.OnGameStateChanged(self,_state)
     if _state == kGameState.Countdown then
         if not self:GetHasCommander() then
             self.originTechNode:SetResearched(true)
@@ -1315,7 +1317,7 @@ local kUpgradeStructureTable =
         name = "Shell",
         techId = kTechId.Shell,
         upgrades = {
-            kTechId.Vampirism, kTechId.Carapace, kTechId.Regeneration
+            kTechId.Vampirism, kTechId.Carapace, kTechId.Regeneration,kTechId.Condense
         }
     },
     {
@@ -1329,7 +1331,7 @@ local kUpgradeStructureTable =
         name = "Spur",
         techId = kTechId.Spur,
         upgrades = {
-            kTechId.Crush, kTechId.Celerity, kTechId.Adrenaline
+            kTechId.Crush, kTechId.Celerity, kTechId.Adrenaline,kTechId.Silence
         }
     }
 }
@@ -1354,16 +1356,6 @@ function AlienTeam:OnEvolved(techId)
     end
 
 end
-
-local function OnSetDesiredSpawnPoint(client, message)
-
-    local player = client:GetControllingPlayer()
-    if player then
-        player.desiredSpawnPoint = message.desiredSpawnPoint
-    end
-
-end
-Server.HookNetworkMessage("SetDesiredSpawnPoint", OnSetDesiredSpawnPoint)
 
 function AlienTeam:GetTotalInRespawnQueue()
 

@@ -1,6 +1,61 @@
 Exo.kBountyThreshold = kBountyClaimMinExo
 Exo.kMaxProtectionDamageReduction = 0
 
+
+function Exo:OnDestroy()
+
+    if self.flashlight ~= nil then
+        Client.DestroyRenderLight(self.flashlight)
+    end
+
+    if self.thrusterLeftCinematic then
+
+        Client.DestroyCinematic(self.thrusterLeftCinematic)
+        self.thrusterLeftCinematic = nil
+
+    end
+
+    if self.thrusterRightCinematic then
+
+        Client.DestroyCinematic(self.thrusterRightCinematic)
+        self.thrusterRightCinematic = nil
+
+    end
+
+    if self.flares then
+
+        Client.DestroyCinematic(self.flares)
+        self.flares = nil
+
+    end
+
+    if self.armorDisplay then
+
+        Client.DestroyGUIView(self.armorDisplay)
+        self.armorDisplay = nil
+
+    end
+
+    if self.healthWarningSound ~= nil then
+        self.healthWarningSound = nil
+    end
+
+    if self.healthCriticalSound ~= nil then
+        self.healthCriticalSound = nil
+    end
+
+    if Client then
+        if gHurtCinematic then
+
+            Client.DestroyCinematic(gHurtCinematic)
+            gHurtCinematic = nil
+
+        end
+    end
+    
+    Player.OnDestroy(self)
+end
+
 if Server then
 
     local kDeploy2DSound = PrecacheAsset("sound/NS2.fev/marine/heavy/deploy_2D")
@@ -49,6 +104,7 @@ function Exo:GetExoVariantOverride(variant)
     end
     return variant
 end
+
 
 
 function Exo:GetArmorAmount(armorLevels)

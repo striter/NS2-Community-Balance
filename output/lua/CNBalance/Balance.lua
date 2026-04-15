@@ -9,7 +9,8 @@ kResourceTowerResourceInterval = 6
 kTeamResourceWithoutTower = 0.5
 kMaxEfficiencyTowers = 3
 kTeamResourceEachTower = 1
-kPlayerResEachTower = 0.125 kPlayerResDeductionAboveLimit = 0
+kPlayerResEachTower = 0.125 kPlayerResDeductionAboveLimit = 0 --0.0025
+kSecondInitialInfantryPortalMinPlayerCount = 8
 
 --Pres reward for aggressive playing (too many farmers?)
 kTechDataPersonalResOnKill = {
@@ -49,19 +50,17 @@ kAssistMinimumDamageFraction = 0.35      --Avoid parasiter or babbler assists ,f
 kBountyScoreEachAssist = 1 kBountyScoreEachKill = 2 kMaxBountyScore = 512       --You can't kill 256 players in a row?
 kBountyClaimMinMarine = 5 kBountyClaimMinJetpack = 8 kBountyClaimMinExo = 12
 kBountyClaimMinSkulk = 5 kBountyClaimMinAlien = 8 kBountyClaimMinFade = 10 kBountyClaimMinOnos = 12
-kPResPerBountyClaimAsMarine = 0.25  kPResPerBountyClaimAsAlien = 0.25  kBountyClaimMultiplier = 2   kBountyCooldown = 20
-
+kBountyCooldown = 20 kBountyClaimMultiplier = 2
 
 --Toy for marine commander (remove all marines passive income)
 kMilitaryProtocolResearchCost = 0
 kMilitaryProtocolResearchTime = 12
-kMilitaryProtocolTResPerBountyClaim = 0.5
-kMilitaryProtocolResearchDurationMultiply = 1
+kMilitaryProtocolResearchDurationPerExtraPlayer = 0.1
 kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKill above
     [kTechId.Drifter] = 1,
-    [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.GorgeTunnel] = 3,
+    [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.GorgeTunnel] = 2,
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
-    [kTechId.Skulk] = 2, [kTechId.Gorge] = 2,[kTechId.Prowler] = 2, [kTechId.Lerk] = 2, [kTechId.Fade] = 2, [kTechId.Vokex] = 2,[kTechId.Onos] = 2,
+    [kTechId.Skulk] = 2, [kTechId.Gorge] = 2,[kTechId.Prowler] = 3, [kTechId.Lerk] = 3, [kTechId.Fade] = 5, [kTechId.Vokex] = 5,[kTechId.Onos] = 8,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
     [kTechId.Hive] = 20, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20
 }
@@ -79,12 +78,14 @@ kWelderDropCost = 2
 kWelderDropCooldown = 0
 
 kMineResearchCost  = 10
-kMineResearchTime  = 20
+kMineResearchTime  = 45
 
 kGrenadeTechResearchCost = 10   --10
-kGrenadeTechResearchTime = 20   --45
+kGrenadeTechResearchTime = 45   --45
 
-kMineCost = 20
+kMaxARCs = 6
+
+kMineCost = 10
 kMineDamage = 130
 kDropMineCost = 12
 kDropMineCooldown = 0
@@ -115,7 +116,7 @@ kHeavyMachineGunCost = 20
 kHeavyMachineGunDropCost = 15
 kHeavyMachineGunDropCooldown = 0
 
-kHeavyMachineGunDamage = 6  --8
+kHeavyMachineGunDamage = 8  --8
 kHeavyMachineGunDamageType = kDamageType.MachineGun
 kHeavyMachineGunClipSize = 150  --100
 kHeavyMachineGunClipNum = 3 --4
@@ -131,6 +132,8 @@ kUpgradedCommandStationCost = kCommandStationCost + kCommandStationUpgradeCost
 kObservatoryCost = 10
 kPhaseGateCost = 15
 kPhaseTechResearchCost = 10
+
+kPhaseTechResearchTime = 75
 
 -- Standard Supply
 kDragonBreathResearchCost = 30
@@ -154,7 +157,7 @@ kMACEmpBlastDetectRadius = kPowerSurgeEMPDamageRadius
 kMACEmpBlastTriggerInterval = 5
 
 kExtractorCost = 10
-kPoweredExtractorCost = 30
+kPoweredExtractorCost = 20
 
 kPoweredExtractorResearchCost = nil--10
 kPoweredExtractorResearchTime = nil--60
@@ -214,22 +217,22 @@ kSubMachineGunPointValue = 0
 kRifleMeleeDamage = 10
 
 --Knife
-kKnifeDamage = 20
+kKnifeDamage = 30
 kKnifeRange = 1.3
 kKnifeCost = 0
-kKnifeDamageType = kDamageType.Structural
+kKnifeDamageType = kDamageType.Light
 --
 
 kAxeDamage = 25
 kAxeDamageType = kDamageType.Structural
 
 --Light Machine Gun
-kLightMachineGunClipSize = 55
+kLightMachineGunClipSize = 50 
 kLightMachineGunClipNum = 4
-kLightMachineGunDamage = 10
+kLightMachineGunDamage = 10.8
 kLightMachineGunDamageType = kDamageType.Normal
 kLightMachineGunCost = 0
-kLightMachineGunAcquireCost = 30
+kLightMachineGunAcquireCost = 25
 kLightMachineGunPointValue = 0
 
 --Heavy Marine
@@ -242,9 +245,6 @@ kFlamethrowerCost = 20
 kFlamethrowerDropCost = 15
 kFlamethrowerDropCooldown = 0
 
-kOnFireHealingScalar = 1
-kOnFireEnergyRecuperationScalar = 0.8
-
 kFirePlayerDOTDelay = 1
 kPlayerFireDOTPerSecond = 4
 kDragonBreathPlayerFireDamagePerStack = { 0.7 , 0.8 , 0.9 , 1 }  kFlameThrowerPlayerFireDamagePerStack = { 5 , 5 , 5 , 5 }
@@ -256,10 +256,10 @@ kDragonBreathStructureFireDamagePerStack = { kStructureFireDOTPerSecond / 100, k
 kFlamethrowerStructureDamagePerStack = { kStructureFireDOTPerSecond, kStructureFireDOTPerSecond, kStructureFireDOTPerSecond, kStructureFireDOTPerSecond }
 kStructureFireDamageMaxStack = { kStructureFireDOTPerSecond * 3 , kStructureFireDOTPerSecond * 4, kStructureFireDOTPerSecond * 5, kStructureFireDOTPerSecond * 6  }
 
-kMinigunDamage = 7
-kMinigunDamageType = kDamageType.Exosuit
+kMinigunDamage = 10
+kMinigunDamageType = kDamageType.Normal
 kRailgunDamage = 10
-kRailgunChargeDamage = 140
+kRailgunChargeDamage = 154
 kRailgunDamageType = kDamageType.Structural
 
 kPulseGrenadeDamageRadius = 4
@@ -267,15 +267,17 @@ kPulseGrenadeEnergyDamageRadius = 4
 kPulseGrenadeDamage = 90  --75
 kPulseGrenadeEnergyDamage = 35  --25
 
-kNerveGasDamagePerSecond = 20
-
 kClusterGrenadeDamageRadius = 10
-kClusterGrenadeDamage = 80
+kClusterGrenadeDamage = 72
 kClusterGrenadeDamageType = kDamageType.ClusterFlame
 
 kClusterFragmentDamageRadius = 6
 kClusterFragmentDamage = 20
 kClusterGrenadeFragmentDamageType = kDamageType.ClusterFlameFragment
+
+kNerveGasDamagePerSecond = 50 kNerveGasRegenPerSecond = 10
+kNerveGasDamageType = kDamageType.NerveGas
+kNerveGasCloudRadius = 7
 
 kInfantryPortalBuildTime = 7
 kInfantryPortalCost = 15
@@ -288,7 +290,7 @@ kARCCost = 15
 kARCBuildTime = 5
 kMACCost = 4
 
-kSentryDamage = 4  kSentryWeapon1Scalar = 1.125 kSentryWeapon2Scalar = 1.25 kSentryWeapon3Scalar = 1.375
+kSentryDamage = 4 kSentryWeapon1Scalar = 1.125 kSentryWeapon2Scalar = 1.25 kSentryWeapon3Scalar = 1.375
 kSentryCost = 0
 kSentryBuildTime = 3
 kSentryBatteryCost = 20
@@ -296,16 +298,16 @@ kSentryBatteryBuildTime = 5
 
 kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 90
-kPrototypeLabCost = 25
+kPrototypeLabCost = 20
 
 kCannonTechResearchCost = 20
-kCannonTechResearchTime = 120
+kCannonTechResearchTime = 90
 
-kJetpackTechResearchCost = 25
-kJetpackTechResearchTime = 120
+kJetpackTechResearchCost = 30
+kJetpackTechResearchTime = 105
 
-kExosuitTechResearchCost = 20
-kExosuitTechResearchTime = 120
+kExosuitTechResearchCost = 25
+kExosuitTechResearchTime = 90
 
 kRoboticsFactoryBuildTime = 8
 
@@ -318,9 +320,9 @@ kCannonCost = 25
 kCannonDropCost = 18
 
 kCannonDamage = 25
+kCannonAoeDamage = 80
 kCannonAoeRadius = 2.5
 kCannonRateOfFire = 0.88
-kCannonAoeDamage = 80
 kCannonClipSize = 6
 kCannonPointValue = 15
 kCannonDamageType = kDamageType.Exosuit
@@ -335,8 +337,8 @@ kOnosDevourTime = 40
 
 kUmbraBulletModifier = 0.8
 
-kDevourEnergyCost = 30 --50
-kDevourPunchDamage = 50 --100
+kDevourEnergyCost = 45 kDevourMissedEnergyCost = 15
+kDevourPunchDamage = 30 --100
 
 kTunnelUpgradeTime = 60
 kShiftTunnelUpgradeCost = 25
@@ -353,16 +355,16 @@ kFadeEggCost = 70
 kOnosCost = 62
 kOnosEggCost = 100
 
-kTunnelEntranceCost = 7
-kTunnelRelocateCost = 5
+kTunnelEntranceCost = 6
+kTunnelRelocateCost = 4
 
 --Research with skill activation
 kResearchBioMassOneCost = 30
-kBioMassOneTime = 30
-kResearchBioMassTwoCost = 50
-kBioMassTwoTime = 45
-kResearchBioMassThreeCost = 65
-kBioMassThreeTime = 60
+kBioMassOneTime = 45
+kResearchBioMassTwoCost = 40
+kBioMassTwoTime = 60
+kResearchBioMassThreeCost = 60
+kBioMassThreeTime = 90
 
 --Recover
 kRecoverBioMassOneCost = 10
@@ -375,7 +377,7 @@ kRecoverBioMassThreeTime = 25
 --Skulk
 kParasiteEnergyCost = 30
 kAdrenalineParasiteEnergyCost = 17.5
-kParasiteDamageType = kDamageType.Normal
+kParasiteDamageType = kDamageType.Exosuit
 
 kXenocideResearchCost = 20
 kXenocideResearchTime = 60
@@ -385,9 +387,9 @@ kXenocideFuelTime = 120
 
 kXenocideEnergyCost = 30
 kXenocideDamageType = kDamageType.Structural
-kXenocideDamage = 150  kXenocideFuelDamage = 220 --200
+kXenocideDamage = 150  kXenocideFuelDamage = 200 --200
 kXenocideRange = 9 kXenocideFuelRange = 12 -- 14
-kXenocideDamageScalarEmptyHealth = 0.2 kXenocideDamageHealthScalar = 1 - kXenocideDamageScalarEmptyHealth
+kXenocideDamageScalarEmptyHealth = 0.1 kXenocideDamageHealthScalar = 1 - kXenocideDamageScalarEmptyHealth
 kXenocideSpawnReduction = 1 kXenocideFuelSpawnReduction = 0.6
 
 kBileBombResearchCost = 10
@@ -408,15 +410,15 @@ kVolleySpread = Math.Radians(3)
 kProwlerDamagePerPellet = 8 -- there are 6 pellets
 kVolleyRappelDamageType = kDamageType.Normal
 kVolleyEnergyCost = 7.0 --7.0
-kVolleyWebTime = 1.5
+kVolleyWebTime = 2
 
 kRappelDamage = 10 kRappelContinuousDamage = 5 kRappelContinuousDamageAgainstStructure = 80
-kRappelReelInitialSpeed = 10 kRappelReelContinuousSpeed = 4
+kRappelReelReactionTime = 0.7 kRappelReelContinuousSpeed = 8
 kRappelResearchCost = 10
 kRappelResearchTime = 20
-kRappelEnergyCost = 15
-kRappelReelEnergyCost = 20
-kRappelRange = 25
+kRappelEnergyCost = 12
+kRappelReelEnergyCost = 15
+kRappelRange = 30
 
 kAcidSprayResearchCost = 10
 kAcidSprayResearchTime = 60
@@ -441,6 +443,7 @@ kHealthOnBlink = 0
 kVokexCost = 42
 kVokexUpgradeCost = 5
 
+kSwipeShadowStepEnergyCost = 8
 kVokexShadowStepEnergyCost = 13
 kSwipeShadowStepDamage = 40
 kVokexGestateTime = 25
@@ -468,7 +471,7 @@ kVortexShadowStepResearchTime = 90
 kVortexLifetime = 6 kVortexInitTime = 0.5
 kVortexRadius = 4
 kVortexEnergyCost = 50
-kVortexPlayerDamagePerSecond = 6 kVortexStructureDamagePerSecond = 80
+kVortexPlayerDamagePerSecond = 10 kVortexStructureDamagePerSecond = 80
 kVortexSuckinVelocityPerSecond = 30
 
 kVortexMaxDamageEndurance = 10 kVortexPerPlayerDamageEnduranceCostPerSecond = 1 --kVortexProjectileEnduranceCost = 0
@@ -491,9 +494,9 @@ kBoneShieldMaxDuration = 10
 kStompEnergyCost = 40
 kStompDamageType = kDamageType.Structural
 kStompDamage = 60
-kStompFirstPDamage = 0  kStompDisruptTime = 3
-kStompSecondPDamage = 0 kStompSecondDisruptTime = 1.5
-kStompElseDamage = 0
+kStompFirstPDamage = 60  kStompDisruptTime = 3
+kStompSecondPDamage = 20 kStompSecondDisruptTime = 0
+kStompElseDamage = 10
 kStompRange = 12 
 
 kDisruptMarineTimeout = 4
@@ -520,8 +523,14 @@ kVeilCost = 15
 kContaminationCost = 5
 kContaminationCooldown = 10
 kBoneWallCost = 3
-kRuptureCost = 1
 kDrifterCost = 5
+
+kRuptureCost = 2
+kRuptureCooldown = 4
+kRuptureParasiteTime = 22
+kRuptureBurstTime = 1.25 --Time before rupture "pops"
+kRuptureEffectTime = 3
+kRuptureEffectRadius = 8.7
 
 kHydraDamage = 15
 kHydraAttackDamageType = kDamageType.Normal
@@ -546,18 +555,18 @@ kWhipBombardDamage = 45
 kWhipBombardDamageType = kDamageType.Structural
 
 kObservatoryScanCost = 4
-kScanCooldown = 5
+kScanCooldown = 3
 kObservatoryDistressBeaconCost = 10
 
-kArmsLabCost = 15
+kArmsLabCost = 20
 
-kWeapons1ResearchCost = 25 kWeapons1ResearchTime = 75
-kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 105
-kWeapons3ResearchCost = 45 kWeapons3ResearchTime = 150
+kWeapons1ResearchCost = 20 kWeapons1ResearchTime = 75
+kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 90
+kWeapons3ResearchCost = 45 kWeapons3ResearchTime = 120
 
-kArmor1ResearchCost = 25 kArmor1ResearchTime = 75
+kArmor1ResearchCost = 25 kArmor1ResearchTime = 90
 kArmor2ResearchCost = 35 kArmor2ResearchTime = 105
-kArmor3ResearchCost = 45 kArmor3ResearchTime = 135
+kArmor3ResearchCost = 40 kArmor3ResearchTime = 120
 
 kAdvancedMarineSupportResearchCost = 20
 kAdvancedMarineSupportResearchTime = 90
@@ -588,19 +597,20 @@ kNanoShieldCooldown = 5
 kNanoShieldDamageReductionDamage = 0.68
 
 kWelderPointValue = 1
+kSelfWeldAmount = 5
+kPlayerArmorWeldRate = 30
 
 kCombatBuilderCost = 3
 kCombatBuilderDropCost = 5
 kCombatBuilderPointValue = 2
 
 kMarineSentryCost = 2
-kMarineSentryPersonalCost = 15
+kMarineSentryPersonalCost = 7
 kMarineSentryDamage = 3  kMarineSentryWeapon1Scalar = 1.11  kMarineSentryWeapon2Scalar = 1.22 kMarineSentryWeapon3Scalar = 1.33
 kMarineSentryBuildTime = 3
-kMarineSentrySupply = 5
 
 kWeaponCacheCost = 3
-kWeaponCachePersonalCost = 12
+kWeaponCachePersonalCost = 10
 kWeaponCacheBuildTime = 6
 kWeaponCachePersonalCarries = 1
 kMarineSentryPersonalCarries = 2
@@ -614,8 +624,8 @@ kBioformSuppressProtocolCost = 0
 kBioformSuppressProtocolTime = 30
 kBioformSuppressRange = 58
 
-kMotionTrackInterval = 6
-kMotionTrackMinSpeed = 5
+kMotionTrackInterval = 12
+kMotionTrackMinSpeed = 6
 kMotionTrackResearchCost = 35
 kMotionTrackResearchTime = 90
 
@@ -653,9 +663,11 @@ kBabblerCost = 0
 --Hatch
 kBabblerExplodeAmount = 6
 kBabblerEggHatchInterval = 3
-kBabblerEggHatchRadius = 22
+kBabblerEggHatchRadius = 27
 
 kDrifterHatchTime = 12
+kDrifterParasiteTime = 12
+kDrifterParasiteRange = 5
 --
 kMarkerCost = 0 kMarkerCooldown = 5 
 kRallyCost = 0 kRallyCooldown = 30
@@ -665,14 +677,13 @@ kRallyScoreEachDuration = 2
 kRallyPResEachDuration = 0.2
 
 kGorgeDropCooldown = 1
-kGorgeDropEnergyReductionPerBiomass = 0.09
-kGorgeDropCooldownReductionPerBiomass = 0.09
+kGorgeDropEnergyReductionPerBiomass = 0.05
+kGorgeDropCooldownReductionPerBiomass = 0.05
 kGorgeReductionMin = 0.1
 
 kHydraCost = 0
 kClogCost = 0
-kGorgeTunnelCost = 4
-kGorgeTunnelBuildTime = 18.5
+kTunnelBuildTime = 18.5
 
 kBalanceOffInfestationHurtPercentPerSecond = 0.02
 kMinOffInfestationHurtPerSecond = 20
@@ -680,17 +691,18 @@ kMinOffInfestationHurtPerSecond = 20
 kOriginFormResearchCost = 0
 kOriginFormResearchTime = 12
 
-kOriginFormOnInfestationHealPercentPerSecond = 0.01
-kOriginFormOnInfestationMinHealPerSecond = 10
+kOnInfestationHealPercentPerSecond = 0.005
+kOnInfestationMinHealPerSecond = 10
 
 kGorgeAbilitiesCost = {
     [kTechId.Hydra] = 0, [kTechId.Clog] = 0, [kTechId.Web] = 0,[kTechId.SporeMine] = 0, [kTechId.BabblerEgg] = 3,
-    [kTechId.Cyst] = 0.5,    [kTechId.Egg] = 1.5, [kTechId.Tunnel] = 4, [kTechId.TunnelExit] = 4,
+    [kTechId.Cyst] = 0.5,  [kTechId.Egg] = 2, [kTechId.Tunnel] = 5, [kTechId.TunnelExit] = 3,
     [kTechId.Whip] = 8, [kTechId.Shift] = 15, [kTechId.Shade] = 15, [kTechId.Crag] = 15,
+    [kTechId.Spur] = 12, [kTechId.Shell] = 12, [kTechId.Veil] = 12,
     [kTechId.Harvester] = 8, [kTechId.ShiftHive] = 40, [kTechId.CragHive] = 40, [kTechId.ShadeHive] = 40,
-                         [kTechId.Spur] = 12, [kTechId.Shell] = 12, [kTechId.Veil] = 12,
 }
-kGorgeStructureScorePerRes = 0.4
+
+kGorgeStructureScorePerRes = 0.3
 kOriginPersonalResourcesPerKill = {
     [kTechId.Marine] = 2, [kTechId.JetpackMarine] = 3, [kTechId.Exo] = 4, [kTechId.Exosuit] = 2,
 }
@@ -701,7 +713,7 @@ kOriginFormAdditionalTRes = 40
 kOriginFormInitialGorgePRes = 60
 kOriginFormExtraGorgePRes = 20
 kOriginFormTeamResourceFetchThreshold = 10
-kOriginFormTeamResScalarHiveCount = { 0.75 , 0.5 , 0.25 , 0.125 , 0.125 , 0.125,0.125}
+kOriginFormTeamResScalarHiveCount = { 0.5 , 0.25 , 0.125 , 0.125 , 0.125 , 0.125, 0.125}
 
 kBiomassPerTower = {0,1,3,6}
 function GetOriginFormBiomassLevel(count)
@@ -714,22 +726,24 @@ function GetOriginFormBiomassLevel(count)
     return level
 end
 
---kTechRespawnTimeExtension = 
---{
---    --[kTechId.Armor1] = 0,[kTechId.Weapons1] = 0, [kTechId.Observatory] = 0,
---    --[kTechId.MinesTech] = 0,[kTechId.ShotgunTech] = 0,
---    [kTechId.Armor2] = 1,[kTechId.Weapons2] = 1, [kTechId.Armor3] = 2, [kTechId.Weapons3] = 2,
---    [kTechId.PhaseGate] = 1, [kTechId.AdvancedArmory] = 1,
---    [kTechId.ExosuitPrototypeLab] = 2, [kTechId.JetpackPrototypeLab] = 2, [kTechId.CannonPrototypeLab] = 2,
---    [kTechId.DragonBreath] = 2, [kTechId.ArmorRegen] = 2,  [kTechId.MotionTrack] = 2, --[kTechId.MACEmpBlast] = 1,[kTechId.GrenadeLauncherUpgrade] = 1,
---    
---    --[kTechId.BioMassOne] = 0, [kTechId.BioMassTwo] = 0, 
---    [kTechId.BioMassThree] = 1, [kTechId.BioMassFour] = 1, [kTechId.BioMassFive] = 1, [kTechId.BioMassSix] = 1,
---    [kTechId.TwoVeils] = 1,[kTechId.ThreeVeils] = 1,[kTechId.TwoShells] = 1,[kTechId.ThreeShells] = 1,[kTechId.TwoSpurs] = 1, [kTechId.ThreeSpurs] = 1,
---    [kTechId.BioMassSeven] = 2, [kTechId.BioMassEight] = 2,
---    [kTechId.BioMassNine] = 3, [kTechId.BioMassTen] = 3,
---    --[kTechId.BioMassEleven] = 1, [kTechId.BioMassTwelve] = 1,
---}
+kTechRespawnTimeExtension = 
+{
+    --[kTechId.Armor1] = 0,[kTechId.Weapons1] = 0, [kTechId.Observatory] = 0,
+    --[kTechId.MinesTech] = 0,[kTechId.ShotgunTech] = 0,
+    [kTechId.Armor2] = 1, [kTechId.Weapons2] = 1,
+    [kTechId.Armor3] = 2, [kTechId.Weapons3] = 2,
+    --[kTechId.PhaseGate] = 0, [kTechId.AdvancedArmory] = 0,
+    [kTechId.ExosuitPrototypeLab] = 2, [kTechId.JetpackPrototypeLab] = 2, [kTechId.CannonPrototypeLab] = 2,
+    --[kTechId.DragonBreath] = 2, [kTechId.ArmorRegen] = 2,  [kTechId.MotionTrack] = 2, --[kTechId.MACEmpBlast] = 1,[kTechId.GrenadeLauncherUpgrade] = 1,
+    
+    --[kTechId.BioMassOne] = 0, [kTechId.BioMassTwo] = 0, 
+    [kTechId.BioMassThree] = 1, [kTechId.BioMassFour] = 1, 
+    [kTechId.BioMassFive] = 1, [kTechId.BioMassSix] = 1,
+    --[kTechId.TwoVeils] = 1,[kTechId.ThreeVeils] = 1,[kTechId.TwoShells] = 1,[kTechId.ThreeShells] = 1,[kTechId.TwoSpurs] = 1, [kTechId.ThreeSpurs] = 1,
+    [kTechId.BioMassSeven] = 2, [kTechId.BioMassEight] = 2,
+    [kTechId.BioMassNine] = 2, [kTechId.BioMassTen] = 2,
+    --[kTechId.BioMassEleven] = 1, [kTechId.BioMassTwelve] = 1,
+}
 
 kDOTPlayerDamageMaxLifeTime = 2
 

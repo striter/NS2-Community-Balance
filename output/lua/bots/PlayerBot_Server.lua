@@ -33,7 +33,7 @@ Script.Load("lua/bots/FadeBrain.lua")
 Script.Load("lua/bots/OnosBrain.lua")
 
 
-local kBotPersonalSettings =
+local kBotPersonalSettings = 
 {
     { name = "The Salty Sea Captain", isMale = true },
     { name = "Ashton M", isMale = true },
@@ -87,6 +87,7 @@ local kBotPersonalSettings =
     { name = "OwNzOr", isMale = true },
     { name = "PaulWolfe", isMale = true},
     { name = "Patrick8675", isMale = true },
+    { name = "Predator", isMale = true },
     { name = "pSyk", isMale = true },
     { name = "Railo", isMale = true },
     { name = "Rantology", isMale = false },
@@ -100,7 +101,7 @@ local kBotPersonalSettings =
     { name = "SplatMan", isMale = true },
     { name = "Squeal Like a Pig", isMale = true },
     { name = "Steelcap", isMale = true },
-    { name = "SteveRock", isMale = true },
+	{ name = "SteveRock", isMale = true },
     { name = "Steven G.", isMale = true },
     { name = "Strayan", isMale = true },
     { name = "Sweets", isMale = true },
@@ -186,12 +187,42 @@ end
 -- help (0-1): Increases likeliness of bots helping (guarding/welding) humans
 -- aggro (0-1): Increases likeliness of bots pioritizing to attack enemies
 -- sneak (bool): Should bots sneak to avoid detection by closeby enemies
-local personalities =
+local personalities = 
 {
-    { -- new player
-        aim = 0.1,
-        help = 0.1,
-        aggro = 0.1,
+    { -- new player orginal alles auf 0.1
+        aim = 0.6, --vorher 0.5
+        help = 0.5,
+        aggro = 0.5,
+        sneaky = false,
+        label = "Recruit",
+    },
+    { -- normal player
+        aim = 0.7, --vorher 0.6
+        help = 0.9,
+        aggro = 0.6,
+        sneaky = false,
+        label = "Normal",
+    },
+    { -- aggesive player
+        aim = 0.9,
+        help = 0,
+        aggro = 0.9,
+        sneaky = true,  --???, not very "aggro" ...
+        label = "Aggro",
+    },
+    { -- veteran / pro
+        aim = 0.8,
+        help = 0.5,
+        aggro = 0.7,
+        sneaky = true,
+        label = "Veteran",
+    },
+}
+--[[orginal Werte:
+    { -- new player orginal alles auf 0.1
+        aim = 0.3,
+        help = 0.5,
+        aggro = 0.6,
         sneaky = false,
         label = "Recruit",
     },
@@ -216,7 +247,7 @@ local personalities =
         sneaky = true,
         label = "Veteran",
     },
-}
+} --]]
 
 -- Distribution of traits
 local personalitiesDist = {1, 2, 2, 3, 4, 4}
@@ -247,7 +278,7 @@ function PlayerBot:UpdateNameAndGender()
     player:SetName(self.name)
 
     --??? Filter and prevent TD rewards?
-    self.client.variantData =
+    self.client.variantData = 
     {
         isMale = settings.isMale,
         marineVariant = kMarineHumanVariants[kMarineHumanVariants[math.random(1, #kMarineHumanVariants)]],
@@ -283,11 +314,11 @@ function PlayerBot:UpdateNameAndGender()
         cystVariant = 1,
         drifterVariant = 1,
         alienTunnelsVariant = 1,
-
+        
         shoulderPadIndex = 0
     }
     self.client:GetControllingPlayer():OnClientUpdated(self.client, false)
-
+    
 end
 
 -- Just delete the bot brain when the game is reset, will trigger _LazilyInitBrain on next update
@@ -321,9 +352,15 @@ function PlayerBot:_LazilyInitBrain()
         elseif player:isa("Fade") then
             self.brain = FadeBrain()
 
+        elseif player:isa ("Vokex") then
+            self.brain = FadeBrain()
+
         elseif player:isa("Onos") then
             self.brain = OnosBrain()
 
+        elseif player:isa("Prowler") then
+            self.brain = GorgeBrain()
+            
         elseif player:isa("Exo") then   --FIXME Need to distinguish Minigun v Railgun
 
             local weaponHolder = player:GetActiveWeapon()
@@ -420,7 +457,7 @@ function PlayerBot:GenerateMove()
             self.brain.teamBrain:UnassignBot(self)
             return move --bail immediately, He's dead Jim
         end
-
+        
         local viewDir, moveDir, doJump = self:GetMotion():OnGenerateMove(player)
 
         move.yaw = GetYawFromVector(viewDir) - player:GetBaseViewAngles().yaw
@@ -448,42 +485,42 @@ function PlayerBot:TriggerAlerts()          --FIXME Unused. Utilize/Revise, or d
     PROFILE("PlayerBot:TriggerAlerts")
 
     local player = self:GetPlayer()
-
+    
     local team = player:GetTeam()
     if player:isa("Marine") and team and team.TriggerAlert then
-
+    
         local primaryWeapon
-        local weapons = player:GetHUDOrderedWeaponList()
+        local weapons = player:GetHUDOrderedWeaponList()        
         if table.icount(weapons) > 0 then
             primaryWeapon = weapons[1]
         end
-
+        
         -- Don't ask for stuff too often
         if not self.timeOfLastRequest or (Shared.GetTime() > self.timeOfLastRequest + 9) then
-
+        
             -- Ask for health if we need it
             if player:GetHealthScalar() < .4 and (math.random() < .3) then
-
+            
                 team:TriggerAlert(kTechId.MarineAlertNeedMedpack, player)
                 self.timeOfLastRequest = Shared.GetTime()
-
-                -- Ask for ammo if we need it
+                
+            -- Ask for ammo if we need it
             elseif primaryWeapon and primaryWeapon:isa("ClipWeapon") and (primaryWeapon:GetAmmo() < primaryWeapon:GetMaxAmmo()*.4) and (math.random() < .25) then
-
+            
                 team:TriggerAlert(kTechId.MarineAlertNeedAmmo, player)
                 self.timeOfLastRequest = Shared.GetTime()
-
+                
             elseif (not self:GetPlayerHasOrder()) and (math.random() < .2) then
-
+            
                 team:TriggerAlert(kTechId.MarineAlertNeedOrder, player)
                 self.timeOfLastRequest = Shared.GetTime()
-
+                
             end
-
+            
         end
-
+        
     end
-
+    
 end
 
 function PlayerBot:GetEngagementPointOverride()
@@ -513,7 +550,7 @@ function PlayerBot:OnThink()
         self.inAttackRange = false
         self.initializedBot = true
     end
-
+        
     self:UpdateNameAndGender()
 end
 

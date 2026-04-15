@@ -1,12 +1,13 @@
  if Server then
 
-     NS2Gamerules.kBalanceConfig = LoadConfigFile("Siege2.0Config.json", {
+     NS2Gamerules.kBalanceConfig = LoadConfigFile("NS2.0Config.json", {
          bountyActive = false,
          resourceEfficiency = false,
          recentWinsBalance = false,
+         deadlockInitialTime = 1800
      }, true)
 
-     NS2Gamerules.kRecentRoundStatus = LoadConfigFile("Siege2.0RoundStatus.json",{
+     NS2Gamerules.kRecentRoundStatus = LoadConfigFile("NS2.0RoundStatus.json",{
      },true)
      
      function NS2Gamerules:GetRecentRoundAlienWins()
@@ -23,8 +24,7 @@
          return kRecentRoundAliensWins
      end
      
-     local kRandomTencentage = 0
-     
+     local kRandomTencentage = -1
      function NS2Gamerules:RandomTechPoint(techPoints, teamNumber)
          local chosenIndex = math.random(1,#techPoints)
          local chosenTechPoint = techPoints[chosenIndex]
@@ -32,13 +32,44 @@
          return chosenTechPoint
      end
 
-     local baseSetGameState = NS2Gamerules.SetGameState
-     function NS2Gamerules:SetGameState(_state)
-         baseSetGameState(self,_state)
-         self.team1:OnGameStateChanged(_state)
-         self.team2:OnGameStateChanged(_state)
+     --local baseSetGameState = NS2Gamerules.SetGameState
+     function NS2Gamerules:SetGameState(state)
+         if state ~= self.gameState then
+
+             self.gameState = state
+             self.gameInfo:SetState(state)
+             self.timeGameStateChanged = Shared.GetTime()
+             self.timeSinceGameStateChanged = 0
+
+             if self.gameState == kGameState.Started then
+
+                 self.gameStartTime = Shared.GetTime()
+
+                 self.gameInfo:SetStartTime(self.gameStartTime)
+
+                 SendTeamMessage(self.team1, kTeamMessageTypes.GameStarted)
+                 SendTeamMessage(self.team2, kTeamMessageTypes.GameStarted)
+
+             end
+
+             -- On end game, check for map switch conditions
+             if state == kGameState.Team1Won or state == kGameState.Team2Won then
+
+                 if MapCycle_TestCycleMap() then
+                     self.timeToCycleMap = Shared.GetTime() + kPauseToSocializeBeforeMapcycle
+                 else
+                     self.timeToCycleMap = nil
+                 end
+
+             end
+
+         end
+         
+         self.team1:OnGameStateChanged(state)
+         self.team2:OnGameStateChanged(state)
+
      end
-     
+
      function NS2Gamerules:ResetGame()
 
          StatsUI_ResetStats()
@@ -269,6 +300,8 @@
          StatsUI_InitializeTeamStatsAndTechPoints(self)
      end
 
+     
+     
      function NS2Gamerules:OnUpdate(timePassed)
 
          PROFILE("NS2Gamerules:OnUpdate")
@@ -288,7 +321,6 @@
                  self:CheckGameEnd()
 
                  self:UpdateWarmUp()
-
                  self:UpdatePregame(timePassed)
                  self:UpdateToReadyRoom()
                  self:UpdateMapCycle()
@@ -313,6 +345,8 @@
                  self:UpdatePlayerSkill()
                  self:UpdateNumPlayersForScoreboard()
 
+                 self.gameInfo:SetMarineDeadlockTime(self.team1.deadlockTime)
+                 self.gameInfo:SetAlienDeadlockTime(self.team2.deadlockTime)
                  if Shared.GetThunderdomeEnabled() then
                      GetThunderdomeRules():CheckForAutoConcede(self)
                  end
@@ -341,7 +375,7 @@
          end
          
          local roundLength = lastRoundData.RoundInfo.roundLength
-         local playerCount = table.count(lastRoundData.PlayerStats)
+         local playerCount = table.countkeys(lastRoundData.PlayerStats)
          if roundLength < 300 or playerCount < 12 then return end
          
          table.insert(self.kRecentRoundStatus, 1, {
@@ -354,5 +388,34 @@
          )
          self.kRecentRoundStatus[11] = nil
          SaveConfigFile("NS2.0RoundStatus.json",self.kRecentRoundStatus)
+     end
+
+
+     function NS2Gamerules:OnCommanderLogin(commandStructure, newCommander)
+         local teamInfo = GetTeamInfoEntity(commandStructure:GetTeamNumber())
+
+         if teamInfo:GetLastCommIsBot() then
+             for i = 1, #gServerBots do
+                 local bot = gServerBots[i]
+                 if bot then
+                     local player = bot:GetPlayer()
+                     if player
+                             and player:isa("Commander")
+                             and player:GetTeamNumber() == commandStructure:GetTeamNumber()
+                     then
+                         bot:Disconnect()
+                         break
+                     end
+                 end
+             end
+         end
+
+         if not self.gameInfo:GetRookieMode() and not Shared.GetCheatsEnabled() and
+                 Server.IsDedicated() and not self.botTraining and newCommander:GetIsRookie() then
+
+             Server.SendNetworkMessage(nil, "CommanderLoginError", {}, true)
+         end
+
+         return not commandStructure:GetTeam():GetHasCommander()
      end
  end

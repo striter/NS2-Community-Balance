@@ -7,6 +7,7 @@ ModLoader.SetupFileHook("lua/Shared.lua", "lua/CNBalance/Shared.lua", "post")
 ModLoader.SetupFileHook("lua/NS2Gamerules.lua", "lua/CNBalance/NS2Gamerules.lua", "post")
 ModLoader.SetupFileHook("lua/Globals.lua", "lua/CNBalance/Globals.lua", "post" )
 ModLoader.SetupFileHook("lua/Team.lua", "lua/CNBalance/Team.lua", "post")
+ModLoader.SetupFileHook("lua/GameInfo.lua", "lua/CNBalance/GameInfo.lua", "replace")
 
 ModLoader.SetupFileHook("lua/Entity.lua", "lua/CNBalance/Entity.lua", "post")
 ModLoader.SetupFileHook("lua/ScriptActor.lua", "lua/CNBalance/ScriptActor.lua", "post" )
@@ -33,13 +34,16 @@ ModLoader.SetupFileHook("lua/ReadyRoomEmbryo.lua", "lua/CNBalance/ReadyRoomEmbry
 ModLoader.SetupFileHook("lua/Scoreboard.lua", "lua/CNBalance/Scoreboard.lua", "post" )
 ModLoader.SetupFileHook("lua/ServerStats.lua", "lua/CNBalance/ServerStats.lua", "replace" )
 --GUI
+ModLoader.SetupFileHook("lua/GUITechMap.lua", "lua/CNBalance/GUITechMap.lua", "replace")
+ModLoader.SetupFileHook("lua/Hud/HelpScreen/HelpScreenContent.lua", "lua/CNBalance/GUI/HelpScreenContent.lua", "post")
 ModLoader.SetupFileHook("lua/GUIMinimapFrame.lua", "lua/CNBalance/GUI/GUIMinimapFrame.lua", "post")
+ModLoader.SetupFileHook("lua/GUIUpgradeChamberDisplay.lua", "lua/CNBalance/GUI/GUIUpgradeChamberDisplay.lua", "replace")
 ModLoader.SetupFileHook("lua/Hud2/topBar/GUIHudTopBarObjectClasses.lua", "lua/CNBalance/GUI/GUIHudTopBarObjectClasses.lua", "replace")
 ModLoader.SetupFileHook("lua/GUIMinimap.lua", "lua/CNBalance/GUI/GUIMinimap.lua", "replace" )
 ModLoader.SetupFileHook("lua/GUIMinimapConnection.lua", "lua/CNBalance/GUI/GUIMinimapConnection.lua", "replace" )
 ModLoader.SetupFileHook("lua/GUIWorldText.lua", "lua/CNBalance/GUI/GUIWorldText.lua", "post" )
 ModLoader.SetupFileHook("lua/GUIUnitStatus.lua", "lua/CNBalance/GUI/GUIUnitStatus.lua", "replace" )
-ModLoader.SetupFileHook("lua/GUIScoreboard.lua", "lua/CNBalance/GUI/GUIScoreboard.lua", "post" )
+ModLoader.SetupFileHook("lua/TeamMessenger.lua", "lua/CNBalance/TeamMessenger.lua", "replace")
 
 
 --Effects
@@ -140,6 +144,7 @@ ModLoader.SetupFileHook("lua/MAC.lua", "lua/CNBalance/Structures/Marine/MAC.lua"
 
 ModLoader.SetupFileHook("lua/Marine.lua", "lua/CNBalance/Marine.lua", "post")
 ModLoader.SetupFileHook("lua/MarineSpectator.lua", "lua/CNBalance/MarineSpectator.lua", "post")
+ModLoader.SetupFileHook("lua/Jetpack.lua", "lua/CNBalance/Jetpack.lua", "post")
 ModLoader.SetupFileHook("lua/JetpackMarine.lua", "lua/CNBalance/JetpackMarine.lua", "post")
 ModLoader.SetupFileHook("lua/Exo.lua", "lua/CNBalance/Exo.lua", "post")
 ModLoader.SetupFileHook("lua/Exosuit.lua", "lua/CNBalance/Exosuit.lua", "post")
@@ -156,7 +161,8 @@ ModLoader.SetupFileHook("lua/Weapons/Marine/Pistol.lua", "lua/CNBalance/Weapons/
 ModLoader.SetupFileHook("lua/Weapons/Marine/Rifle.lua", "lua/CNBalance/Weapons/Marine/Rifle.lua", "post")
 ModLoader.SetupFileHook("lua/CommAbilities/Marine/EMPBlast.lua", "lua/CNBalance/Weapons/Marine/EMPBlast.lua", "post")
  ModLoader.SetupFileHook("lua/Weapons/Marine/PulseGrenade.lua", "lua/CNBalance/Weapons/Marine/PulseGrenade.lua", "post")
-ModLoader.SetupFileHook("lua/Weapons/Marine/ClusterGrenade.lua", "lua/CNBalance/Weapons/Marine/ClusterGrenade.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Marine/GasGrenade.lua", "lua/CNBalance/Weapons/Marine/GasGrenade.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Marine/ClusterGrenade.lua", "lua/CNBalance/Weapons/Marine/ClusterGrenade.lua", "replace")
 ModLoader.SetupFileHook("lua/Weapons/Marine/Shotgun.lua", "lua/CNBalance/Weapons/Marine/Shotgun.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/HeavyMachineGun.lua", "lua/CNBalance/Weapons/Marine/HeavyMachineGun.lua", "post")
 
@@ -167,6 +173,7 @@ ModLoader.SetupFileHook("lua/MarineVariantMixin.lua","lua/CNBalance/MarineVarian
 ModLoader.SetupFileHook("lua/ExoVariantMixin.lua","lua/CNBalance/ExoVariantMixin.lua","post")
 ModLoader.SetupFileHook("lua/RifleVariantMixin.lua","lua/CNBalance/RifleVariantMixin.lua","post")
 
+ModLoader.SetupFileHook("lua/GUICommanderButtons.lua", "lua/CNBalance/GUI/GUICommanderButtons.lua", "post" )
 ModLoader.SetupFileHook("lua/GUIInsight_PlayerHealthbars.lua", "lua/CNBalance/GUI/GUIInsight_PlayerHealthbars.lua", "post")
 --------------------
 
@@ -183,6 +190,8 @@ ModLoader.SetupFileHook("lua/GUIAlienHUD.lua", "lua/CNBalance/GUI/GUIAlienHUD.lu
 ModLoader.SetupFileHook("lua/GUIHiveStatus.lua", "lua/CNBalance/GUI/GUIHiveStatus.lua", "replace")
 
 ModLoader.SetupFileHook( "lua/CommAbilities/Alien/HallucinationCloud.lua", "lua/CNBalance/HallucinationCloud.lua", "post" )
+ModLoader.SetupFileHook( "lua/CommAbilities/Alien/BoneWall.lua", "lua/CNBalance/Structures/Alien/BoneWall.lua", "post" )
+
 ModLoader.SetupFileHook( "lua/AlienHallucination.lua", "lua/CNBalance/AlienHallucination.lua", "post" )
 ModLoader.SetupFileHook( "lua/Hallucination.lua", "lua/CNBalance/Hallucination.lua", "replace" )
 
@@ -194,6 +203,7 @@ ModLoader.SetupFileHook("lua/AlienUpgradeManager.lua", "lua/CNBalance/AlienUpgra
 
 ModLoader.SetupFileHook("lua/Alien.lua", "lua/CNBalance/Alien.lua", "post")
 ModLoader.SetupFileHook("lua/Alien_Server.lua", "lua/CNBalance/Alien_Server.lua", "post")
+ModLoader.SetupFileHook("lua/Alien_Upgrade.lua", "lua/CNBalance/Alien_Upgrade.lua", "replace")
 ModLoader.SetupFileHook("lua/Skulk.lua", "lua/CNBalance/Lifeforms/Skulk.lua", "post")
 ModLoader.SetupFileHook("lua/Gorge.lua", "lua/Prowler/Prowler.lua", "post")     --Hack
 ModLoader.SetupFileHook("lua/Fade.lua", "lua/CNBalance/Lifeforms/Vokex.lua", "post")     --Hack
@@ -221,7 +231,7 @@ ModLoader.SetupFileHook("lua/Weapons/Alien/ClogAbility.lua", "lua/CNBalance/Weap
 ModLoader.SetupFileHook("lua/Weapons/Alien/BabblerEggAbility.lua", "lua/CNBalance/Weapons/Alien/Gorge/BabblerEggAbility.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/WebsAbility.lua", "lua/CNBalance/Weapons/Alien/Gorge/WebsAbility.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Alien/SporeCloud.lua", "lua/CNBalance/Weapons/Alien/SporeCloud.lua", "replace")
-ModLoader.SetupFileHook("lua/Weapons/Alien/BabblerPheromone.lua", "lua/CNBalance/Weapons/Alien/Gorge/BabblerPheromone.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Alien/BabblerPheromone.lua", "lua/CNBalance/Weapons/Alien/Gorge/BabblerPheromone.lua", "replace")
 ModLoader.SetupFileHook("lua/Weapons/Alien/DropStructureAbility.lua", "lua/CNBalance/Weapons/Alien/Gorge/DropStructureAbility.lua", "replace")
 ModLoader.SetupFileHook("lua/GUIGorgeBuildMenu.lua", "lua/CNBalance/Weapons/Alien/Gorge/GUIGorgeBuildMenu.lua", "replace")
 

@@ -124,7 +124,51 @@ kPlayerEffectData =
             {player_sound = "sound/NS2.fev/marine/common/jump", classname = "Marine", done = true},
         },
     },
+    -- triggered server side only since the required data on client is missing
+    flinch =
+    {
+        flinchEffects =
+        {
+            -- marine flinch effects
+            {sound = "sound/NS2.fev/marine/common/wound_bigmac", classname = "Marine", sex="bigmac", damagetype = kDamageType.Gas, world_space = true, done = true},
+            {sound = "sound/NS2.fev/marine/common/wound_bigmac", classname = "Marine", sex="bigmac", world_space = true, done = true},
+            {sound = "sound/NS2.fev/marine/common/wound_bigmac_serious", classname = "Marine", sex = "bigmac", flinch_severe = true, world_space = true, done = true},
 
+            {sound = "sound/NS2.fev/marine/common/spore_wound_female", classname = "Marine", sex = "female", damagetype = kDamageType.Gas, world_space = true, done = true},
+            {sound = "sound/NS2.fev/marine/common/spore_wound", classname = "Marine", damagetype = kDamageType.Gas, world_space = true, done = true},
+
+            {sound = "sound/NS2.fev/marine/common/wound_serious_female", classname = "Marine", sex = "female", flinch_severe = true, world_space = true, done = true},
+            {sound = "sound/NS2.fev/marine/common/wound_serious", classname = "Marine", flinch_severe = true, world_space = true, done = true},
+
+            {sound = "sound/NS2.fev/marine/common/wound_female", classname = "Marine", sex = "female", world_space = true, done = true},
+            {sound = "sound/NS2.fev/marine/common/wound", classname = "Marine", world_space = true, done = true},
+
+            {sound = "sound/NS2.fev/marine/structures/mac/pain", classname = "MAC", world_space = true, done = true},
+
+            -- alien flinch effects
+            {sound = "sound/NS2.fev/alien/skulk/wound_serious", classname = "Skulk", flinch_severe = true, world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/skulk/wound", classname = "Skulk", world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/drifter/wound", classname = "Prowler", flinch_severe = true, world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/drifter/wound", classname = "Prowler", world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/gorge/wound_serious", classname = "Gorge", flinch_severe = true, world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/gorge/wound", classname = "Gorge", world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/lerk/wound_serious", classname = "Lerk", flinch_severe = true, world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/lerk/wound", classname = "Lerk", world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/fade/wound_serious", classname = "Fade", flinch_severe = true, world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/fade/wound", classname = "Fade", world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/fade/wound_serious", classname = "Vokex", flinch_severe = true, world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/fade/wound", classname = "Vokex", world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/onos/wound_serious", classname = "Onos", flinch_severe = true, world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/onos/wound", classname = "Onos", world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/drifter/wound", classname = "Drifter", world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/structures/shade/wound", classname = "Shade", world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/structures/hydra/wound", classname = "Hydra", world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/structures/crag/wound", classname = "Crag", world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/structures/whip/wound", classname = "Whip", world_space = true, done = true},
+            {sound = "sound/NS2.fev/alien/structures/harvester_wound", classname = "Harvester", world_space = true, done = true},
+        },
+    },
+    
     footstep =
     {
         footstepSoundEffects =

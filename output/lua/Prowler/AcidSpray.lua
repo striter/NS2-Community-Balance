@@ -8,6 +8,7 @@ class 'AcidSpray' (Ability)
 AcidSpray.kMapName = "acidspray"
 AcidSpray.kNumMissiles = 3
 AcidSpray.AttackSpeedMod = 2.66  -- 0.69second
+AcidSpray.kKeepCloakWhenSecondary = true
 local kAcidSpraySpread = Math.Radians(12) -- degrees
 
 local kAnimationGraph = PrecacheAsset("models/alien/prowler/prowler_view.animation_graph")
@@ -25,6 +26,7 @@ function AcidSpray:OnCreate()
     InitMixin(self, RappelMixin)
     
     self.primaryAttacking = false
+    self.timeDrawCooldown = 0
 
 end
 
@@ -141,14 +143,22 @@ function AcidSpray:GetSecondaryTechId()
     return kTechId.Rappel
 end
 
+
+function AcidSpray:OnDraw(player, previousWeaponMapName)
+    Ability.OnDraw(self, player, previousWeaponMapName)
+    if previousWeaponMapName == ProwlerStructureAbility.kMapName then
+        self.timeDrawCooldown = Shared.GetTime() + 0.3
+    end
+end
+
 function AcidSpray:OnUpdateAnimationInput(modelMixin)
 
     PROFILE("AcidSpray:OnUpdateAnimationInput")
 
 
     modelMixin:SetAnimationInput("ability", "parasite")
-    
-    local activityString = (self.primaryAttacking and "primary") or "none"
+
+    local activityString = (self.primaryAttacking and Shared.GetTime() > self.timeDrawCooldown) and "primary" or "none"
     modelMixin:SetAnimationInput("activity", activityString)
     
     --[[local player = self:GetParent()

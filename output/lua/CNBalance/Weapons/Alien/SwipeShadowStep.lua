@@ -9,7 +9,7 @@ local networkVars =
 }
 
 -- Make sure to keep damage vs. structures less then Skulk
-SwipeShadowStep.kSwipeEnergyCost = kSwipeEnergyCost
+SwipeShadowStep.kSwipeEnergyCost = kSwipeShadowStepEnergyCost
 SwipeShadowStep.kDamage = kSwipeShadowStepDamage
 SwipeShadowStep.kRange = 1.6
 
@@ -23,7 +23,7 @@ function SwipeShadowStep:OnCreate()
     
     self.lastSwipedEntityId = Entity.invalidId
     self.primaryAttacking = false
-
+    self.timeDrawCooldown = 0
 end
 
 function SwipeShadowStep:GetAnimationGraphName()
@@ -123,6 +123,13 @@ function SwipeShadowStep:OnTag(tagName)
 
 end
 
+function SwipeShadowStep:OnDraw(player, previousWeaponMapName)
+    Ability.OnDraw(self, player, previousWeaponMapName)
+    if previousWeaponMapName == AcidRocket.kMapName then
+        self.timeDrawCooldown = Shared.GetTime() + 0.3
+    end
+end
+
 function SwipeShadowStep:ModifyAttackSpeedView(attackSpeedTable)
     attackSpeedTable.attackSpeed = attackSpeedTable.attackSpeed * kAttackScalar
 end
@@ -144,7 +151,7 @@ function SwipeShadowStep:OnUpdateAnimationInput(modelMixin)
     
     modelMixin:SetAnimationInput("ability", "swipe")
     
-    local activityString = (self.primaryAttacking and "primary") or "none"
+    local activityString = (self.primaryAttacking and Shared.GetTime() > self.timeDrawCooldown) and "primary" or "none"
     modelMixin:SetAnimationInput("activity", activityString)
     
 end

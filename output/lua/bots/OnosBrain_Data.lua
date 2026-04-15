@@ -277,7 +277,7 @@ local function PerformAttackEntity( eyePos, bestTarget, bot, brain, move )
         local tNow = Shared.GetTime()
         local isStomping = hasStomp and goreWeapon:GetIsStomping()
         if brain.lastIsStomping and brain.lastIsStomping ~= isStomping then
-            --brain.wantsToStomp = false --Orginal = false (fehler der mit der zeit bewirkt das der onos nicht mehr kï¿½mpfen kann und in seiner stomp animation festhï¿½ngt, wenn auf false) bot kann sich selbst debuggen wenn der fehler autritt (SwitchToBoneShield) /false bezieht sich nur auf den code if not brain.wantsToStomp wenn er aktiv ist.  
+            --brain.wantsToStomp = false --Orginal = false (fehler der mit der zeit bewirkt das der onos nicht mehr kämpfen kann und in seiner stomp animation festhängt, wenn auf false) bot kann sich selbst debuggen wenn der fehler autritt (SwitchToBoneShield) /false bezieht sich nur auf den code if not brain.wantsToStomp wenn er aktiv ist.  
         end
 
         brain.lastIsStomping = isStomping
@@ -287,10 +287,14 @@ local function PerformAttackEntity( eyePos, bestTarget, bot, brain, move )
             distance <= kBotStompRange and
             (not bestTarget:isa("JetpackMarine") or bestTarget:GetIsOnGround())
 
+            --[[if brain.wantsToStomp and tNow - onosPlayer:GetTimeLastDamageTaken() < 1 and SwitchToBoneShield(onosPlayer, brain) then --orginal
+            move.commands = AddMoveCommand( move.commands, Move.PrimaryAttack )--]] --orginal
+
+        --Leichte Änderung am Orginalcode, damit der Bot beim Stompbug wieder alle angriffe ausführen kann.
         if tNow - onosPlayer:GetTimeLastDamageTaken() < 1 and SwitchToBoneShield(onosPlayer, brain) then
             move.commands = AddMoveCommand( move.commands, Move.PrimaryAttack )--]]
         elseif hasStomp and
-                ( ( tNow - brain.timeLastStomp > 6 ) or (brain.wantsToStomp) ) and
+                ( ( tNow - brain.timeLastStomp > 2 ) or (brain.wantsToStomp) ) and --orginal > 6
                 targetIsStompable then
 
             local isStompEquipped = hasStomp and goreWeapon:GetIsActive()
@@ -316,28 +320,56 @@ local function PerformAttackEntity( eyePos, bestTarget, bot, brain, move )
 
 end
 
-local function PerformAttack( eyePos, mem, bot, brain, move )
-
-    assert( mem )
+local function PerformAttack(eyePos, mem, bot, brain, move)
+    assert(mem)
 
     local target = Shared.GetEntity(mem.entId)
+    local player = bot:GetPlayer()
+    local client = player.GetClient and player:GetClient()
+    local isSelfBot = client and client:GetIsVirtual()
 
     if target ~= nil then
 
-        PerformAttackEntity( eyePos, target, bot, brain, move )
-         --local chatMsg =  bot:SendTeamMessage( "Stomp and crush TSF! " .. target:GetMapName() .. " in " .. target:GetLocationName() )
-         --   bot:SendTeamMessage(chatMsg, 60)
+        --------------------------------------------------------------------
+        -- Angriff ausführen
+        --------------------------------------------------------------------
+        PerformAttackEntity(eyePos, target, bot, brain, move)
+
+        --------------------------------------------------------------------
+        -- Anti-Spam Chatmeldung (gilt für ALLE Aliens)
+        --------------------------------------------------------------------
+        if isSelfBot and target:GetTeamNumber() ~= bot:GetTeamNumber() then
+
+            local location = target:GetLocationName()
+            local now = Shared.GetTime()
+
+            -- Letzte Meldung für diese Location
+            local lastReport = gLastAlienReports[location] or 0
+
+            -- Nur melden, wenn seit 60 Sekunden nichts kam
+            if now - lastReport > 60 then
+
+                local chatMsg =
+                    "Stomp and crush TSF! " ..
+                    target:GetMapName() .. " in " .. location
+
+                bot:SendTeamMessage(chatMsg, 60)
+
+                -- Zeitstempel aktualisieren
+                gLastAlienReports[location] = now
+            end
+        end
+        --------------------------------------------------------------------
 
     else
-    
-        -- mem is too far to be relevant, so move towards it
+        --------------------------------------------------------------------
+        -- Ziel verloren ? zum letzten bekannten Ort bewegen
+        --------------------------------------------------------------------
         bot:GetMotion():SetDesiredViewTarget(nil)
         PerformMove(eyePos, mem.lastSeenPos, bot, brain, move)
-
     end
-    
-    brain.teamBrain:AssignBotToMemory(bot, mem)
 
+    brain.teamBrain:AssignBotToMemory(bot, mem)
 end
 
 local kValidateOnosRetreat = function(bot, brain, onos, action)
@@ -459,6 +491,31 @@ local kExecAttackAction = function(move, bot, brain, onos, action)
     PerformAttack( onos:GetEyePos(), action.bestMem, bot, brain, move )
 end
 
+local kExecAttackAction = function(move, bot, brain, skulk, action)
+    PerformAttack(skulk:GetEyePos(), action.bestMem, bot, brain, move)
+end
+
+local kExecDestroyExosuit = function(move, bot, brain, onos, action)
+    PROFILE("OnosBrain_Data:destroyExosuit")
+
+    local exo = action.exo.entity
+    assert(exo ~= nil)
+
+    local aimPos = exo:GetOrigin() -- Get the position of the Exo
+    local distanceToExo = (onos:GetOrigin() - aimPos):GetLength()
+
+    -- Wenn die Entfernung zum Exo größer als 1.4 ist, bewege dich zum Exo
+    if distanceToExo > 1.4 then
+        bot:GetMotion():SetDesiredMoveTarget(aimPos)
+    end
+
+    -- Zielen und angreifen, wenn der Exo noch lebt und der Onos in Reichweite ist
+    if  distanceToExo <= 1.4 then
+        bot:GetMotion():SetDesiredViewTarget(aimPos) -- Aim at the Exo
+        move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
+    end
+end
+
 ------------------------------------------
 --  Each want function should return the fuzzy weight,
 -- along with a closure to perform the action
@@ -478,6 +535,36 @@ kOnosBrainActions =
     --                 -- like go to the marines, or defend
     --             end }
     -- end,
+    
+                function(bot, brain, onos)
+        PROFILE("OnosBrain_Data:destroyExosuit")
+        -- Log("OnosBrain - destroyExosuit")
+
+        local name = "destroyExosuit"
+        local sdb = brain:GetSenses()
+        local weight = 0
+
+        local exo = sdb:Get("destroyExosuit")
+
+        --[[ Don't build structures if we've been given an order or we're "on a mission"
+        if HasHighPriorityTask(bot, brain) then
+            return kNilAction
+        end--]]
+
+        if exo.entity then
+            weight = weight + 1
+        end
+
+        return 
+        {
+            name = name,
+            weight = weight,
+            fastUpdate = true,
+            exo = exo,
+            perform = kExecDestroyExosuit
+        }
+
+    end, -- DESTROY EXOSUIT
 
     ------------------------------------------
     -- Attack
@@ -534,6 +621,21 @@ function CreateOnosBrainSenses()
 
     local s = BrainSenses()
     s:Initialize()
+    
+            s:Add("destroyExosuit", function(db, onos)
+
+            local onosPos = onos:GetOrigin()
+            local exos = GetEntitiesWithinRange("Exosuit", onosPos, 25)
+
+            local dist, exo = GetMinTableEntry( exos, function(exo)
+                if exo:GetIsSighted() then
+                    return GetBotWalkDistance(onos, exo)
+                end
+                return nil
+                end)
+
+            return {entity = exo, distance = dist}
+            end)
 
     s:Add("allThreats", function(db, onos)
             local team = onos:GetTeamNumber()

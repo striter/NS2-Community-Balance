@@ -203,7 +203,7 @@ end
 if Server then
 
     function SporeMine:GetSendDeathMessageOverride()
-        return not self.consumed
+        return false
     end
     
     --function SporeMine:OnTakeDamage(_, attacker, doer)

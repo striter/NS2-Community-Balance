@@ -1,0 +1,12 @@
+-- ______ _     _
+-- | ___ (_)   | |                      Bishop - Bot Mod by Bhaz.
+-- | |_/ /_ ___| |__   ___  _ __
+-- | ___ \ / __| '_ \ / _ \| '_ \       Steam Workshop ID: 3397710344.
+-- | |_/ / \__ \ | | | (_) | |_) |      This mod is and always will be free.
+-- \____/|_|___/_| |_|\___/| .__/
+--                         | |
+--                         |_|
+
+modEntry = {
+  FileHooks = "lua/bishop/FileHooks.lua",
+}

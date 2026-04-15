@@ -1,4 +1,5 @@
 
+MarineTeam.kDeadlockAlert = PrecacheAsset("sound/ns2plus.fev/comm/deadlock")
 function MarineTeam:InitTechTree()
 
     PlayingTeam.InitTechTree(self)
@@ -141,7 +142,8 @@ function MarineTeam:InitTechTree()
     --Explosive
     self.techTree:AddUpgradeNode(kTechId.ExplosiveSupply, kTechId.CommandStation)
     self.techTree:AddTargetedActivation(kTechId.MineDeploy, kTechId.ExplosiveStation,kTechId.MinesTech)
-    self.techTree:AddPassive(kTechId.MinesUpgrade, kTechId.ExplosiveStation,kTechId.MinesTech)
+    self.techTree:AddPassive(kTechId.ClusterFlame, kTechId.ExplosiveStation)
+    --self.techTree:AddPassive(kTechId.MinesUpgrade, kTechId.ExplosiveStation,kTechId.MinesTech)
     self.techTree:AddResearchNode(kTechId.GrenadeLauncherUpgrade,kTechId.ExplosiveStation, kTechId.None)
 
     --Electronic
@@ -264,14 +266,39 @@ function MarineTeam:IsMilitaryProtocol()
     return self.militaryProtocolTechNode:GetResearched()
 end
 
-function MarineTeam:OnTeamKill(_techId, _fraction, _bountyScore)
+local kHiveTechIdTable = {
+    kTechId.Hive,
+    kTechId.ShiftHive,
+    kTechId.CragHive,
+    kTechId.ShadeHive,
+}
 
-    local pRes = PlayingTeam.OnTeamKill(self, _techId,_fraction, _bountyScore)
+function MarineTeam:OnTeamKill(_target,doer,_techId, _fraction)
+
+    local pRes = PlayingTeam.OnTeamKill(self,_target,doer, _techId,_fraction)
     if self:IsMilitaryProtocol() then
         local tRes = (kMilitaryProtocolTeamResourcesPerKill[_techId] or 0) * _fraction
         if tRes > 0 then
             self:AddTeamResources(tRes)  
         end
+    end
+
+    if table.contains(kHiveTechIdTable,_techId)  and self:GetNumCapturedTechPoints() == 0 then
+        local techPoint =  _target:GetAttached()
+
+        if techPoint then
+            techPoint:ClearAttached()
+            _target:ClearAttached()
+
+            local commandStructure = techPoint:SpawnCommandStructure(self:GetTeamNumber())
+            assert(commandStructure ~= nil)
+            commandStructure:Construct(5,doer)
+
+            local techPointCoords = techPoint:GetCoords()
+            techPointCoords.origin = commandStructure:GetOrigin()
+            commandStructure:SetCoords(techPointCoords)
+        end
+        
     end
     
     return pRes
@@ -294,7 +321,12 @@ function MarineTeam:CollectTeamResources(teamRes,playerRes,rtActiveCount)
 end
 
 function MarineTeam:GetResearchTimeFactor()
-    return self:IsMilitaryProtocol() and kMilitaryProtocolResearchDurationMultiply or 1
+    if not self:IsMilitaryProtocol() then return 1 end
+    
+    local factor = 1
+    local extraPlayerCount = (GetPlayersAboveLimit(self:GetTeamNumber()))
+    factor = factor + extraPlayerCount * kMilitaryProtocolResearchDurationPerExtraPlayer
+    return factor
 end
 
 function MarineTeam:ShouldHandleManualAlert()            --He can handle it himself
@@ -587,4 +619,130 @@ function MarineTeam:OnEntityChange(oldEntityId, newEntityId)
 
     self:UpdateClientOwnedStructures(oldEntityId)
 
+end
+
+
+local baseUpdate = MarineTeam.Update
+function MarineTeam:Update(timePassed)
+    baseUpdate(self,timePassed)
+    self:UpdateSpectators()
+end
+
+MarineTeam.OnRespawnQueueChanged = nil
+
+function MarineTeam:GetCriticalPosition()
+
+    -- get position of enemy team, ignore commanders
+    local numPositions = 0
+    local teamPosition = Vector(0, 0, 0)
+
+    for _, player in ipairs( GetEntitiesForTeam("Player", GetEnemyTeamNumber(self:GetTeamNumber())) ) do
+
+        if player:isa("Alien")  and player:GetIsAlive() then
+
+            numPositions = numPositions + 1
+            teamPosition = teamPosition + player:GetOrigin()
+
+        end
+
+    end
+
+    if numPositions > 0 then
+        return teamPosition / numPositions
+    end
+
+end
+
+function MarineTeam:UpdateSpectators()
+
+    if not GetWarmupActive() then
+        if self.timeLastSpectatorUpdate == nil then
+            self.timeLastSpectatorUpdate = Shared.GetTime() - 1
+        end
+    
+        if self.timeLastSpectatorUpdate + 1 <= Shared.GetTime() then
+    
+            local marineSpectators = self:GetSortedRespawnQueue()
+            local enemyTeamPosition = self:GetCriticalPosition()
+    
+            for i = 1, #marineSpectators do
+    
+                local marineSpectator = marineSpectators[i]
+                -- Do not spawn players waiting in the auto team balance queue.
+                if marineSpectator:isa("MarineSpectator") and not marineSpectator:GetIsWaitingForTeamBalance() then
+    
+                    -- Consider min death time.
+                    if not marineSpectator:GetIsRespawning() and marineSpectator:GetRespawnQueueEntryTime() < Shared.GetTime() then
+
+                        local success = self:AssignPlayerToInfantryPortal(marineSpectator, enemyTeamPosition)
+    
+                        -- We have no eggs currently, makes no sense to check for every spectator now.
+                        if not success then
+                            break
+                        end
+    
+                    end
+    
+                end
+    
+            end
+    
+            self.timeLastSpectatorUpdate = Shared.GetTime()
+    
+        end
+    end
+
+end
+
+function MarineTeam:AssignPlayerToInfantryPortal(player,enemyTeamPosition)
+
+    local success = false
+
+    local spawnPoint = player:GetDesiredSpawnPoint()
+
+    if not spawnPoint then
+        spawnPoint = enemyTeamPosition or player:GetOrigin()
+    end
+
+    local ips = GetEntitiesForTeam("InfantryPortal", self:GetTeamNumber())
+    Shared.SortEntitiesByDistance(spawnPoint, ips)
+
+    for _, current in ipairs(ips) do
+
+        if current:GetIsBuilt() and current:GetIsPowered() and not current:GetIsRespawning() then
+
+            current:SetQueuedPlayer(player)
+            success = true
+            break
+        end
+
+    end
+
+    return success
+
+end
+
+function MarineTeam:GetHasAbilityToRespawn()
+
+    local ipCount = 0
+    local ips = GetEntitiesForTeam("InfantryPortal", self:GetTeamNumber())
+    for k,v in pairs(ips) do
+        if GetIsUnitActive(v) then
+            ipCount = ipCount + 1
+        end
+    end
+
+    local ccs = GetEntitiesForTeam("CommandStation", self:GetTeamNumber())
+    return ipCount > 0 or table.icount(ccs) > 0
+
+end
+function MarineTeam:GetHasTeamLost()
+    local activePlayers = self:GetHasActivePlayers()
+    local abilityToRespawn = self:GetHasAbilityToRespawn()
+    if (not activePlayers and not abilityToRespawn)
+            or (self:GetNumPlayers() == 0)
+            or  self:GetHasConceded() then
+        return true
+    end
+    return false
 end

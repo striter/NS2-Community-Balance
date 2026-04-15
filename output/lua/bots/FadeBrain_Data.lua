@@ -13,7 +13,7 @@ local kFadeBrainEnergyRetreatStart = 0.3
 local kFadeBrainEnergyRetreatStop = 0.9
 
 -- If retreating from danger, try to go back to the hive for at least this much time
-local kFadeRetreatMinTime = 10.0
+local kFadeRetreatMinTime = 0 --orginal 10 (Fehlerquelle für Deadlock Fade am Hive????)
 
 local kFadeRequiredEnergyBlinkCombat = kStartBlinkEnergyCost * 6
 local kFadeBlinkSequenceJumps = 2
@@ -144,64 +144,82 @@ local function PerformMove( alienPos, targetPos, bot, brain, move )
 
 end
 
-local function GetAttackUrgency( bot, mem )
+local function EstimateFadeResponseUtility(fade, target)
+    PROFILE("FadeBrain - EstimateFadeResponseUtility")
 
-    -- See if we know whether if it is alive or not
+    local mloc = fade:GetLocationName()
+    local tloc = target:GetLocationName()
+
+    if mloc == tloc then
+        return 1.0
+    end
+
+    local dist = GetTunnelDistanceForAlien(fade, target)
+    return Clamp(1.0 - ( ( dist - 30.0 ) / 60.0 ), 0.0, 1.0)
+end
+
+local function GetAttackUrgency(bot, mem)
+
     local ent = Shared.GetEntity(mem.entId)
-    if (not HasMixin(ent, "Live") or not ent:GetIsAlive()) or (ent.GetTeamNumber and ent:GetTeamNumber() == bot:GetTeamNumber()) then
-        return nil
+    if not HasMixin(ent, "Live") or not ent:GetIsAlive() then
+        return 0.0
+    end
+    if ent.GetTeamNumber and ent:GetTeamNumber() == bot:GetTeamNumber() then
+        return 0.0
     end
 
     local botPos = bot:GetPlayer():GetOrigin()
     local targetPos = ent:GetOrigin()
-
-    -- Don't calculate tunnel distance for every single target memory, gets very expensive very quickly
-    -- local distance = select(2, GetTunnelDistanceForAlien(bot:GetPlayer(), ent))
     local distance = botPos:GetDistance(targetPos)
 
-    local immediateThreats = 
-    {
+    -- POWER NODES: nur angreifen wenn gebaut & aktiv
+    if mem.btype == kMinimapBlipType.PowerPoint then
+        local node = ent
+        if node ~= nil and node:GetIsSocketed() and node:GetIsPowering() then
+            return 0.65
+        else
+            return 0.0
+        end
+    end
+
+    -- Sofortige Bedrohungen
+    local immediateThreats = {
         [kMinimapBlipType.Marine] = true,
         [kMinimapBlipType.JetpackMarine] = true,
         [kMinimapBlipType.Exo] = true,
     }
 
-    if distance < 15 and immediateThreats[mem.btype] then
-        -- Attack the nearest immediate threat (urgency will be 1.1 - 2)
+    if distance < 10 and immediateThreats[mem.btype] then
         return 1 + 1 / math.max(distance, 1)
     end
 
-    -- No immediate threat - load balance!
-    local numOthers = bot.brain.teamBrain:GetNumAssignedTo( mem,
+    -- Load balancing
+    local numOthers = bot.brain.teamBrain:GetNumAssignedTo(mem,
         function(otherId)
-            if otherId ~= bot:GetPlayer():GetId() then
-                return true
-            end
-            return false
+            return otherId ~= bot:GetPlayer():GetId()
         end)
 
-    --Other urgencies do not rank anything here higher than 1!
-    local urgencies = 
-    {
+    local urgencies = {
         [kMinimapBlipType.Marine] =             numOthers >= 2 and 0.6 or 1,
         [kMinimapBlipType.JetpackMarine] =      numOthers >= 2 and 0.7 or 1.1,
         [kMinimapBlipType.Exo] =                numOthers >= 2 and 0.8 or 1.2,
 
+        -- Strukturen
         [kMinimapBlipType.Sentry] =             numOthers >= 2 and 0.5 or 0.95,
-        [kMinimapBlipType.ARC] =                numOthers >= 1 and 0.4 or 0.9,
-        [kMinimapBlipType.CommandStation] =     numOthers >= 2 and 0.3 or 0.75,
-        [kMinimapBlipType.PhaseGate] =          numOthers >= 1 and 0.2 or 0.9,
-        [kMinimapBlipType.Observatory] =        numOthers >= 1 and 0.2 or 0.8,
-        [kMinimapBlipType.Extractor] =          numOthers >= 1 and 0.2 or 0.7,
-        [kMinimapBlipType.InfantryPortal] =     numOthers >= 1 and 0.2 or 0.6,
+        [kMinimapBlipType.ARC] =                numOthers >= 4 and 0.4 or 0.9,
+        [kMinimapBlipType.CommandStation] =     numOthers >= 8 and 0.3 or 0.85,
+        [kMinimapBlipType.PhaseGate] =          numOthers >= 4 and 0.2 or 0.8,
+        [kMinimapBlipType.Observatory] =        numOthers >= 3 and 0.2 or 0.75,
+        [kMinimapBlipType.Extractor] =          numOthers >= 3 and 0.2 or 0.7,
+        [kMinimapBlipType.InfantryPortal] =     numOthers >= 3 and 0.2 or 0.6,
+        [kMinimapBlipType.PrototypeLab] =       numOthers >= 3 and 0.2 or 0.55,
+        [kMinimapBlipType.Armory] =             numOthers >= 3 and 0.2 or 0.5,
+        [kMinimapBlipType.RoboticsFactory] =    numOthers >= 3 and 0.2 or 0.5,
+        [kMinimapBlipType.ArmsLab] =            numOthers >= 3 and 0.2 or 0.5,
+        [kMinimapBlipType.MAC] =                numOthers >= 2 and 0.2 or 0.4,
     }
 
-    if urgencies[ mem.btype ] ~= nil then
-        return urgencies[ mem.btype ]
-    end
-
-    return nil
-
+    return urgencies[mem.btype] or 0.0
 end
 
 local function PerformAttackEntity( eyePos, bestTarget, bot, brain, move )
@@ -219,10 +237,39 @@ local function PerformAttackEntity( eyePos, bestTarget, bot, brain, move )
     local dist = select(2, GetTunnelDistanceForAlien(fade, bestTarget))
     local hasClearShot = dist < 15.0 and bot:GetBotCanSeeTarget( bestTarget )
 
+    --------------------------------------------------------------------
+    -- NEU: Struktur-Angriff (NICHTS vom Original überschrieben!)
+    --------------------------------------------------------------------
+    -- Niemals eigene Gebäude angreifen
+if bestTarget.GetTeamNumber and bestTarget:GetTeamNumber() == bot:GetTeamNumber() then
+    return
+end
+
+    if not isDodgeable then
+        -- Strukturmodus: Fade soll NICHT über das Ziel hinausschießen
+        if dist < 2.8 then
+            -- stehen bleiben
+            bot:GetMotion():SetDesiredMoveTarget(nil)
+            bot:GetMotion():SetDesiredMoveDirection(Vector(0,0,0))
+
+            fade:SetActiveWeapon(SwipeBlink.kMapName)
+
+            if bot.aim and bot.aim:UpdateAim(bestTarget, aimPos, kBotAccWeaponGroup.Swipe) then
+                move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
+            end
+        else
+            -- hinlaufen
+            PerformMove(eyePos, bestTarget:GetOrigin(), bot, brain, move)
+        end
+
+        return  -- WICHTIG: Player-Logik unten wird NICHT ausgeführt
+    end
+    --------------------------------------------------------------------
+
     --fuzzy range, to allow self+targ move to potentially get hit in range (plus latency, etc.)
     if dist <= kFadeAttackRange + math.random(0.05, 0.125) then
         doFire = true
-        move.commands = AddMoveCommand( move.commands, Move.PrimaryAttack ) -- hinzugefï¿½gt fï¿½r mehr Trefferchancen....
+        move.commands = AddMoveCommand( move.commands, Move.PrimaryAttack ) -- hinzugefügt für mehr Trefferchancen....
     end
 
     local idealMoveTo = GetPositionBehindTarget( fade, bestTarget, kFadeAttackRange )
@@ -242,7 +289,7 @@ local function PerformAttackEntity( eyePos, bestTarget, bot, brain, move )
                 IsPointInCone( aimPos, eyePos, fade:GetViewAngles():GetCoords().zAxis, math.rad(55) ) and
                 idealMoveTo or aimPos
 
-            local strafeTarget = (eyePos - aimPos):CrossProduct(Vector(0,1,0))      --clamp to X interval (e.g. strage left at least Y time?)
+            local strafeTarget = (eyePos - aimPos):CrossProduct(Vector(0,1,0))
             strafeTarget:Normalize()
         
             -- numbers chosen arbitrarily to give some appearance of random juking
@@ -255,7 +302,6 @@ local function PerformAttackEntity( eyePos, bestTarget, bot, brain, move )
         else
 
             if dist < kFadeAttackRange * 0.915 then
-            -- Stop running at the structure when close enough
                 bot:GetMotion():SetDesiredMoveTarget(nil)
                 move.commands = RemoveMoveCommand( move.commands, Move.Jump )
                 move.commands = RemoveMoveCommand( move.commands, Move.SecondaryAttack )
@@ -266,7 +312,6 @@ local function PerformAttackEntity( eyePos, bestTarget, bot, brain, move )
         move.commands = AddMoveCommand( move.commands, Move.PrimaryAttack )
 
     else
-    --FIXME This won't do any dodge of any sort, need another layer (is in sight / not seen, etc.)
         
         if idealMoveTo then
             PerformMove(eyePos, idealMoveTo, bot, brain, move)
@@ -278,27 +323,56 @@ local function PerformAttackEntity( eyePos, bestTarget, bot, brain, move )
     
 end
 
-local function PerformAttack( eyePos, mem, bot, brain, move )
-
-    assert( mem )
+local function PerformAttack(eyePos, mem, bot, brain, move)
+    assert(mem)
 
     local target = Shared.GetEntity(mem.entId)
+    local player = bot:GetPlayer()
+    local client = player.GetClient and player:GetClient()
+    local isSelfBot = client and client:GetIsVirtual()
 
     if target ~= nil then
 
-        PerformAttackEntity( eyePos, target, bot, brain, move )
-         --local chatMsg =  bot:SendTeamMessage( "Blink and slash marines! " .. target:GetMapName() .. " in " .. target:GetLocationName() )
-         --   bot:SendTeamMessage(chatMsg, 60)
+        --------------------------------------------------------------------
+        -- Angriff ausführen
+        --------------------------------------------------------------------
+        PerformAttackEntity(eyePos, target, bot, brain, move)
+
+        --------------------------------------------------------------------
+        -- Gemeinsames Alien-Memo (kein Spam, alle Aliens teilen es)
+        --------------------------------------------------------------------
+        if isSelfBot and target:GetTeamNumber() ~= bot:GetTeamNumber() then
+
+            local location = target:GetLocationName()
+            local now = Shared.GetTime()
+
+            -- Letzte Meldung für diese Location (geteilt von ALLEN Aliens)
+            local lastReport = gLastAlienReports[location] or 0
+
+            -- Nur melden, wenn seit 60 Sekunden nichts kam
+            if now - lastReport > 60 then
+
+                local chatMsg = bot:SendTeamMessage(
+                    "Blink and slash marines! " ..
+                    target:GetMapName() .. " in " .. location
+                )
+
+                bot:SendTeamMessage(chatMsg, 60)
+
+                -- Zeitstempel aktualisieren
+                gLastAlienReports[location] = now
+            end
+        end
+        --------------------------------------------------------------------
 
     else
-    
-        -- mem is too far to be relevant, so move towards it
+        --------------------------------------------------------------------
+        -- Ziel verloren ? zum letzten bekannten Ort bewegen
+        --------------------------------------------------------------------
         PerformMove(eyePos, mem.lastSeenPos, bot, brain, move)
-
     end
-    
-    brain.teamBrain:AssignBotToMemory(bot, mem)
 
+    brain.teamBrain:AssignBotToMemory(bot, mem)
 end
 
 ------------------------------------------

@@ -19,6 +19,33 @@ function CreateMarineComSenses()
 
     local s = BrainSenses()
     s:Initialize()
+    
+    s:Add("nearestPower", function(db)
+    local bestDist = 1000
+    local bestPower = nil
+    local commandStations = db:Get("builtCommandStations")
+    
+    for _, cs in ipairs(commandStations) do
+        local nearby = GetLocationGraph():GetDirectPathsForLocationName(cs:GetLocationName())
+        local powers = GetEntities("PowerPoint")
+        
+        for _, power in ipairs(powers) do
+            if nearby and nearby:Contains(power:GetLocationName()) and not power:GetIsBuilt() then
+                local dist = (cs:GetOrigin() - power:GetOrigin()):GetLength()
+
+                if dist < bestDist then
+                    bestDist = dist
+                    bestPower = power
+                end
+            end
+        end
+    end
+    
+    return {
+        entity = bestPower,
+        distance = bestDist
+    }
+end)
 
     s:Add("activeMarines", function(db)
         local activeMarines = {}
@@ -78,6 +105,12 @@ function CreateMarineComSenses()
     s:Add("numPlayersForTeam", function(db)
         return GetGamerules():GetTeam(db.bot:GetTeamNumber()):GetNumPlayers()
     end)
+    
+    s:Add("hasWelder", function(db)
+    return function(marine)
+        return marine:GetWeapon(Welder.kMapName) ~= nil
+    end
+    end)
 
     s:Add("numResourcePoints", function(db)
         return #GetEntities("ResourcePoint")
@@ -106,6 +139,19 @@ function CreateMarineComSenses()
         }
 
     end)
+    
+    s:Add("damagedStructures", function(db)
+    local teamNumber = db.bot:GetTeamNumber()
+    local damagedStructures = {}
+
+    for _, structure in ipairs(GetEntitiesWithMixinForTeam("Live", teamNumber)) do
+        if structure:GetIsAlive() and structure:GetHealth() < structure:GetMaxHealth() then
+            table.insert(damagedStructures, structure)
+        end
+    end
+
+    return damagedStructures
+    end)
 
     s:Add("hasArmsLab", function(db)
         return #db:Get("armsLabs") > 0
@@ -115,29 +161,92 @@ function CreateMarineComSenses()
         return GetEntitiesAliveForTeam("ArmsLab", db.bot:GetTeamNumber())
     end)
 
-    s:Add("weaponCounts", function(db)
+   -- Stelle sicher, dass diese Definition vorhanden ist, bevor die Sense "weaponCounts" aufgerufen wird
+local kDroppedWeaponTechIds = set{
+    kTechId.Shotgun,
+    kTechId.GrenadeLauncher,
+    kTechId.Flamethrower,
+    kTechId.HeavyMachineGun
+}
 
-        local result = { counts = IterableDict(), totalUpgradedWeapons = 0, numUpgradeableMarines = 0 }
-        local nMarines = #db:Get("marines")
-        local clipWeapons = db:Get("clipWeapons")
+local kWeaponToDropTechIds ={
+    [kTechId.Shotgun        ] = kTechId.DropShotgun,
+    [kTechId.GrenadeLauncher] = kTechId.DropGrenadeLauncher,
+    [kTechId.Flamethrower   ] = kTechId.DropFlamethrower,
+    [kTechId.HeavyMachineGun] = kTechId.DropHeavyMachineGun
+}
 
-        for _, weapon in ipairs(clipWeapons) do
-            local weaponTechId = weapon:GetTechId()
-            if kDroppedWeaponTechIds[weaponTechId] then
-                if result.counts[weaponTechId] then
-                    result.counts[weaponTechId] = result.counts[weaponTechId] + 1
-                else
-                    result.counts[weaponTechId] = 1
-                end
-                result.totalUpgradedWeapons = result.totalUpgradedWeapons + 1
+s:Add("weaponCounts", function(db)
+    local result = { counts = IterableDict(), totalUpgradedWeapons = 0, numUpgradeableMarines = 0 }
+    local nMarines = #db:Get("marines")
+    local clipWeapons = db:Get("clipWeapons")
+
+   -- print("Number of marines:", nMarines) -- Debug
+   -- print("Clip weapons:", clipWeapons) -- Debug
+
+    for _, weapon in ipairs(clipWeapons) do
+        local weaponTechId = weapon:GetTechId()
+
+      -- print("Checking weapon TechId:", weaponTechId) -- Debug
+
+        if kDroppedWeaponTechIds[weaponTechId] then
+            if result.counts[weaponTechId] then
+                result.counts[weaponTechId] = result.counts[weaponTechId] + 1
+            else
+                result.counts[weaponTechId] = 1
+            end
+            result.totalUpgradedWeapons = result.totalUpgradedWeapons + 1
+        end
+    end
+
+    result.numUpgradeableMarines = Clamp(nMarines - result.totalUpgradedWeapons, 0, nMarines)
+    
+    --print("Result counts:", result.counts) -- Debug
+    --print("Total upgraded weapons:", result.totalUpgradedWeapons) -- Debug
+    --print("Number of upgradeable marines:", result.numUpgradeableMarines) -- Debug
+
+    return result
+end)
+
+s:Add("groundWeapons", function(db)
+    local result = {}
+    local clipWeapons = db:Get("clipWeapons")
+
+    -- Nur Waffen ber�cksichtigen, die der Commander droppen kann
+    local droppable = {
+        [kTechId.Shotgun] = true,
+        [kTechId.GrenadeLauncher] = true,
+        [kTechId.Flamethrower] = true,
+        [kTechId.HeavyMachineGun] = true
+    }
+
+    for _, weapon in ipairs(clipWeapons) do
+        local techId = weapon:GetTechId()
+
+        -- Nur droppable Waffen pr�fen
+        if droppable[techId] then
+
+            -- Waffe liegt am Boden, wenn sie KEIN Parent hat
+            -- (Parent = Marine oder Armory)
+            if weapon:GetParent() == nil then
+                table.insert(result, weapon)
             end
         end
+    end
 
-        result.numUpgradeableMarines = Clamp(nMarines - result.totalUpgradedWeapons, 0, nMarines)
+    return result
+end)
 
-        return result
-
-    end)
+s:Add("countMarines", function(db)
+    local marineCount = 0
+    local marines = db:Get("marines")
+    for _, marine in ipairs(marines) do
+        if marine:GetIsAlive() then
+            marineCount = marineCount + 1
+        end
+    end
+    return marineCount
+end)
 
     s:Add("clipWeapons", function(db)
         return GetEntities("ClipWeapon")
@@ -169,33 +278,39 @@ function CreateMarineComSenses()
         return GetEntitiesForTeam("PhaseGate", db.bot:GetTeamNumber())
     end)
 
-    s:Add("bestArmoryForWeaponDrop", function(db) -- TODO(Bots): Cache in TeamBrain? (Using EntityChange)
+  s:Add("bestArmoryForWeaponDrop", function(db)
+    -- TODO(Bots): Cache in TeamBrain? (Using EntityChange)
+    local result = { armoryEnt = nil, isAdvanced = nil }
 
-        local result = { armoryEnt = nil, isAdvanced = nil }
+    -- Engine f�gt neue Entit�ten am Ende des Arrays hinzu, daher sollten die �ltesten zuerst in der Liste stehen
+    -- wenn GetEntities etc. aufgerufen wird
+    local commandStations = db:Get("builtCommandStations")
+    --print("Found command stations:", #commandStations) -- Debug
 
-        -- Engine adds new ents to back of array, so oldest should be first in list
-        -- when calling GetEntities etc
-        local commandStations = db:Get("builtCommandStations")
-        for _, cs in ipairs(commandStations) do
-            local numIPs = #GetEntitiesForTeamByLocation("InfantryPortal", db.bot:GetTeamNumber(), cs:GetLocationId())
-            if numIPs > 0 then -- This can be considered a "main base" location
+    for _, cs in ipairs(commandStations) do
+        local numIPs = #GetEntitiesForTeamByLocation("InfantryPortal", db.bot:GetTeamNumber(), cs:GetLocationId())
+        --print("Checking command station:", cs:GetId(), "Number of IPs:", numIPs) -- Debug
 
-                local armoriesInLoc = GetEntitiesForTeamByLocation("Armory", db.bot:GetTeamNumber(), cs:GetLocationId())
-                for _, armory in ipairs(armoriesInLoc) do
+        if numIPs > 0 then -- Dies kann als "Hauptbasis" betrachtet werden
+            local armoriesInLoc = GetEntitiesForTeamByLocation("Armory", db.bot:GetTeamNumber(), cs:GetLocationId())
+            --print("Found armories in location:", #armoriesInLoc) -- Debug
 
-                    local isAdvanced = armory:GetTechId() == kTechId.AdvancedArmory
-                    result.armoryEnt = armory
-                    result.isAdvanced = isAdvanced
+            for _, armory in ipairs(armoriesInLoc) do
+                local isAdvanced = armory:GetTechId() == kTechId.AdvancedArmory
+                --print("Checking armory:", armory:GetId(), "Is advanced:", isAdvanced) -- Debug
 
-                    return result
-
-                end
-
+                result.armoryEnt = armory
+                result.isAdvanced = isAdvanced
+                return result
             end
         end
+    end
 
-        return result
-    end)
+    --print("No valid armory found.") -- Debug
+    return result
+end)
+
+
 
     s:Add("builtArmories", function(db)
         local builtArmories = {}
@@ -282,6 +397,55 @@ function CreateMarineComSenses()
         return GetAvailableResourcePoints()
     end)
 
+   s:Add("doubleResPoints", function(db)
+    local doubleResPoints = {}
+    local resPoints = db:Get("availResPoints")
+    local extractors = db:Get("extractors")
+
+    -- Print("Available ResPoints: " .. tostring(#resPoints))  -- Debugging-Ausgabe
+    -- Print("Active Extractors: " .. tostring(#extractors))    -- Debugging-Ausgabe
+
+    local allResPoints = {}
+
+    -- Kombinieren der verf�gbaren ResPoints und aktiven Extractors
+    for _, resPoint in ipairs(resPoints) do
+        table.insert(allResPoints, resPoint)
+    end
+    for _, extractor in ipairs(extractors) do
+        table.insert(allResPoints, extractor)
+    end
+
+    local locationMap = {}
+
+    -- Gruppiere ResPoints nach LocationName
+    for _, resPoint in ipairs(allResPoints) do
+        local locationName = resPoint:GetLocationName()
+        if locationName then
+            if not locationMap[locationName] then
+                locationMap[locationName] = {}
+            end
+            table.insert(locationMap[locationName], resPoint)
+        else
+            -- Print("Invalid location detected for resPoint")
+        end
+    end
+
+    -- F�ge ResPoint-Paare hinzu, die sich am gleichen Standort befinden
+    for locationName, resPoints in pairs(locationMap) do
+        if #resPoints > 1 then
+            for i = 1, #resPoints - 1 do
+                for j = i + 1, #resPoints do
+                    table.insert(doubleResPoints, {resPoints[i], resPoints[j]})
+                    -- Print("Double ResPoints found: " .. resPoints[i]:GetLocationName() .. " and " .. resPoints[j]:GetLocationName())
+                end
+            end
+        end
+    end
+
+    -- Print("Total Double ResPoints: " .. tostring(#doubleResPoints))
+    return doubleResPoints
+end)
+
     s:Add("extractors", function(db)
         return GetEntitiesAliveForTeam("ResourceTower", db.bot:GetTeamNumber())
     end)
@@ -301,9 +465,28 @@ function CreateMarineComSenses()
 
         return ghostStructures
     end)
+    
+s:Add("incompleteStructures", function(db)
+    local incompleteStructures = {}
+    local mixinStructures = GetEntitiesWithMixinForTeam("Construct", db.bot:GetTeamNumber())
+    for _, structure in ipairs(mixinStructures) do
+        if structure:GetIsBuilt() == false then
+            table.insert(incompleteStructures, structure)
+        end
+    end
+    return incompleteStructures
+    end)
 
     s:Add("macs", function(db)
         return GetEntitiesAliveForTeam("MAC", db.bot:GetTeamNumber())
+    end)
+    
+    s:Add("arcs", function(db)
+    return GetEntitiesAliveForTeam("ARC", db.bot:GetTeamNumber())
+    end)
+    
+    s:Add("exos", function(db)
+    return GetEntitiesForTeam("Exo", db.bot:GetTeamNumber())
     end)
 
     s:Add("availTechPoints", function(db)
@@ -390,6 +573,21 @@ function CreateMarineComSenses()
         end)
         return {command = command, dist = dist}
     end)
+    
+    s:Add("techPoints", function(db)
+    return GetEntities("TechPoint")
+end)
+
+    s:Add("Observatorys", function(db)
+    local observatories = GetEntitiesAliveForTeam("Observatory", db.bot:GetTeamNumber())
+    local completedObservatories = {}
+    for _, obs in ipairs(observatories) do
+        if obs:GetIsBuilt() then
+            table.insert(completedObservatories, obs)
+        end
+    end
+    return completedObservatories
+end)
 
     -- Senses for techpath handling
 
@@ -451,6 +649,67 @@ function CreateMarineComSenses()
             return units[1]
         end
     end)
+    
+    s:Add("numBuiltHives", function(db)
+    local hives = GetEntitiesAliveForTeam("Hive", GetEnemyTeamNumber(db.bot))
+    local count = 0
+    for _, hive in ipairs(hives) do
+        if hive:GetIsBuilt() then
+            count = count + 1
+        end
+    end
+    return count
+end)
+
+s:Add("techPhaseComplete", function(db)
+    local bot = db.bot
+    local brain = bot.brain
+    local com = bot:GetPlayer()
+
+    local nextTechStep = GetMarineComNextTechStep(bot, brain, com)
+    return nextTechStep == kTechId.None
+end)
+
+s:Add("hasAdvancedArmory", function(db)
+    local team = db.bot:GetTeamNumber()
+    local units = GetEntitiesForTeam("Armory", team)
+
+    for _, armory in ipairs(units) do
+        if armory:GetTechId() == kTechId.AdvancedArmory then
+            return true
+        end
+    end
+
+    return false
+end)
+
+-- Pr�ft, ob eine RoboticsFactory mit ARC-Upgrade existiert
+s:Add("hasUpgradedRoboticsFactory", function(db)
+    local roboFactories = GetEntitiesAliveForTeam("RoboticsFactory", db.bot:GetTeamNumber())
+    for _, f in ipairs(roboFactories) do
+        if f:GetTechId() == kTechId.ARCRoboticsFactory then
+            --db.bot:SendTeamMessage("ARC-Upgrade erkannt!", 10, false, true)
+            return f
+        end
+    end
+    return nil
+end)
+
+    s:Add("hasRoboticsFactoryInBase", function(db)
+        local startingLocationId = Shared.GetStringIndex(db.bot.brain:GetStartingTechPoint() or "")
+        local units = GetEntitiesAliveForTeamByLocationWithTechId("RoboticsFactory", db.bot:GetTeamNumber(), startingLocationId )
+            if #units > 0 then
+                return units[1]
+            end
+        end)
+        
+        s:Add("hasARCRoboticsFactoryInBase", function(db)
+        local startingLocationId = Shared.GetStringIndex(db.bot.brain:GetStartingTechPoint() or "")
+        local units = GetEntitiesAliveForTeamByLocationWithTechId("ARCRoboticsFactory", db.bot:GetTeamNumber(), startingLocationId )
+            if #units > 0 then
+                return units[1]
+            end
+        end)--]]
 
     s:Add("forwardObservatories", function(db)
 
@@ -473,6 +732,7 @@ function CreateMarineComSenses()
 
     end)
 
+
     s:Add("mainStandardStation", function(db)
         local startingLocationId = Shared.GetStringIndex(db.bot.brain:GetStartingTechPoint() or "")
         local commandStationsInMainBase = GetEntitiesAliveForTeamByLocationWithTechId( "CommandStation", db.bot:GetTeamNumber(), startingLocationId ,kTechId.StandardStation)
@@ -491,6 +751,14 @@ function CreateMarineComSenses()
         end
     end)
 
+    s:Add("mainCannonLab", function(db)
+        local startingLocationId = Shared.GetStringIndex(db.bot.brain:GetStartingTechPoint() or "")
+        local units = GetEntitiesAliveForTeamByLocationWithTechId( "PrototypeLab", db.bot:GetTeamNumber(), startingLocationId, kTechId.CannonPrototypeLab )
+        if #units > 0 then
+            return units[1]
+        end
+    end)
+    
     s:Add("mainExosuitLab", function(db)
         local startingLocationId = Shared.GetStringIndex(db.bot.brain:GetStartingTechPoint() or "")
         local units = GetEntitiesAliveForTeamByLocationWithTechId( "PrototypeLab", db.bot:GetTeamNumber(), startingLocationId, kTechId.ExosuitPrototypeLab )

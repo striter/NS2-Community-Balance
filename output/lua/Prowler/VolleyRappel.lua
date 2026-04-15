@@ -7,7 +7,7 @@ class 'VolleyRappel' (Ability)
 VolleyRappel.kMapName = "volley"
 VolleyRappel.kStartOffset = -0.5
 VolleyRappel.AttackSpeedMod = 0.58 --0.515
-
+VolleyRappel.kKeepCloakWhenSecondary = true
 local kAnimationGraph = PrecacheAsset("models/alien/prowler/prowler_view.animation_graph") --PrecacheAsset("models/alien/skulk/skulk_view.animation_graph")
 local kVolleyRappelTracer = PrecacheAsset("cinematics/prowler/1p_tracer_residue.cinematic")
 local kAttackDuration = Shared.GetAnimationLength("models/alien/prowler/prowler_view.model", "bite_attack") -- 0.23333333432674 / 0.55555 = 0.42
@@ -66,7 +66,7 @@ function VolleyRappel:OnCreate()
     InitMixin(self, BulletsMixin)
     
     self.primaryAttacking = false
-    
+    self.timeDrawCooldown = 0    
     --[[if Client then
         Print("AS: ")
         Print(ToString(kAttackDuration))
@@ -166,15 +166,23 @@ function VolleyRappel:OnPrimaryAttackEnd()
     self.primaryAttacking = false
     
 end
+
+
+function VolleyRappel:OnDraw(player, previousWeaponMapName)
+    Ability.OnDraw(self, player, previousWeaponMapName)
+    if previousWeaponMapName == ProwlerStructureAbility.kMapName then
+        self.timeDrawCooldown = Shared.GetTime() + 0.3
+    end
+end
+
 function VolleyRappel:OnUpdateAnimationInput(modelMixin)
 
     PROFILE("VolleyRappel:OnUpdateAnimationInput")
     
     modelMixin:SetAnimationInput("ability", "bite")
     
-    local activityString = (self.primaryAttacking and "primary") or "none"
+    local activityString = (self.primaryAttacking and Shared.GetTime() > self.timeDrawCooldown) and "primary" or "none"
     modelMixin:SetAnimationInput("activity", activityString)    
-    
 end
 
 function VolleyRappel:OnTag(tagName)

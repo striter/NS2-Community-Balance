@@ -164,6 +164,9 @@ if Server then
     end
 end
 
+function PlayerUI_DeadlockActivated()
+    return PlayerUI_GetDeadlockTimeLeft() <= 0
+end
 
 function PlayerUI_GetGameTimeString()
 
@@ -180,10 +183,25 @@ function PlayerUI_GetGameTimeString()
     local teamIndex = player:GetTeamType()
 
     local appender = teamIndex == kTeam1Index and " " or "\n"
-    local gameTimeString = string.format(Locale.ResolveString(string.format("GAME_LENGTH_TEAM%i", teamIndex)), minutes, seconds)
+    local gameTimeString
+
+    local deadlockTime = PlayerUI_GetDeadlockTimeLeft()
+    if deadlockTime < 180 then
+        local sign = deadlockTime > 0 and 1 or -1
+        deadlockTime = deadlockTime * sign
+        local deadlockSeconds = math.floor(deadlockTime % 60)
+        local deadlockMinutes = math.floor(deadlockTime / 60)
+        
+        if sign > 0 then
+            gameTimeString = string.format(appender .. Locale.ResolveString(string.format("DEADLOCK_UNTIL_TEAM%i", teamIndex)),minutes,seconds,deadlockMinutes,deadlockSeconds)
+        else
+            gameTimeString = string.format(appender .. Locale.ResolveString(string.format("DEADLOCK_ACTIVATED_TEAM%i", teamIndex)),minutes,seconds,deadlockMinutes,deadlockSeconds)
+        end
+    else
+        gameTimeString = string.format(Locale.ResolveString(string.format("GAME_LENGTH_TEAM%i", teamIndex)), minutes, seconds)
+    end
     
     local respawnDuration = 0
-
     if teamIndex == kMarineTeamType then
         respawnDuration = respawnDuration + kMarineRespawnTime
     elseif teamIndex == kAlienTeamType then
@@ -196,6 +214,7 @@ function PlayerUI_GetGameTimeString()
     if respawnDuration > 1 then 
         gameTimeString = gameTimeString .. string.format(appender.. Locale.ResolveString(string.format("RESPAWN_EXTEND_TEAM%i", teamIndex)),respawnDuration)
     end
+    
     
     return gameTimeString
 end
@@ -231,7 +250,12 @@ function ApplyPushback(target, disableDuration, velocity)
     }
 
     target:AddTimedCallback(function(self)
-        if not self.stampedeVars then return end
+        if not self.SetVelocity 
+            or not self.stampedeVars
+        then
+            self.stampedeVars = nil
+            return 
+        end
 
         if self.stampedeVars.disableDur > 0 then
             self:DisableGroundMove(self.stampedeVars.disableDur)
@@ -282,16 +306,56 @@ end
 
 if Client then
     
-    function GetTechRestricted(techId)
+    function GetTechReputationRequired(techId)
         local reputationRequirement = kTechReputationByPass[techId]
-        if not reputationRequirement then return false end
+        if not reputationRequirement then return false,0 end
         local player = Client.GetLocalPlayer()
-        --local skill = player:GetPlayerTeamSkill()
-        --if skill > 2100 then return false end
         
         local reputation = Scoreboard_GetPlayerRecord(player:GetClientIndex()).reputation
         if not reputation then return false end
         
         return reputation < reputationRequirement, reputationRequirement
     end 
+    
+    function GetTechMemberLevelRequired(techId)
+
+        local memberLevelRequirement = kTechIdMemberLevelByPass[techId]
+        if not memberLevelRequirement then return false,0 end
+        local player = Client.GetLocalPlayer()
+
+        local memberLevel = Scoreboard_GetPlayerRecord(player:GetClientIndex()).memberLevel
+        return memberLevel < memberLevelRequirement , memberLevelRequirement
+    end
+end
+
+
+function GetIsCloseToMenuStructure(player)
+
+    local ptlabs = GetEntitiesForTeamWithinRange("PrototypeLab", player:GetTeamNumber(), player:GetOrigin(), PrototypeLab.kResupplyUseRange)
+    local armories = GetEntitiesForTeamWithinRange("Armory", player:GetTeamNumber(), player:GetOrigin(), Armory.kResupplyUseRange)
+    local weaponCaches = GetEntitiesForTeamWithinRange("WeaponCache", player:GetTeamNumber(), player:GetOrigin(), WeaponCache.kResupplyUseRange)
+    
+    return (ptlabs and #ptlabs > 0) or (armories and #armories > 0) or (weaponCaches and #weaponCaches > 0)
+
+end
+
+
+function GetPlayerCanUseEntity(player, target)
+
+    local useSuccessTable = { useSuccess = false }
+
+    if target.GetCanBeUsedNew then
+        useSuccessTable.useSuccess = true -- ... that dont seem right ... but theres alot of dependence on this... :T
+        target:GetCanBeUsedNew(player, useSuccessTable)
+    elseif target.GetCanBeUsed then
+        useSuccessTable.useSuccess = true -- ... that dont seem right ... but theres alot of dependence on this... :T
+        target:GetCanBeUsed(player, useSuccessTable)
+    end
+
+
+    --Print("GetPlayerCanUseEntity(%s, %s) returns %s", ToString(player), ToString(target), ToString(useSuccessTable.useSuccess))
+
+    -- really need to move this functionality into two mixin (when for user, one for useable)
+    return useSuccessTable.useSuccess or (target.GetCanAlwaysBeUsed and target:GetCanAlwaysBeUsed())
+
 end

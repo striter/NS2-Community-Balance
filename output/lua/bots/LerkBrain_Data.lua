@@ -9,7 +9,7 @@ local kLerkRetreatStartEnergy = 0.35
 local kLerkRetreatStopEnergy = 0.65
 
 local kLerkRetreatStartHealth = 0.6
-local kLerkRetreatStopHealth = 0.9
+local kLerkRetreatStopHealth = 0.99
 
 local kLerkBrainMinSporeRateTime = 8
 local kLerkBrainNearbyEnemyThreshold = 16
@@ -178,7 +178,7 @@ local function PerformRetreatMove(eyePos, aimPos, bot, brain, target, move)
     local pathIter = FindBackwardsPathPoint(brain, target:GetOrigin(), 16, brain.savedPathPointsIt)
     local pathPos = brain.savedPathPoints[pathIter]
 
-    local flyHeight = 25.0 --orginal =3 .0
+    local flyHeight = 3.0 --orginal =3 .0
 
     -- determine how much ceiling head-room we have (somewhat expensive)
     local trace = Shared.TraceRay(pathPos, pathPos + flyHeight, CollisionRep.Default, PhysicsMask.AllButPCsAndRagdolls, EntityFilterAll())
@@ -324,38 +324,128 @@ local function PerformSporeHostiles( move, bot, brain, player, action )
 
 end
 
-local function PerformAttackEntity( eyePos, bestTarget, lastSeenPos, bot, brain, move )
+local function PerformAttackEntity(eyePos, bestTarget, lastSeenPos, bot, brain, move)
     PROFILE("LerkBrain - PerformAttackEntity")
-
-    assert( bestTarget )
+    assert(bestTarget)
 
     local sighted = not HasMixin(bestTarget, "LOS") or bestTarget:GetIsSighted()
-    local aimPos = sighted and GetBestAimPoint( bestTarget ) or (lastSeenPos + Vector(0,0.5,0))
+    local aimPos = sighted and GetBestAimPoint(bestTarget) or (lastSeenPos + Vector(0, 0.5, 0))
     local doFire = false
-
     local distance = GetDistanceToTouch(eyePos, bestTarget)
-    if distance < 35 and bot:GetBotCanSeeTarget( bestTarget ) then
+    local lerk = bot:GetPlayer()
+
+    --------------------------------------------------------
+    -- STRUKTUREN / ARCS / EGGS / POWER NODES
+    --------------------------------------------------------
+    if not bestTarget:isa("Player") then
+
+        -- Wenn nah genug ? stehen bleiben und beißen
+        if distance < 1.8 then
+            bot:GetMotion():SetDesiredMoveTarget(nil)
+            bot:GetMotion():SetDesiredMoveDirection(Vector(0,0,0))
+
+            lerk:SetActiveWeapon(LerkBite.kMapName)
+
+            if bot.aim and bot.aim:UpdateAim(bestTarget, aimPos, kBotAccWeaponGroup.LerkBite) then
+                move.commands = AddMoveCommand(move.commands, Move.PrimaryAttack)
+            end
+
+        else
+            -- Zu weit weg ? hinfliegen
+            PerformMove(eyePos, bestTarget:GetOrigin(), bot, brain, move)
+        end
+
+        return
+    end
+ --------------------------------------------------------
+-- WAIT TIMER (AMBUSH) + COOLDOWN
+--------------------------------------------------------
+local enemyVisible = bot:GetBotCanSeeTarget(bestTarget)
+
+-- Cooldown aktiv? Dann NICHT warten
+if bot.lerkWaitCooldown and Shared.GetTime() < bot.lerkWaitCooldown then
+    -- Cooldown läuft ? Ambush überspringen
+else
+
+    -- Timer starten, wenn Gegner NICHT sichtbar ist
+    if not enemyVisible and distance < 15 then
+
+        if not bot.lerkWaitStart then
+            bot.lerkWaitStart = Shared.GetTime()
+            bot.lerkWaitPos = lerk:GetOrigin()
+        end
+
+        local wait = Shared.GetTime() - bot.lerkWaitStart
+        local moved = (lerk:GetOrigin() - bot.lerkWaitPos):GetLength() > 0.25
+
+        -- Warten (max. 15 Sekunden)
+        if wait <= 15.0 and not moved then
+            bot:GetMotion():SetDesiredMoveTarget(nil)
+            bot:GetMotion():SetDesiredMoveDirection(Vector(0,0,0))
+            bot:GetMotion():SetDesiredViewTarget(aimPos)
+            return
+        end
+
+        -- Timeout ? Ambush abbrechen + Cooldown setzen
+        bot.lerkWaitStart = nil
+        bot.lerkWaitCooldown = Shared.GetTime() + 5   -- 5 Sekunden Cooldown
+    end
+end
+--------------------------------------------------------
+
+    --------------------------------------------------------
+
+    --------------------------------------------------------
+    -- DEINE ORIGINALEN VARIABLEN
+    --------------------------------------------------------
+    if distance < 35 and bot:GetBotCanSeeTarget(bestTarget) then
         doFire = true
     end
 
     local nearbyThreats = brain:GetSenses():Get("nearbyThreats")
     local anyShotguns = nearbyThreats.numShotguns >= 1
-    local isAttackingMultiple = nearbyThreats.numEnemies > 2
-
-    local lerk = bot:GetPlayer()
-
+    local isAttackingMultiple = nearbyThreats.numEnemies >= 1
+    local numFriendlies = brain:GetSenses():Get("nearbyFriendlies")
+    local nearbyEnemies = brain:GetSenses():Get("nearbyEnemies")
     local botAccGroup = kBotAccWeaponGroup.LerkBite
     local commandFlag = 0
+
+    local nearestThreat = bot.brain:GetSenses():Get("nearestThreat")
+    local nearestThreatDistance = nearestThreat.distance 
+
+    local motion = bot:GetMotion()
+    local hasMoveTarget = motion.desiredMoveTarget ~= nil
+
+    --------------------------------------------------------
+    -- DEIN RETREAT BLOCK (UNVERÄNDERT)
+    --------------------------------------------------------
+    if nearbyEnemies >= 3
+       and not bot:GetBotCanSeeTarget(bestTarget)
+       and not lerk:GetIsUnderFire()
+       and not doFire
+       and not hasMoveTarget
+    then
+        brain:SetCurrentObjective(kLerkBrainObjectiveTypes.Retreat)
+        return
+    end
+    --------------------------------------------------------
+
+    --------------------------------------------------------
+    -- DEINE ORIGINAL-ATTACK-LOGIK
+    --------------------------------------------------------
     if doFire then
 
-        if anyShotguns then
+        if anyShotguns or isAttackingMultiple and numFriendlies == 1 or (lerk:GetIsUnderFire()) then
             PerformRetreatMove(eyePos, aimPos, bot, brain, bestTarget, move)
         else
+            PerformMove(eyePos, aimPos, bot, brain, move)
+        end       
+
+        if nearestThreatDistance and nearestThreatDistance <= 8 then
             PerformMove(eyePos, aimPos, bot, brain, move)
         end
 
         lerk:SetActiveWeapon(LerkBite.kMapName)
-
         local isTargetPlayer = bestTarget:isa("Player")
 
         if distance < 1.5 then
@@ -368,28 +458,39 @@ local function PerformAttackEntity( eyePos, bestTarget, lastSeenPos, bot, brain,
 
         doFire = bot.aim and bot.aim:UpdateAim(bestTarget, aimPos, botAccGroup)
         if doFire then
-
-            -- Does nothing if commandflag is 0
-            move.commands = AddMoveCommand( move.commands, commandFlag )
-
-            -- Handle attacking structure
+            move.commands = AddMoveCommand(move.commands, commandFlag)
             if not isTargetPlayer and distance < 1.75 then
                 bot:GetMotion():SetDesiredMoveTarget(nil)
             end
         end
 
-    else -- Cannot see target yet, just keep traveling to it's position
-        PerformMove(eyePos, bestTarget:GetOrigin(), bot, brain, move)
+    else
+        if numFriendlies > 1 and not sighted then
+            PerformMove(eyePos, aimPos, bot, brain, move)
+        elseif not sighted and isTargetPlayer and distance > 2 and distance < 20 and not bot:GetBotCanSeeTarget(bestTarget) and not lerk:GetIsUnderFire()
+            or not isTargetPlayer and isAttackingMultiple and distance > 2 and distance < 15 then
+            bot:GetMotion():SetDesiredViewTarget(aimPos)
+            bot:GetMotion():SetDesiredMoveTarget(nil)
+        elseif bot:GetBotCanSeeTarget(bestTarget)
+            or lerk:GetIsUnderFire()
+            or lerk:GetIsDetected()
+            or nearbyEnemies <= 1
+            or numFriendlies >= 2 then
+            PerformMove(eyePos, aimPos, bot, brain, move)
+        else
+            PerformMove(eyePos, aimPos, bot, brain, move)
+        end
     end
-    
 end
 
-local function PerformAttack( eyePos, mem, bot, brain, move )
+local function PerformAttack(eyePos, mem, bot, brain, move)
     PROFILE("LerkBrain - PerformAttack")
-
-    assert( mem )
+    assert(mem)
 
     local target = Shared.GetEntity(mem.entId)
+    local player = bot:GetPlayer()
+    local client = player.GetClient and player:GetClient()
+    local isSelfBot = client and client:GetIsVirtual()
 
     if target ~= nil then
         ---@type BotMotion
@@ -399,20 +500,18 @@ local function PerformAttack( eyePos, mem, bot, brain, move )
         local to = Pathing.GetClosestPoint(mem.lastSeenPos)
 
         if target:isa("Player") then
-
-            -- if we're too close to maintain a good standoff distance then start retreating back to the hive
             if (to - from):GetLengthXZ() < kLerkMaintainSpacing then
                 local nearestHive = brain:GetSenses():Get("nearestHive")
                 from = nearestHive.hive and nearestHive.hive:GetOrigin() or from
             end
 
-            local hasStandoffLen = mem.entId == brain.lastAttackEntityId
-                and brain.savedPathPoints and #brain.savedPathPoints > 0
+            local hasStandoffLen =
+                mem.entId == brain.lastAttackEntityId
+                and brain.savedPathPoints
+                and #brain.savedPathPoints > 0
                 and (to - brain.savedPathPoints[1]):GetLengthXZ() < kLerkMaintainSpacing
 
             if not hasStandoffLen then
-
-                -- Generate our "attack path" to follow in reverse order when backing up
                 brain.savedPathPoints = PointArray()
                 brain.savedPathPointsIt = 1
 
@@ -420,31 +519,52 @@ local function PerformAttack( eyePos, mem, bot, brain, move )
                 if reachable and #brain.savedPathPoints > 0 then
                     brain.lastAttackEntityId = mem.entId
                 end
-
             else
-
-                -- Walk the path points forwards and backwards to update our approximate 'current' position on the path
-                brain.savedPathPointsIt = FindClosestPathPoint(brain, from, brain.savedPathPointsIt)
-
+                brain.savedPathPointsIt =
+                    FindClosestPathPoint(brain, from, brain.savedPathPointsIt)
             end
-
         else
-
             brain.savedPathPoints = nil
             brain.savedPathPointsIt = nil
-
         end
 
-        PerformAttackEntity( eyePos, target, mem.lastSeenPos, bot, brain, move )
-        --local chatMsg =  bot:SendTeamMessage( "Wings and venom earthlings! " .. target:GetMapName() .. " in " .. target:GetLocationName() )
-        --    bot:SendTeamMessage(chatMsg, 60)
+        --------------------------------------------------------------------
+        -- Angriff ausführen
+        --------------------------------------------------------------------
+        PerformAttackEntity(eyePos, target, mem.lastSeenPos, bot, brain, move)
+
+        --------------------------------------------------------------------
+        -- Gemeinsames Alien-Memo (kein Spam, alle Aliens teilen es)
+        --------------------------------------------------------------------
+        if isSelfBot and target:GetTeamNumber() ~= bot:GetTeamNumber() then
+
+            local location = target:GetLocationName()
+            local now = Shared.GetTime()
+
+            -- Letzte Meldung für diese Location (geteilt von ALLEN Aliens)
+            local lastReport = gLastAlienReports[location] or 0
+
+            -- Nur melden, wenn seit 60 Sekunden nichts kam
+            if now - lastReport > 60 then
+
+                local chatMsg = bot:SendTeamMessage(
+                    "Wings and venom earthlings! " ..
+                    target:GetMapName() .. " in " .. location
+                )
+
+                bot:SendTeamMessage(chatMsg, 60)
+
+                -- Zeitstempel aktualisieren
+                gLastAlienReports[location] = now
+            end
+        end
+        --------------------------------------------------------------------
 
     else
         assert(false)
     end
-    
-    brain.teamBrain:AssignBotToMemory(bot, mem)
 
+    brain.teamBrain:AssignBotToMemory(bot, mem)
 end
 
 ------------------------------------------
@@ -525,46 +645,81 @@ kLerkBrainObjectives =
     ------------------------------------------
     -- Retreat
     ------------------------------------------
-    function(bot, brain, lerk)
+function(bot, brain, lerk)
 
-        PROFILE("LerkBrain_Data:retreat")
+    PROFILE("LerkBrain_Data:retreat")
 
-        local name, weight = LerkObjectiveWeights:Get(kLerkBrainObjectiveTypes.Retreat)
+    local name, weight = LerkObjectiveWeights:Get(kLerkBrainObjectiveTypes.Retreat)
 
-        if lerk.isHallucination then
-            return kNilAction
+    if lerk.isHallucination then
+        return kNilAction
+    end
+
+    local sdb = brain:GetSenses()
+
+    local hiveData = sdb:Get("nearestHive")
+    local hive = hiveData.hive
+    local hiveDist = hiveData.distance or 0
+
+    local healthFraction = lerk:GetHealthScalar()
+    local energyFraction = lerk:GetEnergy() / lerk:GetMaxEnergy()
+
+    local numFriendlies = sdb:Get("nearbyFriendlies") or 0
+    local numEnemies = sdb:Get("nearbyEnemies") or 0
+
+    ----------------------------------------------------------------------
+    -- 1. Health-basiertes Retreat (Original)
+    ----------------------------------------------------------------------
+    local shouldRetreat = hive and (
+        healthFraction <= kLerkRetreatStartHealth or
+        energyFraction <= kLerkRetreatStartEnergy
+    )
+
+    ----------------------------------------------------------------------
+    -- 2. Taktisches Retreat (NEU)
+    ----------------------------------------------------------------------
+    -- Beispielwerte:
+    -- Wenn 3+ Feinde und <=1 Freund ? Retreat
+    -- Wenn 4+ Feinde egal wie viele Freunde ? Retreat
+    -- Wenn 2+ Feinde und Health < 60% ? Retreat
+
+    if hive then
+        if numEnemies >= 4 then
+            shouldRetreat = true
+        elseif numEnemies >= 3 and numFriendlies <= 1 then
+            shouldRetreat = true
+        elseif numEnemies >= 2 and healthFraction < 0.6 then
+            shouldRetreat = true
         end
+    end
 
-        local sdb = brain:GetSenses()
+    ----------------------------------------------------------------------
+    -- 3. Hive-Heal-Bonus (Original)
+    ----------------------------------------------------------------------
+    if hiveDist < Hive.kHealRadius * 0.85 and healthFraction < 0.9 then
+        healthFraction = healthFraction / 6.0
+    end
 
-        local hiveData = sdb:Get("nearestHive")
-        local hive = hiveData.hive
-        local hiveDist = hiveData.distance or 0
-        local healthFraction = lerk:GetHealthScalar()
-        local energyFraction = lerk:GetEnergy() / lerk:GetMaxEnergy()
+    ----------------------------------------------------------------------
+    -- Wenn kein Retreat nötig ? kein Objective
+    ----------------------------------------------------------------------
+    if not shouldRetreat then
+        return kNilAction
+    end
 
-        -- If we are pretty close to the hive, stay with it a bit longer to encourage full-healing, etc.
-        -- so pretend our situation is more dire than it is
-        if hiveDist < Hive.kHealRadius * 0.85 and healthFraction < 0.9 then
-            healthFraction = healthFraction / 6.0
-        end
+    ----------------------------------------------------------------------
+    -- Retreat-Objective aktivieren
+    ----------------------------------------------------------------------
+    return {
+        name = name,
+        weight = weight,
+        fastUpdate = true,
+        hive = hive,
+        validate = kValidateRetreat,
+        perform = kExecRetreatObjective
+    }
 
-        local shouldRetreat = hive and (healthFraction <= kLerkRetreatStartHealth or energyFraction <= kLerkRetreatStartEnergy)
-
-        if not shouldRetreat then
-            return kNilAction
-        end
-
-        return {
-            name = name,
-            weight = weight,
-            fastUpdate = true,
-            hive = hive,
-            validate = kValidateRetreat,
-            perform = kExecRetreatObjective
-        }
-
-    end,
+end,
 
     ------------------------------------------
     --  RespondToThreats
@@ -750,6 +905,54 @@ function CreateLerkBrainSenses()
 
     local s = BrainSenses()
     s:Initialize()
+    
+s:Add("nearbyEnemies",
+    function(db, lerk)
+        local teamBrain = GetTeamBrain(lerk:GetTeamNumber())
+        local enemyTeam = GetEnemyTeamNumber(lerk:GetTeamNumber())
+        local lerkPos = lerk:GetOrigin()
+        local numEnemies = 0
+        local bestMem = nil
+
+        for _, mem in teamBrain:IterMemoriesNearLocation(lerk:GetLocationName(), enemyTeam) do
+            local isActiveThreat = mem.btype == kMinimapBlipType.Marine
+                or mem.btype == kMinimapBlipType.JetpackMarine
+                or mem.btype == kMinimapBlipType.Exo
+                or mem.btype == kMinimapBlipType.Sentry
+
+            if isActiveThreat then
+                local dist = lerkPos:GetDistance(mem.lastSeenPos)
+
+                if dist ~= nil and klerkBrainNearbyEnemyThreshold ~= nil and dist <= klerkBrainNearbyEnemyThreshold then
+                    numEnemies = numEnemies + 1
+                end
+            end
+        end
+
+        return numEnemies
+    end)
+
+    
+        s:Add("nearbyFriendlies",
+        function(db, lerk)
+            local teamBrain = GetTeamBrain(lerk:GetTeamNumber())
+            local roomMemories = teamBrain:GetMemoriesAtLocation(lerk:GetLocationName(), lerk:GetTeamNumber())
+
+            local numFriendlies = 0
+            local numEnemies = 0
+
+            for _, mem in ipairs(roomMemories) do
+                if mem.btype == kMinimapBlipType.Lerk
+                    or mem.btype == kMinimapBlipType.Skulk
+                    or mem.btype == kMinimapBlipType.Fade
+                    or mem.btype == kMinimapBlipType.Onos
+                then
+                    numFriendlies = numFriendlies + 1
+                end
+            end
+
+            return numFriendlies
+        end)
 
     s:Add("nearbyThreats",
         function(db, lerk)

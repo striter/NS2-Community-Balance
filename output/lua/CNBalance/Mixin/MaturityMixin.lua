@@ -22,8 +22,9 @@ if Server then
 
         self.maturityHealth = self.maturityHealth + healthDelta
 
-        return self:GetMaxHealth() + healthDelta
-
+        local newMaxHealth = self:GetMaxHealth() + healthDelta
+        newMaxHealth = math.max(newMaxHealth,1)
+        return newMaxHealth
     end
 
     local function GetMaturityArmor(self, fraction)

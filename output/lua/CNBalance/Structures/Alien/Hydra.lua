@@ -46,3 +46,9 @@ end
 function Hydra:GetExtraHealth(techLevel,extraPlayers,recentWins)
     return kHydraHealthPerBioMass * techLevel
 end
+
+if Server then
+    function Hydra:GetSendDeathMessageOverride()
+        return false
+    end
+end

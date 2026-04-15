@@ -58,13 +58,7 @@ const float4 edgeColorOrange = float4(1.0, 0.05, 0.0, 0) * 8.0;
 const float4 edgeColorDarkOrange = float4(0.8, 0.2, 0, 0) * 6.0;
 const float4 edgeColorGreen = float4(0.2, 0.7, 0.00, 0) * 4.0;
 
-const float4 geometryEdgeColor = float4(0.25, 0.25, 0.25, 0);
-const float4 geometryDarkEdgeColor = float4(0.67,0.92,0.77,0);
-const float4 geometryDarkSurfaceColor = float4(0.25, 0.5, 0.35,0) ;
-
-float invlerp(float _a, float _b, float _value){
-    return (_value - _a) * rcp(_b - _a);
-}
+const float4 edgeColor2 = float4(1.0, 1.0, 1.0, 0);
 
 float4 SFXDarkVisionPS(PS_INPUT input) : COLOR0
 {
@@ -127,23 +121,10 @@ float4 SFXDarkVisionPS(PS_INPUT input) : COLOR0
 
     } else // world geometry
     {
-        float edgeStrength = edge * step(1.0,edge) * step( depth1.r , 100.0);
-
-        //Let there be light
-        float luminance = inputPixel.r * 0.2126729 + inputPixel.g * 0.7151522 + inputPixel.b * 0.0721750;
-        float darkParameter = saturate(invlerp(0.1,0,luminance));
-        darkParameter *= darkParameter;
-
-        float4 geometryColor = lerp(geometryEdgeColor,geometryDarkEdgeColor ,darkParameter )  * edgeStrength;   //Edge
-
-        float3 normal = tex2D(normalTexture, texCoord).xyz;
-        float normalIntensity = saturate(pow((abs(normal.z - 0.5) + abs(normal.y - 0.5) + abs(normal.x - 0.5)) * 1.3, 8));
-        
-        float colorIntensity = darkParameter * max(normalIntensity,smoothstep(12.0,25.0,depth1.r));
-        geometryColor += geometryDarkSurfaceColor * colorIntensity;
-        //Lights out
-
-        
-        return lerp(inputPixel, geometryColor, ( 0.01 * amount ));  //Animation
+        edge = edge * step( depth1.r, 100 ); // no edges for skyboxes
+        float luminance = max(inputPixel.r,max(inputPixel.g,inputPixel.b));
+        edge = edge * (1 - luminance);
+        edge = edge * amount * 0.01;
+        return lerp(inputPixel, edgeColor2 , min(edge * 5,5) );
     }
 }

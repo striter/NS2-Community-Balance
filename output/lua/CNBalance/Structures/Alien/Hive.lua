@@ -59,6 +59,7 @@ kResearchToHiveType =
 }
 
 Hive.kMapName = "hive"
+Hive.kIgnoreDeadlock = true
 
 PrecacheAsset("cinematics/vfx_materials/hive_frag.surface_shader")
 
@@ -315,39 +316,6 @@ local function CouldUseACommander(self)
     return true
 end
 
-if Server then
-    --local kMaximizeBiomassResearchId = {
-    --    [kTechId.ShiftHive] = kTechId.ShiftTunnel,
-    --    [kTechId.CragHive] = kTechId.CragTunnel,
-    --    [kTechId.ShadeHive] = kTechId.ShadeTunnel,
-    --}
-
-    local kHiveBiomassSource = {
-        [kTechId.ShiftHive] = "Shift",
-        [kTechId.CragHive] = "Crag",
-        [kTechId.ShadeHive] = "Shade",
-    }
-
-    function Hive:UpdateBiomassLevel(team)
-        if not team:IsOriginForm() then return end
-        local techId = self:GetTechId()
-        local biomassSourceName = kHiveBiomassSource[techId]
-        if not biomassSourceName then return end
-        local newBiomassLevel = self:GetIsBuilt() and GetOriginFormBiomassLevel(#GetEntitiesAliveForTeam(biomassSourceName,self:GetTeamNumber())) or 0
-
-        if self.bioMassLevel == newBiomassLevel then return end
-        self.bioMassLevel = newBiomassLevel
-        team:SetBioMassPreserve(techId,self.bioMassLevel)
-        --if self.bioMassLevel == 4 then
-        --    local techId = kMaximizeBiomassResearchId[techId]
-        --    local techTree = team:GetTechTree()
-        --    local researchNode = techTree:GetTechNode(techId)                
-        --    researchNode:SetResearched(true)
-        --    techTree:QueueOnResearchComplete(techId, self)
-        --end
-    end
-    
-end
 
 function Hive:ConstructionTimeBonus()
     local teamInfoEntity = GetTeamInfoEntity(self:GetTeamNumber())
@@ -445,7 +413,6 @@ ShiftHive.kMapName = Hive.kMapName
 --Shared.LinkClassToMap("ShiftHive", ShiftHive.kMapName, { })
 
 Script.Load("lua/CNBalance/Mixin/SupplyProviderMixin.lua")
-local baseOnInitialized = Hive.OnInitialized
 function Hive:OnInitialized()
 
     InitMixin(self, InfestationMixin)
@@ -471,6 +438,7 @@ function Hive:OnInitialized()
         if Server then
             InitMixin(self, SupplyProviderMixin)
         end
+        self.timeLastOriginformBiomassCheck = Shared.GetTime()
     elseif Client then
 
         InitMixin(self, UnitStatusMixin)
@@ -649,6 +617,15 @@ if Server then
 
     end
     
+    local baseOnInitialized = Hive.OnInitialized
+    function Hive:OnInitialized()
+        baseOnInitialized(self)
+        local team = self:GetTeam()
+        if team then
+            team:OnDeadlockExtend(self:GetTechId())
+        end
+    end
+    
     local baseOnKill = Hive.OnKill
     function Hive:OnKill(attacker, doer, point, direction)
 
@@ -659,6 +636,13 @@ if Server then
             researchNode:ClearResearching()
             techTree:SetTechNodeChanged(researchNode, string.format("researchProgress = %.2f", 0))
         end
+
+        local amount = LookupTechData(techId, kTechDataCostKey, 0)
+        if amount > 0 then
+            local team = self:GetTeam()
+            team:AddTeamResources(amount * 0.5)
+        end
+        
         baseOnKill(self,attacker, doer, point, direction)
     end
     

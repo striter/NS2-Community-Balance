@@ -769,6 +769,19 @@ local function ScanForNearbyEnemy(self)
 
 end
 
+local function ParasiteNearbyEnemy(self)
+    if self:GetIsCamouflaged() then return end
+    
+    self.kLastParasitedTime = self.kLastParasitedTime or 0
+    if self.kLastParasitedTime + kDetectInterval < Shared.GetTime() then
+        self.kLastParasitedTime = Shared.GetTime()
+        local owner = self:GetOwner()
+        for k,v in pairs(GetEntitiesWithMixinForTeamWithinRange("ParasiteAble",GetEnemyTeamNumber(self:GetTeamNumber()), self:GetOrigin(), kDrifterParasiteRange)) do
+            v:SetParasited(owner,kDrifterParasiteTime)
+        end
+    end
+end
+
 function Drifter:PerformAction(techNode)
 
     if techNode:GetTechId() == kTechId.FollowAlien then
@@ -808,6 +821,8 @@ function Drifter:OnUpdate(deltaTime)
 
         ScanForNearbyEnemy(self)
 
+        ParasiteNearbyEnemy(self)
+        
         self.camouflaged = (not self:GetHasOrder() or self:GetCurrentOrder():GetType() == kTechId.HoldPosition ) and not self:GetIsInCombat()
 
         self.hasCamouflage = GetHasTech(self, kTechId.ShadeHive)

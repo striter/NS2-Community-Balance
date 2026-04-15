@@ -38,6 +38,7 @@ Script.Load("lua/ObstacleMixin.lua")
 Script.Load("lua/InfestationMixin.lua")
 Script.Load("lua/AlienTunnelVariantMixin.lua")
 Script.Load("lua/BiomassHealthMixin.lua")
+Script.Load("lua/RailgunTargetMixin.lua")
 
 
 Script.Load("lua/Tunnel.lua")
@@ -134,6 +135,7 @@ function TunnelEntrance:OnCreate()
         self.isPlayingConnectedEffects = false
 
     elseif Client then
+        InitMixin(self, RailgunTargetMixin)
         InitMixin(self, CommanderGlowMixin)
     end
 
@@ -977,7 +979,16 @@ if Server then
 end
 
 function TunnelEntrance:GetExtraHealth(techLevel,extraPlayers,recentWins)
-    return kTunnelEntranceHealthPerPlayerAdd * (extraPlayers - recentWins * 2)
+    return kTunnelEntranceHealthPerPlayerAdd * (extraPlayers - recentWins)
+end
+
+
+function TunnelEntrance:ConstructionTimeBonus()
+    local teamInfoEntity = GetTeamInfoEntity(self:GetTeamNumber())
+    if teamInfoEntity then
+        return teamInfoEntity.isOriginForm and 2 or 1
+    end
+    return 1
 end
 
 ---
