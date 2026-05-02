@@ -55,7 +55,7 @@ kBountyCooldown = 20 kBountyClaimMultiplier = 2
 --Toy for marine commander (remove all marines passive income)
 kMilitaryProtocolResearchCost = 0
 kMilitaryProtocolResearchTime = 12
-kMilitaryProtocolResearchDurationPerExtraPlayer = 0.1
+kMilitaryProtocolResearchDurationPerExtraPlayer = 0.05
 kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKill above
     [kTechId.Drifter] = 1,
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 2, [kTechId.InfestedTunnel] = 2, [kTechId.GorgeTunnel] = 2,
