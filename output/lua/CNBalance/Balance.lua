@@ -413,7 +413,7 @@ kVolleyEnergyCost = 7.0 --7.0
 kVolleyWebTime = 2
 
 kRappelDamage = 10 kRappelContinuousDamage = 5 kRappelContinuousDamageAgainstStructure = 80
-kRappelReelReactionTime = 0.7 kRappelReelContinuousSpeed = 8
+kRappelReelReactionTime = 0.7 kRappelReelContinuousSpeed = 8 kRappelReelContinuousSpeedBMAC = 4
 kRappelResearchCost = 10
 kRappelResearchTime = 20
 kRappelEnergyCost = 12
@@ -499,7 +499,7 @@ kStompSecondPDamage = 20 kStompSecondDisruptTime = 1
 kStompElseDamage = 10
 kStompRange = 12
 
-kDevourDisruptBMACTime = 5
+kDevourDisruptBMACTime = 4
 kDisruptMarineTimeout = 4
 
 kBabblerShieldPercent = 0.1

@@ -107,7 +107,7 @@ local function ClearPlayerNow(player)
             math.max(playerExtents.x, playerExtents.z), playerExtents.y,
             CollisionRep.Move, PhysicsMask.AllButPCs, EntityFilterAll())
             
-		newPlayer = player:Replace(player.previousMapName, player:GetTeamNumber(), false, trace.endPoint )
+		local newPlayer = player:Replace(player.previousMapName, player:GetTeamNumber(), false, trace.endPoint )
 		newPlayer:DevourEscape()
 		newPlayer:SetHealth(oldHealth)
 		newPlayer:SetArmor(oldArmor)
@@ -207,11 +207,11 @@ function Devour:Attack(player)
         local energyCost = kDevourMissedEnergyCost
         
         self.timeDevourEnd = Shared.GetTime() + Devour.kAttackAnimationLength
-        
-        if target and HasMixin(target, "Live") and target:GetIsAlive() then
-            if target:isa("Player") and not target:isa("Exo") then
-                if not target:GetIgnoreHealth() then
-                    if GetAreEnemies(self,target) then
+
+        if Server then
+            if target and HasMixin(target, "Live") and target:GetIsAlive() then
+                if GetAreEnemies(self,target) and target:isa("Player") and not target:isa("Exo") then
+                    if not target:GetIgnoreHealth() then
                         self.eatingPlayerId = target:GetId()
                         self.timeDevourEnd = Shared.GetTime() + Devour.kEatCoolDown
                         energyCost = kDevourEnergyCost
@@ -220,10 +220,10 @@ function Devour:Attack(player)
                             self:DevourPlayer(target)
                             self:AddTimedCallback(UpdateDevour, kDevourUpdateRate)
                         end
+                    else
+                        target:SetCorroded()
+                        target:SetStun(kDevourDisruptBMACTime)
                     end
-                else
-                    player:SetCorroded()
-                    player:SetStun(kDevourDisruptBMACTime)
                 end
             end
         end
@@ -240,9 +240,8 @@ function Devour:OnTag(tagName)
     
     if self.attackButtonPressed and player:GetEnergy() >= self:GetEnergyCost() then    
 
-        self:TriggerEffects("gore_attack")  
-        self:Attack(player)        
-
+        self:TriggerEffects("gore_attack")
+        self:Attack(player)
     else
         self:OnAttackEnd()
     end

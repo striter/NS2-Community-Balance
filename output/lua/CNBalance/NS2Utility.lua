@@ -238,10 +238,12 @@ function MarineMeleeBoxDamage(self,player,coords,range,damage)
     end
 end
 
-function ApplyPushback(target, disableDuration, velocity)
-    local mass = target.GetMass and target:GetMass() or Player.kMass
-    if mass >= kPushBackMass then
-        return
+function ApplyPushback(target, disableDuration, velocity,force)
+    if not force then
+        local mass = target.GetMass and target:GetMass() or Player.kMass
+        if mass >= kPushBackMass then
+            return
+        end
     end
     
     target.stampedeVars = {

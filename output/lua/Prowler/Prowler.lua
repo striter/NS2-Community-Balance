@@ -389,10 +389,11 @@ function Prowler:ModifyVelocity(input, velocity, deltaTime)
                         reelDirection = (viewCoords.origin + viewCoords.zAxis * 1) - hitTarget:GetOrigin()
                     end
                     reelDirection:Normalize()
-                    
-                    ApplyPushback(hitTarget,0.5, self:GetVelocity() * .2 + (reelDirection * kRappelReelContinuousSpeed))
+
+                    local speed = hitTarget:GetIsBMAC() and kRappelReelContinuousSpeedBMAC or kRappelReelContinuousSpeed
+                    ApplyPushback(hitTarget,0.5,self:GetVelocity() * .2 + (reelDirection * speed),true)
                 else
-                    ApplyPushback(hitTarget,0.1, kDisableVector)
+                    ApplyPushback(hitTarget,0.1,kDisableVector,true)
                 end
                 
                 if velocity:GetLength() > Prowler.kReelingSpeed then

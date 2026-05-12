@@ -174,7 +174,8 @@ ModLoader.SetupFileHook("lua/ExoVariantMixin.lua","lua/CNBalance/ExoVariantMixin
 ModLoader.SetupFileHook("lua/RifleVariantMixin.lua","lua/CNBalance/RifleVariantMixin.lua","post")
 
 ModLoader.SetupFileHook("lua/GUICommanderButtons.lua", "lua/CNBalance/GUI/GUICommanderButtons.lua", "post" )
-ModLoader.SetupFileHook("lua/GUIInsight_PlayerHealthbars.lua", "lua/CNBalance/GUI/GUIInsight_PlayerHealthbars.lua", "post")
+ModLoader.SetupFileHook("lua/GUIInsight_PlayerHealthbars.lua", "lua/CNBalance/GUI/GUIInsight_PlayerHealthbars.lua", "replace")
+ModLoader.SetupFileHook("lua/GUIAdvancedHUDBars.lua", "lua/CNBalance/GUI/GUIAdvancedHUDBars.lua", "replace")
 --------------------
 
 --Combat Weapon Hacks
