@@ -40,6 +40,23 @@ function GetVoiceSoundData(voiceId)
     return kSoundData[voiceId]
 end
 
+-- Function to give weld orders (from base game VoiceOver.lua)
+local function GiveWeldOrder(player)
+    if ( player:isa("Marine") or player:isa("Exo") ) and player:GetArmor() < player:GetMaxArmor() then
+        for _, marine in ipairs(GetEntitiesForTeamWithinRange("Marine", player:GetTeamNumber(), player:GetOrigin(), 8)) do
+            if player ~= marine and marine:GetWeapon(Welder.kMapName) then
+                marine:GiveOrder(kTechId.AutoWeld, player:GetId(), player:GetOrigin(), nil, true, false)
+            end
+        end
+    end
+end
+
+-- Modify BMAC medpack request to trigger weld instead
+kSoundData[kVoiceId.Mac_RequestMedpack].Function = GiveWeldOrder
+kSoundData[kVoiceId.Mac_RequestMedpack].AlertTechId = kTechId.None
+kSoundData[kVoiceId.MilMac_RequestMedpack].Function = GiveWeldOrder
+kSoundData[kVoiceId.MilMac_RequestMedpack].AlertTechId = kTechId.None
+
 local kRequestMenus = debug.getupvaluex(GetRequestMenu, "kRequestMenus")
 
 local kAlienMenu =

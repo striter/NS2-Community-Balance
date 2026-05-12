@@ -39,3 +39,18 @@ function MedPack:OnTouch(recipient)
     end
     
 end
+
+
+function MedPack:GetIsValidRecipient(recipient)
+
+    if not recipient:isa("Marine") then
+        return false
+    end
+
+    if recipient:GetIgnoreHealth() then
+        return false
+    end
+    
+    return recipient:GetIsAlive() and recipient:GetHealth() < recipient:GetMaxHealth() and (not recipient.timeLastMedpack or recipient.timeLastMedpack + self.kPickupDelay <= Shared.GetTime())
+
+end

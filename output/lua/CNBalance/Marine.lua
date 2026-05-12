@@ -340,7 +340,11 @@ if Server then
     end
     
     function Marine:GetAutoWeldArmorPerSecond(nanoArmorResearched)
-        return nanoArmorResearched and kMarineNanoArmorPerSecond or 0
+        local aps = self:GetIsBMAC() and kBMACAutoWeldPerSecond or 0
+        if nanoArmorResearched then
+            aps = aps + kMarineNanoArmorPerSecond
+        end
+        return aps
     end
 
 end
@@ -415,10 +419,33 @@ function Marine:OverrideInput(input)
 	return Player.OverrideInput(self, input)
 end
 
-function Marine:GetArmorAmount(armorLevels)
+function Marine:GetIsBMAC()
+    return self.marineType == kMarineVariantsBaseType.bigmac
+end
 
-    local hasNanoArmor = GetHasTech(self,kTechId.ArmorRegen)
+function Marine:UpdateArmorAmount(armorLevel)
+
+    -- note: some player may have maxArmor == 0
+    local armorPercent = self.maxArmor > 0 and self.armor/self.maxArmor or 0
+    local isBMAC = self:GetIsBMAC()
+    local newMaxArmor = self:GetArmorAmount(armorLevel,isBMAC)
+    
+    self:SetIgnoreHealth(isBMAC)
+    
+    if newMaxArmor ~= self.maxArmor then
+
+        self.maxArmor = newMaxArmor
+        self:SetArmor(self.maxArmor * armorPercent, true)
+
+    end
+
+end
+
+
+function Marine:GetArmorAmount(armorLevels,isBMAC)
+
     if not armorLevels then
+
         armorLevels = 0
 
         if GetHasTech(self, kTechId.Armor3, true) then
@@ -428,12 +455,24 @@ function Marine:GetArmorAmount(armorLevels)
         elseif GetHasTech(self, kTechId.Armor1, true) then
             armorLevels = 1
         end
+
     end
 
-    return hasNanoArmor and ( kNanoMarineArmor + armorLevels * kNanoArmorPerUpgradeLevel) or (Marine.kBaseArmor + armorLevels * Marine.kArmorPerUpgradeLevel)
+    local armorAmount = isBMAC and kMarineArmorBMAC + armorLevels * kArmorPerUpgradeLevelBMAC
+                                or Marine.kBaseArmor + armorLevels * Marine.kArmorPerUpgradeLevel
+
+    if GetHasTech(self,kTechId.ArmorRegen) then
+        armorAmount = armorAmount + kNanoMarineArmor
+    end
+    
+    return armorAmount
 end
 
 if Client then
+
+    function Marine:GetIsHighlightEnabled()
+        return self:GetIsBMAC() and 0.98 or 1
+    end
     
     function Marine:UpdateGhostModel()
 
@@ -467,7 +506,7 @@ end
 
 if Server then
 
-    local variantToMPUniform =
+    local kBMAPToMPUniform =
     {
         --[kMarineVariants.green] = kMarineVariants.chroma,
         --[kMarineVariants.special] = kMarineVariants.chroma,
@@ -499,7 +538,7 @@ if Server then
     
     function Marine:GetVariantOverride(variant)
         if GetHasTech(self,kTechId.MilitaryProtocol) then
-            return variantToMPUniform[variant] or kMarineVariants.chroma
+            return kBMAPToMPUniform[variant] or kMarineVariants.chroma
         end
         return variant
     end
@@ -525,5 +564,40 @@ if Server then
         heavyMarine:SetHealth(health)
     end
 
+end
+
+function Marine:GetMass()
+    return self:GetIsBMAC() and 101.2 or Player.kMass
+end
+
+
+function Marine:GetMaxSpeed(possible)
+
+    if possible then
+        return Marine.kRunMaxSpeed
+    end
+
+    local sprintingScalar = self:GetSprintingScalar()
+    local maxSprintSpeed = Marine.kWalkMaxSpeed + ( Marine.kRunMaxSpeed - Marine.kWalkMaxSpeed ) * sprintingScalar
+    local maxSpeed = ConditionalValue( self:GetIsSprinting(), maxSprintSpeed, Marine.kWalkMaxSpeed )
+
+    -- Take into account our weapon inventory and current weapon. Assumes a vanilla marine has a scalar of around .8.
+    local inventorySpeedScalar = self:GetInventorySpeedScalar() + .17
+    local useModifier = 1
+
+    local activeWeapon = self:GetActiveWeapon()
+    if activeWeapon and self.isUsing and activeWeapon:GetMapName() == Builder.kMapName then
+        useModifier = 0.5
+    end
+
+    if self:GetIsBMAC() then
+        maxSpeed = maxSpeed - kBMACMoveSpeedReduce
+    end
+
+    if self:GetHasCatPackBoost() then
+        maxSpeed = maxSpeed + kCatPackMoveAddSpeed
+    end
+
+    return maxSpeed * self:GetSlowSpeedModifier() * inventorySpeedScalar  * useModifier
 
 end

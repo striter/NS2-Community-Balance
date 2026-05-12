@@ -82,18 +82,19 @@ if Server then
             end
         end
 
+        if not self:GetIgnoreHealth() then
+            if self.GetAutoHealPerSecond and now > self.timeNextSustain then
+                self.timeNextSustain = now + AutoWeldMixin.kRegenInterval
 
-        if self.GetAutoHealPerSecond and now > self.timeNextSustain then
-            self.timeNextSustain = now + AutoWeldMixin.kRegenInterval
+                local lifeSustainResearched = GetHasTech(self, kTechId.ArmorStation)
 
-            local lifeSustainResearched = GetHasTech(self, kTechId.ArmorStation)
+                local healthCap = lifeSustainResearched and kLifeSustainMaxCap or kLifeRegenMaxCap
 
-            local healthCap = lifeSustainResearched and kLifeSustainMaxCap or kLifeRegenMaxCap
-
-            local healthToRegen = self:GetMaxHealth() * healthCap - self:GetHealth()
-            if healthToRegen > 0 then
-                local regenPerSecond = self:GetAutoHealPerSecond(lifeSustainResearched)
-                self:Heal(math.min(AutoWeldMixin.kRegenInterval * regenPerSecond,healthToRegen))
+                local healthToRegen = self:GetMaxHealth() * healthCap - self:GetHealth()
+                if healthToRegen > 0 then
+                    local regenPerSecond = self:GetAutoHealPerSecond(lifeSustainResearched)
+                    self:Heal(math.min(AutoWeldMixin.kRegenInterval * regenPerSecond,healthToRegen))
+                end
             end
         end
 

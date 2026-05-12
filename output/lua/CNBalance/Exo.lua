@@ -94,7 +94,11 @@ if Server then
     end
 
     function Exo:GetAutoWeldArmorPerSecond(nanoArmorResearched)
-        return nanoArmorResearched and kExoNanoArmorPerSecond or kExoArmorPerSecond
+        local amount = kExoArmorPerSecond
+        if nanoArmorResearched then
+            amount = amount + kExoNanoArmorPerSecond
+        end
+        return amount
     end
 end
 
@@ -123,8 +127,7 @@ function Exo:GetArmorAmount(armorLevels)
 
     end
 
-    local hasMP = GetHasTech(self,kTechId.MilitaryProtocol)
-    return hasMP and (kExosuitMPArmor + armorLevels * kExosuitMPArmorPerUpgradeLevel  ) 
+    return GetHasTech(self,kTechId.MilitaryProtocol) and (kExosuitMPArmor + armorLevels * kExosuitMPArmorPerUpgradeLevel  ) 
                  or (kExosuitArmor + armorLevels *kExosuitArmorPerUpgradeLevel)
 
 end

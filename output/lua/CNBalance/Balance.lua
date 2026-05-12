@@ -495,10 +495,11 @@ kStompEnergyCost = 40
 kStompDamageType = kDamageType.Structural
 kStompDamage = 60
 kStompFirstPDamage = 60  kStompDisruptTime = 3
-kStompSecondPDamage = 20 kStompSecondDisruptTime = 0
+kStompSecondPDamage = 20 kStompSecondDisruptTime = 1
 kStompElseDamage = 10
-kStompRange = 12 
+kStompRange = 12
 
+kDevourDisruptBMACTime = 5
 kDisruptMarineTimeout = 4
 
 kBabblerShieldPercent = 0.1
@@ -574,6 +575,8 @@ kAmmoPackCost = 1
 kAmmoPackCooldown = 0
 kMedPackCost = 1
 kMedPackCooldown = 0
+
+kBMACMoveSpeedReduce = 1
 
 kCatPackCost = 1
 kCatPackCooldown = 0

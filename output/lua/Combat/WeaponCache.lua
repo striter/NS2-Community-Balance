@@ -32,8 +32,8 @@ WeaponCache.kMapName = "weaponcache"
 WeaponCache.kModelName = PrecacheAsset("models/marine/weapon_cache/weapon_cache.model")
 WeaponCache.kAnimationGraph = PrecacheAsset("models/marine/weapon_cache/weapon_cache.animation_graph")
 
-local kHealUpdateTime = 0.3
 WeaponCache.kHealAmount = 12.5
+WeaponCache.kWeldAmount = 5
 WeaponCache.kRefillAmount = 0.5
 WeaponCache.kResupplyInterval = 0.8
 WeaponCache.kResupplyUseRange = 3.0

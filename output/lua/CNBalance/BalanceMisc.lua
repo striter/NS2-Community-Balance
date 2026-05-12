@@ -163,11 +163,9 @@ kShiftSupply = 20
 kMarinePhaseArmorDeduct = 20
 kMarineArmorDeductRegen = 20
 
-kMarineNanoArmorPerSecond = 3
-kJetpackMarineArmorPerSecond = 0
-kJetpackMarineNanoArmorPerSecond = 3
-kExoArmorPerSecond = 8
-kExoNanoArmorPerSecond = 12
+                                kBMACAutoWeldPerSecond = 2.5  kMarineNanoArmorPerSecond = 2.5
+kJetpackMarineArmorPerSecond = 0 kJetpackMarineArmorPerSecondBMAC = 2.5  kJetpackMarineNanoArmorPerSecond = 2.5
+                                kExoArmorPerSecond = 7.5 kExoNanoArmorPerSecond = 5
 --& Lifesustain
 kLifeRegenMaxCap = 0.8 kLifeSustainMaxCap = 1
 kLifeRegenHPS = 3   kLifeSustainHPS = 5

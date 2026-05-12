@@ -72,8 +72,14 @@ function WeaponCache:ResupplyPlayer(player)
     
     -- Heal player first
     if needsHealing then
-        -- third param true = ignore armor
-        player:AddHealth(WeaponCache.kHealAmount, false, true)
+        if player:GetIgnoreHealth() then
+            player:AddArmor(self.kWeldAmount, false, true)
+        else
+            if player:GetHealthFraction() < 1 then
+                player:AddHealth(self.kHealAmount, false, true)
+            end
+        end
+        
         
         -- Play heal sound effect
         self:TriggerEffects("armory_health", {effecthostcoords = Coords.GetTranslation(player:GetOrigin())})

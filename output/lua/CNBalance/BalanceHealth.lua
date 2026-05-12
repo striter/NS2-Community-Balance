@@ -1,27 +1,11 @@
---(*) In replaced of special condition,usually receive few damage.  |*| Stands for Focus    --MP Stands for military protocol(Disable all weapons, marines should be tougher i mean)
--- Marine     Skulk      Lerk        Fade        Onos             MP     Skulk      Lerk        Fade        Onos           
---A    ehp    75|125     60|100      80|128      90               ehp   
---0    160    3(2)|2(1)  3   |2      2|2         2   |1           170    3(2)|2(1)   3   |2      2|2         2   |1    
---1    200    3   |2     4(3)|2      3|2         3(2)|2(1)        220    4(3)|2      4           3           3
---2    240    4   |2     4   |3      3|2         3   |2           250    4   |3(2)   5(4)        4(3)        3
---3    280    4   |3     5   |3      4|3         4(3)|2           290    5(4)|3      6(5)        4           4
--- Jetpack
---A    ehp   
---0    210    3|2        4(3)|2      3   |2      3(2)|2(1)        210    4(3)        4          3           3
---1    260    4|2        5(4)|3(2)   3   |2      3   |2           260    4           5          4           4(3)
---2    310    4|3        5   |3      4   |3      4   |2           310    5           6          5(4)        4
---3    360    5|3        6   |3      5   |3      4   |2           360    6(5)        7(6)       6(5)        5(4)
--- Exosuit    
---A    ehp
---0    640    9          11          8           8  
---1    700    10         12          9           8                 
---2    760    11         13          10          9                 
---3    820    12         14          11          10
 
-kMarineHealth = 100    kMarineArmor = 30    kArmorPerUpgradeLevel = 20          kNanoMarineArmor = 35    kNanoArmorPerUpgradeLevel = 20
-kJetpackHealth = 100    kJetpackArmor = 50   kJetpackArmorPerUpgradeLevel = 20  kMPJetpackMarineArmor = 50   kMPJetpackArmorPerUpgradeLevel = 20  
+kMarineHealth = 100     kMarineArmor = 30     kArmorPerUpgradeLevel = 20 kNanoMarineArmor = 5 
+                        kMarineArmorBMAC = 80 kArmorPerUpgradeLevelBMAC = 25
+kJetpackHealth = 100    kJetpackArmor = 50    kJetpackArmorPerUpgradeLevel = 20
+                        kJetpackArmorBMAC = 100 kJetpackArmorPerUpgradeLevelBMAC = 25
 kExosuitHealth = 100    kExosuitArmor = 320  kExosuitArmorPerUpgradeLevel = 30  kExosuitMPArmor = 320 kExosuitMPArmorPerUpgradeLevel = 30
 kMarinePointValue = 5   kJetpackPointValue = 12   kExosuitPointValue = 20
+
 
 kMedpackHeal = 40   kMedpackRegen = 10
 kMedpackHealWhenRegening = 25 kMedpackRegenWhenRegening = 25

@@ -27,9 +27,7 @@ JetpackMarine.kKDRatioMaxDamageReduction = 0.2
 -- end
 JetpackMarine.kHealth = kJetpackHealth
 
-function JetpackMarine:GetArmorAmount(armorLevels)
-
-    local hasMP = GetHasTech(self,kTechId.MilitaryProtocol)
+function JetpackMarine:GetArmorAmount(armorLevels,isBMAC)
     if not armorLevels then
 
         armorLevels = 0
@@ -43,10 +41,14 @@ function JetpackMarine:GetArmorAmount(armorLevels)
         end
 
     end
+    
+    local armorAmount = isBMAC and kJetpackArmorBMAC + armorLevels * kJetpackArmorPerUpgradeLevelBMAC
+                                or  kJetpackArmor + armorLevels * kJetpackArmorPerUpgradeLevel
 
-    return hasMP and (kMPJetpackMarineArmor + armorLevels * kMPJetpackArmorPerUpgradeLevel  ) 
-    or (kJetpackArmor + armorLevels *kJetpackArmorPerUpgradeLevel)
-
+    if GetHasTech(self,kTechId.ArmorRegen) then
+        armorAmount = armorAmount + kNanoMarineArmor
+    end
+    return armorAmount
 end
 
 --function JetpackMarine:GetIsStunAllowed()
@@ -59,7 +61,12 @@ if Server then
     end
     
     function JetpackMarine:GetAutoWeldArmorPerSecond(nanoArmorResearched)
-        return nanoArmorResearched and kJetpackMarineNanoArmorPerSecond or kJetpackMarineArmorPerSecond
+        local aps = self:GetIsBMAC() and kJetpackMarineArmorPerSecondBMAC or kJetpackMarineArmorPerSecond
+
+        if nanoArmorResearched then
+            aps = aps + kJetpackMarineNanoArmorPerSecond
+        end
+        return aps
     end
 end
 
@@ -77,8 +84,10 @@ end
 --    end
 --end
 
-local kFlySpeed = 9
+local kFlySpeed = 9 
 local kFlyAcceleration = 28
+local kFlySpeedBMAC = 8
+local kFlyAccelerationBMAC = 24
 function JetpackMarine:ModifyVelocity(input, velocity, deltaTime)
 
     if self:GetIsJetpacking() then
@@ -101,7 +110,10 @@ function JetpackMarine:ModifyVelocity(input, velocity, deltaTime)
 
         -- do XZ acceleration
         local prevXZSpeed = velocity:GetLengthXZ()
-        local maxSpeedTable = { maxSpeed = math.max(kFlySpeed - math.max(self:GetWeaponsWeight() - kRifleWeight , 0) * 33, prevXZSpeed) }       --multiplier per 0.01 weight above
+        
+        local isBMAC = self:GetIsBMAC()
+        local flySpeed = isBMAC and kFlySpeedBMAC or kFlySpeed
+        local maxSpeedTable = { maxSpeed = math.max(flySpeed - math.max(self:GetWeaponsWeight() - kRifleWeight , 0) * 33, prevXZSpeed) }       --multiplier per 0.01 weight above
         self:ModifyMaxSpeed(maxSpeedTable)
         local maxSpeed = maxSpeedTable.maxSpeed
 
@@ -114,8 +126,7 @@ function JetpackMarine:ModifyVelocity(input, velocity, deltaTime)
         wishDir.y = 0
         wishDir:Normalize()
 
-        acceleration = kFlyAcceleration
-        acceleration = acceleration
+        acceleration = isBMAC and kFlyAccelerationBMAC or  kFlyAcceleration
 
         velocity:Add(wishDir * acceleration * self:GetInventorySpeedScalar() * deltaTime)
 

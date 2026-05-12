@@ -74,7 +74,7 @@ function GUIMarineHUD:Initialize()
     self.militaryProtocol = CreateTechIcon(kTechId.MilitaryProtocol)
 
     self.lastMilitaryProtocol = nil
-
+    
     self.autoMedPack = GUIUtility_CreateRequestIcon(kTechId.MedPack, Vector(-52 - 32, -36, 0),kMarineTeamType)
     self.autoAmmoPack = GUIUtility_CreateRequestIcon(kTechId.AmmoPack, Vector(52 - 32, -36, 0),kMarineTeamType)
     self.teamCountElements = {}
@@ -127,6 +127,62 @@ function GUIMarineHUD:Reset()
     end
 end
 
+
+function GUIMarineHUD:OnLocalPlayerChanged(newPlayer)
+    
+    if newPlayer:isa("Exo") then
+
+        self:SetStatusDisplayVisible(false)
+        self:SetFrameVisible(false)
+        self:SetInventoryDisplayVisible(false)
+
+    else
+
+        self:SetStatusDisplayVisible(true)
+        self:SetFrameVisible(self.cachedHudDetail ~= kHUDMode.Minimal)
+        self:SetInventoryDisplayVisible(true)
+        if newPlayer:GetTeamNumber() ~= kTeamReadyRoom and Client.GetIsControllingPlayer() then
+            self:TriggerInitAnimations()
+        end
+
+    end
+
+end
+
+local baseUpdateVisibility = GUIMarineHUD.UpdateVisibility
+
+local kBackgroundCoords = { 0, 0, 300, 121 }
+local kBackgroundSize = Vector(kBackgroundCoords[3], kBackgroundCoords[4], 0)
+
+local kBackgroundCoordsBMAC = { 0, 61, 300, 121 }
+local kBackgroundSizeBMAC = Vector(kBackgroundCoordsBMAC[3], kBackgroundCoordsBMAC[4] - kBackgroundCoordsBMAC[2], 0)
+
+local kBackgroundNoHealthPos = Vector(30, -120, 0)
+function GUIMarineHUD:UpdateVisibility()
+    baseUpdateVisibility(self)
+    local player = Client.GetLocalPlayer()
+    if not player:isa("Exo") then
+        local hasHealthBar = not player:GetIsBMAC()
+        self.statusDisplay.healthBar:SetIsVisible(hasHealthBar)
+        self.statusDisplay.healthBorder:SetIsVisible(hasHealthBar)
+        self.statusDisplay.healthBorderMask:SetIsVisible(hasHealthBar)
+        self.statusDisplay.regenBar:SetIsVisible(hasHealthBar)
+        self.statusDisplay.healthText:SetIsVisible(hasHealthBar)
+
+        self.statusDisplay.statusbackground:SetTexturePixelCoordinates(GUIUnpackCoords(hasHealthBar and kBackgroundCoords or kBackgroundCoordsBMAC))
+        self.statusDisplay.statusbackground:SetSize(hasHealthBar and kBackgroundSize or kBackgroundSizeBMAC)
+        self.statusDisplay.statusbackground:SetPosition(hasHealthBar and GUIMarineStatus.kBackgroundPos or kBackgroundNoHealthPos)
+
+        -- Reposition armor elements for BMAC mode (shift up by 61 pixels to align with cropped background)
+        local armorBarY = hasHealthBar and 88 or 27
+        local armorTextY = hasHealthBar and 96 or 35
+        local armorBorderY = hasHealthBar and 10 or -51
+        self.statusDisplay.armorBar:SetPosition(Vector(58, armorBarY, 0))
+        self.statusDisplay.armorText:SetPosition(Vector(-20, armorTextY, 0))
+        self.statusDisplay.armorBorder:SetPosition(Vector(-150, armorBorderY, 0))
+    end
+end
+
 local kErrorColor = Color(1, 0, 0, 1)
 local baseUpdate = GUIMarineHUD.Update
 function GUIMarineHUD:Update(deltaTime)
@@ -137,7 +193,7 @@ function GUIMarineHUD:Update(deltaTime)
         self.lastMilitaryProtocol = hasMilitaryProtocol
         self.militaryProtocol:SetIsVisible(self.lastMilitaryProtocol)
     end
-
+    
     local requestHandle = player.timeLastPrimaryRequestHandle and not hasMilitaryProtocol or false
     if requestHandle then
         local time = Shared.GetTime()
@@ -155,7 +211,10 @@ function GUIMarineHUD:Update(deltaTime)
     end
 
     self.autoAmmoPack:SetIsVisible(requestHandle)
-    self.autoMedPack:SetIsVisible(requestHandle)
+    
+    local hasHealth = requestHandle
+    hasHealth = hasHealth and not player:GetIgnoreHealth()
+    self.autoMedPack:SetIsVisible(hasHealth)
     
     local teamInfo = GetTeamInfoEntity(player:GetTeamNumber())
     if teamInfo then

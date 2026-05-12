@@ -163,6 +163,10 @@ function Devour:GetDeathIconIndex()
     return kDeathMessageIcon.Devour
 end
 
+function Devour:GetDamageType()
+    return kDamageType.Heavy
+end
+
 function Devour:GetAnimationGraphName()
     return kAnimationGraph
 end
@@ -204,18 +208,22 @@ function Devour:Attack(player)
         
         self.timeDevourEnd = Shared.GetTime() + Devour.kAttackAnimationLength
         
-        if target and HasMixin(target, "Live") and target:GetIsAlive() then            
-            
+        if target and HasMixin(target, "Live") and target:GetIsAlive() then
             if target:isa("Player") and not target:isa("Exo") then
-                if GetAreEnemies(self,target) then
-                    self.eatingPlayerId = target:GetId()
-                    self.timeDevourEnd = Shared.GetTime() + Devour.kEatCoolDown
-                    energyCost = kDevourEnergyCost
-                    
-                    if Server then
-                        self:DevourPlayer(target)                  
-                        self:AddTimedCallback(UpdateDevour, kDevourUpdateRate)
+                if not target:GetIgnoreHealth() then
+                    if GetAreEnemies(self,target) then
+                        self.eatingPlayerId = target:GetId()
+                        self.timeDevourEnd = Shared.GetTime() + Devour.kEatCoolDown
+                        energyCost = kDevourEnergyCost
+
+                        if Server then
+                            self:DevourPlayer(target)
+                            self:AddTimedCallback(UpdateDevour, kDevourUpdateRate)
+                        end
                     end
+                else
+                    player:SetCorroded()
+                    player:SetStun(kDevourDisruptBMACTime)
                 end
             end
         end

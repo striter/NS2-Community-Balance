@@ -134,7 +134,7 @@ if Server then
         if (player:GetHealthScalar() < 1) then
 
             -- third param true = ignore armor
-            if player:GetHealthFraction() < 1 then
+            if not player:GetIgnoreHealth() and player:GetHealthFraction() < 1 then
                 player:AddHealth(self.kHealAmount, false, true)
             else
                 player:AddArmor(self.kWeldAmount, false, true)

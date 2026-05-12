@@ -158,13 +158,17 @@ function Bishop.marineCom.actions.SupportMedPack(_, brain, com)
 
     if entity and entity:GetIsAlive()
         and time >= request.requestTime + kMinAlertAge then
-      local health = entity:GetHealthFraction()
-      local serviceHealth = 1 or request.wasServiced and kMaxHealthFraction
+      local ignoreHealth = entity.GetIgnoreHealth and entity:GetIgnoreHealth() or false
 
-      if health < lowestHealth and health < serviceHealth then
-        entId = request.entId
-        position = entity:GetOrigin()
-        lowestHealth = health
+      if not ignoreHealth then
+          local health = entity:GetHealthFraction()
+          local serviceHealth = 1 or request.wasServiced and kMaxHealthFraction
+
+          if health < lowestHealth and health < serviceHealth then
+            entId = request.entId
+            position = entity:GetOrigin()
+            lowestHealth = health
+          end
       end
     end
   end
@@ -297,7 +301,9 @@ function actions.SupportPreemptiveMedPack(bot, brain, com)
   for _, marine in ipairs(marines) do
     local health = marine:GetHealthFraction()
 
-    if health < lowestHealth and marine:GetIsAlive() then
+    local ignoreHealth = marine.GetIgnoreHealth and marine:GetIgnoreHealth() or false
+
+    if not ignoreHealth and health < lowestHealth and marine:GetIsAlive() then
       entityId = marine:GetId()
       position = marine:GetOrigin()
       lowestHealth = health

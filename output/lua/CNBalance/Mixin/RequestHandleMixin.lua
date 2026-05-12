@@ -77,7 +77,9 @@ if Server then
         if self.kIgnoreRequest then return false end
         
         if techId == kTechId.MarineAlertNeedMedpack then
-            self:AddTimedCallback(self.MedSelf,kAlertHandleDelay)
+            if not self:GetIgnoreHealth() then
+                self:AddTimedCallback(self.MedSelf,kAlertHandleDelay)
+            end
             --return true
         end
 
