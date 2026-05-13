@@ -140,7 +140,7 @@ function NS2Gamerules_GetUpgradedAlienDamage( target, attacker, doer, damage, ar
     if isAffectedByCrush then --Crush
         local crushLevel = attacker:GetSpurLevel()
         if crushLevel > 0 then
-            if target:isa("Exo") or target:isa("Exosuit") or target.GetReceivesStructuralDamage and target:GetReceivesStructuralDamage(damageType) then
+            if target:GetIgnoreHealth() or target.GetReceivesStructuralDamage and target:GetReceivesStructuralDamage(damageType) then
                 damage = damage + ( damage * ( crushLevel * kAlienCrushDamagePercentByLevel ) )
             elseif target:isa("Player") then
                 armorFractionUsed = kBaseArmorUseFraction + ( crushLevel * kAlienCrushDamagePercentByLevel )
@@ -273,8 +273,8 @@ local function ApplyDefaultArmorUseFraction(_, _, _, damage, _, healthPerArmor, 
 end
 
 local function ApplyHighArmorUseFractionForExos(target, _, _, damage, armorFractionUsed, healthPerArmor, _, _, _, overshieldDamage)
-    
-    if target:isa("Exo") then
+
+    if target:GetIgnoreHealth() then
         armorFractionUsed = kExosuitArmorUseFraction
     end
     
@@ -409,7 +409,7 @@ local function IgnoreHealth(target, _, _, damage, _, healthPerArmor)
 end
 
 local function ReduceGreatlyForPlayers(target, _, _, damage, armorFractionUsed, healthPerArmor)
-    if target:isa("Exo") or target:isa("Exosuit") then
+    if target:GetIgnoreHealth() then
         damage = damage * kCorrodeDamageExoArmorScalar
     elseif target:isa("Player") then
         damage = damage * kCorrodeDamagePlayerArmorScalar
