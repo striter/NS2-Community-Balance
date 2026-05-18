@@ -51,12 +51,6 @@ local function GiveWeldOrder(player)
     end
 end
 
--- Modify BMAC medpack request to trigger weld instead
-kSoundData[kVoiceId.Mac_RequestMedpack].Function = GiveWeldOrder
-kSoundData[kVoiceId.Mac_RequestMedpack].AlertTechId = kTechId.None
-kSoundData[kVoiceId.MilMac_RequestMedpack].Function = GiveWeldOrder
-kSoundData[kVoiceId.MilMac_RequestMedpack].AlertTechId = kTechId.None
-
 local kRequestMenus = debug.getupvaluex(GetRequestMenu, "kRequestMenus")
 
 local kAlienMenu =

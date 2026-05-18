@@ -390,7 +390,10 @@ function Prowler:ModifyVelocity(input, velocity, deltaTime)
                     end
                     reelDirection:Normalize()
 
-                    local speed = hitTarget:GetIsBMAC() and kRappelReelContinuousSpeedBMAC or kRappelReelContinuousSpeed
+                    local speed = kRappelReelContinuousSpeed
+                    if hitTarget.GetIsBMAC and hitTarget:GetIsBMAC() then
+                        speed = kRappelReelContinuousSpeedBMAC 
+                    end 
                     ApplyPushback(hitTarget,0.5,self:GetVelocity() * .2 + (reelDirection * speed),true)
                 else
                     ApplyPushback(hitTarget,0.1,kDisableVector,true)

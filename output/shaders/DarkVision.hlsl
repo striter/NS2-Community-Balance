@@ -55,6 +55,7 @@ float2 clamp_tex2D( sampler2D tex, float2 coord )
 const float4 edgeColorBlue = float4(0.0, 0.35, 1, 0) * 6.0;
 const float4 edgeColorDarkBlue = float4(0, 0.5, 1, 0) * 6.0;
 const float4 edgeColorOrange = float4(1.0, 0.05, 0.0, 0) * 8.0;
+const float4 edgeColorBurntOrange = float4(0.8, 0.25, 0.05, 0) * 5.0;
 const float4 edgeColorDarkOrange = float4(0.8, 0.2, 0, 0) * 6.0;
 const float4 edgeColorGreen = float4(0.2, 0.7, 0.00, 0) * 4.0;
 
@@ -115,6 +116,10 @@ float4 SFXDarkVisionPS(PS_INPUT input) : COLOR0
             {
                 return saturate( inputPixel + edgeColorGreen * 0.035 * amount * edge );
             } 
+            else if(depth1.g > 0.91)    //BMAC 0.92
+            {
+               return saturate(lerp(inputPixel, edgeColorBurntOrange * edge, (0.45 + edge) * amount));
+            }
             else { // targets and world ents 0.9
                 return saturate( inputPixel + edgeColorGreen * 0.1 * amount * edge );
             }

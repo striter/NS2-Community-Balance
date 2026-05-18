@@ -409,7 +409,7 @@ local function IgnoreHealth(target, _, _, damage, _, healthPerArmor)
 end
 
 local function ReduceGreatlyForPlayers(target, _, _, damage, armorFractionUsed, healthPerArmor)
-    if target:GetIgnoreHealth() then
+    if target:isa("Exo") or target:isa("Exosuit") then
         damage = damage * kCorrodeDamageExoArmorScalar
     elseif target:isa("Player") then
         damage = damage * kCorrodeDamagePlayerArmorScalar

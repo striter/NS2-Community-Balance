@@ -75,8 +75,9 @@ function GUIMarineHUD:Initialize()
 
     self.lastMilitaryProtocol = nil
     
-    self.autoMedPack = GUIUtility_CreateRequestIcon(kTechId.MedPack, Vector(-52 - 32, -36, 0),kMarineTeamType)
-    self.autoAmmoPack = GUIUtility_CreateRequestIcon(kTechId.AmmoPack, Vector(52 - 32, -36, 0),kMarineTeamType)
+    self.autoMedPack = GUIUtility_CreateRequestIcon(kTechId.MedPack, Vector(-52 - 34, -36, 0),kMarineTeamType)
+    self.autoNanoShield = GUIUtility_CreateRequestIcon(kTechId.NanoShield, Vector(-52 - 34, -36, 0),kMarineTeamType)
+    self.autoAmmoPack = GUIUtility_CreateRequestIcon(kTechId.AmmoPack, Vector(52 - 34, -36, 0),kMarineTeamType)
     self.teamCountElements = {}
     table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.Shotgun))
     table.insert(self.teamCountElements,CreateTeamCountElement(kTechId.HeavyMachineGun))
@@ -89,6 +90,7 @@ function GUIMarineHUD:Initialize()
     baseInitialize(self)
 
     self.resourceDisplay.background:AddChild(self.autoMedPack)
+    self.resourceDisplay.background:AddChild(self.autoNanoShield)
     self.resourceDisplay.background:AddChild(self.autoAmmoPack)
     self.background:AddChild(self.militaryProtocol)
     --........ or i should totally rewrite initialize
@@ -195,28 +197,37 @@ function GUIMarineHUD:Update(deltaTime)
     end
     
     local requestHandle = player.timeLastPrimaryRequestHandle and not hasMilitaryProtocol or false
+    local isBMAC = player.GetIsBMAC and player:GetIsBMAC()
     if requestHandle then
         local time = Shared.GetTime()
         local color = kIconColors[kMarineTeamType]
-        local percentage = Clamp(1 - (player.timeLastPrimaryRequestHandle - time)/kAutoMedCooldown,0,1)
-        local medColor = color * (percentage * percentage)
-        medColor.a = percentage >= 1 and 1 or 0.5
-        self.autoMedPack:SetColor(medColor)
 
-        percentage = Clamp(1 - (player.timeLastAutoAmmoPack - time)/kAutoAmmoCooldown,0,1)
-        local ammoColor = color * (percentage * percentage)
-        ammoColor.a = percentage >= 1 and 1 or 0.5
-        percentage = percentage * percentage
+        if isBMAC then
+            local nanoPercentage = Clamp(1 - (player.timeLastPrimaryRequestHandle - time)/kAutoNanoShieldCooldown,0,1)
+            local nanoColor = color * (nanoPercentage * nanoPercentage)
+            nanoColor.a = nanoPercentage >= 1 and 1 or 0.5
+            self.autoNanoShield:SetColor(nanoColor)
+        else
+            local medPercecntage = Clamp(1 - (player.timeLastPrimaryRequestHandle - time)/kAutoMedCooldown,0,1)
+            local medColor = color * (medPercecntage * medPercecntage)
+            medColor.a = medPercecntage >= 1 and 1 or 0.5
+            self.autoMedPack:SetColor(medColor)
+        end
+
+        local ammoPercentage = Clamp(1 - (player.timeLastAutoAmmoPack - time)/kAutoAmmoCooldown,0,1)
+        local ammoColor = color * (ammoPercentage * ammoPercentage)
+        ammoColor.a = ammoPercentage >= 1 and 1 or 0.5
         self.autoAmmoPack:SetColor(ammoColor)
     end
 
     self.autoAmmoPack:SetIsVisible(requestHandle)
+
+    local teamNumber = player:GetTeamNumber()
+    local hasNanoShield = GetIsTechAvailable(teamNumber,kTechId.NanoShield)
+    self.autoMedPack:SetIsVisible(requestHandle and not isBMAC)
+    self.autoNanoShield:SetIsVisible(requestHandle and isBMAC and hasNanoShield)
     
-    local hasHealth = requestHandle
-    hasHealth = hasHealth and not player:GetIgnoreHealth()
-    self.autoMedPack:SetIsVisible(hasHealth)
-    
-    local teamInfo = GetTeamInfoEntity(player:GetTeamNumber())
+    local teamInfo = GetTeamInfoEntity(teamNumber)
     if teamInfo then
         for _,element in ipairs(self.teamCountElements) do
             UpdateTeamCount(self,teamInfo,element)

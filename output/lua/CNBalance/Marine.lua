@@ -471,7 +471,7 @@ end
 if Client then
 
     function Marine:GetIsHighlightEnabled()
-        return self:GetIsBMAC() and 0.98 or 1
+        return self:GetIsBMAC() and 0.92 or 1
     end
     
     function Marine:UpdateGhostModel()

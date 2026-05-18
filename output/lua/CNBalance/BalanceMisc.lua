@@ -176,6 +176,8 @@ kOnFireEnergyRecuperationScalar = 1
 
 kAutoMedCooldown = 6    kAutoMedPRes = 0.5
 kAutoAmmoCooldown = 40  kAutoAmmoPRes = 1
+kAutoNanoShieldCooldown = 10 kAutoNanoShieldPRes = 1.5
+
 
 kAutoMistPRes = 1.5 kAutoMistCooldown = 30
 
