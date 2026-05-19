@@ -35,8 +35,8 @@ WeaponCache.kAnimationGraph = PrecacheAsset("models/marine/weapon_cache/weapon_c
 WeaponCache.kHealAmount = 12.5
 WeaponCache.kWeldAmount = 5
 WeaponCache.kRefillAmount = 0.5
-WeaponCache.kResupplyInterval = 0.8
-WeaponCache.kResupplyUseRange = 3.0
+WeaponCache.kResupplyUseRange = 4
+WeaponCache.kResupplyInterval = 1
 WeaponCache.kMaxUseableRange = 1.5
 
 if Server then
@@ -125,7 +125,7 @@ function WeaponCache:OnInitialized()
     if Server then    
         -- Use entityId as index, store time last resupplied
         self.resuppliedPlayers = { }
-        self:AddTimedCallback(HealNearbyPlayers, kHealUpdateTime)
+        self:AddTimedCallback(HealNearbyPlayers, self.kResupplyInterval)
         
         -- This Mixin must be inited inside this OnInitialized() function.
         if not HasMixin(self, "MapBlip") then

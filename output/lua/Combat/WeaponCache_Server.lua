@@ -1,4 +1,4 @@
-﻿local function OnDeploy(self)
+local function OnDeploy(self)
     self.deployed = true
     self.showAura = true
     self:TriggerEffects("weaponcache_deploy")
@@ -15,50 +15,13 @@ function WeaponCache:OnDestroy()
     self.showAura = false
 end
 
-function WeaponCache:GetTimeToResupplyPlayer(player)
-    assert(player ~= nil)
-    
-    local timeResupplied = self.resuppliedPlayers[player:GetId()]
-    
-    if timeResupplied ~= nil then
-        -- Make sure we haven't done this recently    
-        if Shared.GetTime() < (timeResupplied + WeaponCache.kResupplyInterval) then
-            return false
-        end
-    end
-    
-    return true
-end
-
-function WeaponCache:GetShouldResupplyPlayer(player)
-    if not player:GetIsAlive() then
-        return false
-    end
-    
-    local stunned = HasMixin(player, "Stun") and player:GetIsStunned()
-    if stunned then
-        return false
-    end
-    
-    -- Check if player needs healing or ammo - no facing check, just range
-    if player:GetHealth() < player:GetMaxHealth() then
-        return self:GetTimeToResupplyPlayer(player)
-    end
-    
-    -- Check if weapons need ammo
-    for i = 1, player:GetNumChildren() do
-        local child = player:GetChildAtIndex(i - 1)
-        if child:isa("ClipWeapon") and child:GetNeedsAmmo(false) then
-            return self:GetTimeToResupplyPlayer(player)
-        end
-    end
-    
-    return false
-end
-
 function WeaponCache:ResupplyPlayer(player)
+    if player.timeLastWeaponCacheResupply and player.timeLastWeaponCacheResupply + WeaponCache.kResupplyInterval > Shared.GetTime() then
+        return false
+    end
+
     local resuppliedPlayer = false
-    local needsHealing = player:GetHealth() < player:GetMaxHealth()
+    local needsHealing = player:GetHealthScalar() < 1
     local needsAmmo = false
     
     -- Check if weapons need ammo
@@ -72,14 +35,11 @@ function WeaponCache:ResupplyPlayer(player)
     
     -- Heal player first
     if needsHealing then
-        if player:GetIgnoreHealth() then
-            player:AddArmor(self.kWeldAmount, false, true)
+        if not  player:GetIgnoreHealth() and player:GetHealthFraction() < 1 then
+            player:AddHealth(self.kHealAmount, false, true)
         else
-            if player:GetHealthFraction() < 1 then
-                player:AddHealth(self.kHealAmount, false, true)
-            end
+            player:AddArmor(self.kWeldAmount, false, true)
         end
-        
         
         -- Play heal sound effect
         self:TriggerEffects("armory_health", {effecthostcoords = Coords.GetTranslation(player:GetOrigin())})
@@ -106,19 +66,24 @@ function WeaponCache:ResupplyPlayer(player)
             end
         end
     end
-        
+    
+    -- Set timestamp to prevent duplicate resupply from multiple WeaponCaches
     if resuppliedPlayer then
-        -- Insert/update entry in table
-        self.resuppliedPlayers[player:GetId()] = Shared.GetTime()
+        player.timeLastWeaponCacheResupply = Shared.GetTime()
     end
+    
+    return resuppliedPlayer
 end
 
 function WeaponCache:ResupplyPlayers()
     local playersInRange = GetEntitiesForTeamWithinRange("Marine", self:GetTeamNumber(), self:GetOrigin(), WeaponCache.kResupplyUseRange)
+    local resupply = false
     for _, player in ipairs(playersInRange) do
-        if self:GetShouldResupplyPlayer(player) then
-            self:ResupplyPlayer(player)
-        end
+        resupply = self:ResupplyPlayer(player) or resupply
+    end
+    
+    if resupply then
+        self:TriggerEffects("armory_ammo", {effecthostcoords = Coords.GetTranslation(self:GetOrigin())})
     end
 end
 

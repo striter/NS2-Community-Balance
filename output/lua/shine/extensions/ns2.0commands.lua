@@ -35,6 +35,26 @@ function Plugin:CreateCommands()
     self:BindCommand( "sh_scale_all", "scale_all", AdminSetAllScale )
     :AddParam{ Type = "number", Round = false, Min = 0.1, Max = 5, Optional = true, Default = 0.5 }
     :Help( "设置所有玩家的大小." )
+
+    local function AdminGiveTeamRes( _client, teamNumber, amount )
+        local team = GetGamerules():GetTeam( teamNumber )
+        if not team then
+            Shine:Notify( _client, "Invalid team number." )
+            return
+        end
+
+        if team.AddTeamResources then
+            team:AddTeamResources( amount )
+            Shine:AdminPrint( nil, "%s gave %s resources to team %s", true, Shine.GetClientInfo( _client ), amount, teamNumber )
+        else
+            Shine:Notify( _client, "Team does not support resource giving." )
+        end
+    end
+
+    self:BindCommand( "sh_give_tres", "give_tres", AdminGiveTeamRes )
+    :AddParam{ Type = "number", Min = 1, Max = 2, Help = "Team number (1=Marine, 2=Alien)" }
+    :AddParam{ Type = "number", Min = -200,Max=200, Help = "Amount of resources" }
+    :Help( "Give resources to a team." )
 end
 
 return Plugin
