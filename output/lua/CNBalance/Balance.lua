@@ -78,10 +78,10 @@ kWelderDropCost = 2
 kWelderDropCooldown = 0
 
 kMineResearchCost  = 10
-kMineResearchTime  = 45
+kMineResearchTime  = 20
 
 kGrenadeTechResearchCost = 10   --10
-kGrenadeTechResearchTime = 45   --45
+kGrenadeTechResearchTime = 20   --45
 
 kMaxARCs = 6
 
@@ -91,7 +91,7 @@ kDropMineCost = 12
 kDropMineCooldown = 0
 
 kShotgunTechResearchCost = 20
-kShotgunTechResearchTime = 60
+kShotgunTechResearchTime = 30
 kShotgunCost = 20
 kShotgunDropCost = 15
 kShotgunDropCooldown = 0
@@ -116,7 +116,7 @@ kHeavyMachineGunCost = 20
 kHeavyMachineGunDropCost = 15
 kHeavyMachineGunDropCooldown = 0
 
-kHeavyMachineGunDamage = 8  --8
+kHeavyMachineGunDamage = 7  --8
 kHeavyMachineGunDamageType = kDamageType.MachineGun
 kHeavyMachineGunClipSize = 150  --100
 kHeavyMachineGunClipNum = 3 --4
@@ -167,21 +167,15 @@ kPoweredExtractorChargingInterval = 5
 kPoweredExtractorDamageDistance = 5
 kPoweredExtractorDamage = 40
 kPoweredExtractorElectrifyDuration = 5
---kGrenadeLauncherDetectionShotResearchCost = 15
---kGrenadeLauncherDetectionShotResearchTime = 60
---kGrenadeLauncherAllyBlastResearchCost = 15
---kGrenadeLauncherAllyBlastResearchTime = 60
 
 kGrenadeLauncherCost = 20
 kGrenadeLauncherDropCost = 15
 kGrenadeLauncherDropCooldown = 0
 
 kGrenadeLauncherGrenadeDamageType = kDamageType.GrenadeLauncher
-kGrenadeLauncherGrenadeDamage = 100
-kGrenadeLauncherGrenadeDamageRadius = 4.8
+kGrenadeLauncherGrenadeDamage = 90
 
-kGrenadeLauncherImpactGrenadeDamage = 80
-kGrenadeLauncherDetectionShotRadius = 3.5
+kGrenadeLauncherGrenadeDamageRadius = 4.8
 
 kGrenadeLauncherClipSize = 4
 
@@ -296,7 +290,7 @@ kSentryBuildTime = 3
 kSentryBatteryCost = 20
 kSentryBatteryBuildTime = 5
 
-kAdvancedArmoryUpgradeCost = 25
+kAdvancedArmoryUpgradeCost = 30
 kAdvancedArmoryResearchTime = 90
 kPrototypeLabCost = 20
 
@@ -304,7 +298,7 @@ kCannonTechResearchCost = 20
 kCannonTechResearchTime = 90
 
 kJetpackTechResearchCost = 30
-kJetpackTechResearchTime = 105
+kJetpackTechResearchTime = 120
 
 kExosuitTechResearchCost = 25
 kExosuitTechResearchTime = 90

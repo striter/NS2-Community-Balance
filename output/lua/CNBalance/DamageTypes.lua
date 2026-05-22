@@ -70,7 +70,7 @@ function NS2Gamerules_GetUpgradedDamageScalar( attacker, weaponTechId )
         upgradedDamageScalars =
         {
             [kTechId.Shotgun]         = { kShotgunWeapons1DamageScalar,         kShotgunWeapons2DamageScalar,         kShotgunWeapons3DamageScalar },
-            [kTechId.GrenadeLauncher] = { 1.08, 1.16, 1.25 },
+            [kTechId.GrenadeLauncher] = { 102.0 / kGrenadeLauncherGrenadeDamage, 114.0 / kGrenadeLauncherGrenadeDamage, 125.0 / kGrenadeLauncherGrenadeDamage },
             [kTechId.Flamethrower]    = { kFlamethrowerWeapons1DamageScalar,    kFlamethrowerWeapons2DamageScalar,    kFlamethrowerWeapons3DamageScalar },
             [kTechId.PowerSurge]    =   { kEMPDamageWeapons1Scalar,    kEMPDamageWeapons2Scalar,    kEMPDamageWeapons3Scalar },
             [kTechId.MarineSentry] =   { kMarineSentryWeapon1Scalar,    kMarineSentryWeapon2Scalar,   kMarineSentryWeapon3Scalar},
