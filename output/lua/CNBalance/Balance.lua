@@ -570,7 +570,7 @@ kAmmoPackCooldown = 0
 kMedPackCost = 1
 kMedPackCooldown = 0
 
-kBMACMoveSpeedReduce = 1
+kBMACMoveSpeedReduce = 0.8
 
 kCatPackCost = 1
 kCatPackCooldown = 0
