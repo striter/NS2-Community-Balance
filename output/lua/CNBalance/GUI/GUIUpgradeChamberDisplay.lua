@@ -37,7 +37,7 @@ local kUpgradeLevelFunc =
 local kIndexToUpgrades =
 {
     { kTechId.Spur, kTechId.Crush, kTechId.Celerity, kTechId.Adrenaline , kTechId.Silence},
-    { kTechId.Veil, kTechId.Camouflage, kTechId.Aura, kTechId.Focus },
+    { kTechId.Veil, kTechId.Camouflage, kTechId.Aura, kTechId.Focus, kTechId.Phantom },
     { kTechId.Shell, kTechId.Vampirism, kTechId.Carapace, kTechId.Regeneration ,kTechId.Condense},
 }
 

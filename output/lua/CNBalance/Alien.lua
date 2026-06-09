@@ -73,6 +73,7 @@ end
          baseOnCreate(self)
      end
 
+
      function Alien:OnProcessMove(input)
          PROFILE("Alien:OnProcessMove")
 
@@ -103,6 +104,7 @@ end
 
              self:UpdateAutoHeal()
              self:UpdateSilenceLevel()
+             self:UpdatePhantom()
          end
      end
 
@@ -120,5 +122,68 @@ end
 
      function Alien:GetCondenseScalePerLevel()
          return 0.08
+     end
+
+
+     local kPhantomHallucinationClassNameMap
+
+     local function TrySpawnPhantom(self)
+         if not GetHasPhantomUpgrade(self) then return end
+         if not self:GetIsAlive() then return end
+         if self.isHallucination then return end
+         
+         local veilLevel = self:GetVeilLevel()
+         if veilLevel == 0 then return end
+         local cooldown = kPhantomCooldown[veilLevel] or kPhantomCooldown[1]
+         if self.timeLastPhantom and (Shared.GetTime() - self.timeLastPhantom) < cooldown then
+             return
+         end
+
+         local mapName = self:GetMapName()
+         if not kPhantomHallucinationClassNameMap then
+             kPhantomHallucinationClassNameMap = debug.getupvaluex(HallucinationCloud.Perform, "kHallucinationClassNameMap")
+         end
+         local hallucinationClassName = kPhantomHallucinationClassNameMap[mapName] or SkulkHallucination.kMapName
+
+         local extents = LookupTechData(self:GetTechId(), kTechDataMaxExtents, Vector(Skulk.kXExtents, Skulk.kYExtents, Skulk.kZExtents))
+         local _, capsuleRadius = GetTraceCapsuleFromExtents(extents)
+         local spawnPoint
+         for _ = 1, 3 do
+             spawnPoint = GetRandomSpawnForCapsule(extents.y, capsuleRadius, self:GetModelOrigin(), 0.5, 5)
+             if spawnPoint then break end
+         end
+
+         if spawnPoint then
+             local phantom = CreateEntity(hallucinationClassName, spawnPoint, self:GetTeamNumber())
+             phantom:SetEmulation(self)
+
+             self:TriggerEffects("phantom_spawn", { effecthostcoords = Coords.GetTranslation(self:GetOrigin()) })
+
+             local randomDestinations = GetRandomPointsWithinRadius(self:GetOrigin(), 4, 15, 10, 1, 1, nil, nil)
+             if randomDestinations[1] then
+                 phantom:GiveOrder(kTechId.Move, nil, randomDestinations[1], nil, true, true)
+             end
+
+             self.timeLastPhantom = Shared.GetTime()
+         end
+     end
+
+
+     local kPhantomCheckInterval = 1
+     function Alien:UpdatePhantom()
+         -- Throttle first (cheap subtraction) before any expensive calls
+         if not self.timeLastPhantomCheck or (Shared.GetTime() - self.timeLastPhantomCheck) >= kPhantomCheckInterval then
+             self.timeLastPhantomCheck = Shared.GetTime()
+             
+             if GetIsUnitActive(self) and self:GetIsSighted() and GetHasPhantomUpgrade(self) then
+                 TrySpawnPhantom(self)
+             end
+         end
+     end
+
+     
+     function Alien:OnDetectedChange(detected)
+         if not detected then return end
+         TrySpawnPhantom(self)
      end
  end

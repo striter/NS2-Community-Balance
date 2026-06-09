@@ -36,9 +36,9 @@ local kMarineComBrainTypes = enum({
     "BuildRoboticsFactory_NearMainCommandStation",
 
     "BuildPhaseGate_NearControlledTechPoint", -- 3: Controlled TechPoint (Friendly players are near)
-    "BuildCommandStation_NearControlledTechPoint",
     "BuildPhaseGate_NearDoubleResPoints",
     "ResearchUpgrades",
+    "BuildCommandStation_NearControlledTechPoint",
 
     "ObservatoryScan_BaseStructure",
     "ObservatoryScan_Extractor",
@@ -159,7 +159,7 @@ local kDroppackAlertCheckFunctions =
     -- Standard: volle Ammo
     local ammoPercentage = 1
 
-    -- Alle Waffen prüfen, nicht nur die aktive
+    -- Alle Waffen pr?fen, nicht nur die aktive
     local weapons = target:GetWeapons()
 
     for i = 1, #weapons do
@@ -226,14 +226,14 @@ local function GetIsAssignedToOtherMarine(self, target)
                     return true
                 end
 
-                -- Order-Ziel prüfen
+                -- Order-Ziel pr?fen
                 local currentOrder = marine:GetCurrentOrder()
                 local orderTarget
                 if currentOrder and currentOrder:GetParam() ~= nil then
                     orderTarget = Shared.GetEntity(currentOrder:GetParam())
                 end
 
-                -- HIER Attack hinzugefügt
+                -- HIER Attack hinzugef?gt
                 if currentOrder
                    and orderTarget == target
                    and (
@@ -241,7 +241,7 @@ local function GetIsAssignedToOtherMarine(self, target)
                         or currentOrder:GetType() == kTechId.Move
                         or currentOrder:GetType() == kTechId.Defend
                         or currentOrder:GetType() == kTechId.Weld
-                        or currentOrder:GetType() == kTechId.Attack   -- ? hinzugefügt
+                        or currentOrder:GetType() == kTechId.Attack   -- ? hinzugef?gt
                    )
                 then
                     return true
@@ -314,7 +314,7 @@ end
 
 local function FindBuildPosition(techId, origin, initialDist, maxDist, increment)
     local buildPos = nil
-    local angleIncrement = math.pi / 32 -- Noch kleinere Inkremente fï¿½r den Winkel
+    local angleIncrement = math.pi / 32 -- Noch kleinere Inkremente f?r den Winkel
 
     while not buildPos do
         for radius = initialDist, maxDist, increment do
@@ -711,7 +711,7 @@ function(bot, brain, com)
         local doubleResPoints = senses:Get("doubleResPoints")
 
         for _, pair in ipairs(doubleResPoints) do
-            -- Prï¿½fe den Midpoint
+            -- Pr?fe den Midpoint
             local midPoint = (pair[1]:GetOrigin() + pair[2]:GetOrigin()) * 0.5
             local midOffsets = {Vector(0, 5, 0), Vector(5, 0, 5), Vector(-5, 0, -5)}
             for _, offset in ipairs(midOffsets) do
@@ -733,7 +733,7 @@ function(bot, brain, com)
 
             if buildPos then break end
 
-            -- Prï¿½fe ResPoint 1
+            -- Pr?fe ResPoint 1
             local res1Offsets = {Vector(0, 5, 0), Vector(5, 0, 5), Vector(-5, 0, -5)}
             for _, offset in ipairs(res1Offsets) do
                 local potentialBuildPos = pair[1]:GetOrigin() + offset
@@ -753,7 +753,7 @@ function(bot, brain, com)
 
             if buildPos then break end
 
-            -- Prï¿½fe ResPoint 2
+            -- Pr?fe ResPoint 2
             local res2Offsets = {Vector(0, 5, 0), Vector(5, 0, 5), Vector(-5, 0, -5)}
             for _, offset in ipairs(res2Offsets) do
                 local potentialBuildPos = pair[2]:GetOrigin() + offset
@@ -797,15 +797,15 @@ function(bot, brain, com)
     local buildPos
     local mainBaseLocationId = brain:GetStartingLocationId()
 
-    -- ï¿½berprï¿½fen, ob aktive Infantry Portals vorhanden sind
+    -- ?berpr?fen, ob aktive Infantry Portals vorhanden sind
     local isZeroIPs = #senses:Get("activeInfantryPortals") <= 0
 
-    -- Fortfahren, wenn die Bedingungen erfï¿½llt sind
+    -- Fortfahren, wenn die Bedingungen erf?llt sind
     if doables[kTechId.RoboticsFactory] and hasMinimumTRes and not isZeroIPs and not brain:GetIsProcessingTechPathOverride() and mainBaseLocationId ~= 0 then
-        -- Vorhandene Robotics Factories in der Startbasis ï¿½berprï¿½fen
+        -- Vorhandene Robotics Factories in der Startbasis ?berpr?fen
         local roboticsfactories = GetEntitiesForTeamByLocation("RoboticsFactory", comTeam, mainBaseLocationId)
         if #roboticsfactories < kMaxRoboticsFactories then
-            -- Bauposition in der Nï¿½he der Command Station in der Startbasis erhalten
+            -- Bauposition in der N?he der Command Station in der Startbasis erhalten
             local commandStations = GetEntitiesForTeamByLocation("CommandStation", comTeam, mainBaseLocationId)
             for _, cs in ipairs(commandStations) do
                 if cs:GetLocationId() == mainBaseLocationId then
@@ -857,7 +857,7 @@ end,  --Build RoboticsFactory (Near Main CommandStation) --]]
             local pgLocationId = pg:GetLocationId()
             local isDoubleResNode = false
 
-            -- ï¿½berprï¿½fen, ob das PhaseGate in der Nï¿½he von Double ResPoints liegt
+            -- ?berpr?fen, ob das PhaseGate in der N?he von Double ResPoints liegt
             for _, pair in ipairs(doubleResPoints) do
                 local midPoint = (pair[1]:GetOrigin() + pair[2]:GetOrigin()) * 0.5
                 local distanceToMidPoint = (pg:GetOrigin() - midPoint):GetLength()
@@ -1159,7 +1159,7 @@ function(bot, brain, com)
 
             if cc:GetHealthFraction() < 0.45 then
 
-                -- Marines + Exos berücksichtigen
+                -- Marines + Exos ber?cksichtigen
                 local marinesNearCC = GetEntitiesForTeamWithinRange("Marine", com:GetTeamNumber(), cc:GetOrigin(), 20)
                 local exosNearCC    = GetEntitiesForTeamWithinRange("Exo", com:GetTeamNumber(), cc:GetOrigin(), 20)
 
@@ -1209,7 +1209,7 @@ function(bot, brain, com)
         end
 
         ---------------------------------------------------------------------
-        -- GENERISCHER HP-CHECK FÜR ALLE STRUKTUREN (MIT RAUM-FIX)
+        -- GENERISCHER HP-CHECK F?R ALLE STRUKTUREN (MIT RAUM-FIX)
         ---------------------------------------------------------------------
         for _, rule in ipairs(hpBeaconRules) do
             local ents = rule.entities() or {}
@@ -1218,7 +1218,7 @@ function(bot, brain, com)
 
                 if ent:GetIsAlive() and ent:GetHealthFraction() < rule.hpThreshold then
 
-                    -- Marines + Exos berücksichtigen
+                    -- Marines + Exos ber?cksichtigen
                     local marines = GetEntitiesForTeamWithinRange("Marine", com:GetTeamNumber(), ent:GetOrigin(), rule.marineRange)
                     local exos    = GetEntitiesForTeamWithinRange("Exo", com:GetTeamNumber(), ent:GetOrigin(), rule.marineRange)
 
@@ -1420,7 +1420,7 @@ end
     local upgradedFactory = senses:Get("hasUpgradedRoboticsFactory")
     local mainCS = senses:Get("mainCommandStation")
 
-    -- Prüfen, ob überhaupt eine erlaubte Waffe gedropped werden darf
+    -- Pr?fen, ob ?berhaupt eine erlaubte Waffe gedropped werden darf
     local hasAdvanced = senses:Get("hasAdvancedArmory") == true
     local anyAllowed = false
 
@@ -1469,7 +1469,7 @@ end
         end
     end
 
-    -- WICHTIG: erst jetzt prüfen, ob überhaupt Waffen erlaubt UND Kandidaten vorhanden sind
+    -- WICHTIG: erst jetzt pr?fen, ob ?berhaupt Waffen erlaubt UND Kandidaten vorhanden sind
     if not anyAllowed or #finalCandidates == 0 then
         return { name = name, weight = 0, perform = function() end }
     end
@@ -1484,7 +1484,7 @@ end
             local weaponCounts = (senses:Get("weaponCounts") or {}).counts or {}
             local weaponChoice, minCount = nil, math.huge
 
-            -- Waffe mit geringster Anzahl auswählen (unter Berücksichtigung der Regeln)
+            -- Waffe mit geringster Anzahl ausw?hlen (unter Ber?cksichtigung der Regeln)
             for techId, dropTechId in pairs(kWeaponToDropTechIds) do
 
                 -- Shotgun immer erlaubt, wenn doable
@@ -1588,7 +1588,7 @@ end
 
 
     ----------------------------------------------------------------------
-    -- Prüfen ob ein Marine eine Mine trägt
+    -- Pr?fen ob ein Marine eine Mine tr?gt
     ----------------------------------------------------------------------
     local marineHasMine = false
     for _, m in ipairs(GetEntitiesForTeam("Player", comTeam)) do
@@ -1623,7 +1623,7 @@ end
     local armoryToDropNear = armories[1]
     local weight = GetMarineComBaselineWeight(kMarineComBrainTypes.DropMines)
     
-        -- Prüfen ob Mine-Forschung abgeschlossen ist
+        -- Pr?fen ob Mine-Forschung abgeschlossen ist
     local techTree = com:GetTeam():GetTechTree()
     local mineResearchNode = techTree:GetTechNode(kTechId.MinesTech)
 
@@ -1699,7 +1699,7 @@ function(bot, brain, com)
     end
 
     ----------------------------------------------------------------------
-    -- Marines mit Welder zählen
+    -- Marines mit Welder z?hlen
     ----------------------------------------------------------------------
     local marines = GetEntitiesForTeam("Player", comTeam)
     local marineCount = #marines
@@ -1905,7 +1905,7 @@ function(bot, brain, com)
     -- Alle Observatories holen
     local observatories = GetEntitiesAliveForTeam("Observatory", com:GetTeamNumber())
 
-    -- Funktion: Prüfen, ob ein aktives Observatory in der Nähe ist
+    -- Funktion: Pr?fen, ob ein aktives Observatory in der N?he ist
     local function HasPoweredObservatoryNear(pos)
         for _, obs in ipairs(observatories) do
             if obs:GetIsAlive() and obs:GetIsPowered() then
@@ -1940,7 +1940,7 @@ function(bot, brain, com)
 
                 if target then
 
-                    -- Kein Scan, wenn Observatory in der Nähe
+                    -- Kein Scan, wenn Observatory in der N?he
                     if HasPoweredObservatoryNear(target:GetOrigin()) then
                         goto continue
                     end
@@ -2038,10 +2038,10 @@ function(bot, brain, com)
     local scanOrigin
     local scanTarget   -- <--- NEU: Speichert, wen wir scannen
 
-    -- Scan verfügbar?
+    -- Scan verf?gbar?
     if doables[kTechId.Scan] then
 
-        -- Observatory nötig
+        -- Observatory n?tig
         local observatories = senses:Get("Observatorys")
         if observatories and #observatories > 0 then
 
@@ -2072,7 +2072,7 @@ function(bot, brain, com)
                 end
 
                 ----------------------------------------------------
-                -- Shades in der Nähe eines Marines oder Exos prüfen
+                -- Shades in der N?he eines Marines oder Exos pr?fen
                 ----------------------------------------------------
                 for _, unit in ipairs(units) do
                     local uOrigin = unit:GetOrigin()
@@ -2088,7 +2088,7 @@ function(bot, brain, com)
         end
     end
 
-    -- Gewicht setzen, wenn ein Scan ausgeführt werden soll
+    -- Gewicht setzen, wenn ein Scan ausgef?hrt werden soll
     if scanOrigin then
         weight = GetMarineComBaselineWeight(kMarineComBrainTypes.ShadeScan)
     end
@@ -2141,7 +2141,7 @@ function(bot, brain, com)
     local commandStationAlive = #GetEntitiesAliveForTeam("CommandStation", comTeam) > 0
 
     ----------------------------------------------------
-    -- Gebäudeliste für Observatory-Surge
+    -- Geb?udeliste f?r Observatory-Surge
     ----------------------------------------------------
     local powerSurgeRelevantBuildings = {
         "ArmsLab",
@@ -2186,7 +2186,7 @@ local function IsAnyBuildingUnderAttack(buildings)
             end
             b.lastHP = hp
 
-            -- 3) Gegner in der Nähe (ohne Team-Filter)
+            -- 3) Gegner in der N?he (ohne Team-Filter)
             local nearby = GetEntitiesWithinRange("Live", b:GetOrigin(), 12)
             for _, ent in ipairs(nearby) do
                 if ent ~= b and ent:GetIsAlive() then
@@ -2202,7 +2202,7 @@ local function IsAnyBuildingUnderAttack(buildings)
 end
 
     ----------------------------------------------------
-    -- NEU: Prüfen, ob CC im selben Raum wie Observatory
+    -- NEU: Pr?fen, ob CC im selben Raum wie Observatory
     ----------------------------------------------------
     local function HasCCInSameRoom(obs, teamNumber)
         local ccs = GetEntitiesAliveForTeam("CommandStation", teamNumber)
@@ -2296,7 +2296,7 @@ end
         -- Nur surgen, wenn tote Marines existieren
         local numDead = senses:Get("numDeadPlayers")
         if numDead == 0 then
-            -- Keine toten Spieler ? kein Bedarf für IP-Surge
+            -- Keine toten Spieler ? kein Bedarf f?r IP-Surge
             goto skip_ip_surge
         end
 
@@ -2857,11 +2857,11 @@ function(bot, brain, com)
         end
     end
 
-    -- Nachrückphase
+    -- Nachr?ckphase
     if arcs ~= nil then
         for _, arc in ipairs(arcs) do
 
-            -- Keine Nachrücker, wenn Front-ARC < 50% HP
+            -- Keine Nachr?cker, wenn Front-ARC < 50% HP
             if blockReinforcements then
                 break
             end
@@ -2974,7 +2974,7 @@ function(bot, brain, com)
                     giveDefendOrder(nearestExo)
                 end
 
-                -- Hive-Zerstörungs-Trigger
+                -- Hive-Zerst?rungs-Trigger
                 if arc.hasDeployed and not GetEntitiesWithinRange("Hive", arc:GetOrigin(), kFireRange, true)[1] then
                     if brain.timeHiveDestroyed == 0 then
                         brain.timeHiveDestroyed = Shared.GetTime()
@@ -2986,7 +2986,7 @@ function(bot, brain, com)
         end
     end
 
-    -- Globaler Timer nach Hive-Zerstörung
+    -- Globaler Timer nach Hive-Zerst?rung
     if brain.timeHiveDestroyed > 0 then
         if Shared.GetTime() - brain.timeHiveDestroyed >= kWaitAfterHiveDestruction then
             local enemyHives = GetEntitiesForTeam("Hive", GetEnemyTeamNumber(comTeam))
@@ -3056,7 +3056,7 @@ function(bot, brain, com)
     local orderCooldown = 45
     brain.lastOrderTimes = brain.lastOrderTimes or {}
 
-    -- Gewichtung der Strukturen nach Prioritï¿½t
+    -- Gewichtung der Strukturen nach Priorit?t
     local structurePriority = {
         ["CommandStation"] = 1,
         ["ArmsLab"] = 2,
@@ -3070,7 +3070,7 @@ function(bot, brain, com)
         ["Other"] = 10
     }
 
-    -- Funktion zum Berechnen der Prioritï¿½t einer Struktur
+    -- Funktion zum Berechnen der Priorit?t einer Struktur
     local function GetStructurePriority(structure)
         if structure:isa("CommandStation") then
             return structurePriority["CommandStation"]
@@ -3103,7 +3103,7 @@ function(bot, brain, com)
         end
     end
 
-    -- Strukturen nach Prioritï¿½t und Entfernung zur Kommandozentrale sortieren
+    -- Strukturen nach Priorit?t und Entfernung zur Kommandozentrale sortieren
     table.sort(filteredTargetStructures, function(a, b)
         local priorityA = GetStructurePriority(a)
         local priorityB = GetStructurePriority(b)
@@ -3231,7 +3231,7 @@ function(bot, brain, com)
     end
 
     ----------------------------------------------------------------------
-    -- ZIELPRIORITÄT
+    -- ZIELPRIORIT?T
     ----------------------------------------------------------------------
 local function AlienPriority(ent)
     local techId = ent.GetTechId and ent:GetTechId() or nil
@@ -3318,7 +3318,7 @@ end
                     goto continue
                 end
 
-                -- Ziel nach Priorität sortieren
+                -- Ziel nach Priorit?t sortieren
                 table.sort(aliens, function(a, b)
                     return AlienPriority(a) < AlienPriority(b)
                 end)
@@ -3406,7 +3406,7 @@ function(bot, brain, com)
               --Print("TechPoint to Take: " .. techPointToTake:GetLocationName() .. ", Position: " .. tostring(techPointToTake:GetOrigin()))
             end
 
-            -- Zuweisung von Move-Orders an den nï¿½chsten neutralen TechPoint
+            -- Zuweisung von Move-Orders an den n?chsten neutralen TechPoint
             if techPointToTake and assignedCount < 1 then
                 local nearestUnit = nil
                 local nearestDistance = math.huge
@@ -3445,7 +3445,7 @@ function(bot, brain, com)
                 end
             end
 
-            -- Zuweisung von Construct-Orders an unvollstï¿½ndige Strukturen
+            -- Zuweisung von Construct-Orders an unvollst?ndige Strukturen
             for _, targetStructure in ipairs(filteredTargetStructures) do
                 local nearestMarine = nil
                 local nearestDistance = math.huge
@@ -3472,11 +3472,11 @@ function(bot, brain, com)
                 end
             end
             
-            -- ï¿½berprï¿½fung, ob ein Observatorium vorhanden ist
+            -- ?berpr?fung, ob ein Observatorium vorhanden ist
             local observatories = senses:Get("Observatorys")
             local hasObservatory = observatories and #observatories > 0
 
-            -- Durchfï¿½hrung des Scans, wenn der Bot nï¿½her als 15 Einheiten am Tech Point ist, seit dem letzten Scan mehr als 15 Sekunden vergangen sind, und ein Observatorium vorhanden ist
+            -- Durchf?hrung des Scans, wenn der Bot n?her als 15 Einheiten am Tech Point ist, seit dem letzten Scan mehr als 15 Sekunden vergangen sind, und ein Observatorium vorhanden ist
             if techPointToTake and currentTime > lastScanTimeTechPoint and hasObservatory then
                 for _, marine in ipairs(marines) do
                     local distanceToTechPoint = (marine:GetOrigin() - techPointToTake:GetOrigin()):GetLength()
@@ -3520,7 +3520,7 @@ function(bot, brain, com)
     local distanceThreshold = 20
     local weldDistanceThreshold = 50
 
-    -- Funktion, um zu ï¿½berprï¿½fen, ob eine Command Station auf dem TechPoint vorhanden ist
+    -- Funktion, um zu ?berpr?fen, ob eine Command Station auf dem TechPoint vorhanden ist
     local function IsTechPointOccupiedByCommandStation(techPoint)
         for _, commandStation in ipairs(commandStations) do
             if (techPoint:GetOrigin() - commandStation:GetOrigin()):GetLength() < distanceThreshold then
@@ -3530,7 +3530,7 @@ function(bot, brain, com)
         return false
     end
 
-    -- Funktion, um zu ï¿½berprï¿½fen, ob ein Resource Point besetzt ist
+    -- Funktion, um zu ?berpr?fen, ob ein Resource Point besetzt ist
     local function IsResourcePointOccupiedByExtractor(resPoint)
         for _, extractor in ipairs(extractors) do
             if (resPoint:GetOrigin() - extractor:GetOrigin()):GetLength() < distanceThreshold then
@@ -3561,7 +3561,7 @@ function(bot, brain, com)
         end
     end
 
-    -- Gewichtung der Strukturen nach Prioritï¿½t
+    -- Gewichtung der Strukturen nach Priorit?t
     local structurePriority = {
         ["PowerPoint"] = 1,
         ["CommandStation"] = 2,
@@ -3576,7 +3576,7 @@ function(bot, brain, com)
         ["Other"] = 11
     }
 
-    -- Funktion zum Berechnen der Prioritï¿½t einer Struktur
+    -- Funktion zum Berechnen der Priorit?t einer Struktur
     local function GetStructurePriority(structure)
         if structure:isa("PowerPoint") then
             for _, techPoint in ipairs(techPoints) do
@@ -3624,7 +3624,7 @@ function(bot, brain, com)
         }
     end
 
-    -- Strukturen nach Prioritï¿½t und Entfernung zur nï¿½chstgelegenen Kommandozentrale sortieren
+    -- Strukturen nach Priorit?t und Entfernung zur n?chstgelegenen Kommandozentrale sortieren
     table.sort(damagedStructures, function(a, b)
         local priorityA = GetStructurePriority(a)
         local priorityB = GetStructurePriority(b)
@@ -3639,7 +3639,7 @@ function(bot, brain, com)
         end
     end)
 
-    -- Gewichtungslogik fï¿½r die Weld Order
+    -- Gewichtungslogik f?r die Weld Order
     if #damagedStructures > 0 then
         weight = GetMarineComBaselineWeight(kMarineComBrainTypes.WeldOrder)
     end
@@ -3650,7 +3650,7 @@ function(bot, brain, com)
         perform = function(move)
             local marinesAssignedToTarget = {}
 
-            -- Zuweisung von Weld-Orders an beschï¿½digte Strukturen
+            -- Zuweisung von Weld-Orders an besch?digte Strukturen
             for _, damagedStructure in ipairs(damagedStructures) do
                 if damagedStructure:GetHealth() < damagedStructure:GetMaxHealth() then
                     local nearestMarine = nil
@@ -3658,7 +3658,7 @@ function(bot, brain, com)
                     for _, marine in ipairs(marines) do
                         local distanceToTarget = (marine:GetOrigin() - damagedStructure:GetOrigin()):GetLength()
                         local currentOrder = marine:GetCurrentOrder()
-                        local hasWelder = senses:Get("hasWelder")(marine) -- ï¿½berprï¿½fen, ob der Marine einen Welder hat
+                        local hasWelder = senses:Get("hasWelder")(marine) -- ?berpr?fen, ob der Marine einen Welder hat
 
                         if distanceToTarget < nearestDistance and distanceToTarget <= weldDistanceThreshold and hasWelder and not GetIsAssignedToOtherMarine(marine, damagedStructure) and (not currentOrder or currentOrder:GetType() ~= kTechId.Weld) then
                             nearestDistance = distanceToTarget

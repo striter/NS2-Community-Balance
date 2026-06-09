@@ -237,12 +237,12 @@ function GUIAlienBuyMenu:_InitializeSlots()
 	CreateSlot(self, kTechId.ShadeHive)
 	CreateSlot(self, kTechId.ShiftHive)
 
-	local anglePerSlot = (math.pi * 0.6) / (#self.slots-1)
+	local anglePerSlot = (math.pi * 0.7) / (#self.slots-1)
 
 	local distance = GUIAlienBuyMenu.kSlotDistance
 	for i = 1, #self.slots do
 
-		local angle = (i-1) * anglePerSlot + math.pi * 0.2
+		local angle = (i-1) * anglePerSlot + math.pi * 0.15
 
 		self.slots[i].Graphic:SetPosition( Vector( math.cos(angle) * distance - GUIAlienBuyMenu.kSlotSize * .5, math.sin(angle) * distance - GUIAlienBuyMenu.kSlotSize * .5, 0) )
 		self.slots[i].Angle = angle

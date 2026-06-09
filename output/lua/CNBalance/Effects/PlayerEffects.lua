@@ -425,6 +425,15 @@ kPlayerEffectData =
         }
     },
 
+    phantom_spawn =
+    {
+        phantomSpawnEffects =
+        {
+            {parented_cinematic = "cinematics/alien/fade/blink_in.cinematic", classname = "Alien"},
+            {sound = "sound/NS2.fev/alien/common/celerity_start", classname = "Alien", done = true},
+        }
+    },
+
 }
 
 GetEffectManager():AddEffectData("PlayerEffectData", kPlayerEffectData)

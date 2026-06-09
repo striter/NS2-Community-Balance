@@ -1193,6 +1193,14 @@ function BuildTechData()
     })
 
     table.insert(techData, {
+        [kTechDataId] = kTechId.Phantom,
+        [kTechDataCategory] = kTechId.ShadeHive,
+        [kTechDataDisplayName] = "PHANTOM",
+        [kTechDataTooltipInfo] = "PHANTOM_TOOLTIP",
+        [kTechDataCostKey] = kPhantomCost,
+    })
+
+    table.insert(techData, {
         [kTechDataId] = kTechId.OriginFormResourceFetch,
         [kTechDataCategory] = kTechId.OriginForm,
         [kTechDataDisplayName] = "ORIGIN_FORM_RESOURCE_FETCH",

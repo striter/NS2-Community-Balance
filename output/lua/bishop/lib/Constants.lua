@@ -10,12 +10,14 @@ Bishop.lib.constants = {}
 ---@field techId integer
 
 ---@class kTechId
+---@field AdvancedArmory integer
 ---@field AdvancedWeaponry integer
 ---@field AmmoPack integer
 ---@field Armory integer
 ---@field Cyst integer
 ---@field DualMinigunExosuit integer
 ---@field DualRailgunExosuit integer
+---@field ExosuitPrototypeLab integer
 ---@field ExosuitTech integer
 ---@field Fade integer
 ---@field Flamethrower integer

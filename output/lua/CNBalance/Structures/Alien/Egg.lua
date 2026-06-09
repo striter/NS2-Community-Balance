@@ -2,13 +2,14 @@ function Egg.BuildUpgradeStructureTable()
     local kUpgrades = {}
     local kStructures = {}
 
-    -- don't autoselect focus
+    -- don't autoselect special upgrades
     local filter = {
         [kTechId.Focus] = true,
         [kTechId.Crush] = true,
         [kTechId.Silence] = true,
-        [kTechId.Crush] = true,
         [kTechId.Vampirism] = true,
+        [kTechId.Condense] = true,
+        [kTechId.Phantom] = true,
     }
 
     local kUpgradeStructureTable = AlienTeam.GetUpgradeStructureTable()

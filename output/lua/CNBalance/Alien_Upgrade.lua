@@ -139,6 +139,10 @@ function GetHasCondenseUpgrade(callingEntity)
     return HasUpgrade(callingEntity, kTechId.Condense)
 end
 
+function GetHasPhantomUpgrade(callingEntity)
+    return HasUpgrade(callingEntity, kTechId.Phantom)
+end
+
 function GetHiveTypeForUpgrade(upgradeId)
 
     local hiveType = LookupTechData(upgradeId, kTechDataCategory, kTechId.None)

@@ -4,7 +4,7 @@ function GetHallucinationTechId(techId)
     
         gTechIdToHallucinateTechId = {}
         gTechIdToHallucinateTechId[kTechId.Drifter] = kTechId.HallucinateDrifter
-        gTechIdToHallucinateTechId[kTechId.Prowler] = kTechId.HallucinateProwler  
+        gTechIdToHallucinateTechId[kTechId.Prowler] = kTechId.HallucinateProwler
         gTechIdToHallucinateTechId[kTechId.Vokex] = kTechId.HallucinateVokex 
         gTechIdToHallucinateTechId[kTechId.Skulk] = kTechId.HallucinateSkulk
         gTechIdToHallucinateTechId[kTechId.Gorge] = kTechId.HallucinateGorge
@@ -20,11 +20,6 @@ function GetHallucinationTechId(techId)
         gTechIdToHallucinateTechId[kTechId.Harvester] = kTechId.HallucinateHarvester
         gTechIdToHallucinateTechId[kTechId.Hydra] = kTechId.HallucinateHydra
     
-    elseif not gTechIdToHallucinateTechId[kTechId.Prowler] then
-        
-        gTechIdToHallucinateTechId[kTechId.Prowler] = kTechId.HallucinateProwler
-        gTechIdToHallucinateTechId[kTechId.Vokex] = kTechId.HallucinateVokex
-    
     end
     
     return gTechIdToHallucinateTechId[techId]
@@ -34,8 +29,9 @@ end
 if Server then
     
     local kHallucinationClassNameMap = debug.getupvaluex(HallucinationCloud.Perform, "kHallucinationClassNameMap")
-    kHallucinationClassNameMap[Prowler.kMapName] = SkulkHallucination.kMapName
+    kHallucinationClassNameMap[Prowler.kMapName] = LerkHallucination.kMapName
     kHallucinationClassNameMap[Fade.kMapName] = FadeHallucination.kMapName
+    kHallucinationClassNameMap[Vokex.kMapName] = FadeHallucination.kMapName
 
 end
 

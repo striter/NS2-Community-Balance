@@ -179,7 +179,7 @@ function IsTechPointIncomplete(tp, teamNumber)
     local startName = GetTeamBrain(teamNumber).initialTechPointLoc
     local attached = tp:GetAttached()
 
-    -- Feindliche Geb�ude blockieren den TP
+    -- Feindliche Geb??de blockieren den TP
     if attached then
         if attached:isa("Hive") then
             return false
@@ -198,12 +198,12 @@ function IsTechPointIncomplete(tp, teamNumber)
         return true
     end
 
-    -- Freier TP (kein Geb�ude drauf)
+    -- Freier TP (kein Geb??de drauf)
     if not attached then
         return true
     end
 
-    -- Eigene CC drauf ? pr�fen ob PG/Obs fehlen
+    -- Eigene CC drauf ? pr??en ob PG/Obs fehlen
     if attached:isa("CommandStation") and attached:GetTeamNumber() == teamNumber then
 
         local origin = tp:GetOrigin()
@@ -222,7 +222,7 @@ function IsTechPointIncomplete(tp, teamNumber)
             return false
         end
 
-        -- Wenn weniger als 3 existieren ? pr�fen, ob dieser TP eins braucht
+        -- Wenn weniger als 3 existieren ? pr??en, ob dieser TP eins braucht
         local obs = GetEntitiesForTeamWithinRange("Observatory", teamNumber, origin, 25)
         if #obs == 0 then
             return true
@@ -264,7 +264,7 @@ local function ArcIsDefended(arc)
 
     for _, p in ipairs(players) do
         
-        -- Commander hat keine Orders ? �berspringen
+        -- Commander hat keine Orders ? ??erspringen
         if p:isa("MarineCommander") then
             goto continue_player
         end
@@ -428,7 +428,7 @@ local function PerformAttackStructure( eyePos, target, lastSeenPos, bot, brain, 
     -- NEUE LOGIK: Shotgun soll nah ran (= 4)
     if weaponType == Shotgun.kMapName and dist > 4 then
         PerformMove( eyePos, aimPos, bot, brain, move )
-        return -- erst n�her ran, dann feuern
+        return -- erst n??er ran, dann feuern
     end
 
     if weaponType == GrenadeLauncher.kMapName then
@@ -519,10 +519,10 @@ local function PredictGLImpact(startPos, target, projSpeed, gravity)
     -- Flugzeit horizontal
     local t = distXZ / projSpeed
 
-    -- Zielbewegung ber�cksichtigen
+    -- Zielbewegung ber??ksichtigen
     local predicted = targetPos + targetVel * t
 
-    -- Schwerkraft ber�cksichtigen
+    -- Schwerkraft ber??ksichtigen
     predicted.y = predicted.y + 0.5 * gravity * t * t
 
     --------------------------------------------------------------------
@@ -538,8 +538,8 @@ local function PredictGLImpact(startPos, target, projSpeed, gravity)
 
     -- Wenn etwas im Weg ist ? predicted NICHT benutzen
     if trace.fraction < 1 then
-        -- Hindernis erkannt ? Bot soll NICHT direkt schie�en
-        -- Wir geben einfach die letzte freie Position zur�ck
+        -- Hindernis erkannt ? Bot soll NICHT direkt schie??n
+        -- Wir geben einfach die letzte freie Position zur??k
         return trace.endPoint
     end
     --------------------------------------------------------------------
@@ -548,7 +548,7 @@ local function PredictGLImpact(startPos, target, projSpeed, gravity)
 end
 
 local function IsShockwaveIncoming(player)
-    -- Radius anpassen, z.B. 20�25
+    -- Radius anpassen, z.B. 20??5
     local radius = 17
     local origin = player:GetOrigin()
 
@@ -564,7 +564,7 @@ end
 
 local function IsEnemyAroundCorner(player, target, bot)
 
-    -- Nur Spieler k�nnen "um die Ecke lauern"
+    -- Nur Spieler k??nen "um die Ecke lauern"
     if not target:isa("Player") then
         return false
     end
@@ -608,7 +608,7 @@ local function ShouldReload(player, sdb)
     local clip = weapon:GetClip()
     local maxClip = weapon:GetClipSize()
 
-    -- Distanz zum gef�hrlichsten Gegner
+    -- Distanz zum gef??rlichsten Gegner
     local threat = sdb:Get("biggestLifeformThreat")
     local threatDist = threat and threat.distance or 999
 
@@ -652,7 +652,7 @@ local function PerformAttackEntity( eyePos, target, lastSeenPos, bot, brain, mov
     local isDodgeable = target:isa("Player") or target:isa("Babbler")
 
     ----------------------------------------------------
-    -- Sichtlinie pr�fen
+    -- Sichtlinie pr??en
     ----------------------------------------------------
     local hasClearShot = false
     if dist < 32.5 then
@@ -708,10 +708,10 @@ if enemyAroundCorner and not enoughSupport and brain.cornerWaitStart and (time -
         gLastMarineReports[location] = now
     end
     ----------------------------------------------------
-    -- Abstand halten: 9�15 m Deadzone
+    -- Abstand halten: 9??5 m Deadzone
     ----------------------------------------------------
 
-    -- Zu nah ? zur�ck
+    -- Zu nah ? zur??k
     if dist < 9 then
         local backDir = (player:GetOrigin() - target:GetOrigin())
         backDir.y = 0
@@ -1000,7 +1000,7 @@ else
     local location = target:GetLocationName()
     local now = Shared.GetTime()
 
-    -- Letzte Meldung f�r diese Location (geteilt von ALLEN Marines)
+    -- Letzte Meldung f?? diese Location (geteilt von ALLEN Marines)
     local lastReport = gLastMarineReports[location] or 0
 
     -- Nur melden, wenn seit 45 Sekunden nichts kam
@@ -1014,7 +1014,7 @@ else
 
         bot:SendTeamMessage(chatMsg, 60)
 
-        -- Zeitstempel aktualisieren (f�r ALLE Marines g�ltig)
+        -- Zeitstempel aktualisieren (f?? ALLE Marines g??tig)
         gLastMarineReports[location] = now
     end
 
@@ -1569,14 +1569,14 @@ local kValidateFollowBuddyGL = function(bot, brain, marine, action)
         return false
     end
 
-    -- Buddy muss exklusiv diesem GL-Bot geh�ren
+    -- Buddy muss exklusiv diesem GL-Bot geh??en
     local assigned = brain.teamBrain:GetNumOthersAssignedToEntity(marine, buddy:GetId())
     if assigned >= 1 then
         brain.teamBrain:UnassignPlayer(marine)
         return false
     end
 
-    -- Distanz pr�fen
+    -- Distanz pr??en
     local dist = marine:GetOrigin():GetDistance(buddy:GetOrigin())
     if dist > 30 then
         brain.teamBrain:UnassignPlayer(marine)
@@ -1615,7 +1615,7 @@ local kValidateGuardARC = function(bot, brain, marine, action)
         return false
     end
 
-    -- Distanz pr�fen
+    -- Distanz pr??en
     local dist = GetPhaseDistanceForMarine(marine, arc, brain.lastGateId)
     if dist > 50 then
         brain:ResetGuardState()
@@ -1629,7 +1629,7 @@ local kValidateGuardARC = function(bot, brain, marine, action)
         return false
     end
 
-    -- H�henunterschied pr�fen
+    -- H??enunterschied pr??en
     local dy = math.abs(marine:GetOrigin().y - arc:GetOrigin().y)
     if dy > 10 then
         return false
@@ -1679,7 +1679,7 @@ local kValidateAwaitEarlyResDrop = function(bot, brain, marine, action)
 
         if rp1 and rp2 then
 
-            -- Harvester-Check nur f�r Double-Res
+            -- Harvester-Check nur f?? Double-Res
             for _, rp in ipairs(action.doublePair) do
                 local harvesters = GetEntitiesForTeamWithinRange("Harvester",kAlienTeamType, rp:GetOrigin(), 2 )
                 if #harvesters > 0 then
@@ -2128,7 +2128,7 @@ local kExecGuardARC = function(move, bot, brain, marine, action)
         return
     end
 
-    -- WICHTIG: Exklusivit�t aktivieren
+    -- WICHTIG: Exklusivit?? aktivieren
     local arcId = arc:GetId()
     if not brain.teamBrain:GetIsAssignedToEntity(marine, arcId) then
         brain.teamBrain:UnassignPlayer(marine)
@@ -2218,7 +2218,7 @@ local kExecBuildStructure = function(move, bot, brain, marine, action)
         local location = target:GetLocationName()
         local now = Shared.GetTime()
 
-        -- Letzte Meldung f�r diese Location
+        -- Letzte Meldung f?? diese Location
         local lastReport = gLastMarineReports[location] or 0
 
         -- Nur melden, wenn seit 120 Sekunden nichts kam
@@ -2578,7 +2578,7 @@ function(bot, brain, marine)
         armory = armoryGoal.armory
         armoryDist = armoryGoal.distance
 
-        -- Wenn sehr nah an der Armory, Situation k�nstlich versch�rfen, um Heilung/Ammo zu erzwingen
+        -- Wenn sehr nah an der Armory, Situation k??stlich versch??fen, um Heilung/Ammo zu erzwingen
         if armoryDist < 2.0 and minFraction < 0.8 then
             minFraction = minFraction / 3.0
         end
@@ -3022,7 +3022,7 @@ end, -- RETREAT
         local canAffordWeaponTechId = nil
         local roundTimeMinutes = GetGameMinutesPassed()
 
-        local hasBoughtDesiredWeapon = false-- primaryWep and primaryWep:GetTechId() == brain.activeWeaponPurchaseTechId
+        local hasBoughtDesiredWeapon = primaryWep and primaryWep:GetTechId() == brain.activeWeaponPurchaseTechId
 
         if not hasBoughtDesiredWeapon and brain.activeWeaponPurchaseTechId ~= nil then
         --Update Armory position / target only (done in case of Recycle / Destroyed)
@@ -3032,7 +3032,7 @@ end, -- RETREAT
             targetArmory = armory
             local isAdvArmory = targetArmory ~= nil and targetArmory:isa("AdvancedArmory") or false
 
-            local wantAdvancedWeapon = brain.activeWeaponPurchaseTechId ~= kTechId.Shotgun -- Dieser Befehl sorgt nur daf�r, dass die Bots nur die Schrotflinte im aktvien Spiel kaufen.
+            local wantAdvancedWeapon = brain.activeWeaponPurchaseTechId ~= kTechId.Shotgun -- Dieser Befehl sorgt nur daf??, dass die Bots nur die Schrotflinte im aktvien Spiel kaufen.
 
             if wantAdvancedWeapon and not isAdvArmory then
             --Only update if needed
@@ -3359,7 +3359,7 @@ function(bot, brain, marine)
     if buddy and dist < 30 then
         local buddyId = buddy:GetId()
 
-        -- Pr�fen ob Buddy schon vergeben ist
+        -- Pr??en ob Buddy schon vergeben ist
         if teamBrain:GetNumOthersAssignedToEntity(bot, buddyId) == 0 then
 
             return {
@@ -3471,7 +3471,7 @@ function(bot, brain, marine)
     ------------------------------------------------------------
     -- 2) TP-Suche (Erweiterung)
     ------------------------------------------------------------
-    if not awaitableResNode then
+    if roundMinutesPassed <= limit and not awaitableResNode then
 
         local techPoints = GetEntities("TechPoint")
 
@@ -3494,7 +3494,7 @@ function(bot, brain, marine)
     ------------------------------------------------------------
 -- 2b) Double-Res-Point-Suche (ohne Senses)
 ------------------------------------------------------------
-if not awaitableResNode then
+if roundMinutesPassed <= limit and not awaitableResNode then
 
     local resNodes = GetEntities("ResourcePoint")
     local locationMap = {}
@@ -3514,14 +3514,14 @@ if not awaitableResNode then
     for loc, list in pairs(locationMap) do
         if #list > 1 then
 
-            -- Pr�fe alle Paare
+            -- Pr??e alle Paare
             for i = 1, #list - 1 do
                 for j = i + 1, #list do
 
                     local rp1 = list[i]
                     local rp2 = list[j]
 
-                    -- Beide m�ssen frei sein
+                    -- Beide m??sen frei sein
                     if not rp1:GetAttached() and not rp2:GetAttached() then
 
                         -- Pro Node max. 1 Marine
@@ -3555,7 +3555,7 @@ end
     end
 
     ------------------------------------------------------------
-    -- 4) Action zur�ckgeben
+    -- 4) Action zur??kgeben
     ------------------------------------------------------------
     return {
         name = name,
@@ -3722,7 +3722,7 @@ local kExecAttackLifeforms = function(move, bot, brain, marine, action)
         or (target.GetHealthFraction and target:GetHealthFraction() > 0.7 and sdb:Get("ammoFraction") > 0 ) 
         or (numFriendlies >= 4 and sdb:Get("pistolClipFraction") == 0 ) then
             SwitchToPrimary(marine)           
-            -- Bedingung f�r Munition pr�fen und zu Nahkampf wechseln
+            -- Bedingung f?? Munition pr??en und zu Nahkampf wechseln
         elseif 
               dist <= 1.5 and sdb:Get("pistolClipFraction") == 0 then   
             --dist <= 1.5 and target:GetHealthFraction() <= 0.15 or sdb:Get("pistolClipFraction") == 0 then 
@@ -3912,8 +3912,8 @@ local kExecClearCysts = function(move, bot, brain, marine, action)
     local aimPos = cyst:GetOrigin() -- Get the position of the Cyst
     local distanceToCyst = (marine:GetOrigin() - aimPos):GetLength()
 
-    -- Wenn die Entfernung zur Cyste gr��er als 2.0 ist, bewege dich zur Cyste
-    -- Der Bot sollte sich beim Angriff immer bewegen, dass sollte vor miss Treffern mit dem Welder sch�tzen...
+    -- Wenn die Entfernung zur Cyste gr???er als 2.0 ist, bewege dich zur Cyste
+    -- Der Bot sollte sich beim Angriff immer bewegen, dass sollte vor miss Treffern mit dem Welder sch??zen...
     if distanceToCyst > 1.5 then
         bot:GetMotion():SetDesiredMoveTarget(aimPos)
     else
@@ -4000,7 +4000,7 @@ local kExecWeldNearest = function(move, bot, brain, marine, action)
     
     if targetHasWelder and marine:GetArmorScalar() < 1 then
 
-        -- Angriff deaktivieren, damit er NICHT schie�t
+        -- Angriff deaktivieren, damit er NICHT schie??
         move.primaryAttack = false
         move.secondaryAttack = false
 
@@ -4009,7 +4009,7 @@ local kExecWeldNearest = function(move, bot, brain, marine, action)
 
         if client and not isBot then
             bot:SendTeamMessage("I need some welds, " .. weldTarget:GetName() .. "!", 70)
-        --Welde aktiv mit wenn m�glich  
+        --Welde aktiv mit wenn m??lich  
             if invWelder ~= nil then            
             SwitchToWelder(marine)
         end
@@ -4472,7 +4472,7 @@ local function IsPackForWeapon(pack)
     return false
 end
 
-        -- N�chstes g�ltiges Pack finden
+        -- N??hstes g??tiges Pack finden
         bestDist, bestPack = GetNearestFiltered(marine, packs, IsPackForWeapon)
 
         if bestPack ~= nil then
@@ -4504,7 +4504,7 @@ function(bot, brain, marine)
         mines = {}
     end
 
-    -- N�chste Mine bestimmen
+    -- N??hste Mine bestimmen
     local bestDist, bestMine = GetNearestFiltered(marine:GetOrigin(), mines)
 
     -- Gewichtung: nur wenn eine Mine existiert
@@ -4550,7 +4550,7 @@ function(bot, brain, marine)
         welders = {}
     end
 
-    -- N�chsten Welder bestimmen
+    -- N??hsten Welder bestimmen
     local bestDist, bestWelder = GetNearestFiltered(marine:GetOrigin(), welders)
 
     -- Gewichtung: nur wenn ein Welder existiert
@@ -4799,7 +4799,7 @@ function(bot, brain, marine)
 
     local inDanger = IsThreatClose(threat, 10) or marine:GetIsUnderFire()
 ------------------------------------------------------------------
--- Voice Weld Request: Armor < 0.5, aber nur wenn Welder in der N�he
+-- Voice Weld Request: Armor < 0.5, aber nur wenn Welder in der N??e
 ------------------------------------------------------------------
 
     local WELD_REQUEST_COOLDOWN = 10
@@ -4827,7 +4827,7 @@ function(bot, brain, marine)
     end
     ------------------------------------------------------------------
     -- Wenn wir selbst keinen Welder haben und Armor < 1 ? Attack blockieren
-    -- (dieses Flag muss man in der Attack-Action ber�cksichtigen)
+    -- (dieses Flag muss man in der Attack-Action ber??ksichtigen)
     ------------------------------------------------------------------
     if marine:GetArmorScalar() < 1 and sdb:Get("welder") == nil then
         brain.attackBlockedBecauseLowArmor = true
@@ -4872,7 +4872,7 @@ function(bot, brain, marine)
                     weight = 0
                 end
 
-                -- Exo-Sonderfall �berschreibt Danger-Check
+                -- Exo-Sonderfall ??erschreibt Danger-Check
                 inDanger = false
             else
                 if inDanger then
@@ -4886,7 +4886,7 @@ function(bot, brain, marine)
 
     ------------------------------------------------------------------
     -- Teil 2: Wir haben KEINEN Welder, Armor < 1, nicht in Gefahr
-    -- ? aktiven Spieler mit Welder in der N�he suchen, der uns weldet.
+    -- ? aktiven Spieler mit Welder in der N??e suchen, der uns weldet.
     ------------------------------------------------------------------
     if weldTarget == nil
        and marine:GetArmorScalar() < 1
@@ -4895,7 +4895,7 @@ function(bot, brain, marine)
         local nearbyPlayers = GetEntitiesForTeamWithinRange("Player", marine:GetTeamNumber(), marine:GetOrigin(), 25)
 
         for _, player in ipairs(nearbyPlayers) do
-            -- Niemals sich selbst als Ziel w�hlen
+            -- Niemals sich selbst als Ziel w??len
             if player ~= marine then
                 -- Hier ist GetActiveWeapon sicher, da "Player"-Klasse
                 local weapon = player.GetActiveWeapon and player:GetActiveWeapon() or nil
@@ -4931,7 +4931,7 @@ function(bot, brain, marine)
     end
 
     ------------------------------------------------------------------
-    -- R�ckgabe der Aktion
+    -- R??kgabe der Aktion
     ------------------------------------------------------------------
     return {
         name      = name,
@@ -5724,7 +5724,7 @@ s:Add("nearestBuddyForGL",
         local teamNumber = marine:GetTeamNumber()
         local players = GetEntitiesForTeam("Player", teamNumber)
         
-        -- Wenn der Bot selbst kein GL ist, liefere nil zur�ck
+        -- Wenn der Bot selbst kein GL ist, liefere nil zur??k
         local weapon = marine:GetActiveWeapon() or marine:GetWeaponInHUDSlot(1)
         if not (weapon and weapon.GetMapName and weapon:GetMapName() == GrenadeLauncher.kMapName) then
         return nil
@@ -5741,7 +5741,7 @@ s:Add("nearestBuddyForGL",
                 -- Kein Commander
                 if p:isa("Commander") then return nil end
 
-                -- GL-Tr�ger d�rfen NICHT Buddy sein
+                -- GL-Tr??er d??fen NICHT Buddy sein
                 for _, weapon in ipairs(p:GetWeapons()) do
                     if weapon.GetMapName and weapon:GetMapName() == GrenadeLauncher.kMapName then
                         return nil
@@ -5916,7 +5916,7 @@ s:Add("nearestBuddyForGL",
             return {entity = bestPower, distance = bestDist}
             end)          
 
---[Vereinfachte Version wo auch Exosuits geweldet werden k�nnen.
+--[Vereinfachte Version wo auch Exosuits geweldet werden k??nen.
 s:Add("nearbyWeldable", function(db, marine)
     local targets = GetEntitiesWithMixinForTeamWithinRange("Weldable", marine:GetTeamNumber(), marine:GetOrigin(), 20.0)
     local dist, nearestTarget = GetMinTableEntry(targets, function(target)

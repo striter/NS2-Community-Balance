@@ -249,10 +249,6 @@ function Prowler:GetEngagementPointOverride()
 end
 
 -- we, uh, don't have variants 
-function Prowler:SetVariant()
-end
-function Prowler:GetVariant()
-end
 function Prowler:GetCrouchShrinkAmount()
     return 0
 end
@@ -382,21 +378,25 @@ function Prowler:ModifyVelocity(input, velocity, deltaTime)
         if hitTarget then
             local targetIsPlayer = hitTarget:isa("Player")
             if targetIsPlayer then
-                if now > (self.timeRappelStart + kRappelReelReactionTime) then
-                    local viewCoords = self:GetViewCoords()
-                    local reelDirection = (viewCoords.origin - followEntity:GetModelOrigin())
-                    if Math.DotProduct(-viewCoords.zAxis,reelDirection) > 0.2 then
-                        reelDirection = (viewCoords.origin + viewCoords.zAxis * 1) - hitTarget:GetOrigin()
-                    end
-                    reelDirection:Normalize()
+                local mass = hitTarget.GetMass and hitTarget:GetMass() or Player.kMass
+                local pullSpeed = mass < kPushBackMass and kRappelReelContinuousSpeed or 0
+                if hitTarget.GetIsBMAC and hitTarget:GetIsBMAC() then
+                    pullSpeed = kRappelReelContinuousSpeedBMAC
+                end
 
-                    local speed = kRappelReelContinuousSpeed
-                    if hitTarget.GetIsBMAC and hitTarget:GetIsBMAC() then
-                        speed = kRappelReelContinuousSpeedBMAC 
-                    end 
-                    ApplyPushback(hitTarget,0.5,self:GetVelocity() * .2 + (reelDirection * speed),true)
-                else
-                    ApplyPushback(hitTarget,0.1,kDisableVector,true)
+                if pullSpeed > 0 then
+                    if now > (self.timeRappelStart + kRappelReelReactionTime) then
+                        local viewCoords = self:GetViewCoords()
+                        local reelDirection = (viewCoords.origin - followEntity:GetModelOrigin())
+                        if Math.DotProduct(-viewCoords.zAxis,reelDirection) > 0.2 then
+                            reelDirection = (viewCoords.origin + viewCoords.zAxis * 1) - hitTarget:GetOrigin()
+                        end
+                        reelDirection:Normalize()
+
+                        ApplyPushback(hitTarget,0.5,self:GetVelocity() * .2 + (reelDirection * pullSpeed),true)
+                    else
+                        ApplyPushback(hitTarget,0.1,kDisableVector,true)
+                    end
                 end
                 
                 if velocity:GetLength() > Prowler.kReelingSpeed then
@@ -585,13 +585,13 @@ function Prowler:RappelFilter()
     end
 end
 
-local breakRappelTolerance = 0.2
+local kPlayerBreakRappelTolerence = 0.2
 function Prowler:PostUpdateMove(input)
     if not self.rappelling then return end
     local breakRappel = false
 
-    local followEntity = Shared.GetEntity(self.rappelFollow)
     if self.rappelFollow ~= Entity.invalidId then
+        local followEntity = Shared.GetEntity(self.rappelFollow)
         if followEntity and followEntity.GetIsAlive and followEntity:GetIsAlive() then
             self.rappelPoint = followEntity:GetModelOrigin()
             if self:GetEnergy() < kRappelEnergyCost then
@@ -600,21 +600,23 @@ function Prowler:PostUpdateMove(input)
         else
             breakRappel = true
         end
-    end
 
-    local origin = self:GetModelOrigin()
-    local trace = Shared.TraceRay(origin, self.rappelPoint,  CollisionRep.Default, PhysicsMask.AllButPCsAndRagdolls, self:RappelFilter())
-    --local trace = Shared.TraceRay(origin, self.rappelPoint, CollisionRep.Move, PhysicsMask.AllButPCs, EntityFilterOneAndIsa(self, "Babbler"))
-    if (self:GetOrigin() - self.rappelPoint):GetLength() > kRappelRange
-            or trace.fraction ~= 1
-            or (trace.endPoint - self.rappelPoint):GetLength() > 0.5
-    then
-        self.rappelToleranceDuration = (self.rappelToleranceDuration or 0) + input.time
-        breakRappel = breakRappel or self.rappelToleranceDuration > breakRappelTolerance
-    else
-        self.rappelToleranceDuration = 0
-    end
+        if followEntity and followEntity:isa("Player") then
+            local origin = self:GetModelOrigin()
+            local trace = Shared.TraceRay(origin, self.rappelPoint,  CollisionRep.Default, PhysicsMask.AllButPCsAndRagdolls, self:RappelFilter())
+            --local trace = Shared.TraceRay(origin, self.rappelPoint, CollisionRep.Move, PhysicsMask.AllButPCs, EntityFilterOneAndIsa(self, "Babbler"))
+            if (self:GetOrigin() - self.rappelPoint):GetLength() > kRappelRange
+                    or trace.fraction ~= 1
+                    or (trace.endPoint - self.rappelPoint):GetLength() > 0.5
+            then
+                self.rappelToleranceDuration = (self.rappelToleranceDuration or 0) + input.time
+                breakRappel = breakRappel or self.rappelToleranceDuration > kPlayerBreakRappelTolerence
+            else
+                self.rappelToleranceDuration = 0
+            end
+        end
 
+    end
 
     if not breakRappel then return end
 

@@ -35,11 +35,11 @@ local kTechDataCostKey = kTechDataCostKey
 local kTechId = kTechId
 local kTechUnlocks = {
   [kTechId.Shotgun] = kTechId.ShotgunTech,
-  [kTechId.Flamethrower] = kTechId.AdvancedWeaponry,
-  [kTechId.GrenadeLauncher] = kTechId.AdvancedWeaponry,
-  [kTechId.HeavyMachineGun] = kTechId.AdvancedWeaponry,
-  [kTechId.DualMinigunExosuit] = kTechId.ExosuitTech,
-  [kTechId.DualRailgunExosuit] = kTechId.ExosuitTech,
+  [kTechId.Flamethrower] = kTechId.AdvancedArmory,
+  [kTechId.GrenadeLauncher] = kTechId.AdvancedArmory,
+  [kTechId.HeavyMachineGun] = kTechId.AdvancedArmory,
+  [kTechId.DualMinigunExosuit] = kTechId.ExosuitPrototypeLab,
+  [kTechId.DualRailgunExosuit] = kTechId.ExosuitPrototypeLab,
 }
 local kUseDistance = 1.35
 local kUsePositions = {
@@ -109,7 +109,7 @@ function Bishop.marine.soldier.objectives.BuyWeapon(bot, brain, marine)
     end
   end
 
-  if bot.desiredWeapon == kTechId.None then
+  if bot.desiredWeapon == nil or bot.desiredWeapon == kTechId.None then
     bot.desiredWeapon = GetRequiredWeapon()
     if kDebug then
       Log("%s wants to buy %s.", marine:GetName(), kTechId[bot.desiredWeapon])
@@ -119,13 +119,20 @@ function Bishop.marine.soldier.objectives.BuyWeapon(bot, brain, marine)
   local purchase = bot.desiredWeapon
   local building = brain:GetSenses():Get(kBuildingSenses[purchase]).entity
   local resources = marine:GetResources()
+  local techTree = GetTechTree(marine:GetTeamNumber())
 
   -- Rather than hoarding resources for a tech that isn't unlocked, fall back to
   -- a shotgun for the team.
-  if not building and purchase ~= kTechId.Shotgun
+  if purchase ~= kTechId.Shotgun
       and resources >= kAbundantRes - bot.buyTemptation then
-    purchase = kTechId.Shotgun
-    building = brain:GetSenses():Get(kBuildingSenses[purchase]).entity
+
+    local techUnlocked = techTree
+        and techTree:GetHasTech(kTechUnlocks[purchase], true)
+
+    if not building or not techUnlocked then
+      purchase = kTechId.Shotgun
+      building = brain:GetSenses():Get(kBuildingSenses[purchase]).entity
+    end
   end
 
   if purchase == kTechId.DualMinigunExosuit
@@ -133,7 +140,11 @@ function Bishop.marine.soldier.objectives.BuyWeapon(bot, brain, marine)
     purchase = kTechId.DualRailgunExosuit
   end
 
-  local techTree = GetTechTree(marine:GetTeamNumber())
+  -- DualRailgunExosuit also requires CannonPrototypeLab.
+  if purchase == kTechId.DualRailgunExosuit and techTree
+      and not techTree:GetHasTech(kTechId.CannonPrototypeLab, true) then
+    purchase = kTechId.DualMinigunExosuit
+  end
 
   -- If jetpacks are unlocked then the marine should also take into account a
   -- mandatory jetpack purchase with their weapon.

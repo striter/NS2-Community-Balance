@@ -172,6 +172,8 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["CONDENSE_TOOLTIP"]="*获得更小的体型.\n-略微降低移动速率."
     Locale.kTranslateMessage["SILENCE"]="无声"
     Locale.kTranslateMessage["SILENCE_TOOLTIP"]="*降低行动发出的声音."
+    Locale.kTranslateMessage["PHANTOM"]="幻影"
+    Locale.kTranslateMessage["PHANTOM_TOOLTIP"]="*被侦测时释放幻影镜像."
     Locale.kTranslateMessage["ABM_GORGE"] ="仅[Gorge]可用"
     Locale.kTranslateMessage["ABM_RESOURCE_LOW"] ="资源不足以同步"
 
@@ -435,6 +437,8 @@ if Locale.kLocales then
     Locale.kLocales["CONDENSE_TOOLTIP"]="*Became smaller than usual.\n-Slower movement."
     Locale.kLocales["SILENCE"]="Silence"
     Locale.kLocales["SILENCE_TOOLTIP"]="*Reduce sounds caused by movement."
+    Locale.kLocales["PHANTOM"]="Phantom"
+    Locale.kLocales["PHANTOM_TOOLTIP"]="*Creates a phantom when detected."
     Locale.kLocales["ABM_GORGE"] ="Only [Gorge] Available"
     Locale.kLocales["ABM_RESOURCE_LOW"] ="Team Resources Low"
     

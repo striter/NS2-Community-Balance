@@ -595,7 +595,7 @@ kNanoShieldDamageReductionDamage = 0.68
 
 kWelderPointValue = 1
 kSelfWeldAmount = 5
-kPlayerArmorWeldRate = 30
+kPlayerArmorWeldRate = 20
 
 kCombatBuilderCost = 3
 kCombatBuilderDropCost = 5
@@ -745,3 +745,6 @@ kTechRespawnTimeExtension =
 kDOTPlayerDamageMaxLifeTime = 2
 
 kPushBackMass = 100
+--Phantom (Shade Hive branch)
+kPhantomCost = 0
+kPhantomCooldown = {20, 15, 8}
