@@ -113,7 +113,7 @@ local function PerformAttackEntity( eyePos, target, lastSeenPos, bot, brain, mov
     local retreating = false
 
     ----------------------------------------------------------------------
-    -- Eier niemals beschieﬂen ñ Exo soll sie nur zertreten
+    -- Eier niemals beschieÈÅùn ÔøΩ Exo soll sie nur zertreten
     ----------------------------------------------------------------------
     if target:isa("Egg") or target:isa("Embryo") then
 
@@ -144,7 +144,7 @@ local function PerformAttackEntity( eyePos, target, lastSeenPos, bot, brain, mov
     local armory = nearestArmoryData and nearestArmoryData.armory or nil
 
     ----------------------------------------------------------------------
-    -- Dynamische Distanz: Wenn Eier in der N‰he sind ? mehr Bewegungsfreiheit
+    -- Dynamische Distanz: Wenn Eier in der NÈãíe sind ? mehr Bewegungsfreiheit
     ----------------------------------------------------------------------
     local stompEggs = GetEntitiesWithinRange("Egg", eyePos, 25)
     local stompEmbryos = GetEntitiesWithinRange("Embryo", eyePos, 25)
@@ -194,7 +194,7 @@ local function PerformAttackEntity( eyePos, target, lastSeenPos, bot, brain, mov
     end
 
     ----------------------------------------------------------------------
-    -- Wenn kein klarer Schuss mˆglich ? weiterlaufen (aber NICHT wenn Ei-Commitment)
+    -- Wenn kein klarer Schuss mÈ∞Élich ? weiterlaufen (aber NICHT wenn Ei-Commitment)
     ----------------------------------------------------------------------
     if not hasClearShot and not committedToEgg then
         PerformMove(eyePos, aimPos, bot, brain, move)
@@ -237,7 +237,7 @@ local function PerformAttackEntity( eyePos, target, lastSeenPos, bot, brain, mov
             local strafePos = strafeTarget + myOrigin
             local pathingPos = Pathing.GetClosestPoint(strafePos)
 
-            -- NEU: Egg-Commitment ¸berschreibt Strafen
+            -- NEU: Egg-Commitment Èªöerschreibt Strafen
            if committedToEgg then
            
            local stompTarget = stompTargets[1]
@@ -262,7 +262,7 @@ local function PerformAttackEntity( eyePos, target, lastSeenPos, bot, brain, mov
         end
 
         ------------------------------------------------------------------
-        -- Aiming abh‰ngig von Railgun/Minigun
+        -- Aiming abhÈãògig von Railgun/Minigun
         ------------------------------------------------------------------
         local aimGroup = brain.isMinigun and kBotAccWeaponGroup.ExoMinigun
                                          or kBotAccWeaponGroup.ExoRailgun
@@ -275,7 +275,7 @@ local function PerformAttackEntity( eyePos, target, lastSeenPos, bot, brain, mov
     ----------------------------------------------------------------------
     dist = GetDistanceToTouch(eyePos, target)
 
-    if armory and (
+    if armory and IsValid(armory) and (
         healthFraction < kExoBrainRetreatHealth
         or numFriendlies == 0
         or tacticalRetreat
@@ -385,7 +385,7 @@ local function PerformAttack(eyePos, mem, bot, brain, move)
     if target ~= nil then
 
         --------------------------------------------------------------------
-        -- Angriff ausf¸hren
+        -- Angriff ausfÈª®ren
         --------------------------------------------------------------------
         PerformAttackEntity(eyePos, target, mem.lastSeenPos, bot, brain, move)
 
@@ -397,7 +397,7 @@ local function PerformAttack(eyePos, mem, bot, brain, move)
             local location = target:GetLocationName()
             local now = Shared.GetTime()
 
-            -- Letzte Meldung f¸r diese Location (geteilt von ALLEN Marines/Exos)
+            -- Letzte Meldung fÈªµ diese Location (geteilt von ALLEN Marines/Exos)
             local lastReport = gLastMarineReports[location] or 0
 
             -- Nur melden, wenn seit 60 Sekunden nichts kam
@@ -535,6 +535,7 @@ end
 
 local kExecRetreat = function(move, bot, brain, exo, action)
     local structure = action.structure
+    if not IsValid(structure) then return kPlayerObjectiveComplete end
 
     -- we are retreating, unassign ourselves from anything else, e.g. attack targets
     brain.teamBrain:UnassignPlayer(exo)
@@ -712,7 +713,7 @@ function(bot, brain, exo)
     for _, arc in ipairs(arcs) do
         if IsValid(arc) and arc:GetIsAlive() then
 
-            -- ? ARC wird verteidigt ? ¸berspringen
+            -- ? ARC wird verteidigt ? Èªöerspringen
             if ArcIsDefended(arc) then
                 goto continue_arc
             end

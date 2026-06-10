@@ -1820,6 +1820,7 @@ local kExecHealByNearestArmory = function(move, bot, brain, marine, action)
     PROFILE("MarineBrain - ExecHealByNearestArmory")
 
     local armory = action.armory
+    if not IsValid(armory) then return kPlayerObjectiveComplete end
 
     local touchDist = GetDistanceToTouch( marine:GetEyePos(), armory )
     if touchDist < 1.55 then
@@ -1836,7 +1837,7 @@ local kExecRetreat = function(move, bot, brain, marine, action)
     PROFILE("MarineBrain - ExecRetreat")
 
     local armory = action.armory
-    if not armory then return kPlayerObjectiveComplete end
+    if not IsValid(armory) then return kPlayerObjectiveComplete end
 
     -- we are retreating, unassign ourselves from anything else, e.g. attack targets
 
@@ -1901,6 +1902,7 @@ local kExecBuyWeapons = function(move, bot, brain, marine, action)
     PROFILE("MarineBrain - ExecBuyWeapons")
 
     local targetArmory = action.targetArmory
+    if not IsValid(targetArmory) then return kPlayerObjectiveComplete end
 
     -- Since player "use" process does a trace, using a "eyepos" to "touch" direct calculation
     -- will be slightly larger, which can get bots stuck.
@@ -6155,3 +6157,5 @@ end)--]]
     return s
 
 end
+
+
