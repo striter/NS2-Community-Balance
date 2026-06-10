@@ -629,7 +629,7 @@ function Vokex:OnUpdateAnimationInput(modelMixin)
 end
 
 function Vokex:GetCondenseScalePerLevel()
-    return 0.06
+    return 0.07
 end
 
 Shared.LinkClassToMap("Vokex", Vokex.kMapName, networkVars, true)

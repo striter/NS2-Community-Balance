@@ -32,7 +32,7 @@ kTechReputationByPass = {
 }
 
 kTechIdMemberLevelByPass = {
-    [kTechId.Condense] = 0,
+    [kTechId.Condense] = 1,
     [kTechId.Silence] = 1,
     [kTechId.Phantom] = 2,
 }

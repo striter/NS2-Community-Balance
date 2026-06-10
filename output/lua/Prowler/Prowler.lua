@@ -892,7 +892,7 @@ if Client then
 end
 
 function Prowler:GetCondenseScalePerLevel()
-    return 0.06
+    return 0.07
 end
 
 Shared.LinkClassToMap("Prowler", Prowler.kMapName, networkVars, true)

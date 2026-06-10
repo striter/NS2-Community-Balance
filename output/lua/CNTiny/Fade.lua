@@ -5,5 +5,5 @@ function Fade:GetMaxSpeed(possible)
 end
 
 function Fade:GetCondenseScalePerLevel()
-    return 0.06
+    return 0.07
 end

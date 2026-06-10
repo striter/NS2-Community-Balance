@@ -121,9 +121,8 @@ end
      end
 
      function Alien:GetCondenseScalePerLevel()
-         return 0.08
+         return 0.09
      end
-
 
      local kPhantomHallucinationClassNameMap
 
