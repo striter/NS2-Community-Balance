@@ -313,6 +313,10 @@ function LightMachineGun:GetAmmoPackMapName()
     return LightMachineGunAmmo.kMapName
 end
 
+function LightMachineGun:GetTechId()
+    return kTechId.LightMachineGun
+end
+
 function LightMachineGun:OverrideWeaponName()
     return "rifle"
 end

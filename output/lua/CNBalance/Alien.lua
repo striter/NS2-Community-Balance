@@ -35,37 +35,24 @@ end
 
 
  if Server then
---     -- ThirdPerson Codes
---     local function ThirdPerson(self)
---         if HasMixin(self, "CameraHolder") then
 
---             local numericDistance = 3
---             if self:GetIsThirdPerson() then
---                 numericDistance = 0
---             end
-            
---             self:SetIsThirdPerson(numericDistance)
---         end
---     end
+     local baseHandleButtons = Alien.HandleButtons
+     function Alien:HandleButtons(input)
+         PROFILE("Alien:HandleButtons")
+         baseHandleButtons(self, input)
 
---     local baseHandleButtons = Alien.HandleButtons
+         if not self:GetIsDestroyed() then
+             local useDown = bit.band(input.commands, Move.Use) ~= 0
+             if useDown then
+                 if not self._returnToHiveHoldStart then
+                     self._returnToHiveHoldStart = Shared.GetTime()
+                 end
+             else
+                 self._returnToHiveHoldStart = nil
+             end
+         end
 
---     local tpPressed = false
-
---     function Alien:HandleButtons(input)
-
---         baseHandleButtons(self,input)
-
---             if bit.band(input.commands, Move.Reload) ~= 0 then
---                 if not tpPressed then
---                     tpPressed=true
---                     ThirdPerson(self)
---                 end
---             else
---                 tpPressed=false
---             end
-        
---     end
+     end
 
      local baseOnCreate = Alien.OnCreate
      function Alien:OnCreate()
@@ -74,37 +61,42 @@ end
      end
 
 
+     local baseOnProcessMove = Alien.OnProcessMove
      function Alien:OnProcessMove(input)
          PROFILE("Alien:OnProcessMove")
-
-         self.hasAdrenalineUpgrade = GetHasAdrenalineUpgrade(self)
-
-         -- Update energy (server)
-         self:GetEnergy()
-
-         -- need to clear this value or spectators would see the hatch effect every time they cycle through players
-         if self.hatched and self.creationTime + 3 < Shared.GetTime() then
-             self.hatched = false
-         end
-
-         if GetIsUnitActive(self) then
-             self:UpdateCondenseLevel()
-         end
-         Player.OnProcessMove(self, input)
-
-         -- In rare cases, Player.OnProcessMove() above may cause this entity to be destroyed.
-         -- The below code assumes the player is not destroyed.
+         baseOnProcessMove(self, input)
          if not self:GetIsDestroyed() then
+             self:UpdateReturnToHive()
+         end
+     end
 
-             -- Calculate two and three hives so abilities for abilities
-             UpdateAbilityAvailability(self, self:GetTierOneTechId(), self:GetTierTwoTechId(), self:GetTierThreeTechId())
-
-             self.enzymed = self.timeWhenEnzymeExpires > Shared.GetTime()
-             self.electrified = self.timeElectrifyEnds > Shared.GetTime()
-
-             self:UpdateAutoHeal()
-             self:UpdateSilenceLevel()
-             self:UpdatePhantom()
+     function Alien:UpdateReturnToHive()
+         PROFILE("UpdateReturnToHive")
+         if not self._returnToHiveHoldStart or not GetHasTech(self, kTechId.ShiftHive) then
+             return
+         end
+         
+         -- Check proximity to any active Shift
+         local shifts = GetEntitiesForTeam("Shift", self:GetTeamNumber())
+         local nearShift = false
+         local echoLocationId = 0
+         if shifts then
+             for _, shift in ipairs(shifts) do
+                 if GetIsUnitActive(shift) then
+                     if (self:GetOrigin() - shift:GetOrigin()):GetLengthSquared() <= 6.25 then
+                         nearShift = true
+                         echoLocationId = shift.echoLocationId
+                         break
+                     end
+                 end
+             end
+         end
+         
+         if not nearShift then
+             self._returnToHiveHoldStart = nil
+         elseif Shared.GetTime() - self._returnToHiveHoldStart >= 0.6 then
+             self._returnToHiveHoldStart = nil
+             self:ReturnToLocation(echoLocationId)
          end
      end
 
@@ -180,9 +172,111 @@ end
          end
      end
 
+     function Alien:ReturnToLocation(echoLocationId)
+
+         PROFILE("Alien:ReturnToLocation")
+
+         -- Don't return if already gestating or dead
+         if self:GetIsDestroyed() or not self:GetIsAlive() then return end
+
+         local spawnPos
+         local spawnAngles
+         local eggs = GetEntitiesForTeam("Egg", self:GetTeamNumber())
+         local hives = GetEntitiesForTeam("Hive", self:GetTeamNumber())
+         
+         -- Check if this location has an alive hive
+         local targetHive = nil
+         if hives and echoLocationId and echoLocationId > 0 then
+             for _, hive in ipairs(hives) do
+                 if hive:GetIsAlive() and hive:GetIsBuilt() and hive:GetLocationId() == echoLocationId then
+                     targetHive = hive
+                     break
+                 end
+             end
+         end
+
+         if not targetHive then
+             Server.PlayPrivateSound(self, "sound/NS2.fev/interface/error", self, 1.0, Vector(0, 0, 0))
+             return
+         end
+         
+         -- Try to find an unselected Egg near this hive
+         if eggs then
+             for _, egg in ipairs(eggs) do
+                 if not egg:GetIsDestroyed() and egg:GetIsFree() and (egg:GetOrigin() - targetHive:GetOrigin()):GetLengthSquared() <= 900 then
+                     spawnPos = Vector(egg:GetOrigin())
+                     spawnAngles = egg:GetAngles()
+                     DestroyEntity(egg)
+                     break
+                 end
+             end
+         end
+
+         if not spawnPos then
+             -- No available egg, use hive's spawn points
+             if targetHive.eggSpawnPoints and #targetHive.eggSpawnPoints > 0 then
+                 spawnPos = targetHive.eggSpawnPoints[math.random(1, #targetHive.eggSpawnPoints)]
+             else
+                 spawnPos = Vector(targetHive:GetOrigin())
+             end
+         end
+
+         -- Save data before replacement
+         local healthScalar = self:GetHealthScalar()
+         local armorScalar = self:GetArmorScalar()
+         local currentTechId = self:GetTechId()
+         local upgrades = self:GetUpgrades() or {}
+
+         -- Replace current player with Embryo
+         local newPlayer = self:Replace(Embryo.kMapName)
+
+         if newPlayer and newPlayer:isa("Embryo") then
+             -- Teleport to spawn position
+             newPlayer:SetOrigin(spawnPos)
+             if spawnAngles then
+                 newPlayer:SetAngles(spawnAngles)
+             end
+             newPlayer:SetVelocity(Vector(0, 0, 0))
+             newPlayer:DropToFloor()
+             newPlayer:SetCameraDistance(kGestateCameraDistance)
+             newPlayer:SetIsDroppedEmbryo(true)
+
+             -- Setup gestation data (lifeform techId + all upgrades preserved)
+             local techIds = { currentTechId }
+             for _, upgradeId in ipairs(upgrades) do
+                 table.insertunique(techIds, upgradeId)
+             end
+
+             newPlayer:SetGestationData(techIds, currentTechId, healthScalar, armorScalar)
+         end
+
+     end
+
      
      function Alien:OnDetectedChange(detected)
          if not detected then return end
          TrySpawnPhantom(self)
      end
+ end
+ 
+ if Client then
+ 
+     local baseHandleButtons = Alien.HandleButtons
+     function Alien:HandleButtons(input)
+         PROFILE("Alien:HandleButtonsClient")
+         baseHandleButtons(self, input)
+ 
+         if self == Client.GetLocalPlayer() and not self:GetIsDestroyed() then
+             local useDown = bit.band(input.commands, Move.Use) ~= 0
+             if useDown then
+                 if not self._clientEHoldStart then
+                     self._clientEHoldStart = Shared.GetTime()
+                 end
+             else
+                 self._clientEHoldStart = nil
+             end
+         end
+ 
+     end
+ 
  end

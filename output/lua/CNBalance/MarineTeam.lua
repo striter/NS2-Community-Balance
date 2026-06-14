@@ -1,5 +1,7 @@
 
 MarineTeam.kDeadlockAlert = PrecacheAsset("sound/ns2plus.fev/comm/deadlock")
+local kLastStandInterval = 3
+local kLastStandTicks = 10
 function MarineTeam:InitTechTree()
 
     PlayingTeam.InitTechTree(self)
@@ -224,6 +226,7 @@ local baseOnInitialize = MarineTeam.Initialize
 function MarineTeam:Initialize(teamName, teamNumber)
     self.clientOwnedStructures = { }
     self.timeLastMotionTrack = 0
+    self.lastStandData = nil
     baseOnInitialize(self, teamName, teamNumber)
 end
 
@@ -260,6 +263,7 @@ local baseUpdate = MarineTeam.Update
 function MarineTeam:Update(timePassed)
     baseUpdate(self,timePassed)
     TickMotionTrack(self)
+    self:CheckLastStandTimeout()
 end
 
 function MarineTeam:IsMilitaryProtocol()
@@ -283,22 +287,15 @@ function MarineTeam:OnTeamKill(_target,doer,_techId, _fraction)
         end
     end
 
-    if table.contains(kHiveTechIdTable,_techId)  and self:GetNumCapturedTechPoints() == 0 then
-        local techPoint =  _target:GetAttached()
-
+    if table.contains(kHiveTechIdTable,_techId) then
+        local techPoint = _target:GetAttached()
         if techPoint then
-            techPoint:ClearAttached()
-            _target:ClearAttached()
-
-            local commandStructure = techPoint:SpawnCommandStructure(self:GetTeamNumber())
-            assert(commandStructure ~= nil)
-            commandStructure:Construct(5,doer)
-
-            local techPointCoords = techPoint:GetCoords()
-            techPointCoords.origin = commandStructure:GetOrigin()
-            commandStructure:SetCoords(techPointCoords)
+            self.lastStandData = {
+                techPoint = techPoint,
+                lastCheckTime = Shared.GetTime(),
+                remainingTicks = kLastStandTicks
+            }
         end
-        
     end
     
     return pRes
@@ -388,6 +385,73 @@ function MarineTeam:OnResearchComplete(structure, researchId)
     gameInfo:SetTeamCosmeticSlot( teamIdx, kTeamCosmeticSlot4, commArcSkin )
 end
 
+function MarineTeam:CheckLastStandTimeout()
+    if not self.lastStandData then return end
+    
+    local now = Shared.GetTime()
+    if now - self.lastStandData.lastCheckTime < kLastStandInterval then return end
+    self.lastStandData.lastCheckTime = now
+    self.lastStandData.remainingTicks = self.lastStandData.remainingTicks - 1
+    
+    if self:TrySpawnAtAnchor(self.lastStandData.techPoint) then
+        self.lastStandData = nil
+    elseif self.lastStandData.remainingTicks <= 0 then
+        self.lastStandData = nil
+    end
+end
+
+function MarineTeam:OnBeaconCompleted(beaconOrigin)
+    if not self.lastStandData or not beaconOrigin then return end
+    
+    local csTP = self:GetNearestTechPoint(beaconOrigin)
+    if csTP then
+        self.lastStandData.techPoint = csTP
+    end
+end
+
+function MarineTeam:GetNearestTechPoint(origin)
+    local techPoints = GetEntities("TechPoint")
+    local nearestTP = nil
+    local nearestDist = 30
+    for _, tp in ipairs(techPoints) do
+        local dist = (tp:GetOrigin() - origin):GetLength()
+        if dist < nearestDist then
+            nearestDist = dist
+            nearestTP = tp
+        end
+    end
+    return nearestTP
+end
+
+function MarineTeam:TrySpawnAtAnchor(techPoint)
+    if not techPoint then return false end
+    if techPoint:GetAttached() then return false end
+    if self:GetNumCapturedTechPoints() > 0 then return false end
+    
+    local players = GetEntitiesForTeam("Player", self:GetTeamNumber())
+    local builder = nil
+    local anchorOrigin = techPoint:GetOrigin()
+    local maxDistSq = 30 * 30
+    for _, player in ipairs(players) do
+        if player:GetIsAlive() then
+            local distSq = (player:GetOrigin() - anchorOrigin):GetLengthSquared()
+            if distSq < maxDistSq then
+                maxDistSq = distSq
+                builder = player
+            end
+        end
+    end
+    if not builder then return false end
+    local commandStructure = techPoint:SpawnCommandStructure(self:GetTeamNumber())
+    if commandStructure then
+        commandStructure:Construct(5, builder)
+        local techPointCoords = techPoint:GetCoords()
+        techPointCoords.origin = commandStructure:GetOrigin()
+        commandStructure:SetCoords(techPointCoords)
+    end
+    return true
+end
+
 local cancelTechNode
 local function DestroyMarineStructure(self,structure)
     if not cancelTechNode then
@@ -407,6 +471,7 @@ end
 local baseOnResetComplete = MarineTeam.OnResetComplete
 function MarineTeam:OnResetComplete()
     baseOnResetComplete(self)
+    self.lastStandData = nil
 
     local locations = GetLocations()
     local initialTechPoint = self:GetInitialTechPoint()

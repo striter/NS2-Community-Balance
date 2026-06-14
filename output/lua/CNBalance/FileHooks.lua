@@ -91,6 +91,7 @@ ModLoader.SetupFileHook("lua/BiomassHealthMixin.lua", "lua/CNBalance/Mixin/Bioma
 ModLoader.SetupFileHook("lua/RecycleMixin.lua", "lua/CNBalance/Mixin/RecycleMixin.lua", "post")
 ModLoader.SetupFileHook("lua/GhostStructureMixin.lua", "lua/CNBalance/Mixin/GhostStructureMixin.lua", "post")
 ModLoader.SetupFileHook("lua/PhaseGateUserMixin.lua", "lua/CNBalance/Mixin/PhaseGateUserMixin.lua", "replace")
+ModLoader.SetupFileHook("lua/AlienActionFinderMixin.lua", "lua/CNBalance/Mixin/AlienActionFinderMixin.lua", "post")
 
 ModLoader.SetupFileHook("lua/Player.lua", "lua/CNBalance/Player.lua", "post" )
 ModLoader.SetupFileHook("lua/Spectator.lua", "lua/CNBalance/Spectator.lua", "post" )

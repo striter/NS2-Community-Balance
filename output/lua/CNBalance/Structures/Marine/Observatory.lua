@@ -34,6 +34,17 @@ function Observatory:TriggerDistressBeacon()
 
 end
 
+local basePerformDistressBeacon = Observatory.PerformDistressBeacon
+function Observatory:PerformDistressBeacon()
+
+    local success = basePerformDistressBeacon(self)
+    if success and self:GetTeam().OnBeaconCompleted then
+        self:GetTeam():OnBeaconCompleted(self:GetDistressOrigin())
+    end
+    return success
+
+end
+
 
 -- Check if both origins are in the location (game wise, not mapping wise since a "location" is composed of several mapping "location" entities)
 local function GetIsSameLocation(CC_orig, player_orig)

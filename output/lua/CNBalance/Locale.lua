@@ -1,5 +1,6 @@
 
 if Locale.kTranslateMessage then
+    Locale.kTranslateMessage["ECHO_RETURN"] = "回声"
     Locale.kTranslateMessage["BUYMENU_ERROR_RANKREQUIRED"] = "信誉值需达到[%s]"
     Locale.kTranslateMessage["ABM_REPUTATION"] = "需要信誉值达到[%s]"
     Locale.kTranslateMessage["ABM_MEMBER_LEVEL"] = "需要昌吉社工等级[%s]"
@@ -272,6 +273,7 @@ end
 
 if Locale.kLocales then
     
+    Locale.kLocales["ECHO_RETURN"] = "Echo"
     Locale.kLocales["BUYMENU_ERROR_RANKREQUIRED"] = "Reputation Required(%s)"
     Locale.kLocales["ABM_REPUTATION"] ="Reputation Required (%s)"
     Locale.kLocales["ABM_MEMBER_LEVEL"] = "SI Level Required[%s]"
