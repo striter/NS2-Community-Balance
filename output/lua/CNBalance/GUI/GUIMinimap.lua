@@ -1243,21 +1243,36 @@ local function RemoveMinimapConnection(self, index)
     self.minimapConnections[index] = nil
 end
 
-local tunnelColorTable = {
-    Color(247/255.0, 220/255.0, 111/255.0,1), Color(248/255.0, 196/255.0, 113/255.0,1), Color(240/255.0, 178/255.0, 122/255.0,1), Color(229/255.0, 152/255.0, 102/255.0,1),
-    Color(244/255.0, 208/255.0, 63/255.0,1), Color(245/255.0, 176/255.0, 65/255.0,1), Color(235/255.0, 152/255.0, 78/255.0,1), Color(220/255.0, 118/255.0, 51/255.0,1),
-    Color(241/255.0, 196/255.0, 15/255.0,1), Color(243/255.0, 156/255.0, 18/255.0,1), Color(230/255.0, 126/255.0, 34/255.0,1), Color(221/255.0, 84/255.0, 0/255.0,1),
-}
-
-local function getLineColor(tunnelIndex)
-    local colorIndex = (tunnelIndex % #tunnelColorTable) + 1
-    return tunnelColorTable[colorIndex]
-end
+local kAlienMapConnectionColor = Color(1, 0.792, 0.227, 1)
 
 local function UpdateConnections(self)
     local mapConnectors = Shared.GetEntitiesWithClassname("MapConnector")
     local numConnectors = 0
-    local tunnelEntranceIndex = 0
+    
+    -- Find the closest connector
+    local closestConnector = nil
+    local closestDistSq = nil
+    
+    for _, connector in ientitylist(mapConnectors) do
+        local isOneWay = connector.isOneSided
+        local distSq
+        if isOneWay then
+            distSq = (connector:GetOrigin() - self.playerOrigin):GetLengthSquared()
+        else
+            distSq = math.min(
+                (connector:GetOrigin() - self.playerOrigin):GetLengthSquared(),
+                (connector:GetEndPoint() - self.playerOrigin):GetLengthSquared()
+            )
+        end
+        if closestConnector == nil or distSq < closestDistSq then
+            closestConnector = connector
+            closestDistSq = distSq
+        end
+    end
+    
+    -- Only activate highlight when within 5m (5^2 = 25)
+    local highlightActive = closestConnector and closestDistSq < 25
+    
     for _, connector in ientitylist(mapConnectors) do
         -- using numConnectors as index for minimapConnections as the mapConnectors list may contain invalid ents
         numConnectors = numConnectors + 1
@@ -1269,26 +1284,51 @@ local function UpdateConnections(self)
 
         local origin = connector:GetOrigin()
         local cEndPoint = connector:GetEndPoint()
+        local isOneWay = connector.isOneSided
         local startPoint = Vector(self:PlotToMap(origin.x, origin.z))
         local endPoint = Vector(self:PlotToMap(cEndPoint.x, cEndPoint.z))
-
+        
         minimapConnection:Setup(startPoint, endPoint, self.minimap)
-        if(connector:GetTeamNumber() == kTeam2Index) then
-            minimapConnection:UpdateAnimation_Alien(self.comMode == GUIMinimapFrame.kModeMini, getLineColor(tunnelEntranceIndex))
-            tunnelEntranceIndex = tunnelEntranceIndex + 1
+        if isOneWay and connector:GetTeamNumber() == kTeam2Index then
+            local length = minimapConnection.length or 0
+            minimapConnection.line:SetTexturePixelCoordinates(0, 16, length * 2 / 3, 32)
+            minimapConnection.line:SetColor(kAlienMapConnectionColor)
+            minimapConnection.line:SetSize(Vector(length, GUIScale(ConditionalValue(self.comMode == GUIMinimapFrame.kModeMini, 6, 10)), 0))
         else
             minimapConnection:UpdateAnimation(connector:GetTeamNumber(), self.comMode == GUIMinimapFrame.kModeMini)
+            if connector:GetTeamNumber() == kTeam2Index then
+                minimapConnection.line:SetColor(kAlienMapConnectionColor)
+            end
+        end
+        
+        local isHighlighted = (highlightActive and connector == closestConnector)
+        
+        if isHighlighted then
+            minimapConnection.line:SetColor(Color(1, 1, 0, 1))
+            self._closestConnection = minimapConnection
+        elseif highlightActive then
+            local c = minimapConnection.line:GetColor()
+            minimapConnection.line:SetColor(Color(c.r, c.g, c.b, 0.6))
         end
 
         self.minimapConnections[numConnectors] = minimapConnection
     end
 
     local numMinimapConnections = #self.minimapConnections
+
     for i = numMinimapConnections, numConnectors + 1, -1 do
         RemoveMinimapConnection(self, i)
     end
+    
+    if self._closestConnection and self._closestConnection.line then
+        local parent = self._closestConnection.line:GetParent()
+        if parent then
+            parent:RemoveChild(self._closestConnection.line)
+            parent:AddChild(self._closestConnection.line)
+        end
+        self._closestConnection = nil
+    end
 
-    --Print("num minimap connections %s", ToString(#self.minimapConnections))
 end
 
 local function UpdateCommanderPing(self)

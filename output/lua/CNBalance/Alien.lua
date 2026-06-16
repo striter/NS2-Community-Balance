@@ -229,26 +229,23 @@ end
 
          -- Replace current player with Embryo
          local newPlayer = self:Replace(Embryo.kMapName)
-
-         if newPlayer and newPlayer:isa("Embryo") then
-             -- Teleport to spawn position
-             newPlayer:SetOrigin(spawnPos)
-             if spawnAngles then
-                 newPlayer:SetAngles(spawnAngles)
-             end
-             newPlayer:SetVelocity(Vector(0, 0, 0))
-             newPlayer:DropToFloor()
-             newPlayer:SetCameraDistance(kGestateCameraDistance)
-             newPlayer:SetIsDroppedEmbryo(true)
-
-             -- Setup gestation data (lifeform techId + all upgrades preserved)
-             local techIds = { currentTechId }
-             for _, upgradeId in ipairs(upgrades) do
-                 table.insertunique(techIds, upgradeId)
-             end
-
-             newPlayer:SetGestationData(techIds, currentTechId, healthScalar, armorScalar)
+         newPlayer:SetOrigin(spawnPos)
+         if spawnAngles then
+             newPlayer:SetAngles(spawnAngles)
          end
+         newPlayer:SetCameraDistance(kGestateCameraDistance)
+         newPlayer:SetIsDroppedEmbryo(true)
+         newPlayer:SetVelocity(Vector(0, 0, 0))
+         newPlayer:DropToFloor()
+
+         -- Setup gestation data (lifeform techId + all upgrades preserved)
+         local techIds = { currentTechId }
+         for _, upgradeId in ipairs(upgrades) do
+             table.insertunique(techIds, upgradeId)
+         end
+
+         newPlayer:SetGestationData(techIds, currentTechId, healthScalar, armorScalar)
+         newPlayer.gestationTime = kShiftPlayerEchoDuration
 
      end
 

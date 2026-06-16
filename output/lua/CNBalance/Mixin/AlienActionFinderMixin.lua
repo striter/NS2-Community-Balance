@@ -11,7 +11,7 @@ if Client then
 
         -- Check for Shift return-to-hive interaction
         local player = Client.GetLocalPlayer()
-        if player == self and self.actionIconGUI and self:GetIsAlive() and not self:GetIsDestroyed() and GetHasTech(self, kTechId.ShiftHive) then
+        if player == self and self.actionIconGUI and self:GetIsAlive() and not self:GetIsDestroyed() and not self:isa("Embryo") and GetHasTech(self, kTechId.ShiftHive) then
 
             local shifts = GetEntitiesForTeam("Shift", self:GetTeamNumber())
             local shiftWithEcho = nil

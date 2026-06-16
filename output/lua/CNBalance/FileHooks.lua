@@ -41,6 +41,7 @@ ModLoader.SetupFileHook("lua/GUIUpgradeChamberDisplay.lua", "lua/CNBalance/GUI/G
 ModLoader.SetupFileHook("lua/Hud2/topBar/GUIHudTopBarObjectClasses.lua", "lua/CNBalance/GUI/GUIHudTopBarObjectClasses.lua", "replace")
 ModLoader.SetupFileHook("lua/GUIMinimap.lua", "lua/CNBalance/GUI/GUIMinimap.lua", "replace" )
 ModLoader.SetupFileHook("lua/GUIMinimapConnection.lua", "lua/CNBalance/GUI/GUIMinimapConnection.lua", "replace" )
+ModLoader.SetupFileHook("lua/MapConnector.lua", "lua/CNBalance/MapConnector.lua", "post")
 ModLoader.SetupFileHook("lua/GUIWorldText.lua", "lua/CNBalance/GUI/GUIWorldText.lua", "post" )
 ModLoader.SetupFileHook("lua/GUIUnitStatus.lua", "lua/CNBalance/GUI/GUIUnitStatus.lua", "replace" )
 ModLoader.SetupFileHook("lua/TeamMessenger.lua", "lua/CNBalance/TeamMessenger.lua", "replace")
@@ -58,6 +59,8 @@ ModLoader.SetupFileHook("lua/SoundEffect.lua", "lua/CNBalance/SoundEffect.lua", 
 
 ModLoader.SetupFileHook("lua/Weapons/DotMarker.lua", "lua/CNBalance/Weapons/DotMarker.lua", "replace")
 --Mixin
+
+ModLoader.SetupFileHook("lua/MinimapConnectionMixin.lua", "lua/CNBalance/MinimapConnectionMixin.lua", "post")
 
 ModLoader.SetupFileHook("lua/ClientLOSMixin.lua", "lua/CNBalance/Mixin/ClientLOSMixin.lua", "post" )
 ModLoader.SetupFileHook("lua/LOSMixin.lua", "lua/CNBalance/Mixin/LOSMixin.lua", "post" )

@@ -70,6 +70,7 @@ kMilitaryProtocolPlayerResourcesPerKill = {
 
 kMarineRespawnTime = 9
 kAlienSpawnTime = 10
+kShiftPlayerEchoDuration = 2
 
 kEggGenerationRate = 12  --13
 kAlienEggsPerHive = 2

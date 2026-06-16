@@ -19,6 +19,10 @@ function PhaseGate:GetExtraHealth(techLevel,extraPlayers,recentWins)
     return kPhaseGateHealthPerPlayerAdd * (extraPlayers - recentWins * 2)
 end
 
+function PhaseGate:GetIsConnectionOneSided()
+    return true
+end
+
 
 local function TransformPlayerCoordsForPhaseGate(player, srcCoords, dstCoords)
 
@@ -112,7 +116,6 @@ function PhaseGate:Phase(user)
                 if destinationPhaseGate:GetIsCorroded() then
                     if user.DeductArmorWithAutoWeld then
                         user:DeductArmorWithAutoWeld(kMarinePhaseArmorDeduct)
-                        user:SetCorroded()
                     end
 
                     if user.SetCorroded then

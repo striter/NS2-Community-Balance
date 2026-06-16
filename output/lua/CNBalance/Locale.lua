@@ -154,7 +154,7 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["CLUSTERGRENADE_BUYDESCRIPTION"]="陆战队士兵常用的投掷物.\n*对建筑物有高额的伤害.\n*[投掷物升级]产生额外子雷."
 
     Locale.kTranslateMessage["GAS_GRENADE"]="气体手雷"
-    Locale.kTranslateMessage["GASGRENADE_BUYDESCRIPTION"]="陆战队士兵常用的投掷物.\n*对敌方单位造成护甲伤害.\n*缓慢回复范围内的己方单位血量."
+    Locale.kTranslateMessage["GASGRENADE_BUYDESCRIPTION"]="仅对受到应力的单位生效.\n*对敌方单位造成护甲伤害.\n*缓慢回复范围内的己方单位血量."
     
     Locale.kTranslateMessage["BUYMENU_RESTRICTION"] = "%i(过多持有)"
     
@@ -419,7 +419,7 @@ if Locale.kLocales then
     Locale.kLocales["GRENADES_TOOLTIP"]="+Unlock new grenade types.\nMarines throw grenades faster."
     Locale.kLocales["RESEARCH_GRENADES_TITLE"]="Grenade Upgrade"
     Locale.kLocales["GAS_GRENADE"]="Gas Grenade"
-    Locale.kLocales["GASGRENADE_BUYDESCRIPTION"]="*Deal armor damage to enemies.\n*Regen health for team member within range."
+    Locale.kLocales["GASGRENADE_BUYDESCRIPTION"]="*Work with underpressure entity.\n*Deal armor damage to enemies.\n*Regen health for team member within range."
 
     Locale.kLocales["BUILD_ABILITY"]="Builder"
     Locale.kLocales["BUILD_ABILITY_TOOLTIP"]="Place frontline structures.\n*Hydra(Range damage dealer)\n*Clog(Damage receiver)\n*Babbler Egg(Attack nearby enemies)\n*Web(Slow target)"
