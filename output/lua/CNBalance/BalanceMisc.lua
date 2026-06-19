@@ -99,7 +99,7 @@ kAlienMaxRegeneration = 80
 kAlienCrushDamagePercentByLevel = 0.07 --0.07
 
 
-kFocusDamageBonusAtMax = 0.66 kFocusAttackSlowAtMax = 2
+kFocusDamageBonusAtMax = 0.66 kFocusAttackSlowAtMax = 1
 kSpitFocusDamageBonusAtMax = 0.5  kSpitFocusAttackSlowAtMax = 0
 kVolleyFocusDamageBonusAtMax = 0.2  kVolleyFocusAttackSlowAtMax = 0
 kSwipeFocusDamageBonusAtMax = 0.6
@@ -163,6 +163,9 @@ kShiftSupply = 20
 -- Nanoarmor 
 kMarinePhaseArmorDeduct = 20
 kMarineArmorDeductRegen = 20
+
+kInfestationArmorDPSWalking = 0.5
+kInfestationArmorDPSSprinting = 1
 
                                 kBMACAutoWeldPerSecond = 2.5  kMarineNanoArmorPerSecond = 2.5
 kJetpackMarineArmorPerSecond = 0 kJetpackMarineArmorPerSecondBMAC = 2.5  kJetpackMarineNanoArmorPerSecond = 2.5

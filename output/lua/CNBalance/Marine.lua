@@ -564,6 +564,36 @@ if Server then
         heavyMarine:SetHealth(health)
     end
 
+    -- Infestation armor debuff: movement-based armor drain
+    local kInfestationCheckInterval = 0.5
+    local baseOnProcessMove= Marine.OnProcessMove
+    function Marine:OnProcessMove(input)
+        baseOnProcessMove(self, input)
+
+        if not self:GetIsAlive() then
+            return
+        end
+        
+        local now = Shared.GetTime()
+        if self.timeLastInfestationTick and now < self.timeLastInfestationTick + kInfestationCheckInterval then
+            return
+        end
+        self.timeLastInfestationTick = now
+        
+        local deltaTime = kInfestationCheckInterval
+        if self:GetGameEffectMask(kGameEffect.OnInfestation) then
+
+            local infestationDPS = 0
+            if  self:GetCrouching() or self:GetVelocity():GetLength() <= 0.1 then
+                infestationDPS = 0
+            else
+                infestationDPS = self:GetIsSprinting() and kInfestationArmorDPSSprinting or kInfestationArmorDPSWalking
+            end
+            
+            self:DeductArmorWithAutoWeld(deltaTime * infestationDPS,true)
+        end
+    end
+
 end
 
 function Marine:GetMass()

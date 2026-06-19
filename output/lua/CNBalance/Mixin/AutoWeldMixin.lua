@@ -14,6 +14,7 @@ AutoWeldMixin.type = "AutoWeld"
 --AutoWeldMixin.kWeldArmorPerSecond = 8
 AutoWeldMixin.kWeldInterval = 0.2 -- weld hits 5x per second.
 AutoWeldMixin.kRegenInterval = 0.5
+local kAutoWeldCooldown = 1.5
 
 AutoWeldMixin.expectedMixins =
 {
@@ -33,6 +34,7 @@ local function ResetTimer(self)
     local now = Shared.GetTime()
     self.timeNextWeld = now + AutoWeldMixin.kWeldInterval
     self.timeNextSustain =  now + AutoWeldMixin.kRegenInterval
+    self.timeAutoWeldCooldown = now + kAutoWeldCooldown
 end
 
 function AutoWeldMixin:__initmixin()
@@ -52,7 +54,7 @@ function AutoWeldMixin:__initmixin()
         else
             self.__GetIsInCombatForAutoRepair = GetIsInCombat_WithoutCombatMixin
         end
-
+        self.timeAutoWeldCooldown = Shared.GetTime()
     end
 
 end
@@ -63,6 +65,10 @@ if Server then
 
         -- Don't auto weld if in combat or took damage too recently.
         local now = Shared.GetTime()
+        if now < self.timeAutoWeldCooldown then
+            return
+        end
+        
         if self:__GetIsInCombatForAutoRepair(now) then
             return 
         end
@@ -72,7 +78,7 @@ if Server then
 
             local armorRegen = self:GetAutoWeldArmorPerSecond(GetHasTech(self, kTechId.ArmorRegen))
 
-            if self.armorRegenStack > 0  then
+            if self.armorRegenStack > 0 then
                 self.armorRegenStack = math.max(0, self.armorRegenStack - kMarineArmorDeductRegen * AutoWeldMixin.kWeldInterval)
                 armorRegen = armorRegen + kMarineArmorDeductRegen
             end
@@ -112,16 +118,20 @@ if Server then
         return true
     end
 
-    function AutoWeldMixin:DeductArmorWithAutoWeld(amount)
-        if self.armorRegenStack > 0 then return end     --Still Regenerating
-
-        amount = math.min(self:GetArmor(),amount)
+    function AutoWeldMixin:DeductArmorWithAutoWeld(armorDamage, skipNotify)
+        local armor = self:GetArmor()
+        armorDamage = math.min(armor, armorDamage)
 
         ResetTimer(self)
-        self.armorRegenStack = self.armorRegenStack + amount
+        self.armorRegenStack = self.armorRegenStack + armorDamage
 
+        if skipNotify then
+            self:SetArmor(math.max(0, armor - armorDamage))
+            return
+        end
+        
         local engagePoint = HasMixin(self, "Target") and self:GetEngagementPoint() or self:GetOrigin()
-        self:TakeDamage(amount, self, nil, engagePoint, nil, amount, 0, kDamageType.ArmorOnly, nil)
+        self:TakeDamage(armorDamage, self, nil, engagePoint, nil, armorDamage, 0, kDamageType.ArmorOnly, nil)
 
     end
 
