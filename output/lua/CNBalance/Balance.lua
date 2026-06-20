@@ -572,6 +572,7 @@ kMedPackCost = 1
 kMedPackCooldown = 0
 
 kBMACMoveSpeedReduce = 0.8
+kInfestationArmorSpeedModifier = 0.82     
 
 kCatPackCost = 1
 kCatPackCooldown = 0

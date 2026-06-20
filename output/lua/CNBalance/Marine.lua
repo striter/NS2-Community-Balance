@@ -620,12 +620,16 @@ function Marine:GetMaxSpeed(possible)
         useModifier = 0.5
     end
 
+    if self:GetHasCatPackBoost() then
+        maxSpeed = maxSpeed + kCatPackMoveAddSpeed
+    end
+    
     if self:GetIsBMAC() then
         maxSpeed = maxSpeed - kBMACMoveSpeedReduce
     end
 
-    if self:GetHasCatPackBoost() then
-        maxSpeed = maxSpeed + kCatPackMoveAddSpeed
+    if self:GetGameEffectMask(kGameEffect.OnInfestation) then
+        maxSpeed = maxSpeed * kInfestationArmorSpeedModifier
     end
 
     return maxSpeed * self:GetSlowSpeedModifier() * inventorySpeedScalar  * useModifier
