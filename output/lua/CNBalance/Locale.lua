@@ -59,7 +59,7 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["LIFE_SUSTAIN_TOOLTIP"]="*陆战队员脱战后逐渐回复生命值."
 
     Locale.kTranslateMessage["GRENADE_LAUNCHER_UPGRADE"] = "榴弹枪架构升级"
-    Locale.kTranslateMessage["GRENADE_LAUNCHER_UPGRADE_TOOLTIP"] = "+改进装弹加速榴弹枪换弹.\n+撞击榴弹内置智能引信."
+    Locale.kTranslateMessage["GRENADE_LAUNCHER_UPGRADE_TOOLTIP"] = "+改进装弹机构加速榴弹枪换弹.\n+撞击榴弹内置智能引信."
     
     Locale.kTranslateMessage["EXPLOSIVE_SUPPLY"] = "可燃物研发站"
     Locale.kTranslateMessage["EXPLOSIVE_SUPPLY_TOOLTIP"] = "升级为可燃物研发基地."
@@ -93,10 +93,10 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["CANNON_PROTOTYPE_LAB_HINT"] = "提供高斯枪升级购买"
     Locale.kTranslateMessage["CANNON_PROTOTYPE_LAB_TOOLTIP"] = "于陆战队解锁原型高斯枪."
 
-    Locale.kTranslateMessage["JETPACK_PROTOTYPE_UPGRADE"] = "[喷气背包]升级"
-    Locale.kTranslateMessage["JETPACK_PROTOTYPE_LAB"] = "[喷气背包]科技实验室"
-    Locale.kTranslateMessage["JETPACK_PROTOTYPE_LAB_HINT"] = "提供喷气背包升级购买"
-    Locale.kTranslateMessage["JETPACK_PROTOTYPE_LAB_TOOLTIP"] = "于陆战队解锁喷气背包."
+    Locale.kTranslateMessage["JETPACK_PROTOTYPE_UPGRADE"] = "[弹射背包]升级"
+    Locale.kTranslateMessage["JETPACK_PROTOTYPE_LAB"] = "[弹射背包]科技实验室"
+    Locale.kTranslateMessage["JETPACK_PROTOTYPE_LAB_HINT"] = "提供弹射背包升级购买"
+    Locale.kTranslateMessage["JETPACK_PROTOTYPE_LAB_TOOLTIP"] = "于陆战队解锁弹射背包."
 
     Locale.kTranslateMessage["EXOSUIT_PROTOTYPE_UPGRADE"] = "[单兵机甲]升级"
     Locale.kTranslateMessage["EXOSUIT_PROTOTYPE_LAB"] = "[单兵机甲]科技实验室"
@@ -110,27 +110,27 @@ if Locale.kTranslateMessage then
     
     Locale.kTranslateMessage["WELDER_BUYDESCRIPTION"]="制式维修工具.\n*修复陆战队护甲以及机甲.\n*修复建筑以及电力节点,加速建造建筑.\n*对菌毯造成高额伤害,可以灼烧孢子云."
     Locale.kTranslateMessage["KNIFE"]="步战刀"
-    Locale.kTranslateMessage["KNIFE_BUYDESCRIPTION"]="制式步战刀.\n+最快的移动速度.\n+从无甲单位身上切下一大块肉.\n-近距离搏斗.\n-对披甲单无法造成有效杀伤."
+    Locale.kTranslateMessage["KNIFE_BUYDESCRIPTION"]="制式步战刀.\n+最快的移动速度.\n+从无甲单位身上切下一大块肉.\n-近距离搏斗.\n-对披甲单位无法造成有效杀伤."
     Locale.kTranslateMessage["REVOLVER"]="左轮"
     Locale.kTranslateMessage["STATUS_REVOLVER"]="左轮"
     Locale.kTranslateMessage["REVOLVER_BUYDESCRIPTION"]="制式左轮手枪.\n+连射足以摧毁一切小型单位.\n-较低的载弹量."
     Locale.kTranslateMessage["SUBMACHINEGUN"]="冲锋枪"
     Locale.kTranslateMessage["STATUS_SUBMACHINEGUN"]="冲锋枪"
-    Locale.kTranslateMessage["SUBMACHINEGUN_BUYDESCRIPTION"]="制式冲锋枪.\n+相对步枪更高的伤害,*轻量化配置.\n*更有效的近战方式,对拌网生效.\n-较少的弹夹容量,远程精准度较差."
+    Locale.kTranslateMessage["SUBMACHINEGUN_BUYDESCRIPTION"]="制式冲锋枪.\n+相对步枪更高的伤害,*轻量化配置.\n*更有效的近战方式,对绊网生效.\n-较少的弹夹容量,远程精准度较差."
     Locale.kTranslateMessage["LIGHTMACHINEGUN"]="轻机枪"
     Locale.kTranslateMessage["STATUS_LIGHTMACHINEGUN"]="轻机枪"
-    Locale.kTranslateMessage["LIGHTMACHINEGUN_BUYDESCRIPTION"]="将你的制式步枪升级为制式轻机枪.\n*相对步枪更高的伤害.\n*相对步枪更高的精准度.\n*更有效的近战方式,对拌网生效."
+    Locale.kTranslateMessage["LIGHTMACHINEGUN_BUYDESCRIPTION"]="将你的制式步枪升级为制式轻机枪.\n*相对步枪更高的伤害.\n*相对步枪更高的精准度.\n*更有效的近战方式,对绊网生效."
     Locale.kTranslateMessage["CANNON"]="高斯枪"
     Locale.kTranslateMessage["CANNON_DROP"]="发放高斯枪"
     Locale.kTranslateMessage["STATUS_CANNON"]="高斯枪"
-    Locale.kTranslateMessage["CANNON_BUYDESCRIPTION"]="单兵携带式磁轨炮.\n*单发高额伤害,精准对点打击,以及小范围攻击.\n-较慢的射速与低载弹量.\n-小心他超高的重量以及无法控制后坐力."
+    Locale.kTranslateMessage["CANNON_BUYDESCRIPTION"]="单兵携带式磁轨炮.\n*单发高额伤害,精准对点打击,以及小范围攻击.\n-较慢的射速与低载弹量.\n-小心它超高的重量以及无法控制后坐力."
     Locale.kTranslateMessage["RESEARCH_CANNON"]="研发高斯枪"
     Locale.kTranslateMessage["RESEARCH_CANNON_TOOLTIP"]="*进行高斯枪研发.\n*适用于压制高机动目标."
     Locale.kTranslateMessage["CANNON_TOOLTIP"]="*单兵高斯枪研发.\n*适用于压制高机动目标."
 
     Locale.kTranslateMessage["COMBATBUILDER"]="工程套件"
     Locale.kTranslateMessage["COMBATBUILDER_TOOLTIP"]="给予陆战队员基础建筑建造."
-    Locale.kTranslateMessage["COMBATBUILDER_BUYDESCRIPTION"]="给予基础建筑建造.\n*建造补给站以获取弹药,投掷物与地雷.\n*建造机枪塔攻击范围内敌方单位."
+    Locale.kTranslateMessage["COMBATBUILDER_BUYDESCRIPTION"]="给予基础建筑建造.\n*建造补给站以获取弹药,投掷物与地雷.\n*建造哨戒机枪攻击范围内敌方单位."
 
     Locale.kTranslateMessage["WEAPON_CACHE"]="补给站"
     Locale.kTranslateMessage["WEAPON_CACHE_HINT"]="回复弹药与生命值"
@@ -143,7 +143,7 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["PROTOS_MENU_TOOLTIP"]="给陆战队员发放原型装备"
     Locale.kTranslateMessage["DUAL_MINIGUN"]="转轮机甲"
     Locale.kTranslateMessage["DUAL_MINIGUN_TOOLTIP"]="双臂都安装了 |转轮机枪| 的原型单兵机甲.\n*预热后造成大量持续伤害. -请当心转轮过热."
-    Locale.kTranslateMessage["DUAL_RAILGUN"]="电磁枪机甲"
+    Locale.kTranslateMessage["DUAL_RAILGUN"]="磁轨炮机甲"
     Locale.kTranslateMessage["DUAL_RAILGUN_TOOLTIP"]="双臂都安装了 |磁轨炮| 的原型单兵机甲.\n*蓄力造成大量穿透伤害.\n*远距离对点打击.\n*对骨盾造成全额伤害."
 
     Locale.kTranslateMessage["BUYMENU_GROUPLABEL_GRENADES"]="投掷物"
@@ -153,14 +153,12 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["RESEARCH_GRENADES_TITLE"]="投掷物升级"
     Locale.kTranslateMessage["CLUSTERGRENADE_BUYDESCRIPTION"]="陆战队士兵常用的投掷物.\n*对建筑物有高额的伤害.\n*[投掷物升级]产生额外子雷."
 
-    Locale.kTranslateMessage["GAS_GRENADE"]="气体手雷"
+    Locale.kTranslateMessage["GAS_GRENADE"]="毒气手雷"
     Locale.kTranslateMessage["GASGRENADE_BUYDESCRIPTION"]="仅对受到应力的单位生效.\n*对敌方单位造成护甲伤害.\n*缓慢回复范围内的己方单位血量."
     
     Locale.kTranslateMessage["BUYMENU_RESTRICTION"] = "%i(过多持有)"
     
     Locale.kTranslateMessage["BUILD_ABILITY"]="建造者"
-    Locale.kTranslateMessage["BUILD_ABILITY_TOOLTIP"]="放置建筑,构建前线阵地.\n*刺花(造成远程伤害)\n*泥团(构建基础阵地)\n*酸液地雷(爆炸造成护甲伤害)\n*拌网(减缓敌方单位速度)"
-
     Locale.kTranslateMessage["ORIGIN_FORM"]="原始族群"
     Locale.kTranslateMessage["ORIGIN_FORM_TOOLTIP"]="虫群不再拥有母巢意志.\n*Gorge替代指挥放置建筑.\n*死亡的敌方单位将提供资源."
     Locale.kTranslateMessage["ORIGIN_FORM_PASSIVE"]="原始族群"
@@ -181,7 +179,7 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["TUNNEL_EXIT_HINT"]="虫洞出口."
     
     Locale.kTranslateMessage["DROP_TEAM_STRUCTURE"]="工蜂"
-    Locale.kTranslateMessage["DROP_TEAM_STRUCTURE_TOOLTIP"]="*仅在原始族群状态可用.\n*巢(提供范围强化/攻击)\n*资源塔(提供被动资源收入)\n*母巢(提供生物质)\n*属性塔(提供演化强化).\n*蛹(提供复活点).\n*虫洞(双端建成以提供迅捷通道)."
+    Locale.kTranslateMessage["DROP_TEAM_STRUCTURE_TOOLTIP"]="*仅在原始族群状态可用.\n*巢(提供范围强化/攻击)\n*资源塔(提供被动资源收入)\n*母巢(提供生物质)\n*属性塔(提供演化强化).\n*蛹(提供复活点).\n*虫洞(双端建成以提供快速通道)."
     
     Locale.kTranslateMessage["BELLY_SLIDE"]="滑行"
     Locale.kTranslateMessage["BELLY_SLIDE_TOOLTIP"]="使用光滑的肚皮在地面滑行.\n*通过高低差获得加速度."
@@ -201,8 +199,8 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["RAPPEL_TOOLTIP"] = "将Prowler快速拉向目标.\n*对击中的敌方单位造成伤害."
     Locale.kTranslateMessage["ACIDSPRAY"] = "酸液投掷"
     Locale.kTranslateMessage["ACIDSPRAY_TOOLTIP"] = "投掷一串酸性炸弹.\n*抛物线弹道."
-    Locale.kTranslateMessage["PROWLER_STRUCTURE"] = "拌网"
-    Locale.kTranslateMessage["PROWLER_STRUCTURE_TOOLTIP"] = "构建能够粘住敌人  的拌网."
+    Locale.kTranslateMessage["PROWLER_STRUCTURE"] = "绊网"
+    Locale.kTranslateMessage["PROWLER_STRUCTURE_TOOLTIP"] = "构建能够粘住敌人的绊网."
 
     Locale.kTranslateMessage["VOKEX"] = "Vokex"
     Locale.kTranslateMessage["VOKEX_EGG"] = "蛹(Vokex)"
@@ -211,15 +209,15 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["ACIDROCKET"] = "酸液飞弹"
     Locale.kTranslateMessage["ACIDROCKET_TOOLTIP"] = "发射一枚直线飞弹.\n*撞击后造成范围酸液伤害."
     Locale.kTranslateMessage["SHADOWSTEP"] = "暗影步"
-    Locale.kTranslateMessage["SHADOWSTEP_TOOLTIP"] = "朝者运动方向快速闪现.\n*结束后将短暂隐形.\n*闪现后可再次释放二段跳."
-    Locale.kTranslateMessage["VORTEX"] = "漩涡"
-    Locale.kTranslateMessage["VORTEX_SHADOWSTEP"] = "漩涡"
-    Locale.kTranslateMessage["VORTEX_SHADOWSTEP_TOOLTIP"] = "重击前方释放短暂持续的漩涡.\n*吸收所有经过的弹道.\n*吸附临近单位并造成少量伤害."
+    Locale.kTranslateMessage["SHADOWSTEP_TOOLTIP"] = "朝移动方向快速闪现.\n*结束后将短暂隐形.\n*闪现后可再次释放二段跳."
+    Locale.kTranslateMessage["VORTEX"] = "涡旋"
+    Locale.kTranslateMessage["VORTEX_SHADOWSTEP"] = "涡旋"
+    Locale.kTranslateMessage["VORTEX_SHADOWSTEP_TOOLTIP"] = "重击前方释放短暂持续的涡旋.\n*吸收所有经过的弹道.\n*吸附临近单位并造成少量伤害."
     
     Locale.kTranslateMessage["DEVOUR"] = "吞噬"
     Locale.kTranslateMessage["ONOS_DEVOUR"] = "吞噬"
     Locale.kTranslateMessage["STATUS_DEVOURED"] = "消化中"
-    Locale.kTranslateMessage["ONOS_DEVOUR_TOOLTIP"] = "将陆战队员吞进肚子.\n*吞噬单位后无法使用骨盾.\n-消化过程将遇到抵抗.\n-额外的重量将减缓移动速度."
+    Locale.kTranslateMessage["ONOS_DEVOUR_TOOLTIP"] = "将陆战队员吞入.\n*吞噬单位后无法使用骨盾.\n-消化过程将遇到抵抗.\n-额外的重量将减缓移动速度."
 
     Locale.kTranslateMessage["SHIFT_TUNNEL"] = "快速虫洞"
     Locale.kTranslateMessage["SHIFT_TUNNEL_TOOLTIP"] = "*虫洞使用者不再需要长途跋涉."
@@ -228,7 +226,7 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["SHADE_TUNNEL"] = "拟态虫洞"
     Locale.kTranslateMessage["SHADE_TUNNEL_TOOLTIP"] = "*虫洞入口脱战后将对敌方单位不可见."
     
-    Locale.kTranslateMessage["BUILD_ABILITY_TOOLTIP"] = "消耗体力建造阵地.\n*刺花(远程攻击范围内可视目标).\n*泥团(用于抵挡子弹)\n*孢子团块(死亡时爆炸并造成护甲伤害)\n-升级后将持续释放孢子云覆盖阵地.\n*拌网(减缓触碰的敌方单位速度)"
+    Locale.kTranslateMessage["BUILD_ABILITY_TOOLTIP"] = "消耗体力建造阵地.\n*刺花(远程攻击范围内可视目标).\n*泥团(用于抵挡子弹)\n*孢子团块(死亡时爆炸并造成护甲伤害)\n-升级后将持续释放孢子云覆盖阵地.\n*绊网(减缓触碰的敌方单位速度)"
     Locale.kTranslateMessage["BABBLER_MINE"] = "虫巢"
     Locale.kTranslateMessage["BABBLER_MINE_TOOLTIP"] = "自动感应式.\n*释放子虫追踪并攻击临近区域的敌方单位.\n*死亡时释放所有子虫攻击目标."
     Locale.kTranslateMessage["SPOREMINE"]="孢子团块"
@@ -236,8 +234,8 @@ if Locale.kTranslateMessage then
     
     Locale.kTranslateMessage["BIOMASS_PRESERVATION"] = "生物质贮存"
     Locale.kTranslateMessage["BIOMASS_PRESERVATION_TOOLTIP"] = "卡拉异形已吸收此生物质.\n*在生物质因故剥离后.\n*可以更快演化至该级生物质."
-    Locale.kTranslateMessage["BIOMASS_RECOVER"] = "生物量演化"
-    Locale.kTranslateMessage["BIOMASS_RECOVER_TOOLTIP"] = "以更低的成本升级母巢.\n*并增加生物量等级."
+    Locale.kTranslateMessage["BIOMASS_RECOVER"] = "生物质演化"
+    Locale.kTranslateMessage["BIOMASS_RECOVER_TOOLTIP"] = "以更低的成本升级母巢.\n*并增加生物质等级."
 
     Locale.kTranslateMessage["MARK_THREAT"] = "到此集合"
     Locale.kTranslateMessage["PHEROMONE_THREAT_TOOLTIP"] = "通知全队:集合至该点.\n*范围玩家持续获得资源."
@@ -246,7 +244,7 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["HELP_SCREEN_DEVOUR_DESCRIPTION"] = "尝试吞噬前方的陆战队员，命中后将他装到你的肚子里并持续消化！期间无法使用骨盾并且额外的重量将导致减速。也许会遭遇顽强抵抗，但总比子弹来的好。"
     
     Locale.kTranslateMessage["HELP_SCREEN_VOLLEY"] = "齐射"
-    Locale.kTranslateMessage["HELP_SCREEN_VOLLEY_DESCRIPTION"] = "对前方进行一轮刺网齐射，试试击落那些在天上飞的讨厌鬼，让他们落地成为其他人的美餐。"
+    Locale.kTranslateMessage["HELP_SCREEN_VOLLEY_DESCRIPTION"] = "对前方进行一轮钉刺齐射，试试击落那些在天上飞的讨厌鬼，让他们落地成为其他人的美餐。"
     Locale.kTranslateMessage["HELP_SCREEN_RAPPEL"] = "结绳"
     Locale.kTranslateMessage["HELP_SCREEN_RAPPEL_DESCRIPTION"] = "向目标点结绳。并拖拽自己成为空中飞蛛，或选择在墙上高速移动。"
 
@@ -262,8 +260,8 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["HELP_SCREEN_SHADOWSTEP_JUMP_DESCRIPTION"] = "左脚踩右脚，螺旋升天。"
     Locale.kTranslateMessage["HELP_SCREEN_ACIDROCKET"] = "酸液飞弹"
     Locale.kTranslateMessage["HELP_SCREEN_ACIDROCKET_DESCRIPTION"] = "向前方发射一枚直线弹道酸液飞弹，就算对面在十万八千里都能够射中，更适合打那些固定建筑。"
-    Locale.kTranslateMessage["HELP_SCREEN_VORTEX"] = "黑洞"
-    Locale.kTranslateMessage["HELP_SCREEN_VORTEX_DESCRIPTION"] = "释放一个小型单位无法挣脱的黑洞，能够吸收经过的所有弹道物体，当心别吸到你的队友了！"
+    Locale.kTranslateMessage["HELP_SCREEN_VORTEX"] = "涡旋"
+    Locale.kTranslateMessage["HELP_SCREEN_VORTEX_DESCRIPTION"] = "释放一个小型单位无法挣脱的涡旋，能够吸收经过的所有弹道物体，当心别吸到你的队友了！"
 
     Locale.kTranslateMessage["RESOURCES_ALIEN"] = "进化因子"
     Locale.kTranslateMessage["RESOURCES_MARINE"] = "军需补给点"
@@ -313,9 +311,9 @@ if Locale.kLocales then
     Locale.kLocales["STANDARD_STATION"] = "Command Station (Weapons Lab)"
     Locale.kLocales["STANDARD_STATION_TOOLTIP"] = "Marine Base"
     Locale.kLocales["LIGHTMACHINEGUN_UPGRADE"]="Rifle Upgrade"
-    Locale.kLocales["LIGHTMACHINEGUN_UPGRADE_TOOLTIP"]="*Upgrade marine's main weapon to <Machine gune>\n*Higher damage.\n*More accurate."
+    Locale.kLocales["LIGHTMACHINEGUN_UPGRADE_TOOLTIP"]="*Upgrade marine's main weapon to <Machine Gun>\n*Higher damage.\n*More accurate."
     Locale.kLocales["MINES_UPGRADE"]="Mine coating"
-    Locale.kLocales["MINES_UPGRADE_TOOLTIP"]="*Reduce mines' visibility for kharaa."
+    Locale.kLocales["MINES_UPGRADE_TOOLTIP"]="*Reduce mines' visibility for Kharaa."
     Locale.kLocales["CLUSTER_FLAME"]="Cluster Flame"
     Locale.kLocales["CLUSTER_FLAME_TOOLTIP"]="*Cluster grenade bust out flames."
     Locale.kLocales["DRAGON_BREATH"] = "Dragon breath"
@@ -352,7 +350,7 @@ if Locale.kLocales then
     Locale.kLocales["POWERED_EXTRACTOR_TECH"] = "Extractor Fusion Core"
     Locale.kLocales["POWERED_EXTRACTOR_TECH_TOOLTIP"] = "+Increase health.\n+Will try deal damage to attacker."
     Locale.kLocales["POWERED_EXTRACTOR"] = "Fusion Extractor"
-    Locale.kLocales["POWERED_EXTRACTOR_HINT"] = "Team/Personal Imcome. Will try deal damage to attacker."
+    Locale.kLocales["POWERED_EXTRACTOR_HINT"] = "Team/Personal Income. Will try deal damage to attacker."
 
     Locale.kLocales["PROTOTYPE_LAB_TOOLTIP"] = "Upgrade & Unlock Field Prototypes"
     Locale.kLocales["CANNON_PROTOTYPE_UPGRADE"] = "Gauss Upgrade"
@@ -382,10 +380,10 @@ if Locale.kLocales then
     Locale.kLocales["REVOLVER_BUYDESCRIPTION"]="Standard Revolver.\n-Low magazine size."
     Locale.kLocales["SUBMACHINEGUN"]="SMG"
     Locale.kLocales["STATUS_SUBMACHINEGUN"]="SMG"
-    Locale.kLocales["SUBMACHINEGUN_BUYDESCRIPTION"]="Standard SMG.\n+*Higher damage,*Lighter.\n-Lower magazine side,higher spread."
+    Locale.kLocales["SUBMACHINEGUN_BUYDESCRIPTION"]="Standard SMG.\n+*Higher damage,*Lighter.\n-Lower magazine size,higher spread."
     Locale.kLocales["LIGHTMACHINEGUN"]="Machine Gun"
     Locale.kLocales["STATUS_LIGHTMACHINEGUN"]="MG"
-    Locale.kLocales["LIGHTMACHINEGUN_BUYDESCRIPTION"]="Standard Machine Gun.\n*Higher damage compare.\n*Higher accuracy compare."
+    Locale.kLocales["LIGHTMACHINEGUN_BUYDESCRIPTION"]="Standard Machine Gun.\n*Higher damage compared to rifle.\n*Higher accuracy compared to rifle."
     Locale.kLocales["CANNON"]="Gauss"
     Locale.kLocales["CANNON_DROP"]="Drop Gauss"
     Locale.kLocales["STATUS_CANNON"]="Gauss"
@@ -409,13 +407,13 @@ if Locale.kLocales then
     Locale.kLocales["PROTOS_MENU"]="Prototype menu"
     Locale.kLocales["PROTOS_MENU_TOOLTIP"]="Buy prototypes for ground units"
     Locale.kLocales["DUAL_MINIGUN"]="Minigun Exosuit"
-    Locale.kLocales["DUAL_MINIGUN_TOOLTIP"]="Dual-weld | Minigun | Exosuit.\n*Deals continous damage after warmup."
+    Locale.kLocales["DUAL_MINIGUN_TOOLTIP"]="Dual-wield | Minigun | Exosuit.\n*Deals continous damage after warmup."
     Locale.kLocales["DUAL_RAILGUN"]="Railgun Exosuit"
-    Locale.kLocales["DUAL_RAILGUN_TOOLTIP"]="Dual-weld | Railgun | Exosuit.\n*Deals burst damage after charge up."
+    Locale.kLocales["DUAL_RAILGUN_TOOLTIP"]="Dual-wield | Railgun | Exosuit.\n*Deals burst damage after charge up."
     
     Locale.kLocales["BUYMENU_GROUPLABEL_GRENADES"]="Throwables"
     Locale.kLocales["BUYMENU_GROUPLABEL_WEAPONCACHE"]="Supply Depot"
-    Locale.kLocales["RESEARCH_GRENADES"]="Throwables Upgarde"
+    Locale.kLocales["RESEARCH_GRENADES"]="Throwables Upgrade"
     Locale.kLocales["GRENADES_TOOLTIP"]="+Unlock new grenade types.\nMarines throw grenades faster."
     Locale.kLocales["RESEARCH_GRENADES_TITLE"]="Grenade Upgrade"
     Locale.kLocales["GAS_GRENADE"]="Gas Grenade"
@@ -452,7 +450,7 @@ if Locale.kLocales then
     Locale.kLocales["DROP_TEAM_STRUCTURE_TOOLTIP"]="*Available with Origin Form.\n*You will build every team-thing now."
 
     Locale.kLocales["BELLY_SLIDE"]="Slide"
-    Locale.kLocales["BELLY_SLIDE_TOOLTIP"]="Slide using ur belly.\n*Increased speed through steep."
+    Locale.kLocales["BELLY_SLIDE_TOOLTIP"]="Slide using your belly.\n*Increased speed through steep."
 
     Locale.kLocales["XENOCIDE_FUEL"]="Xenocide fuel"
     Locale.kLocales["XENOCIDE_FUEL_TOOLTIP"]="Make xenocide deadlier.\n*Increase the range for xenocide.\n*Increase the damage for xenocide.\n*Reduce the respawn time when successfully."
@@ -482,7 +480,7 @@ if Locale.kLocales then
     Locale.kLocales["SHADOWSTEPSWIPE"] = "Chop"
     Locale.kLocales["VORTEX"] = "Vortex"
     Locale.kLocales["VORTEX_SHADOWSTEP"] = "Vortex"
-    Locale.kLocales["VORTEX_SHADOWSTEP_TOOLTIP"] = "Cast a short life vortex.\n*Blink out every passing projectiles.\n*Suckin nearby entities & deal minor damage."
+    Locale.kLocales["VORTEX_SHADOWSTEP_TOOLTIP"] = "Cast a short life vortex.\n*Blink out every passing projectiles.\n*Suck in nearby entities & deal minor damage."
 
     Locale.kLocales["DEVOUR"] = "Devour"
     Locale.kLocales["ONOS_DEVOUR"] = "Devour"
@@ -499,7 +497,7 @@ if Locale.kLocales then
     Locale.kLocales["BIOMASS_PRESERVATION"] = "Biomass Preservation"
     Locale.kLocales["BIOMASS_PRESERVATION_TOOLTIP"] = "Kharaa has adapted this biomass.\n*Can evolve faster while biomass lost."
     Locale.kLocales["BIOMASS_RECOVER"] = "Biomass Recover"
-    Locale.kLocales["BIOMASS_RECOVER_TOOLTIP"] = "Upgrade biomass level with lowerer cost."
+    Locale.kLocales["BIOMASS_RECOVER_TOOLTIP"] = "Upgrade biomass level with lower cost."
 
     Locale.kLocales["MARK_THREAT"] = "Rally Point"
     Locale.kLocales["PHEROMONE_THREAT_TOOLTIP"] = "Setup the rally point.\n*Players within range gain pres reward continuously"
