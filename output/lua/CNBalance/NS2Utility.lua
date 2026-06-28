@@ -25,6 +25,16 @@ function BuildClassToGrid()
 end
 
 local loadAdditional = true
+
+-- Returns RT difference between enemy team and own team (positive = behind)
+function GetRTDifference(teamNumber)
+    local teamInfo = GetTeamInfoEntity(teamNumber)
+    local ownRT = teamInfo:GetNumResourceTowers()
+    local enemyTeamNumber = (teamNumber == kMarineTeamType) and kAlienTeamType or kMarineTeamType
+    local enemyRT = GetTeamInfoEntity(enemyTeamNumber):GetNumResourceTowers()
+    return math.max(enemyRT - ownRT, 0)
+end
+
 local oldGetTexCoordsForTechId = GetTexCoordsForTechId
 function GetTexCoordsForTechId(techId)
 	if loadAdditional and gTechIdPosition then

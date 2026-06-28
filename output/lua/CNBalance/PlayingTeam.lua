@@ -142,20 +142,24 @@ function PlayingTeam:UpdateResTick()
     if self.lastTimeCollectResources + kResourceTowerResourceInterval < Shared.GetTime() then
         self.lastTimeCollectResources = time
 
-        local rtActiveCount = 0
-        local rts = GetEntitiesForTeam("ResourceTower", self:GetTeamNumber())
-        for _, rt in ipairs(rts) do
-            if rt:GetIsAlive() and rt:GetIsCollecting() then
-                rtActiveCount = rtActiveCount + 1
-            end
-        end
+        local teamInfo = GetTeamInfoEntity(self:GetTeamNumber())
+        local rtActiveCount = teamInfo:GetNumResourceTowers()
 
         local finalResParam = rtActiveCount
 
         if NS2Gamerules.kBalanceConfig.resourceEfficiency then
-            local rtAboveThreshold = math.max( rtActiveCount - kMaxEfficiencyTowers,0)
-            local rtInsideThreshold = math.min(rtActiveCount,kMaxEfficiencyTowers)
-            finalResParam = rtInsideThreshold * 1 + rtAboveThreshold * .5
+            local effTotal = 0
+            local lastIdx = #kEfficiencyTable
+            for i = 1, rtActiveCount do
+                effTotal = effTotal + kEfficiencyTable[math.min(i, lastIdx)]
+            end
+            finalResParam = effTotal
+        end
+
+        if NS2Gamerules.kBalanceConfig.resourceCatchUp then
+            local rtDiff = GetRTDifference(self:GetTeamNumber())
+            local catchUpBonus = math.min(math.max(rtDiff - 1, 0) * kResCatchUpPerRT, kResCatchUpMax)
+            finalResParam = finalResParam + catchUpBonus  --Additive: flat bonus after efficiency decay
         end
 
         if finalResParam <= 0 then
@@ -166,7 +170,7 @@ function PlayingTeam:UpdateResTick()
 
         local pRes = finalResParam * pResEachRT
         local tRes = finalResParam * kTeamResourceEachTower
-        self:CollectTeamResources(tRes, pRes,rtActiveCount)
+        self:CollectTeamResources(tRes, pRes)
     end
 end
 

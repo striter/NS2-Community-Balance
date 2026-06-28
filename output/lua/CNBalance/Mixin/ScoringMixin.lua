@@ -50,28 +50,33 @@ if Server then
         self.bountyCooldown = 0
     end
 
-    local function AddBounty(self,value)
-        --if GetWarmupActive() then return end
-        self.bountyCurrentLife = Clamp(self.bountyCurrentLife + value, 0, kMaxBountyScore)
-        self.bountyCooldown = 0
+    local function HasTeammatesNearby(self)
+        local origin = self:GetOrigin()
+        local teamNumber = self:GetTeamNumber()
+        local nearbyCount = 0
+        for _, player in ipairs(GetEntitiesForTeam("Player", teamNumber)) do
+            if player ~= self and player:GetIsAlive() then
+                local distSq = (player:GetOrigin() - origin):GetLengthSquared()
+                if distSq <= kBountyTeammateRadius * kBountyTeammateRadius then
+                    nearbyCount = nearbyCount + 1
+                    if nearbyCount >= kBountyMinTeammatesNearby then
+                        return true
+                    end
+                end
+            end
+        end
+        return false
     end
-    
+
     local baseAddKill = ScoringMixin.AddKill
     function ScoringMixin:AddKill()
         baseAddKill(self)
         if not NS2Gamerules.kBalanceConfig.bountyActive then
             return
         end
-        AddBounty(self,kBountyScoreEachKill)
-    end
-
-    local baseAddAssistKill = ScoringMixin.AddAssistKill
-    function ScoringMixin:AddAssistKill()
-        baseAddAssistKill(self)
-        if not NS2Gamerules.kBalanceConfig.bountyActive then
-            return
-        end
-        AddBounty(self,kBountyScoreEachAssist)
+        local bountyValue = HasTeammatesNearby(self) and kBountyScoreGroupKill or kBountyScoreEachKill
+        self.bountyCurrentLife = Clamp(self.bountyCurrentLife + bountyValue, 0, kMaxBountyScore)
+        self.bountyCooldown = 0
     end
 
     function ScoringMixin:ClaimBounty()

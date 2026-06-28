@@ -4,6 +4,7 @@
          bountyActive = false,
          resourceEfficiency = false,
          recentWinsBalance = false,
+         resourceCatchUp = false,
          deadlockInitialTime = 1800
      }, true)
 

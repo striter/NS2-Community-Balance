@@ -7,7 +7,8 @@ kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
 kResourceTowerResourceInterval = 6
 kTeamResourceWithoutTower = 0.5
-kMaxEfficiencyTowers = 3
+kEfficiencyTable = {1, 1, 0.75, 0.5, 0.5}  --Per-RT efficiency: RT1=100%, RT2=100%, RT3=75%, RT4+=50%. Beyond table length uses last value.
+kResCatchUpPerRT = 0.25 kResCatchUpMax = 1.0  --Losing team: +0.25 flat res per (rtDiff-1) (additive), capped at +1.0. No catchUp when diff<=1.
 kTeamResourceEachTower = 1
 kPlayerResEachTower = 0.125 kPlayerResDeductionAboveLimit = 0 --0.0025
 kSecondInitialInfantryPortalMinPlayerCount = 8
@@ -47,10 +48,11 @@ kTechDataTeamResOnKill = {
 
 --If a player kills too many players and crushing the game 
 kAssistMinimumDamageFraction = 0.35      --Avoid parasiter or babbler assists ,feels pretty weird
-kBountyScoreEachAssist = 1 kBountyScoreEachKill = 2 kMaxBountyScore = 512       --You can't kill 256 players in a row?
+kBountyScoreEachKill = 2 kBountyScoreGroupKill = 1 kMaxBountyScore = 512       --You can't kill 256 players in a row?
 kBountyClaimMinMarine = 5 kBountyClaimMinJetpack = 8 kBountyClaimMinExo = 12
 kBountyClaimMinSkulk = 5 kBountyClaimMinAlien = 8 kBountyClaimMinFade = 10 kBountyClaimMinOnos = 12
 kBountyCooldown = 20 kBountyClaimMultiplier = 2
+kBountyTeammateRadius = 30 kBountyMinTeammatesNearby = 1  --Don't stack bounty when teammates are nearby (team effort, not solo carry)
 
 --Toy for marine commander (remove all marines passive income)
 kMilitaryProtocolResearchCost = 0
