@@ -40,6 +40,9 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["MOTION_TRACK"] = "动态侦测"
     Locale.kTranslateMessage["MOTION_TRACK_TOOLTIP"] = "每隔一段时间.\n揭露站点内的高速活跃生物."
 
+    Locale.kTranslateMessage["DEPLOY_ORDER"] = "集结点"
+    Locale.kTranslateMessage["DEPLOY_ORDER_TOOLTIP"] = "在目标位置设置集结点.\n*持续30秒,小地图可见.\n*偏离队员会被自动纠正."
+
     Locale.kTranslateMessage["STANDARD_SUPPLY"] = "制式武器研发站"
     Locale.kTranslateMessage["STANDARD_SUPPLY_TOOLTIP"] = "升级为制式武器研发基地."
     Locale.kTranslateMessage["STANDARD_STATION"] = "指挥站 (制式装备研发)"
@@ -501,6 +504,9 @@ if Locale.kLocales then
 
     Locale.kLocales["MARK_THREAT"] = "Rally Point"
     Locale.kLocales["PHEROMONE_THREAT_TOOLTIP"] = "Setup the rally point.\n*Players within range gain pres reward continuously"
+
+    Locale.kLocales["DEPLOY_ORDER"] = "Rally Point"
+    Locale.kLocales["DEPLOY_ORDER_TOOLTIP"] = "Set a rally point at target location.\n*Lasts 30s, visible on minimap.\n*Straying marines will be redirected."
 
     Locale.kLocales["RESOURCES_ALIEN"] = "Evolve Matter"
     Locale.kLocales["RESOURCES_MARINE"] = "Supply Point"

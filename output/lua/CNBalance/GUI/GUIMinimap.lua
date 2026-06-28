@@ -151,6 +151,7 @@ kBlipInfo[kMinimapBlipType.BoneWall] = { kBlipColorType.FullColor, kBlipSizeType
 kBlipInfo[kMinimapBlipType.Pheromone_Defend] = { kBlipColorType.Waypoint, kBlipSizeType.Waypoint, kWaypointLayer }
 kBlipInfo[kMinimapBlipType.Pheromone_Expand] = { kBlipColorType.Waypoint, kBlipSizeType.Waypoint, kWaypointLayer }
 kBlipInfo[kMinimapBlipType.Pheromone_Threat] = { kBlipColorType.Waypoint, kBlipSizeType.Waypoint, kWaypointLayer }
+kBlipInfo[kMinimapBlipType.DeployOrder] = { kBlipColorType.Team, kBlipSizeType.Waypoint, kWaypointLayer, "DeployOrder" }
 
 local kClassToGrid = BuildClassToGrid()
 
@@ -1078,7 +1079,10 @@ local function UpdateLocalBlips(self)
     local key = "spawn"
     local blip = self.localBlipData:Get(key)
     local active = false
-    if GetPlayerIsSpawning() then
+    -- Don't show spawn blip if player is commander or spectator
+    local localPlayer = Client.GetLocalPlayer()
+    local isCommanderOrSpectator = localPlayer and (localPlayer:isa("Commander") or localPlayer:isa("Spectator"))
+    if GetPlayerIsSpawning() and not isCommanderOrSpectator then
         local spawnPosition = GetDesiredSpawnPosition()
         if spawnPosition then
             if not blip then

@@ -48,6 +48,7 @@ debug.appendtoenum(kMinimapBlipType, "SporeMine")
 debug.appendtoenum(kMinimapBlipType, "Pheromone_Defend")
 debug.appendtoenum(kMinimapBlipType, "Pheromone_Threat")
 debug.appendtoenum(kMinimapBlipType, "Pheromone_Expand")
+debug.appendtoenum(kMinimapBlipType, "DeployOrder")
 
 function GetPlayersAboveLimit(team)
     local info = GetTeamInfoEntity(team)

@@ -59,6 +59,7 @@ function MarineTeam:InitTechTree()
     self.techTree:AddTargetedActivation(kTechId.AmmoPack)--,         kTechId.MilitaryProtocol)
 
     self.techTree:AddTargetedActivation(kTechId.Scan,             kTechId.Observatory)
+    self.techTree:AddTargetedActivation(kTechId.DeployOrder,      kTechId.InfantryPortal)
 
     self.techTree:AddAction(kTechId.SelectObservatory)
 

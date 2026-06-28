@@ -3,6 +3,7 @@
 Script.Load("lua/Combat/BioformSuppressor.lua")
 Script.Load("lua/Combat/WeaponCache.lua")
 Script.Load("lua/Combat/MarineSentry.lua")
+Script.Load("lua/CNBalance/Structures/Marine/RallyMarker.lua")
 
 --Script.Load("lua/Combat/Heavy.lua")
 --Script.Load("lua/Combat/HeavyMarine.lua")

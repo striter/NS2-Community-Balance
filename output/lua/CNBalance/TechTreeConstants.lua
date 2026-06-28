@@ -45,6 +45,7 @@ debug.appendtoenum(kTechId, "CannonProtoUpgrade")
 debug.appendtoenum(kTechId, "CannonPrototypeLab")
 debug.appendtoenum(kTechId, "BioformSuppressor")
 debug.appendtoenum(kTechId, "BioformSuppressProtocol")
+debug.appendtoenum(kTechId, "DeployOrder")
 
 --Weapons
 debug.appendtoenum(kTechId, "Knife")

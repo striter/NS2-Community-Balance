@@ -120,7 +120,7 @@ end
 
 function Pheromone:UpdateRelevancy()
 
-    self:SetRelevancyDistance(self:GetAppearDistance())
+    self:SetRelevancyDistance(kMaxRelevancyDistance)
 
     if self.teamNumber == 1 then
         self:SetIncludeRelevancyMask(kRelevantToTeam1)

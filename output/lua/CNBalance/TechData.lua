@@ -330,6 +330,17 @@ function BuildTechData()
         [kTechDataCooldown] = kScanCooldown,
         [kTechDataTooltipInfo] = "SCAN_TOOLTIP",
     })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.DeployOrder,
+        [kTechDataAllowStacking] = true,
+        [kTechDataCollideWithWorldOnly] = true,
+        [kTechDataIgnorePathingMesh] = true,
+        [kTechDataDisplayName] = "DEPLOY_ORDER",
+        [kTechDataCooldown] = kDeployOrderCooldown,
+        [kTechDataTooltipInfo] = "DEPLOY_ORDER_TOOLTIP",
+    })
+
     table.insert(techData, {
         [kTechDataId] = kTechId.Knife,
         [kTechDataMapName] = Knife.kMapName,

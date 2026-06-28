@@ -19,6 +19,7 @@ function BuildClassToGrid()
     ClassToGrid["Pheromone_Expand"] = { 3 , 9 }
     ClassToGrid["Pheromone_Threat"] = { 2 , 9 }
     ClassToGrid["Pheromone_Defend"] = { 3 , 9 }
+    ClassToGrid["DeployOrder"] = { 2, 9 }
     return ClassToGrid
     
 end

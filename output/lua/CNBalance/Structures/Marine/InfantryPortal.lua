@@ -1,4 +1,4 @@
-﻿-- ======= Copyright (c) 2003-2011, Unknown Worlds Entertainment, Inc. All rights reserved. =======
+-- ======= Copyright (c) 2003-2011, Unknown Worlds Entertainment, Inc. All rights reserved. =======
 --
 -- lua\InfantryPortal.lua
 --
@@ -411,6 +411,12 @@ local function SpawnPlayer(self)
 
             SetPlayerStartingLocation(player)
 
+            -- Give deploy order to respawned player if an active marker exists
+            local markers = GetEntitiesForTeam("RallyMarker", self:GetTeamNumber())
+            if markers and markers[1] and markers[1].OnPlayerRespawn then
+                markers[1]:OnPlayerRespawn(player)
+            end
+
             return true
             
         else
@@ -580,10 +586,7 @@ end
 
 function InfantryPortal:OnOverrideOrder(order)
 
-    -- Convert default to set rally point.
-    if order:GetType() == kTechId.Default then
-        order:SetType(kTechId.SetRally)
-    end
+    -- Rally point disabled: DeployOrder now handles move orders.
     
 end
 

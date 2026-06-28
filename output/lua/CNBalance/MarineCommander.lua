@@ -102,7 +102,7 @@ end
 local gMarineMenuButtons =
 {
     [kTechId.BuildMenu] = { kTechId.CommandStation, kTechId.Extractor, kTechId.InfantryPortal, kTechId.Armory,
-                            kTechId.RoboticsFactory, kTechId.ArmsLab, kTechId.None, kTechId.None },
+                            kTechId.RoboticsFactory, kTechId.ArmsLab, kTechId.DeployOrder, kTechId.None },
                             
     [kTechId.AdvancedMenu] = { kTechId.Sentry, kTechId.Observatory, kTechId.PhaseGate, kTechId.PrototypeLab, 
                                kTechId.SentryBattery, kTechId.MineDeploy, kTechId.None, kTechId.None },
@@ -181,6 +181,26 @@ if Server then
 
     end
 
+    function MarineCommander:TriggerDeployOrder(position)
+
+        local teamNumber = self:GetTeamNumber()
+
+        -- Destroy any existing deploy order marker for this team (only one can exist)
+        local markers = GetEntitiesForTeam("RallyMarker", teamNumber)
+        if markers and markers[1] then
+            DestroyEntity(markers[1])
+        end
+
+        -- Create new rally marker (use kMapName for CreateEntity)
+        local marker = CreateEntity(RallyMarker.kMapName, position, teamNumber)
+        if marker then
+            marker:Initialize(position, teamNumber)
+        end
+
+        return true
+
+    end
+
     -- check if a notification should be send for successful actions
     function MarineCommander:ProcessTechTreeActionForEntity(techNode, position, normal, pickVec, orientation, entity, trace, targetId)
 
@@ -191,6 +211,11 @@ if Server then
         if techId == kTechId.Scan then
 
             success = self:TriggerScan(position, trace)
+            keepProcessing = false
+
+        elseif techId == kTechId.DeployOrder then
+
+            success = self:TriggerDeployOrder(position)
             keepProcessing = false
 
         elseif techId == kTechId.SelectObservatory then

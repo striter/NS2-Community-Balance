@@ -102,3 +102,4 @@ kTechIdToMaterialOffset[kTechId.DropTeamStructureAbility] = 220
 
 kTechIdToMaterialOffset[kTechId.ExpandingMarker] = 134
 kTechIdToMaterialOffset[kTechId.ThreatMarker] = 118
+kTechIdToMaterialOffset[kTechId.DeployOrder] = kTechIdToMaterialOffset[kTechId.SetRally]

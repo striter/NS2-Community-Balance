@@ -595,6 +595,8 @@ kNanoShieldCost = 3
 kNanoShieldCooldown = 5
 kNanoShieldDamageReductionDamage = 0.68
 
+kDeployOrderCooldown = 10
+
 kWelderPointValue = 1
 kSelfWeldAmount = 5
 kPlayerArmorWeldRate = 20

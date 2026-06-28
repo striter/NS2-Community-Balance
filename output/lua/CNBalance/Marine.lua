@@ -70,6 +70,18 @@ function Marine:OnCreate()
     InitMixin(self,RequestHandleMixin)
 end
 
+if Server then
+    -- Clear orders when Marine entity is destroyed (death or becoming commander)
+    -- This prevents MoveOrder blips from persisting on minimap
+    local baseOnDestroy = Marine.OnDestroy
+    function Marine:OnDestroy()
+        if self.ClearOrders then
+            self:ClearOrders()
+        end
+        baseOnDestroy(self)
+    end
+end
+
 --Weapons
 if Server then
     local baseAttemptToBuy = Marine.AttemptToBuy
@@ -543,10 +555,15 @@ if Server then
         return variant
     end
     
-    --local baseOnKill = Marine.OnKill
-    --function Marine:OnKill(killer, doer, point, direction)
-    --    baseOnKill(self,killer, doer, point, direction)
-    --end
+    -- Clear orders on death to prevent MoveOrder blips from persisting on minimap
+    local baseOnKill = Marine.OnKill
+    function Marine:OnKill(killer, doer, point, direction)
+        -- Clear all orders to remove MoveOrder blips from minimap
+        if self.ClearOrders then
+            self:ClearOrders()
+        end
+        baseOnKill(self, killer, doer, point, direction)
+    end
     
     function Marine:GiveHeavy()
 
