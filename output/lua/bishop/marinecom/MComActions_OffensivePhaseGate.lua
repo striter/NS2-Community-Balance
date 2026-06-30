@@ -43,6 +43,28 @@ local kTechId = kTechId
 local settings = Bishop.settings.marineCom
 
 --------------------------------------------------------------------------------
+-- Offensive phase gate validation.
+-- Entity ids can be reused by the engine after destruction, so the cached id
+-- may unexpectedly refer to a different class (e.g. TunnelProp). Verify the
+-- stored id still points to a PhaseGate before calling PhaseGate methods.
+--------------------------------------------------------------------------------
+
+local function IsValidOffensivePhaseGate(teamBrain)
+    local phaseGateId = teamBrain.offensivePhaseGateId
+    if not phaseGateId then
+        return nil
+    end
+
+    local phaseGate = Shared_GetEntity(phaseGateId)
+    if not phaseGate or not phaseGate:isa("PhaseGate") or not phaseGate:GetIsAlive() then
+        teamBrain.offensivePhaseGateId = nil
+        return nil
+    end
+
+    return phaseGate
+end
+
+--------------------------------------------------------------------------------
 -- Build and recycle offensive phase gates.
 --------------------------------------------------------------------------------
 -- Depending on the map, many marine pushes into hives end badly because the run
@@ -92,6 +114,9 @@ function Bishop.marineCom.actions.BuildOffensivePhaseGate(bot, brain, com)
   local teamBrain = brain.teamBrain
   local spawnGate = brain:GetSenses():Get("mainPhaseGate")
   local minResources = kMinResources
+
+  -- Clear stale id before deciding whether a new gate can be built.
+  IsValidOffensivePhaseGate(teamBrain)
 
   if #senses:Get("extractors") <= kExtractorsForCostPenalty then
     minResources = minResources + kExtractorCost
@@ -144,18 +169,13 @@ end
 
 function Bishop.marineCom.actions.RecycleOffensivePhaseGate(bot, brain, com)
   local teamBrain = brain.teamBrain
+  local phaseGate = IsValidOffensivePhaseGate(teamBrain)
+
+  if not phaseGate then
+    return kNilAction
+  end
+
   local phaseGateId = teamBrain.offensivePhaseGateId
-
-  if not phaseGateId then
-    return kNilAction
-  end
-  
-  local phaseGate = Shared_GetEntity(phaseGateId)
-  if not phaseGate or not phaseGate:GetIsAlive() then
-    teamBrain.offensivePhaseGateId = nil
-    return kNilAction
-  end
-
   local safeTechPoints = brain:GetSenses():Get("safeTechPoints")
 
   if not table_contains(safeTechPoints, teamBrain.offensivePhaseGateTechPoint)
@@ -224,16 +244,17 @@ local function CountPhaseGateHops(fromGate, toGate)
 end
 
 function Bishop.marineCom.actions.ReverseOffensivePhaseGate(bot, brain, com)
-  local phaseGateId = brain.teamBrain.offensivePhaseGateId
+  local teamBrain = brain.teamBrain
+  local phaseGate = IsValidOffensivePhaseGate(teamBrain)
 
-  if not phaseGateId then
+  if not phaseGate then
     return kNilAction
   end
 
-  local phaseGate = Shared_GetEntity(phaseGateId)
+  local phaseGateId = teamBrain.offensivePhaseGateId
   local spawnGate = brain:GetSenses():Get("mainPhaseGate")
 
-  if not phaseGate or not phaseGate:GetIsBuilt() or not phaseGate:GetIsPowered()
+  if not phaseGate:GetIsBuilt() or not phaseGate:GetIsPowered()
       or not phaseGate:GetIsLinked() or not spawnGate
       or not spawnGate:GetIsLinked() then
     return kNilAction
@@ -308,8 +329,9 @@ local function ShouldBuildOffensiveArmory(brain, com)
   if not settings.offensivePhaseArm or not phaseGateId or armoryId then
     return false
   end
-  local phaseGate = Shared_GetEntity(phaseGateId)
-  if not phaseGate or not phaseGate:GetIsBuilt()
+  local phaseGate = IsValidOffensivePhaseGate(teamBrain)
+  if not phaseGate
+      or not phaseGate:GetIsBuilt()
       or not phaseGate:GetIsPowered()
       or not IsMarineInRange(brain, phaseGate:GetOrigin()) then
     return false

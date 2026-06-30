@@ -23,6 +23,7 @@ local function BishopMarineTeamBrainInit(self)
   self.nextFireteamCleanTime = kFireteamCleanInterval
 
   self.offensivePhaseGateTime = 0
+  self.nextOffensivePhaseGateValidateTime = 0
 end
 
 Shine.Hook.SetupClassHook("MarineTeamBrain", "Initialize",
@@ -35,8 +36,30 @@ function MarineTeamBrain:PopulateTeamSenses(senses)
   Bishop.marine.PopulateTeamSenses(senses)
 end
 
+local kOffensivePhaseGateValidateInterval = 1
+
+local function ValidateOffensivePhaseGateId(self)
+  local phaseGateId = self.offensivePhaseGateId
+  if not phaseGateId then
+    return
+  end
+
+  local phaseGate = Shared.GetEntity(phaseGateId)
+  if not phaseGate or not phaseGate:isa("PhaseGate") or not phaseGate:GetIsAlive() then
+    self.offensivePhaseGateId = nil
+  end
+end
+
 local function MarineTeamBrain_Update(self)
-  if Shared_GetTime() > self.nextFireteamCleanTime then
+  local time = Shared_GetTime()
+
+  if time > self.nextOffensivePhaseGateValidateTime then
+    self.nextOffensivePhaseGateValidateTime = time
+      + kOffensivePhaseGateValidateInterval
+    ValidateOffensivePhaseGateId(self)
+  end
+
+  if time > self.nextFireteamCleanTime then
     self.nextFireteamCleanTime = self.nextFireteamCleanTime
       + kFireteamCleanInterval
     CleanFireteams(self)

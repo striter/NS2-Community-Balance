@@ -663,11 +663,62 @@ if Client then
                 end
                 
                 self:SetOpacity(1, "hallucination")
-            
+
             end
-            
+
+            if self.clientDirty == nil or (self.clientAssignedTechId ~= self.assignedTechId) then
+                self.clientDirty = not self:UpdateVariant(model)
+                if not self.clientDirty then
+                    self.clientAssignedTechId = self.assignedTechId
+                end
+            end
+
         end
-    
+
+    end
+
+    function Hallucination:UpdateVariant(renderModel)
+
+        local gameInfo = GetGameInfoEntity()
+        if gameInfo and renderModel and renderModel:GetReadyForOverrideMaterials() then
+
+            local skinVariant
+            local defaultSkinVariant
+            local className
+            local materialIndex
+
+            if self.assignedTechId == kTechId.Hive then
+                skinVariant = gameInfo:GetTeamCosmeticSlot( self:GetTeamNumber(), kTeamCosmeticSlot1 )
+                defaultSkinVariant = kDefaultAlienStructureVariant
+                className = "Hive"
+                materialIndex = 0
+            elseif self.assignedTechId == kTechId.Harvester then
+                skinVariant = gameInfo:GetTeamCosmeticSlot( self:GetTeamNumber(), kTeamCosmeticSlot2 )
+                defaultSkinVariant = kDefaultHarvesterVariant
+                className = "Harvester"
+                materialIndex = 0
+            elseif self.assignedTechId == kTechId.Drifter then
+                skinVariant = gameInfo:GetTeamCosmeticSlot( self:GetTeamNumber(), kTeamCosmeticSlot6 )
+                defaultSkinVariant = kDefaultAlienDrifterVariant
+                className = "Drifter"
+                materialIndex = 0
+            else
+                return true -- ignore
+            end
+
+            if skinVariant == defaultSkinVariant then
+                renderModel:ClearOverrideMaterials()
+            else
+                local material = GetPrecachedCosmeticMaterial( className, skinVariant )
+                renderModel:SetOverrideMaterial( materialIndex, material )
+            end
+
+            self:SetHighlightNeedsUpdate()
+            return true
+        else
+            return false
+        end
+
     end
 
     function Hallucination:UpdateClient(deltaTime)

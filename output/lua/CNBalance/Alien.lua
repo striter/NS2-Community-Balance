@@ -65,8 +65,9 @@ end
      function Alien:OnProcessMove(input)
          PROFILE("Alien:OnProcessMove")
          baseOnProcessMove(self, input)
-         if not self:GetIsDestroyed() then
-             self:UpdateReturnToHive()
+         if not self:GetIsDestroyed() then 
+            self:UpdateReturnToHive()
+            self:UpdatePhantom()
          end
      end
 

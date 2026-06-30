@@ -46,11 +46,6 @@ if Server then
       mode = "post"
     },
     {
-      vanilla = "lua/PlayerHallucinationMixin.lua",
-      modded = {"lua/bishop/fixes/PlayerHallucinationMixin.lua"},
-      mode = "post"
-    },
-    {
       vanilla = "lua/ScoringMixin.lua",
       modded = {"lua/bishop/fixes/ScoringMixin.lua"},
       mode = "post"
