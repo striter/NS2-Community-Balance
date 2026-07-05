@@ -9,6 +9,7 @@ local baseOnInitialized = PlayingTeam.OnInitialized
 function PlayingTeam:OnInitialized()
     self.maxSupply = kStartSupply
     self.floatingResourceIncome = 0
+    self.commanderAggressiveCredit = 0
     baseOnInitialized(self)
 end
 
@@ -107,11 +108,21 @@ function PlayingTeam:AddTeamResources(amount, isIncome)
         self.floatingResourceIncome = teamResourceDelta % 1
         teamResourceDelta = teamResourceDelta - self.floatingResourceIncome
     end
-        
+
     if teamResourceDelta > 0 and isIncome then
         self.totalTeamResourcesCollected = self.totalTeamResourcesCollected + teamResourceDelta
     end
     self:SetTeamResources(self.teamResources + teamResourceDelta)
+end
+
+function PlayingTeam:OnProcessAggressiveTechSuccessful(techId)
+    local ratio = kCommanderAggressiveTechs[techId]
+    if ratio and ratio > 0 then
+        local cost = GetCostForTech(techId)
+        if cost and cost > 0 then
+            self.commanderAggressiveCredit = (self.commanderAggressiveCredit or 0) + cost * ratio
+        end
+    end
 end
 
 local baseTriggerAlert = PlayingTeam.TriggerAlert
@@ -146,9 +157,10 @@ function PlayingTeam:UpdateResTick()
         local rtActiveCount = teamInfo:GetNumResourceTowers()
 
         local finalResParam = rtActiveCount
+        local effTotal = rtActiveCount
 
         if NS2Gamerules.kBalanceConfig.resourceEfficiency then
-            local effTotal = 0
+            effTotal = 0
             local lastIdx = #kEfficiencyTable
             for i = 1, rtActiveCount do
                 effTotal = effTotal + kEfficiencyTable[math.min(i, lastIdx)]
@@ -160,6 +172,14 @@ function PlayingTeam:UpdateResTick()
             local rtDiff = GetRTDifference(self:GetTeamNumber())
             local catchUpBonus = math.min(math.max(rtDiff - 1, 0) * kResCatchUpPerRT, kResCatchUpMax)
             finalResParam = finalResParam + catchUpBonus  --Additive: flat bonus after efficiency decay
+        end
+
+        local efficiencyLoss = rtActiveCount - effTotal
+        --Commander aggressive credit: withdraw efficiency loss from credit pool
+        if efficiencyLoss > 0 and self.commanderAggressiveCredit and self.commanderAggressiveCredit > 0 then
+            local offset = math.min(self.commanderAggressiveCredit, efficiencyLoss)
+            finalResParam = finalResParam + offset
+            self.commanderAggressiveCredit = self.commanderAggressiveCredit - offset
         end
 
         if finalResParam <= 0 then
@@ -239,6 +259,7 @@ function PlayingTeam:OnGameStateChanged(_state)
         self.deadlockTime = Shared.GetTime() + (NS2Gamerules.kBalanceConfig.deadlockInitialTime or 99999)
         self.deadlockDamageInterval = 0
         self.deadlockBroadcastInterval = 0
+        self.commanderAggressiveCredit = 0
     end
 end
 

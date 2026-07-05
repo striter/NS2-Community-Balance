@@ -754,3 +754,28 @@ kPushBackMass = 100
 --Phantom (Shade Hive branch)
 kPhantomCost = 0
 kPhantomCooldown = {20, 15, 8}
+
+kCommanderAggressiveTechs = {
+    --Marine
+    [kTechId.MedPack] = 1,
+    [kTechId.CatPack] = 1,
+    [kTechId.NanoShield] = 1,
+    [kTechId.PowerSurge] = 1,
+    [kTechId.MineDeploy] = 0.25,
+    --[kTechId.AmmoPack] = 1,
+    --[kTechId.Scan] = 1,
+
+    --Alien
+    [kTechId.BoneWall] = 1,
+    [kTechId.Rupture] = 1,
+    --[kTechId.Contamination] = 1,
+    [kTechId.HealWave] = 1,
+    --[kTechId.NutrientMist] = 1,
+
+    --[kTechId.Drifter] = 1,
+    [kTechId.EnzymeCloud] = 1,
+    [kTechId.HallucinationCloud] = 1,
+    [kTechId.MucousMembrane] = 1,
+    [kTechId.ShadeInk] = 1,
+    [kTechId.Storm] = 1,
+}
