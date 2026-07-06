@@ -35,7 +35,7 @@ Script.Load("lua/TeamMixin.lua")
 class 'Pheromone' (Entity)
 
 Pheromone.kMapName = "pheromone"
-local kAppearDistance = 45
+local kAppearDistance = kMaxRelevancyDistance
 local kRallyLifetime = 30
 local kExpandingLifetime = 60
 local kHurtLifetime = 30

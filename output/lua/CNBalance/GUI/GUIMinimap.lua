@@ -151,7 +151,7 @@ kBlipInfo[kMinimapBlipType.BoneWall] = { kBlipColorType.FullColor, kBlipSizeType
 kBlipInfo[kMinimapBlipType.Pheromone_Defend] = { kBlipColorType.Waypoint, kBlipSizeType.Waypoint, kWaypointLayer }
 kBlipInfo[kMinimapBlipType.Pheromone_Expand] = { kBlipColorType.Waypoint, kBlipSizeType.Waypoint, kWaypointLayer }
 kBlipInfo[kMinimapBlipType.Pheromone_Threat] = { kBlipColorType.Waypoint, kBlipSizeType.Waypoint, kWaypointLayer }
-kBlipInfo[kMinimapBlipType.DeployOrder] = { kBlipColorType.Team, kBlipSizeType.Waypoint, kWaypointLayer, "DeployOrder" }
+kBlipInfo[kMinimapBlipType.DeployOrder] = { kBlipColorType.Waypoint, kBlipSizeType.Waypoint, kWaypointLayer, "DeployOrder" }
 
 local kClassToGrid = BuildClassToGrid()
 

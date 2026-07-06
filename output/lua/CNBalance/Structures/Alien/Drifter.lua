@@ -933,6 +933,7 @@ function Drifter:SpawnCloudAt(position, techId)
                 self.hallucinations = cloudEntity:GetRegisteredHallucinations()
             end
             team:AddTeamResources(-cost)
+            team:OnProcessAggressiveTechSuccessful(techId)
 
         end
 
