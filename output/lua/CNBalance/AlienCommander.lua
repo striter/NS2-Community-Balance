@@ -107,4 +107,17 @@ if Server then
         return false
 
     end
+
+    local baseProcessTechTreeActionForEntity = AlienCommander.ProcessTechTreeActionForEntity
+    function AlienCommander:ProcessTechTreeActionForEntity(techNode, position, normal, pickVec, orientation, entity, trace, targetId)
+        local success, keepProcessing = baseProcessTechTreeActionForEntity(self, techNode, position, normal, pickVec, orientation, entity, trace, targetId)
+        if success then
+            local team = self:GetTeam()
+            if team then
+                team:OnProcessAggressiveTechSuccessful(techNode:GetTechId())
+            end
+        end
+        return success, keepProcessing
+    end
+
 end 

@@ -107,7 +107,6 @@ ModLoader.SetupFileHook("lua/BalanceMisc.lua", "lua/CNBalance/BalanceMisc.lua", 
 
 --Commanders
 ModLoader.SetupFileHook("lua/Commander_Buttons.lua", "lua/CNBalance/Commander_Buttons.lua", "post" )
-ModLoader.SetupFileHook("lua/Commander_Server.lua", "lua/CNBalance/Commander_Server.lua", "post" )
 ModLoader.SetupFileHook("lua/AlienCommander.lua", "lua/CNBalance/AlienCommander.lua", "post" )
 ModLoader.SetupFileHook("lua/MarineCommander.lua", "lua/CNBalance/MarineCommander.lua", "replace")
 

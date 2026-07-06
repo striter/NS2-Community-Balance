@@ -268,4 +268,11 @@ if Server then
 
     end
 
+    function MarineCommander:ProcessSuccessAction(techId)
+        local team = self:GetTeam()
+        if team then
+            team:OnProcessAggressiveTechSuccessful(techId)
+        end
+    end
+
 end 

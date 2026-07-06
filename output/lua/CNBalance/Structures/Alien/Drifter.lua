@@ -1078,15 +1078,4 @@ function Drifter:GetCanBeUsed(player, useSuccessTable)
     useSuccessTable.useSuccess = false
 end
 
---Track Drifter ability spending for commander aggressive credit
-local baseSpawnCloudAt = Drifter.SpawnCloudAt
-function Drifter:SpawnCloudAt(position, techId)
-    local team = self:GetTeam()
-    local orderTechId = self:GetCurrentOrder() and self:GetCurrentOrder():GetType()
-    baseSpawnCloudAt(self, position, techId)
-    if orderTechId and team then
-        team:OnProcessAggressiveTechSuccessful(orderTechId)
-    end
-end
-
 Shared.LinkClassToMap("Drifter", Drifter.kMapName, networkVars, true)
