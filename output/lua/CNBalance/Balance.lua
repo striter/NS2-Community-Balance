@@ -774,7 +774,7 @@ kCommanderAggressiveTechs = {
 
     --[kTechId.Drifter] = 1,
     [kTechId.EnzymeCloud] = 1,
-    [kTechId.HallucinationCloud] = 1,
+    [kTechId.Hallucinate] = 1,
     [kTechId.MucousMembrane] = 1,
     [kTechId.ShadeInk] = 1,
     [kTechId.Storm] = 1,
