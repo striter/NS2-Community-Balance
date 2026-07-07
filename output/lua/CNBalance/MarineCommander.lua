@@ -270,7 +270,10 @@ if Server then
 
     function MarineCommander:ProcessSuccessAction(techId)
         local team = self:GetTeam()
-        if team then
+        local cost = GetCostForTech(techId)
+
+        if cost and cost ~= 0 then
+            team:AddTeamResources(-cost)
             team:OnProcessAggressiveTechSuccessful(techId)
         end
     end
