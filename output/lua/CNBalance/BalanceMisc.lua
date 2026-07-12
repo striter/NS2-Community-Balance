@@ -73,6 +73,7 @@ kFlameThrowerEntityBurnReward = 1
 kFlameThrowerEntityBurnRewardInterval = kFlameThrowerEntityBurnReward * 3
 kFlameThrowerEntityBurnScoreRewardEachInterval = 1
 kFlameThrowerEntityBurnPResRewardEachInterval = 0.1
+kFlameThrowerBurnSpentExtraAmmoCost = 1
 
 -- Jetpack
 --kUpgradedJetpackUseFuelRate = 0.18

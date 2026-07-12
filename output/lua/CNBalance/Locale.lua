@@ -59,7 +59,7 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["NANO_ARMOR"]="纳米护甲"
     Locale.kTranslateMessage["NANO_ARMOR_TOOLTIP"]="*队员战后缓慢回复护甲.\n*略微增加基础护甲值.\n+强化原型科技的护甲恢复"
     Locale.kTranslateMessage["LIFE_SUSTAIN"]="生命维持装置"
-    Locale.kTranslateMessage["LIFE_SUSTAIN_TOOLTIP"]="*陆战队员脱战后逐渐回复生命值."
+    Locale.kTranslateMessage["LIFE_SUSTAIN_TOOLTIP"]="*陆战队员脱战后逐渐回复生命值.\n*气体手雷缓慢回复范围内己方单位血量."
 
     Locale.kTranslateMessage["GRENADE_LAUNCHER_UPGRADE"] = "榴弹枪架构升级"
     Locale.kTranslateMessage["GRENADE_LAUNCHER_UPGRADE_TOOLTIP"] = "+改进装弹机构加速榴弹枪换弹.\n+撞击榴弹内置智能引信."
@@ -86,7 +86,7 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["MAC_EMP_BLAST"] = "电磁芯片"
     Locale.kTranslateMessage["MAC_EMP_BLAST_TOOLTIP"] = "+探测到临近敌方单位时.\nMAC将触发一道冲击波."
     Locale.kTranslateMessage["POWERED_EXTRACTOR_TECH"] = "采集器电极升级"
-    Locale.kTranslateMessage["POWERED_EXTRACTOR_TECH_TOOLTIP"] = "+强化采集器耐久度.\n+蓄能电击临近单位."
+    Locale.kTranslateMessage["POWERED_EXTRACTOR_TECH_TOOLTIP"] = "+强化采集器耐久度.\n+蓄能电击临近单位.\n*脱战建筑自动焊接恢复护甲."
     Locale.kTranslateMessage["POWERED_EXTRACTOR"] = "电极采集器"
     Locale.kTranslateMessage["POWERED_EXTRACTOR_HINT"] = "团队/玩家收入. 附近有敌方单位时将触发蓄能电机."
 
@@ -156,10 +156,13 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["RESEARCH_GRENADES_TITLE"]="投掷物升级"
     Locale.kTranslateMessage["CLUSTERGRENADE_BUYDESCRIPTION"]="陆战队士兵常用的投掷物.\n*对建筑物有高额的伤害.\n*[投掷物升级]产生额外子雷."
 
-    Locale.kTranslateMessage["GAS_GRENADE"]="毒气手雷"
-    Locale.kTranslateMessage["GASGRENADE_BUYDESCRIPTION"]="仅对受到应力的单位生效.\n*对敌方单位造成护甲伤害.\n*缓慢回复范围内的己方单位血量."
+    Locale.kTranslateMessage["GAS_GRENADE"]="气体手雷"
+    Locale.kTranslateMessage["GASGRENADE_BUYDESCRIPTION"]="影响范围内的生物单位.\n*对处于压力状态的敌方单位造成护甲伤害."
     
     Locale.kTranslateMessage["BUYMENU_RESTRICTION"] = "%i(过多持有)"
+
+    Locale.kTranslateMessage["BUYMENU_HEAL_TITLE"]="治疗"
+    Locale.kTranslateMessage["BUYMENU_HEAL_SPECIAL1"]="治疗作用范围内的己方生物单位"
     
     Locale.kTranslateMessage["BUILD_ABILITY"]="建造者"
     Locale.kTranslateMessage["ORIGIN_FORM"]="原始族群"
@@ -329,7 +332,7 @@ if Locale.kLocales then
     Locale.kLocales["NANO_ARMOR"]="Nano Armor"
     Locale.kLocales["NANO_ARMOR_TOOLTIP"]="*Regen armor after combat.\n*Increase Armor Amount\n*Strengthen autoweld of jetpack & exo"
     Locale.kLocales["LIFE_SUSTAIN"]="Life Sustain System"
-    Locale.kLocales["LIFE_SUSTAIN_TOOLTIP"]="*Regen health after combat."
+    Locale.kLocales["LIFE_SUSTAIN_TOOLTIP"]="*Regen health after combat.\n*Gas Grenade regens health for nearby teammates."
     
     Locale.kLocales["EXPLOSIVE_SUPPLY"] = "Combustible branch"
     Locale.kLocales["EXPLOSIVE_SUPPLY_TOOLTIP"] = "Begin the combustible research."
@@ -351,7 +354,7 @@ if Locale.kLocales then
     Locale.kLocales["MAC_EMP_BLAST"] = "MAC EMP Blast"
     Locale.kLocales["MAC_EMP_BLAST_TOOLTIP"] = "MAC Triggers EMP When enemies Nearby"
     Locale.kLocales["POWERED_EXTRACTOR_TECH"] = "Extractor Fusion Core"
-    Locale.kLocales["POWERED_EXTRACTOR_TECH_TOOLTIP"] = "+Increase health.\n+Will try deal damage to attacker."
+    Locale.kLocales["POWERED_EXTRACTOR_TECH_TOOLTIP"] = "+Increase health.\n+Will try deal damage to attacker.\n*Auto-weld armor for out-of-combat structures."
     Locale.kLocales["POWERED_EXTRACTOR"] = "Fusion Extractor"
     Locale.kLocales["POWERED_EXTRACTOR_HINT"] = "Team/Personal Income. Will try deal damage to attacker."
 
@@ -420,7 +423,10 @@ if Locale.kLocales then
     Locale.kLocales["GRENADES_TOOLTIP"]="+Unlock new grenade types.\nMarines throw grenades faster."
     Locale.kLocales["RESEARCH_GRENADES_TITLE"]="Grenade Upgrade"
     Locale.kLocales["GAS_GRENADE"]="Gas Grenade"
-    Locale.kLocales["GASGRENADE_BUYDESCRIPTION"]="*Work with underpressure entity.\n*Deal armor damage to enemies.\n*Regen health for team member within range."
+    Locale.kLocales["GASGRENADE_BUYDESCRIPTION"]="*Work with underpressure entity.\n*Deal armor damage to enemies."
+
+    Locale.kLocales["BUYMENU_HEAL_TITLE"]="Healing"
+    Locale.kLocales["BUYMENU_HEAL_SPECIAL1"]="Requires [Equipment Supply]: Regen health for nearby teammates"
 
     Locale.kLocales["BUILD_ABILITY"]="Builder"
     Locale.kLocales["BUILD_ABILITY_TOOLTIP"]="Place frontline structures.\n*Hydra(Range damage dealer)\n*Clog(Damage receiver)\n*Babbler Egg(Attack nearby enemies)\n*Web(Slow target)"

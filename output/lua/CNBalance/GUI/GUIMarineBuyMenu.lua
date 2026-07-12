@@ -143,7 +143,8 @@ local kSpecial = enum(
 {
     'Massive',
     'Electrify',
-    'Burn'
+    'Burn',
+    'Heal'
 })
 
 local kSpecialDefinitions =
@@ -184,6 +185,16 @@ local kSpecialDefinitions =
         {
             "BUYMENU_BURN_SPECIAL1",
             "BUYMENU_BURN_SPECIAL2",
+        }
+    },
+
+    [kSpecial.Heal] =
+    {
+        TextureCoordinates = { 0, 465, 717, 555 },
+        Title = "BUYMENU_HEAL_TITLE",
+        Specials =
+        {
+            "BUYMENU_HEAL_SPECIAL1",
         }
     }
 }
@@ -1415,6 +1426,8 @@ function GUIMarineBuyMenu:_SetDetailsSectionTechId(techId, techCost)
     local techSpecial = kTechIdInfo[techId].Special
     if techId == kTechId.ClusterGrenade and PlayerUI_GetHasTech(kTechId.ExplosiveStation) then
         techSpecial = kSpecial.Burn
+    elseif techId == kTechId.GasGrenade and PlayerUI_GetHasTech(kTechId.ArmorStation) then
+        techSpecial = kSpecial.Heal
     end
     
     if techSpecial then

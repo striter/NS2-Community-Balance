@@ -135,9 +135,9 @@ function BuildTechData()
 
     table.insert(techData, {
         [kTechDataId] = kTechId.ClusterFlame,
-        [kTechDataDisplayName] = "CLUSTER_FLAME_UPGRADE",
-        [kTechDataTooltipInfo] = "CLUSTER_FLAME_UPGRADE",
-        [kTechDataResearchName] = "CLUSTER_FLAME_UPGRADE",
+        [kTechDataDisplayName] = "CLUSTER_FLAME",
+        [kTechDataTooltipInfo] = "CLUSTER_FLAME_TOOLTIP",
+        [kTechDataResearchName] = "CLUSTER_FLAME",
     })
 
     table.insert(techData, {

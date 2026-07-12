@@ -34,7 +34,7 @@ kTechDataPersonalResOnKill = {
     [kTechId.Shell] = 2.5, [kTechId.Veil] = 2.5, [kTechId.Spur] = 2.5,
     [kTechId.Whip] = 1.5, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,       --CPVE
     [kTechId.Harvester] = 2, [kTechId.Tunnel] = 3, [kTechId.InfestedTunnel] = 3, [kTechId.GorgeTunnel] = 3,
-    [kTechId.Hive] = 12, [kTechId.ShiftHive] = 15, [kTechId.CragHive] = 15, [kTechId.ShadeHive] = 15,
+    [kTechId.Hive] = 6, [kTechId.ShiftHive] = 6, [kTechId.CragHive] = 6, [kTechId.ShadeHive] = 6,
 }
 
 --TRes reward to kill certain structures, snowball rolling
@@ -43,7 +43,7 @@ kTechDataTeamResOnKill = {
     [kTechId.CommandStation] = 12, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [kTechId.ElectronicStation] = 15,
     
     --Aliens
-    [kTechId.Hive] = 15, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20,
+    [kTechId.Hive] = 8, [kTechId.ShiftHive] = 10, [kTechId.CragHive] = 10, [kTechId.ShadeHive] = 10,
 }
 
 --If a player kills too many players and crushing the game 
@@ -64,7 +64,7 @@ kMilitaryProtocolTeamResourcesPerKill = {          --Append kTechDataTeamResOnKi
     [kTechId.Whip] = 2, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,
     [kTechId.Skulk] = 2, [kTechId.Gorge] = 2,[kTechId.Prowler] = 3, [kTechId.Lerk] = 3, [kTechId.Fade] = 5, [kTechId.Vokex] = 5,[kTechId.Onos] = 8,
     [kTechId.Shell] = 2, [kTechId.Veil] = 2, [kTechId.Spur] = 2,
-    [kTechId.Hive] = 20, [kTechId.ShiftHive] = 20, [kTechId.CragHive] = 20, [kTechId.ShadeHive] = 20
+    [kTechId.Hive] = 8, [kTechId.ShiftHive] = 10, [kTechId.CragHive] = 10, [kTechId.ShadeHive] = 10
 }
 kMilitaryProtocolPlayerResourcesPerKill = {
     [kTechId.Skulk] = 0.8, [kTechId.Gorge] = 1.2, [kTechId.Prowler] = 1.5, [kTechId.Lerk] = 2, [kTechId.Fade] = 3,[kTechId.Vokex] = 3, [kTechId.Onos] = 5,
@@ -693,6 +693,10 @@ kOriginFormResearchTime = 12
 
 kOnInfestationHealPercentPerSecond = 0.005
 kOnInfestationMinHealPerSecond = 10
+
+kMarineStructureRegenInterval = 1
+kMarineStructureRegenPercentPerSecond = 0.005
+kMarineStructureRegenMinPerSecond = 5
 
 kGorgeAbilitiesCost = {
     [kTechId.Hydra] = 0, [kTechId.Clog] = 0, [kTechId.Web] = 0,[kTechId.SporeMine] = 0, [kTechId.BabblerEgg] = 3,

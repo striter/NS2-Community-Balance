@@ -107,41 +107,6 @@ if Server then
         self:Detonate()
     end
 
-    function ClusterGrenade:BurnNearbyAbilities()
-        local origin = self:GetOrigin()
-        local range = kClusterGrenadeDamageRadius
-
-        -- lerk spores
-        local spores = GetEntitiesWithinRange("SporeCloud", origin, range)
-
-        -- lerk umbra
-        local umbras = GetEntitiesWithinRange("CragUmbra", origin, range)
-
-        -- bilebomb (gorge and contamination), whip bomb
-        local bombs = GetEntitiesWithinRange("Bomb", origin, range)
-        local whipBombs = GetEntitiesWithinRange("WhipBomb", origin, range)
-
-        for _, spore in ipairs(spores) do
-            self:TriggerEffects("burn_spore", {effecthostcoords = Coords.GetTranslation(spore:GetOrigin())})
-            DestroyEntity(spore)
-        end
-
-        for _, umbra in ipairs(umbras) do
-            self:TriggerEffects("burn_umbra", {effecthostcoords = Coords.GetTranslation(umbra:GetOrigin())})
-            DestroyEntity(umbra)
-        end
-
-        for _, bomb in ipairs(bombs) do
-            self:TriggerEffects("burn_bomb", {effecthostcoords = Coords.GetTranslation(bomb:GetOrigin())})
-            DestroyEntity(bomb)
-        end
-
-        for _, bomb in ipairs(whipBombs) do
-            self:TriggerEffects("burn_bomb", {effecthostcoords = Coords.GetTranslation(bomb:GetOrigin())})
-            DestroyEntity(bomb)
-        end
-    end
-
     function ClusterGrenade:BurnEntities(ents)
         local owner = self:GetOwner()
         for i = 1, #ents do

@@ -47,8 +47,8 @@ function CommandStation:GetTechButtons()
     if techId == kTechId.CommandStation then
         techButtons[1] = GetSupplyResearchAllowed(self,kTechId.StandardSupply)
         techButtons[2] = GetSupplyResearchAllowed(self,kTechId.ArmorSupply)
-        techButtons[3] = GetSupplyResearchAllowed(self,kTechId.ElectronicSupply)
-        techButtons[4] = GetSupplyResearchAllowed(self,kTechId.ExplosiveSupply)
+        techButtons[3] = GetSupplyResearchAllowed(self,kTechId.ExplosiveSupply)
+        techButtons[4] = GetSupplyResearchAllowed(self,kTechId.ElectronicSupply)
     elseif techId == kTechId.ElectronicStation then
         techButtons[1] = kTechId.MACEMPBlast
         techButtons[4] = kTechId.PoweredExtractorTech

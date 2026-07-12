@@ -92,10 +92,13 @@ function NerveGasCloud:DoNerveGasDamage()
         end
     end
     
-    for _, entity in ipairs(GetEntitiesWithMixinForTeamWithinRange("Regeneration", self:GetTeamNumber(), self:GetOrigin(), 2*kNerveGasCloudRadius)) do
-        if not GetRecentlyDamaged(entity:GetId(), (Shared.GetTime() - kCloudUpdateRate)) and GetIsInCloud(self, entity, radius) and GetIsUnderFire(entity) then
-            SetRecentlyDamaged(entity:GetId())
-            entity:AddRegeneration(kNerveGasRegenPerSecond * kCloudUpdateRate)
+    local lifeSustainResearched = GetHasTech(self, kTechId.ArmorStation)
+    if lifeSustainResearched then
+        for _, entity in ipairs(GetEntitiesWithMixinForTeamWithinRange("Regeneration", self:GetTeamNumber(), self:GetOrigin(), 2*kNerveGasCloudRadius)) do
+            if not GetRecentlyDamaged(entity:GetId(), (Shared.GetTime() - kCloudUpdateRate)) and GetIsInCloud(self, entity, radius) then
+                SetRecentlyDamaged(entity:GetId())
+                entity:AddRegeneration(kNerveGasRegenPerSecond * kCloudUpdateRate)
+            end
         end
     end
 

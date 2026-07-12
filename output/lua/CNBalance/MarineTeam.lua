@@ -220,6 +220,7 @@ function MarineTeam:InitTechTree()
 
     self.militaryProtocolTechNode = self.techTree:GetTechNode(kTechId.MilitaryProtocol)
     self.motionTrackTechNode = self.techTree:GetTechNode(kTechId.MotionTrack)
+    self.electronicStationNode = self.techTree:GetTechNode(kTechId.ElectronicStation)
 end
 
 
@@ -228,6 +229,7 @@ function MarineTeam:Initialize(teamName, teamNumber)
     self.clientOwnedStructures = { }
     self.timeLastMotionTrack = 0
     self.lastStandData = nil
+    self.timeOfLastStructureRegen = nil
     baseOnInitialize(self, teamName, teamNumber)
 end
 
@@ -260,10 +262,45 @@ local function TickMotionTrack(self)
     
 end
 
+local function TickStructureRegen(self)
+    local now = Shared.GetTime()
+
+    if self.timeOfLastStructureRegen == nil then
+        self.timeOfLastStructureRegen = now
+    end
+
+    if now <= (self.timeOfLastStructureRegen + kMarineStructureRegenInterval) then return end
+
+    if not self.electronicStationNode or not self.electronicStationNode:GetHasTech() then return end
+
+    local deltaTime = now - self.timeOfLastStructureRegen
+    self.timeOfLastStructureRegen = now
+
+    local structures = GetEntitiesWithMixinForTeam("Live", self:GetTeamNumber())
+
+    for _, entity in ipairs(structures) do
+        if not entity:isa("Player") and HasMixin(entity, "Weldable") and HasMixin(entity, "Combat") then
+            if (not entity.GetIsBuilt or entity:GetIsBuilt()) and not entity:GetGameEffectMask(kGameEffect.OnInfestation) then
+                if not entity:GetIsUnderFire() then
+                    local armor = entity:GetArmor()
+                    local maxArmor = entity:GetMaxArmor()
+                    if armor < maxArmor then
+                        local weldPerSecond = maxArmor * kMarineStructureRegenPercentPerSecond
+                        weldPerSecond = math.max(weldPerSecond, kMarineStructureRegenMinPerSecond)
+                        entity:OnWeld(nil, deltaTime, nil, weldPerSecond)
+                    end
+                end
+            end
+        end
+    end
+end
+
 local baseUpdate = MarineTeam.Update
 function MarineTeam:Update(timePassed)
     baseUpdate(self,timePassed)
     TickMotionTrack(self)
+    TickStructureRegen(self)
+    self:UpdateSpectators()
     self:CheckLastStandTimeout()
 end
 
@@ -473,6 +510,7 @@ local baseOnResetComplete = MarineTeam.OnResetComplete
 function MarineTeam:OnResetComplete()
     baseOnResetComplete(self)
     self.lastStandData = nil
+    self.timeOfLastStructureRegen = nil
 
     local locations = GetLocations()
     local initialTechPoint = self:GetInitialTechPoint()
@@ -687,12 +725,6 @@ function MarineTeam:OnEntityChange(oldEntityId, newEntityId)
 
 end
 
-
-local baseUpdate = MarineTeam.Update
-function MarineTeam:Update(timePassed)
-    baseUpdate(self,timePassed)
-    self:UpdateSpectators()
-end
 
 MarineTeam.OnRespawnQueueChanged = nil
 
