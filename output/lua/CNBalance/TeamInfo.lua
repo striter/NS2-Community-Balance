@@ -41,7 +41,8 @@ local networkVars =
     spawnQueueTotal = "integer (0 to 64)",  --max val should be ref'd from somewhere
     supplyUsed = "integer (0 to " ..kStartSupply + 10 * kSupplyEachTechPoint .. ")",
     maxSupply = "integer (0 to " .. kStartSupply + 10 * kSupplyEachTechPoint .. ")",
-    kills = "integer (0 to 9999)"
+    kills = "integer (0 to 9999)",
+    commanderAggressiveCredit = "float (0 to 100 by 0.1)"
 }
 
 AddMixinNetworkVars(TeamMixin, networkVars)
@@ -218,6 +219,7 @@ if Server then
         self.supplyUsed = 0
         self.maxSupply = 0
         self.userTrackersDirty = true
+        self.commanderAggressiveCredit = 0
 
     end
 
@@ -274,6 +276,15 @@ if Client then
                     local teamNumber = self2:GetTeamNumber()
                     local eventName = string.format("OnTeam%dSpawnQueueTotalChanged", teamNumber)
                     GetGlobalEventDispatcher():FireEvent(eventName, self2.spawnQueueTotal)
+                    return true -- preserve field watcher
+                end)
+
+        -- Notify GUI system when commander aggressive credit changes.
+        self:AddFieldWatcher("commanderAggressiveCredit",
+                function(self2)
+                    local teamNumber = self2:GetTeamNumber()
+                    local eventName = string.format("OnTeam%dCommanderAggressiveCreditChanged", teamNumber)
+                    GetGlobalEventDispatcher():FireEvent(eventName, self2.commanderAggressiveCredit)
                     return true -- preserve field watcher
                 end)
 
@@ -350,6 +361,8 @@ function TeamInfo:UpdateInfo()
 
             self.spawnQueueTotal = team:GetTotalInRespawnQueue()
 
+            self.commanderAggressiveCredit = team.commanderAggressiveCredit or 0
+
             if self.userTrackersDirty then
                 self:UpdateUserTrackers()
                 self.userTrackersDirty = false
@@ -382,6 +395,10 @@ function TeamInfo:GetSupplyUsed()
 end
 function TeamInfo:GetMaxSupply()
     return self.maxSupply
+end
+
+function TeamInfo:GetCommanderAggressiveCredit()
+    return self.commanderAggressiveCredit
 end
 
 function TeamInfo:GetNumWorkers()

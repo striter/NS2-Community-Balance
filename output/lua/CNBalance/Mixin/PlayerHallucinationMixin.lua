@@ -1,8 +1,3 @@
--- Merged from bishop/fixes/PlayerHallucinationMixin.lua
--- Improvements over vanilla:
--- 1. Brain senses setup with team brain during initialization
--- 2. Prevent hallucinations from sending chat messages
-
 if Server then
 
     function PlayerHallucinationMixin:OnUpdate(deltaTime)
@@ -76,11 +71,12 @@ if Server then
 
     end
 
-end
 
---------------------------------------------------------------------------------
--- Prevent all cases of Hallucinations sending chat messages.
---------------------------------------------------------------------------------
+    --------------------------------------------------------------------------------
+    -- Prevent all cases of Hallucinations sending chat messages.
+    --------------------------------------------------------------------------------
 
-function PlayerHallucinationMixin:SendTeamMessage()
+    function PlayerHallucinationMixin:SendTeamMessage()
+    end
+
 end

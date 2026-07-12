@@ -120,7 +120,9 @@ function PlayingTeam:OnProcessAggressiveTechSuccessful(techId)
     if ratio and ratio > 0 then
         local cost = GetCostForTech(techId)
         if cost and cost > 0 then
-            self.commanderAggressiveCredit = (self.commanderAggressiveCredit or 0) + cost * ratio
+            local currentCredit = self.commanderAggressiveCredit or 0
+            local newCredit = math.min(currentCredit + cost * ratio, kCommanderAggressiveCreditMax)
+            self.commanderAggressiveCredit = newCredit
         end
     end
 end

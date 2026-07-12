@@ -39,6 +39,7 @@ ModLoader.SetupFileHook("lua/Hud/HelpScreen/HelpScreenContent.lua", "lua/CNBalan
 ModLoader.SetupFileHook("lua/GUIMinimapFrame.lua", "lua/CNBalance/GUI/GUIMinimapFrame.lua", "post")
 ModLoader.SetupFileHook("lua/GUIUpgradeChamberDisplay.lua", "lua/CNBalance/GUI/GUIUpgradeChamberDisplay.lua", "replace")
 ModLoader.SetupFileHook("lua/Hud2/topBar/GUIHudTopBarObjectClasses.lua", "lua/CNBalance/GUI/GUIHudTopBarObjectClasses.lua", "replace")
+ModLoader.SetupFileHook("lua/Hud2/topBar/GUIHudTres.lua", "lua/CNBalance/GUI/GUIHudTres.lua", "replace")
 ModLoader.SetupFileHook("lua/GUIMinimap.lua", "lua/CNBalance/GUI/GUIMinimap.lua", "replace" )
 ModLoader.SetupFileHook("lua/GUIMinimapConnection.lua", "lua/CNBalance/GUI/GUIMinimapConnection.lua", "replace" )
 ModLoader.SetupFileHook("lua/MapConnector.lua", "lua/CNBalance/MapConnector.lua", "post")

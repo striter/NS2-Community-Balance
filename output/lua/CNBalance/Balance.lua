@@ -7,7 +7,7 @@ kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
 kResourceTowerResourceInterval = 6
 kTeamResourceWithoutTower = 0.5
-kEfficiencyTable = {1, 1, 0.75, 0.5, 0.5}  --Per-RT efficiency: RT1=100%, RT2=100%, RT3=75%, RT4+=50%. Beyond table length uses last value.
+kEfficiencyTable = {1, 0.8, 0.7, 0.5,0.35}
 kResCatchUpPerRT = 0.25 kResCatchUpMax = 1.0  --Losing team: +0.25 flat res per (rtDiff-1) (additive), capped at +1.0. No catchUp when diff<=1.
 kTeamResourceEachTower = 1
 kPlayerResEachTower = 0.125 kPlayerResDeductionAboveLimit = 0 --0.0025
@@ -355,7 +355,6 @@ kOnosEggCost = 100
 kTunnelEntranceCost = 6
 kTunnelRelocateCost = 4
 
---Research with skill activation
 kResearchBioMassOneCost = 30
 kBioMassOneTime = 45
 kResearchBioMassTwoCost = 40
@@ -363,7 +362,6 @@ kBioMassTwoTime = 60
 kResearchBioMassThreeCost = 60
 kBioMassThreeTime = 90
 
---Recover
 kRecoverBioMassOneCost = 10
 kRecoverBioMassOneTime = 15
 kRecoverBioMassTwoCost = 15
@@ -371,7 +369,6 @@ kRecoverBioMassTwoTime = 20
 kRecoverBioMassThreeCost = 20
 kRecoverBioMassThreeTime = 25
 
---Skulk
 kParasiteEnergyCost = 30
 kAdrenalineParasiteEnergyCost = 17.5
 kParasiteDamageType = kDamageType.Exosuit
@@ -757,20 +754,21 @@ kPhantomCooldown = {20, 15, 8}
 
 kCommanderAggressiveTechs = {
     --Marine
+    [kTechId.AmmoPack] = 0.5,
     [kTechId.MedPack] = 1,
     [kTechId.CatPack] = 1,
     [kTechId.NanoShield] = 1,
     [kTechId.PowerSurge] = 1,
     [kTechId.MineDeploy] = 0.25,
     --[kTechId.AmmoPack] = 1,
-    --[kTechId.Scan] = 1,
+    [kTechId.Scan] = 0.25,
 
     --Alien
-    [kTechId.BoneWall] = 1,
+    [kTechId.BoneWall] = 0.5,
     [kTechId.Rupture] = 1,
-    --[kTechId.Contamination] = 1,
+    [kTechId.Contamination] = 0.5,
     [kTechId.HealWave] = 1,
-    --[kTechId.NutrientMist] = 1,
+    [kTechId.NutrientMist] = 0.5,
 
     --[kTechId.Drifter] = 1,
     [kTechId.EnzymeCloud] = 1,
@@ -779,3 +777,5 @@ kCommanderAggressiveTechs = {
     [kTechId.ShadeInk] = 1,
     [kTechId.Storm] = 1,
 }
+
+kCommanderAggressiveCreditMax = 40
