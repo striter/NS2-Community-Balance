@@ -767,6 +767,19 @@ kCommanderAggressiveTechs = {
     --[kTechId.AmmoPack] = 1,
     [kTechId.Scan] = 0.25,
 
+    [kTechId.DropWelder] = 0.5,
+    [kTechId.DropCombatBuilder] = 0.5,
+    [kTechId.DropShotgun] = 0.2,
+    [kTechId.DropMines] = 0.2,
+    [kTechId.DropHeavyMachineGun] = 0.2,
+    [kTechId.DropGrenadeLauncher] = 0.2,
+    [kTechId.DropFlamethrower] = 0.2,
+    [kTechId.DropCannon] = 0.2,
+    [kTechId.DropJetpack] = 0.2,
+    [kTechId.DropDualMinigunExosuit] = 0.2,
+    [kTechId.DropDualRailgunExosuit] = 0.2,
+
+
     --Alien
     [kTechId.BoneWall] = 0.5,
     [kTechId.Rupture] = 1,
