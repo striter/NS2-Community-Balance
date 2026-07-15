@@ -352,8 +352,9 @@ kFadeEggCost = 70
 kOnosCost = 62
 kOnosEggCost = 100
 
-kTunnelEntranceCost = 6
-kTunnelRelocateCost = 4
+kTunnelEntranceCost = 8
+kTunnelExitCost = 6
+kTunnelRelocateCost = 6
 
 kResearchBioMassOneCost = 30
 kBioMassOneTime = 45
@@ -758,11 +759,11 @@ kPhantomCooldown = {20, 15, 8}
 
 kCommanderAggressiveTechs = {
     --Marine
-    [kTechId.AmmoPack] = 0.5,
+    --[kTechId.AmmoPack] = 0.5,
     [kTechId.MedPack] = 1,
-    [kTechId.CatPack] = 1,
-    [kTechId.NanoShield] = 1,
-    [kTechId.PowerSurge] = 1,
+    [kTechId.CatPack] = 0.5,
+    [kTechId.NanoShield] = 0.5,
+    [kTechId.PowerSurge] = 0.5,
     [kTechId.MineDeploy] = 0.25,
     --[kTechId.AmmoPack] = 1,
     [kTechId.Scan] = 0.25,
@@ -787,7 +788,7 @@ kCommanderAggressiveTechs = {
     [kTechId.HealWave] = 1,
     [kTechId.NutrientMist] = 0.5,
 
-    --[kTechId.Drifter] = 1,
+    [kTechId.DrifterEgg] = 0.2,
     [kTechId.EnzymeCloud] = 1,
     [kTechId.Hallucinate] = 1,
     [kTechId.MucousMembrane] = 1,
