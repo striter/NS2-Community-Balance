@@ -116,6 +116,7 @@ function PlayingTeam:AddTeamResources(amount, isIncome)
 end
 
 function PlayingTeam:OnProcessAggressiveTechSuccessful(techId)
+    if not NS2Gamerules.kBalanceConfig.resourceEfficiency then return end
     local ratio = kCommanderAggressiveTechs[techId]
     if ratio and ratio > 0 then
         local cost = GetCostForTech(techId)
