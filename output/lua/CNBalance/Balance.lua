@@ -7,7 +7,7 @@ kMarineInitialIndivRes = 15
 kAlienInitialIndivRes = 12
 kResourceTowerResourceInterval = 6
 kTeamResourceWithoutTower = 0.5
-kEfficiencyTable = {1, 0.8, 0.7, 0.5,0.35}
+kEfficiencyTable = {1, 1, 0.8, 0.5,0.35}
 kResCatchUpPerRT = 0.25 kResCatchUpMax = 1.0  --Losing team: +0.25 flat res per (rtDiff-1) (additive), capped at +1.0. No catchUp when diff<=1.
 kTeamResourceEachTower = 1
 kPlayerResEachTower = 0.125 kPlayerResDeductionAboveLimit = 0 --0.0025
@@ -20,7 +20,6 @@ kTechDataPersonalResOnKill = {
     [kTechId.MAC] = 0.3,    [kTechId.SentryBattery] = 2, [kTechId.Sentry] = 0.5, [kTechId.ARC] = 1,      --CPVE
     [kTechId.Extractor] = 2, [kTechId.PoweredExtractor] = 2,
     [kTechId.RoboticsFactory] = 2, [kTechId.ARCRoboticsFactory] = 2,
-    [kTechId.Armory] = 3,[kTechId.Observatory] = 3, [kTechId.PhaseGate] = 5,
     [kTechId.CommandStation] = 12, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [ kTechId.ElectronicStation ] = 15,
     [kTechId.Mine] = 0.3, [kTechId.InfantryPortal] = 2, [kTechId.MarineSentry] = 1,   --PPVE
     
