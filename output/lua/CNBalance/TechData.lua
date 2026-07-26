@@ -88,6 +88,7 @@ function BuildTechData()
         [kTechDataResearchName] = "LIGHTMACHINEGUN_UPGRADE",
     })
 
+
     table.insert(techData, {
         [kTechDataId] = kTechId.DragonBreath,
         [kTechDataCostKey] = kDragonBreathResearchCost,

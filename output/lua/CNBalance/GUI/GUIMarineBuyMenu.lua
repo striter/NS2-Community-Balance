@@ -142,9 +142,10 @@ local kWeaponGroupButtonPositions =
 local kSpecial = enum(
 {
     'Massive',
+    'Upgraded',
     'Electrify',
     'Burn',
-    'Heal'
+    'Heal',
 })
 
 local kSpecialDefinitions =
@@ -174,6 +175,16 @@ local kSpecialDefinitions =
         Specials =
         {
             "BUYMENU_ELECTRIFY_SPECIAL1",
+        }
+    },
+
+    [kSpecial.Upgraded] =
+    {
+        TextureCoordinates = { 0, 280, 717, 369 },
+        Title = "BUYMENU_UPGRADED_TITLE",
+        Specials =
+        {
+            "BUYMENU_UPGRADED_SPECIAL1",
         }
     },
 
@@ -1428,6 +1439,10 @@ function GUIMarineBuyMenu:_SetDetailsSectionTechId(techId, techCost)
         techSpecial = kSpecial.Burn
     elseif techId == kTechId.GasGrenade and PlayerUI_GetHasTech(kTechId.ArmorStation) then
         techSpecial = kSpecial.Heal
+    elseif techId == kTechId.Shotgun and PlayerUI_GetHasTech(kTechId.StandardStation) then
+        techSpecial = kSpecial.Upgraded
+    elseif techId == kTechId.GrenadeLauncher and PlayerUI_GetHasTech(kTechId.ExplosiveStation) then
+        techSpecial = kSpecial.Upgraded
     end
     
     if techSpecial then

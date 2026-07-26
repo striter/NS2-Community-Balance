@@ -10,18 +10,32 @@ Shotgun.kShotgunRings =
 }
 Shotgun._RecalculateSpreadVectors()
 
-local kShotgunFireSpeedMult = 1 -- 1.08
-local kShotgunFireAnimationLength = 0.8474577069282532 / kShotgunFireSpeedMult -- defined by art asset.     --0.8474577069282532
-Shotgun.kFireDuration = kShotgunFireAnimationLength -- same duration for now.
+local kShotgunFireAnimationLength = 0.8474577069282532 -- defined by art asset.
+
+local function GetShotgunFireSpeedMult(self)
+    if GetHasTech(self, kTechId.StandardStation) then
+        return kShotgunFireSpeedMult
+    end
+    return kShotgunBaseFireSpeedMult
+end
+
+function Shotgun:GetClipSize()
+    if GetHasTech(self, kTechId.StandardStation) then
+        return kShotgunClipSize
+    end
+    return kShotgunBaseClipSize
+end
 
 function Shotgun:GetPrimaryMinFireDelay()
-    return kShotgunFireAnimationLength
+    return kShotgunFireAnimationLength / GetShotgunFireSpeedMult(self)
 end
 
 function Shotgun:OnUpdateAnimationInput(modelMixin)
     ClipWeapon.OnUpdateAnimationInput(self, modelMixin)
-    modelMixin:SetAnimationInput("attack_mult", kShotgunFireSpeedMult)
+    modelMixin:SetAnimationInput("attack_mult", GetShotgunFireSpeedMult(self))
 end
+
+Shotgun.kFireDuration = kShotgunFireAnimationLength
 
 function Shotgun:GetMaxClips()
     return kShotGunClipNum

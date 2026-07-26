@@ -44,7 +44,7 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["DEPLOY_ORDER_TOOLTIP"] = "在目标位置设置集结点.\n*持续30秒,小地图可见.\n*偏离队员会被自动纠正."
 
     Locale.kTranslateMessage["STANDARD_SUPPLY"] = "制式武器研发站"
-    Locale.kTranslateMessage["STANDARD_SUPPLY_TOOLTIP"] = "升级为制式武器研发基地."
+    Locale.kTranslateMessage["STANDARD_SUPPLY_TOOLTIP"] = "升级为制式武器研发基地.\n+改进霰弹枪供弹机构.\n+升级霰弹枪击发架构."
     Locale.kTranslateMessage["STANDARD_STATION"] = "指挥站 (制式装备研发)"
     Locale.kTranslateMessage["STANDARD_STATION_HINT"] = "陆战队基地"
     Locale.kTranslateMessage["LIGHTMACHINEGUN_UPGRADE"]="制式步枪升级"
@@ -163,6 +163,9 @@ if Locale.kTranslateMessage then
 
     Locale.kTranslateMessage["BUYMENU_HEAL_TITLE"]="治疗"
     Locale.kTranslateMessage["BUYMENU_HEAL_SPECIAL1"]="治疗作用范围内的己方生物单位"
+    
+    Locale.kTranslateMessage["BUYMENU_UPGRADED_TITLE"]="架构升级"
+    Locale.kTranslateMessage["BUYMENU_UPGRADED_SPECIAL1"]="已获得武器架构的深度强化"
     
     Locale.kTranslateMessage["BUILD_ABILITY"]="建造者"
     Locale.kTranslateMessage["ORIGIN_FORM"]="原始族群"
@@ -313,7 +316,7 @@ if Locale.kLocales then
     Locale.kLocales["MOTION_TRACK_TOOLTIP"] = "Track Active Kharra Each Time Interval."
     
     Locale.kLocales["STANDARD_SUPPLY"] = "Weapon Supply"
-    Locale.kLocales["STANDARD_SUPPLY_TOOLTIP"] = "Begin the standard weapon research."
+    Locale.kLocales["STANDARD_SUPPLY_TOOLTIP"] = "Begin the standard weapon research.\n+Improved shotgun feed mechanism.\n+Upgraded shotgun firing assembly."
     Locale.kLocales["STANDARD_STATION"] = "Command Station (Weapons Lab)"
     Locale.kLocales["STANDARD_STATION_TOOLTIP"] = "Marine Base"
     Locale.kLocales["LIGHTMACHINEGUN_UPGRADE"]="Rifle Upgrade"
@@ -427,6 +430,9 @@ if Locale.kLocales then
 
     Locale.kLocales["BUYMENU_HEAL_TITLE"]="Healing"
     Locale.kLocales["BUYMENU_HEAL_SPECIAL1"]="Requires [Equipment Supply]: Regen health for nearby teammates"
+
+    Locale.kLocales["BUYMENU_UPGRADED_TITLE"]="Upgraded"
+    Locale.kLocales["BUYMENU_UPGRADED_SPECIAL1"]="Deep weapon architecture enhancement unlocked"
 
     Locale.kLocales["BUILD_ABILITY"]="Builder"
     Locale.kLocales["BUILD_ABILITY_TOOLTIP"]="Place frontline structures.\n*Hydra(Range damage dealer)\n*Clog(Damage receiver)\n*Babbler Egg(Attack nearby enemies)\n*Web(Slow target)"
