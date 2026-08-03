@@ -74,7 +74,7 @@ kAlienSpawnTime = 10
 kShiftPlayerEchoDuration = 2
 
 kEggGenerationRate = 12  --13
-kAlienEggsPerHive = 2
+kAlienEggsPerHive = 3
 
 kWelderDropCost = 2
 kWelderDropCooldown = 0
@@ -297,12 +297,12 @@ kSentryBatteryBuildTime = 5
 
 kAdvancedArmoryUpgradeCost = 30
 kAdvancedArmoryResearchTime = 90
-kPrototypeLabCost = 20
+kPrototypeLabCost = 15
 
 kCannonTechResearchCost = 20
-kCannonTechResearchTime = 90
+kCannonTechResearchTime = 75
 
-kJetpackTechResearchCost = 30
+kJetpackTechResearchCost = 25
 kJetpackTechResearchTime = 120
 
 kExosuitTechResearchCost = 25

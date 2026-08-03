@@ -604,6 +604,18 @@ function BuildTechData()
                 [kTechDataTooltipInfo] = "PROTOS_MENU_TOOLTIP",
             })
 
+    table.insert(techData,{
+        [kTechDataId] = kTechId.PrototypeLab,
+        [kTechDataMapName] = PrototypeLab.kMapName,
+        [kTechDataCostKey] = kPrototypeLabCost,
+        [kTechDataBuildTime] = kPrototypeLabBuildTime,
+        [kTechDataModel] = PrototypeLab.kModelName,
+        [kTechDataMaxHealth] = kPrototypeLabHealth,
+        [kTechDataMaxArmor] = kPrototypeLabArmor,
+        [kTechDataPointValue] = kPrototypeLabPointValue,
+        [kTechDataSupply] = kPrototypeLabSupply,
+    })
+
     table.insert(techData,
             {
                 [kTechDataId] = kTechId.JetpackProtoUpgrade,
@@ -650,6 +662,7 @@ function BuildTechData()
         [kTechDataHint] = "EXOSUIT_PROTOTYPE_LAB_HINT",
         [kTechDataObstacleRadius] = 0.65,
         [kTechDataUpgradeTech] = kTechId.PrototypeLab,
+        [kTechDataSupply] = kPrototypeLabSupply,
     } )
 
     table.insert(techData,{
@@ -667,6 +680,7 @@ function BuildTechData()
         [kTechDataHint] = "CANNON_PROTOTYPE_LAB_HINT",
         [kTechDataObstacleRadius] = 0.65,
         [kTechDataUpgradeTech] = kTechId.PrototypeLab,
+        [kTechDataSupply] = kPrototypeLabSupply,
     } )
 
     table.insert(techData,{
@@ -684,6 +698,7 @@ function BuildTechData()
         [kTechDataHint] = "JETPACK_PROTOTYPE_LAB_HINT",
         [kTechDataObstacleRadius] = 0.65,
         [kTechDataUpgradeTech] = kTechId.PrototypeLab,
+        [kTechDataSupply] = kPrototypeLabSupply,
     } )
 
     table.insert(techData,{

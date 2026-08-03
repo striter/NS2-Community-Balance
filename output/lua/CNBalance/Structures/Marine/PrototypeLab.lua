@@ -1,5 +1,15 @@
 
 
+Script.Load("lua/SupplyUserMixin.lua")
+
+local baseOnInitialized = PrototypeLab.OnInitialized
+function PrototypeLab:OnInitialized()
+    baseOnInitialized(self)
+    if Server then
+        InitMixin(self, SupplyUserMixin)
+    end
+end
+
 PrototypeLab.kUpgradeToTargetType =
 {
     [kTechId.JetpackProtoUpgrade] = kTechId.JetpackPrototypeLab,

@@ -152,6 +152,7 @@ kSentrySupply = 0
 kRoboticsFactorySupply = 0
 kInfantryPortalSupply = 0
 kPhaseGateSupply = 15
+kPrototypeLabSupply = 30
 
 kSentriesPerBattery = 3
 
