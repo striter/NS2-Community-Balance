@@ -48,8 +48,8 @@ kTechDataTeamResOnKill = {
 --If a player kills too many players and crushing the game 
 kAssistMinimumDamageFraction = 0.35      --Avoid parasiter or babbler assists ,feels pretty weird
 kBountyScoreEachKill = 2 kBountyScoreGroupKill = 1 kMaxBountyScore = 512       --You can't kill 256 players in a row?
-kBountyClaimMinMarine = 4 kBountyClaimMinJetpack = 6 kBountyClaimMinExo = 8
-kBountyClaimMinSkulk = 4 kBountyClaimMinAlien = 6 kBountyClaimMinFade = 8 kBountyClaimMinOnos = 10
+kBountyClaimMinMarine = 3 kBountyClaimMinJetpack = 5 kBountyClaimMinExo = 6
+kBountyClaimMinSkulk = 3 kBountyClaimMinAlien = 5 kBountyClaimMinFade = 6 kBountyClaimMinOnos = 7
 kBountyCooldown = 20 kBountyClaimMultiplier = 2
 kBountyTeammateRadius = 30 kBountyMinTeammatesNearby = 1  --Don't stack bounty when teammates are nearby (team effort, not solo carry)
 
