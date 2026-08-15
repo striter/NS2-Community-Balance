@@ -1,7 +1,7 @@
 Script.Load("lua/BiomassHealthMixin.lua")
 
 local kPhaseCooldownBase = 0.8
-local kPhaseCooldownPerPlayerAboveLimit = 0.125
+local kPhaseCooldownPerPlayerAboveLimit = 0.1
 local kPhaseCooldownPerGate = 0.5
 local kBeaconInstantPhaseDuration = 15
 local kBeaconInstantPhaseCooldown = 0.5
@@ -22,7 +22,6 @@ end
 function PhaseGate:GetIsConnectionOneSided()
     return true
 end
-
 
 local function TransformPlayerCoordsForPhaseGate(player, srcCoords, dstCoords)
 

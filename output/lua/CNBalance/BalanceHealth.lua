@@ -170,7 +170,7 @@ kOnosBaseCarapaceUpgradeAmount  = 180   kOnosCarapaceArmorPerBiomass  = 10
 kVokexBaseCarapaceUpgradeAmount = 22.5    kVokexCarapaceArmorPerBiomass = 2.5
 
 --4000 750 6000 1400
-kHiveHealth = 3600    kHiveArmor = 750 kMatureHiveHealth = 5000 kMatureHiveArmor = 1900
+kHiveHealth = 4000    kHiveArmor = 1500 kMatureHiveHealth = 5000 kMatureHiveArmor = 1900
 kHiveHealthPerPlayerAdd = 200
 
 --2000 200 2300 320

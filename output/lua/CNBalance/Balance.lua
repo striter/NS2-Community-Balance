@@ -8,7 +8,7 @@ kAlienInitialIndivRes = 12
 kResourceTowerResourceInterval = 6
 kTeamResourceWithoutTower = 0.5
 kEfficiencyTable = {1, 1, 0.8, 0.5,0.35}
-kResCatchUpPerRT = 0.25 kResCatchUpMax = 1.0  --Losing team: +0.25 flat res per (rtDiff-1) (additive), capped at +1.0. No catchUp when diff<=1.
+kResCatchUpPerRT = 0.25 kResCatchUpMax = 1.0
 kTeamResourceEachTower = 1
 kPlayerResEachTower = 0.125 kPlayerResDeductionAboveLimit = 0 --0.0025
 kSecondInitialInfantryPortalMinPlayerCount = 8
@@ -562,7 +562,7 @@ kWeapons1ResearchCost = 20 kWeapons1ResearchTime = 75
 kWeapons2ResearchCost = 35 kWeapons2ResearchTime = 90
 kWeapons3ResearchCost = 45 kWeapons3ResearchTime = 120
 
-kArmor1ResearchCost = 25 kArmor1ResearchTime = 90
+kArmor1ResearchCost = 25 kArmor1ResearchTime = 75
 kArmor2ResearchCost = 35 kArmor2ResearchTime = 105
 kArmor3ResearchCost = 40 kArmor3ResearchTime = 120
 
