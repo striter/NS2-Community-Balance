@@ -18,10 +18,11 @@ kTechDataPersonalResOnKill = {
     --Marines
     [kTechId.PowerPoint] = 1,
     [kTechId.MAC] = 0.3,    [kTechId.SentryBattery] = 2, [kTechId.Sentry] = 0.5, [kTechId.ARC] = 1,      --CPVE
-    [kTechId.Extractor] = 2, [kTechId.PoweredExtractor] = 2,
-    [kTechId.RoboticsFactory] = 2, [kTechId.ARCRoboticsFactory] = 2,
-    [kTechId.CommandStation] = 12, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [ kTechId.ElectronicStation ] = 15,
-    [kTechId.Mine] = 0.3, [kTechId.InfantryPortal] = 2, [kTechId.MarineSentry] = 1,   --PPVE
+    --[kTechId.Extractor] = 2, [kTechId.PoweredExtractor] = 2,
+    --[kTechId.RoboticsFactory] = 2, [kTechId.ARCRoboticsFactory] = 2,
+    --[kTechId.CommandStation] = 12, [kTechId.StandardStation] = 15, [kTechId.ExplosiveStation] = 15, [kTechId.ArmorStation] = 15, [ kTechId.ElectronicStation ] = 15,
+    [kTechId.Mine] = 0.3,    [kTechId.MarineSentry] = 1,   --PPVE
+    --[kTechId.InfantryPortal] = 2,
     
     [kTechId.Shotgun] = 1.5, [kTechId.HeavyMachineGun] = 1.5, [kTechId.GrenadeLauncher] = 1.5, [kTechId.Flamethrower] = 1.5, [kTechId.Cannon] = 1.5,    --Special one for gorgie
     [kTechId.Welder] = 0.1, [kTechId.CombatBuilder] = 0.2,
@@ -29,11 +30,11 @@ kTechDataPersonalResOnKill = {
     --Aliens
     [kTechId.Spores] = 0.1,
     [kTechId.Egg] = 0.2,[kTechId.Cyst] = 0.2, [kTechId.Drifter] = 0.3,    --[kTechId.DrifterEgg] = 0.5,
-    [kTechId.Hydra] = 0.1,[kTechId.SporeMine] = 0.1,[kTechId.BabblerEgg] = 1,       --PPVE
-    [kTechId.Shell] = 2.5, [kTechId.Veil] = 2.5, [kTechId.Spur] = 2.5,
-    [kTechId.Whip] = 1.5, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,       --CPVE
-    [kTechId.Harvester] = 2, [kTechId.Tunnel] = 3, [kTechId.InfestedTunnel] = 3, [kTechId.GorgeTunnel] = 3,
-    [kTechId.Hive] = 6, [kTechId.ShiftHive] = 6, [kTechId.CragHive] = 6, [kTechId.ShadeHive] = 6,
+    --[kTechId.Hydra] = 0.1,[kTechId.SporeMine] = 0.1,[kTechId.BabblerEgg] = 1,       --PPVE
+    --[kTechId.Shell] = 2.5, [kTechId.Veil] = 2.5, [kTechId.Spur] = 2.5,
+    --[kTechId.Whip] = 1.5, [kTechId.Shift] = 2, [kTechId.Crag] = 2, [kTechId.Shade] = 2,       --CPVE
+    --[kTechId.Harvester] = 2, [kTechId.Tunnel] = 3, [kTechId.InfestedTunnel] = 3, [kTechId.GorgeTunnel] = 3,
+    --[kTechId.Hive] = 6, [kTechId.ShiftHive] = 6, [kTechId.CragHive] = 6, [kTechId.ShadeHive] = 6,
 }
 
 --TRes reward to kill certain structures, snowball rolling

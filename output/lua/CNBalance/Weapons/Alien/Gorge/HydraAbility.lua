@@ -1,6 +1,6 @@
 
 function HydraStructureAbility:GetEnergyCost()
-    return 30
+    return 25
 end
 
 function HydraStructureAbility:GetMaxStructures(biomass)

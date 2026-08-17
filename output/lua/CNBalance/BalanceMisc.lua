@@ -38,7 +38,7 @@ kTechIdMemberLevelByPass = {
 }
 
 --Gorge Ability
-kDropStructureEnergyCost = 15
+kDropStructureEnergyCost = 12
 kBellySlideCost = 20
 kBellySlideImpactCost = 20
 
