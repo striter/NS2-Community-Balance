@@ -336,6 +336,9 @@ kOnosDevourCost = 10
 kOnosDevourTime = 40
 
 kUmbraBulletModifier = 0.8
+kUmbraLifeformModifier = {
+    Onos = 0.9,
+}
 
 kDevourEnergyCost = 45 kDevourMissedEnergyCost = 15
 kDevourPunchDamage = 30 --100
