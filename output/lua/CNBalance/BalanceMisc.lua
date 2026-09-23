@@ -11,6 +11,20 @@ kDeadlockTimeExtend = {
     [kTechId.Hive] = 150, [kTechId.ShiftHive] = 150, [kTechId.CragHive] = 150, [kTechId.ShadeHive] = 150,
 }
 
+kCommWinsRequired = {
+    [kTechId.ArmorSupply]        = 10,
+    [kTechId.CombatBuilder]      = 20,
+    [kTechId.MilitaryProtocol]   = 200,
+    [kTechId.CannonProtoUpgrade] = 50,
+    [kTechId.ExplosiveSupply]    = 50,
+    [kTechId.ElectronicSupply]   = 100,
+    -- alien side
+    [kTechId.UpgradeToShadeHive] = 20,
+    [kTechId.ShiftTunnel]        = 100,
+    [kTechId.CragTunnel]         = 100,
+    [kTechId.ShadeTunnel]        = 100,
+}
+
 kTechReputationByPass = {
     [kTechId.Flamethrower] = 55,
     [kTechId.GrenadeLauncher] = 55,

@@ -525,7 +525,7 @@ kVeilCost = 15
 kContaminationCost = 5
 kContaminationCooldown = 10
 kBoneWallCost = 3
-kDrifterCost = 5
+kDrifterCost = 6
 
 kRuptureCost = 2
 kRuptureCooldown = 4
@@ -788,7 +788,6 @@ kCommanderAggressiveTechs = {
 
 
     --Alien
-    [kTechId.BoneWall] = 0.5,
     [kTechId.Rupture] = 1,
     [kTechId.Contamination] = 0.5,
     [kTechId.HealWave] = 1,

@@ -723,4 +723,17 @@ if Client then
         CommandStructure.OnUpdateRender(self)
     end
     
-end 
+end
+
+-- CNBalance commander-wins GetTechAllowed gate (client-side hard block; server untouched)
+if Client and not CNBalance_HiveWinsGated then
+    CNBalance_HiveWinsGated = true
+    local baseHiveGetTechAllowed = Hive.GetTechAllowed
+    function Hive:GetTechAllowed(techId, techNode, player)
+        local allowed, canAfford = baseHiveGetTechAllowed(self, techId, techNode, player)
+        if allowed and IsCNCommWinsBlocked and IsCNCommWinsBlocked(techId) then
+            allowed = false
+        end
+        return allowed, canAfford
+    end
+end

@@ -63,7 +63,7 @@ function CommandStation:GetTechButtons()
         techButtons[4] = kTechId.MinesUpgrade
     end
     
-    --techButtons[5] = kTechId.MilitaryProtocol
+    techButtons[5] = kTechId.MilitaryProtocol
     
     return techButtons
 end
@@ -133,3 +133,16 @@ class 'ElectronicStation' (CommandStation)
 ElectronicStation.kMapName = "electronic_station"
 
 Shared.RegisterNetworkMessage("SwitchLocalize", {})
+
+-- CNBalance commander-wins GetTechAllowed gate (client-side hard block; server untouched)
+if Client and not CNBalance_CommandStationWinsGated then
+    CNBalance_CommandStationWinsGated = true
+    local baseGetTechAllowed = CommandStation.GetTechAllowed
+    function CommandStation:GetTechAllowed(techId, techNode, player)
+        local allowed, canAfford = baseGetTechAllowed(self, techId, techNode, player)
+        if allowed and IsCNCommWinsBlocked and IsCNCommWinsBlocked(techId) then
+            allowed = false
+        end
+        return allowed, canAfford
+    end
+end

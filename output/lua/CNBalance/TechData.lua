@@ -614,6 +614,10 @@ function BuildTechData()
         [kTechDataMaxArmor] = kPrototypeLabArmor,
         [kTechDataPointValue] = kPrototypeLabPointValue,
         [kTechDataSupply] = kPrototypeLabSupply,
+        [kTechDataHint] = "PROTOTYPE_LAB_HINT",
+        [kTechDataDisplayName] = "PROTOTYPE_LAB",
+        [kTechDataTooltipInfo] = "PROTOTYPE_LAB_TOOLTIP",
+        [kTechDataResearchName] = "PROTOTYPE_LAB"
     })
 
     table.insert(techData,

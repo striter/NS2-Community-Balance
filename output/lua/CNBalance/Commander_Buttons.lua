@@ -78,3 +78,72 @@ function CommanderUI_MenuButtonOffset(index)
     return -1, -1
 
 end
+
+function GetCNCommWinsRequired(techId)
+    return techId and kCommWinsRequired[techId] or nil
+end
+
+function GetCNCommanderWins()
+    -- The Scoreboard player record extra-data whitelist does NOT carry roundWinCommander,
+    -- so it reads 0 here. The authoritative local-player value lives in the Shine
+    -- communityrank client store (populated by the Shine_CommunityTier network message,
+    -- PascalCase field). Read it first; fall back to scoreboard only if plugin absent.
+    if Shine and Shine.IsExtensionEnabled then
+        local enabled, plugin = Shine:IsExtensionEnabled("communityrank")
+        if enabled and plugin and plugin.GetCommunityData then
+            local data = plugin:GetCommunityData()
+            if data and data.RoundWinCommander then
+                return data.RoundWinCommander
+            end
+        end
+    end
+    local player = Client.GetLocalPlayer()
+    if not player then
+        return 0
+    end
+    local record = Scoreboard_GetPlayerRecord(player:GetClientIndex())
+    return record and record.roundWinCommander or 0
+end
+
+-- true when this tech is win-gated and the local commander has NOT reached the required wins (client only)
+function IsCNCommWinsBlocked(techId)
+    if not Client then
+        return false
+    end
+    local need = GetCNCommWinsRequired(techId)
+    return need ~= nil and GetCNCommanderWins() < need
+end
+
+-- belt-and-suspenders: force the button grayed even before GetTechAllowed propagates
+local baseMenuButtonStatus = CommanderUI_MenuButtonStatus
+function CommanderUI_MenuButtonStatus(index)
+    local status = baseMenuButtonStatus(index)
+    if status == 1 or status == 2 then
+        local player = Client.GetLocalPlayer()
+        if player and index <= table.icount(player.menuTechButtons) and IsCNCommWinsBlocked(player.menuTechButtons[index]) then
+            status = 3
+        end
+    end
+    return status
+end
+
+-- The tooltip the commander quickbar ACTUALLY shows is built by
+-- PlayerUI_GetTooltipDataFromTechId (Player_Client.lua), NOT CommanderUI_MenuButtonTooltip.
+-- Append the win requirement to its "requires" line so a blocked tech explains why.
+if PlayerUI_GetTooltipDataFromTechId and not CNBalance_CommWinsTooltipHooked then
+    CNBalance_CommWinsTooltipHooked = true
+    local baseGetTooltipDataFromTechId = PlayerUI_GetTooltipDataFromTechId
+    function PlayerUI_GetTooltipDataFromTechId(techId, hotkeyIndex)
+        local tooltipData = baseGetTooltipDataFromTechId(techId, hotkeyIndex)
+        if tooltipData and IsCNCommWinsBlocked and IsCNCommWinsBlocked(techId) then
+            local extra = string.format('需要指挥胜场%d(当前%d)', GetCNCommWinsRequired(techId), GetCNCommanderWins())
+            local requiresText = tooltipData.requires
+            if requiresText and requiresText ~= '' then
+                tooltipData.requires = requiresText .. ', ' .. extra
+            else
+                tooltipData.requires = extra
+            end
+        end
+        return tooltipData
+    end
+end
