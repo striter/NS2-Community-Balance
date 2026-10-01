@@ -63,6 +63,13 @@ if Server then
 		
 		if player:isa("Marine") and not self:GetIsAlive() then
 
+			if not player.primaryRespawn then
+				local mpTeam = player:GetTeam()
+				if mpTeam and mpTeam.IsMilitaryProtocol and mpTeam:IsMilitaryProtocol() then
+				    player.primaryRespawn = LightMachineGun.kMapName
+				end
+			end
+
 			if player.primaryRespawn then
 				player:GiveItem(player.primaryRespawn,true)
 			end

@@ -79,5 +79,9 @@ function GetRespawnTimeExtend(player,teamIndex, _gameLength)
         teamExtension = teamExtension + math.max(info.numInfantryPortals - 2,0) * -1
     end
     
+    -- Military Protocol: extra respawn time, 1 - pow(t/720, 2) curve (stays high early), 0 after 12 min
+    if GetHasTech(player, kTechId.MilitaryProtocol) then
+        teamExtension = teamExtension + math.floor(15 * Clamp(1 - math.pow(_gameLength / 720, 2), 0, 1))
+    end
     return respawnExtension + teamExtension
 end
