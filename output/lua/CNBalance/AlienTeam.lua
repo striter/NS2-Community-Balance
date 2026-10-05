@@ -83,6 +83,7 @@ function AlienTeam:OnInitialized()
     self.bioMassAlertLevel = 0
     self.maxBioMassLevel = 0
     self.bioMassFraction = 0
+    self.hiveDestroyedCount = 0
     self.shiftHiveBiomassPreserve = 1
     self.shadeHiveBiomassPreserve = 1
     self.cragHiveBiomassPreserve = 1
@@ -399,6 +400,19 @@ function AlienTeam:GetBioMassPreserve(techId)
         return self.cragHiveBiomassPreserve
     end
     assert(false,"?")
+end
+
+function AlienTeam:GetAndIncrementHiveDestroyedRefundFraction()
+
+    local destroyedCount = self.hiveDestroyedCount or 0
+
+    local refundTable = kHiveDestroyedRefundFractions
+    local refundFraction = (refundTable and refundTable[math.min(destroyedCount + 1, #refundTable)]) or kHiveDestroyedRefundDefault
+
+    self.hiveDestroyedCount = destroyedCount + 1
+
+    return refundFraction
+
 end
 
 function AlienTeam:GetBioMassAlertLevel()

@@ -725,6 +725,8 @@ kOriginFormInitialGorgePRes = 60
 kOriginFormExtraGorgePRes = 20
 kOriginFormTeamResourceFetchThreshold = 10
 kOriginFormTeamResScalarHiveCount = { 0.5 , 0.25 , 0.125 , 0.125 , 0.125 , 0.125, 0.125}
+kHiveDestroyedRefundFractions = { 1.0, 0.8, 0.6, 0.5 }
+kHiveDestroyedRefundDefault = 0.5
 
 kBiomassPerTower = {0,1,3,6}
 function GetOriginFormBiomassLevel(count)
