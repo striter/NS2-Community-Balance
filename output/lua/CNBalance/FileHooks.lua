@@ -111,6 +111,8 @@ ModLoader.SetupFileHook("lua/BalanceMisc.lua", "lua/CNBalance/BalanceMisc.lua", 
 ModLoader.SetupFileHook("lua/Commander_Buttons.lua", "lua/CNBalance/Commander_Buttons.lua", "post" )
 ModLoader.SetupFileHook("lua/AlienCommander.lua", "lua/CNBalance/AlienCommander.lua", "post" )
 ModLoader.SetupFileHook("lua/MarineCommander.lua", "lua/CNBalance/MarineCommander.lua", "replace")
+ModLoader.SetupFileHook("lua/Commander_Client.lua", "lua/CNBalance/GUI/Commander_Client.lua", "post")
+ModLoader.SetupFileHook("lua/Hud/Commander/MarineGhostModel.lua", "lua/CNBalance/GUI/MarineGhostModel.lua", "post")
 
 ModLoader.SetupFileHook("lua/CommAbilities/Marine/Scan.lua", "lua/CNBalance/CommAbilities/Scan.lua", "post")
 --Marines
@@ -135,6 +137,7 @@ ModLoader.SetupFileHook("lua/Mine.lua", "lua/CNBalance/Mine.lua", "replace")
 --Strutcures
 ModLoader.SetupFileHook("lua/Sentry.lua", "lua/CNBalance/Structures/Marine/Sentry.lua", "replace")
 ModLoader.SetupFileHook("lua/SentryBattery.lua", "lua/CNBalance/Structures/Marine/SentryBattery.lua", "post")
+ModLoader.SetupFileHook("lua/PowerConsumerMixin.lua", "lua/CNBalance/Mixin/PowerConsumerMixin.lua", "post")
 ModLoader.SetupFileHook("lua/ARC.lua", "lua/CNBalance/Structures/Marine/ARC.lua", "post")
 ModLoader.SetupFileHook("lua/ArmsLab.lua", "lua/CNBalance/Structures/Marine/ArmsLab.lua", "post")
 ModLoader.SetupFileHook("lua/PrototypeLab.lua", "lua/CNBalance/Structures/Marine/PrototypeLab.lua", "post")

@@ -142,6 +142,12 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["MARINE_SENTRY"]="工程步哨"
     Locale.kTranslateMessage["MARINE_SENTRY_HINT"]="自动索敌并攻击."
 
+    Locale.kTranslateMessage["SENTRY_BATTERY"] = "机动供电器"
+    Locale.kTranslateMessage["SENTRY_BATTERY_HINT"] = "就近为两座建筑供电."
+    Locale.kTranslateMessage["SENTRY_BATTERY_TOOLTIP"] = "脱离电网的机动供电源.\n*就近为两座建筑供电.\n*机枪在范围内即可开火.\n*电池被毁则全部断电."
+    Locale.kTranslateMessage["SENTRY_HINT"] = "须在[机动供电器]半径内."
+    Locale.kTranslateMessage["SENTRY_TOOLTIP"] = "自动索敌攻击范围异形.\n*须在[机动供电器]半径内.\n*脱离范围或被毁即停火."
+
     Locale.kTranslateMessage["PROTOS_MENU"]="原型装备"
     Locale.kTranslateMessage["PROTOS_MENU_TOOLTIP"]="给陆战队员发放原型装备"
     Locale.kTranslateMessage["DUAL_MINIGUN"]="转轮机甲"
@@ -276,6 +282,8 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["RESOURCES_MARINE"] = "军需补给点"
     Locale.kTranslateMessage["VOTE_RANDOM_SCALE"]="全体玩家 - [随机大小]"
     Locale.kTranslateMessage["VOTE_RANDOM_SCALE_QUERY"]="给所有人随机大小?"
+    Locale.kTranslateMessage["CNBATTERY_POWERED"] = "%s 电池供电"
+    Locale.kTranslateMessage["CNBATTERY_POWERED_SLOTS"] = "%s 电池供电(%d/%d)"
 end
 
 if Locale.kLocales then
@@ -411,6 +419,12 @@ if Locale.kLocales then
     Locale.kLocales["MARINE_SENTRY"]="Portable sentry"
     Locale.kLocales["MARINE_SENTRY_HINT"]="Track and damage living target"
 
+    Locale.kLocales["SENTRY_BATTERY"] = "Field Power Unit"
+    Locale.kLocales["SENTRY_BATTERY_HINT"] = "Powers the 2 nearest buildings in radius"
+    Locale.kLocales["SENTRY_BATTERY_TOOLTIP"] = "Mobile off-grid power source.\n*Powers the 2 nearest buildings.\n*Sentries just need range.\n*All lose power if it dies."
+    Locale.kLocales["SENTRY_HINT"] = "Fires only near a [Field Power Unit]."
+    Locale.kLocales["SENTRY_TOOLTIP"] = "Auto-tracks and fires at aliens.\n*Needs a [Field Power Unit] in range.\n*Stops firing if out of range."
+
     Locale.kLocales["BUYMENU_RESTRICTION"] = "%i(TooMany)"
     
     Locale.kLocales["PROTOS_MENU"]="Prototype menu"
@@ -524,4 +538,6 @@ if Locale.kLocales then
     Locale.kLocales["RESOURCES_MARINE"] = "Supply Point"
     Locale.kLocales["VOTE_RANDOM_SCALE"]="Vote random scale"
     Locale.kLocales["VOTE_RANDOM_SCALE_QUERY"]="Dispatch everyone random scale?"
+    Locale.kLocales["CNBATTERY_POWERED"] = "%s Battery Power"
+    Locale.kLocales["CNBATTERY_POWERED_SLOTS"] = "%s Battery Power (%d/%d)"
 end

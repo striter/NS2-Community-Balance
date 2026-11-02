@@ -160,29 +160,38 @@ local kBackgroundCoordsBMAC = { 0, 61, 300, 121 }
 local kBackgroundSizeBMAC = Vector(kBackgroundCoordsBMAC[3], kBackgroundCoordsBMAC[4] - kBackgroundCoordsBMAC[2], 0)
 
 local kBackgroundNoHealthPos = Vector(30, -120, 0)
+
+local kNoBarHealthTextY = 44
+local kNoBarArmorTextY = 84
+local kNoBarArmorTextSoloY = 64
 function GUIMarineHUD:UpdateVisibility()
     baseUpdateVisibility(self)
     local player = Client.GetLocalPlayer()
-    if not player:isa("Exo") then
-        local hasHealthBar = not player:GetIsBMAC()
-        self.statusDisplay.healthBar:SetIsVisible(hasHealthBar)
-        self.statusDisplay.healthBorder:SetIsVisible(hasHealthBar)
-        self.statusDisplay.healthBorderMask:SetIsVisible(hasHealthBar)
-        self.statusDisplay.regenBar:SetIsVisible(hasHealthBar)
-        self.statusDisplay.healthText:SetIsVisible(hasHealthBar)
-
-        self.statusDisplay.statusbackground:SetTexturePixelCoordinates(GUIUnpackCoords(hasHealthBar and kBackgroundCoords or kBackgroundCoordsBMAC))
-        self.statusDisplay.statusbackground:SetSize(hasHealthBar and kBackgroundSize or kBackgroundSizeBMAC)
-        self.statusDisplay.statusbackground:SetPosition(hasHealthBar and GUIMarineStatus.kBackgroundPos or kBackgroundNoHealthPos)
-
-        -- Reposition armor elements for BMAC mode (shift up by 61 pixels to align with cropped background)
-        local armorBarY = hasHealthBar and 88 or 27
-        local armorTextY = hasHealthBar and 96 or 35
-        local armorBorderY = hasHealthBar and 10 or -51
-        self.statusDisplay.armorBar:SetPosition(Vector(58, armorBarY, 0))
-        self.statusDisplay.armorText:SetPosition(Vector(-20, armorTextY, 0))
-        self.statusDisplay.armorBorder:SetPosition(Vector(-150, armorBorderY, 0))
+    local status = self.statusDisplay
+    if player:isa("Exo") or not status then
+        return
     end
+    local hasHealth = not player:GetIsBMAC()
+    if status.hpBarHidden then
+        status.healthText:SetIsVisible(hasHealth)
+        status.healthText:SetPosition(Vector(status.healthText:GetPosition().x, kNoBarHealthTextY, 0))
+        status.armorText:SetPosition(Vector(status.armorText:GetPosition().x, hasHealth and kNoBarArmorTextY or kNoBarArmorTextSoloY, 0))
+        return
+    end
+    status.healthBar:SetIsVisible(hasHealth)
+    status.healthBorder:SetIsVisible(hasHealth)
+    status.healthBorderMask:SetIsVisible(hasHealth)
+    status.regenBar:SetIsVisible(hasHealth)
+    status.healthText:SetIsVisible(hasHealth)
+    status.statusbackground:SetTexturePixelCoordinates(GUIUnpackCoords(hasHealth and kBackgroundCoords or kBackgroundCoordsBMAC))
+    status.statusbackground:SetSize(hasHealth and kBackgroundSize or kBackgroundSizeBMAC)
+    status.statusbackground:SetPosition(hasHealth and GUIMarineStatus.kBackgroundPos or kBackgroundNoHealthPos)
+    local armorBarY = hasHealth and 88 or 27
+    local armorTextY = hasHealth and 96 or 35
+    local armorBorderY = hasHealth and 10 or -51
+    status.armorBar:SetPosition(Vector(58, armorBarY, 0))
+    status.armorText:SetPosition(Vector(-20, armorTextY, 0))
+    status.armorBorder:SetPosition(Vector(-150, armorBorderY, 0))
 end
 
 local kErrorColor = Color(1, 0, 0, 1)
@@ -220,7 +229,7 @@ function GUIMarineHUD:Update(deltaTime)
         self.autoAmmoPack:SetColor(ammoColor)
     end
 
-    self.autoAmmoPack:SetIsVisible(requestHandle)
+    self.autoAmmoPack:SetIsVisible(requestHandle and not GUIClassicAmmo_GetIsShowingAmmo())
 
     local teamNumber = player:GetTeamNumber()
     local hasNanoShield = GetIsTechAvailable(teamNumber,kTechId.NanoShield)
