@@ -17,6 +17,7 @@ function GUIUtility_CreateRequestIcon(techId, offset, teamType)
 end
 
 function GUIClassicAmmo_GetIsShowingAmmo()
+    local display = ClientUI and ClientUI.GetScript and ClientUI.GetScript("GUIClassicAmmo")
     if not display or not display.enabled or not display.ammoText or not display.ammoText:GetIsVisible() then
         return false
     end
