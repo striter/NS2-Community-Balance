@@ -150,7 +150,8 @@ function MarineCommander:GetQuickMenuTechButtons(techId)
         menuButtons[7] = Shared.GetCheatsEnabled() and kTechId.BioformSuppressor or kTechId.None
     end
     if techId == kTechId.ProtosMenu then
-        local dualNode = self:GetTechTree():GetTechNode(kTechId.DualWeaponTech)
+        local techTree = GetTechTree(self:GetTeamNumber())
+        local dualNode = techTree and techTree:GetTechNode(kTechId.DualWeaponTech)
         local dualResearched = dualNode and dualNode:GetResearched()
         menuButtons[2] = dualResearched and kTechId.DropDualMinigunExosuit or kTechId.DropClawMinigunExosuit
         menuButtons[3] = dualResearched and kTechId.DropDualRailgunExosuit or kTechId.DropClawRailgunExosuit
