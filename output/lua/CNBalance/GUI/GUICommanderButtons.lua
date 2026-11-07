@@ -58,24 +58,21 @@ GUICommanderButtons.kAlienTechIdToNetworkVar = {
 }
 
 local function UpdateTeamCount(self, _teamInfo, _element)
-    local netVarName = nil
+    local count
     if PlayerUI_GetTeamType() == kMarineTeamType then
-        local techMapName = GUIMarineBuyMenu._GetMapNameForNetvar(nil, _element.techId)       --???
-        assert(techMapName)
-        netVarName = TeamInfo_GetUserTrackerNetvarName(techMapName)
+        count = GUIMarineBuyMenu.GetTeamUserCountForTechId(_element.techId, _teamInfo)
     else
-        netVarName = GUICommanderButtons.kAlienTechIdToNetworkVar[_element.techId]
+        local netVarName = GUICommanderButtons.kAlienTechIdToNetworkVar[_element.techId]
+        assert(netVarName)
+        count = _teamInfo[netVarName]
     end
-
-    assert(netVarName)
-    local count = _teamInfo[netVarName]
     if _element.count ~= count then
         _element.count = count
         _element.text:SetText(string.format("x%i", _element.count))
         if PlayerUI_GetTeamType() == kMarineTeamType then
-            _element:SetColor(numUsers ~= 0 and GUIMarineHUD.kCountHaveUser or GUIMarineHUD.kCountNoUsed)
+            _element:SetColor(count ~= 0 and GUIMarineHUD.kCountHaveUser or GUIMarineHUD.kCountNoUsed)
         else
-            _element:SetColor(numUsers ~= 0 and GUIHiveStatus.kTeamCountIconColor or GUIHiveStatus.kTeamCountZeroedIconColor)
+            _element:SetColor(count ~= 0 and GUIHiveStatus.kTeamCountIconColor or GUIHiveStatus.kTeamCountZeroedIconColor)
         end
         _element.text:SetIsVisible(count > 1)
     end

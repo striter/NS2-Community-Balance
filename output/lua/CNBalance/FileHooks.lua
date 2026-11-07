@@ -158,6 +158,7 @@ ModLoader.SetupFileHook("lua/JetpackMarine.lua", "lua/CNBalance/JetpackMarine.lu
 ModLoader.SetupFileHook("lua/JetpackOnBack.lua", "lua/CNBalance/JetpackOnBack.lua", "post")
 ModLoader.SetupFileHook("lua/Exo.lua", "lua/CNBalance/Exo.lua", "post")
 ModLoader.SetupFileHook("lua/Exosuit.lua", "lua/CNBalance/Exosuit.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Marine/ExoWeaponHolder.lua", "lua/CNBalance/Weapons/Marine/ExoWeaponHolder.lua", "post")
 
 ModLoader.SetupFileHook("lua/Weapons/WeaponDisplayManager.lua", "lua/CNBalance/Weapons/WeaponDisplayManager.lua", "post" )
 ModLoader.SetupFileHook("lua/Weapons/Weapon.lua", "lua/CNBalance/Weapons/Weapon.lua", "post")
@@ -175,6 +176,8 @@ ModLoader.SetupFileHook("lua/Weapons/Marine/GasGrenade.lua", "lua/CNBalance/Weap
 ModLoader.SetupFileHook("lua/Weapons/Marine/ClusterGrenade.lua", "lua/CNBalance/Weapons/Marine/ClusterGrenade.lua", "replace")
 ModLoader.SetupFileHook("lua/Weapons/Marine/Shotgun.lua", "lua/CNBalance/Weapons/Marine/Shotgun.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/HeavyMachineGun.lua", "lua/CNBalance/Weapons/Marine/HeavyMachineGun.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Marine/Claw.lua", "lua/CNBalance/Weapons/Marine/Claw.lua", "post")
+ModLoader.SetupFileHook("lua/Weapons/Marine/Railgun.lua", "lua/CNBalance/Weapons/Marine/Railgun.lua", "replace")
 
 ModLoader.SetupFileHook("lua/Weapons/Marine/GrenadeThrower.lua", "lua/CNBalance/Weapons/Marine/GrenadeThrower.lua", "post")
 ModLoader.SetupFileHook("lua/Weapons/Marine/GrenadeLauncher.lua", "lua/CNBalance/Weapons/Marine/GrenadeLauncher.lua", "post")

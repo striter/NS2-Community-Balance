@@ -59,15 +59,15 @@ AddMixinNetworkVars(ScoringMixin, networkVars)
 AddMixinNetworkVars(RegenerationMixin, networkVars)
 AddMixinNetworkVars(GUINotificationMixin, networkVars)
 AddMixinNetworkVars(PlayerStatusMixin, networkVars)
-AddMixinNetworkVars(RequestHandleMixin,networkVars)
+AddMixinNetworkVars(RequestHandleMixin, networkVars)
 
 Shared.LinkClassToMap("Marine", Marine.kMapName, networkVars, true)
 
 local baseOnCreate = Marine.OnCreate
 function Marine:OnCreate()
     baseOnCreate(self)
-    InitMixin(self,AutoWeldMixin)
-    InitMixin(self,RequestHandleMixin)
+    InitMixin(self, AutoWeldMixin)
+    InitMixin(self, RequestHandleMixin)
 end
 
 if Server then
@@ -84,11 +84,50 @@ end
 
 --Weapons
 if Server then
+
+    -- Vanilla BuyExo already branches on ClawRailgunExosuit, so only that switch is turned
+    -- on. ClawMinigunExosuit has no branch there and BuyExo is local to Marine_Server, so
+    -- the claw+minigun purchase is rebuilt below.
+    kIsExoTechId[kTechId.ClawRailgunExosuit] = true
+
+    local function BuyClawMinigunExo(self, techId)
+        local maxAttempts = 100
+        for _ = 1, maxAttempts do
+            local extents = Vector(Exo.kXZExtents, Exo.kYExtents, Exo.kXZExtents)
+            local spawnPoint
+            local checkPoint = self:GetOrigin() + Vector(0, 0.02, 0)
+            if GetHasRoomForCapsule(extents, checkPoint + Vector(0, extents.y, 0), CollisionRep.Move, PhysicsMask.Evolve, self) then
+                spawnPoint = checkPoint
+            else
+                spawnPoint = GetRandomSpawnForCapsule(extents.y, extents.x, checkPoint, 0.5, 5, EntityFilterOne(self))
+            end
+            if spawnPoint then
+                self:AddResources(-GetCostForTech(techId))
+                local weapons = self:GetWeapons()
+                for i = 1, #weapons do
+                    weapons[i]:SetParent(nil)
+                end
+                local exo = self:GiveClawMinigunExo(spawnPoint)
+                if exo then
+                    for i = 1, #weapons do
+                        exo:StoreWeapon(weapons[i])
+                    end
+                    exo:TriggerEffects("spawn_exo")
+                end
+                return true
+            end
+        end
+        return false
+    end
+
     local baseAttemptToBuy = Marine.AttemptToBuy
     function Marine:AttemptToBuy(techIds)
-        local result = baseAttemptToBuy(self,techIds)
+        local techId = techIds[1]
+        if techId == kTechId.ClawMinigunExosuit then
+            return BuyClawMinigunExo(self, techId)
+        end
+        local result = baseAttemptToBuy(self, techIds)
         if result then
-            local techId = techIds[1]
             if techId == kTechId.Rifle then
                 self.primaryRespawn = Rifle.kMapName
             elseif techId == kTechId.SubMachineGun then
@@ -109,10 +148,8 @@ if Server then
                 self.meleeRespawn = Knife.kMapName
             end
         end
-        
         return result
     end
-
 
     local function GetHostSupportsTechId(forPlayer, host, techId)
 
@@ -343,9 +380,7 @@ if Server then
             end
         end
     end
-----------    
 
-    
     --AutoHeal NanoArmor
     function Marine:GetAutoHealPerSecond(lifeSustainResearched)
         return lifeSustainResearched and kLifeSustainHPS or kLifeRegenHPS
@@ -558,7 +593,6 @@ if Server then
     -- Clear orders on death to prevent MoveOrder blips from persisting on minimap
     local baseOnKill = Marine.OnKill
     function Marine:OnKill(killer, doer, point, direction)
-        -- Clear all orders to remove MoveOrder blips from minimap
         if self.ClearOrders then
             self:ClearOrders()
         end
@@ -581,33 +615,30 @@ if Server then
         heavyMarine:SetHealth(health)
     end
 
+    function Marine:GiveClawMinigunExo(spawnPoint, isPickup)
+        return self:Replace(Exo.kMapName, self:GetTeamNumber(), false, spawnPoint, { layout = "ClawMinigun" }, isPickup)
+    end
+
     -- Infestation armor debuff: movement-based armor drain
     local kInfestationCheckInterval = 0.5
-    local baseOnProcessMove= Marine.OnProcessMove
+    local baseOnProcessMove = Marine.OnProcessMove
     function Marine:OnProcessMove(input)
         baseOnProcessMove(self, input)
-
         if not self:GetIsAlive() then
             return
         end
-        
         local now = Shared.GetTime()
         if self.timeLastInfestationTick and now < self.timeLastInfestationTick + kInfestationCheckInterval then
             return
         end
         self.timeLastInfestationTick = now
-        
         local deltaTime = kInfestationCheckInterval
         if self:GetGameEffectMask(kGameEffect.OnInfestation) then
-
             local infestationDPS = 0
-            if  self:GetCrouching() or self:GetVelocity():GetLength() <= 0.1 then
-                infestationDPS = 0
-            else
+            if not self:GetCrouching() and self:GetVelocity():GetLength() > 0.1 then
                 infestationDPS = self:GetIsSprinting() and kInfestationArmorDPSSprinting or kInfestationArmorDPSWalking
             end
-            
-            self:DeductArmorWithAutoWeld(deltaTime * infestationDPS,true)
+            self:DeductArmorWithAutoWeld(deltaTime * infestationDPS, true)
         end
     end
 
@@ -616,7 +647,6 @@ end
 function Marine:GetMass()
     return self:GetIsBMAC() and 101.2 or Player.kMass
 end
-
 
 function Marine:GetMaxSpeed(possible)
 
@@ -649,6 +679,6 @@ function Marine:GetMaxSpeed(possible)
         maxSpeed = maxSpeed * kInfestationArmorSpeedModifier
     end
 
-    return maxSpeed * self:GetSlowSpeedModifier() * inventorySpeedScalar  * useModifier
+    return maxSpeed * self:GetSlowSpeedModifier() * inventorySpeedScalar * useModifier
 
 end

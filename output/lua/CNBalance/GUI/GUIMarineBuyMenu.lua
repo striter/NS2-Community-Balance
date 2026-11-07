@@ -18,7 +18,6 @@ GUIMarineBuyMenu.kArmoryBackgroundTexture         = PrecacheAsset("ui/buymenu_ma
 GUIMarineBuyMenu.kPrototypeLabBackgroundTexture   = PrecacheAsset("ui/buymenu_marine/prototypelab_background.dds")
 
 GUIMarineBuyMenu.kButtonGroupFrame_Unlabeled_x2   = PrecacheAsset("ui/buymenu_marine/button_group_frame_unlabeled_x2.dds")
-GUIMarineBuyMenu.kButtonGroupFrame_Labeled_x3     = PrecacheAsset("ui/buymenu_marine/button_group_frame_labeled_x3.dds")
 GUIMarineBuyMenu.kButtonGroupFrame_Labeled_x4     = PrecacheAsset("ui/buymenu_marine/button_group_frame_labeled_x4.dds")
 
 GUIMarineBuyMenu.kButtonsTexture                  = PrecacheAsset("ui/buymenu_marine/buttons.dds")
@@ -69,7 +68,7 @@ local kButtonShowStateDefinitions =
     [kButtonShowState.Disabled] = {
         ShowError = true,
         Text = "BUYMENU_ERROR_DISABLED",
-        TextColor = Color(239/255, 94/255, 80/255)
+        TextColor = Color(94/255, 116/255, 128/255)
     },
 
     [kButtonShowState.NotHosted] = {
@@ -121,13 +120,6 @@ local kWeaponGroupButtonPositions =
     {
         Vector(4, 4, 0),
         Vector(4, 122, 0)
-    },
-
-    [GUIMarineBuyMenu.kButtonGroupFrame_Labeled_x3] =
-    {
-        Vector(4, 20, 0),
-        Vector(4, 140, 0),
-        Vector(4, 258, 0),
     },
 
     [GUIMarineBuyMenu.kButtonGroupFrame_Labeled_x4] =
@@ -336,6 +328,20 @@ local kTechIdStats =
         StructureDamage = 0.6,
         Range = 1,
     },
+
+    [kTechId.ClawMinigunExosuit] =
+    {
+        LifeFormDamage = 0.5,
+        StructureDamage = 0.7,
+        Range = 0.7,
+    },
+
+    [kTechId.ClawRailgunExosuit] =
+    {
+        LifeFormDamage = 0.7,
+        StructureDamage = 0.7,
+        Range = 1,
+    },
     
     [kTechId.Cannon] =
     {
@@ -504,6 +510,8 @@ local kTechIdInfo =
     },
 
     -- Prototype Lab "big" pictures are a seperate texture file.
+    -- prototypelab_bigicons.dds layout: 403 x (424 * 6) rows
+    --   0=DualMinigun  1=DualRailgun  2=Jetpack  3=Cannon  4=ClawMinigun  5=ClawRailgun
     [kTechId.Cannon] =
     {
         ButtonTextureIndex = 17,
@@ -511,7 +519,7 @@ local kTechIdInfo =
         Description = "CANNON_BUYDESCRIPTION",
         Stats = GetStatsForTechId(kTechId.Cannon)
     },
-    
+
     [kTechId.Jetpack] =
     {
         ButtonTextureIndex = 12,
@@ -535,6 +543,24 @@ local kTechIdInfo =
         BigPictureIndex = 0,
         Description = "DUALMINIGUN_BUYDESCRIPTION",
         Stats = GetStatsForTechId(kTechId.DualMinigunExosuit),
+        Special = kSpecial.Massive
+    },
+
+    [kTechId.ClawRailgunExosuit] =
+    {
+        ButtonTextureIndex = 22,
+        BigPictureIndex = 5,
+        Description = "CLAWRAILGUN_BUYDESCRIPTION",
+        Stats = GetStatsForTechId(kTechId.ClawRailgunExosuit),
+        Special = kSpecial.Massive
+    },
+
+    [kTechId.ClawMinigunExosuit] =
+    {
+        ButtonTextureIndex = 21,
+        BigPictureIndex = 4,
+        Description = "CLAWMINIGUN_BUYDESCRIPTION",
+        Stats = GetStatsForTechId(kTechId.ClawMinigunExosuit),
         Special = kSpecial.Massive
     },
 
@@ -652,6 +678,10 @@ function GUIMarineBuyMenu:_UpdateStatBar(barItem, stat)
 end
 
 function GUIMarineBuyMenu:GetTechIDDisabled(techID)
+    local localPlayer = Client.GetLocalPlayer()
+    if localPlayer and localPlayer:isa("Exo") then
+        return techID ~= GetExoUpgradeTechId(localPlayer)
+    end
     return false
 end
 
@@ -802,9 +832,14 @@ function GUIMarineBuyMenu:SetHostStructure(hostStructure)
     
 end
 
-function GUIMarineBuyMenu:CreatePrototypeLabUI(isVeteran)
+function GUIMarineBuyMenu:CreatePrototypeLabUI()
 
-    self.defaultTechId = kTechId.Jetpack
+    local localPlayer = Client.GetLocalPlayer()
+    local isExoNow = localPlayer and localPlayer:isa("Exo")
+    local exoUpgradeTechId = isExoNow and GetExoUpgradeTechId(localPlayer)
+
+    -- An exo pilot only swaps suit layouts here, jetpack and cannon are infantry-only.
+    self.defaultTechId = exoUpgradeTechId or kTechId.Jetpack
 
     self.background = self:CreateAnimatedGraphicItem()
     self.background:SetTexture(self.kPrototypeLabBackgroundTexture)
@@ -819,42 +854,21 @@ function GUIMarineBuyMenu:CreatePrototypeLabUI(isVeteran)
     local buttonGroupX = 97
     local buttonGroupY = 149
 
-    local buttonPositions
-    local buttonGroup
-    if isVeteran then
+    -- The group keeps the same four slots for both, an exo pilot just sees the dual layouts in the
+    -- slots the infantry list uses for the claw suits and can only pick the one it can trade up to.
+    local groupFrame = self.kButtonGroupFrame_Labeled_x4
+    local purchasableTechIds = isExoNow
+        and { kTechId.Jetpack, kTechId.DualMinigunExosuit, kTechId.DualRailgunExosuit, kTechId.Cannon }
+        or { kTechId.Jetpack, kTechId.ClawMinigunExosuit, kTechId.ClawRailgunExosuit, kTechId.Cannon }
 
-        buttonPositions = kWeaponGroupButtonPositions[self.kButtonGroupFrame_Labeled_x3]
-
-        buttonGroup = self:CreateAnimatedGraphicItem()
-        buttonGroup:AddAsChildTo(self.background)
-        buttonGroup:SetIsScaling(false)
-        buttonGroup:SetPosition(Vector(buttonGroupX, buttonGroupY, 0))
-        buttonGroup:SetTexture(self.kButtonGroupFrame_Labeled_x3)
-        buttonGroup:SetSizeFromTexture()
-        buttonGroup:SetOptionFlag(GUIItem.CorrectScaling)
-        self:_InitializeWeaponGroup(buttonGroup, buttonPositions, {
-            kTechId.Jetpack,
-            kTechId.DualMinigunExosuit,
-            kTechId.DualRailgunExosuit,
-        })
-    else
-
-        buttonPositions = kWeaponGroupButtonPositions[self.kButtonGroupFrame_Labeled_x4]
-
-        buttonGroup = self:CreateAnimatedGraphicItem()
-        buttonGroup:AddAsChildTo(self.background)
-        buttonGroup:SetIsScaling(false)
-        buttonGroup:SetPosition(Vector(buttonGroupX, buttonGroupY, 0))
-        buttonGroup:SetTexture(self.kButtonGroupFrame_Labeled_x4)
-        buttonGroup:SetSizeFromTexture()
-        buttonGroup:SetOptionFlag(GUIItem.CorrectScaling)
-        self:_InitializeWeaponGroup(buttonGroup, buttonPositions, {
-            kTechId.Jetpack,
-            kTechId.DualMinigunExosuit,
-            kTechId.DualRailgunExosuit,
-            kTechId.Cannon
-        })
-    end
+    local buttonGroup = self:CreateAnimatedGraphicItem()
+    buttonGroup:AddAsChildTo(self.background)
+    buttonGroup:SetIsScaling(false)
+    buttonGroup:SetPosition(Vector(buttonGroupX, buttonGroupY, 0))
+    buttonGroup:SetTexture(groupFrame)
+    buttonGroup:SetSizeFromTexture()
+    buttonGroup:SetOptionFlag(GUIItem.CorrectScaling)
+    self:_InitializeWeaponGroup(buttonGroup, kWeaponGroupButtonPositions[groupFrame], purchasableTechIds)
 
     local groupLabel = self:CreateAnimatedTextItem()
     groupLabel:SetIsScaling(false)
@@ -1631,6 +1645,25 @@ function GUIMarineBuyMenu:Update(deltaTime)
 
 end
 
+-- Both layouts of one weapon are counted together, the marines only see a single button.
+local kTeamCountLayoutMerges = {
+    [kTechId.DualMinigunExosuit] = kTechId.ClawMinigunExosuit,
+    [kTechId.DualRailgunExosuit] = kTechId.ClawRailgunExosuit,
+}
+
+local function GetUserTrackerCount(teamInfo, techId)
+    return teamInfo[TeamInfo_GetUserTrackerNetvarName(GUIMarineBuyMenu._GetMapNameForNetvar(nil, techId))]
+end
+
+function GUIMarineBuyMenu.GetTeamUserCountForTechId(techId, teamInfo)
+    local count = GetUserTrackerCount(teamInfo, techId)
+    local mergedTechId = kTeamCountLayoutMerges[techId]
+    if mergedTechId then
+        count = count + GetUserTrackerCount(teamInfo, mergedTechId)
+    end
+    return count
+end
+
 function GUIMarineBuyMenu:_GetMapNameForNetvar(techId)
 
     local rawMapName = LookupTechData(techId, kTechDataMapName, nil)
@@ -1645,6 +1678,10 @@ function GUIMarineBuyMenu:_GetMapNameForNetvar(techId)
         overriddenMapName = string.format("%s+%s", Railgun.kMapName, Railgun.kMapName)
     elseif techId == kTechId.DualMinigunExosuit then
         overriddenMapName = string.format("%s+%s", Minigun.kMapName, Minigun.kMapName)
+    elseif techId == kTechId.ClawRailgunExosuit then
+        overriddenMapName = string.format("%s+%s", Claw.kMapName, Railgun.kMapName)
+    elseif techId == kTechId.ClawMinigunExosuit then
+        overriddenMapName = string.format("%s+%s", Claw.kMapName, Minigun.kMapName)
     else
         assert(false, "Invalid exo techId for user tracker!")
     end

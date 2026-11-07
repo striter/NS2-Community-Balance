@@ -1,5 +1,3 @@
-
-
 Script.Load("lua/SupplyUserMixin.lua")
 
 local baseOnInitialized = PrototypeLab.OnInitialized
@@ -23,6 +21,10 @@ local function GetResearchAllowed(self, techId)
     return available and techId or kTechId.None
 end
 
+local kStationResearchNodes = {
+    [kTechId.ExosuitPrototypeLab] = kTechId.DualWeaponTech,
+}
+
 function PrototypeLab:GetTechButtons()
 
     local techId = self:GetTechId()
@@ -32,15 +34,10 @@ function PrototypeLab:GetTechButtons()
         techButtons[1] = GetResearchAllowed(self,kTechId.JetpackProtoUpgrade)
         techButtons[2] = GetResearchAllowed(self,kTechId.ExosuitProtoUpgrade)
         techButtons[5] = GetResearchAllowed(self,kTechId.CannonProtoUpgrade)
+    else
+        techButtons[1] = kStationResearchNodes[techId] or kTechId.None
     end
-    --elseif techId == kTechId.JetpackPrototypeLab then
-    --    techButtons[1] = kTechId.JetpackTech
-    --elseif techId == kTechId.CannonPrototypeLab then
-    --    techButtons[1] = kTechId.CannonTech
-    --elseif techId == kTechId.ExosuitPrototypeLab then
-    --    techButtons[1] = kTechId.ExosuitTech
-    --end
-    
+
     return techButtons
 end
 
@@ -95,11 +92,30 @@ if Server then
 
 end
 
-
 function PrototypeLab:GetItemList(forPlayer)
-    return { kTechId.Jetpack, kTechId.DualMinigunExosuit, kTechId.DualRailgunExosuit, kTechId.Cannon}
+
+    if not forPlayer and Client then
+        forPlayer = Client.GetLocalPlayer()
+    end
+    if forPlayer and forPlayer:isa("Exo") then
+        local upgradeTechId = GetExoUpgradeTechId(forPlayer)
+        return upgradeTechId and { upgradeTechId } or {}
+    end
+    return { kTechId.Jetpack, kTechId.ClawMinigunExosuit, kTechId.ClawRailgunExosuit, kTechId.Cannon }
+
 end
 
+local baseGetCanBeUsed = PrototypeLab.GetCanBeUsed
+function PrototypeLab:GetCanBeUsed(player, useSuccessTable)
+    baseGetCanBeUsed(self, player, useSuccessTable)
+    if not useSuccessTable.useSuccess and player:isa("Exo")
+        and not player:GetHasDualGuns()
+        and player:GetTeamNumber() == self:GetTeamNumber()
+        and self:GetIsBuilt() and self:GetIsPowered()
+    then
+        useSuccessTable.useSuccess = true
+    end
+end
 
 class 'ExosuitPrototypeLab' (PrototypeLab)
 ExosuitPrototypeLab.kMapName = "exosuit_prototypelab"
@@ -109,13 +125,3 @@ JetpackPrototypeLab.kMapName = "jetpack_prototypelab"
 
 class 'CannonPrototypeLab' (PrototypeLab)
 CannonPrototypeLab.kMapName = "cannon_prototypelab"
-
---local baseGetCanBeUsed = PrototypeLab.GetCanBeUsed
---function PrototypeLab:GetCanBeUsed(player, useSuccessTable)
---
---    baseGetCanBeUsed(self,player,useSuccessTable)
---    if GetHasTech(self,kTechId.MilitaryProtocol) then
---        useSuccessTable.useSuccess = false
---    end
---
---end

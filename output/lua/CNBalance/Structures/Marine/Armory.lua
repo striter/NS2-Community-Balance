@@ -7,7 +7,6 @@ function Armory:GetItemList(forPlayer)
     table.insert(itemList, kTechId.Knife)
     table.insert(itemList, kTechId.Revolver)
     table.insert(itemList, kTechId.SubMachineGun)
-    --table.insert(itemList, kTechId.LightMachineGun)
     table.insert(itemList, kTechId.LightMachineGunAcquire)
     table.insert(itemList, kTechId.Cannon)
     table.insert(itemList, kTechId.CombatBuilder)
@@ -21,7 +20,6 @@ function AdvancedArmory:GetItemList(forPlayer)
         table.insert(itemList, kTechId.Knife)
         table.insert(itemList, kTechId.Revolver)
         table.insert(itemList, kTechId.SubMachineGun)
-        --table.insert(itemList, kTechId.LightMachineGun)
         table.insert(itemList, kTechId.LightMachineGunAcquire)
         table.insert(itemList, kTechId.Cannon)
         table.insert(itemList, kTechId.CombatBuilder)
@@ -58,17 +56,6 @@ function Armory:GetTechAllowed(techId, techNode, player)
     return allowed, canAfford
 
 end
-
-
---local baseGetCanBeUsed = Armory.GetCanBeUsed
---function Armory:GetCanBeUsed(player, useSuccessTable)
---
---    baseGetCanBeUsed(self,player,useSuccessTable)
---    if GetHasTech(self,kTechId.MilitaryProtocol) then
---        useSuccessTable.useSuccess = false
---    end
---    
---end
 
 if Server then
 
@@ -142,13 +129,6 @@ if Server then
             self:TriggerEffects("armory_health", {effecthostcoords = Coords.GetTranslation(player:GetOrigin())})
 
             resuppliedPlayer = true
-            --[[
-            if HasMixin(player, "ParasiteAble") and player:GetIsParasited() then
-            
-                player:RemoveParasite()
-                
-            end
-            --]]
 
             if player:isa("Marine") and player.poisoned then
 
@@ -183,9 +163,6 @@ if Server then
 
             -- Insert/update entry in table
             self.resuppliedPlayers[player:GetId()] = Shared.GetTime()
-
-            -- Play effect
-            --self:PlayArmoryScan(player:GetId())
 
         end
 

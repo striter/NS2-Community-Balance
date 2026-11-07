@@ -51,6 +51,11 @@ kTechIdToMaterialOffset[kTechId.DualMinigunExosuit] = 84
 kTechIdToMaterialOffset[kTechId.DropDualMinigunExosuit] = 84
 kTechIdToMaterialOffset[kTechId.DropDualRailgunExosuit] = 116
 kTechIdToMaterialOffset[kTechId.DualRailgunExosuit] = 116
+kTechIdToMaterialOffset[kTechId.ClawMinigunExosuit] = 226
+kTechIdToMaterialOffset[kTechId.DropClawMinigunExosuit] = 226
+kTechIdToMaterialOffset[kTechId.ClawRailgunExosuit] = 227
+kTechIdToMaterialOffset[kTechId.DropClawRailgunExosuit] = 227
+kTechIdToMaterialOffset[kTechId.DualWeaponTech] = 84
 kTechIdToMaterialOffset[kTechId.CannonTech] = 204
 kTechIdToMaterialOffset[kTechId.DropCannon] = 204
 

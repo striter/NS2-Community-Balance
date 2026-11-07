@@ -26,8 +26,10 @@ kMarineTechMap =
                     { kTechId.AdvancedWeaponry, 6, 6.5 },                        { kTechId.HeavyMachineGunTech, 8, 6.5 },
     --R
                                                         { kTechId.JetpackPrototypeLab, 11, 4.5 },       --{ kTechId.JetpackFuelTech, 12, 6.5 },  
-                { kTechId.PrototypeLab, 10, 5.5 },       { kTechId.ExosuitPrototypeLab, 11,5.5 },{ kTechId.DualRailgunExosuit,12 , 5.5 },
+                { kTechId.PrototypeLab, 10, 5.5 },       { kTechId.ExosuitPrototypeLab, 11, 5.5 },
                                                             { kTechId.CannonPrototypeLab,11 ,6.5 },
+                                                          { kTechId.DualWeaponTech, 12, 5 },
+                                                          { kTechId.DualRailgunExosuit, 12, 6 },
 
 
                                                                                               
@@ -118,6 +120,8 @@ kMarineLines =
     GetLinePositionForTechMap(kMarineTechMap, kTechId.PrototypeLab, kTechId.JetpackPrototypeLab),
     GetLinePositionForTechMap(kMarineTechMap, kTechId.PrototypeLab, kTechId.CannonPrototypeLab),
 
-    GetLinePositionForTechMap(kMarineTechMap, kTechId.DualRailgunExosuit, kTechId.ExosuitPrototypeLab),
-    GetLinePositionForTechMap(kMarineTechMap, kTechId.DualRailgunExosuit, kTechId.CannonPrototypeLab),
+    GetLinePositionForTechMap(kMarineTechMap, kTechId.ExosuitPrototypeLab, kTechId.DualWeaponTech),
+    GetLinePositionForTechMap(kMarineTechMap, kTechId.ExosuitPrototypeLab, kTechId.DualRailgunExosuit),
+    GetLinePositionForTechMap(kMarineTechMap, kTechId.DualWeaponTech, kTechId.DualRailgunExosuit),
+    GetLinePositionForTechMap(kMarineTechMap, kTechId.CannonPrototypeLab, kTechId.DualRailgunExosuit),
 }

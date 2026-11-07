@@ -54,6 +54,8 @@ local kTrackedMarineGadgets =
 local kTrackedExoLayouts = IterableDict()
 kTrackedExoLayouts[string.format("%s+%s", Minigun.kMapName, Minigun.kMapName)] = 1
 kTrackedExoLayouts[string.format("%s+%s", Railgun.kMapName, Railgun.kMapName)] = 1
+kTrackedExoLayouts[string.format("%s+%s", Claw.kMapName, Minigun.kMapName)] = 1
+kTrackedExoLayouts[string.format("%s+%s", Claw.kMapName, Railgun.kMapName)] = 1
 
 -- Add network variables for the user tracking stuff. (Marine weapons, exo layouts, etc)
 

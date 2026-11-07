@@ -261,6 +261,10 @@ kMinigunDamageType = kDamageType.Normal
 kRailgunDamage = 10
 kRailgunChargeDamage = 154
 kRailgunDamageType = kDamageType.Structural
+-- The last entry repeats for further targets, a 0 entry ends the pierce.
+kRailgunPierceDamageScalars = { 1, 1, 0.5, 0.2 }
+kRailgunRepeatDamageWindow = 0.5
+kRailgunRepeatDamageScalar = 0.5
 
 kPulseGrenadeDamageRadius = 4
 kPulseGrenadeEnergyDamageRadius = 4
@@ -327,10 +331,15 @@ kCannonClipSize = 6
 kCannonPointValue = 15
 kCannonDamageType = kDamageType.Exosuit
 
-kDualExosuitCost = 55
-kDualRailgunExosuitCost = 55
+kClawExosuitCost = 40
+kClawExosuitDropCost = 28
+kDualExosuitCost = 15
+kDualRailgunExosuitCost = 15
 kDualExosuitDropCost = 36
-kExosuitCost = kDualExosuitCost   --Used in some ways... (newcomer protection from )
+kDualWeaponTechResearchCost = 15
+kDualWeaponTechResearchTime = 60
+kExosuitCost = kClawExosuitCost
+kExoFiringSpeedReduction = 0.1
 
 kOnosDevourCost = 10
 kOnosDevourTime = 40
@@ -787,6 +796,8 @@ kCommanderAggressiveTechs = {
     [kTechId.DropJetpack] = 0.2,
     [kTechId.DropDualMinigunExosuit] = 0.2,
     [kTechId.DropDualRailgunExosuit] = 0.2,
+    [kTechId.DropClawMinigunExosuit] = 0.2,
+    [kTechId.DropClawRailgunExosuit] = 0.2,
 
 
     --Alien

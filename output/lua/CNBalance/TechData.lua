@@ -727,6 +727,16 @@ function BuildTechData()
         [kTechDataPlayersRestrictionKey] = kCannonPlayersAlert,
     } )
 
+    table.insert(techData, {
+        [kTechDataId] = kTechId.DualWeaponTech,
+        [kTechDataCostKey] = kDualWeaponTechResearchCost,
+        [kTechDataResearchTimeKey] = kDualWeaponTechResearchTime,
+        [kTechIDShowEnables] = false,
+        [kTechDataDisplayName] = "DUALWEAPON_TECH",
+        [kTechDataResearchName] = "DUALWEAPON_TECH",
+        [kTechDataTooltipInfo] = "DUALWEAPON_TECH_TOOLTIP",
+    })
+
     table.insert(techData,{
         [kTechDataId] = kTechId.DualRailgunExosuit,
         [kTechIDShowEnables] = false,
@@ -777,6 +787,53 @@ function BuildTechData()
         [kStructureAttachRequiresPower] = true,
     })
 
+    table.insert(techData, {
+        [kTechDataId] = kTechId.DropClawMinigunExosuit,
+        [kTechDataMapName] = Exosuit.kMapName,
+        [kTechDataModel] = Exosuit.kModelName,
+        [kTechDataDisplayName] = "CLAW_MINIGUN",
+        [kTechDataTooltipInfo] = "CLAW_MINIGUN_TOOLTIP",
+        [kTechDataLayoutKey] = "ClawMinigun",
+        [kTechDataCostKey] = kClawExosuitDropCost,
+        [kStructureAttachId] = {kTechId.PrototypeLab,kTechId.CannonPrototypeLab,kTechId.JetpackPrototypeLab,kTechId.ExosuitPrototypeLab},
+        [kStructureAttachRange] = kArmoryWeaponAttachRange,
+        [kStructureAttachRequiresPower] = true,
+    })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.DropClawRailgunExosuit,
+        [kTechDataMapName] = Exosuit.kMapName,
+        [kTechDataModel] = Exosuit.kModelName,
+        [kTechDataDisplayName] = "CLAW_RAILGUN",
+        [kTechDataTooltipInfo] = "CLAW_RAILGUN_TOOLTIP",
+        [kTechDataLayoutKey] = "ClawRailgun",
+        [kTechDataCostKey] = kClawExosuitDropCost,
+        [kStructureAttachId] = {kTechId.PrototypeLab,kTechId.CannonPrototypeLab,kTechId.JetpackPrototypeLab,kTechId.ExosuitPrototypeLab},
+        [kStructureAttachRange] = kArmoryWeaponAttachRange,
+        [kStructureAttachRequiresPower] = true,
+    })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.ClawMinigunExosuit,
+        [kTechIDShowEnables] = false,
+        [kTechDataDisplayName] = "CLAWMINIGUN_EXOSUIT",
+        [kTechDataMapName] = "exo",
+        [kTechDataCostKey] = kClawExosuitCost,
+        [kTechDataHotkey] = Move.E,
+        [kTechDataTooltipInfo] = "CLAWMINIGUN_EXOSUIT_TECH_TOOLTIP",
+        [kTechDataSpawnHeightOffset] = kCommanderEquipmentDropSpawnHeight,
+    })
+
+    table.insert(techData, {
+        [kTechDataId] = kTechId.ClawRailgunExosuit,
+        [kTechIDShowEnables] = false,
+        [kTechDataDisplayName] = "CLAWRAILGUN_EXOSUIT",
+        [kTechDataMapName] = "exo",
+        [kTechDataCostKey] = kClawExosuitCost,
+        [kTechDataHotkey] = Move.E,
+        [kTechDataTooltipInfo] = "CLAWRAILGUN_EXOSUIT_TECH_TOOLTIP",
+        [kTechDataSpawnHeightOffset] = kCommanderEquipmentDropSpawnHeight,
+    })
 
     table.insert(techData, {
         [kTechDataId] = kTechId.DropJetpack,

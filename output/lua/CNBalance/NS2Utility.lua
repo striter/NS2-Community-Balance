@@ -61,6 +61,8 @@ function GetTexCoordsForTechId(techId)
         gTechIdPosition[kTechId.Jetpack] = kDeathMessageIcon.Jetpack
         gTechIdPosition[kTechId.DualMinigunExosuit] = kDeathMessageIcon.Minigun
         gTechIdPosition[kTechId.DualRailgunExosuit] = kDeathMessageIcon.Railgun
+        gTechIdPosition[kTechId.ClawMinigunExosuit] = kDeathMessageIcon.Claw
+        gTechIdPosition[kTechId.ClawRailgunExosuit] = kDeathMessageIcon.Claw
 		loadAdditional = false
 	end
 	return oldGetTexCoordsForTechId(techId)
@@ -370,5 +372,47 @@ function GetPlayerCanUseEntity(player, target)
 
     -- really need to move this functionality into two mixin (when for user, one for useable)
     return useSuccessTable.useSuccess or (target.GetCanAlwaysBeUsed and target:GetCanAlwaysBeUsed())
+
+end
+
+local kExoUpgradeTechIds
+
+local function GetExoUpgradeTechIds()
+
+    if not kExoUpgradeTechIds then
+        kExoUpgradeTechIds = {
+            layouts = {
+                ClawMinigun = kTechId.DualMinigunExosuit,
+                ClawRailgun = kTechId.DualRailgunExosuit,
+            },
+            weaponClasses = {
+                Minigun = kTechId.DualMinigunExosuit,
+                Railgun = kTechId.DualRailgunExosuit,
+            },
+        }
+    end
+    return kExoUpgradeTechIds
+
+end
+
+function GetExoUpgradeTechId(exo)
+
+    local techIds = GetExoUpgradeTechIds()
+    if exo.layout then
+        return techIds.layouts[exo.layout]
+    end
+
+    local weaponHolder = exo:GetWeapon(ExoWeaponHolder.kMapName)
+    if not weaponHolder then
+        return nil
+    end
+
+    local leftWeapon = weaponHolder:GetLeftSlotWeapon()
+    if not (leftWeapon and leftWeapon:GetClassName() == "Claw") then
+        return nil
+    end
+
+    local rightWeapon = weaponHolder:GetRightSlotWeapon()
+    return rightWeapon and techIds.weaponClasses[rightWeapon:GetClassName()] or nil
 
 end

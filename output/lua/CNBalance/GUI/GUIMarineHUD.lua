@@ -42,19 +42,13 @@ local function CreateTeamCountElement(techID)
 end
 
 
-local function UpdateTeamCount(self,teamInfo,element)
-    local techMapName = GUIMarineBuyMenu._GetMapNameForNetvar(nil,element.techId)       --???
-    assert(techMapName)
-    if  techMapName then
-        local netVarName = TeamInfo_GetUserTrackerNetvarName(techMapName)
-        local numUsers = teamInfo[netVarName]
-        if element.count ~= numUsers then
-            element.count = numUsers
-            element.text:SetText(string.format("x%i",element.count))
-            
-            element:SetColor(numUsers ~= 0 and self.kCountHaveUser or self.kCountNoUsed)
-            element.text:SetIsVisible(numUsers > 1)
-        end
+local function UpdateTeamCount(self, teamInfo, element)
+    local numUsers = GUIMarineBuyMenu.GetTeamUserCountForTechId(element.techId, teamInfo)
+    if element.count ~= numUsers then
+        element.count = numUsers
+        element.text:SetText(string.format("x%i", element.count))
+        element:SetColor(numUsers ~= 0 and self.kCountHaveUser or self.kCountNoUsed)
+        element.text:SetIsVisible(numUsers > 1)
     end
 end
 

@@ -113,7 +113,7 @@ local gMarineMenuButtons =
     [kTechId.WeaponsMenu] = { kTechId.DropShotgun, kTechId.DropGrenadeLauncher, kTechId.DropFlamethrower, kTechId.DropHeavyMachineGun,
                               kTechId.DropWelder ,kTechId.DropMines, kTechId.DropCombatBuilder,  kTechId.AssistMenu},
     
-    [kTechId.ProtosMenu] = { kTechId.DropJetpack, kTechId.DropDualMinigunExosuit, kTechId.DropDualRailgunExosuit, kTechId.None,
+    [kTechId.ProtosMenu] = { kTechId.DropJetpack, kTechId.DropClawMinigunExosuit, kTechId.DropClawRailgunExosuit, kTechId.None,
                                 kTechId.DropCannon, kTechId.None, kTechId.None, kTechId.AssistMenu}
 }
 
@@ -149,6 +149,12 @@ function MarineCommander:GetQuickMenuTechButtons(techId)
     if techId == kTechId.AdvancedMenu then
         menuButtons[7] = Shared.GetCheatsEnabled() and kTechId.BioformSuppressor or kTechId.None
     end
+    if techId == kTechId.ProtosMenu then
+        local dualNode = self:GetTechTree():GetTechNode(kTechId.DualWeaponTech)
+        local dualResearched = dualNode and dualNode:GetResearched()
+        menuButtons[2] = dualResearched and kTechId.DropDualMinigunExosuit or kTechId.DropClawMinigunExosuit
+        menuButtons[3] = dualResearched and kTechId.DropDualRailgunExosuit or kTechId.DropClawRailgunExosuit
+    end
 
     table.copy(menuButtons, marineTechButtons, true)        
 
@@ -177,7 +183,9 @@ if Server then
 
         return techId == kTechId.DropWelder or techId == kTechId.DropMines or techId == kTechId.DropShotgun or techId == kTechId.DropHeavyMachineGun or techId == kTechId.DropGrenadeLauncher or
                 techId == kTechId.DropFlamethrower or techId == kTechId.DropJetpack or techId == kTechId.DropExosuit
-        or techId == kTechId.DropCombatBuilder or techId == kTechId.DropCannon or techId == kTechId.DropDualMinigunExosuit or techId == kTechId.DropDualRailgunExosuit
+        or techId == kTechId.DropCombatBuilder or techId == kTechId.DropCannon
+        or techId == kTechId.DropDualMinigunExosuit or techId == kTechId.DropDualRailgunExosuit
+        or techId == kTechId.DropClawMinigunExosuit or techId == kTechId.DropClawRailgunExosuit
 
     end
 
