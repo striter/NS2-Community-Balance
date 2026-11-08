@@ -35,6 +35,7 @@ ModLoader.SetupFileHook("lua/Scoreboard.lua", "lua/CNBalance/Scoreboard.lua", "p
 ModLoader.SetupFileHook("lua/ServerStats.lua", "lua/CNBalance/ServerStats.lua", "replace" )
 --GUI
 ModLoader.SetupFileHook("lua/GUITechMap.lua", "lua/CNBalance/GUITechMap.lua", "replace")
+ModLoader.SetupFileHook("lua/GUIProduction.lua", "lua/CNBalance/GUI/GUIProduction.lua", "post")
 ModLoader.SetupFileHook("lua/Hud/HelpScreen/HelpScreenContent.lua", "lua/CNBalance/GUI/HelpScreenContent.lua", "post")
 ModLoader.SetupFileHook("lua/GUIMinimapFrame.lua", "lua/CNBalance/GUI/GUIMinimapFrame.lua", "post")
 ModLoader.SetupFileHook("lua/GUIUpgradeChamberDisplay.lua", "lua/CNBalance/GUI/GUIUpgradeChamberDisplay.lua", "replace")

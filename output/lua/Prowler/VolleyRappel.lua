@@ -105,14 +105,6 @@ function VolleyRappel:GetTracerResidueEffectName()
 end
 
 function VolleyRappel:GetBulletsPerShot()
-    local player = self:GetParent()
-    if player then
-        local teamInfo = GetTeamInfoEntity(player:GetTeamNumber())
-        local biomassLevel = (teamInfo and teamInfo.GetBioMassLevel) and teamInfo:GetBioMassLevel() or 0
-        
-        return 5 + biomassLevel / 5
-    end
-    
     return 6
 end
 

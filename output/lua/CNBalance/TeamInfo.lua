@@ -37,6 +37,8 @@ local networkVars =
     lastCommIsBot = "boolean",
     techActiveMask = "integer",
     techOwnedMask = "integer",
+    techActiveMask2 = "integer",
+    techOwnedMask2 = "integer",
     playerCount = "integer (0 to " .. kMaxPlayers - 1 .. ")",
     spawnQueueTotal = "integer (0 to 64)",  --max val should be ref'd from somewhere
     supplyUsed = "integer (0 to " ..kStartSupply + 10 * kSupplyEachTechPoint .. ")",
@@ -74,7 +76,6 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.Armor2,
     kTechId.Armor3,
 
-    --kTechId.UpgradeRoboticsFactory,
     kTechId.BioformSuppressProtocol,
     
     kTechId.PhaseTech,
@@ -90,6 +91,13 @@ TeamInfo.kRelevantTechIdsMarine =
     kTechId.GrenadeLauncherUpgrade,
     kTechId.ArmorRegen,
     kTechId.PoweredExtractorUpgrade,
+
+    kTechId.StandardSupply,
+    kTechId.ArmorSupply,
+    kTechId.ExplosiveSupply,
+    kTechId.ElectronicSupply,
+    kTechId.DualWeaponTech,
+    kTechId.UpgradeRoboticsFactory,
 }
 
 TeamInfo.kRelevantTechIdsAlien =
@@ -122,6 +130,15 @@ TeamInfo.kRelevantTechIdsAlien =
     
     kTechId.OriginForm,
 
+    kTechId.RecoverBiomassOne,
+    kTechId.RecoverBiomassTwo,
+    kTechId.RecoverBiomassThree,
+    kTechId.ResearchBioMassFour,
+    kTechId.GorgeEgg,
+    kTechId.LerkEgg,
+    kTechId.FadeEgg,
+    kTechId.OnosEgg,
+
     --kTechId.Leap,
     --kTechId.Xenocide,
     --kTechId.XenocideFuel,
@@ -143,35 +160,47 @@ TeamInfo.kRelevantTechIdsAlien =
     --kTechId.Stomp,
 }
 
-local function CreateRelevantIdMaskMarine()
+-- Bit 31 is the sign bit and GUIProduction tests masks with "> 0", so each group holds at most 31 techs
+local kTechMaskBitsPerGroup = 31
 
-    local t = {}
+local function CreateTechMaskGroups(techIds)
 
-    for i, techId in ipairs(TeamInfo.kRelevantTechIdsMarine) do
+    local groupIdMasks = { {}, {} }
+    local groupTechIds = { {}, {} }
 
-        local s = EnumToString(kTechId, techId)
-        t[i] = s
+    for index, techId in ipairs(techIds) do
+
+        local groupIndex = math.floor((index - 1) / kTechMaskBitsPerGroup) + 1
+        local techIdString = EnumToString(kTechId, techId)
+
+        groupIdMasks[groupIndex][techIdString] = bit.lshift(1, (index - 1) % kTechMaskBitsPerGroup)
+        table.insert(groupTechIds[groupIndex], techId)
 
     end
 
+    return groupIdMasks, groupTechIds
 
-    TeamInfo.kRelevantIdMaskMarine = CreateBitMask(t)
+end
+
+local function CreateRelevantIdMaskMarine()
+
+    local groupIdMasks, groupTechIds = CreateTechMaskGroups(TeamInfo.kRelevantTechIdsMarine)
+
+    TeamInfo.kRelevantIdMaskMarine = groupIdMasks[1]
+    TeamInfo.kRelevantTechIdsMarine1 = groupTechIds[1]
+    TeamInfo.kRelevantIdMaskMarine2 = groupIdMasks[2]
+    TeamInfo.kRelevantTechIdsMarine2 = groupTechIds[2]
 
 end
 
 local function CreateRelevantIdMaskAlien()
 
-    local t = {}
+    local groupIdMasks, groupTechIds = CreateTechMaskGroups(TeamInfo.kRelevantTechIdsAlien)
 
-    for i,techId in ipairs(TeamInfo.kRelevantTechIdsAlien) do
-
-        local s = EnumToString(kTechId, techId)
-        t[i] = s
-
-    end
-
-
-    TeamInfo.kRelevantIdMaskAlien = CreateBitMask(t)
+    TeamInfo.kRelevantIdMaskAlien = groupIdMasks[1]
+    TeamInfo.kRelevantTechIdsAlien1 = groupTechIds[1]
+    TeamInfo.kRelevantIdMaskAlien2 = groupIdMasks[2]
+    TeamInfo.kRelevantTechIdsAlien2 = groupTechIds[2]
 
 end
 
@@ -212,6 +241,8 @@ if Server then
         self.totalTeamResources = 0
         self.techActiveMask = 0
         self.techOwnedMask = 0
+        self.techActiveMask2 = 0
+        self.techOwnedMask2 = 0
         self.playerCount = 0
         self.spawnQueueTotal = 0
         self.workerCount = 0
@@ -337,6 +368,8 @@ function TeamInfo:UpdateInfo()
                 if not GetGamerules():GetGameStarted() then
                     self.techActiveMask = 0
                     self.techOwnedMask = 0
+                    self.techActiveMask2 = 0
+                    self.techOwnedMask2 = 0
                 else
                     self:UpdateTechTreeInfo(self.team:GetTechTree())
                 end
@@ -382,12 +415,28 @@ function TeamInfo:UpdateUserTrackers()
     -- for others to override.
 end
 
-function TeamInfo:GetRelevantTech()
+function TeamInfo:GetRelevantTech(groupIndex)
+
+    local group = groupIndex or self.techGroupIndex or 1
+
     if self:GetTeamType() == kMarineTeamType then
-        return TeamInfo.kRelevantIdMaskMarine, TeamInfo.kRelevantTechIdsMarine
+
+        if group == 1 then
+            return TeamInfo.kRelevantIdMaskMarine, TeamInfo.kRelevantTechIdsMarine1
+        end
+
+        return TeamInfo.kRelevantIdMaskMarine2, TeamInfo.kRelevantTechIdsMarine2
+
     else
-        return TeamInfo.kRelevantIdMaskAlien, TeamInfo.kRelevantTechIdsAlien
+
+        if group == 1 then
+            return TeamInfo.kRelevantIdMaskAlien, TeamInfo.kRelevantTechIdsAlien1
+        end
+
+        return TeamInfo.kRelevantIdMaskAlien2, TeamInfo.kRelevantTechIdsAlien2
+
     end
+
 end
 
 function TeamInfo:GetSupplyUsed()
@@ -493,14 +542,19 @@ function TeamInfo:UpdateTechTreeInfo(techTree)
 
     if not techTree then return end
 
-    local relevantIdMask, relevantTechIds = self:GetRelevantTech()
-    for i,techId in ipairs(relevantTechIds) do
+    for groupIndex = 1, 2 do
 
-        local techNode = techTree:GetTechNode(techId)
+        local relevantIdMask, relevantTechIds = self:GetRelevantTech(groupIndex)
 
-        if techNode and relevantIdMask then
+        for i,techId in ipairs(relevantTechIds) do
 
-            self:UpdateBitmasks(techId, techNode)
+            local techNode = techTree:GetTechNode(techId)
+
+            if techNode and relevantIdMask then
+
+                self:UpdateBitmasks(techId, techNode)
+
+            end
 
         end
 
@@ -522,8 +576,14 @@ function TeamInfo:GetTotalTeamResources()
     return self.totalTeamResources
 end
 
-function TeamInfo:GetTeamTechTreeInfo()
-    return self.techActiveMask, self.techOwnedMask
+function TeamInfo:GetTeamTechTreeInfo(groupIndex)
+
+    if (groupIndex or self.techGroupIndex or 1) == 1 then
+        return self.techActiveMask, self.techOwnedMask
+    end
+
+    return self.techActiveMask2, self.techOwnedMask2
+
 end
 
 --[[
@@ -538,23 +598,37 @@ A O |
 1 1 | Researched
 -----]]
 
-function TeamInfo:UpdateBitmasks(techId, techNode)
-
-    local relevantIdMask, relevantTechIds = self:GetRelevantTech()
+local function GetTechMaskInfo(self, techId)
 
     local techIdString = EnumToString(kTechId, techId)
-    local mask = relevantIdMask[techIdString]
+
+    local groupIdMasks = self:GetRelevantTech(1)
+    if groupIdMasks and groupIdMasks[techIdString] then
+        return groupIdMasks[techIdString], "techActiveMask", "techOwnedMask"
+    end
+
+    groupIdMasks = self:GetRelevantTech(2)
+    if groupIdMasks and groupIdMasks[techIdString] then
+        return groupIdMasks[techIdString], "techActiveMask2", "techOwnedMask2"
+    end
+
+end
+
+function TeamInfo:UpdateBitmasks(techId, techNode)
+
+    local mask, activeField, ownedField = GetTechMaskInfo(self, techId)
+    if not mask then return end
 
     -- Tech researching or researched
     if (techNode:GetResearching() and not techNode:GetResearched()) or techNode:GetHasTech() then
-        self.techActiveMask = bit.bor(self.techActiveMask, mask)
+        self[activeField] = bit.bor(self[activeField], mask)
     else
-        self.techActiveMask = bit.band(self.techActiveMask, bit.bnot(mask))
+        self[activeField] = bit.band(self[activeField], bit.bnot(mask))
     end
 
     -- Tech has been owned at some point
     if techNode:GetHasTech() then
-        self.techOwnedMask = bit.bor(self.techOwnedMask, mask)
+        self[ownedField] = bit.bor(self[ownedField], mask)
     end
 
     -- Hide prerequisite techs when this tech has been researched
@@ -562,17 +636,17 @@ function TeamInfo:UpdateBitmasks(techId, techNode)
         local preq1 = techNode:GetPrereq1()
         local preq2 = techNode:GetPrereq2()
         if preq1 ~= nil then
-            local msk = relevantIdMask[EnumToString(kTechId, preq1)]
+            local msk, preqActiveField, preqOwnedField = GetTechMaskInfo(self, preq1)
             if msk then
-                self.techActiveMask = bit.band(self.techActiveMask, bit.bnot(msk))
-                self.techOwnedMask = bit.band(self.techOwnedMask, bit.bnot(msk))
+                self[preqActiveField] = bit.band(self[preqActiveField], bit.bnot(msk))
+                self[preqOwnedField] = bit.band(self[preqOwnedField], bit.bnot(msk))
             end
         end
         if preq2 ~= nil then
-            local msk = relevantIdMask[EnumToString(kTechId, preq2)]
+            local msk, preqActiveField, preqOwnedField = GetTechMaskInfo(self, preq2)
             if msk then
-                self.techActiveMask = bit.band(self.techActiveMask, bit.bnot(msk))
-                self.techOwnedMask = bit.band(self.techOwnedMask, bit.bnot(msk))
+                self[preqActiveField] = bit.band(self[preqActiveField], bit.bnot(msk))
+                self[preqOwnedField] = bit.band(self[preqOwnedField], bit.bnot(msk))
             end
         end
     end
