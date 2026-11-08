@@ -256,11 +256,12 @@ kDragonBreathStructureFireDamagePerStack = { kStructureFireDOTPerSecond / 100, k
 kFlamethrowerStructureDamagePerStack = { kStructureFireDOTPerSecond, kStructureFireDOTPerSecond, kStructureFireDOTPerSecond, kStructureFireDOTPerSecond }
 kStructureFireDamageMaxStack = { kStructureFireDOTPerSecond * 3 , kStructureFireDOTPerSecond * 4, kStructureFireDOTPerSecond * 5, kStructureFireDOTPerSecond * 6  }
 
-kMinigunDamage = 10
+kMinigunDamage = 11
 kMinigunDamageType = kDamageType.Normal
+kExoDualMinigunModifier = (kMinigunDamage - 1) / kMinigunDamage
 kRailgunDamage = 10
 kRailgunChargeDamage = 154
-kRailgunDamageType = kDamageType.Structural
+kRailgunDamageType = kDamageType.Normal
 -- The last entry repeats for further targets, a 0 entry ends the pierce.
 kRailgunPierceDamageScalars = { 1, 1, 0.5, 0.2 }
 kRailgunRepeatDamageWindow = 0.5
@@ -339,7 +340,7 @@ kDualExosuitDropCost = 36
 kDualWeaponTechResearchCost = 15
 kDualWeaponTechResearchTime = 60
 kExosuitCost = kClawExosuitCost
-kExoFiringSpeedReduction = 0.1
+kExoFiringSpeedReduction = 0.06
 
 kOnosDevourCost = 10
 kOnosDevourTime = 40
