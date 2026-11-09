@@ -149,6 +149,9 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["SENTRY_HINT"] = "须在[机动供电器]半径内."
     Locale.kTranslateMessage["SENTRY_TOOLTIP"] = "自动索敌攻击范围异形.\n*须在[机动供电器]半径内.\n*脱离范围或被毁即停火."
 
+    Locale.kTranslateMessage["INFANTRY_PORTAL_TOOLTIP"] = "每9秒重生一名士兵.\n*须建在[指挥站]或[机动供电器]附近."
+    Locale.kTranslateMessage["INFANTRY_PORTAL_NEEDS_ANCHOR"] = "须建在[指挥站]或[机动供电器]附近"
+
     Locale.kTranslateMessage["PROTOS_MENU"]="原型装备"
     Locale.kTranslateMessage["PROTOS_MENU_TOOLTIP"]="给陆战队员发放原型装备"
     Locale.kTranslateMessage["DUAL_MINIGUN"]="转轮机甲"
@@ -441,6 +444,9 @@ if Locale.kLocales then
     Locale.kLocales["SENTRY_BATTERY_TOOLTIP"] = "Mobile off-grid power source.\n*Powers the 2 nearest buildings.\n*Sentries just need range.\n*All lose power if it dies."
     Locale.kLocales["SENTRY_HINT"] = "Fires only near a [Field Power Unit]."
     Locale.kLocales["SENTRY_TOOLTIP"] = "Auto-tracks and fires at aliens.\n*Needs a [Field Power Unit] in range.\n*Stops firing if out of range."
+
+    Locale.kLocales["INFANTRY_PORTAL_TOOLTIP"] = "Respawns a Marine every 9 seconds.\n*Must be built near a Command Station or Field Power Unit."
+    Locale.kLocales["INFANTRY_PORTAL_NEEDS_ANCHOR"] = "Must be built near a Command Station or Field Power Unit"
 
     Locale.kLocales["BUYMENU_RESTRICTION"] = "%i(TooMany)"
     

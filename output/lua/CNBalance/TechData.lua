@@ -308,9 +308,7 @@ function BuildTechData()
         [kTechDataMaxHealth] = kInfantryPortalHealth,
         [kTechDataMaxArmor] = kInfantryPortalArmor,
         [kTechDataModel] = InfantryPortal.kModelName,
-        --[kStructureBuildNearClass] = "CommandStation",
-        --[kStructureAttachId] = {kTechId.CommandStation,kTechId.StandardStation,kTechId.ArmorStation,kTechId.ExplosiveStation,kTechId.ElectronicStation},        --For Stations
-        --[kStructureAttachRange] = kInfantryPortalAttachRange,
+        [kTechDataBuildMethodFailedMessage] = "INFANTRY_PORTAL_NEEDS_ANCHOR",
         [kTechDataEngagementDistance] = kInfantryPortalEngagementDistance,
         [kTechDataHotkey] = Move.P,
         [kTechDataNotOnInfestation] = kPreventMarineStructuresOnInfestation,

@@ -170,8 +170,8 @@ kPrototypeLabSupply = 30
 
 kSentriesPerBattery = 3
 
-kMaxLocalPowered = 1
-kMaxLocalPoweredElectronic = 2
+kMaxLocalPowered = 2
+kMaxLocalPoweredElectronic = 3
 
 kDrifterSupply = 5
 kWhipSupply = 5

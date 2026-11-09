@@ -590,59 +590,59 @@ function InfantryPortal:OnOverrideOrder(order)
     
 end
 
+local function GetHasActiveAnchorWithinRange(teamNumber, origin, className, range)
+
+    for _, anchor in ipairs(GetEntitiesForTeamWithinRange(className, teamNumber, origin, range)) do
+        if GetIsUnitActive(anchor) then
+            return true
+        end
+    end
+
+    return false
+
+end
+
 function GetInfantryPortalGhostGuides(commander)
 
     local entities = { }
     local ranges = { }
 
-    local commandStations = GetEntitiesForTeam("CommandStation", commander:GetTeamNumber())
-    local attachRange = LookupTechData(kTechId.InfantryPortal, kStructureAttachRange, 1)
-    
-    for _, commandStation in ipairs(commandStations) do
-        if commandStation:GetIsBuilt() then
-            ranges[commandStation] = attachRange
+    local teamNumber = commander:GetTeamNumber()
+
+    for _, commandStation in ipairs(GetEntitiesForTeam("CommandStation", teamNumber)) do
+        if GetIsUnitActive(commandStation) then
+            ranges[commandStation] = kInfantryPortalAttachRange
             table.insert(entities, commandStation)
         end
     end
-    
+
+    for _, battery in ipairs(GetEntitiesForTeam("SentryBattery", teamNumber)) do
+        if GetIsUnitActive(battery) then
+            ranges[battery] = SentryBattery.kRange
+            table.insert(entities, battery)
+        end
+    end
+
     return entities, ranges
 
 end
 
 function GetCommandStationIsBuilt(techId, origin, normal, commander)
 
-    -- check if there is a built command station in our team
+    -- check if there is a built command station or sentry battery in our team
     if not commander then
         return false
     end
 
     local spaceFree = GetHasRoomForCapsule(Vector(Player.kXZExtents, Player.kYExtents, Player.kXZExtents), origin + Vector(0, 0.1 + Player.kYExtents, 0), CollisionRep.Default, PhysicsMask.AllButPCsAndRagdolls)
-    
-    --if spaceFree then
-    --
-    --    local cs = GetEntitiesForTeamWithinRange("CommandStation", commander:GetTeamNumber(), origin, 15)
-    --    if cs and #cs > 0 then
-    --
-    --        local ccs = cs[1] -- Hmm...
-    --        local ips = GetEntitiesForTeamWithinRange("InfantryPortal", commander:GetTeamNumber(), ccs:GetOrigin(), 15)
-    --        if ips then
-    --
-    --            local ipCountValid = #ips < kMaxInfantryPortalsPerCommandStation
-    --            local built = ccs:GetIsBuilt()
-    --
-    --            if ipCountValid and built then
-    --                return true
-    --            elseif not ipCountValid then
-    --                return false, "INFANTRY_PORTAL_TOOMANYIPS"
-    --            end
-    --        end
-    --
-    --    end
-    --
-    --end
-    
+    if not spaceFree then
+        return false
+    end
 
-    return spaceFree
+    local teamNumber = commander:GetTeamNumber()
+
+    return GetHasActiveAnchorWithinRange(teamNumber, origin, "CommandStation", kInfantryPortalAttachRange)
+        or GetHasActiveAnchorWithinRange(teamNumber, origin, "SentryBattery", SentryBattery.kRange)
 
 end
 
