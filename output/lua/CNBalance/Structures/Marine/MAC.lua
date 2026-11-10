@@ -1048,7 +1048,7 @@ function MAC:OnUpdate(deltaTime)
                 local ents = GetEntitiesWithMixinForTeamWithinRange("Live", GetEnemyTeamNumber(self:GetTeamNumber()), self:GetOrigin(), kMACEmpBlastDetectRadius)
                 for e = 1, #ents do
                     local entity = ents[e]
-                    if entity:isa("Player") and entity:GetIsAlive() and not entity.electrified then
+                    if entity:isa("Player") and entity:GetIsAlive() then
                         TriggerEMPBlast(self)
                         break;
                     end

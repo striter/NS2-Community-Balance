@@ -301,7 +301,7 @@ kSentryBuildTime = 3
 kSentryBatteryCost = 5
 kSentryBatteryBuildTime = 5
 
-kAdvancedArmoryUpgradeCost = 30
+kAdvancedArmoryUpgradeCost = 25
 kAdvancedArmoryResearchTime = 90
 kPrototypeLabCost = 15
 
@@ -311,8 +311,8 @@ kCannonTechResearchTime = 75
 kJetpackTechResearchCost = 25
 kJetpackTechResearchTime = 120
 
-kExosuitTechResearchCost = 25
-kExosuitTechResearchTime = 90
+kExosuitTechResearchCost = 20
+kExosuitTechResearchTime = 60
 
 kRoboticsFactoryBuildTime = 8
 
@@ -604,6 +604,8 @@ kPowerSurgeTriggerEMP = true
 kPowerSurgeEMPDamage = 20  kEMPDamageWeapons1Scalar = 1.25 kEMPDamageWeapons2Scalar = 1.5 kEMPDamageWeapons3Scalar = 1.75
 kPowerSurgeEMPDamageRadius = 6
 kPowerSurgeEMPElectrifiedDuration = 2
+kEMPBlastRepeatDamageWindow = 1
+kEMPBlastRepeatDamageScalar = 0.35
 
 kNanoShieldPlayerDuration = 3
 kNanoShieldStructureDuration = 5
