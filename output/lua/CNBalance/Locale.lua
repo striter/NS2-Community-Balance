@@ -159,6 +159,7 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["DUAL_RAILGUN"]="磁轨炮机甲"
     Locale.kTranslateMessage["DUAL_RAILGUN_TOOLTIP"]="双臂都安装了 |磁轨炮| 的原型单兵机甲.\n*蓄力造成大量穿透伤害.\n*远距离对点打击.\n*对骨盾造成全额伤害."
 
+    Locale.kTranslateMessage["CLAW"]="机械臂"
     Locale.kTranslateMessage["CLAW_MINIGUN"]="单臂转轮机甲"
     Locale.kTranslateMessage["CLAW_MINIGUN_TOOLTIP"]="左手|机械爪|,右手|转轮机枪|的原型单兵机甲.\n*预热后造成大量持续伤害.\n*机械爪有限抵御近距离敌人."
     Locale.kTranslateMessage["CLAW_RAILGUN"]="单臂磁轨机甲"
@@ -171,6 +172,11 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["CLAWRAILGUN_BUYDESCRIPTION"]="单臂磁轨机甲.\n*机械爪:近战无弹药消耗,有限抵御近距离敌人.\n*磁轨炮:蓄力穿透,远程精准对点打击."
     Locale.kTranslateMessage["DUALMINIGUN_BUYDESCRIPTION"]="双臂转轮机甲.\n*装甲厚重,持续火力输出,对护甲单位尤为有效.\n-机动性较差.\n-请当心转轮过热."
     Locale.kTranslateMessage["DUALRAILGUN_BUYDESCRIPTION"]="双臂磁轨机甲.\n*装甲厚重,蓄力穿透,远程精准对点打击.\n*对骨盾造成全额伤害.\n-机动性较差,惧怕成群近身单位."
+    Locale.kTranslateMessage["RESEARCH_CLAW_RAILGUN"]="研发单臂机甲"
+    Locale.kTranslateMessage["CLAW_RAILGUN_TECH_TOOLTIP"]="*解锁单臂机甲的军需采购.\n*配置为机械爪+磁轨炮."
+    Locale.kTranslateMessage["EVT_CLAWRAILGUN_RESEARCHED"]="单臂机甲 研发完成"
+    Locale.kTranslateMessage["MINIGUN_CLAW_TOOLTIP"]="BIND_PrimaryAttack以机械爪挥击.\n按住BIND_SecondaryAttack发射转轮机枪.\n*弹药无限,但会过热.\nBIND_Jump启动跳跃喷口."
+    Locale.kTranslateMessage["RAILGUN_CLAW_TOOLTIP"]="BIND_PrimaryAttack以机械爪挥击.\nBIND_SecondaryAttack发射磁轨炮.\n*弹药无限,但射速缓慢.\nBIND_Jump启动跳跃喷口."
     Locale.kTranslateMessage["DUALWEAPON_TECH"]="副臂搭载系统"
     Locale.kTranslateMessage["DUALWEAPON_TECH_TOOLTIP"]="解锁双臂同型武器机甲.\n*转轮/磁轨双臂配置.\n*研发后可购买双手机甲."
 
@@ -457,6 +463,7 @@ if Locale.kLocales then
     Locale.kLocales["DUAL_RAILGUN"]="Railgun Exosuit"
     Locale.kLocales["DUAL_RAILGUN_TOOLTIP"]="Dual-wield | Railgun | Exosuit.\n*Deals burst damage after charge up."
 
+    Locale.kLocales["CLAW"]="Claw Arm"
     Locale.kLocales["CLAW_MINIGUN"]="Claw+Minigun Exosuit"
     Locale.kLocales["CLAW_MINIGUN_TOOLTIP"]="Left | Claw | Right | Minigun | Exosuit.\n*Continuous damage after warmup.\n*Claw offers limited close-range defense."
     Locale.kLocales["CLAW_RAILGUN"]="Claw+Railgun Exosuit"

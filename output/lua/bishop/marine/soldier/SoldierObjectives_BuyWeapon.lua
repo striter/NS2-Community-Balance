@@ -27,19 +27,33 @@ local kBuildingSenses = {
   [kTechId.GrenadeLauncher] = "ent_advArmory_nearestBuilt",
   [kTechId.Flamethrower] = "ent_advArmory_nearestBuilt",
   [kTechId.DualMinigunExosuit] = "ent_protoLab_nearestBuilt",
+  [kTechId.ClawMinigunExosuit] = "ent_protoLab_nearestBuilt",
+  [kTechId.ClawRailgunExosuit] = "ent_protoLab_nearestBuilt",
 }
 local kDebug = Bishop.debug.weapons
 local kNilAction = Bishop.lib.constants.kNilAction
 local kObjectiveTypes = Bishop.marine.kObjectiveTypes
 local kTechDataCostKey = kTechDataCostKey
 local kTechId = kTechId
-local kTechUnlocks = {
-  [kTechId.Shotgun] = kTechId.ShotgunTech,
-  [kTechId.Flamethrower] = kTechId.AdvancedArmory,
-  [kTechId.GrenadeLauncher] = kTechId.AdvancedArmory,
-  [kTechId.HeavyMachineGun] = kTechId.AdvancedArmory,
-  [kTechId.DualMinigunExosuit] = kTechId.ExosuitPrototypeLab,
-  [kTechId.DualRailgunExosuit] = kTechId.ExosuitPrototypeLab,
+-- Marines always buy the claw layout; the dual layout is an upgrade bought from
+-- the prototype lab once the exo exists and DualWeaponTech is researched.
+local kClawLayouts = {
+  [kTechId.DualMinigunExosuit] = kTechId.ClawMinigunExosuit,
+  [kTechId.DualRailgunExosuit] = kTechId.ClawRailgunExosuit,
+}
+local kRailgunLayouts = {
+  [kTechId.ClawMinigunExosuit] = kTechId.ClawRailgunExosuit,
+  [kTechId.DualMinigunExosuit] = kTechId.DualRailgunExosuit,
+}
+local kMinigunLayouts = {
+  [kTechId.ClawRailgunExosuit] = kTechId.ClawMinigunExosuit,
+  [kTechId.DualRailgunExosuit] = kTechId.DualMinigunExosuit,
+}
+local kExoLayouts = {
+  [kTechId.ClawMinigunExosuit] = true,
+  [kTechId.ClawRailgunExosuit] = true,
+  [kTechId.DualMinigunExosuit] = true,
+  [kTechId.DualRailgunExosuit] = true,
 }
 local kUseDistance = 1.35
 local kUsePositions = {
@@ -116,7 +130,7 @@ function Bishop.marine.soldier.objectives.BuyWeapon(bot, brain, marine)
     end
   end
 
-  local purchase = bot.desiredWeapon
+  local purchase = kClawLayouts[bot.desiredWeapon] or bot.desiredWeapon
   local building = brain:GetSenses():Get(kBuildingSenses[purchase]).entity
   local resources = marine:GetResources()
   local techTree = GetTechTree(marine:GetTeamNumber())
@@ -127,7 +141,7 @@ function Bishop.marine.soldier.objectives.BuyWeapon(bot, brain, marine)
       and resources >= kAbundantRes - bot.buyTemptation then
 
     local techUnlocked = techTree
-        and techTree:GetHasTech(kTechUnlocks[purchase], true)
+        and techTree:GetTechAvailable(purchase)
 
     if not building or not techUnlocked then
       purchase = kTechId.Shotgun
@@ -135,22 +149,20 @@ function Bishop.marine.soldier.objectives.BuyWeapon(bot, brain, marine)
     end
   end
 
-  if purchase == kTechId.DualMinigunExosuit
-      and random() <= kRailgunProbability then
-    purchase = kTechId.DualRailgunExosuit
+  if kRailgunLayouts[purchase] and random() <= kRailgunProbability then
+    purchase = kRailgunLayouts[purchase]
   end
 
-  -- DualRailgunExosuit also requires CannonPrototypeLab.
-  if purchase == kTechId.DualRailgunExosuit and techTree
+  -- The railgun layout also requires CannonPrototypeLab.
+  if kMinigunLayouts[purchase] and techTree
       and not techTree:GetHasTech(kTechId.CannonPrototypeLab, true) then
-    purchase = kTechId.DualMinigunExosuit
+    purchase = kMinigunLayouts[purchase]
   end
 
   -- If jetpacks are unlocked then the marine should also take into account a
   -- mandatory jetpack purchase with their weapon.
   local jetpackOffset = 0
-  if purchase ~= kTechId.DualMinigunExosuit
-      and purchase ~= kTechId.DualRailgunExosuit
+  if not kExoLayouts[purchase]
       and techTree and techTree:GetHasTech(kTechId.JetpackTech, true)
       and not marine:isa("JetpackMarine")
       and not Bishop.settings.marine.jetpackLmg then
@@ -158,7 +170,7 @@ function Bishop.marine.soldier.objectives.BuyWeapon(bot, brain, marine)
   end
 
   if not building or not techTree
-      or not techTree:GetHasTech(kTechUnlocks[purchase], true)
+      or not techTree:GetTechAvailable(purchase)
       or resources < LookupTechData(purchase, kTechDataCostKey)
         + jetpackOffset then
     return kNilAction

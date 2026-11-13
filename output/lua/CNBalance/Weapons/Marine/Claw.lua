@@ -1,5 +1,5 @@
 -- Punch shoves the victim back like the rifle butt does, slightly stronger.
-local kClawRange = 2.2
+local kClawRange = 2.8
 local kClawPushbackSpeed = 6
 local kClawPushbackDisableTime = 0.2
 

@@ -8,6 +8,10 @@ function BuildClassToGrid()
     ClassToGrid["Vokex"] = { 4, 9 }
     ClassToGrid["JetpackMarine"] = { 5, 9 }
 
+    ClassToGrid["ClawMinigunExo"] = { 6, 9 }
+    ClassToGrid["ClawRailgunExo"] = { 7, 9 }
+    ClassToGrid["DualRailgunExo"] = { 8, 9 }
+
     ClassToGrid["WeaponCache"] = { 8, 5 }
     ClassToGrid["HeavyMarine"] = { 7, 8 }
     ClassToGrid["MarineSentry"] = { 5, 4 }

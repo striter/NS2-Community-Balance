@@ -50,6 +50,10 @@ debug.appendtoenum(kMinimapBlipType, "Pheromone_Threat")
 debug.appendtoenum(kMinimapBlipType, "Pheromone_Expand")
 debug.appendtoenum(kMinimapBlipType, "DeployOrder")
 
+debug.appendtoenum(kMinimapBlipType, "ClawMinigunExo")
+debug.appendtoenum(kMinimapBlipType, "ClawRailgunExo")
+debug.appendtoenum(kMinimapBlipType, "DualRailgunExo")
+
 function GetPlayersAboveLimit(team)
     local info = GetTeamInfoEntity(team)
     if not info then return 0 end

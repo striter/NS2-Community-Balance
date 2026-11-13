@@ -69,6 +69,7 @@ local kMarineCommanderTechPath = {
         kTechId.Weapons3,
         kTechId.PrototypeLab,
         kTechId.ExosuitProtoUpgrade,
+        kTechId.DualWeaponTech,
         kTechId.Armor3,
         kTechId.UpgradeRoboticsFactory,
         kTechId.StandardSupply,

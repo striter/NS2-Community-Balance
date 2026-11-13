@@ -2917,7 +2917,7 @@ end, -- RETREAT
 
         local techTree = GetTechTree(marine:GetTeamNumber())
 
-        if not techTree:GetHasTech(kTechId.ExosuitTech, true) then
+        if not techTree:GetTechAvailable(kTechId.ClawMinigunExosuit) then
             return kNilAction
         end
 
@@ -2936,21 +2936,22 @@ end, -- RETREAT
             totalRailgunsAllowed = 0
         end
 
+        -- Dual layouts are an upgrade of an existing claw exo, so marines always buy the claw layout.
+        local buyId = kTechId.ClawMinigunExosuit
+
         local shouldBuyExo = totalExosAllowed > 0 and
-            totalExosAllowed > 0 and
             sdb:Get("welder") and
             not marine:isa("JetpackMarine") and
             not HasGoodWeapon(marine) and
-            resources >= LookupTechData(kTechId.DualMinigunExosuit, kTechDataCostKey) and
+            resources >= LookupTechData(buyId, kTechDataCostKey) and
             totalExosAllowed - exoCounts.total > 0
 
         if not shouldBuyExo then
             return kNilAction
         end
 
-        local buyId = kTechId.DualMinigunExosuit
-        if totalRailgunsAllowed > 0 and math.random() > 0.5 then
-            buyId = kTechId.DualRailgunExosuit -- Don't need many railguns, miniguns much more useful
+        if totalRailgunsAllowed > 0 and techTree:GetHasTech(kTechId.CannonPrototypeLab, true) and math.random() > 0.5 then
+            buyId = kTechId.ClawRailgunExosuit -- Don't need many railguns, miniguns much more useful
         end
 
         local data = sdb:Get("nearestProto")
@@ -3116,7 +3117,7 @@ end, -- RETREAT
                     
                     -- always try to reserve enough for an exo
                     if bot.wantsExo then
-                        resources = resources - LookupTechData(kTechId.DualMinigunExosuit, kTechDataCostKey)
+                        resources = resources - LookupTechData(kTechId.ClawMinigunExosuit, kTechDataCostKey)
                     end
                     
                     if bot.wantsJetpack then

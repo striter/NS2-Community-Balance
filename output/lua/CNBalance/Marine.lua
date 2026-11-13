@@ -103,6 +103,7 @@ if Server then
             end
             if spawnPoint then
                 self:AddResources(-GetCostForTech(techId))
+                Shared.PlayPrivateSound(self, Marine.kSpendResourcesSoundName, nil, 1.0, self:GetOrigin())
                 local weapons = self:GetWeapons()
                 for i = 1, #weapons do
                     weapons[i]:SetParent(nil)
@@ -114,7 +115,9 @@ if Server then
                     end
                     exo:TriggerEffects("spawn_exo")
                 end
-                return true
+                -- The cost is already paid above, so report a failed buy to stop
+                -- Player.ProcessBuyAction from charging it a second time.
+                return false
             end
         end
         return false

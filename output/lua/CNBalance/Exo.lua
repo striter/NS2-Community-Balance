@@ -104,6 +104,16 @@ if Server then
         return amount
     end
 
+    local kLayoutMapBlipTypes = {
+        ClawMinigun = kMinimapBlipType.ClawMinigunExo,
+        ClawRailgun = kMinimapBlipType.ClawRailgunExo,
+        RailgunRailgun = kMinimapBlipType.DualRailgunExo,
+    }
+
+    function Exo:GetMapBlipType()
+        return kLayoutMapBlipTypes[self.layout] or kMinimapBlipType.Exo
+    end
+
     local kExoLayoutFromTechId = {
         [kTechId.DualMinigunExosuit] = "MinigunMinigun",
         [kTechId.DualRailgunExosuit] = "RailgunRailgun",
@@ -129,6 +139,7 @@ if Server then
         local maxArmor = self:GetMaxArmor()
         local origin = self:GetOrigin()
         self:AddResources(-cost)
+        Shared.PlayPrivateSound(self, Marine.kSpendResourcesSoundName, nil, 1.0, origin)
         local newExo = self:Replace(Exo.kMapName, self:GetTeamNumber(), false, origin, { layout = targetLayout }, false)
         if newExo then
             newExo:SetHealth(health)
@@ -136,7 +147,9 @@ if Server then
             newExo:SetArmor(armor)
             newExo:TriggerEffects("spawn_exo")
         end
-        return newExo ~= nil
+        -- The cost is already paid above, so report a failed buy to stop
+        -- Player.ProcessBuyAction from charging it a second time.
+        return false
     end
 
     local baseExoAttemptToBuy = Exo.AttemptToBuy
