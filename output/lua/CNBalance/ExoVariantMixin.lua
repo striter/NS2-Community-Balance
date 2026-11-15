@@ -29,24 +29,41 @@ if Client then
     -- as their own cosmetic classes with the slots renumbered, so vanilla keeps using its own
     -- index handling. Reporting the claw classes also keeps the left arm unskinned, which the
     -- vanilla classes would have painted with a gun skin.
+    -- Vanilla ships no claw skin, so each config gets a claw_<variant> albedo painted from the
+    -- matching forearm albedo and the vanilla claw normal/spec maps.
+    local kClawMaterialDir = "models/marine/exosuit/"
+
     local kClawLoadouts = {
-        ClawMinigun = { source = "Minigun", worldIndices = { 0, 2 }, viewIndices = { 1 } },
-        ClawRailgun = { source = "Railgun", worldIndices = { 1, 2 }, viewIndices = { 0, 1 } },
+        ClawMinigun = { source = "Minigun", worldIndices = { 0, 2 }, clawWorldIndex = 1, viewIndices = { 0, 1 }, clawViewAt = 1 },
+        ClawRailgun = { source = "Railgun", worldIndices = { 1, 2 }, clawWorldIndex = 0, viewIndices = { 0, 1, 2 }, clawViewAt = 3 },
     }
 
     for loadout, claw in pairs(kClawLoadouts) do
         local variants = {}
         for variant, variantData in ipairs(kExoVariantsData) do
             local entry = {}
-            if variantData.worldMaterials then
+            local variantName = kExoVariants[variant]
+            if variantData.worldMaterials and variant ~= kDefaultExoVariant and variantName then
                 local worldMats = {}
                 for i, worldMat in ipairs(variantData.worldMaterials[claw.source]) do
                     table.insert(worldMats, { idx = claw.worldIndices[i], mat = worldMat.mat })
                 end
+                table.insert(worldMats, { idx = claw.clawWorldIndex, mat = kClawMaterialDir .. "claw_" .. variantName .. ".material" })
                 entry.worldMaterials = { [loadout] = worldMats }
-            end
-            if variantData.viewMaterials then
-                entry.viewMaterials = { [loadout] = variantData.viewMaterials[claw.source] }
+                local sourceViewMats = variantData.viewMaterials and variantData.viewMaterials[claw.source]
+                if sourceViewMats then
+                    local viewMats = {}
+                    local sourceIndex = 1
+                    for i = 1, #claw.viewIndices do
+                        if i == claw.clawViewAt then
+                            table.insert(viewMats, kClawMaterialDir .. "claw_view_" .. variantName .. ".material")
+                        else
+                            table.insert(viewMats, sourceViewMats[sourceIndex])
+                            sourceIndex = sourceIndex + 1
+                        end
+                    end
+                    entry.viewMaterials = { [loadout] = viewMats }
+                end
             end
             variants[variant] = entry
         end

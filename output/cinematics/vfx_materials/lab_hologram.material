@@ -1,0 +1,5 @@
+shader = "cinematics/vfx_materials/lab_hologram.surface_shader"
+scanMap = "materials/effects/mesh_effects/builder_scan.dds"
+noiseMap = "materials/effects/mesh_effects/nanoshield_noise.dds"
+glowcircuitMap = "materials/effects/mesh_effects/nanoshield_circuit.dds"
+circuitMap = "cinematics/vfx_materials/vfx_circuit_01.dds"
