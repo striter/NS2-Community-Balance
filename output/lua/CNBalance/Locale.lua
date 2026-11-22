@@ -6,6 +6,7 @@ if Locale.kTranslateMessage then
     Locale.kTranslateMessage["ABM_REPUTATION"] = "需要信誉值达到[%s]"
     Locale.kTranslateMessage["ABM_MEMBER_LEVEL"] = "需要昌吉社工等级[%s]"
     Locale.kTranslateMessage["ABM_DISABLED"] ="原型测试中"
+    Locale.kTranslateMessage["ABM_BIOMASS"] = "需要生物质等级[%s]"
 
     Locale.kTranslateMessage["RESPAWN_EXTEND_TEAM0"] = "战局清理中"
     Locale.kTranslateMessage["GAME_LENGTH_TEAM1"] = "站点清理 [%i:%02i]"
@@ -319,6 +320,7 @@ if Locale.kLocales then
     Locale.kLocales["ABM_REPUTATION"] ="Reputation Required (%s)"
     Locale.kLocales["ABM_MEMBER_LEVEL"] = "SI Level Required[%s]"
     Locale.kLocales["ABM_DISABLED"] ="Developing"
+    Locale.kLocales["ABM_BIOMASS"] = "Biomass Level Required[%s]"
 
     Locale.kLocales["RESPAWN_EXTEND_TEAM0"] = "Round Finishing"
     

@@ -1138,6 +1138,20 @@ local function GetMemberLevelRestricted(self,type)
     return restricted,maxRequirement
 end
 
+local function GetBiomassRestricted(type)
+
+    local requiredLevel = kEarlyLifeformMinBiomass[IndexToAlienTechId(type)]
+    if not requiredLevel then
+        return false, 0
+    end
+
+    local player = Client.GetLocalPlayer()
+    local teamInfo = player and GetTeamInfoEntity(player:GetTeamNumber())
+    local bioMassLevel = (teamInfo and teamInfo.GetBioMassLevel) and teamInfo:GetBioMassLevel() or 0
+    return bioMassLevel < requiredLevel, requiredLevel
+
+end
+
 local function GetIsDisabled(type)
 	return false
 	
@@ -1204,6 +1218,7 @@ local function UpdateEvolveButton(self)
     local memberLevelRestriction, memberLevelRequirement = GetMemberLevelRestricted(self,self.selectedAlienType)
 
 	local resourceFetchValid, fetchingKey = ResourceFetchingDisabled(self,self.selectedAlienType)
+	local biomassRestriction, biomassRequirement = GetBiomassRestricted(self.selectedAlienType)
 	
 	if GetIsDisabled(self.selectedAlienType) then
 		evolveButtonTextureCoords = GUIAlienBuyMenu.kEvolveButtonNeedResourcesTextureCoordinates
@@ -1214,6 +1229,9 @@ local function UpdateEvolveButton(self)
     elseif reputationRestriction then
         evolveButtonTextureCoords = GUIAlienBuyMenu.kEvolveButtonNeedResourcesTextureCoordinates
         evolveText = string.format(Locale.ResolveString("ABM_REPUTATION"), reputationRequirement)
+    elseif biomassRestriction then
+        evolveButtonTextureCoords = GUIAlienBuyMenu.kEvolveButtonNeedResourcesTextureCoordinates
+        evolveText = string.format(Locale.ResolveString("ABM_BIOMASS"), biomassRequirement)
 	elseif resourceFetchValid then
 		evolveButtonTextureCoords = GUIAlienBuyMenu.kEvolveButtonNeedResourcesTextureCoordinates
 		evolveText = Locale.ResolveString(fetchingKey)
@@ -1264,6 +1282,7 @@ local function UpdateEvolveButton(self)
 
 	local allowedToEvolve = not researching and GetCanAffordAlienTypeAndUpgrades(self, self.selectedAlienType) and hasGameStarted
 	allowedToEvolve = allowedToEvolve and GetAlienOrUpgradeSelected(self)
+	allowedToEvolve = allowedToEvolve and not biomassRestriction
 	local veinsAlpha = 0
 	self.evolveButtonBackground:SetScale(Vector(1, 1, 0))
 
@@ -1416,8 +1435,9 @@ function GUIAlienBuyMenu:_UpdateAlienButtons()
 		if buttonIsVisible then
 
 			local reputationDisbaled = GetReputationRestricted(self,alienButton.TypeData.Index)
+			local biomassDisbaled = GetBiomassRestricted(alienButton.TypeData.Index)
 			local isCurrentAlien = AlienBuy_GetCurrentAlien() == alienButton.TypeData.Index
-			if reputationDisbaled or GetIsDisabled(alienButton.TypeData.Index) or ResourceFetchingDisabled(self,alienButton.TypeData.Index) then
+			if reputationDisbaled or biomassDisbaled or GetIsDisabled(alienButton.TypeData.Index) or ResourceFetchingDisabled(self,alienButton.TypeData.Index) then
 				alienButton.Button:SetColor(GUIAlienBuyMenu.kDisabledColor)
 			elseif researched and (isCurrentAlien or self:_GetCanAffordAlienType(alienButton.TypeData.Index)) then
 				alienButton.Button:SetColor(GUIAlienBuyMenu.kEnabledColor)
@@ -1678,6 +1698,7 @@ function GUIAlienBuyMenu:SendKeyEvent(key, down)
 			allowedToEvolve = allowedToEvolve and GetAlienOrUpgradeSelected(self) 
 			allowedToEvolve = allowedToEvolve and not GetReputationRestricted(self,self.selectedAlienType)
             allowedToEvolve = allowedToEvolve and not GetMemberLevelRestricted(self,self.selectedAlienType)
+			allowedToEvolve = allowedToEvolve and not GetBiomassRestricted(self.selectedAlienType)
 			allowedToEvolve = allowedToEvolve and not GetIsDisabled(self.selectedAlienType)
 			allowedToEvolve = allowedToEvolve and not ResourceFetchingDisabled(self,self.selectedAlienType)
 			

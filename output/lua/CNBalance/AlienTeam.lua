@@ -1441,7 +1441,7 @@ function AlienTeam:OnOriginFormResourceFetch(_player)
     end
 
     self.timeGorgeGestated = self.timeGorgeGestated + 1
-    local desirePRes =  self.timeGorgeGestated == 1 and kOriginFormInitialGorgePRes or kOriginFormExtraGorgePRes
+    local desirePRes = self.timeGorgeGestated == 1 and kOriginFormInitialGorgePRes or kOriginFormExtraGorgePRes
     local teamResource = math.floor(self:GetTeamResources())
     local finalPRes = math.min(teamResource,desirePRes)
 

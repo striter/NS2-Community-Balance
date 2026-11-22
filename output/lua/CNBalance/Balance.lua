@@ -342,6 +342,12 @@ kDualWeaponTechResearchTime = 60
 kExosuitCost = kClawExosuitCost
 kExoFiringSpeedReduction = 0.06
 
+kEarlyLifeformMinBiomass = {
+    [kTechId.Fade] = 1,
+    [kTechId.Vokex] = 1,
+    [kTechId.Onos] = 1,
+}
+
 kOnosDevourCost = 10
 kOnosDevourTime = 40
 
@@ -587,7 +593,7 @@ kAmmoPackCooldown = 0
 kMedPackCost = 1
 kMedPackCooldown = 0
 
-kBMACMoveSpeedReduce = 0.8
+kBMACMoveSpeedReduce = 0.4
 kInfestationArmorSpeedModifier = 0.82     
 
 kCatPackCost = 1
